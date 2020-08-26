@@ -1,0 +1,17 @@
+@media only screen and (max-width: 992px) {
+	.ui-datatable {
+		width: auto;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.ui-datatable-tablewrapper {
+		overflow: auto;
+	}
+	.ui-datatable {
+		width: auto;
+	}
+	.caseNameColumn {
+		width: 200px;
+	}
+}

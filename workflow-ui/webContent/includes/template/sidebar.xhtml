@@ -1,0 +1,64 @@
+<div class="layout-sidebar">
+  <div class="sidebar-logo">
+    <a href="/">
+      <img src="../faces/javax.faces.resource/images/axon_ivy_logo_white.svg" alt="Axon.ivy"/>
+    </a>
+  </div>
+  <div class="nano container has-scrollbar">
+    <div class="nano-content sidebar-scroll-content" tabindex="0" style="margin-right: -16px;">
+      <div class="layout-menu-container">
+        <ul id="menuform" class="layout-menu">
+          <li id="menuform:home" role="menuitem">
+            <a class="ripplelink" href="home.xhtml">
+              <i class="material-icons">home</i><!-- <span class="menuitem-text">Home</span> -->
+            </a>
+          </li>
+          <li id="menuform:my-tasks" role="menuitem">
+            <a class="ripplelink" href="tasks.xhtml">
+              <i class="material-icons">format_list_bulleted</i><span class="menuitem-text">Tasks</span>
+            </a>
+          </li>
+          <li id="menuform:my-prcesses" role="menuitem">
+            <a class="ripplelink" href="starts.xhtml">
+              <i class="material-icons">menu</i><span class="menuitem-text">Starts</span>
+            </a>
+          </li>
+          <li id="menuform:all-tasks" role="menuitem">
+            <a class="ripplelink" href="../wf/?pageId=tasklist">
+              <i class="material-icons">history</i><span class="menuitem-text">All cases and tasks</span>
+            </a>
+          </li>
+          <li id="menuform:dev" role="menuitem">
+            <a href="#" class="ripplelink">
+              <i class="material-icons">build</i><span class="menuitem-text">Actions</span><i class="material-icons layout-submenu-toggler">keyboard_arrow_up</i>
+            </a>
+            <ul role="menu">
+              <li id="menuform:signals" role="menuitem">
+                <a class="ripplelink" href="../wf/?pageId=signals">
+                  <i class="material-icons">signal_cellular_4_bar</i>
+                  <span class="menuitem-text">Signals</span>
+                </a>
+              </li>
+              <li id="menuform:intermediate-events" role="menuitem">
+                <a class="ripplelink" href="../wf/?pageId=intermediateElements">
+                  <i class="material-icons">trending_down</i>
+                  <span class="menuitem-text">Intermediate Events</span>
+                </a>
+              </li>
+              <li id="menuform:cleanup" role="menuitem">
+                <a class="ripplelink" href="../wf/?pageId=cleanup">
+                  <i class="material-icons">not_interested</i>
+                  <span class="menuitem-text">Cleanup</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <script id="menuform" type="text/javascript">PrimeFaces.cw("Serenity","menu",{id:"menuform:j_id_g",closeDelay:"250"});</script>
+      </div>
+    </div>
+    <div class="nano-pane" style="display: block;">
+      <div class="nano-slider" style="height: 20px; transform: translate(0px);"></div>
+    </div>
+  </div>
+</div>
