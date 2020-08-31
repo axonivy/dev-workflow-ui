@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>ch.ivyteam.ivy.project.workflow</groupId>
   <artifactId>workflow-ui-web-test</artifactId>
@@ -14,10 +13,10 @@
       <type>iar</type>
     </dependency>
     <dependency>
-    	<groupId>com.axonivy.ivy.webtest</groupId>
-    	<artifactId>web-tester</artifactId>
-    	<version>9.1.0</version>
-    	<scope>test</scope>
+      <groupId>com.axonivy.ivy.webtest</groupId>
+      <artifactId>web-tester</artifactId>
+      <version>9.1.0</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
   <build>
