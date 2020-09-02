@@ -20,6 +20,12 @@
 
   <dependencies>
     <dependency>
+      <groupId>ch.ivyteam.workflow</groupId>
+      <artifactId>workflow-ui</artifactId>
+      <version>${revision}</version>
+      <type>iar</type>
+    </dependency>
+    <dependency>
       <groupId>com.axonivy.ivy.webtest</groupId>
       <artifactId>web-tester</artifactId>
       <version>9.1.1-SNAPSHOT</version>
