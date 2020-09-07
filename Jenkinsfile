@@ -22,9 +22,10 @@ pipeline {
           checkVersions recordIssue: false
           checkVersions cmd: '-f maven-config/pom.xml'
           junit testDataPublishers: [[$class: 'AttachmentPublisher'], [$class: 'StabilityTestDataPublisher']], testResults: '**/target/surefire-reports/**/*.xml'
+          junit testDataPublishers: [[$class: 'AttachmentPublisher'], [$class: 'StabilityTestDataPublisher']], testResults: '**/target/failsafe-reports/*.xml'
           archiveArtifacts '**/target/*.iar'
           archiveArtifacts '**/target/ivyEngine/logs/*'
-          archiveArtifacts artifacts: '**/target/selenide/reports/**/*', allowEmptyArchive: true
+          archiveArtifacts artifacts: '**/target/screenshots/*', allowEmptyArchive: true
         }
       }
     }
