@@ -21,7 +21,7 @@ public class WebTestScreenshotsIT
   @BeforeEach
   void beforeEach()
   {
-    Configuration.reportsFolder = "target/screenshots/";
+    Configuration.reportsFolder = "target/docu/screenshots/";
     Configuration.savePageSource = false;
   }
 

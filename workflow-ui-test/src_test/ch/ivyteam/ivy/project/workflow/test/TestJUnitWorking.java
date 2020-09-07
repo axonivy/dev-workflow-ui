@@ -1,4 +1,4 @@
-package ch.ivyteam.ivy.project.workflow;
+package ch.ivyteam.ivy.project.workflow.test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -8,7 +8,7 @@ import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.environment.IvyTest;
 
 @IvyTest
-public class SampleIvyTest
+public class TestJUnitWorking
 {
 
   @Test

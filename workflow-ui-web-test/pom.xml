@@ -7,16 +7,12 @@
     <groupId>ch.ivyteam.workflow</groupId>
     <artifactId>workflow-ui-config-test</artifactId>
     <version>${revision}</version>
-    <relativePath>../maven-config/test</relativePath>
+    <relativePath>../maven/config/test</relativePath>
   </parent>
 
   <groupId>ch.ivyteam.workflow</groupId>
   <artifactId>workflow-ui-web-test</artifactId>
   <packaging>iar-integration-test</packaging>
-
-  <properties>
-    <test.application>workflowuiwebtest</test.application>
-  </properties>
 
   <dependencies>
     <dependency>
@@ -49,5 +45,30 @@
   <build>
     <testSourceDirectory>src_test</testSourceDirectory>
     <testOutputDirectory>target/test-classes</testOutputDirectory>
+    <plugins>
+      <plugin>
+        <groupId>com.axonivy.ivy.ci</groupId>
+        <artifactId>project-build-plugin</artifactId>
+        <extensions>true</extensions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <appendAssemblyId>false</appendAssemblyId>
+              <descriptors>
+                <descriptor>zip.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 </project>
