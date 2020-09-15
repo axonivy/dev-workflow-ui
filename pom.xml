@@ -4,7 +4,7 @@
     <groupId>ch.ivyteam.workflow</groupId>
     <artifactId>workflow-ui-config</artifactId>
     <version>${revision}</version>
-    <relativePath>maven-config</relativePath>
+    <relativePath>maven/config</relativePath>
   </parent>
   <artifactId>workflow-ui-module</artifactId>
   <packaging>pom</packaging>

@@ -15,3 +15,6 @@ target/
 classes/
 src_dataClasses/
 src_wsproc/
+
+workflow-ui/lib/
+.flattened-pom.xml
