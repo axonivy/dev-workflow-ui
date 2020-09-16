@@ -2,6 +2,7 @@ package ch.ivyteam.ivy.project.workflow.webtest;
 
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.executeJs;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.logout;
 import static com.codeborne.selenide.Selenide.open;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -29,6 +30,9 @@ public class WebTestScreenshotsIT
   public void screenshotMainPages()
   {
     open(viewUrl("home.xhtml"));
+    logout();
+
+    open(viewUrl("home.xhtml"));
     takeScreenshot("workflow-ui-home", new Dimension(SCREENSHOT_WIDTH, 800));
 
     open(viewUrl("tasks.xhtml"));
@@ -36,6 +40,12 @@ public class WebTestScreenshotsIT
 
     open(viewUrl("starts.xhtml"));
     takeScreenshot("workflow-ui-starts", new Dimension(SCREENSHOT_WIDTH, 800));
+
+    open(viewUrl("loginTable.xhtml"));
+    takeScreenshot("workflow-ui-loginTable", new Dimension(SCREENSHOT_WIDTH, 800));
+
+    open(viewUrl("login.xhtml"));
+    takeScreenshot("workflow-ui-login", new Dimension(SCREENSHOT_WIDTH, 800));
   }
 
   private void takeScreenshot(String fileName, Dimension size)

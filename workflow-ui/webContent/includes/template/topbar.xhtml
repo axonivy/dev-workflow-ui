@@ -22,15 +22,22 @@
           </a>
           <ul class="animated" style="right: 5px">
             <li role="menuitem">
-              <a id="login" href="#" class="ui-commandlink ui-widget">
-                <i class="material-icons">vpn_key</i><span>Login</span>
-              </a>
+              <h:link outcome="loginTable" rendered="#{engineModeBean.demoOrDesigner}">
+                <i class="material-icons">group</i>
+                <span>Switch user</span>
+              </h:link>
             </li>
             <li role="menuitem">
-              <a id="sessionLogoutBtn" href="#" class="ui-commandlink ui-widget"
-                jsf:rendered="#{!ivyJsfWfHelper.sessionUserUnknown}">
+              <h:link outcome="login">
+                <i class="material-icons">vpn_key</i>
+                <span>Login</span>
+              </h:link>
+            </li>
+            <li role="menuitem">
+              <p:commandLink id="sessionLogoutBtn" actionListener="#{loginBean.logout}"
+                rendered="#{!ivyJsfWfHelper.sessionUserUnknown}">
                 <i class="material-icons">power_settings_new</i><span>Logout</span>
-              </a>
+              </p:commandLink>
             </li>
           </ul>
         </li>
