@@ -92,7 +92,7 @@ pipeline {
 
   triggers {
     cron '@midnight'
-    pollSCM('H/10 * * * *')
+    bitbucketPush()
   }
 
   parameters {
