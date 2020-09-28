@@ -1,6 +1,20 @@
 pipeline {
   agent any
 
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '60', artifactNumToKeepStr: '1'))
+  }
+
+  triggers {
+    cron '@midnight'
+    bitbucketPush()
+  }
+
+  parameters {
+    string(name: 'engineSource', defaultValue: 'https://jenkins.ivyteam.io/job/ivy-core_product/job/master/lastSuccessfulBuild/', description: 'Engine page url')
+    booleanParam(name: 'deployScreenshots', defaultValue: false, description: 'Deploy new screenshots')
+  }
+
   environment {
     imgSimilarity = 98
     dockerfileParams = '--shm-size 1g --hostname=ivy'
@@ -84,19 +98,5 @@ pipeline {
         }
       }
     }
-  }
-
-  options {
-    buildDiscarder(logRotator(numToKeepStr: '60', artifactNumToKeepStr: '1'))
-  }
-
-  triggers {
-    cron '@midnight'
-    pollSCM('H/10 * * * *')
-  }
-
-  parameters {
-    string(name: 'engineSource', defaultValue: 'https://jenkins.ivyteam.io/job/ivy-core_product/job/master/lastSuccessfulBuild/', description: 'Engine page url')
-    booleanParam(name: 'deployScreenshots', defaultValue: false, description: 'Deploy new screenshots')
   }
 }
