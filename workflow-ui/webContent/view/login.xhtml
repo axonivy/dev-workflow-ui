@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+  <f:attribute name="primefaces.THEME" value="serenity-ivy" />
+  <f:facet name="first">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+  </f:facet>
+  <title>Login - #{ivyAdvisor.applicationName} #{ivyAdvisor.versionShort}</title>
+  <link rel="shortcut icon" href="#{resource['ivy-webcontent:resources/images/ivy_favicon_48.png']}" />
+  <h:outputScript name="js/layout.js" library="serenity-layout" />
+  <h:outputScript name="js/ripple.js" library="serenity-layout" />
+</h:head>
+
+<h:body styleClass="login-body"
+  style="background-image: url('#{resource['ivy-webcontent:resources/images/background.jpg']}');">
+  <div class="login-panel ui-fluid">
+    <div class="login-panel-header">
+      <p:graphicImage name="resources/images/axon_ivy_logo_round.svg" />
+    </div>
+    <div class="login-panel-content">
+      <h:form id="loginForm">
+        <p:focus for="#{loginBean.focus()}" />
+        <div class="ui-g">
+          <div class="ui-g-12">
+            <h1>Sign-in</h1>
+          </div>
+          <div class="ui-g-12">
+            <p:messages globalOnly="true" id="loginMessage" />
+          </div>
+          <div class="ui-g-12">
+            <h:panelGroup styleClass="md-inputfield">
+              <p:inputText id="username" autocomplete="off" value="#{loginBean.username}" required="true" />
+              <p:outputLabel for="username" indicateRequired="false">Username</p:outputLabel>
+              <p:message for="username" id="usernameMessage" />
+            </h:panelGroup>
+          </div>
+          <div class="ui-g-12">
+            <h:panelGroup styleClass="md-inputfield">
+              <p:password id="password" autocomplete="off" value="#{loginBean.password}" required="true" />
+              <p:outputLabel for="password" indicateRequired="false">Password</p:outputLabel>
+              <p:message for="password" id="passwordMessage" />
+            </h:panelGroup>
+          </div>
+          <div class="ui-g-12">
+            <p:commandButton update="@form" id="login" actionListener="#{loginBean.customLogin}" value="Sign In"
+              icon="ui-icon-person" />
+          </div>
+        </div>
+      </h:form>
+    </div>
+  </div>
+
+  <h:outputStylesheet name="css/layout-ivy.css" library="serenity-layout" />
+  <h:outputStylesheet name="css/cockpit.css" library="serenity-layout" />
+</h:body>
+
+</html>

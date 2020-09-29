@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<userConfig/>
+<userConfig>
+    <user>
+        <username>testJunitUser</username>
+        <password>jUnitPassword</password>
+        <role>testRoleJunit</role>
+    </user>
+</userConfig>
