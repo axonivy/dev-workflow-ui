@@ -1,6 +1,7 @@
 package ch.ivyteam.ivy.project.workflow.webtest.util;
 
 import static com.axonivy.ivy.webtest.engine.EngineUrl.createStaticViewUrl;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -73,7 +74,10 @@ public class WorkflowUiUtil
 
   public static void logout()
   {
-    $("#sessionUser").click();
-    $("#sessionLogoutBtn").shouldBe(visible).click();
+    if (!$("#sessionUserName").has(text("Unknown User")))
+    {
+      $("#sessionUser").click();
+      $("#sessionLogoutBtn").shouldBe(visible).click();
+    }
   }
 }
