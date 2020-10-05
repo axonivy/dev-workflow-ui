@@ -14,4 +14,12 @@
   <artifactId>workflow-ui</artifactId>
   <version>${revision}</version>
   <packaging>iar</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.ocpsoft.prettytime</groupId>
+      <artifactId>prettytime</artifactId>
+      <version>3.2.7.Final</version>
+    </dependency>
+  </dependencies>
 </project>
