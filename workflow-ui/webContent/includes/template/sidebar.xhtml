@@ -14,7 +14,7 @@
               <p:menuitem id="sr_home" icon="home" url="home.xhtml" />
               <p:menuitem id="sr_tasks" value="Tasks" icon="format_list_bulleted" url="tasks.xhtml" />
               <p:menuitem id="sr_starts" value="Starts" icon="menu" url="starts.xhtml" />
-              <p:menuitem id="sr_tasks_cases" value="All Tasks and Cases" icon="history" url="#" />
+              <p:menuitem id="sr_tasks_cases" value="All Tasks and Cases" icon="history" url="allTasksAndCases.xhtml" rendered="#{adminBean.isWorkflowAdmin()}"/>
 
               <p:submenu id="sr_actions" label="Actions" icon="build">
                 <p:menuitem id="sr_signals" value="Signals" icon="signal_cellular_4_bar" url="#" />

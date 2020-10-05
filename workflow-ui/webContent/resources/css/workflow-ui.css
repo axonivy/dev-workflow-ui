@@ -4,3 +4,13 @@
   font-size: 17px !important;
   margin-right: 5px;
 }
+
+.icon-row {
+  width: 40px;
+  padding: 0px;
+  text-align: center;
+}
+
+.ui-datatable .ui-column-filter {
+  display: none;
+}

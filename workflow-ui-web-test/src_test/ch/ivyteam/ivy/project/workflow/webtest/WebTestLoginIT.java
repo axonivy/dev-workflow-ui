@@ -6,7 +6,6 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.logout
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 import org.junit.jupiter.api.Test;
@@ -16,6 +15,8 @@ import com.axonivy.ivy.webtest.IvyWebTest;
 import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.axonivy.ivy.webtest.primeui.widget.Table;
 import com.codeborne.selenide.Selenide;
+
+import ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil;
 
 @IvyWebTest
 public class WebTestLoginIT
@@ -51,10 +52,7 @@ public class WebTestLoginIT
   @Test
   void testCustomLogin()
   {
-    Selenide.open(viewUrl("login.xhtml"));
-    $("#loginForm\\:username").sendKeys("DeveloperTest");
-    $("#loginForm\\:password").sendKeys("DeveloperTest");
-    $("#loginForm\\:login").shouldBe(visible).click();
+    WorkflowUiUtil.customLogin("DeveloperTest","DeveloperTest");
   }
 
 }
