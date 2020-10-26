@@ -14,3 +14,38 @@
 .ui-datatable .ui-column-filter {
   display: none;
 }
+
+.task-detail-title {
+  position: relative;
+  margin-bottom: 14px;
+  font-weight: bold;
+}
+
+.task-detail-action-container {
+  position: absolute;
+  top: -2px;
+  right: 0px;
+}
+
+.action-container {
+  display: flex;
+  align-items: center;
+}
+
+.task-action-item {
+  margin: auto 7px;
+}
+
+.task-actions-link {
+  margin: auto 10px;
+  font-weight: normal;
+}
+
+.straight-text-icon {
+  display: flex;
+  align-items: center;
+}
+
+.no-padding-left {
+  padding-left: 0px !important;
+}

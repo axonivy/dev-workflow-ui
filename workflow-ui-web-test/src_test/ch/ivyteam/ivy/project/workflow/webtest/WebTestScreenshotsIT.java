@@ -1,8 +1,12 @@
 package ch.ivyteam.ivy.project.workflow.webtest;
 
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.customLogin;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.executeJs;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -30,25 +34,30 @@ public class WebTestScreenshotsIT
   public void screenshotMainPages()
   {
     open(viewUrl("home.xhtml"));
-    customLogin("DeveloperTest", "DeveloperTest");
+    loginDeveloper();
+    startTestProcess("1750C5211D94569D/start.ivp");
 
     open(viewUrl("home.xhtml"));
     takeScreenshot("workflow-ui-home", new Dimension(SCREENSHOT_WIDTH, 800));
 
-    open(viewUrl("tasks.xhtml"));
-    takeScreenshot("workflow-ui-tasks", new Dimension(SCREENSHOT_WIDTH, 800));
-
     open(viewUrl("starts.xhtml"));
     takeScreenshot("workflow-ui-starts", new Dimension(SCREENSHOT_WIDTH, 800));
-
-    open(viewUrl("allTasksAndCases.xhtml"));
-    takeScreenshot("workflow-ui-allTasksAndCases", new Dimension(SCREENSHOT_WIDTH, 800));
 
     open(viewUrl("loginTable.xhtml"));
     takeScreenshot("workflow-ui-loginTable", new Dimension(SCREENSHOT_WIDTH, 800));
 
     open(viewUrl("login.xhtml"));
     takeScreenshot("workflow-ui-login", new Dimension(SCREENSHOT_WIDTH, 800));
+
+    open(viewUrl("tasks.xhtml"));
+    takeScreenshot("workflow-ui-tasks", new Dimension(SCREENSHOT_WIDTH, 800));
+
+    open(viewUrl("allTasksAndCases.xhtml"));
+    takeScreenshot("workflow-ui-allTasksAndCases", new Dimension(SCREENSHOT_WIDTH, 800));
+
+    $(byText("info_outline")).shouldBe(visible).click();
+    $("#form\\:taskActionsBtn").click();
+    takeScreenshot("workflow-ui-taskDetails", new Dimension(SCREENSHOT_WIDTH, 800));
   }
 
   private void takeScreenshot(String fileName, Dimension size)

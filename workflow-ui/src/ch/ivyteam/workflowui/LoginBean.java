@@ -10,6 +10,7 @@ import org.primefaces.event.SelectEvent;
 
 import ch.ivyteam.ivy.security.ISecurityConstants;
 import ch.ivyteam.ivy.security.IUser;
+import ch.ivyteam.workflowui.LoginTableBean.User;
 import ch.ivyteam.workflowui.util.LoginUtil;
 import ch.ivyteam.workflowui.util.UserUtil;
 
@@ -23,13 +24,13 @@ public class LoginBean
   public void login(SelectEvent event)
   {
     Object object = event.getObject();
-    if (object instanceof IUser)
+    if (object instanceof User)
     {
-      login((IUser) object);
+      login((User) object);
     }
   }
 
-  private void login(IUser user)
+  private void login(User user)
   {
     username = user.getName();
     password = "";

@@ -6,9 +6,9 @@
     <h:outputText value="Login Table" style="font-size:16pt; font-weight:bold" />
     <br />
     <h:outputText value="Click user to login" />
-    <p:dataTable id="users" var="user" value="#{loginBean.getUsers()}" widgetVar="usersTable"
+    <p:dataTable id="users" var="user" value="#{loginTableBean.users}" widgetVar="usersTable"
       emptyMessage="No users found with given criteria" style="margin-top:10px" selectionMode="single"
-      rowKey="#{user.getFullName()}">
+      rowKey="#{user.fullname}">
       <p:ajax event="rowSelect" listener="#{loginBean.login}" update="@form" />
 
       <f:facet name="header">
@@ -19,18 +19,18 @@
         </p:outputPanel>
       </f:facet>
 
-      <p:column headerText="Username" filterBy="#{user.getName()}" filterStyle="display: none">
-        <h:outputText value="#{user.getName()}" >
+      <p:column headerText="Username" filterBy="#{user.name}" filterStyle="display: none">
+        <h:outputText value="#{user.name}" >
         <i class="material-icons table-icon">person</i>
         </h:outputText>
       </p:column>
 
-      <p:column headerText="Fullname" filterBy="#{user.getFullName()}" filterStyle="display: none">
-        <h:outputText value="#{user.getFullName()}" />
+      <p:column headerText="Fullname" filterBy="#{user.fullname}" filterStyle="display: none">
+        <h:outputText value="#{user.fullname}" />
       </p:column>
 
-      <p:column headerText="Roles" filterBy="#{loginBean.getRoles(user)}" filterStyle="display: none" colspan="2">
-        <h:outputText value="#{loginBean.getRoles(user)}" />
+      <p:column headerText="Roles" filterBy="#{user.roles}" filterStyle="display: none" colspan="2">
+        <h:outputText value="#{user.roles}" />
       </p:column>
 
       <p:column width="64">
