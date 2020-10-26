@@ -34,8 +34,11 @@ public class TasksBean
 
   public List<ITask> getPersonalTasks()
   {
+    List<PropertyOrder<TaskProperty>> order = PropertyOrder.create(TaskProperty.ID,
+            OrderDirection.DESCENDING);
     IQueryResult<ITask> queryResult = WorkflowNavigationUtil.getWorkflowContext(IApplication.current())
-            .findWorkTasks(ISession.current().getSessionUser(), 0, 100);
+            .findWorkTasks(ISession.current().getSessionUser(), null, order, 0, 100, true,
+                    TaskState.WORKING_OR_SUSPENDED_STATES);
     return queryResult.getResultList();
   }
 
@@ -84,6 +87,11 @@ public class TasksBean
   public String getPrettyTime(Date date)
   {
     return DateUtil.getPrettyTime(date);
+  }
+
+  public String getDateTime(Date date)
+  {
+    return DateUtil.getDateAndTime(date);
   }
 
   public String getPriorityIcon(WorkflowPriority priority)

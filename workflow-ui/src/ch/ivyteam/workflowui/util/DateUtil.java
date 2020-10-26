@@ -1,5 +1,6 @@
 package ch.ivyteam.workflowui.util;
 
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -12,6 +13,10 @@ public class DateUtil
 {
   public static String getPrettyTime(Date date)
   {
+    if (date == null)
+    {
+      return "";
+    }
     LocalDateTime dateNow = LocalDateTime.now();
     LocalDateTime dateThen = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
     long hoursPassed = Duration.between(dateThen, dateNow).toHours();
@@ -22,8 +27,14 @@ public class DateUtil
     }
     else
     {
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy, HH:mm");
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy, HH:mm:ss");
       return dateThen.format(formatter).toString();
     }
+  }
+
+  public static String getDateAndTime(Date date)
+  {
+    SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
+    return date == null ? "" : formatter.format(date);
   }
 }

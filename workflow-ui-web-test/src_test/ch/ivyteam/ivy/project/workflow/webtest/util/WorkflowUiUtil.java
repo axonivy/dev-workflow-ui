@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import com.axonivy.ivy.webtest.engine.EngineUrl;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 
@@ -22,6 +23,11 @@ public class WorkflowUiUtil
   public static String pmvName()
   {
     return System.getProperty("test.engine.pmv", "workflow-ui");
+  }
+
+  public static void startTestProcess(String pathToIvp)
+  {
+    Selenide.open(EngineUrl.createProcessUrl("/workflow-ui-test-data/" + pathToIvp));
   }
 
   public static String viewUrl(String page)
@@ -63,10 +69,17 @@ public class WorkflowUiUtil
     }
   }
 
+  public static void loginDeveloper()
+  {
+    customLogin("DeveloperTest", "DeveloperTest");
+  }
+
   public static void customLogin(String username, String password)
   {
     Selenide.open(viewUrl("login.xhtml"));
+    $("#loginForm\\:username").clear();
     $("#loginForm\\:username").sendKeys(username);
+    $("#loginForm\\:password").clear();
     $("#loginForm\\:password").sendKeys(password);
     $("#loginForm\\:login").shouldBe(visible).click();
   }

@@ -36,11 +36,12 @@
       </p:column>
 
       <p:column headerText="Start Date" style="text-align: center;">
-        <h:outputText value="#{tasksBean.getPrettyTime(task.getStartTimestamp())}" />
+        <h:outputText id="startTime" value="#{tasksBean.getPrettyTime(task.getStartTimestamp())}" />
+        <p:tooltip for="startTime" value="#{tasksBean.getDateTime(task.getStartTimestamp())}" position="top"/>
       </p:column>
 
       <p:column headerText="Expiry" style="text-align: center;">
-        <h:outputText value="#{task.getExpiryTimestamp()}" />
+        <h:outputText id="expiryTime" value="#{tasksBean.getDateTime(task.getExpiryTimestamp())}" />
       </p:column>
 
       <p:column style="width: 60px; text-align: center;">
