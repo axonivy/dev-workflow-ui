@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   options {
-    buildDiscarder(logRotator(numToKeepStr: '60', artifactNumToKeepStr: '1'))
+    buildDiscarder(logRotator(numToKeepStr: '30'))
   }
 
   triggers {
@@ -52,6 +52,7 @@ pipeline {
           archiveArtifacts '**/target/*.iar'
           archiveArtifacts '**/target/ivyEngine/logs/*'
           archiveArtifacts artifacts: '**/target/selenide/reports/**/*', allowEmptyArchive: true
+          currentBuild.description = "<a href='${BUILD_URL}artifact/workflow-ui-web-test/target/screenshotsCompare.html'>&raquo; Screenshots</a>"
         }
       }
     }
