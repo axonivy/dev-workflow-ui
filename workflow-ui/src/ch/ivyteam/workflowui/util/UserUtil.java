@@ -8,6 +8,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.faces.context.FacesContext;
+
+import org.apache.commons.lang3.StringUtils;
+
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.security.IRole;
 import ch.ivyteam.ivy.security.ISession;
@@ -46,6 +50,17 @@ public class UserUtil
     {
       RedirectUtil.redirect("loginTable.xhtml");
     }
+  }
+
+  public static boolean checkIfPersonalTask()
+  {
+    String currentUrl = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+    String currentPage = StringUtils.substringAfterLast(currentUrl, "/");
+    if (currentPage.equals("tasks.xhtml"))
+    {
+      return true;
+    }
+    return false;
   }
 
   public static boolean isLoggedIn()

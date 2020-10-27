@@ -6,54 +6,11 @@
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
     <f:event type="preRenderView" listener="#{tasksBean.checkIfLoggedIn}"/>
-     <h:form id="tasksForm" style="margin-top: 20px">
-    <h:outputText value="Personal Tasks" style="font-size:16pt; font-weight:bold" />
-    <p:dataTable id="tasks" var="task" value="#{tasksBean.getPersonalTasks()}" widgetVar="tasksTable"
-      emptyMessage="No Tasks found with given criteria" style="margin-top:10px">
-
-      <f:facet name="header">
-        <p:outputPanel>
-          <h:outputText value="Search:" />
-          <p:inputText id="globalFilter" onkeyup="PF('tasksTable').filter()" style="width:150px"
-            placeholder="Enter keyword" />
-        </p:outputPanel>
-      </f:facet>
-
-      <p:column filterBy="#{task.getPriority()}" styleClass="icon-row">
-        <i class="material-icons"><h:outputText id="taskPriority"
-            value="#{tasksBean.getPriorityIcon(task.getPriority())}" /></i>
-        <p:tooltip for="taskPriority" value="Priority #{task.getPriority()}" position="top" />
-      </p:column>
-
-      <p:column filterBy="#{task.getState()}" styleClass="icon-row">
-        <i class="material-icons"><h:outputText id="taskState" value="#{tasksBean.getStateIcon(task.getState())}" /></i>
-        <p:tooltip for="taskState" value="State #{task.getState()}" position="top" />
-      </p:column>
-
-      <p:column headerText="Name" filterBy="#{task.getName()}">
-        <h:outputText id="taskName" value="#{task.getName()}" />
-        <p:tooltip for="taskName" value="Task ID: #{task.getId()}" position="top" />
-      </p:column>
-
-      <p:column headerText="Start Date" style="text-align: center;">
-        <h:outputText id="startTime" value="#{tasksBean.getPrettyTime(task.getStartTimestamp())}" />
-        <p:tooltip for="startTime" value="#{tasksBean.getDateTime(task.getStartTimestamp())}" position="top"/>
-      </p:column>
-
-      <p:column headerText="Expiry" style="text-align: center;">
-        <h:outputText id="expiryTime" value="#{tasksBean.getDateTime(task.getExpiryTimestamp())}" />
-      </p:column>
-
-      <p:column style="width: 60px; text-align: center;">
-        <h:link outcome="taskDetails">
-          <f:param name="task" value="#{task.getId()}" />
-          <i class="material-icons">info_outline</i>
-        </h:link>
-      </p:column>
-    </p:dataTable>
-  </h:form>
+    <h:form id="tasksForm" style="margin-top: 20px">
+      <h:outputText value="Personal Tasks" style="font-size:16pt; font-weight:bold" />
+      <ui:include src="/includes/components/tasksTable.xhtml" />
+    </h:form>
     </ui:define>
   </ui:composition>
 </h:body>
-
 </html>

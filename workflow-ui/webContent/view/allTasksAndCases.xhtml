@@ -6,7 +6,10 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
+    <h:form id="tasksForm" style="margin-top: 20px">
+      <h:outputText value="All Tasks" style="font-size:16pt; font-weight:bold" />
       <ui:include src="/includes/components/tasksTable.xhtml" />
+    </h:form>
     </ui:define>
   </ui:composition>
 </h:body>
