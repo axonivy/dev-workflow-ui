@@ -51,7 +51,7 @@ public class TasksDataModel extends LazyDataModel<ITask>
   {
     if (UserUtil.checkIfPersonalTask())
     {
-      taskQuery = taskQuery.where().currentUserCanWorkOn();
+      taskQuery.where().currentUserCanWorkOn();
     }
   }
 

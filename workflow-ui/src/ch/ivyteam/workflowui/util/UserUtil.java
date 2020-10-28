@@ -56,11 +56,7 @@ public class UserUtil
   {
     String currentUrl = FacesContext.getCurrentInstance().getViewRoot().getViewId();
     String currentPage = StringUtils.substringAfterLast(currentUrl, "/");
-    if (currentPage.equals("tasks.xhtml"))
-    {
-      return true;
-    }
-    return false;
+    return currentPage.equals("tasks.xhtml");
   }
 
   public static boolean isLoggedIn()

@@ -16,6 +16,12 @@ public class TasksBean
 {
   private TasksDataModel tasksDataModel;
 
+  public TasksBean()
+  {
+    tasksDataModel = new TasksDataModel();
+    tasksDataModel.setFilter("");
+  }
+
   public TasksDataModel getTasksDataModel()
   {
     return tasksDataModel;
@@ -29,12 +35,6 @@ public class TasksBean
   public void setFilter(String filter)
   {
     this.tasksDataModel.setFilter(filter);
-  }
-
-  public TasksBean()
-  {
-    tasksDataModel = new TasksDataModel();
-    tasksDataModel.setFilter("");
   }
 
   @SuppressWarnings("removal")
