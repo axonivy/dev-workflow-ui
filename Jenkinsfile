@@ -1,3 +1,5 @@
+def manualDeploy
+
 pipeline {
   agent any
 
@@ -75,8 +77,23 @@ pipeline {
 
           archiveArtifacts '**/target/docu/**/*'
           archiveArtifacts '**/target/*.html'
+          isMaster = (env.BRANCH_NAME == 'master')
           recordIssues filters: [includeType('screenshot-html-plugin:compare-images')], tools: [mavenConsole(name: 'Image')], unstableNewAll: 1,
-          qualityGates: [[threshold: 1, type: 'TOTAL', unstable: true]]
+          qualityGates: [[threshold: 1, type: 'TOTAL', unstable: isMaster]]
+        }
+      }
+    }
+    stage('manual-deploy') {
+      when {
+        branch 'master'
+      }
+      steps {
+        script{
+          if (currentBuild.currentResult != 'SUCCESS') {
+            manualDeploy = input(
+              message: 'Build did not succeed. Deploy screenshots?', parameters: [
+              [$class: 'BooleanParameterDefinition', defaultValue: false, description: '', name: 'Deploy']])
+          }
         }
       }
     }
@@ -90,7 +107,7 @@ pipeline {
       when {
         allOf {
           branch 'master'
-          expression { return currentBuild.currentResult == 'SUCCESS' || params.deployScreenshots }
+          expression { return currentBuild.currentResult == 'SUCCESS' || params.deployScreenshots || manualDeploy }
         }
       }
       steps {
