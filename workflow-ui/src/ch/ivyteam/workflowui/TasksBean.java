@@ -1,45 +1,40 @@
 package ch.ivyteam.workflowui;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
-import ch.ivyteam.ivy.application.IApplication;
-import ch.ivyteam.ivy.persistence.IQueryResult;
-import ch.ivyteam.ivy.persistence.OrderDirection;
-import ch.ivyteam.ivy.security.ISession;
-import ch.ivyteam.ivy.workflow.ITask;
-import ch.ivyteam.ivy.workflow.PropertyOrder;
-import ch.ivyteam.ivy.workflow.TaskProperty;
 import ch.ivyteam.ivy.workflow.TaskState;
-import ch.ivyteam.ivy.workflow.WorkflowNavigationUtil;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.workflowui.util.DateUtil;
 import ch.ivyteam.workflowui.util.UserUtil;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class TasksBean
 {
+  private TasksDataModel tasksDataModel;
 
-  public List<ITask> getTasks()
+  public TasksBean()
   {
-    OrderDirection direction = OrderDirection.DESCENDING;
-    IQueryResult<ITask> queryResult = WorkflowNavigationUtil.getWorkflowContext(IApplication.current())
-            .findTasks(null, PropertyOrder.create(TaskProperty.ID, direction), 0, 100, true);
-    return queryResult.getResultList();
+    tasksDataModel = new TasksDataModel();
+    tasksDataModel.setFilter("");
   }
 
-  public List<ITask> getPersonalTasks()
+  public TasksDataModel getTasksDataModel()
   {
-    List<PropertyOrder<TaskProperty>> order = PropertyOrder.create(TaskProperty.ID,
-            OrderDirection.DESCENDING);
-    IQueryResult<ITask> queryResult = WorkflowNavigationUtil.getWorkflowContext(IApplication.current())
-            .findWorkTasks(ISession.current().getSessionUser(), null, order, 0, 100, true,
-                    TaskState.WORKING_OR_SUSPENDED_STATES);
-    return queryResult.getResultList();
+    return tasksDataModel;
+  }
+
+  public String getFilter()
+  {
+    return tasksDataModel.getFilter();
+  }
+
+  public void setFilter(String filter)
+  {
+    this.tasksDataModel.setFilter(filter);
   }
 
   @SuppressWarnings("removal")
@@ -82,6 +77,11 @@ public class TasksBean
   public void checkIfLoggedIn()
   {
     UserUtil.redirectIfNotLoggedIn();
+  }
+
+  public boolean checkIfPersonalTasks()
+  {
+    return UserUtil.checkIfPersonalTask();
   }
 
   public String getPrettyTime(Date date)
