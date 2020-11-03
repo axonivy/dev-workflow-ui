@@ -90,9 +90,12 @@ pipeline {
       steps {
         script{
           if (currentBuild.currentResult != 'SUCCESS') {
-            manualDeploy = input(
-              message: 'Build did not succeed. Deploy screenshots?', parameters: [
-              [$class: 'BooleanParameterDefinition', defaultValue: false, description: '', name: 'Deploy']])
+            timeout(time: 10, unit: 'MINUTES')
+            {
+              manualDeploy = input(
+                message: 'Build did not succeed. Deploy screenshots?', parameters: [
+                [$class: 'BooleanParameterDefinition', defaultValue: false, description: '', name: 'Deploy']])
+            }
           }
         }
       }
