@@ -83,18 +83,21 @@ pipeline {
         }
       }
     }
-    stage('manual-deploy') {
+    stage('verify-manually') {
       when {
         branch 'master'
+        not {
+          triggeredBy 'TimerTrigger'
+        }
       }
       steps {
         script{
-          if (currentBuild.currentResult != 'SUCCESS') {
+          if (currentBuild.currentResult == 'UNSTABLE') {
             timeout(time: 10, unit: 'MINUTES')
             {
               manualDeploy = input(
-                message: 'Build did not succeed. Deploy screenshots?', parameters: [
-                [$class: 'BooleanParameterDefinition', defaultValue: false, description: '', name: 'Deploy']])
+                message: 'Screenshot comparison failed. Please check them manually.', parameters: [
+                [$class: 'BooleanParameterDefinition', defaultValue: false, description: '', name: 'Deploy screenshots?']])
             }
           }
         }
