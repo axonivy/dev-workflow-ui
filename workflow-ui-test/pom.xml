@@ -5,9 +5,9 @@
 
   <parent>
     <groupId>ch.ivyteam.workflow</groupId>
-    <artifactId>workflow-ui-config</artifactId>
+    <artifactId>workflow-ui-config-iar</artifactId>
     <version>${revision}</version>
-    <relativePath>../maven/config</relativePath>
+    <relativePath>../maven/config/iar</relativePath>
   </parent>
 
   <groupId>ch.ivyteam.workflow</groupId>

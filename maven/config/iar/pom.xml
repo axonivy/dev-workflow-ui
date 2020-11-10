@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ch.ivyteam.workflow</groupId>
+  <artifactId>workflow-ui-config-iar</artifactId>
+  <version>${revision}</version>
+  <packaging>pom</packaging>
+
+  <parent>
+    <groupId>ch.ivyteam.workflow</groupId>
+    <artifactId>workflow-ui-config</artifactId>
+    <version>${revision}</version>
+    <relativePath>..</relativePath>
+  </parent>
+
+  <properties>
+    <engine.page.url>https://jenkins.ivyteam.io/job/ivy-core_product/job/master/lastSuccessfulBuild/</engine.page.url>
+    <deployApplicationName>workflow-ui-dev-${user.name}</deployApplicationName>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.axonivy.ivy.ci</groupId>
+        <artifactId>project-build-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <ivyVersion>[9.1.0,]</ivyVersion>
+          <engineListPageUrl>${engine.page.url}</engineListPageUrl>
+          <skipScriptValidation>false</skipScriptValidation>
+          <compilerOptions>
+            <!-- unnecessary suppress warnings: false positives off -->
+            <compilerOption>-warn:-warningToken</compilerOption>
+          </compilerOptions>
+        </configuration>
+        <executions>
+          <execution>
+            <id>test.app.deploy</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>deploy-to-engine</goal>
+            </goals>
+            <configuration>
+              <deployMethod>HTTP</deployMethod>
+              <deployServerId>axonivy.engine</deployServerId>
+              <deployEngineUrl>https://nightly.demo.ivyteam.io</deployEngineUrl>
+              <deployToEngineApplication>${deployApplicationName}</deployToEngineApplication>
+              <deployTestUsers>true</deployTestUsers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
