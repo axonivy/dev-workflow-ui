@@ -36,20 +36,6 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>com.axonivy.ivy.ci</groupId>
-        <artifactId>project-build-plugin</artifactId>
-        <extensions>true</extensions>
-        <configuration>
-          <ivyVersion>[9.1.0,]</ivyVersion>
-          <engineListPageUrl>${engine.page.url}</engineListPageUrl>
-          <skipScriptValidation>false</skipScriptValidation>
-          <compilerOptions>
-            <!-- unnecessary suppress warnings: false positives off -->
-            <compilerOption>-warn:-warningToken</compilerOption>
-          </compilerOptions>
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>flatten-maven-plugin</artifactId>
         <version>${flatten.plugin.version}</version>

@@ -16,6 +16,8 @@ import ch.ivyteam.workflowui.util.UserUtil;
 
 public class TasksDataModel extends LazyDataModel<ITask>
 {
+  /**  */
+  private static final long serialVersionUID = -5287014754211109062L;
   private String filter;
 
   public String getFilter()
