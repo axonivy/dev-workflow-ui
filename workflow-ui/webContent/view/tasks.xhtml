@@ -5,7 +5,7 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-    <f:event type="preRenderView" listener="#{tasksBean.checkIfLoggedIn}"/>
+    <f:event type="preRenderView" listener="#{tasksBean.checkIfLoggedIn}" />
     <h:form id="tasksForm" style="margin-top: 20px">
       <h:outputText value="Personal Tasks" style="font-size:16pt; font-weight:bold" />
       <ui:include src="/includes/components/tasksTable.xhtml" />
