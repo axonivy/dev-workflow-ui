@@ -6,7 +6,37 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <p>This is starts</p>
+      <h:form id="startsForm">
+        <h:outputText value="Starts" styleClass="starts-header-title" />
+        <p:panel id="main-starts-container">
+          <f:facet name="header">
+            <p:outputPanel>
+              <p:inputText id="filter" placeholder="Search project or start" value="#{processesBean.filter}">
+                <p:ajax event="keyup" update="projectStarts" />
+              </p:inputText>
+            </p:outputPanel>
+          </f:facet>
+          <p:accordionPanel var="pmv" value="#{processesBean.PMVs}" id="projectStarts" activeIndex="0" multiple="true">
+            <p:tab>
+              <f:facet name="title">
+                <i class="si si-#{pmv.stateIcon}" title="#{pmv.state} - #{pmv.versionName}"></i>
+                <h:outputText styleClass="starts-project-name" value="#{pmv.projectName}"/>
+              </f:facet>
+              <ui:repeat var="start" value="#{pmv.startElements}">
+                <p:panel styleClass="start-element" rendered="#{pmv.active}">
+                  <a href="#{start.link.relative}" id="start-link" class="flex-space">
+                    <span class="straight-text-icon">
+                      <i class="material-icons">play_circle_filled</i>
+                      <span>#{start.getUserFriendlyRequestPath()}</span>
+                    </span>
+                    <span>#{start.getName()}</span>
+                  </a>
+                </p:panel>
+              </ui:repeat>
+            </p:tab>
+          </p:accordionPanel>
+        </p:panel>
+      </h:form>
     </ui:define>
   </ui:composition>
 </h:body>
