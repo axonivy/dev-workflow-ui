@@ -65,8 +65,8 @@
 }
 
 .starts-project-name {
-  color: #343232 !important;
-  font-weight: 700 !important;
+  color: #343232;
+  font-weight: 700;
   margin-left: 6px;
 }
 
@@ -80,20 +80,20 @@
     background-color: #afced8;
 }
 
-#startsForm {
+.starts-form {
    margin-top: 20px;
 }
 
-#startsForm\:main-starts-container {
+.main-starts-container {
   margin-top: 10px;
 }
 
-#startsForm\:main-starts-container_content {
-  padding: 0px !important;
+.main-starts-container > div.ui-panel-content {
+  padding: 0px;
 }
 
-#startsForm\:projectStarts *{
-  border: 0px !important;
+.main-starts-container > div.ui-panel-content *{
+  border: 0px;
 }
 
 .flex-space {

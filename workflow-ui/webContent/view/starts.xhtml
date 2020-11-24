@@ -6,9 +6,9 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <h:form id="startsForm">
+      <h:form id="startsForm" styleClass="starts-form">
         <h:outputText value="Starts" styleClass="starts-header-title" />
-        <p:panel id="main-starts-container">
+        <p:panel id="main-starts-container" styleClass="main-starts-container">
           <f:facet name="header">
             <p:outputPanel>
               <p:inputText id="filter" placeholder="Search project or start" value="#{processesBean.filter}">
@@ -17,7 +17,7 @@
             </p:outputPanel>
           </f:facet>
           <p:accordionPanel var="pmv" value="#{processesBean.PMVs}" id="projectStarts" activeIndex="0" multiple="true">
-            <p:tab>
+            <p:tab titleStyleClass="straight-text-icon">
               <f:facet name="title">
                 <i class="si si-#{pmv.stateIcon}" title="#{pmv.state} - #{pmv.versionName}"></i>
                 <h:outputText styleClass="starts-project-name" value="#{pmv.projectName}"/>
