@@ -19,7 +19,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 
 @IvyWebTest
-public class WebTestScreenshotsIT
+public class WebDocuScreenshots
 {
   private static final int SCREENSHOT_WIDTH = 1500;
 

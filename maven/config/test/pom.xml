@@ -12,6 +12,10 @@
   <version>${revision}</version>
   <packaging>pom</packaging>
 
+  <properties>
+    <maven.surefire.version>3.0.0-M3</maven.surefire.version>
+  </properties>
+
   <build>
     <sourceDirectory>src</sourceDirectory>
     <testSourceDirectory>src_test</testSourceDirectory>
