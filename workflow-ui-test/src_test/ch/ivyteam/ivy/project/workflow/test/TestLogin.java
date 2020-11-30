@@ -38,7 +38,7 @@ public class TestLogin
 
   private static void login()
   {
-    LoginUtil.login("testJunitUser", "jUnitPassword");
+    LoginUtil.login("testJunitUser", "testJunitUser");
   }
 
   private static final class TestHandler implements RedirectHandler

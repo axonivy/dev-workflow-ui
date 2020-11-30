@@ -2,7 +2,7 @@
 <userConfig>
     <user>
         <username>testJunitUser</username>
-        <password>jUnitPassword</password>
+        <password>testJunitUser</password>
         <role>testRoleJunit</role>
     </user>
 </userConfig>
