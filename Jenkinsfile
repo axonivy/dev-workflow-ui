@@ -81,9 +81,9 @@ pipeline {
 
           archiveArtifacts '**/target/docu/**/*'
           archiveArtifacts '**/target/*.html'
-          isMaster = (env.BRANCH_NAME == 'master') ? 1 : 2
-          recordIssues filters: [includeType('screenshot-html-plugin:compare-images')], tools: [mavenConsole(name: 'Image')], unstableNewAll: isMaster,
-          qualityGates: [[threshold: isMaster, type: 'TOTAL', unstable: true]]
+          testFailsCount = (env.BRANCH_NAME == 'master') ? 1 : 2
+          recordIssues filters: [includeType('screenshot-html-plugin:compare-images')], tools: [mavenConsole(name: 'Image')], unstableNewAll: testFailsCount,
+          qualityGates: [[threshold: testFailsCount, type: 'TOTAL', unstable: true]]
         }
       }
     }
