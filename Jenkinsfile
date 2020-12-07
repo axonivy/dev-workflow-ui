@@ -8,7 +8,7 @@ pipeline {
   }
 
   triggers {
-    cron('H 0 4 * * ?')
+    cron('H 4 * * *')
     bitbucketPush()
   }
 
