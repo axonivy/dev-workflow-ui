@@ -24,7 +24,7 @@
         <artifactId>project-build-plugin</artifactId>
         <extensions>true</extensions>
         <configuration>
-          <ivyVersion>[9.1.0,]</ivyVersion>
+          <ivyVersion>[9.2.0,]</ivyVersion>
           <engineListPageUrl>${engine.page.url}</engineListPageUrl>
           <skipScriptValidation>false</skipScriptValidation>
           <compilerOptions>

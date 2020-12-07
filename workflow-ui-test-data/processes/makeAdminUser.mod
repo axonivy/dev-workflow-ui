@@ -1,5 +1,5 @@
 [Ivy]
-175461E47A870BF8 7.5.0 #module
+175461E47A870BF8 9.2.0 #module
 >Proto >Proto Collection #zClass
 mr0 makeAdminUser Big #zClass
 mr0 B #cInfo
@@ -34,8 +34,8 @@ mr0 f1 337 49 30 30 0 15 #rect
 mr0 f1 @|EndIcon #fIcon
 mr0 f2 actionTable 'out=in;
 ' #txt
-mr0 f2 actionCode 'import ch.ivyteam.workflowui.util.UserUtil;
-UserUtil.makeAdmin();' #txt
+mr0 f2 actionCode 'import ch.ivyteam.workflowuitestdata.TestUtil;
+TestUtil.makeAdmin();' #txt
 mr0 f2 security system #txt
 mr0 f2 168 42 112 44 0 -7 #rect
 mr0 f2 @|StepIcon #fIcon
