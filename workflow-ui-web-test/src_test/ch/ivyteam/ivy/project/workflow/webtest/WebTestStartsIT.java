@@ -22,7 +22,7 @@ public class WebTestStartsIT
     Selenide.open(viewUrl("starts.xhtml"));
     $(By.id("startsForm:projectStarts")).shouldBe(visible);
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui"));
-    $(By.id("startsForm:filter")).sendKeys("main/start");
+    $(By.id("startsForm:filter")).sendKeys("main/DefaultApplication");
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui"));
     $(By.id("startsForm:projectStarts")).shouldNotHave(text("workflow-ui-test-data"));
   }
