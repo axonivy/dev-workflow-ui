@@ -8,7 +8,7 @@ pipeline {
   }
 
   triggers {
-    cron '@midnight'
+    cron 'H 4 * * *'
     bitbucketPush()
   }
 
@@ -83,7 +83,7 @@ pipeline {
           archiveArtifacts '**/target/*.html'
           isMaster = (env.BRANCH_NAME == 'master')
           recordIssues filters: [includeType('screenshot-html-plugin:compare-images')], tools: [mavenConsole(name: 'Image')], unstableNewAll: 1,
-          qualityGates: [[threshold: 1, type: 'TOTAL', unstable: isMaster]]
+          qualityGates: [[threshold: 1, type: 'TOTAL', unstable: !isMaster]]
         }
       }
     }
@@ -96,7 +96,7 @@ pipeline {
       }
       steps {
         script{
-          if (currentBuild.currentResult == 'UNSTABLE') {
+          if (currentBuild.currentResult == 'FAILURE') {
             timeout(time: 10, unit: 'MINUTES')
             {
               manualDeploy = input(
