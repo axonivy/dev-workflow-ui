@@ -1,9 +1,11 @@
 package ch.ivyteam.ivy.project.workflow.webtest;
 
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.assertCurrentUrlEndsWith;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
+import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
 import org.junit.jupiter.api.Test;
@@ -19,21 +21,21 @@ public class WebTestStartsIT
   @Test
   public void testFilter()
   {
+    startTestProcess("1750C5211D94569D/TestData.ivp");
     Selenide.open(viewUrl("starts.xhtml"));
     $(By.id("startsForm:projectStarts")).shouldBe(visible);
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui"));
-    $(By.id("startsForm:filter")).sendKeys("main/DefaultApplication");
-    $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui"));
-    $(By.id("startsForm:projectStarts")).shouldNotHave(text("workflow-ui-test-data"));
+    $(By.id("startsForm:filter")).sendKeys("makeAdmin");
+    $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui-test-data"));
+    $(By.id("startsForm:projectStarts")).shouldNotHave(exactText("workflow-ui"));
   }
 
   @Test
   public void testExecuteStart()
   {
     Selenide.open(viewUrl("starts.xhtml"));
-    $(By.id("startsForm:filter")).sendKeys("workflow-ui");
-    $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui"));
-    $(By.id("start-link")).shouldBe(visible).click();
-    assertCurrentUrlEndsWith("home.xhtml");
+    $(By.id("startsForm:filter")).sendKeys("testdata");
+    $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui-test-data"));
+    $(byText("TestData.ivp")).shouldBe(visible).click();
   }
 }

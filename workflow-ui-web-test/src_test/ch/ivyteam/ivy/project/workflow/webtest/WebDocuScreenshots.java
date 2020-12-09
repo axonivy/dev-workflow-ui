@@ -35,7 +35,7 @@ public class WebDocuScreenshots
   {
     open(viewUrl("home.xhtml"));
     loginDeveloper();
-    startTestProcess("1750C5211D94569D/start.ivp");
+    startTestProcess("1750C5211D94569D/TestData.ivp");
 
     open(viewUrl("home.xhtml"));
     takeScreenshot("workflow-ui-home", new Dimension(SCREENSHOT_WIDTH, 800));

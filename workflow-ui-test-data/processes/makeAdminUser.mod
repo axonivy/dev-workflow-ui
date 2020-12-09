@@ -14,21 +14,21 @@ mr0 @GridStep f2 '' #zField
 mr0 @PushWFArc f3 '' #zField
 mr0 @PushWFArc f4 '' #zField
 >Proto mr0 mr0 makeAdminUser #zField
-mr0 f0 outLink start.ivp #txt
+mr0 f0 outLink makeAdminUser.ivp #txt
 mr0 f0 inParamDecl '<> param;' #txt
 mr0 f0 requestEnabled true #txt
 mr0 f0 triggerEnabled false #txt
-mr0 f0 callSignature start() #txt
+mr0 f0 callSignature makeAdminUser() #txt
 mr0 f0 caseData businessCase.attach=true #txt
 mr0 f0 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>
     <language>
-        <name>start.ivp</name>
+        <name>makeAdminUser.ivp</name>
     </language>
 </elementInfo>
 ' #txt
 mr0 f0 @C|.responsibility Everybody #txt
-mr0 f0 81 49 30 30 -25 17 #rect
+mr0 f0 81 49 30 30 -55 23 #rect
 mr0 f0 @|StartRequestIcon #fIcon
 mr0 f1 337 49 30 30 0 15 #rect
 mr0 f1 @|EndIcon #fIcon
