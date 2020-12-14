@@ -21,25 +21,26 @@ public class CustomPMV
   {
     if (StringUtils.containsIgnoreCase(pmv.getName(), filter))
     {
-      var startElements = pmv.getStartables(ISession.current().getSessionUser().getUserToken())
-              .stream().collect(Collectors.toList());
-      return filterNoStartsAndSelf(pmv, startElements);
+      var startElements = pmv.getStartables(ISession.current());
+      return filterEmptyStartsAndSelf(pmv, startElements);
     }
     else
     {
-      var startElements = pmv.getStartables(ISession.current().getSessionUser().getUserToken()).stream()
-              .filter(e -> StringUtils.containsIgnoreCase(e.getLink().toUri().toString(), filter))
+      var startElements = pmv.getStartables(ISession.current()).stream()
+              .filter(e -> StringUtils.containsIgnoreCase(e.getLink().getRelative(), filter))
               .collect(Collectors.toList());
-      return filterNoStartsAndSelf(pmv, startElements);
+      return filterEmptyStartsAndSelf(pmv, startElements);
     }
   }
 
-  private static Optional<CustomPMV> filterNoStartsAndSelf(IWorkflowProcessModelVersion pmv,
+  private static Optional<CustomPMV> filterEmptyStartsAndSelf(IWorkflowProcessModelVersion pmv,
           List<IWebStartable> startElements)
   {
-    return (startElements.isEmpty() || pmv.getName().equals(IProcessModelVersion.current().getName()))
-            ? Optional.empty()
-            : Optional.of(new CustomPMV(pmv, startElements));
+    if (startElements.isEmpty() || pmv.equals(IProcessModelVersion.current()))
+    {
+      return Optional.empty();
+    }
+    return Optional.of(new CustomPMV(pmv, startElements));
   }
 
   private CustomPMV(IWorkflowProcessModelVersion pmv, List<IWebStartable> startElements)

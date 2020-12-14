@@ -92,7 +92,7 @@
         <artifactId>project-build-plugin</artifactId>
         <extensions>true</extensions>
         <configuration>
-          <ivyVersion>[9.2.0,]</ivyVersion>
+          <ivyVersion>${buildPlugin.ivyVersion}</ivyVersion>
         </configuration>
       </plugin>
       <plugin>
