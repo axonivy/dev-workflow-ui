@@ -26,7 +26,7 @@ public class WebTestTasksIT
   @Test
   public void allTasksOnlyAdmin()
   {
-    startTestProcess("175461E47A870BF8/start.ivp");
+    startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     Selenide.open(viewUrl("home.xhtml"));
     loginFromTable("testuser");
     $(By.id("menuform:sr_tasks_cases")).shouldNotBe(visible);
@@ -41,7 +41,7 @@ public class WebTestTasksIT
     loginDeveloper();
     open(viewUrl("allTasksAndCases.xhtml"));
 
-    startTestProcess("1750C5211D94569D/start.ivp");
+    startTestProcess("1750C5211D94569D/TestData.ivp");
     open(viewUrl("allTasksAndCases.xhtml"));
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.firstRowContains("TestTask");
@@ -54,7 +54,7 @@ public class WebTestTasksIT
   {
     open(viewUrl("home.xhtml"));
     loginDeveloper();
-    startTestProcess("1750C5211D94569D/start.ivp");
+    startTestProcess("1750C5211D94569D/TestData.ivp");
     open(viewUrl("allTasksAndCases.xhtml"));
 
     $(byText("info_outline")).shouldBe(visible).click();

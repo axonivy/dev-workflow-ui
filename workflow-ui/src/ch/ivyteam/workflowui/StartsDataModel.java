@@ -9,7 +9,7 @@ import org.primefaces.model.LazyDataModel;
 
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.application.IProcessModel;
-import ch.ivyteam.ivy.workflow.WorkflowNavigationUtil;
+import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
 
 public class StartsDataModel extends LazyDataModel<CustomPMV>
 {
@@ -29,7 +29,7 @@ public class StartsDataModel extends LazyDataModel<CustomPMV>
   public List<CustomPMV> getPMVs()
   {
     return IApplication.current().getProcessModels().stream().map(IProcessModel::getReleasedProcessModelVersion)
-            .map(WorkflowNavigationUtil::getWorkflowProcessModelVersion).filter(Objects::nonNull)
+            .map(IWorkflowProcessModelVersion::of).filter(Objects::nonNull)
             .map(pmv -> CustomPMV.create(pmv, filter)).filter(Optional::isPresent).map(Optional::get)
             .collect(Collectors.toList());
   }

@@ -1,0 +1,29 @@
+{
+  "uuid" : "0cf1f054-a4ad-4b2b-bcf1-c9c34ec0a2ab",
+  "id" : "test___case___map",
+  "name" : "test _ case _ map",
+  "stages" : [ {
+    "id" : "stage1",
+    "name" : "stage1",
+    "icon" : "css:fa fa-ambulance",
+    "processes" : [ {
+      "id" : "process_1",
+      "name" : "process 1",
+      "processToExecute" : "ch.ivyteam.workflow:workflow-ui:17425834F1CBA722/DefaultApplicationHomePage.ivp"
+    } ]
+  }, {
+    "id" : "stage_2",
+    "name" : "stage 2",
+    "icon" : "css:fa fa-apple",
+    "processes" : [ {
+      "id" : "make_admin_user",
+      "name" : "make Admin User",
+      "processToExecute" : "ch.ivyteam.workflow:workflow-ui-test-data:175461E47A870BF8/makeAdminUser.ivp"
+    } ],
+    "sidesteps" : [ {
+      "id" : "test_data",
+      "name" : "Test Data",
+      "processToExecute" : "ch.ivyteam.workflow:workflow-ui-test-data:1750C5211D94569D/TestData.ivp"
+    } ]
+  } ]
+}

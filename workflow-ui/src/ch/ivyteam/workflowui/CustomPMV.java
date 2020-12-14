@@ -7,48 +7,46 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.application.ActivityOperationState;
-import ch.ivyteam.ivy.workflow.IStartElement;
+import ch.ivyteam.ivy.application.IProcessModelVersion;
+import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
+import ch.ivyteam.ivy.workflow.start.IWebStartable;
 
 public class CustomPMV
 {
   private final IWorkflowProcessModelVersion pmv;
-  private final List<IStartElement> startElements;
+  private final List<IWebStartable> starts;
 
   public static Optional<CustomPMV> create(IWorkflowProcessModelVersion pmv, String filter)
   {
     if (StringUtils.containsIgnoreCase(pmv.getName(), filter))
     {
-      var startElements = pmv.getStartElements()
-              .stream().filter(e -> (e.isVisible())).collect(Collectors.toList());
-      return filterNoStarts(pmv, startElements);
+      var startElements = pmv.getStartables(ISession.current());
+      return filterEmptyStartsAndSelf(pmv, startElements);
     }
     else
     {
-      var startElements = pmv.getStartElements().stream()
-              .filter(e -> (e.isVisible() &&  StringUtils.containsIgnoreCase(e.getUserFriendlyRequestPath(), filter)))
+      var startElements = pmv.getStartables(ISession.current()).stream()
+              .filter(e -> StringUtils.containsIgnoreCase(e.getLink().getRelative(), filter))
               .collect(Collectors.toList());
-      return filterNoStarts(pmv, startElements);
+      return filterEmptyStartsAndSelf(pmv, startElements);
     }
   }
 
-  private static Optional<CustomPMV> filterNoStarts(IWorkflowProcessModelVersion pmv,
-          List<IStartElement> startElements)
+  private static Optional<CustomPMV> filterEmptyStartsAndSelf(IWorkflowProcessModelVersion pmv,
+          List<IWebStartable> startElements)
   {
-    if (startElements.isEmpty())
+    if (startElements.isEmpty() || pmv.equals(IProcessModelVersion.current()))
     {
       return Optional.empty();
     }
-    else
-    {
-      return Optional.of(new CustomPMV(pmv, startElements));
-    }
+    return Optional.of(new CustomPMV(pmv, startElements));
   }
 
-  private CustomPMV(IWorkflowProcessModelVersion pmv, List<IStartElement> startElements)
+  private CustomPMV(IWorkflowProcessModelVersion pmv, List<IWebStartable> startElements)
   {
     this.pmv = pmv;
-    this.startElements = startElements;
+    this.starts = startElements;
   }
 
   public IWorkflowProcessModelVersion getPMV()
@@ -89,8 +87,8 @@ public class CustomPMV
     return pmv.getVersionName();
   }
 
-  public List<IStartElement> getStartElements()
+  public List<IWebStartable> getStartElements()
   {
-    return this.startElements;
+    return this.starts;
   }
 }
