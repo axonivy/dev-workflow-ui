@@ -22,6 +22,7 @@ Mn0 @EndRequest f10 '' #zField
 Mn0 @EndRequest f15 '' #zField
 Mn0 @PushWFArc f16 '' #zField
 Mn0 @PushWFArc f11 '' #zField
+Mn0 @StartRequest f12 '' #zField
 >Proto Mn0 Mn0 Main #zField
 Mn0 f0 outLink DefaultApplicationHomePage.ivp #txt
 Mn0 f0 inParamDecl '<> param;' #txt
@@ -122,6 +123,26 @@ Mn0 f15 209 241 30 30 0 15 #rect
 Mn0 f15 @|EndRequestIcon #fIcon
 Mn0 f16 111 256 209 256 #arcP
 Mn0 f11 111 192 209 192 #arcP
+Mn0 f12 outLink DefaultFramePage.ivp #txt
+Mn0 f12 inParamDecl '<String relativeUrl,Number runningTaskId> param;' #txt
+Mn0 f12 actionCode 'import ch.ivyteam.ivy.application.IApplication;
+
+ch.ivyteam.ivy.request.IHttpResponse.current().sendRedirect(IApplication.current().getContextPath()+"/faces/view/workflow-ui/frame.xhtml?taskUrl="+param.relativeUrl);
+' #txt
+Mn0 f12 requestEnabled true #txt
+Mn0 f12 triggerEnabled false #txt
+Mn0 f12 callSignature DefaultFramePage(String,Number) #txt
+Mn0 f12 caseData businessCase.attach=true #txt
+Mn0 f12 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elementInfo>
+    <language>
+        <name>DefaultFramePage.ivp</name>
+    </language>
+</elementInfo>
+' #txt
+Mn0 f12 @C|.responsibility Everybody #txt
+Mn0 f12 80 368 32 32 -63 16 #rect
+Mn0 f12 @|StartRequestIcon #fIcon
 >Proto Mn0 .type ch.ivyteam.ivy.project.workflow.ui.Data #txt
 >Proto Mn0 .processKind NORMAL #txt
 >Proto Mn0 0 0 32 24 18 0 #rect

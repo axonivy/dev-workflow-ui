@@ -18,7 +18,7 @@
             <i class="material-icons">perm_identity</i>
             <h:outputText value="Description" />
             <div class="task-detail-action-container action-container">
-              <p:commandLink value="Start" class="task-action-item straight-text-icon" id="taskStartBtn">
+              <p:commandLink value="Start" action="#{tasksBean.executeTask(tasksDetailsBean.getSelectedTask().getId())}" class="task-action-item straight-text-icon" id="taskStartBtn">
                 <i class="material-icons">chevron_right</i>
               </p:commandLink>
               <p:commandLink value="Actions" class="task-actions-link straight-text-icon" id="taskActionsBtn">

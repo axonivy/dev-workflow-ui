@@ -1,5 +1,6 @@
 package ch.ivyteam.ivy.project.workflow.webtest;
 
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.assertCurrentUrlEndsWith;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.Condition.exactText;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
+import com.axonivy.ivy.webtest.engine.EngineUrl;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
@@ -34,8 +36,27 @@ public class WebTestStartsIT
   public void testExecuteStart()
   {
     Selenide.open(viewUrl("starts.xhtml"));
-    $(By.id("startsForm:filter")).sendKeys("testdata");
+    $(By.id("startsForm:filter")).sendKeys("startTestDialog");
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui-test-data"));
-    $(byText("TestData.ivp")).shouldBe(visible).click();
+    $(byText("startTestDialog.ivp")).shouldBe(visible).click();
+    assertCurrentUrlEndsWith("startTestDialog.ivp");
+
+    Selenide.switchTo().frame("iFrame");
+    $(By.id("form:testInput")).sendKeys("test input");
+    $(By.id("form:testSelectOneMenu")).shouldBe(visible).click();
+    $(By.id("form:testSelectOneMenu_2")).shouldBe(visible).click();
+  }
+
+  @Test
+  public void testExecuteDefaultFramePage()
+  {
+    Selenide.open(EngineUrl.createProcessUrl("/workflow-ui-test-data/1750C5211D94569D/startTestDialog.ivp?embedInFrame"));
+    if($(By.id("iFrame")).is(visible))
+    {
+      Selenide.switchTo().frame("iFrame");
+    }
+    $(By.id("form:testInput")).sendKeys("test input");
+    $(By.id("form:testSelectOneMenu")).shouldBe(visible).click();
+    $(By.id("form:testSelectOneMenu_1")).shouldBe(visible).click();
   }
 }
