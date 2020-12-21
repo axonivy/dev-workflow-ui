@@ -5,9 +5,12 @@ import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import ch.ivyteam.ivy.environment.Ivy;
+import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.workflowui.util.DateUtil;
+import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.UserUtil;
 
 @ManagedBean
@@ -92,6 +95,12 @@ public class TasksBean
   public String getDateTime(Date date)
   {
     return DateUtil.getDateAndTime(date);
+  }
+
+  public void executeTask(long taskId)
+  {
+    ITask task = Ivy.wf().findTask(taskId);
+    RedirectUtil.redirect("frame.xhtml?taskUrl=" + task.getStartLink().getRelative());
   }
 
   public String getPriorityIcon(WorkflowPriority priority)

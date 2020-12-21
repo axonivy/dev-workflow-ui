@@ -43,4 +43,9 @@ public class ProcessesBean
   {
     RedirectUtil.redirect("home.xhtml");
   }
+
+  public void executeStart(String taskUrl)
+  {
+    RedirectUtil.redirect("frame.xhtml?taskUrl=" + taskUrl);
+  }
 }

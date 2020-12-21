@@ -40,9 +40,6 @@ public class WebDocuScreenshots
     open(viewUrl("home.xhtml"));
     takeScreenshot("workflow-ui-home", new Dimension(SCREENSHOT_WIDTH, 800));
 
-    open(viewUrl("starts.xhtml"));
-    takeScreenshot("workflow-ui-starts", new Dimension(SCREENSHOT_WIDTH, 800));
-
     open(viewUrl("loginTable.xhtml"));
     takeScreenshot("workflow-ui-loginTable", new Dimension(SCREENSHOT_WIDTH, 800));
 
@@ -58,6 +55,9 @@ public class WebDocuScreenshots
     $(byText("info_outline")).shouldBe(visible).click();
     $("#form\\:taskActionsBtn").click();
     takeScreenshot("workflow-ui-taskDetails", new Dimension(SCREENSHOT_WIDTH, 800));
+
+    open(viewUrl("starts.xhtml"));
+    takeScreenshot("workflow-ui-starts", new Dimension(SCREENSHOT_WIDTH, 800));
   }
 
   private void takeScreenshot(String fileName, Dimension size)

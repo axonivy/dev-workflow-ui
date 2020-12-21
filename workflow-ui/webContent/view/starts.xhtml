@@ -24,13 +24,13 @@
               </f:facet>
               <ui:repeat var="start" value="#{pmv.startElements}">
                 <p:panel styleClass="start-element" rendered="#{pmv.active}">
-                  <a href="#{start.link.relative}" id="start-link" class="flex-space">
+                  <h:commandLink action="#{processesBean.executeStart(start.link.relative)}" id="start-link" class="flex-space">
                     <span class="straight-text-icon">
                       <i class="material-icons">play_circle_filled</i>
                       <span>#{start.getDisplayName()}</span>
                     </span>
                     <span>#{start.getDescription()}</span>
-                  </a>
+                  </h:commandLink>
                 </p:panel>
               </ui:repeat>
             </p:tab>
