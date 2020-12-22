@@ -7,7 +7,6 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUr
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -57,7 +56,7 @@ public class WebTestTasksIT
     startTestProcess("1750C5211D94569D/TestData.ivp");
     open(viewUrl("allTasksAndCases.xhtml"));
 
-    $(byText("info_outline")).shouldBe(visible).click();
+    $(".si-information-circle").shouldBe(visible).click();
     $("#form\\:businessCase").shouldBe(text("TestCase"));
 
     $("#form\\:taskResponsible").shouldBe(exactText("Everybody"));

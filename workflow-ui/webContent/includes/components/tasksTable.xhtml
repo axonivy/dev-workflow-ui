@@ -16,15 +16,12 @@
       </p:outputPanel>
     </f:facet>
 
-    <p:column filterBy="#{task.getPriority()}" styleClass="icon-row">
-      <i class="material-icons"><h:outputText id="taskPriority"
-          value="#{tasksBean.getPriorityIcon(task.getPriority())}" /></i>
-      <p:tooltip for="taskPriority" value="Priority #{task.getPriority()}" position="top" />
+    <p:column id="priority" filterBy="#{task.getPriority()}" styleClass="icon-row">
+      <i class="si si-lg si-#{tasksBean.getPriorityIcon(task.getPriority())}" title="Priority #{task.getPriority()}"></i>
     </p:column>
 
     <p:column filterBy="#{task.getState()}" styleClass="icon-row">
-      <i class="material-icons"><h:outputText id="taskState" value="#{tasksBean.getStateIcon(task.getState())}" /></i>
-      <p:tooltip for="taskState" value="State #{task.getState()}" position="top" />
+      <i class="si si-lg si-#{tasksBean.getStateIcon(task.getState())}" title="State #{task.getState()}"></i>
     </p:column>
 
     <p:column headerText="Name" filterBy="#{task.getName()}">
@@ -50,7 +47,7 @@
     <p:column style="width: 60px; text-align: center;">
       <h:link outcome="taskDetails">
         <f:param name="task" value="#{task.getId()}" />
-        <i class="material-icons">info_outline</i>
+        <i class="si si-lg si-information-circle"></i>
       </h:link>
     </p:column>
   </p:dataTable>

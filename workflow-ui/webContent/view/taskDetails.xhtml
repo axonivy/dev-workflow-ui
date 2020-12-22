@@ -15,32 +15,32 @@
       <div class="card card-w-title" style="margin: auto">
         <h:form id="form">
           <div class="task-detail-title straight-text-icon">
-            <i class="material-icons">perm_identity</i>
+            <i class="si si-lg si-single-neutral-actions" style="padding-right: 6px"></i>
             <h:outputText value="Description" />
             <div class="task-detail-action-container action-container">
               <p:commandLink value="Start" action="#{tasksBean.executeTask(tasksDetailsBean.getSelectedTask().getId())}" class="task-action-item straight-text-icon" id="taskStartBtn">
-                <i class="material-icons">chevron_right</i>
+                <i class="si si-arrow-right-1" style="padding-left: 4px; font-weight: 800;"></i>
               </p:commandLink>
               <p:commandLink value="Actions" class="task-actions-link straight-text-icon" id="taskActionsBtn">
-                <i class="material-icons">expand_more</i>
+                <i class="si si-arrow-down-1" style="padding-left: 4px"></i>
               </p:commandLink>
               <p:menu id="actionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom">
                 <p:menuitem actionListener="#{tasksDetailsBean.selectedTask.reset()}" update="form"
                   disabled="#{!tasksDetailsBean.canReset()}" id="taskResetBtn">
-                  <i class="material-icons table-icon">refresh</i>Reset
+                  <i class="si si-road-sign-u-turn-left table-icon"></i>Reset
                 </p:menuitem>
                 <p:menuitem actionListener="#{tasksDetailsBean.park()}" update="form"
                   disabled="#{!tasksDetailsBean.canPark()}" id="taskParkBtn">
-                  <i class="material-icons table-icon">access_time</i>Park
+                  <i class="si si-road-sign-u-turn-right table-icon"></i>Park
                 </p:menuitem>
                 <p:menuitem actionListener="#{tasksDetailsBean.selectedTask.destroy()}" update="form"
                   disabled="#{!tasksDetailsBean.selectedTask.getState().isActive()}"  id="taskDestoryBtn">
-                  <i class="material-icons table-icon">clear</i>Destroy
+                  <i class="si si-close table-icon"></i>Destroy
                 </p:menuitem>
                 <p:menuitem actionListener="#{tasksDetailsBean.expireTask}" update="form"
                   disabled="#{!tasksDetailsBean.selectedTask.getState().isActive()}"
                   rendered="#{engineModeBean.demoOrDesigner}" id="taskExpireBtn">
-                  <i class="material-icons table-icon">local_fire_department</i>Expire now
+                  <i class="si si-alarm-bell-timer table-icon"></i>Expire now
                 </p:menuitem>
               </p:menu>
             </div>
@@ -56,13 +56,13 @@
 
               <h:outputText value="Priority:" />
               <h:outputText>
-                <i class="material-icons table-icon">#{tasksBean.getPriorityIcon(tasksDetailsBean.selectedTask.getPriority())}</i>
+                <i class="si si-#{tasksBean.getPriorityIcon(tasksDetailsBean.selectedTask.getPriority())} table-icon"></i>
                 <h:outputText value="#{tasksDetailsBean.selectedTask.getPriority()}" id="taskPriority" />
               </h:outputText>
 
               <h:outputText value="State:" />
               <h:outputText>
-                <i class="material-icons table-icon">#{tasksBean.getStateIcon(tasksDetailsBean.selectedTask.getState())}</i>
+                <i class="si si-#{tasksBean.getStateIcon(tasksDetailsBean.selectedTask.getState())} table-icon"></i>
                 <h:outputText value="#{tasksDetailsBean.selectedTask.getState()}" id="taskState" />
               </h:outputText>
 

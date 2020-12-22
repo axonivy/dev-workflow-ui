@@ -5,7 +5,6 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginD
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -52,7 +51,7 @@ public class WebDocuScreenshots
     open(viewUrl("allTasksAndCases.xhtml"));
     takeScreenshot("workflow-ui-allTasksAndCases", new Dimension(SCREENSHOT_WIDTH, 800));
 
-    $(byText("info_outline")).shouldBe(visible).click();
+    $(".si-information-circle").shouldBe(visible).click();
     $("#form\\:taskActionsBtn").click();
     takeScreenshot("workflow-ui-taskDetails", new Dimension(SCREENSHOT_WIDTH, 800));
 
