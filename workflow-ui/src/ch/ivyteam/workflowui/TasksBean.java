@@ -45,35 +45,28 @@ public class TasksBean
   {
     switch (taskState)
     {
-      case CREATED:
-        return "note_add";
       case DELAYED:
-        return "timer";
-      case DESTROYED:
-        return "clear";
+        return "alarm-bell-timer";
       case DONE:
-        return "done";
+        return "check-circle-1";
       case FAILED:
-        return "cancel";
-      case JOINING:
-        return "flight_land";
       case JOIN_FAILED:
-        return "airplanemode_inactive";
+        return "mood-warning";
       case PARKED:
-        return "local_parking";
-      case READY_FOR_JOIN:
-        return "flight_takeoff";
+        return "touch-finger_1";
+      case CREATED:
       case RESUMED:
-        return "settings";
+        return "hourglass";
       case SUSPENDED:
-        return "pause";
+        return "controls-play";
       case WAITING_FOR_INTERMEDIATE_EVENT:
-        return "event";
+        return "synchronize-arrow-clock";
+      case DESTROYED:
       case ZOMBIE:
-        return "coronavirus";
+        return "alert-circle";
       case UNASSIGNED:
       default:
-        return "help";
+        return "synchronize-arrows";
     }
   }
 
@@ -108,15 +101,15 @@ public class TasksBean
     switch (priority)
     {
       case EXCEPTION:
-        return "keyboard_capslock";
+        return "alert-circle";
       case HIGH:
-        return "keyboard_arrow_up";
+        return "arrow-up-1";
       case LOW:
-        return "keyboard_arrow_down";
+        return "arrow-down-1";
       case NORMAL:
-        return "remove";
+        return "subtract";
       default:
-        return "remove";
+        return "subtract";
     }
   }
 
