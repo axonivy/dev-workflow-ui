@@ -12,99 +12,102 @@
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
 
-      <div class="card card-w-title" style="margin: auto">
+      <h:panelGroup styleClass="card card-w-title task-detail-container" layout="block">
         <h:form id="form">
           <div class="task-detail-title straight-text-icon">
-            <i class="si si-lg si-single-neutral-actions" style="padding-right: 6px"></i>
+            <i class="si si-lg si-single-neutral-actions" style="padding-right: 6px" />
             <h:outputText value="Description" />
             <div class="task-detail-action-container action-container">
-              <p:commandLink value="Start" action="#{tasksBean.executeTask(tasksDetailsBean.getSelectedTask().getId())}" class="task-action-item straight-text-icon" id="taskStartBtn">
+              <p:commandLink value="Start" action="#{tasksBean.executeTask(tasksDetailsBean.getSelectedTask().getId())}"
+                class="task-action-item straight-text-icon" id="taskStartBtn">
                 <i class="si si-arrow-right-1" style="padding-left: 4px; font-weight: 800;"></i>
               </p:commandLink>
               <p:commandLink value="Actions" class="task-actions-link straight-text-icon" id="taskActionsBtn">
                 <i class="si si-arrow-down-1" style="padding-left: 4px"></i>
               </p:commandLink>
               <p:menu id="actionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom">
-                <p:menuitem actionListener="#{tasksDetailsBean.selectedTask.reset()}" update="form"
+                <p:menuitem actionListener="#{tasksDetailsBean.selectedTask.reset()}" update="form, events"
                   disabled="#{!tasksDetailsBean.canReset()}" id="taskResetBtn">
-                  <i class="si si-road-sign-u-turn-left table-icon"></i>Reset
+                  <i class="si si-road-sign-u-turn-left table-icon"/>Reset
                 </p:menuitem>
-                <p:menuitem actionListener="#{tasksDetailsBean.park()}" update="form"
+                <p:menuitem actionListener="#{tasksDetailsBean.park()}" update="form, events"
                   disabled="#{!tasksDetailsBean.canPark()}" id="taskParkBtn">
-                  <i class="si si-road-sign-u-turn-right table-icon"></i>Park
+                  <i class="si si-road-sign-u-turn-right table-icon"/>Park
                 </p:menuitem>
-                <p:menuitem actionListener="#{tasksDetailsBean.selectedTask.destroy()}" update="form"
-                  disabled="#{!tasksDetailsBean.selectedTask.getState().isActive()}"  id="taskDestoryBtn">
-                  <i class="si si-close table-icon"></i>Destroy
+                <p:menuitem actionListener="#{tasksDetailsBean.selectedTask.destroy()}" update="form, events"
+                  disabled="#{!tasksDetailsBean.selectedTask.getState().isActive()}" id="taskDestoryBtn">
+                  <i class="si si-close table-icon"/>Destroy
                 </p:menuitem>
-                <p:menuitem actionListener="#{tasksDetailsBean.expireTask}" update="form"
+                <p:menuitem actionListener="#{tasksDetailsBean.expireTask}" update="form, events"
                   disabled="#{!tasksDetailsBean.selectedTask.getState().isActive()}"
                   rendered="#{engineModeBean.demoOrDesigner}" id="taskExpireBtn">
-                  <i class="si si-alarm-bell-timer table-icon"></i>Expire now
+                  <i class="si si-alarm-bell-timer table-icon"/>Expire now
                 </p:menuitem>
               </p:menu>
             </div>
           </div>
-          <span>
-            <p:panelGrid id="taskDetails" columns="2" layout="grid" style="padding-bottom:60px"
-              columnClasses="ui-g-3 no-padding-left, ui-g-9" styleClass="ui-noborder">
-              <h:outputText value="Task ID:" />
-              <h:outputText value="#{tasksDetailsBean.selectedTask.getId()}" />
 
-              <h:outputText value="Task name:" />
-              <h:outputText value="#{tasksDetailsBean.selectedTask.getName()}" id="taskName"/>
+          <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank"
+            columnClasses="no-padding-left ui-g-6 ui-md-2, ui-g-6 ui-md-4, no-padding-left ui-g-6 ui-md-2, ui-g-6 ui-md-4">
+            <h:outputText value="Task ID" />
+            <h:outputText value="#{tasksDetailsBean.selectedTask.getId()}" />
 
-              <h:outputText value="Priority:" />
-              <h:outputText>
-                <i class="si si-#{tasksBean.getPriorityIcon(tasksDetailsBean.selectedTask.getPriority())} table-icon"></i>
-                <h:outputText value="#{tasksDetailsBean.selectedTask.getPriority()}" id="taskPriority" />
-              </h:outputText>
+            <h:outputText value="Task name" />
+            <h:outputText value="#{tasksDetailsBean.selectedTask.getName()}" id="taskName" />
 
-              <h:outputText value="State:" />
-              <h:outputText>
-                <i class="si si-#{tasksBean.getStateIcon(tasksDetailsBean.selectedTask.getState())} table-icon"></i>
-                <h:outputText value="#{tasksDetailsBean.selectedTask.getState()}" id="taskState" />
-              </h:outputText>
+            <h:outputText value="Priority" />
+            <h:outputText>
+              <i class="si si-#{tasksBean.getPriorityIcon(tasksDetailsBean.selectedTask.getPriority())} table-icon"></i>
+              <h:outputText value="#{tasksDetailsBean.selectedTask.getPriority()}" id="taskPriority" />
+            </h:outputText>
 
-              <h:outputText value="Business case:" />
-              <h:link id="businessCase" value="#{tasksDetailsBean.getBusinessCaseName()}" outcome="caseDetails">
-                <f:param name="case" value="#{tasksDetailsBean.getBusinessCaseId()}" />
-              </h:link>
+            <h:outputText value="State" />
+            <h:outputText>
+              <i class="si si-#{tasksBean.getStateIcon(tasksDetailsBean.selectedTask.getState())} table-icon"></i>
+              <h:outputText value="#{tasksDetailsBean.selectedTask.getState()}" id="taskState" />
+            </h:outputText>
 
-              <h:outputText value="Technical case:" />
-              <h:link id="technicalCase" value="##{tasksDetailsBean.selectedTask.getCase().getId()}"
-                outcome="caseDetails">
-                <f:param name="case" value="#{tasksDetailsBean.selectedTask.getCase().getId()}" />
-              </h:link>
+            <h:outputText value="Business case" />
+            <h:link id="businessCase" value="#{tasksDetailsBean.getBusinessCaseName()}" outcome="caseDetails">
+              <f:param name="case" value="#{tasksDetailsBean.getBusinessCaseId()}" />
+            </h:link>
 
-              <h:outputText value="Working user:" />
-              <h:outputText value="#{tasksDetailsBean.getWorkingUser()}" id="workingUser"/>
+            <h:outputText value="Technical case" />
+            <h:link id="technicalCase" value="##{tasksDetailsBean.selectedTask.getCase().getId()}" outcome="caseDetails">
+              <f:param name="case" value="#{tasksDetailsBean.selectedTask.getCase().getId()}" />
+            </h:link>
 
-              <h:outputText value="Responsible:" />
-              <h:outputText value="#{tasksDetailsBean.selectedTask.getActivator().getDisplayName()}" id="taskResponsible"/>
+            <h:outputText value="Working user" />
+            <h:outputText value="#{tasksDetailsBean.getWorkingUser()}" id="workingUser" />
 
-              <h:outputText value="Created:" />
-              <h:outputText value="#{tasksDetailsBean.getDateTime(tasksDetailsBean.selectedTask.getStartTimestamp())}" id="createdDate"/>
+            <h:outputText value="Responsible" />
+            <h:outputText value="#{tasksDetailsBean.selectedTask.getActivator().getDisplayName()}" id="taskResponsible" />
 
-              <h:outputText value="Expiry:" />
-              <h:outputText
-                value="#{tasksDetailsBean.getDetailTime(tasksDetailsBean.selectedTask.getExpiryTimestamp())}" id="expiryDate"/>
+            <h:outputText value="Created" />
+            <h:outputText value="#{tasksDetailsBean.getDateTime(tasksDetailsBean.selectedTask.getStartTimestamp())}" id="createdDate" />
 
-              <h:outputText value="Completed on:" />
-              <h:outputText value="#{tasksDetailsBean.getDetailTime(tasksDetailsBean.selectedTask.getEndTimestamp())}" id="completedDate"/>
+            <h:outputText value="Expiry" />
+            <h:outputText value="#{tasksDetailsBean.getDetailTime(tasksDetailsBean.selectedTask.getExpiryTimestamp())}" id="expiryDate" />
 
-              <h:outputText value="Workflow Events:" />
-              <p:commandLink value="Open" onclick="PF('workflowDialog').show()" id="workflowEventsBtn"/>
+            <h:outputText value="Completed on" />
+            <h:outputText value="#{tasksDetailsBean.getDetailTime(tasksDetailsBean.selectedTask.getEndTimestamp())}" id="completedDate" />
 
-              <h:outputText value="Description:" />
-              <h:outputText value="#{tasksDetailsBean.getDescription()}" id="taskDescription"/>
-            </p:panelGrid>
+            <h:outputText value="Description" />
+            <h:outputText value="#{tasksDetailsBean.getDescription()}" id="taskDescription" />
             <p:tooltip for="businessCase" value="#{tasksDetailsBean.getBusinessCaseTooltip()}" position="top" />
             <p:tooltip for="technicalCase" value="#{tasksDetailsBean.getTechnicalCaseTooltip()}" position="top" />
-            <ui:include src="/includes/components/workflowEventsDialog.xhtml" />
-          </span>
+          </p:panelGrid>
         </h:form>
+      </h:panelGroup>
+
+      <div class="card card-w-title task-detail-container">
+        <div class="task-detail-title straight-text-icon">
+          <i class="si si-lg si-synchronize-arrow-clock" style="padding-right: 6px" />
+          <h:outputText value="Workflow Events" />
+        </div>
+        <ui:include src="/includes/components/workflowEventsTable.xhtml" />
       </div>
+
     </ui:define>
   </ui:composition>
 </h:body>
