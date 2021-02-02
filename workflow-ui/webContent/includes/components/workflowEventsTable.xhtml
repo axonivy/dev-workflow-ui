@@ -6,7 +6,7 @@
       emptyMessage="No Events found with given criteria" reflow="true">
 
       <p:column headerText="Creation Date" sortBy="#{event.getEventTimestamp()}">
-        <h:outputText value="#{tasksDetailsBean.getDateTime(event.getEventTimestamp())}"/>
+        <h:outputText value="#{dateTimeBean.getDateTime(event.getEventTimestamp())}"/>
       </p:column>
 
       <p:column headerText="Event type" colspan="2">

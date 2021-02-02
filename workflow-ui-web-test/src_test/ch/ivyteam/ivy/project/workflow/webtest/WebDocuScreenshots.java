@@ -48,12 +48,19 @@ public class WebDocuScreenshots
     open(viewUrl("tasks.xhtml"));
     takeScreenshot("workflow-ui-tasks", new Dimension(SCREENSHOT_WIDTH, 800));
 
-    open(viewUrl("allTasksAndCases.xhtml"));
+    open(viewUrl("allTasks.xhtml"));
     takeScreenshot("workflow-ui-allTasksAndCases", new Dimension(SCREENSHOT_WIDTH, 800));
 
     $(".si-information-circle").shouldBe(visible).click();
     $("#form\\:taskActionsBtn").click();
     takeScreenshot("workflow-ui-taskDetails", new Dimension(SCREENSHOT_WIDTH, 800));
+
+    open(viewUrl("cases.xhtml"));
+    takeScreenshot("workflow-ui-cases", new Dimension(SCREENSHOT_WIDTH, 800));
+
+    $(".si-information-circle").shouldBe(visible).click();
+    $("#form\\:taskActionsBtn").click();
+    takeScreenshot("workflow-ui-caseDetails", new Dimension(SCREENSHOT_WIDTH, 800));
 
     open(viewUrl("starts.xhtml"));
     takeScreenshot("workflow-ui-starts", new Dimension(SCREENSHOT_WIDTH, 800));

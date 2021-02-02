@@ -1,0 +1,110 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
+  xmlns:pe="http://primefaces.org/ui/extensions" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+  xmlns:pm="http://primefaces.org/serenity-ivy">
+
+<h:body>
+  <f:metadata>
+    <f:viewParam name="case" value="#{casesDetailsBean.selectedCaseId}" />
+  </f:metadata>
+
+  <ui:composition template="../includes/template/template.xhtml">
+    <ui:define name="content">
+
+      <p:panelGrid columns="3" layout="grid" styleClass="ui-panelgrid-blank case-details-grid"
+        columnClasses="ui-g-12 ui-lg-8, ui-g-12 ui-lg-4, ui-g-12">
+
+        <h:panelGroup styleClass="card card-w-title task-detail-container" layout="block">
+          <h:form id="form">
+            <div class="task-detail-title straight-text-icon">
+              <i class="si si-lg si-common-file-text detail-title-icon"/>
+              <h:outputText value="Description" />
+              <div class="task-detail-action-container action-container">
+                <p:commandLink value="Destroy case"
+                  action="#{casesDetailsBean.selectedCase.destroy}"
+                  class="task-action-item straight-text-icon" id="caseDestroyBtn">
+                  <i class="si si-close detail-action-icon-bold"></i>
+                </p:commandLink>
+                <p:commandLink value="Actions" class="task-actions-link straight-text-icon"
+                  id="taskActionsBtn">
+                  <i class="si si-arrow-down-1 detail-action-icon"></i>
+                </p:commandLink>
+              </div>
+            </div>
+
+            <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank"
+              columnClasses="no-padding-left ui-g-6 ui-md-2, ui-g-6 ui-md-4, no-padding-left ui-g-6 ui-md-2, ui-g-6 ui-md-4">
+              <h:outputText value="Case ID" />
+              <h:outputText value="#{casesDetailsBean.selectedCase.getId()}" />
+
+              <h:outputText value="Case name" />
+              <h:outputText value="#{casesDetailsBean.selectedCase.getName()}" id="caseName" />
+
+              <h:outputText value="Case Owner" />
+              <h:outputText value="#{casesDetailsBean.selectedCase.ownerName}" id="taskResponsible" />
+
+              <h:outputText value="Creator" />
+              <h:outputText value="#{casesDetailsBean.selectedCase.creatorUserName}"
+                id="creatorUser" />
+
+              <h:outputText value="Created" />
+              <h:outputText
+                value="#{dateTimeBean.getDateTime(casesDetailsBean.selectedCase.getStartTimestamp())}"
+                id="createdDate" />
+
+              <h:outputText value="State" />
+              <h:outputText>
+                <i
+                  class="si si-#{casesBean.getStateIcon(casesDetailsBean.selectedCase.getState())} table-icon"></i>
+                <h:outputText value="#{casesDetailsBean.selectedCase.getState()}" id="caseState" />
+              </h:outputText>
+
+              <h:outputText value="Completed on" />
+              <h:outputText
+                value="#{dateTimeBean.getDetailTime(casesDetailsBean.selectedCase.getEndTimestamp())}"
+                id="expiryDate" />
+
+              <h:outputText value="Description" />
+              <h:outputText value="#{casesDetailsBean.description}" id="caseDescription" />
+            </p:panelGrid>
+            <p:tooltip for="createdDate"
+              value="#{dateTimeBean.getPrettyTime(casesDetailsBean.selectedCase.getStartTimestamp())}"
+              position="top" />
+          </h:form>
+        </h:panelGroup>
+
+        <h:panelGroup styleClass="card card-w-title task-detail-container case-details-item"
+          layout="block">
+          <div>
+
+            <h:panelGroup layout="block"
+              styleClass="task-detail-title straight-text-icon related-element">
+              <i class="si si-lg si-information-circle detail-title-icon"/>
+              <h:outputText value="Case Map" />
+            </h:panelGroup>
+
+            <div class="related-element case-map-container ui-g-12 u-padding-0">
+              <p:repeat var="stage" value="#{casesDetailsBean.caseMap.stages}">
+                <h:panelGroup styleClass="case-map-column">
+                  <div class="case-map-icon-container">
+                    <i class="#{stage.getIcon().getCssClass()} case-map-icon" />
+                  </div>
+                </h:panelGroup>
+              </p:repeat>
+            </div>
+
+          </div>
+        </h:panelGroup>
+
+        <h:panelGroup styleClass="card card-w-title task-detail-container case-details-item"
+          layout="block">
+
+        </h:panelGroup>
+
+      </p:panelGrid>
+    </ui:define>
+  </ui:composition>
+</h:body>
+
+</html>
