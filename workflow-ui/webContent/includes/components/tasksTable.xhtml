@@ -11,19 +11,19 @@
     <f:facet name="header">
       <p:outputPanel>
         <h:outputText value="Search:" />
-        <p:inputText id="globalFilter" onkeyup="PF('tasksTable').filter()" style="width:150px"
-          placeholder="Enter keyword" value="#{tasksBean.filter}" />
+        <p:inputText id="tasksFilter" onkeyup="PF('tasksTable').filter()" style="width:150px"
+          placeholder="Enter keyword" value="#{tasksBean.tasksDataModel.filter}" />
       </p:outputPanel>
     </f:facet>
 
-    <p:column id="priority" filterBy="#{task.getPriority()}" styleClass="icon-row">
-      <i class="si si-lg si-#{tasksBean.getPriorityIcon(task.getPriority())}" title="Priority #{task.getPriority()}"></i>
-    </p:column>
 
     <p:column filterBy="#{task.getState()}" styleClass="icon-row">
       <i class="si si-lg si-#{tasksBean.getStateIcon(task.getState())}" title="State #{task.getState()}"></i>
     </p:column>
 
+    <p:column id="priority" filterBy="#{task.getPriority()}" styleClass="icon-row">
+      <i class="si si-lg si-#{tasksBean.getPriorityIcon(task.getPriority())}" title="Priority #{task.getPriority()}"></i>
+    </p:column>
     <p:column headerText="Name" filterBy="#{task.getName()}">
       <h:commandLink action="#{tasksBean.executeTask(task.id)}">
         <h:outputText id="taskName" value="#{task.getName()}" style="color:#212121"/>
@@ -36,12 +36,12 @@
     </p:column>
 
     <p:column headerText="Start Date" style="text-align: center;">
-      <h:outputText id="startTime" value="#{tasksBean.getPrettyTime(task.getStartTimestamp())}" />
-      <p:tooltip for="startTime" value="#{tasksBean.getDateTime(task.getStartTimestamp())}" position="top" />
+      <h:outputText id="startTime" value="#{dateTimeBean.getPrettyTime(task.getStartTimestamp())}" />
+      <p:tooltip for="startTime" value="#{dateTimeBean.getDateTime(task.getStartTimestamp())}" position="top" />
     </p:column>
 
     <p:column headerText="Expiry" style="text-align: center;">
-      <h:outputText id="expiryTime" value="#{tasksBean.getDateTime(task.getExpiryTimestamp())}" />
+      <h:outputText id="expiryTime" value="#{dateTimeBean.getDateTime(task.getExpiryTimestamp())}" />
     </p:column>
 
     <p:column style="width: 60px; text-align: center;">

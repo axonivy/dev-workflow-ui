@@ -6,7 +6,8 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <h:form id="startsForm" styleClass="starts-form">
+      <h:form id="startsForm">
+      <h:panelGroup styleClass="card card-w-title task-detail-container case-details-item" layout="block">
         <h:outputText value="Starts" styleClass="starts-header-title" />
         <p:panel id="main-starts-container" styleClass="main-starts-container">
           <f:facet name="header">
@@ -36,6 +37,7 @@
             </p:tab>
           </p:accordionPanel>
         </p:panel>
+      </h:panelGroup>
       </h:form>
     </ui:define>
   </ui:composition>

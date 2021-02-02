@@ -3,40 +3,44 @@
   xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component"
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
   <h:form id="loginTable" style="margin-top: 20px">
-    <h:outputText value="Login Table" style="font-size:16pt; font-weight:bold" />
-    <br />
-    <h:outputText value="Click user to login" />
-    <p:dataTable id="users" var="user" value="#{loginTableBean.users}" widgetVar="usersTable"
-      emptyMessage="No users found with given criteria" style="margin-top:10px" selectionMode="single"
-      rowKey="#{user.fullname}">
-      <p:ajax event="rowSelect" listener="#{loginBean.login}" update="@form" />
+    <h:panelGroup styleClass="card card-w-title task-detail-container case-details-item"
+      layout="block">
+      <h:outputText value="Login Table" style="font-size:16pt; font-weight:bold" />
+      <br />
+      <h:outputText value="Click user to login" />
+      <p:dataTable id="users" var="user" value="#{loginTableBean.users}" widgetVar="usersTable"
+        emptyMessage="No users found with given criteria" style="margin-top:10px"
+        selectionMode="single" rowKey="#{user.fullname}">
+        <p:ajax event="rowSelect" listener="#{loginBean.login}" update="@form" />
 
-      <f:facet name="header">
-        <p:outputPanel>
-          <h:outputText value="Search:" />
-          <p:inputText id="globalFilter" onkeyup="PF('usersTable').filter()" style="width:150px"
-            placeholder="Enter keyword" />
-        </p:outputPanel>
-      </f:facet>
+        <f:facet name="header">
+          <p:outputPanel>
+            <h:outputText value="Search:" />
+            <p:inputText id="globalFilter" onkeyup="PF('usersTable').filter()" style="width:150px"
+              placeholder="Enter keyword" />
+          </p:outputPanel>
+        </f:facet>
 
-      <p:column headerText="Username" filterBy="#{user.name}" filterStyle="display: none">
-        <h:outputText value="#{user.name}" >
-        <i class="si si-single-neutral-actions table-icon"></i>
-        </h:outputText>
-      </p:column>
+        <p:column headerText="Username" filterBy="#{user.name}" filterStyle="display: none">
+          <h:outputText value="#{user.name}">
+            <i class="si si-single-neutral-actions table-icon"></i>
+          </h:outputText>
+        </p:column>
 
-      <p:column headerText="Fullname" filterBy="#{user.fullname}" filterStyle="display: none">
-        <h:outputText value="#{user.fullname}" />
-      </p:column>
+        <p:column headerText="Fullname" filterBy="#{user.fullname}" filterStyle="display: none">
+          <h:outputText value="#{user.fullname}" />
+        </p:column>
 
-      <p:column headerText="Roles" filterBy="#{user.roles}" filterStyle="display: none" colspan="2">
-        <h:outputText value="#{user.roles}" />
-      </p:column>
+        <p:column headerText="Roles" filterBy="#{user.roles}"
+         filterStyle="display: none" colspan="2">
+          <h:outputText value="#{user.roles}" />
+        </p:column>
 
-      <p:column width="64">
-        <i class="si si-lg si-login-3"></i>
-      </p:column>
+        <p:column width="64">
+          <i class="si si-lg si-login-3"></i>
+        </p:column>
 
-    </p:dataTable>
+      </p:dataTable>
+    </h:panelGroup>
   </h:form>
 </ui:composition>

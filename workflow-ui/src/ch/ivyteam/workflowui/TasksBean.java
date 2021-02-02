@@ -1,7 +1,5 @@
 package ch.ivyteam.workflowui;
 
-import java.util.Date;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -9,7 +7,6 @@ import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
-import ch.ivyteam.workflowui.util.DateUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.UserUtil;
 
@@ -30,43 +27,33 @@ public class TasksBean
     return tasksDataModel;
   }
 
-  public String getFilter()
-  {
-    return tasksDataModel.getFilter();
-  }
-
-  public void setFilter(String filter)
-  {
-    this.tasksDataModel.setFilter(filter);
-  }
-
   @SuppressWarnings("removal")
   public String getStateIcon(TaskState taskState)
   {
     switch (taskState)
     {
       case DELAYED:
-        return "alarm-bell-timer";
+        return "alarm-bell-timer task-state-delayed";
       case DONE:
-        return "check-circle-1";
+        return "check-circle-1 task-state-done";
       case FAILED:
       case JOIN_FAILED:
-        return "mood-warning";
+        return "mood-warning task-state-failed";
       case PARKED:
-        return "touch-finger_1";
+        return "touch-finger_1 task-state-reserved";
       case CREATED:
       case RESUMED:
-        return "hourglass";
+        return "hourglass task-state-in-progress";
       case SUSPENDED:
-        return "controls-play";
+        return "controls-play task-state-open";
       case WAITING_FOR_INTERMEDIATE_EVENT:
-        return "synchronize-arrow-clock";
+        return "synchronize-arrow-clock task-state-waiting";
       case DESTROYED:
       case ZOMBIE:
-        return "alert-circle";
+        return "alert-circle task-state-zombie-destroyed";
       case UNASSIGNED:
       default:
-        return "synchronize-arrows";
+        return "synchronize-arrows task-state-system";
     }
   }
 
@@ -77,17 +64,7 @@ public class TasksBean
 
   public boolean checkIfPersonalTasks()
   {
-    return UserUtil.checkIfPersonalTask();
-  }
-
-  public String getPrettyTime(Date date)
-  {
-    return DateUtil.getPrettyTime(date);
-  }
-
-  public String getDateTime(Date date)
-  {
-    return DateUtil.getDateAndTime(date);
+    return UserUtil.checkIfPersonalTasks();
   }
 
   public void executeTask(long taskId)

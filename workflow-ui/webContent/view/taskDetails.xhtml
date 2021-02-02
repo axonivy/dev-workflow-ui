@@ -15,15 +15,15 @@
       <h:panelGroup styleClass="card card-w-title task-detail-container" layout="block">
         <h:form id="form">
           <div class="task-detail-title straight-text-icon">
-            <i class="si si-lg si-single-neutral-actions" style="padding-right: 6px" />
+            <i class="si si-lg si-common-file-text detail-title-icon"/>
             <h:outputText value="Description" />
             <div class="task-detail-action-container action-container">
               <p:commandLink value="Start" action="#{tasksBean.executeTask(tasksDetailsBean.getSelectedTask().getId())}"
                 class="task-action-item straight-text-icon" id="taskStartBtn">
-                <i class="si si-arrow-right-1" style="padding-left: 4px; font-weight: 800;"></i>
+                <i class="si si-arrow-right-1 detail-action-icon-bold"></i>
               </p:commandLink>
               <p:commandLink value="Actions" class="task-actions-link straight-text-icon" id="taskActionsBtn">
-                <i class="si si-arrow-down-1" style="padding-left: 4px"></i>
+                <i class="si si-arrow-down-1 detail-title-icon"></i>
               </p:commandLink>
               <p:menu id="actionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom">
                 <p:menuitem actionListener="#{tasksDetailsBean.selectedTask.reset()}" update="form, events"
@@ -73,7 +73,7 @@
             </h:link>
 
             <h:outputText value="Technical case" />
-            <h:link id="technicalCase" value="##{tasksDetailsBean.selectedTask.getCase().getId()}" outcome="caseDetails">
+            <h:link id="technicalCase" value="#{tasksDetailsBean.caseName}" outcome="caseDetails">
               <f:param name="case" value="#{tasksDetailsBean.selectedTask.getCase().getId()}" />
             </h:link>
 
@@ -84,13 +84,13 @@
             <h:outputText value="#{tasksDetailsBean.selectedTask.getActivator().getDisplayName()}" id="taskResponsible" />
 
             <h:outputText value="Created" />
-            <h:outputText value="#{tasksDetailsBean.getDateTime(tasksDetailsBean.selectedTask.getStartTimestamp())}" id="createdDate" />
+            <h:outputText value="#{dateTimeBean.getDateTime(tasksDetailsBean.selectedTask.getStartTimestamp())}" id="createdDate" />
 
             <h:outputText value="Expiry" />
-            <h:outputText value="#{tasksDetailsBean.getDetailTime(tasksDetailsBean.selectedTask.getExpiryTimestamp())}" id="expiryDate" />
+            <h:outputText value="#{dateTimeBean.getDetailTime(tasksDetailsBean.selectedTask.getExpiryTimestamp())}" id="expiryDate" />
 
             <h:outputText value="Completed on" />
-            <h:outputText value="#{tasksDetailsBean.getDetailTime(tasksDetailsBean.selectedTask.getEndTimestamp())}" id="completedDate" />
+            <h:outputText value="#{dateTimeBean.getDetailTime(tasksDetailsBean.selectedTask.getEndTimestamp())}" id="completedDate" />
 
             <h:outputText value="Description" />
             <h:outputText value="#{tasksDetailsBean.getDescription()}" id="taskDescription" />
@@ -102,7 +102,7 @@
 
       <div class="card card-w-title task-detail-container">
         <div class="task-detail-title straight-text-icon">
-          <i class="si si-lg si-synchronize-arrow-clock" style="padding-right: 6px" />
+          <i class="si si-lg si-synchronize-arrow-clock detail-title-icon"/>
           <h:outputText value="Workflow Events" />
         </div>
         <ui:include src="/includes/components/workflowEventsTable.xhtml" />

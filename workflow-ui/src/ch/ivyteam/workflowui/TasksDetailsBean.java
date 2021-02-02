@@ -10,12 +10,12 @@ import javax.faces.bean.ViewScoped;
 import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.application.IApplication;
+import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowEvent;
 import ch.ivyteam.ivy.workflow.IWorkflowSession;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowNavigationUtil;
-import ch.ivyteam.workflowui.util.DateUtil;
 
 @ManagedBean
 @ViewScoped
@@ -56,19 +56,23 @@ public class TasksDetailsBean
     return selectedTask.getWorkerUserName() == null ? "N/A" : selectedTask.getWorkerUserName();
   }
 
-  public String getDetailTime(Date date)
+  public String getCaseName()
   {
-    return date == null ? "N/A" : DateUtil.getDateAndTime(date);
-  }
-
-  public String getDateTime(Date date)
-  {
-    return DateUtil.getDateAndTime(date);
+    ICase technicalCase = selectedTask.getCase();
+    if (technicalCase != null)
+    {
+      if (StringUtils.isNotBlank(technicalCase.getName()))
+      {
+        return technicalCase.getName();
+      }
+      return String.valueOf(technicalCase.getId());
+    }
+    return StringUtils.EMPTY;
   }
 
   public String getBusinessCaseName()
   {
-    return "#" + Long.toString(selectedTask.getCase().getBusinessCase().getId()) + " "
+    return "#" + getBusinessCaseId() + " "
             + selectedTask.getCase().getBusinessCase().getName();
   }
 

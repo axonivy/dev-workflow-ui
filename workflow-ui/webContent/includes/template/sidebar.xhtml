@@ -12,9 +12,10 @@
           <h:form id="menuform">
             <pm:menu widgetVar="sidebar_menu">
               <p:menuitem id="sr_home" icon="si si-house-1" url="home.xhtml" />
-              <p:menuitem id="sr_tasks" value="Tasks" icon="si si-layout-bullets" url="tasks.xhtml" />
               <p:menuitem id="sr_starts" value="Starts" icon="si si-navigation-menu" url="starts.xhtml" />
-              <p:menuitem id="sr_tasks_cases" value="All Tasks and Cases" icon="si si-task-list-approve" url="allTasksAndCases.xhtml" rendered="#{adminBean.isWorkflowAdmin()}"/>
+              <p:menuitem id="sr_tasks" value="Tasks" icon="si si-layout-bullets" url="tasks.xhtml" />
+              <p:menuitem id="sr_allTasks" value="All Tasks" icon="si si-task-list-edit" url="allTasks.xhtml" rendered="#{adminBean.isWorkflowAdmin()}"/>
+              <p:menuitem id="sr_cases" value="Cases" icon="si si-task-list-approve" url="cases.xhtml"/>
 
               <p:submenu id="sr_actions" label="Actions" icon="si si-tools-wench">
                 <p:menuitem id="sr_signals" value="Signals" icon="si si-network-signal" url="#" />

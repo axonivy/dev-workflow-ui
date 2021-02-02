@@ -6,12 +6,18 @@
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
     <f:event type="preRenderView" listener="#{tasksBean.checkIfLoggedIn}" />
-    <h:form id="tasksForm" style="margin-top: 20px">
+    <h:form id="casesForm" style="margin-top: 20px">
       <h:panelGroup styleClass="card card-w-title task-detail-container case-details-item" layout="block">
         <div class="table-title-switch">
-          <h:outputText value="Tasks" style="font-size:16pt; font-weight:bold" />
+          <h:outputText value="Cases" style="font-size:16pt; font-weight:bold" />
+          <h:panelGroup style="display: flex; align-items: center;" layout="block" rendered="#{adminBean.isWorkflowAdmin()}">
+            <h:outputText value="All Cases" style="margin-right: 10px"/>
+            <p:toggleSwitch value="#{casesBean.casesDataModel.showAllCases}">
+              <p:ajax update="casesForm"/>
+            </p:toggleSwitch>
+          </h:panelGroup>
         </div>
-        <ui:include src="/includes/components/tasksTable.xhtml" />
+        <ui:include src="/includes/components/casesTable.xhtml" />
       </h:panelGroup>
     </h:form>
     </ui:define>

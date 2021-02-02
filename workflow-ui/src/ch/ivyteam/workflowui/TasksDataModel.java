@@ -16,9 +16,9 @@ import ch.ivyteam.workflowui.util.UserUtil;
 
 public class TasksDataModel extends LazyDataModel<ITask>
 {
-  /**  */
   private static final long serialVersionUID = -5287014754211109062L;
   private String filter;
+  private boolean showAllTasks = UserUtil.isAdmin();
 
   public String getFilter()
   {
@@ -51,7 +51,7 @@ public class TasksDataModel extends LazyDataModel<ITask>
 
   private void checkIfPersonalTasks(TaskQuery taskQuery)
   {
-    if (UserUtil.checkIfPersonalTask())
+    if (UserUtil.checkIfPersonalTasks())
     {
       taskQuery.where().currentUserCanWorkOn();
     }
@@ -67,10 +67,20 @@ public class TasksDataModel extends LazyDataModel<ITask>
       var taskPriority = Arrays.asList(WorkflowPriority.values()).stream()
               .filter(priority -> StringUtils.startsWithIgnoreCase(priority.toString(), filter))
               .findFirst().orElse(null);
-      query.where().name().isLikeIgnoreCase(filter + "%")
+      query.where().name().isLikeIgnoreCase("%" + filter + "%")
               .or().activatorName().isLikeIgnoreCase(filter + "%")
               .or().state().isEqual(taskState)
               .or().priority().isEqual(taskPriority);
     }
+  }
+
+  public boolean getShowAllTasks()
+  {
+    return showAllTasks;
+  }
+
+  public void setShowAllTasks(boolean allTasks)
+  {
+    this.showAllTasks = allTasks;
   }
 }
