@@ -9,7 +9,7 @@
     <engine.page.url>https://jenkins.ivyteam.io/job/ivy-core_product/job/master/lastSuccessfulBuild/</engine.page.url>
     <revision>9.2.0-SNAPSHOT</revision>
     <flatten.plugin.version>1.2.5</flatten.plugin.version>
-    <project.build.plugin.version>9.1.1-SNAPSHOT</project.build.plugin.version>
+    <project.build.plugin.version>9.2.1-SNAPSHOT</project.build.plugin.version>
     <buildPlugin.ivyVersion>[9.2.0,]</buildPlugin.ivyVersion>
   </properties>
 
