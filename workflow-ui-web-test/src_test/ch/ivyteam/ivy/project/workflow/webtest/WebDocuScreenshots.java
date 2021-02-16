@@ -59,7 +59,6 @@ public class WebDocuScreenshots
     takeScreenshot("workflow-ui-cases", new Dimension(SCREENSHOT_WIDTH, 800));
 
     $(".si-information-circle").shouldBe(visible).click();
-    $("#form\\:taskActionsBtn").click();
     takeScreenshot("workflow-ui-caseDetails", new Dimension(SCREENSHOT_WIDTH, 800));
 
     open(viewUrl("starts.xhtml"));

@@ -15,6 +15,10 @@
   margin-left: 4px;
 }
 
+.margin-right-10 {
+  margin-right: 10px;
+}
+
 .detail-action-icon-bold {
   font-weight: bold;
   margin-left: 4px;
@@ -69,6 +73,10 @@
 
 .case-details-grid .ui-panelgrid-content .ui-g .ui-panelgrid-cell {
   padding: 8px;
+}
+
+.case-detail-card {
+  margin: 0px;
 }
 
 .case-related-task-table {
@@ -180,7 +188,7 @@
   margin-left: 6px;
 }
 
-.starts-header-title {
+.card-header-title {
   font-weight: bold;
   font-size: 16pt;
 }

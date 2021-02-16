@@ -13,6 +13,8 @@ import ch.ivyteam.ivy.casemap.runtime.repo.restricted.ICaseMapRepository;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.WorkflowNavigationUtil;
+import ch.ivyteam.ivy.workflow.custom.field.ICustomField;
+import ch.ivyteam.ivy.workflow.document.IDocument;
 
 @SuppressWarnings("restriction")
 @ManagedBean
@@ -64,5 +66,25 @@ public class CasesDetailsBean
   public ICaseMap getCaseMap()
   {
     return ICaseMapRepository.getInstance().find(selectedCase.getId());
+  }
+
+  public String getCustomFields()
+  {
+    String customFields = "";
+    for (ICustomField customField : selectedCase.customFields().all())
+    {
+      customFields += customField.name() + " = " + customField.getOrNull();
+    }
+    return StringUtils.isNotBlank(customFields) ? customFields : "No custom fields";
+  }
+
+  public String getDocuments()
+  {
+    String documents = "";
+    for (IDocument document : selectedCase.documents().getAll())
+    {
+      documents += document.getName() + ",";
+    }
+    return documents;
   }
 }

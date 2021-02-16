@@ -6,10 +6,10 @@
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
     <f:event type="preRenderView" listener="#{tasksBean.checkIfLoggedIn}" />
-    <h:form id="tasksForm" style="margin-top: 20px">
-      <h:panelGroup styleClass="card card-w-title task-detail-container case-details-item" layout="block">
+    <h:form id="tasksForm">
+      <h:panelGroup styleClass="card card-w-title task-detail-container" layout="block">
         <div class="table-title-switch">
-          <h:outputText value="All Tasks" style="font-size:16pt; font-weight:bold" />
+          <h:outputText value="All Tasks" class="card-header-title" />
         </div>
         <ui:include src="/includes/components/tasksTable.xhtml" />
       </h:panelGroup>

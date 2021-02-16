@@ -12,23 +12,20 @@
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
 
-      <p:panelGrid columns="3" layout="grid" styleClass="ui-panelgrid-blank case-details-grid"
-        columnClasses="ui-g-12 ui-lg-8, ui-g-12 ui-lg-4, ui-g-12">
+      <h:form id="form">
+        <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank case-details-grid"
+          columnClasses="ui-g-12 ui-lg-8, ui-g-12 ui-lg-4">
 
-        <h:panelGroup styleClass="card card-w-title task-detail-container" layout="block">
-          <h:form id="form">
+          <h:panelGroup styleClass="card card-w-title case-detail-card task-detail-container"
+            layout="block">
             <div class="task-detail-title straight-text-icon">
-              <i class="si si-lg si-common-file-text detail-title-icon"/>
+              <i class="si si-lg si-common-file-text detail-title-icon" />
               <h:outputText value="Description" />
               <div class="task-detail-action-container action-container">
-                <p:commandLink value="Destroy case"
+                <p:commandLink value="Destroy case" update="form"
                   action="#{casesDetailsBean.selectedCase.destroy}"
                   class="task-action-item straight-text-icon" id="caseDestroyBtn">
                   <i class="si si-close detail-action-icon-bold"></i>
-                </p:commandLink>
-                <p:commandLink value="Actions" class="task-actions-link straight-text-icon"
-                  id="taskActionsBtn">
-                  <i class="si si-arrow-down-1 detail-action-icon"></i>
                 </p:commandLink>
               </div>
             </div>
@@ -71,38 +68,148 @@
             <p:tooltip for="createdDate"
               value="#{dateTimeBean.getPrettyTime(casesDetailsBean.selectedCase.getStartTimestamp())}"
               position="top" />
-          </h:form>
-        </h:panelGroup>
 
-        <h:panelGroup styleClass="card card-w-title task-detail-container case-details-item"
-          layout="block">
-          <div>
+          </h:panelGroup>
 
+          <h:panelGroup
+            styleClass="card card-w-title case-detail-card task-detail-container case-details-item"
+            layout="block">
+            <div>
+
+              <h:panelGroup layout="block"
+                styleClass="task-detail-title straight-text-icon related-element">
+                <i class="si si-lg si-information-circle detail-title-icon" />
+                <h:outputText value="Case Map" />
+              </h:panelGroup>
+
+              <div class="related-element case-map-container ui-g-12 u-padding-0">
+                <p:repeat var="stage" value="#{casesDetailsBean.caseMap.stages}">
+                  <h:panelGroup styleClass="case-map-column">
+                    <div class="case-map-icon-container">
+                      <i class="#{stage.getIcon().getCssClass()} case-map-icon" />
+                    </div>
+                  </h:panelGroup>
+                </p:repeat>
+                <c:if test="#{empty casesDetailsBean.caseMap.stages}">
+                  <h:outputText value="No Case Map found" />
+                </c:if>
+              </div>
+
+            </div>
+          </h:panelGroup>
+
+          <h:panelGroup
+            styleClass="card card-w-title case-detail-card task-detail-container case-details-item"
+            layout="block">
             <h:panelGroup layout="block"
               styleClass="task-detail-title straight-text-icon related-element">
-              <i class="si si-lg si-information-circle detail-title-icon"/>
-              <h:outputText value="Case Map" />
+              <i class="si si-lg si-task-list-approve detail-title-icon" />
+              <h:outputText value="Task list" />
             </h:panelGroup>
+            <p:dataTable id="tasks" var="task" value="#{casesDetailsBean.selectedCase.activeTasks}"
+              widgetVar="tasksTable" emptyMessage="No Tasks found with given criteria"
+              style="margin-top:10px" lazy="true" paginatorPosition="bottom" rows="10"
+              rowsPerPageTemplate="10,20,50" paginator="true" paginatorAlwaysVisible="false"
+              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
 
-            <div class="related-element case-map-container ui-g-12 u-padding-0">
-              <p:repeat var="stage" value="#{casesDetailsBean.caseMap.stages}">
-                <h:panelGroup styleClass="case-map-column">
-                  <div class="case-map-icon-container">
-                    <i class="#{stage.getIcon().getCssClass()} case-map-icon" />
-                  </div>
-                </h:panelGroup>
-              </p:repeat>
-            </div>
+              <p:column filterBy="#{task.getState()}" styleClass="icon-row">
+                <i class="si si-lg si-#{tasksBean.getStateIcon(task.getState())}"
+                  title="State #{task.getState()}"></i>
+              </p:column>
 
-          </div>
-        </h:panelGroup>
+              <p:column id="priority" filterBy="#{task.getPriority()}" styleClass="icon-row">
+                <i class="si si-lg si-#{tasksBean.getPriorityIcon(task.getPriority())}"
+                  title="Priority #{task.getPriority()}"></i>
+              </p:column>
+              <p:column headerText="Name" filterBy="#{task.getName()}">
+                <h:commandLink action="#{tasksBean.executeTask(task.id)}">
+                  <h:outputText id="taskName" value="#{task.getName()}" style="color:#212121" />
+                  <p:tooltip for="taskName" value="Task ID: #{task.getId()}" position="top" />
+                </h:commandLink>
+              </p:column>
 
-        <h:panelGroup styleClass="card card-w-title task-detail-container case-details-item"
-          layout="block">
+              <p:column headerText="Start Date" style="text-align: center;">
+                <h:outputText id="startTime"
+                  value="#{dateTimeBean.getPrettyTime(task.getStartTimestamp())}" />
+                <p:tooltip for="startTime"
+                  value="#{dateTimeBean.getDateTime(task.getStartTimestamp())}" position="top" />
+              </p:column>
 
-        </h:panelGroup>
+              <p:column headerText="Expiry" style="text-align: center;">
+                <h:outputText id="expiryTime"
+                  value="#{dateTimeBean.getDateTime(task.getExpiryTimestamp())}" />
+              </p:column>
 
-      </p:panelGrid>
+              <p:column style="width: 60px; text-align: center;">
+                <h:link outcome="taskDetails">
+                  <f:param name="task" value="#{task.getId()}" />
+                  <i class="si si-lg si-information-circle"></i>
+                </h:link>
+              </p:column>
+            </p:dataTable>
+          </h:panelGroup>
+
+          <h:panelGroup
+            styleClass="card card-w-title case-detail-card task-detail-container case-details-item"
+            layout="block">
+            <h:panelGroup layout="block"
+              styleClass="task-detail-title straight-text-icon related-element">
+              <i class="si si-lg si-task-list-approve detail-title-icon" />
+              <h:outputText value="Case list" />
+            </h:panelGroup>
+            <p:dataTable id="cases" var="case"
+              value="#{casesDetailsBean.selectedCase.getBusinessCase()}" widgetVar="casesTable"
+              emptyMessage="No Tasks found with given criteria" style="margin-top:10px" lazy="true"
+              paginatorPosition="bottom" rows="10" rowsPerPageTemplate="10,20,50" paginator="true"
+              paginatorAlwaysVisible="false"
+              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
+
+              <p:column filterBy="#{case.getState()}" styleClass="icon-row">
+                <i class="si si-lg si-#{casesBean.getStateIcon(case.getState())}"
+                  title="State #{case.getState()}"></i>
+              </p:column>
+
+              <p:column headerText="Name" filterBy="#{case.getName()}">
+                <h:outputText id="caseName"
+                  value="#{not empty case.getName() ? case.getName() : 'No Case name' }"
+                  style="color:#212121" />
+                <p:tooltip for="caseName" value="Case ID: #{case.getId()}" position="top" />
+              </p:column>
+
+              <p:column style="width: 60px; text-align: center;">
+                <h:link outcome="caseDetails">
+                  <f:param name="case" value="#{case.getId()}" />
+                  <i class="si si-lg si-information-circle"></i>
+                </h:link>
+              </p:column>
+            </p:dataTable>
+          </h:panelGroup>
+
+          <h:panelGroup
+            styleClass="card card-w-title case-detail-card task-detail-container case-details-item"
+            layout="block">
+            <h:panelGroup layout="block"
+              styleClass="task-detail-title straight-text-icon related-element">
+              <i class="si si-lg si-cog detail-title-icon" />
+              <h:outputText value="Custom fields" />
+            </h:panelGroup>
+            <h:outputText id="customFieldsContainer" value="#{casesDetailsBean.customFields}" />
+          </h:panelGroup>
+
+          <h:panelGroup
+            styleClass="card card-w-title case-detail-card task-detail-container case-details-item"
+            layout="block">
+            <h:panelGroup layout="block"
+              styleClass="task-detail-title straight-text-icon related-element">
+              <i class="si si-lg si-office-file-doc-1 detail-title-icon" />
+              <h:outputText value="Documents" />
+            </h:panelGroup>
+            <h:outputText id="documentsContainer"
+              value="#{not empty casesDetailsBean.documents ? casesDetailsBean.documents : 'No documents found'}" />
+          </h:panelGroup>
+
+        </p:panelGrid>
+      </h:form>
     </ui:define>
   </ui:composition>
 </h:body>
