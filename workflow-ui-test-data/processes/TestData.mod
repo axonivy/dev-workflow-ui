@@ -24,7 +24,8 @@ Ta0 f0 inParamDecl '<> param;' #txt
 Ta0 f0 requestEnabled true #txt
 Ta0 f0 triggerEnabled false #txt
 Ta0 f0 callSignature TestData() #txt
-Ta0 f0 caseData businessCase.attach=true #txt
+Ta0 f0 caseData 'businessCase.attach=true
+customFields.STRING.test\ field="test value"' #txt
 Ta0 f0 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>
     <language>
@@ -34,13 +35,13 @@ Ta0 f0 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 ' #txt
 Ta0 f0 @C|.responsibility Everybody #txt
 Ta0 f0 81 49 30 30 -25 17 #rect
-Ta0 f0 @|StartRequestIcon #fIcon
 Ta0 f3 actionTable 'out=in1;
 ' #txt
 Ta0 f3 caseData case.name=TestCase #txt
 Ta0 f3 taskData 'TaskA.EXP=new Duration(0, 0, 3, 0, 0, 0)
 TaskA.NAM=TestTask
-TaskA.PRI=1' #txt
+TaskA.PRI=1
+TaskA.SCRIPT=task.getCase().documents().add(new ch.ivyteam.ivy.workflow.document.Path("Test/test.txt")).write().withContentFrom("this is test document");' #txt
 Ta0 f3 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>
     <language>
@@ -50,11 +51,9 @@ Ta0 f3 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 </elementInfo>
 ' #txt
 Ta0 f3 209 49 30 30 -27 16 #rect
-Ta0 f3 @|TaskSwitchSimpleIcon #fIcon
 Ta0 f2 111 64 209 64 #arcP
 Ta0 f4 239 64 337 64 #arcP
 Ta0 f1 337 49 30 30 0 15 #rect
-Ta0 f1 @|EndIcon #fIcon
 Ta0 f5 outLink startTestDialog.ivp #txt
 Ta0 f5 inParamDecl '<> param;' #txt
 Ta0 f5 requestEnabled true #txt
@@ -70,9 +69,7 @@ Ta0 f5 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 ' #txt
 Ta0 f5 @C|.responsibility Everybody #txt
 Ta0 f5 81 145 30 30 -63 16 #rect
-Ta0 f5 @|StartRequestIcon #fIcon
 Ta0 f6 337 145 30 30 0 15 #rect
-Ta0 f6 @|EndIcon #fIcon
 Ta0 f7 dialogId ch.ivyteam.ivy.project.workflow.TestDialog #txt
 Ta0 f7 startMethod start(ch.ivyteam.ivy.project.workflow.Data) #txt
 Ta0 f7 requestActionDecl '<ch.ivyteam.ivy.project.workflow.Data data> param;' #txt
@@ -86,7 +83,6 @@ Ta0 f7 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 </elementInfo>
 ' #txt
 Ta0 f7 168 138 112 44 -33 -7 #rect
-Ta0 f7 @|UserDialogIcon #fIcon
 Ta0 f8 111 160 168 160 #arcP
 Ta0 f9 280 160 337 160 #arcP
 >Proto Ta0 .type workflow.uite.Data #txt
