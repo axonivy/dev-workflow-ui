@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component"
+  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
+
+  <h:panelGroup styleClass="card card-w-title case-detail-card task-detail-container" layout="block">
+
+    <div class="task-detail-title straight-text-icon">
+      <i class="si si-lg si-common-file-text detail-title-icon" />
+      <h:outputText value="Description" />
+      <div class="task-detail-action-container action-container">
+        <p:commandLink value="Destroy case" update="form" action="#{casesDetailsBean.selectedCase.destroy}"
+          class="task-action-item straight-text-icon" id="caseDestroyBtn">
+          <i class="si si-close detail-action-icon-bold"></i>
+        </p:commandLink>
+      </div>
+    </div>
+
+    <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank"
+      columnClasses="no-padding-left ui-g-6 ui-md-2, ui-g-6 ui-md-4, no-padding-left ui-g-6 ui-md-2, ui-g-6 ui-md-4">
+      <h:outputText value="Case ID" />
+      <h:outputText value="#{casesDetailsBean.selectedCase.getId()}" />
+
+      <h:outputText value="Case name" />
+      <h:outputText value="#{casesDetailsBean.selectedCase.getName()}" id="caseName" />
+
+      <h:outputText value="Case Owner" />
+      <h:outputText value="#{casesDetailsBean.selectedCase.ownerName}" id="taskResponsible" />
+
+      <h:outputText value="Creator" />
+      <h:outputText value="#{casesDetailsBean.selectedCase.creatorUserName}" id="creatorUser" />
+
+      <h:outputText value="Created" />
+      <h:outputText value="#{dateTimeBean.getDateTime(casesDetailsBean.selectedCase.getStartTimestamp())}"
+        id="createdDate" />
+
+      <h:outputText value="State" />
+      <h:outputText>
+        <i class="si si-#{casesBean.getStateIcon(casesDetailsBean.selectedCase.getState())} table-icon"></i>
+        <h:outputText value="#{casesDetailsBean.selectedCase.getState()}" id="caseState" />
+      </h:outputText>
+
+      <h:outputText value="Completed on" />
+      <h:outputText value="#{dateTimeBean.getDetailTime(casesDetailsBean.selectedCase.getEndTimestamp())}"
+        id="expiryDate" />
+
+      <h:outputText value="Description" />
+      <h:outputText value="#{casesDetailsBean.description}" id="caseDescription" />
+    </p:panelGrid>
+    <p:tooltip for="createdDate"
+      value="#{dateTimeBean.getPrettyTime(casesDetailsBean.selectedCase.getStartTimestamp())}" position="top" />
+
+  </h:panelGroup>
+</ui:composition>
