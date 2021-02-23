@@ -38,7 +38,7 @@ pipeline {
     stage('build') {
       steps {
         script {
-          def deployApplicationName = env.BRANCH_NAME.replaceAll("%2F","_").replaceAll("/","_")
+          def deployApplicationName = env.BRANCH_NAME.replaceAll("%2F","_").replaceAll("/","_").replaceAll(".","_")
 
           def random = (new Random()).nextInt(10000000)
           def networkName = "build-" + random
