@@ -3,33 +3,27 @@
   xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component"
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
 
-  <h:panelGroup styleClass="card card-w-title case-detail-card task-detail-container case-details-item" layout="block">
-    <h:panelGroup layout="block" styleClass="task-detail-title straight-text-icon related-element">
-      <i class="si si-lg si-task-list-approve detail-title-icon" />
-      <h:outputText value="Case list" />
-    </h:panelGroup>
-    <p:dataTable id="cases" var="case" value="#{casesDetailsBean.selectedCase.getBusinessCase()}" widgetVar="casesTable"
-      emptyMessage="No Tasks found with given criteria" style="margin-top:10px" lazy="true" paginatorPosition="bottom"
-      rows="10" rowsPerPageTemplate="10,20,50" paginator="true" paginatorAlwaysVisible="false"
-      paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
+  <p:dataTable id="cases" var="case" value="#{casesDetailsBean.selectedCase.getBusinessCase()}" widgetVar="casesTable"
+    emptyMessage="No Tasks found with given criteria" style="margin-top:10px" lazy="true" paginatorPosition="bottom"
+    rows="10" rowsPerPageTemplate="10,20,50" paginator="true" paginatorAlwaysVisible="false"
+    paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
 
-      <p:column filterBy="#{case.getState()}" styleClass="icon-row">
-        <i class="si si-lg si-#{casesBean.getStateIcon(case.getState())}" title="State #{case.getState()}"></i>
-      </p:column>
+    <p:column filterBy="#{case.getState()}" styleClass="icon-row">
+      <i class="si si-lg si-#{casesBean.getStateIcon(case.getState())}" title="State #{case.getState()}"></i>
+    </p:column>
 
-      <p:column headerText="Name" filterBy="#{case.getName()}">
-        <h:outputText id="caseName" value="#{not empty case.getName() ? case.getName() : 'No Case name' }"
-          style="color:#212121" />
-        <p:tooltip for="caseName" value="Case ID: #{case.getId()}" position="top" />
-      </p:column>
+    <p:column headerText="Name" filterBy="#{case.getName()}">
+      <h:outputText id="caseName" value="#{not empty case.getName() ? case.getName() : 'No Case name' }"
+        style="color:#212121" />
+      <p:tooltip for="caseName" value="Case ID: #{case.getId()}" position="top" />
+    </p:column>
 
-      <p:column style="width: 60px; text-align: center;">
-        <h:link outcome="caseDetails">
-          <f:param name="case" value="#{case.getId()}" />
-          <i class="si si-lg si-information-circle"></i>
-        </h:link>
-      </p:column>
-    </p:dataTable>
-  </h:panelGroup>
+    <p:column style="width: 60px; text-align: center;">
+      <h:link outcome="caseDetails">
+        <f:param name="case" value="#{case.getId()}" />
+        <i class="si si-lg si-information-circle"></i>
+      </h:link>
+    </p:column>
+  </p:dataTable>
 
 </ui:composition>

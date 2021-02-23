@@ -16,17 +16,66 @@
         <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank case-details-grid"
           columnClasses="ui-g-12 ui-lg-8, ui-g-12 ui-lg-4">
 
-          <ui:include src="/includes/components/caseDetails/description.xhtml"/>
+          <h:panelGroup styleClass="card card-w-title case-detail-card task-detail-container" layout="block">
+            <div class="task-detail-title straight-text-icon">
+              <i class="si si-lg si-common-file-text detail-title-icon" />
+              <h:outputText value="Description" />
+              <div class="task-detail-action-container action-container">
+                <p:commandLink value="Destroy case" update="form" action="#{casesDetailsBean.selectedCase.destroy}"
+                  class="task-action-item straight-text-icon" id="caseDestroyBtn">
+                  <i class="si si-close detail-action-icon-bold"></i>
+                </p:commandLink>
+              </div>
+            </div>
+            <ui:include src="/includes/components/caseDetails/description.xhtml" />
+          </h:panelGroup>
 
-          <ui:include src="/includes/components/caseDetails/caseMap.xhtml"/>
+          <h:panelGroup styleClass="card card-w-title case-detail-card task-detail-container case-details-item"
+            layout="block">
+            <div>
+              <h:panelGroup layout="block" styleClass="task-detail-title straight-text-icon related-element">
+                <i class="si si-lg si-information-circle detail-title-icon" />
+                <h:outputText value="Case Map" />
+              </h:panelGroup>
+              <ui:include src="/includes/components/caseDetails/caseMap.xhtml" />
+            </div>
+          </h:panelGroup>
 
-          <ui:include src="/includes/components/caseDetails/taskList.xhtml"/>
+          <h:panelGroup styleClass="card card-w-title case-detail-card task-detail-container case-details-item"
+            layout="block">
+            <h:panelGroup layout="block" styleClass="task-detail-title straight-text-icon related-element">
+              <i class="si si-lg si-task-list-approve detail-title-icon" />
+              <h:outputText value="Task list" />
+            </h:panelGroup>
+            <ui:include src="/includes/components/caseDetails/taskList.xhtml" />
+          </h:panelGroup>
 
-          <ui:include src="/includes/components/caseDetails/caseList.xhtml"/>
+          <h:panelGroup styleClass="card card-w-title case-detail-card task-detail-container case-details-item"
+            layout="block">
+            <h:panelGroup layout="block" styleClass="task-detail-title straight-text-icon related-element">
+              <i class="si si-lg si-task-list-approve detail-title-icon" />
+              <h:outputText value="Case list" />
+            </h:panelGroup>
+            <ui:include src="/includes/components/caseDetails/caseList.xhtml" />
+          </h:panelGroup>
 
-          <ui:include src="/includes/components/caseDetails/customFields.xhtml"/>
+          <h:panelGroup styleClass="card card-w-title case-detail-card task-detail-container case-details-item"
+            layout="block">
+            <h:panelGroup layout="block" styleClass="task-detail-title straight-text-icon related-element">
+              <i class="si si-lg si-cog detail-title-icon" />
+              <h:outputText value="Custom fields" />
+            </h:panelGroup>
+            <ui:include src="/includes/components/caseDetails/customFields.xhtml" />
+          </h:panelGroup>
 
-          <ui:include src="/includes/components/caseDetails/documents.xhtml"/>
+          <h:panelGroup styleClass="card card-w-title case-detail-card task-detail-container case-details-item"
+            layout="block">
+            <h:panelGroup layout="block" styleClass="task-detail-title straight-text-icon related-element">
+              <i class="si si-lg si-office-file-doc-1 detail-title-icon" />
+              <h:outputText value="Documents" />
+            </h:panelGroup>
+            <ui:include src="/includes/components/caseDetails/documents.xhtml" />
+          </h:panelGroup>
 
         </p:panelGrid>
       </h:form>
@@ -34,4 +83,5 @@
     </ui:define>
   </ui:composition>
 </h:body>
+
 </html>
