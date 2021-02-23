@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component"
+  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
+
+  <h:panelGroup styleClass="card card-w-title case-detail-card task-detail-container case-details-item" layout="block">
+    <h:panelGroup layout="block" styleClass="task-detail-title straight-text-icon related-element">
+      <i class="si si-lg si-task-list-approve detail-title-icon" />
+      <h:outputText value="Task list" />
+    </h:panelGroup>
+    <p:dataTable id="tasks" var="task" value="#{casesDetailsBean.selectedCase.activeTasks}" widgetVar="tasksTable"
+      emptyMessage="No Tasks found with given criteria" style="margin-top:10px" lazy="true" paginatorPosition="bottom"
+      rows="10" rowsPerPageTemplate="10,20,50" paginator="true" paginatorAlwaysVisible="false"
+      paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
+
+      <p:column filterBy="#{task.getState()}" styleClass="icon-row">
+        <i class="si si-lg si-#{tasksBean.getStateIcon(task.getState())}" title="State #{task.getState()}"></i>
+      </p:column>
+
+      <p:column id="priority" filterBy="#{task.getPriority()}" styleClass="icon-row">
+        <i class="si si-lg si-#{tasksBean.getPriorityIcon(task.getPriority())}"
+          title="Priority #{task.getPriority()}"></i>
+      </p:column>
+      <p:column headerText="Name" filterBy="#{task.getName()}">
+        <h:commandLink action="#{tasksBean.executeTask(task.id)}">
+          <h:outputText id="taskName" value="#{task.getName()}" style="color:#212121" />
+          <p:tooltip for="taskName" value="Task ID: #{task.getId()}" position="top" />
+        </h:commandLink>
+      </p:column>
+
+      <p:column headerText="Start Date" style="text-align: center;">
+        <h:outputText id="startTime" value="#{dateTimeBean.getPrettyTime(task.getStartTimestamp())}" />
+        <p:tooltip for="startTime" value="#{dateTimeBean.getDateTime(task.getStartTimestamp())}" position="top" />
+      </p:column>
+
+      <p:column headerText="Expiry" style="text-align: center;">
+        <h:outputText id="expiryTime" value="#{dateTimeBean.getDateTime(task.getExpiryTimestamp())}" />
+      </p:column>
+
+      <p:column style="width: 60px; text-align: center;">
+        <h:link outcome="taskDetails">
+          <f:param name="task" value="#{task.getId()}" />
+          <i class="si si-lg si-information-circle"></i>
+        </h:link>
+      </p:column>
+    </p:dataTable>
+  </h:panelGroup>
+
+</ui:composition>
