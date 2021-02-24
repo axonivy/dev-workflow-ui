@@ -3,13 +3,7 @@
   xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component"
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
 
-  <h:panelGroup styleClass="card card-w-title case-detail-card task-detail-container case-details-item" layout="block">
-    <h:panelGroup layout="block" styleClass="task-detail-title straight-text-icon related-element">
-      <i class="si si-lg si-office-file-doc-1 detail-title-icon" />
-      <h:outputText value="Documents" />
-    </h:panelGroup>
-    <h:outputText id="documentsContainer"
-      value="#{not empty casesDetailsBean.documents ? casesDetailsBean.documents : 'No documents found'}" />
-  </h:panelGroup>
+  <h:outputText id="documentsContainer"
+    value="#{not empty casesDetailsBean.documents ? casesDetailsBean.documents : 'No documents found'}" />
 
 </ui:composition>
