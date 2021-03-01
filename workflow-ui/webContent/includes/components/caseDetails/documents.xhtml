@@ -4,7 +4,7 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
 
   <ui:repeat var="document" value="#{casesDetailsBean.selectedCase.documents().getAll()}" varStatus="loop">
-    <h:commandLink id="documentsContainer" value="#{document.getName()}">
+    <h:commandLink value="#{document.getName()}">
       <p:fileDownload value="#{casesDetailsBean.getDocumentFile(document.getPath())}"></p:fileDownload>
     </h:commandLink>
     <c:if test="#{!loop.last}">, </c:if>
