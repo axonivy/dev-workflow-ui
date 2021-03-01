@@ -1,11 +1,16 @@
 package ch.ivyteam.workflowui;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import org.apache.commons.lang3.StringUtils;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.casemap.runtime.model.ICaseMap;
@@ -14,7 +19,7 @@ import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.WorkflowNavigationUtil;
 import ch.ivyteam.ivy.workflow.custom.field.ICustomField;
-import ch.ivyteam.ivy.workflow.document.IDocument;
+import ch.ivyteam.ivy.workflow.document.Path;
 
 @SuppressWarnings("restriction")
 @ManagedBean
@@ -68,6 +73,13 @@ public class CasesDetailsBean
     return ICaseMapRepository.getInstance().find(selectedCase.getId());
   }
 
+  public StreamedContent getDocumentFile(Path pathToDocument) throws FileNotFoundException
+  {
+    String contentType = FacesContext.getCurrentInstance().getExternalContext().getMimeType(pathToDocument.asString());
+    String filePath = IApplication.current().getFileArea().getAbsolutePath() + "/" + pathToDocument.asString();
+    return new DefaultStreamedContent (new FileInputStream(filePath), contentType, pathToDocument.getLastSegment());
+  }
+
   public String getCustomFields()
   {
     String customFields = "";
@@ -76,15 +88,5 @@ public class CasesDetailsBean
       customFields += customField.name() + " = " + customField.getOrNull();
     }
     return StringUtils.isNotBlank(customFields) ? customFields : "No custom fields";
-  }
-
-  public String getDocuments()
-  {
-    String documents = "";
-    for (IDocument document : selectedCase.documents().getAll())
-    {
-      documents += document.getName() + ",";
-    }
-    return documents;
   }
 }

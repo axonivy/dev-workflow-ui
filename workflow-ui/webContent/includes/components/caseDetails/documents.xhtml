@@ -3,7 +3,14 @@
   xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component"
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
 
-  <h:outputText id="documentsContainer"
-    value="#{not empty casesDetailsBean.documents ? casesDetailsBean.documents : 'No documents found'}" />
+  <ui:repeat var="document" value="#{casesDetailsBean.selectedCase.documents().getAll()}" varStatus="loop">
+    <h:commandLink id="documentsContainer" value="#{document.getName()}">
+      <p:fileDownload value="#{casesDetailsBean.getDocumentFile(document.getPath())}"></p:fileDownload>
+    </h:commandLink>
+    <c:if test="#{!loop.last}">, </c:if>
+  </ui:repeat>
+  <c:if test="#{empty casesDetailsBean.selectedCase.documents().getAll()}">
+    <h:outputText value="No Documents found" />
+  </c:if>
 
 </ui:composition>

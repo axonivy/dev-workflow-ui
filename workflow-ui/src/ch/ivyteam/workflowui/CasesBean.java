@@ -3,7 +3,10 @@ package ch.ivyteam.workflowui;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.apache.commons.lang3.StringUtils;
+
 import ch.ivyteam.ivy.workflow.CaseState;
+import ch.ivyteam.ivy.workflow.ICase;
 
 @ManagedBean
 @ViewScoped
@@ -20,6 +23,15 @@ public class CasesBean
   public CasesDataModel getCasesDataModel()
   {
     return casesDataModel;
+  }
+
+  public String getName(ICase icase)
+  {
+    if (StringUtils.isBlank(icase.getName()))
+    {
+      return "[Case: " + icase.getId() + "]";
+    }
+    return icase.getName();
   }
 
   public String getStateIcon(CaseState caseState)
