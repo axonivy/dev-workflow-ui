@@ -21,7 +21,7 @@
     </p:column>
 
     <p:column headerText="Name" filterBy="#{case.getName()}">
-        <h:outputText id="caseName" value="#{case.getName()}" style="color:#212121"/>
+        <h:outputText id="caseName" value="#{casesBean.getName(case)}" style="color:#212121"/>
         <p:tooltip for="caseName" value="Case ID: #{case.getId()}" position="top" />
     </p:column>
 
