@@ -19,6 +19,7 @@ import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.WorkflowNavigationUtil;
 import ch.ivyteam.ivy.workflow.custom.field.ICustomField;
+import ch.ivyteam.ivy.workflow.document.IDocument;
 import ch.ivyteam.ivy.workflow.document.Path;
 
 @SuppressWarnings("restriction")
@@ -71,6 +72,11 @@ public class CasesDetailsBean
   public ICaseMap getCaseMap()
   {
     return ICaseMapRepository.getInstance().find(selectedCase.getId());
+  }
+
+  public List<IDocument> getCaseDocuments()
+  {
+    return selectedCase.documents().getAll();
   }
 
   public StreamedContent getDocumentFile(Path pathToDocument) throws FileNotFoundException
