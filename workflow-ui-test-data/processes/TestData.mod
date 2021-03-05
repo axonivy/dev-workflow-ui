@@ -25,7 +25,9 @@ Ta0 f0 requestEnabled true #txt
 Ta0 f0 triggerEnabled false #txt
 Ta0 f0 callSignature TestData() #txt
 Ta0 f0 caseData 'businessCase.attach=true
-customFields.STRING.test\ field="test value"' #txt
+customFields.STRING.field\ 2="value"
+customFields.STRING.test\ 3\ ="test string"
+customFields.STRING.test\ field\ 1="test value"' #txt
 Ta0 f0 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>
     <language>

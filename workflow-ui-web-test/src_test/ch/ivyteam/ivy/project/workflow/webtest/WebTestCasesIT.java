@@ -49,7 +49,7 @@ public class WebTestCasesIT
   }
 
   @Test
-  public void chceckCaseDetails()
+  public void chceckCaseDetails() throws Exception
   {
     open(viewUrl("home.xhtml"));
     loginDeveloper();
@@ -62,7 +62,9 @@ public class WebTestCasesIT
     $("#form\\:creatorUser").shouldBe(exactText("DeveloperTest"));
     $("#form\\:caseState").shouldBe(exactText("RUNNING"));
 
-    $("#form\\:customFieldsContainer").shouldHave(text("test field = test value"));
+    Table fieldsTable = PrimeUi.table(By.id("form:customFieldsTable"));
+    fieldsTable.valueAt(1, 0).contains("field 2");
+
     $("#form\\:documentsContainer").shouldHave(text("test.txt"));
 
     $("#form\\:caseDestroyBtn").should(visible).click();

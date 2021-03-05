@@ -4,15 +4,16 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
 
   <ul>
-    <ui:repeat var="document" value="#{casesDetailsBean.caseDocuments}">
+    <ui:repeat var="document" value="#{casesDetailsBean.documents}">
       <li>
-        <h:commandLink value="#{document.getName()}">
-          <p:fileDownload value="#{casesDetailsBean.getDocumentFile(document.getPath())}"></p:fileDownload>
+        <span class="margin-right-5 si si-lg si-#{document.icon}"/>
+        <h:commandLink value="#{document.name}">
+          <p:fileDownload value="#{document.streamedContent}"></p:fileDownload>
         </h:commandLink>
       </li>
     </ui:repeat>
   </ul>
-  <c:if test="#{empty casesDetailsBean.selectedCase.documents().getAll()}">
+  <c:if test="#{empty casesDetailsBean.documents}">
     <h:outputText value="No Documents found" />
   </c:if>
 
