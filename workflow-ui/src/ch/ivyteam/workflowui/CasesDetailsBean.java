@@ -1,16 +1,11 @@
 package ch.ivyteam.workflowui;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 
 import org.apache.commons.lang3.StringUtils;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.casemap.runtime.model.ICaseMap;
@@ -18,9 +13,8 @@ import ch.ivyteam.ivy.casemap.runtime.repo.restricted.ICaseMapRepository;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.WorkflowNavigationUtil;
-import ch.ivyteam.ivy.workflow.custom.field.ICustomField;
-import ch.ivyteam.ivy.workflow.document.IDocument;
-import ch.ivyteam.ivy.workflow.document.Path;
+import ch.ivyteam.workflowui.customfield.CustomFieldModel;
+import ch.ivyteam.workflowui.document.DocumentModel;
 
 @SuppressWarnings("restriction")
 @ManagedBean
@@ -30,6 +24,8 @@ public class CasesDetailsBean
 
   private String selectedCaseId;
   private ICase selectedCase;
+  private List<CustomFieldModel> customFields;
+  private List<DocumentModel> documents;
 
   public String getSelectedCaseId()
   {
@@ -45,6 +41,8 @@ public class CasesDetailsBean
   {
     this.selectedCaseId = selectedCaseId;
     this.selectedCase = getCaseById(Long.parseLong(selectedCaseId));
+    customFields = CustomFieldModel.create(selectedCase);
+    documents = DocumentModel.create(selectedCase);
   }
 
   public ICase getCaseById(long id)
@@ -74,25 +72,13 @@ public class CasesDetailsBean
     return ICaseMapRepository.getInstance().find(selectedCase.getId());
   }
 
-  public List<IDocument> getCaseDocuments()
+  public List<CustomFieldModel> getCustomFields()
   {
-    return selectedCase.documents().getAll();
+    return customFields;
   }
 
-  public StreamedContent getDocumentFile(Path pathToDocument) throws FileNotFoundException
+  public List<DocumentModel> getDocuments()
   {
-    String contentType = FacesContext.getCurrentInstance().getExternalContext().getMimeType(pathToDocument.asString());
-    String filePath = IApplication.current().getFileArea().getAbsolutePath() + "/" + pathToDocument.asString();
-    return new DefaultStreamedContent (new FileInputStream(filePath), contentType, pathToDocument.getLastSegment());
-  }
-
-  public String getCustomFields()
-  {
-    String customFields = "";
-    for (ICustomField customField : selectedCase.customFields().all())
-    {
-      customFields += customField.name() + " = " + customField.getOrNull();
-    }
-    return StringUtils.isNotBlank(customFields) ? customFields : "No custom fields";
+    return documents;
   }
 }

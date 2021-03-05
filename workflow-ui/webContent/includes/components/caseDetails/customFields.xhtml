@@ -3,6 +3,16 @@
   xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component"
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
 
-  <h:outputText id="customFieldsContainer" value="#{casesDetailsBean.customFields}" />
+  <p:dataTable id="customFieldsTable" var="field" value="#{casesDetailsBean.customFields}">
+    <p:column headerText="Name">
+      <h:outputText value="#{field.name}"/>
+    </p:column>
+    <p:column headerText="Value">
+      <h:outputText value="#{field.value}"/>
+    </p:column>
+    <p:column headerText="Type">
+      <h:outputText value="#{field.type}"/>
+    </p:column>
+  </p:dataTable>
 
 </ui:composition>
