@@ -18,3 +18,5 @@ src_wsproc/
 
 workflow-ui/lib/
 .flattened-pom.xml
+
+workflow-ui-web-test/build/downloads/
