@@ -5,7 +5,7 @@
 
   <ul>
     <ui:repeat var="document" value="#{casesDetailsBean.documents}">
-      <li style="list-style-type: none;">
+      <li class="document-entry" style="list-style-type: none;">
         <span class="margin-right-5 si si-lg si-#{document.icon}"/>
         <h:commandLink value="#{document.name}">
           <p:fileDownload value="#{document.streamedContent}"></p:fileDownload>

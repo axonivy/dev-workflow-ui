@@ -4,8 +4,6 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginD
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
-import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -48,26 +46,4 @@ public class WebTestCasesIT
     table.valueAt(0, 1).contains("running");
   }
 
-  @Test
-  public void chceckCaseDetails() throws Exception
-  {
-    open(viewUrl("home.xhtml"));
-    loginDeveloper();
-    startTestProcess("1750C5211D94569D/TestData.ivp");
-    open(viewUrl("cases.xhtml"));
-
-    $(".si-information-circle").shouldBe(visible).click();
-    $("#form\\:caseName").shouldBe(text("TestCase"));
-
-    $("#form\\:creatorUser").shouldBe(exactText("DeveloperTest"));
-    $("#form\\:caseState").shouldBe(exactText("RUNNING"));
-
-    Table fieldsTable = PrimeUi.table(By.id("form:customFieldsTable"));
-    fieldsTable.valueAt(1, 0).contains("field 2");
-
-    $("#form\\:documentsContainer").shouldHave(text("test.txt"));
-
-    $("#form\\:caseDestroyBtn").should(visible).click();
-    $("#form\\:caseState").shouldBe(exactText("DESTROYED"));
-  }
 }
