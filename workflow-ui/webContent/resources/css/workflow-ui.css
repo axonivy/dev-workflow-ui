@@ -239,3 +239,7 @@
 .task-state-waiting, .task-state-in-progress, .case-state-in-progress {
   color: goldenrod;
 }
+
+.cleanup-container {
+  min-height: 300px;
+}
