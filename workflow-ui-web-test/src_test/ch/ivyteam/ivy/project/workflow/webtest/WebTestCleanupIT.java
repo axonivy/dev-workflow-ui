@@ -29,13 +29,13 @@ public class WebTestCleanupIT
   {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
   }
-  
+
   @BeforeEach
   public void loginAdmin()
   {
     loginDeveloper();
   }
-  
+
   @Test
   public void testCleanupButtonAdmin()
   {
@@ -53,13 +53,12 @@ public class WebTestCleanupIT
     open(viewUrl("cases.xhtml"));
     Table table = PrimeUi.table(By.id("casesForm:cases"));
     table.firstRowContains("TestCase");
-    
+
     Selenide.open(viewUrl("cleanup.xhtml"));
     $(By.id("clanupForm:cleanupBtn")).shouldBe(visible).click();
     $(By.id("casesForm:cases_data")).shouldNot(exist);
-    
   }
-  
+
   @Test
   public void testGrowl()
   {
@@ -68,7 +67,7 @@ public class WebTestCleanupIT
     $(By.id("clanupForm:cleanupBtn")).shouldNotBe(disabled).click();
     $(By.id("clanupForm:growl_container")).shouldBe(visible);
   }
-  
+
   @Test
   public void testCleanupNoChecks()
   {
@@ -79,5 +78,5 @@ public class WebTestCleanupIT
     $(By.id("clanupForm:cleanupBtn")).shouldNotBe(disabled).click();
     $(By.id("clanupForm:growl_container")).shouldNotBe(visible);
   }
-  
+
 }
