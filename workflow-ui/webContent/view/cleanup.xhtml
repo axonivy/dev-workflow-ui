@@ -10,10 +10,10 @@
         <h:panelGroup styleClass="card card-w-title cleanup-container" layout="block">
           <h:outputText styleClass="card-header-title" value="Cleanup" />
           <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank main-starts-container">
-            <p:selectBooleanCheckbox value="#{cleanupBean.casesTasksAndDependent}" itemLabel="All Cases, Tasks and dependent objects" />
-            <p:selectBooleanCheckbox value="#{cleanupBean.businessDataAndSearchIndex}" itemLabel="All Business Data and the search index" />
-            <p:selectBooleanCheckbox value="#{cleanupBean.identityProviderTokens}" itemLabel="All identity provider tokens" />
-            <p:commandButton value="Cleanup" actionListener="#{cleanupBean.cleanup}" update="growl" />
+            <p:selectBooleanCheckbox id="casesAndTasksCheckbox" value="#{cleanupBean.casesTasksAndDependent}" itemLabel="All Cases, Tasks and dependent objects" />
+            <p:selectBooleanCheckbox id="businessDataCheckbox" value="#{cleanupBean.businessDataAndSearchIndex}" itemLabel="All Business Data and the search index" />
+            <p:selectBooleanCheckbox id="identityProviderTokenCheckbox" value="#{cleanupBean.identityProviderTokens}" itemLabel="All identity provider tokens" />
+            <p:commandButton id="cleanupBtn" value="Cleanup" actionListener="#{cleanupBean.cleanup}" update="growl" disabled="#{!adminBean.isWorkflowAdmin()}"/>
           </p:panelGrid>
         </h:panelGroup>
       </h:form>
