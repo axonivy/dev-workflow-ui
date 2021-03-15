@@ -91,6 +91,21 @@
                 -Dtest.engine.app=${test.application}</argLine>
             </configuration>
           </execution>
+          <execution>
+            <id>cleanup-test</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>**/WebTestCleanup.java</include>
+              </includes>
+              <argLine>
+                -Dtest.engine.url=${test.engine.url}
+                -Dtest.engine.app=${test.application}</argLine>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
       <plugin>

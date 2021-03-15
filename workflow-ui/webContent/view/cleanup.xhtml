@@ -13,7 +13,7 @@
             <p:selectBooleanCheckbox id="casesAndTasksCheckbox" value="#{cleanupBean.casesTasksAndDependent}" itemLabel="All Cases, Tasks and dependent objects" />
             <p:selectBooleanCheckbox id="businessDataCheckbox" value="#{cleanupBean.businessDataAndSearchIndex}" itemLabel="All Business Data and the search index" />
             <p:selectBooleanCheckbox id="identityProviderTokenCheckbox" value="#{cleanupBean.identityProviderTokens}" itemLabel="All identity provider tokens" />
-            <p:commandButton id="cleanupBtn" value="Cleanup" actionListener="#{cleanupBean.cleanup}" update="growl" disabled="#{!adminBean.isWorkflowAdmin()}"/>
+            <p:commandButton id="cleanupBtn" value="Cleanup" actionListener="#{cleanupBean.cleanup}" update="growl" disabled="#{!adminBean.isWorkflowAdmin() or !engineModeBean.demoOrDesigner}"/>
           </p:panelGrid>
         </h:panelGroup>
       </h:form>

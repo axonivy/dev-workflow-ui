@@ -22,7 +22,7 @@ import com.axonivy.ivy.webtest.primeui.widget.Table;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
-public class WebTestCleanupIT
+public class WebTestCleanup
 {
   @BeforeAll
   public static void makeAdminUser()

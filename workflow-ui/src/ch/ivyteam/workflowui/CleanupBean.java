@@ -5,8 +5,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import org.apache.commons.lang3.StringUtils;
-
 import ch.ivyteam.di.restricted.DiCore;
 import ch.ivyteam.ivy.business.data.store.restricted.BusinessDataPersistence;
 import ch.ivyteam.ivy.rest.client.oauth2.SessionTokenStore;
@@ -53,27 +51,27 @@ public class CleanupBean
 
   public void cleanup()
   {
-    String msg = "";
     if (casesTasksAndDependent)
     {
       IWorkflowContext.current().cleanup();
-      msg += "Cleaned all Cases and Tasks;";
+      showMessage("Cleaned all Cases and Tasks;");
     }
     if (businessDataAndSearchIndex)
     {
       DiCore.getGlobalInjector().getInstance(BusinessDataPersistence.class).clearAll();
-      msg += "Cleaned all Business Data and the search index;";
+      showMessage("Cleaned all Business Data and the search index");
     }
     if (identityProviderTokens)
     {
       SessionTokenStore.clear();
-      msg += "Cleaned all identity provider tokens;";
+      showMessage("Cleaned all identity provider tokens");
     }
-    if (!StringUtils.isBlank(msg))
-    {
+  }
+
+  private void showMessage(String msg)
+  {
     FacesContext.getCurrentInstance().addMessage(null,
             new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", msg));
-    }
   }
 
 }
