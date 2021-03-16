@@ -27,6 +27,7 @@ public class WebTestCleanup
   @BeforeAll
   public static void makeAdminUser()
   {
+    startTestProcess("1750C5211D94569D/designerEmbedded.ivp");
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
   }
 
@@ -77,6 +78,16 @@ public class WebTestCleanup
     $(By.id("clanupForm:identityProviderTokenCheckbox")).shouldBe(enabled).click();
     $(By.id("clanupForm:cleanupBtn")).shouldNotBe(disabled).click();
     $(By.id("clanupForm:growl_container")).shouldNotBe(visible);
+  }
+
+  @Test
+  public void testNoCleanupEngine()
+  {
+    Selenide.open(viewUrl("cleanup.xhtml"));
+    $(By.id("clanupForm:cleanupBtn")).shouldBe(enabled);
+    startTestProcess("1750C5211D94569D/maintenance.ivp");
+    Selenide.open(viewUrl("cleanup.xhtml"));
+    $(By.id("clanupForm:cleanupBtn")).shouldNotBe(enabled);
   }
 
 }
