@@ -42,7 +42,7 @@ public class WebTestTasksIT
     startTestProcess("1750C5211D94569D/TestData.ivp");
     open(viewUrl("allTasks.xhtml"));
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
-    table.firstRowContains("TestTask");
+    table.row(0).shouldBe(text("TestTask"));
 
     table.valueAt(0, 1).contains("pause");
   }

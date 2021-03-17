@@ -34,7 +34,7 @@
     <dependency>
       <groupId>com.axonivy.ivy.webtest</groupId>
       <artifactId>web-tester</artifactId>
-      <version>9.1.1-SNAPSHOT</version>
+      <version>9.2.0-SNAPSHOT</version>
       <scope>test</scope>
     </dependency>
      <dependency>
@@ -85,6 +85,21 @@
             <configuration>
               <includes>
                 <include>**/WebDocu*.java</include>
+              </includes>
+              <argLine>
+                -Dtest.engine.url=${test.engine.url}
+                -Dtest.engine.app=${test.application}</argLine>
+            </configuration>
+          </execution>
+          <execution>
+            <id>cleanup-test</id>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>**/WebTestCleanup.java</include>
               </includes>
               <argLine>
                 -Dtest.engine.url=${test.engine.url}
