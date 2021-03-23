@@ -54,17 +54,17 @@ public class CleanupBean
     if (casesTasksAndDependent)
     {
       IWorkflowContext.current().cleanup();
-      showMessage("Cleaned all Cases and Tasks;");
+      showMessage("All existing Cases and Tasks have been deleted");
     }
     if (businessDataAndSearchIndex)
     {
       DiCore.getGlobalInjector().getInstance(BusinessDataPersistence.class).clearAll();
-      showMessage("Cleaned all Business Data and the search index");
+      showMessage("All Business Data and the search index has been deleted");
     }
     if (identityProviderTokens)
     {
       SessionTokenStore.clear();
-      showMessage("Cleaned all identity provider tokens");
+      showMessage("All identity provider tokens have been deleted");
     }
   }
 
