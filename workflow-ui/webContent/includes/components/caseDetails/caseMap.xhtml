@@ -3,17 +3,30 @@
   xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component"
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
 
-  <div class="related-element case-map-container ui-g-12 u-padding-0">
-    <p:repeat var="stage" value="#{casesDetailsBean.caseMap.stages}">
-      <h:panelGroup styleClass="case-map-column">
-        <div class="case-map-icon-container">
-          <i class="#{stage.getIcon().getCssClass()} case-map-icon" />
-        </div>
-      </h:panelGroup>
-    </p:repeat>
-    <c:if test="#{empty casesDetailsBean.caseMap.stages}">
-      <h:outputText value="No Case Map found" />
-    </c:if>
+  <div class="ui-g-12 u-padding-0">
+    <div class="case-map-container">
+      <p:repeat var="stage" value="#{casesDetailsBean.caseMap.stages}" varStatus="count">
+        <h:panelGroup styleClass="case-map-column">
+          <div class="case-map-icon-container">
+            <i class="case-map-icon #{stage.iconCss} #{stage.stateCss}" />
+            <h:panelGroup class="stage-icon-container" rendered="#{stage.executed}">
+              <span class="dot">
+                <i class="si #{stage.stateIconCss} case-map-state-icon"/>
+              </span>
+            </h:panelGroup>
+          </div>
+          <h:outputText value="#{stage.name}"/>
+        </h:panelGroup>
+        <h:panelGroup class="process-flow" rendered="#{!stage.last}">
+          <span class="flow-txt">
+            <hr class="#{stage.terminatingCss}"/>
+          </span>
+        </h:panelGroup>
+      </p:repeat>
+      <c:if test="#{empty casesDetailsBean.caseMap.stages}">
+        <h:outputText value="No Case Map found" />
+      </c:if>
+    </div>
   </div>
 
 </ui:composition>

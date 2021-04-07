@@ -42,7 +42,7 @@ public class WebTestCasesIT
     startTestProcess("1750C5211D94569D/TestData.ivp");
     open(viewUrl("cases.xhtml"));
     Table table = PrimeUi.table(By.id("casesForm:cases"));
-    table.row(1).shouldBe(text("TestCase"));
+    table.row(0).shouldBe(text("TestCase"));
 
     table.valueAt(0, 1).contains("running");
   }

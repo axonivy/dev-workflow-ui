@@ -30,6 +30,11 @@ public class WorkflowUiUtil
     Selenide.open(EngineUrl.createProcessUrl("/workflow-ui-test-data/" + pathToIvp));
   }
 
+  public static void startTestCaseMap(String path)
+  {
+    Selenide.open(EngineUrl.createCaseMapUrl("/workflow-ui-test-data/" + path));
+  }
+
   public static String viewUrl(String page)
   {
     return createStaticViewUrl(pmvName() + "/" + page);
