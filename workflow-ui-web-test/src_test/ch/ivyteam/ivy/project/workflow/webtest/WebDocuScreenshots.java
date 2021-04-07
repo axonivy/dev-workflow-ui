@@ -17,6 +17,8 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 
+import ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil;
+
 @IvyWebTest
 public class WebDocuScreenshots
 {
@@ -63,6 +65,12 @@ public class WebDocuScreenshots
 
     open(viewUrl("starts.xhtml"));
     takeScreenshot("workflow-ui-starts", new Dimension(SCREENSHOT_WIDTH, 800));
+
+    WorkflowUiUtil.startTestCaseMap("0cf1f054-a4ad-4b2b-bcf1-c9c34ec0a2ab.icm");
+    open(viewUrl("cases.xhtml"));
+    $(".si-information-circle").shouldBe(visible).click();
+    takeScreenshot("workflow-ui-caseMap", new Dimension(SCREENSHOT_WIDTH, 800));
+
   }
 
   private void takeScreenshot(String fileName, Dimension size)

@@ -8,15 +8,13 @@ import javax.faces.bean.ViewScoped;
 import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.application.IApplication;
-import ch.ivyteam.ivy.casemap.runtime.model.ICaseMap;
-import ch.ivyteam.ivy.casemap.runtime.repo.restricted.ICaseMapRepository;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.WorkflowNavigationUtil;
+import ch.ivyteam.workflowui.casemap.CaseMapModel;
 import ch.ivyteam.workflowui.customfield.CustomFieldModel;
 import ch.ivyteam.workflowui.document.DocumentModel;
 
-@SuppressWarnings("restriction")
 @ManagedBean
 @ViewScoped
 public class CasesDetailsBean
@@ -26,6 +24,7 @@ public class CasesDetailsBean
   private ICase selectedCase;
   private List<CustomFieldModel> customFields;
   private List<DocumentModel> documents;
+  private CaseMapModel caseMapModel;
 
   public String getSelectedCaseId()
   {
@@ -43,6 +42,7 @@ public class CasesDetailsBean
     this.selectedCase = getCaseById(Long.parseLong(selectedCaseId));
     customFields = CustomFieldModel.create(selectedCase);
     documents = DocumentModel.create(selectedCase);
+    caseMapModel = CaseMapModel.create(selectedCase);
   }
 
   public ICase getCaseById(long id)
@@ -67,9 +67,9 @@ public class CasesDetailsBean
     return tasks.size() > 20 ? tasks.subList(0, 20) : tasks;
   }
 
-  public ICaseMap getCaseMap()
+  public CaseMapModel getCaseMap()
   {
-    return ICaseMapRepository.getInstance().find(selectedCase.getId());
+    return caseMapModel;
   }
 
   public List<CustomFieldModel> getCustomFields()
