@@ -19,12 +19,16 @@
   margin-top: 5px;
 }
 
-.margin-right-10 {
-  margin-right: 10px;
+.margin-top-10 {
+  margin-top: 10px;
 }
 
 .margin-right-5 {
   margin-right: 5px;
+}
+
+.margin-right-10 {
+  margin-right: 10px;
 }
 
 .detail-action-icon-bold {
@@ -274,10 +278,15 @@
   font-size: 16pt;
 }
 
+.card-header-icon {
+  font-size: 16pt;
+}
+
 .ui-accordion-content .start-element:hover {
   cursor: pointer;
   background-color: #afced8;
 }
+
 
 .main-starts-container {
   margin-top: 10px;
