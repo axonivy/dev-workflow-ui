@@ -38,7 +38,7 @@ public class WebTestCaseMapIT
     $(".si-information-circle").shouldBe(visible).click();
 
     $("#form\\:creatorUser").shouldBe(exactText("DeveloperTest"));
-    $("#form\\:caseState").shouldBe(exactText("RUNNING"));
+    $("#form\\:caseState").shouldBe(exactText("CREATED"));
 
     $(".case-map-column").shouldHave(text("stage1"));
     $(".process-flow").shouldBe(visible);

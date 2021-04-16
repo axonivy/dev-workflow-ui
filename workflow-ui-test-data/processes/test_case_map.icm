@@ -9,7 +9,7 @@
     "processes" : [ {
       "id" : "process_1",
       "name" : "process 1",
-      "processToExecute" : "ch.ivyteam.workflow:workflow-ui:17425834F1CBA722/DefaultApplicationHomePage.ivp"
+      "processToExecute" : "ch.ivyteam.workflow:workflow-ui-test-data:1750C5211D94569D/startTestDialog.ivp"
     } ]
   }, {
     "id" : "stage_2",
