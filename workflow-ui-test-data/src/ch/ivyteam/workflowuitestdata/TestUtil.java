@@ -12,8 +12,13 @@ public class TestUtil
 
   public static void makeAdmin()
   {
+    String testDevUser = "DeveloperTest";
     Sudo.exec(() -> {
-      IUser developerTestUser = IApplication.current().getSecurityContext().users().find("DeveloperTest");
+      IUser developerTestUser = IApplication.current().getSecurityContext().users().find(testDevUser);
+      if (developerTestUser == null)
+      {
+        developerTestUser = IApplication.current().getSecurityContext().users().create(testDevUser, testDevUser);
+      }
       IApplication.current().getSecurityDescriptor().grantPermission(TASK_READ_ALL,
               developerTestUser);
       IApplication.current().getSecurityDescriptor().grantPermission(CASE_READ_ALL,
