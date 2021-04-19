@@ -13,10 +13,10 @@
     <ui:define name="content">
 
       <h:form id="form">
-        <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank case-details-grid"
+        <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank case-details-grid grid-smaller-padding"
           columnClasses="ui-g-12 ui-lg-8, ui-g-12 ui-lg-4">
 
-          <h:panelGroup styleClass="card card-w-title case-detail-card task-detail-container" layout="block">
+          <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
             <div class="task-detail-title straight-text-icon">
               <i class="si si-lg si-common-file-text detail-title-icon" />
               <h:outputText value="Description" />
@@ -30,7 +30,7 @@
             <ui:include src="/includes/components/caseDetails/description.xhtml" />
           </h:panelGroup>
 
-          <h:panelGroup styleClass="card card-w-title case-detail-card task-detail-container case-details-item"
+          <h:panelGroup styleClass="card card-w-title custom-card case-details-item"
             layout="block">
             <div>
               <h:panelGroup layout="block" styleClass="task-detail-title straight-text-icon related-element">
@@ -41,7 +41,7 @@
             </div>
           </h:panelGroup>
 
-          <h:panelGroup styleClass="card card-w-title case-detail-card task-detail-container case-details-item"
+          <h:panelGroup styleClass="card card-w-title custom-card case-details-item"
             layout="block">
             <h:panelGroup layout="block" styleClass="task-detail-title straight-text-icon related-element">
               <i class="si si-lg si-task-list-approve detail-title-icon" />
@@ -50,7 +50,7 @@
             <ui:include src="/includes/components/caseDetails/taskList.xhtml" />
           </h:panelGroup>
 
-          <h:panelGroup styleClass="card card-w-title case-detail-card task-detail-container case-details-item"
+          <h:panelGroup styleClass="card card-w-title custom-card case-details-item"
             layout="block">
             <h:panelGroup layout="block" styleClass="task-detail-title straight-text-icon related-element">
               <i class="si si-lg si-task-list-approve detail-title-icon" />
@@ -59,7 +59,7 @@
             <ui:include src="/includes/components/caseDetails/caseList.xhtml" />
           </h:panelGroup>
 
-          <h:panelGroup styleClass="card card-w-title case-detail-card task-detail-container case-details-item"
+          <h:panelGroup styleClass="card card-w-title custom-card case-details-item"
             layout="block">
             <h:panelGroup layout="block" styleClass="task-detail-title straight-text-icon related-element">
               <i class="si si-lg si-cog detail-title-icon" />
@@ -68,7 +68,7 @@
             <ui:include src="/includes/components/caseDetails/customFields.xhtml" />
           </h:panelGroup>
 
-          <h:panelGroup id="documentsContainer" styleClass="card card-w-title case-detail-card task-detail-container case-details-item"
+          <h:panelGroup id="documentsContainer" styleClass="card card-w-title custom-card case-details-item"
             layout="block">
             <h:panelGroup layout="block" styleClass="task-detail-title straight-text-icon related-element">
               <i class="si si-lg si-office-file-doc-1 detail-title-icon" />

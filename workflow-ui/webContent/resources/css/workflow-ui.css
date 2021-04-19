@@ -52,10 +52,6 @@
   right: 0px;
 }
 
-.task-detail-container {
-  min-height: 220px;
-}
-
 .action-container {
   display: flex;
   align-items: center;
@@ -83,12 +79,8 @@
   padding: 0;
 }
 
-.case-details-grid .ui-panelgrid-content .ui-g .ui-panelgrid-cell {
+.grid-smaller-padding .ui-panelgrid-content .ui-g .ui-panelgrid-cell {
   padding: 8px;
-}
-
-.case-detail-card {
-  margin: 0px;
 }
 
 .case-related-task-table {
@@ -273,13 +265,18 @@
   margin-left: 6px;
 }
 
-.card-header-title {
-  font-weight: bold;
-  font-size: 16pt;
+.subtitle {
+  font-size: 1.2em;
 }
 
-.card-header-icon {
-  font-size: 16pt;
+.card-header-title {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.custom-card {
+  margin: 0px;
+  min-height: 220px;
 }
 
 .ui-accordion-content .start-element:hover {
