@@ -1,0 +1,19 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component"
+  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
+
+  <p:dataTable id="boundary-signals-table" var="receiver" value="#{signalsBean.boundarySignals}"
+    styleClass="margin-top-10" rows="5" paginator="true" paginatorPosition="bottom" paginatorAlwaysVisible="false">
+    <p:column headerText="Signal pattern">
+      <h:outputText value="#{receiver.signalPattern}" />
+    </p:column>
+    <p:column headerText="Waiting task">
+      <h:link outcome="taskDetails">
+        <f:param name="task" value="#{receiver.waitingTask.id}" />
+        <h:outputText value="#{receiver.waitingTask}" />
+      </h:link>
+    </p:column>
+  </p:dataTable>
+
+</ui:composition>
