@@ -17,6 +17,7 @@ import ch.ivyteam.ivy.workflow.IWorkflowSession;
 import ch.ivyteam.ivy.workflow.signal.IBpmSignalService;
 import ch.ivyteam.ivy.workflow.signal.ISignalEvent;
 import ch.ivyteam.ivy.workflow.signal.IStartSignalEventElement;
+import ch.ivyteam.ivy.workflow.signal.ITaskBoundarySignalEventReceiver;
 
 @ManagedBean
 @ViewScoped
@@ -56,9 +57,14 @@ public class SignalsBean
   public List<String> signalsComplete(String query)
   {
     return IWorkflowContext.current().signals().receivers().all().stream()
-        .map(IStartSignalEventElement::getName)
-        .filter(s -> s.toLowerCase().contains(query.toLowerCase()))
+        .map(IStartSignalEventElement::getName).filter(s -> s.toLowerCase().contains(query.toLowerCase()))
         .collect(Collectors.toList());
+  }
+
+  public List<ITaskBoundarySignalEventReceiver> getBoundarySignals()
+  {
+    return new ArrayList<>(IWorkflowContext.current().signals().receivers().createTaskBoundaryQuery()
+        .orderBy().signalCodePattern().descending().executor().results());
   }
 
   public String getCode()

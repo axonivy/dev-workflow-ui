@@ -16,7 +16,7 @@
       <p:outputLabel value="Payload" for="@previous" />
     </h:panelGroup>
   </div>
-  <p:commandButton id="signalBtn" update="growl, fired-signals-table"
+  <p:commandButton id="signalBtn" update="growl, fired-signals-table, boundary-signals-table"
     class="width-100 margin-top-10" value="Send" actionListener="#{signalsBean.sendSignal}"
     disabled="#{!adminBean.isWorkflowAdmin() or !engineModeBean.demoOrDesigner}" />
 
