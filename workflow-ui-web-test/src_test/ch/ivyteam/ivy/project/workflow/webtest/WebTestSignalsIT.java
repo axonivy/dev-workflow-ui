@@ -30,7 +30,7 @@ public class WebTestSignalsIT
 
     loginDeveloper();
     open(viewUrl("signals.xhtml"));
-    $(By.id("signalForm:signal-code-input")).sendKeys("Test Code");
+    $(By.id("signalForm:signal-code-input_input")).sendKeys("Test Code");
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
     $(By.id("signalForm:growl_container")).shouldBe(visible);
 

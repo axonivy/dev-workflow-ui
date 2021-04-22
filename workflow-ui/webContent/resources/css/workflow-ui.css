@@ -1,7 +1,7 @@
 .table-icon {
   position: relative;
   top: 3px;
-  font-size: 17px !important;
+  font-size: 1.3em !important;
   margin-right: 5px;
 }
 
@@ -29,6 +29,14 @@
 
 .margin-right-10 {
   margin-right: 10px;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+.height-100 {
+  height: 100%;
 }
 
 .detail-action-icon-bold {
@@ -77,6 +85,10 @@
 
 .u-padding-0 {
   padding: 0;
+}
+
+.signal-code-input > input {
+  width: 100%;
 }
 
 .grid-smaller-padding .ui-panelgrid-content .ui-g .ui-panelgrid-cell {
@@ -164,7 +176,7 @@
 }
 
 .case-map-icon {
-  font-size: 16pt;
+  font-size: 1.5em;
 }
 
 .stage-icon-container {
@@ -174,7 +186,7 @@
 }
 
 .case-map-state-icon {
-  font-size: 12px;
+  font-size: 0.9em;
   position: absolute;
   font-weight: bold;
   margin-top: 3px;

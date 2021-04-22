@@ -1,5 +1,6 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
-  xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
   xmlns:pe="http://primefaces.org/ui/extensions">
 
 <h:body>
@@ -7,25 +8,24 @@
     <ui:define name="content">
       <h:form id="signalForm">
         <p:growl id="growl" showDetail="true" />
-        <h:panelGroup styleClass="card card-w-title cleanup-container" layout="block">
-          <i class="si si-network-signal card-header-icon margin-right-5"/>
-          <p:outputLabel class="card-header-title" value="Signals"/>
-          <div class="margin-top-10">
-            <b><p:outputLabel value="Send signal"/></b>
-          </div>
-          <h:panelGrid columns="2" styleClass="margin-top-10">
-            <p:outputLabel value="Signal Code" for="signal-code-input"/>
-            <p:inputText id="signal-code-input" value="#{signalsBean.code}"/>
-            <p:outputLabel value="Payload (String)" for="signal-payload-input"/>
-            <p:inputTextarea id="signal-payload-input" value="#{signalsBean.payload}"/>
-          </h:panelGrid>
-          <p:commandButton id="signalBtn" value="Send" update="growl, fired-signals-table" actionListener="#{signalsBean.sendSignal}" disabled="#{!adminBean.isWorkflowAdmin() or !engineModeBean.demoOrDesigner}"/>
-          <p:dataTable id="fired-signals-table" var="signal" value="#{signalsBean.firedSignals}" styleClass="margin-top-10">
-            <p:column headerText="Code">
-              <h:outputText value="#{signal.signalCode}"/>
-            </p:column>
-          </p:dataTable>
-        </h:panelGroup>
+        <p:panelGrid columns="3" styleClass="ui-g ui-panelgrid-blank grid-smaller-padding" layout="grid"
+          columnClasses="ui-g-12 ui-md-4, ui-g-12 ui-md-8, ui-g-12" >
+
+          <h:panelGroup styleClass="card card-w-title custom-card height-100" layout="block">
+            <b><p:outputLabel value="Send signal" styleClass="subtitle" /></b>
+            <ui:include src="/includes/components/signals/sendSignal.xhtml" />
+          </h:panelGroup>
+
+          <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
+            <b><h:outputText value="Boundary signals" styleClass="subtitle" /></b>
+          </h:panelGroup>
+
+          <h:panelGroup styleClass="card card-w-title card-margin-0" layout="block">
+            <b><h:outputText value="Fired signals" styleClass="subtitle" /></b>
+            <ui:include src="/includes/components/signals/firedSignals.xhtml" />
+          </h:panelGroup>
+
+        </p:panelGrid>
       </h:form>
     </ui:define>
   </ui:composition>
