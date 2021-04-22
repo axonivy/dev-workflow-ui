@@ -14,7 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 import ch.ivyteam.ivy.process.model.value.SignalCode;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.IWorkflowSession;
-import ch.ivyteam.ivy.workflow.query.SignalEventQuery;
 import ch.ivyteam.ivy.workflow.signal.IBpmSignalService;
 import ch.ivyteam.ivy.workflow.signal.ISignalEvent;
 import ch.ivyteam.ivy.workflow.signal.IStartSignalEventElement;
@@ -50,20 +49,16 @@ public class SignalsBean
 
   public List<ISignalEvent> getFiredSignals()
   {
-    SignalEventQuery query = IWorkflowContext.current().signals().history().createSignalEventQuery().orderBy().sentTimestamp().descending();
-    return new ArrayList<>(query.executor().results());
+    return new ArrayList<>(IWorkflowContext.current().signals().history().createSignalEventQuery().orderBy()
+        .sentTimestamp().descending().executor().results());
   }
 
   public List<String> signalsComplete(String query)
   {
-    String queryLowerCase = query.toLowerCase();
-    List<String> startsList = new ArrayList<>();
-    List<IStartSignalEventElement> starts = IWorkflowContext.current().signals().receivers().all();
-    for (IStartSignalEventElement start : starts)
-    {
-      startsList.add(start.getName());
-    }
-    return startsList.stream().filter(s -> s.toLowerCase().contains(queryLowerCase)).collect(Collectors.toList());
+    return IWorkflowContext.current().signals().receivers().all().stream()
+        .map(IStartSignalEventElement::getName)
+        .filter(s -> s.toLowerCase().contains(query.toLowerCase()))
+        .collect(Collectors.toList());
   }
 
   public String getCode()
