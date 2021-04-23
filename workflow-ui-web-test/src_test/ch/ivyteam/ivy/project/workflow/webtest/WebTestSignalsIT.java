@@ -83,4 +83,21 @@ public class WebTestSignalsIT
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
     boundaryTable.valueAtShoudBe(0, 0, text("No records found."));
   }
+
+  @Test
+  public void testBoundarySignalsOnClick()
+  {
+    startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
+    loginDeveloper();
+
+    open(viewUrl("signals.xhtml"));
+    Table boundaryTable = PrimeUi.table(By.id("signalForm:boundary-signals-table"));
+    boundaryTable.valueAtShoudBe(0, 0, text("No records found."));
+
+    startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
+    open(viewUrl("signals.xhtml"));
+
+    $(By.id("signalForm:boundary-signals-table")).find(By.className("ui-commandlink")).shouldBe(text("test:data:signal")).click();
+    boundaryTable.valueAtShoudBe(0, 0, text("No records found."));
+  }
 }

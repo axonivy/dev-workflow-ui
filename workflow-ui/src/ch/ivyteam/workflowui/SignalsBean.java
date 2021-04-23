@@ -26,6 +26,12 @@ public class SignalsBean
   private String code;
   private String payload;
 
+  public void sendBoundarySignal(String code)
+  {
+    this.code = code;
+    sendSignal();
+  }
+
   public void sendSignal()
   {
     IBpmSignalService signals = IWorkflowSession.current().getWorkflowContext().signals();
@@ -40,6 +46,7 @@ public class SignalsBean
       signals.send(signalCode, payload);
     }
     showMessage("Signal " + code + " sent");
+    this.code = "";
   }
 
   private void showMessage(String msg)
