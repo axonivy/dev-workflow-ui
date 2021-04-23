@@ -18,6 +18,14 @@ Ta0 @EndTask f6 '' #zField
 Ta0 @UserDialog f7 '' #zField
 Ta0 @PushWFArc f8 '' #zField
 Ta0 @PushWFArc f9 '' #zField
+Ta0 @StartRequest f10 '' #zField
+Ta0 @EndTask f11 '' #zField
+Ta0 @UserTask f12 '' #zField
+Ta0 @TkArc f13 '' #zField
+Ta0 @PushWFArc f14 '' #zField
+Ta0 @SignalBoundaryEvent f15 '' #zField
+Ta0 @SignalStartEvent f16 '' #zField
+Ta0 @PushWFArc f17 '' #zField
 >Proto Ta0 Ta0 TestData #zField
 Ta0 f0 outLink TestData.ivp #txt
 Ta0 f0 inParamDecl '<> param;' #txt
@@ -87,6 +95,52 @@ Ta0 f7 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 Ta0 f7 168 138 112 44 -33 -7 #rect
 Ta0 f8 111 160 168 160 #arcP
 Ta0 f9 280 160 337 160 #arcP
+Ta0 f10 outLink startBoundarySignal.ivp #txt
+Ta0 f10 inParamDecl '<> param;' #txt
+Ta0 f10 requestEnabled true #txt
+Ta0 f10 triggerEnabled false #txt
+Ta0 f10 callSignature startBoundarySignal() #txt
+Ta0 f10 caseData businessCase.attach=true #txt
+Ta0 f10 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elementInfo>
+    <language>
+        <name>startBoundarySignal.ivp</name>
+    </language>
+</elementInfo>
+' #txt
+Ta0 f10 @C|.responsibility Everybody #txt
+Ta0 f10 81 241 30 30 -72 18 #rect
+Ta0 f11 337 241 30 30 0 15 #rect
+Ta0 f12 responseMappingAction 'out=in;
+' #txt
+Ta0 f12 168 234 112 44 0 -7 #rect
+Ta0 f13 111 256 168 256 #arcP
+Ta0 f14 280 256 337 256 #arcP
+Ta0 f15 actionTable 'out=in;
+' #txt
+Ta0 f15 signalCode test:data:signal #txt
+Ta0 f15 attachedToRef 1750C5211D94569D-f12 #txt
+Ta0 f15 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elementInfo>
+    <language>
+        <name>test:data:signal</name>
+    </language>
+</elementInfo>
+' #txt
+Ta0 f15 241 273 30 30 0 15 #rect
+Ta0 f16 signalCode test:signal:complete #txt
+Ta0 f16 attachToBusinessCase true #txt
+Ta0 f16 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elementInfo>
+    <language>
+        <name>test:signal:complete</name>
+    </language>
+</elementInfo>
+' #txt
+Ta0 f16 81 337 30 30 0 15 #rect
+Ta0 f17 111 352 352 271 #arcP
+Ta0 f17 1 352 352 #addKink
+Ta0 f17 1 0.17787910602871868 0 0 #arcLabel
 >Proto Ta0 .type workflow.uite.Data #txt
 >Proto Ta0 .processKind NORMAL #txt
 >Proto Ta0 0 0 32 24 18 0 #rect
@@ -99,3 +153,9 @@ Ta0 f5 mainOut f8 tail #connect
 Ta0 f8 head f7 mainIn #connect
 Ta0 f7 mainOut f9 tail #connect
 Ta0 f9 head f6 mainIn #connect
+Ta0 f10 mainOut f13 tail #connect
+Ta0 f13 head f12 in #connect
+Ta0 f12 out f14 tail #connect
+Ta0 f14 head f11 mainIn #connect
+Ta0 f16 mainOut f17 tail #connect
+Ta0 f17 head f11 mainIn #connect
