@@ -6,6 +6,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startT
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.enabled;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -30,11 +31,56 @@ public class WebTestSignalsIT
 
     loginDeveloper();
     open(viewUrl("signals.xhtml"));
-    $(By.id("signalForm:signal-code-input_input")).sendKeys("Test Code");
+    $(By.id("signalForm:signalBtn")).shouldBe(enabled);
+  }
+
+  @Test
+  public void testSendSignals()
+  {
+    startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
+    loginDeveloper();
+
+    open(viewUrl("signals.xhtml"));
+    Table signalsTable = PrimeUi.table(By.id("signalForm:fired-signals-table"));
+    signalsTable.containsNot("Web Test Signal");
+
+    $(By.id("signalForm:signal-code-input_input")).sendKeys("Web Test Signal");
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
     $(By.id("signalForm:growl_container")).shouldBe(visible);
 
+    signalsTable.valueAtShoudBe(0, 0, text("Web Test Signal"));
+  }
+
+  @Test
+  public void testSignalAutocomplete()
+  {
+    open(viewUrl("signals.xhtml"));
+    $(By.id("signalForm:signal-code-input")).findElement(By.tagName("button")).click();
+    $(By.id("signalForm:signal-code-input_panel")).shouldHave(text("test:signal:complete"));
+
+    $(By.id("signalForm:signal-code-input_panel")).findElement(By.className("ui-autocomplete-item")).click();
+    $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
+
     Table signalsTable = PrimeUi.table(By.id("signalForm:fired-signals-table"));
-    signalsTable.valueAt(0, 0).contains("Test Code");
+    signalsTable.valueAtShoudBe(0, 0, text("test:signal:complete"));
+  }
+
+  @Test
+  public void testBoundarySignals()
+  {
+    startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
+    loginDeveloper();
+
+    open(viewUrl("signals.xhtml"));
+    Table boundaryTable = PrimeUi.table(By.id("signalForm:boundary-signals-table"));
+    boundaryTable.valueAtShoudBe(0, 0, text("No records found."));
+
+    startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
+    open(viewUrl("signals.xhtml"));
+    boundaryTable.valueAtShoudBe(0, 0, text("test:data:signal"));
+
+    $(By.id("signalForm:signal-code-input_input")).sendKeys("test:data:signal");
+    $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
+    boundaryTable.valueAtShoudBe(0, 0, text("No records found."));
   }
 }
