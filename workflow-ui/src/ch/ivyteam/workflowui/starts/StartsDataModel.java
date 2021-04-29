@@ -1,4 +1,4 @@
-package ch.ivyteam.workflowui;
+package ch.ivyteam.workflowui.starts;
 
 import java.util.List;
 import java.util.Objects;

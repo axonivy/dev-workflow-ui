@@ -5,6 +5,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import ch.ivyteam.workflowui.starts.CustomPMV;
+import ch.ivyteam.workflowui.starts.StartsDataModel;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 
 @ManagedBean
@@ -44,8 +46,4 @@ public class ProcessesBean
     RedirectUtil.redirect("home.xhtml");
   }
 
-  public void executeStart(String taskUrl)
-  {
-    RedirectUtil.redirect("frame.xhtml?taskUrl=" + taskUrl);
-  }
 }
