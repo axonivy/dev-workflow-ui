@@ -36,6 +36,7 @@ public class WebTestCaseDetailsIT
     Selenide.closeWebDriver();
     Configuration.proxyEnabled = true;
     Configuration.fileDownload = FileDownloadMode.PROXY;
+    startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     loginDeveloper();
     startTestProcess("1750C5211D94569D/TestData.ivp");
   }

@@ -45,7 +45,7 @@ public class WebTestCleanup
   {
     open(viewUrl("cleanup.xhtml"));
     $(By.id("clanupForm:cleanupBtn")).shouldBe(enabled);
-    startTestProcess("1783B19164F69B78/standard.ivp");
+    startTestProcess("1783B19164F69B78/designerStandard.ivp");
     open(viewUrl("cleanup.xhtml"));
     $(By.id("clanupForm:cleanupBtn")).shouldNotBe(enabled);
   }

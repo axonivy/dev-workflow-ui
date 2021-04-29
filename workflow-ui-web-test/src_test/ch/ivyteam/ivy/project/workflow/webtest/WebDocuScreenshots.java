@@ -67,10 +67,10 @@ public class WebDocuScreenshots
     takeScreenshot("workflow-ui-starts", new Dimension(SCREENSHOT_WIDTH, 800));
 
     open(viewUrl("cleanup.xhtml"));
-    takeScreenshot("workflow-ui-starts", new Dimension(SCREENSHOT_WIDTH, 800));
+    takeScreenshot("workflow-ui-cleanup", new Dimension(SCREENSHOT_WIDTH, 800));
 
     open(viewUrl("signals.xhtml"));
-    takeScreenshot("workflow-ui-starts", new Dimension(SCREENSHOT_WIDTH, 800));
+    takeScreenshot("workflow-ui-signals", new Dimension(SCREENSHOT_WIDTH, 800));
 
     WorkflowUiUtil.startTestCaseMap("0cf1f054-a4ad-4b2b-bcf1-c9c34ec0a2ab.icm");
     open(viewUrl("cases.xhtml"));

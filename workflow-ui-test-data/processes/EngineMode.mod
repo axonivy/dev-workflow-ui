@@ -25,6 +25,7 @@ Ee0 f10 inParamDecl '<> param;' #txt
 Ee0 f10 requestEnabled true #txt
 Ee0 f10 triggerEnabled false #txt
 Ee0 f10 callSignature designerEmbedded() #txt
+Ee0 f10 startCategory actions #txt
 Ee0 f10 caseData businessCase.attach=true #txt
 Ee0 f10 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>
@@ -53,21 +54,22 @@ Ee0 f0 actionCode 'import ch.ivyteam.ivy.server.restricted.EngineMode;
 EngineMode.set(EngineMode.STANDARD);' #txt
 Ee0 f0 168 138 112 44 0 -7 #rect
 Ee0 f1 337 145 30 30 0 15 #rect
-Ee0 f2 outLink standard.ivp #txt
+Ee0 f2 outLink designerStandard.ivp #txt
 Ee0 f2 inParamDecl '<> param;' #txt
 Ee0 f2 requestEnabled true #txt
 Ee0 f2 triggerEnabled false #txt
-Ee0 f2 callSignature standard() #txt
+Ee0 f2 callSignature designerStandard() #txt
+Ee0 f2 startCategory actions #txt
 Ee0 f2 caseData businessCase.attach=true #txt
 Ee0 f2 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>
     <language>
-        <name>standard</name>
+        <name>designerStandard</name>
     </language>
 </elementInfo>
 ' #txt
 Ee0 f2 @C|.responsibility Everybody #txt
-Ee0 f2 81 145 30 30 -26 19 #rect
+Ee0 f2 81 145 30 30 -57 20 #rect
 Ee0 f3 280 160 337 160 #arcP
 Ee0 f4 111 160 168 160 #arcP
 >Proto Ee0 .type ch.ivyteam.ivy.project.workflow.Data #txt
