@@ -39,6 +39,7 @@ public class WebTestStartsIT
     $(By.id("startsForm:filter")).sendKeys("startTestDialog");
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui-test-data"));
     $(byText("startTestDialog.ivp")).shouldBe(visible).click();
+    $(By.id("iFrame")).shouldBe(visible);
     assertCurrentUrlEndsWith("startTestDialog.ivp");
 
     Selenide.switchTo().frame("iFrame");
