@@ -2,7 +2,7 @@
   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
   xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
   xmlns:pe="http://primefaces.org/ui/extensions" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-  xmlns:pm="http://primefaces.org/serenity-ivy">
+  xmlns:pm="http://primefaces.org/serenity-ivy" xmlns:jc="http://java.sun.com/jsf/composite/components">
 
 <h:body>
   <f:metadata>
@@ -80,16 +80,10 @@
                 </h:outputText>
 
                 <h:outputText value="Business case" />
-                <h:link id="businessCase" value="#{tasksDetailsBean.getBusinessCaseName()}"
-                  outcome="caseDetails">
-                  <f:param name="case" value="#{tasksDetailsBean.getBusinessCaseId()}" />
-                </h:link>
+                <jc:caseLink case="#{tasksDetailsBean.selectedTask.case.getBusinessCase()}"/>
 
                 <h:outputText value="Technical case" />
-                <h:link id="technicalCase" value="#{tasksDetailsBean.caseName}"
-                  outcome="caseDetails">
-                  <f:param name="case" value="#{tasksDetailsBean.selectedTask.getCase().getId()}" />
-                </h:link>
+                <jc:caseLink case="#{tasksDetailsBean.selectedTask.case}"/>
 
                 <h:outputText value="Working user" />
                 <h:outputText value="#{tasksDetailsBean.getWorkingUser()}" id="workingUser" />
@@ -116,10 +110,6 @@
 
                 <h:outputText value="Description" />
                 <h:outputText value="#{tasksDetailsBean.getDescription()}" id="taskDescription" />
-                <p:tooltip for="businessCase" value="#{tasksDetailsBean.getBusinessCaseTooltip()}"
-                  position="top" />
-                <p:tooltip for="technicalCase" value="#{tasksDetailsBean.getTechnicalCaseTooltip()}"
-                  position="top" />
               </p:panelGrid>
             </h:form>
           </h:panelGroup>

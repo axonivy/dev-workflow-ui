@@ -56,7 +56,7 @@ public class WebTestTasksIT
     open(viewUrl("allTasks.xhtml"));
 
     $(".si-information-circle").shouldBe(visible).click();
-    $("#form\\:businessCase").shouldBe(text("TestCase"));
+    $(".case-link").shouldHave(text("TestCase"));
 
     $("#form\\:taskResponsible").shouldBe(exactText("Everybody"));
     $("#form\\:taskState").shouldBe(exactText("SUSPENDED"));

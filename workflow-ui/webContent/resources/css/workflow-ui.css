@@ -296,6 +296,42 @@
   background-color: #afced8;
 }
 
+.start-element > div.ui-panel-content {
+  padding: 0px;
+}
+
+.start-link {
+  padding: 8px;
+}
+
+.custom-list {
+  margin-top: 0px;
+  padding: 0px;
+}
+
+.no-subcases {
+  list-style-type: none;
+}
+
+.subcases-list {
+  margin-top: 0px;
+}
+
+.current-hierarchy-case {
+  font-weight: bold;
+}
+
+.case-link {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.case-link-icon {
+  font-size: 1.3em;
+  color: #333333;
+}
 
 .main-starts-container {
   margin-top: 10px;

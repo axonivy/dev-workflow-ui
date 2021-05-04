@@ -42,7 +42,8 @@ public class CasesDataModel extends LazyDataModel<ICase>
 
     checkIfPersonalCases(caseQuery);
 
-    List<ICase> cases = caseQuery
+    List<ICase> cases = caseQuery.where()
+            .isBusinessCase()
             .executor()
             .resultsPaged()
             .window(first, pageSize);
