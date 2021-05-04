@@ -11,9 +11,11 @@ import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.WorkflowNavigationUtil;
+import ch.ivyteam.ivy.workflow.query.CaseQuery;
 import ch.ivyteam.workflowui.casemap.CaseMapModel;
 import ch.ivyteam.workflowui.customfield.CustomFieldModel;
 import ch.ivyteam.workflowui.document.DocumentModel;
+import ch.ivyteam.workflowui.util.RedirectUtil;
 
 @ManagedBean
 @ViewScoped
@@ -58,7 +60,7 @@ public class CasesDetailsBean
   public String getDescription()
   {
     return StringUtils.isEmpty(selectedCase.getDescription()) ? "No description"
-            : selectedCase.getDescription();
+        : selectedCase.getDescription();
   }
 
   public List<ITask> getRelatedTasks()
@@ -80,5 +82,26 @@ public class CasesDetailsBean
   public List<DocumentModel> getDocuments()
   {
     return documents;
+  }
+
+  public List<ICase> getCaseList()
+  {
+    return CaseQuery.subCases().where().businessCaseId()
+        .isEqual(selectedCase.getBusinessCase().getId())
+        .executor().results();
+  }
+
+  public void redirectToCase(ICase toCase)
+  {
+    RedirectUtil.redirect("caseDetails.xhtml?case=" + toCase.getId());
+  }
+
+  public String isCurrentHierarchyCase(ICase caze)
+  {
+    if (caze.equals(selectedCase))
+    {
+      return "current-hierarchy-case";
+    }
+    return "";
   }
 }

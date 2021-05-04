@@ -16,13 +16,16 @@
       </p:outputPanel>
     </f:facet>
 
+    <p:column styleClass="icon-row">
+      <i class="si si-lg si-task-list-approve" title="ID: #{case.id}"></i>
+    </p:column>
+
     <p:column filterBy="#{case.getState()}" styleClass="icon-row">
       <i class="si si-lg si-#{casesBean.getStateIcon(case.getState())}" title="State #{case.getState()}"></i>
     </p:column>
 
     <p:column headerText="Name" filterBy="#{case.getName()}">
-        <h:outputText id="caseName" value="#{casesBean.getName(case)}" style="color:#212121"/>
-        <p:tooltip for="caseName" value="Case ID: #{case.getId()}" position="top" />
+      <h:outputText value="#{casesBean.getName(case)}"/>
     </p:column>
 
     <p:column headerText="Creator" filterBy="#{case.getCreatorUserName()}">

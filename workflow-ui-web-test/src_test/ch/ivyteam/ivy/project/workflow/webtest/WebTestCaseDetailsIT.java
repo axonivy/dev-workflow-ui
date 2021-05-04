@@ -69,8 +69,7 @@ public class WebTestCaseDetailsIT
   @Test
   public void caseList() throws Exception
   {
-    Table casesTable = PrimeUi.table(By.id("form:cases"));
-    casesTable.valueAt(0, 0).contains("TestCase");
+    $(".current-hierarchy-case").find("a").shouldHave(text("TestCase"));
   }
 
   @Test
