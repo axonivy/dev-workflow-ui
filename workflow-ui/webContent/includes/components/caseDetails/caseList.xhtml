@@ -5,14 +5,14 @@
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
   <h:panelGroup layout="block" class="action-container #{casesDetailsBean.isCurrentHierarchyCase(casesDetailsBean.selectedCase.getBusinessCase())}">
-    <jc:caseLink case="#{casesDetailsBean.selectedCase.getBusinessCase()}"/>
+    <jc:caseLink case="#{casesDetailsBean.selectedCase.getBusinessCase()}" id="business-case"/>
   </h:panelGroup>
 
   <h:panelGroup layout="block">
     <ul class="subcases-list">
       <ui:repeat var="case" value="#{casesDetailsBean.caseList}">
         <li style="list-style-type: none;" class="#{casesDetailsBean.isCurrentHierarchyCase(case)}">
-          <jc:caseLink case="#{case}"/>
+          <jc:caseLink case="#{case}" id="subcase"/>
         </li>
       </ui:repeat>
     </ul>
