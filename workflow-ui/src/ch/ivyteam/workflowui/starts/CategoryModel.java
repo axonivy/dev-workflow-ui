@@ -13,9 +13,9 @@ public class CategoryModel implements Comparable<CategoryModel>
 
   public CategoryModel(Category category, List<StartableModel> starts)
   {
-    this.name = category.isRoot() ? "No Category" : category.getName();
-    this.cssIcon = category.isRoot() ? "si si-remove" : category.getLocalizedText("cssIcon");
-    this.tooltip = category.isRoot() ? "Starts here have no category" : category.getLocalizedText("tooltip");
+    this.name = category.getName();
+    this.cssIcon = category.getLocalizedText("cssIcon");
+    this.tooltip = category.getLocalizedText("tooltip");
     this.starts = starts;
   }
 
