@@ -80,10 +80,10 @@
                 </h:outputText>
 
                 <h:outputText value="Business case" />
-                <jc:caseLink case="#{tasksDetailsBean.selectedTask.case.getBusinessCase()}"/>
+                <jc:caseLink case="#{tasksDetailsBean.selectedTask.case.getBusinessCase()}" id="business-case"/>
 
                 <h:outputText value="Technical case" />
-                <jc:caseLink case="#{tasksDetailsBean.selectedTask.case}"/>
+                <jc:caseLink case="#{tasksDetailsBean.selectedTask.case}" id="technical-case"/>
 
                 <h:outputText value="Working user" />
                 <h:outputText value="#{tasksDetailsBean.getWorkingUser()}" id="workingUser" />

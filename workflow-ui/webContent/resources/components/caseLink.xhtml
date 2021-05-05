@@ -10,7 +10,8 @@
   <p:commandLink styleClass="case-link" actionListener="#{casesDetailsBean.redirectToCase(cc.attrs.case)}">
     <i class="si si-task-list-approve case-link-icon margin-right-5" />
     <i class="si si-#{casesBean.getStateIcon(cc.attrs.case.getState())} case-link-icon margin-right-5" />
-    <h:outputText value="#{casesBean.getName(cc.attrs.case)}" />
+    <h:outputText id="case-link" value="#{casesBean.getName(cc.attrs.case)}" />
+    <p:tooltip for="case-link" value="ID: #{cc.attrs.case.id}" position="top"/>
   </p:commandLink>
 </cc:implementation>
 </html>

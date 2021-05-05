@@ -30,7 +30,7 @@
     </p:column>
     <p:column headerText="Created cases" colspan="2">
       <p:repeat var="task" value="#{signal.createdTasks}" varStatus="status">
-        <jc:caseLink case="#{task.case}" />
+        <jc:caseLink case="#{task.case}" id="created-case"/>
       </p:repeat>
     </p:column>
   </p:dataTable>
