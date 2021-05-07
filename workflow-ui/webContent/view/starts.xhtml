@@ -30,7 +30,9 @@
                 <p:repeat value="#{pmv.caseMapStarts}" var="casemapStart">
                   <p:panel styleClass="start-element" rendered="#{pmv.active}">
                     <p:commandLink action="#{casemapStart.execute}" class="flex-space start-link">
-                      <span class="straight-text-icon"> <i class="si si-controls-play margin-right-5"></i> <span>#{casemapStart.displayName}</span>
+                      <span class="straight-text-icon">
+                        <i class="si si-controls-play margin-right-5"></i>
+                        <span>#{casemapStart.displayName}</span>
                       </span>
                       <span>#{casemapStart.description}</span>
                     </p:commandLink>
@@ -41,7 +43,7 @@
                   <b><h:outputText value="Process Starts" /></b>
                 </h:panelGroup>
                 <p:repeat value="#{pmv.categories}" var="category">
-                  <p:outputPanel styleClass="margin-top-10">
+                  <p:outputPanel styleClass="margin-top-10" rendered="#{!empty category.name}">
                     <i class="#{category.cssIcon} table-icon"></i>
                     <span title="#{category.tooltip}">#{category.name}</span>
                   </p:outputPanel>
@@ -49,7 +51,9 @@
                   <p:repeat value="#{category.starts}" var="start">
                     <p:panel styleClass="start-element" rendered="#{pmv.active}">
                       <p:commandLink action="#{start.execute}" class="flex-space start-link">
-                        <span class="straight-text-icon"> <i class="si si-controls-play margin-right-5"></i> <span>#{start.displayName}</span>
+                        <span class="straight-text-icon">
+                          <i class="si si-controls-play margin-right-5"></i>
+                          <span>#{start.displayName}</span>
                         </span>
                         <span>#{start.description}</span>
                       </p:commandLink>
