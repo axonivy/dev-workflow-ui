@@ -16,6 +16,7 @@ import ch.ivyteam.ivy.workflow.IWorkflowEvent;
 import ch.ivyteam.ivy.workflow.IWorkflowSession;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowNavigationUtil;
+import ch.ivyteam.workflowui.util.RedirectUtil;
 
 @ManagedBean
 @ViewScoped
@@ -119,4 +120,12 @@ public class TasksDetailsBean
     return TaskState.WORKING_OR_SUSPENDED_STATES.contains(selectedTask.getState());
   }
 
+  public String getName(ITask task)
+  {
+    if (StringUtils.isBlank(task.getName()))
+    {
+      return "[Task: " + task.getId() + "]";
+    }
+    return task.getName();
+  }
 }

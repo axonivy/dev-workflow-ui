@@ -26,7 +26,7 @@
     </p:column>
     <p:column headerText="Name" filterBy="#{task.getName()}">
       <h:commandLink action="#{tasksBean.executeTask(task.id)}">
-        <h:outputText id="taskName" value="#{task.getName()}" style="color:#212121"/>
+        <h:outputText id="taskName" value="#{tasksDetailsBean.getName(task)}" style="color:#212121"/>
         <p:tooltip for="taskName" value="Task ID: #{task.getId()}" position="top" />
       </h:commandLink>
     </p:column>
