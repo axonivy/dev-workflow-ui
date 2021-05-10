@@ -62,7 +62,7 @@
                 <h:outputText value="#{tasksDetailsBean.selectedTask.getId()}" />
 
                 <h:outputText value="Task name" />
-                <h:outputText value="#{tasksDetailsBean.selectedTask.getName()}" id="taskName" />
+                <h:outputText value="#{tasksDetailsBean.getName(tasksDetailsBean.selectedTask)}" id="taskName" />
 
                 <h:outputText value="Priority" />
                 <h:outputText>

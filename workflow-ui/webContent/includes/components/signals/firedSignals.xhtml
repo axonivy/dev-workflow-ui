@@ -22,10 +22,7 @@
     </p:column>
     <p:column headerText="Destoryed tasks">
       <p:repeat var="task" value="#{signal.destroyedTasks}" varStatus="status">
-        <h:link outcome="taskDetails">
-          <f:param name="task" value="#{task.id}" />
-          <h:outputText value="#{task}#{status.last ? '' : ', '}" />
-        </h:link>
+        <jc:taskLink task="#{task}" id="destroyed-task"/>
       </p:repeat>
     </p:column>
     <p:column headerText="Created cases" colspan="2">

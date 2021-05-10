@@ -90,4 +90,9 @@ public class TasksBean
     }
   }
 
+  public TaskLinkModel toTaskLinkModel(ITask task)
+  {
+    return new TaskLinkModel(task);
+  }
+
 }
