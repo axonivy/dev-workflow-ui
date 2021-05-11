@@ -17,6 +17,7 @@ import org.openqa.selenium.By;
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.axonivy.ivy.webtest.primeui.widget.Table;
+import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
 public class WebTestSignalsIT
@@ -48,7 +49,7 @@ public class WebTestSignalsIT
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
     $(By.id("signalForm:growl_container")).shouldBe(visible);
 
-    signalsTable.valueAtShoudBe(0, 0, text("Web Test Signal"));
+    signalsTable.valueAtShoudBe(0, 1, text("Web Test Signal"));
   }
 
   @Test
@@ -56,13 +57,14 @@ public class WebTestSignalsIT
   {
     open(viewUrl("signals.xhtml"));
     $(By.id("signalForm:signal-code-input")).findElement(By.tagName("button")).click();
-    $(By.id("signalForm:signal-code-input_panel")).shouldHave(text("test:signal:complete"));
 
+    $(By.id("signalForm:signal-code-input_input")).sendKeys("signal");
+    $(By.id("signalForm:signal-code-input_panel")).shouldNotHave(text("airport"));
     $(By.id("signalForm:signal-code-input_panel")).findElement(By.className("ui-autocomplete-item")).click();
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
 
     Table signalsTable = PrimeUi.table(By.id("signalForm:fired-signals-table"));
-    signalsTable.valueAtShoudBe(0, 0, text("test:signal:complete"));
+    signalsTable.valueAtShoudBe(0, 1, text("test:signal:complete"));
   }
 
   @Test
@@ -77,7 +79,7 @@ public class WebTestSignalsIT
 
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
     open(viewUrl("signals.xhtml"));
-    boundaryTable.valueAtShoudBe(0, 0, text("test:data:signal"));
+    boundaryTable.valueAtShoudBe(0, 1, text("test:data:signal"));
 
     $(By.id("signalForm:signal-code-input_input")).sendKeys("test:data:signal");
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
@@ -97,7 +99,7 @@ public class WebTestSignalsIT
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
     open(viewUrl("signals.xhtml"));
 
-    $(By.id("signalForm:boundary-signals-table")).find(By.className("ui-commandlink")).shouldBe(text("test:data:signal")).click();
+    $(By.id("signalForm:boundary-signals-table:0:send-signal-icon")).shouldBe(visible).click();
     boundaryTable.valueAtShoudBe(0, 0, text("No records found."));
   }
 }
