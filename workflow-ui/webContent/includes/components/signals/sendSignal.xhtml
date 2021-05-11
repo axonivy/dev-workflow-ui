@@ -16,8 +16,9 @@
       <p:outputLabel value="Payload" for="@previous" />
     </h:panelGroup>
   </div>
-  <p:commandButton id="signalBtn" update="@form"
-    class="width-100 margin-top-10" value="Send" actionListener="#{signalsBean.sendSignal}"
-    disabled="#{!adminBean.isWorkflowAdmin() or !engineModeBean.demoOrDesigner}" />
-
+  <div class="ui-g-12">
+    <p:commandButton id="signalBtn" update="@form"
+      class="margin-top-10 send-signal-button" value="Send" actionListener="#{signalsBean.sendSignal}"
+      disabled="#{!adminBean.isWorkflowAdmin() or !engineModeBean.demoOrDesigner}" icon="si si-send-email"/>
+  </div>
 </ui:composition>

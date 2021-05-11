@@ -9,6 +9,9 @@
     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" paginatorPosition="bottom"
     rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+    <p:column width="40">
+      <i class="si si-lg si-network-signal"/>
+    </p:column>
     <p:column headerText="Code">
       <h:outputText value="#{signal.signalCode}" />
     </p:column>

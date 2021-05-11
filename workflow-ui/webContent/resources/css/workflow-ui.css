@@ -91,6 +91,10 @@
   width: 100%;
 }
 
+.send-signal-button {
+  width: 10em;
+}
+
 .grid-smaller-padding .ui-panelgrid-content .ui-g .ui-panelgrid-cell {
   padding: 8px;
 }
