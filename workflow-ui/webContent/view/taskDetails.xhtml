@@ -86,12 +86,10 @@
                 <jc:caseLink case="#{tasksDetailsBean.selectedTask.case}" id="technical-case"/>
 
                 <h:outputText value="Working user" />
-                <h:outputText value="#{tasksDetailsBean.getWorkingUser()}" id="workingUser" />
+                <jc:user user="#{tasksDetailsBean.selectedTask.workerUser}" id="workingUser" />
 
                 <h:outputText value="Responsible" />
-                <h:outputText
-                  value="#{tasksDetailsBean.selectedTask.getActivator().getDisplayName()}"
-                  id="taskResponsible" />
+                <jc:user id="taskResponsible" user="#{tasksDetailsBean.selectedTask.activator().get()}"/>
 
                 <h:outputText value="Created" />
                 <h:outputText

@@ -20,8 +20,7 @@
       <p:tooltip for="timestamp" value="#{dateTimeBean.getDateTime(signal.sentTimestamp)}" position="top" />
     </p:column>
     <p:column headerText="Sent by">
-      <i class="si si-single-neutral-circle table-icon" />
-      <h:outputText value="#{signal.sentByUserName}" />
+      <jc:user user="#{signal.sentByUser}"/>
     </p:column>
     <p:column headerText="Destoryed tasks">
       <p:repeat var="task" value="#{signal.destroyedTasks}" varStatus="status">

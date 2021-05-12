@@ -16,7 +16,6 @@ import ch.ivyteam.ivy.workflow.IWorkflowEvent;
 import ch.ivyteam.ivy.workflow.IWorkflowSession;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowNavigationUtil;
-import ch.ivyteam.workflowui.util.RedirectUtil;
 
 @ManagedBean
 @ViewScoped
@@ -50,11 +49,6 @@ public class TasksDetailsBean
   public void expireTask()
   {
     selectedTask.setExpiryTimestamp(new Date());
-  }
-
-  public String getWorkingUser()
-  {
-    return selectedTask.getWorkerUserName() == null ? "N/A" : selectedTask.getWorkerUserName();
   }
 
   public String getCaseName()
