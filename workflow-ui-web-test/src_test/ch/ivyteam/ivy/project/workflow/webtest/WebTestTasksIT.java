@@ -58,14 +58,14 @@ public class WebTestTasksIT
     $(".si-information-circle").shouldBe(visible).click();
     $(".case-link").shouldHave(text("TestCase"));
 
-    $("#form\\:taskResponsible").shouldBe(exactText("Everybody"));
+    $("#form\\:taskResponsible\\:userName").shouldBe(exactText("Everybody"));
     $("#form\\:taskState").shouldBe(exactText("SUSPENDED"));
 
     $("#form\\:taskActionsBtn").click();
     $("#form\\:taskParkBtn").should(visible).click();
 
     $("#form\\:taskState").shouldBe(exactText("PARKED"));
-    $("#form\\:workingUser").shouldBe(exactText($("#sessionUserName").getText()));
+    $("#form\\:workingUser\\:userName").shouldBe(exactText($("#sessionUserName").getText()));
 
     $("#events\\:0\\:eventType").shouldBe(exactText("EVENT_CREATE_TASK_BY_JOINED_TASKS"));
   }

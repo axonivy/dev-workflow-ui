@@ -1,7 +1,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
   xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component"
-  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
+  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
+  xmlns:jc="http://java.sun.com/jsf/composite/components">
 
   <p:dataTable id="tasks" var="task" value="#{tasksBean.tasksDataModel}" widgetVar="tasksTable"
     emptyMessage="No Tasks found with given criteria" style="margin-top:10px" lazy="true" paginatorPosition="bottom"
@@ -32,7 +33,7 @@
     </p:column>
 
     <p:column headerText="Responsible" filterBy="#{task.getActivator()}" rendered="#{!tasksBean.checkIfPersonalTasks()}">
-      <h:outputText value="#{task.getActivator().getName()}" />
+      <jc:user user="#{task.activator}"/>
     </p:column>
 
     <p:column headerText="Start Date" style="text-align: center;">
