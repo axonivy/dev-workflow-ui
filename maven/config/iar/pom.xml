@@ -14,7 +14,6 @@
 
   <properties>
     <engine.page.url>https://jenkins.ivyteam.io/job/ivy-core_product/job/master/lastSuccessfulBuild/</engine.page.url>
-    <deployApplicationName>workflow-ui-dev-${user.name}</deployApplicationName>
   </properties>
 
   <build>
@@ -32,22 +31,6 @@
             <compilerOption>-warn:-warningToken</compilerOption>
           </compilerOptions>
         </configuration>
-        <executions>
-          <execution>
-            <id>test.app.deploy</id>
-            <phase>pre-integration-test</phase>
-            <goals>
-              <goal>deploy-to-engine</goal>
-            </goals>
-            <configuration>
-              <deployMethod>HTTP</deployMethod>
-              <deployServerId>axonivy.engine</deployServerId>
-              <deployEngineUrl>https://nightly.demo.ivyteam.io</deployEngineUrl>
-              <deployToEngineApplication>${deployApplicationName}</deployToEngineApplication>
-              <deployTestUsers>true</deployTestUsers>
-            </configuration>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>

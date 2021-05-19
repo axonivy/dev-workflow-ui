@@ -14,6 +14,7 @@
     <module>workflow-ui-test</module>
     <module>workflow-ui-web-test</module>
     <module>workflow-ui-test-data</module>
+    <module>maven/deploy</module>
   </modules>
 
   <build>
