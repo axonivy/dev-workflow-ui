@@ -9,9 +9,10 @@
 <cc:implementation>
   <p:commandLink styleClass="case-link" actionListener="#{casesDetailsBean.redirectToCase(cc.attrs.case)}">
     <i class="si si-task-list-approve case-link-icon margin-right-5" />
-    <i class="si si-#{casesBean.getStateIcon(cc.attrs.case.getState())} case-link-icon margin-right-5" />
-    <h:outputText id="case-link" value="#{casesBean.getName(cc.attrs.case)}" />
-    <p:tooltip for="case-link" value="ID: #{cc.attrs.case.id}" position="top"/>
+    <h:outputText id="caseState" styleClass="si si-#{casesBean.getStateIcon(cc.attrs.case.getState())} case-link-icon margin-right-5"/>
+    <p:tooltip for="caseState" value="State: #{cc.attrs.case.state}" position="top"/>
+    <h:outputText id="caseLink" value="#{casesBean.getName(cc.attrs.case)}" />
+    <p:tooltip for="caseLink" value="ID: #{cc.attrs.case.id}" position="top"/>
   </p:commandLink>
 </cc:implementation>
 </html>

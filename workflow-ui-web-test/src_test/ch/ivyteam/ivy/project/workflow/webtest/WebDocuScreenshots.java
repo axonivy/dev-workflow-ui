@@ -75,12 +75,12 @@ public class WebDocuScreenshots
     takeScreenshot("workflow-ui-cleanup", new Dimension(SCREENSHOT_WIDTH, 800));
 
     open(viewUrl("signals.xhtml"));
-    $(By.id("signalForm:signal-code-input_input")).sendKeys("Screenshot data signal");
+    $(By.id("signalForm:signalCodeInput_input")).sendKeys("Screenshot data signal");
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
     open(viewUrl("signals.xhtml"));
     takeScreenshot("workflow-ui-signals", new Dimension(SCREENSHOT_WIDTH, 800));
-    $(By.id("signalForm:boundary-signals-table:0:send-signal-icon")).shouldBe(visible).click();
+    $(By.id("signalForm:boundarySignalsTable:0:sendSignalIcon")).shouldBe(visible).click();
 
     WorkflowUiUtil.startTestCaseMap("0cf1f054-a4ad-4b2b-bcf1-c9c34ec0a2ab.icm");
     open(viewUrl("cases.xhtml"));

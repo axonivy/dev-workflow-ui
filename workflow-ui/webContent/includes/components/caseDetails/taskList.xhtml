@@ -8,33 +8,33 @@
     rows="10" rowsPerPageTemplate="10,20,50" paginator="true" paginatorAlwaysVisible="false"
     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
 
-    <p:column filterBy="#{task.getState()}" styleClass="icon-row">
-      <i class="si si-lg si-#{tasksBean.getStateIcon(task.getState())}" title="State #{task.getState()}"></i>
+    <p:column filterBy="#{task.state}" styleClass="icon-row">
+      <h:outputText id="taskState" styleClass="si si-lg si-#{tasksBean.getStateIcon(task.state)}" />
+      <p:tooltip for="taskState" value="State: #{task.state}" position="top" />
     </p:column>
 
-    <p:column id="priority" filterBy="#{task.getPriority()}" styleClass="icon-row">
-      <i class="si si-lg si-#{tasksBean.getPriorityIcon(task.getPriority())}"
-        title="Priority #{task.getPriority()}"></i>
+    <p:column id="priority" filterBy="#{task.priority}" styleClass="icon-row">
+      <h:outputText id="taskPrio" styleClass="si si-lg si-#{tasksBean.getPriorityIcon(task.priority)}" />
+      <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
     </p:column>
-    <p:column headerText="Name" filterBy="#{task.getName()}">
-      <h:commandLink action="#{tasksBean.executeTask(task.id)}">
-        <h:outputText id="taskName" value="#{tasksDetailsBean.getName(task)}" style="color:#212121" />
-        <p:tooltip for="taskName" value="Task ID: #{task.getId()}" position="top" />
-      </h:commandLink>
+
+    <p:column headerText="Name" filterBy="#{task.name}">
+      <h:outputText id="taskName" value="#{tasksDetailsBean.getName(task)}" style="color:#212121" />
+      <p:tooltip for="taskName" value="Task ID: #{task.id}" position="top" />
     </p:column>
 
     <p:column headerText="Start Date" style="text-align: center;">
-      <h:outputText id="startTime" value="#{dateTimeBean.getPrettyTime(task.getStartTimestamp())}" />
-      <p:tooltip for="startTime" value="#{dateTimeBean.getDateTime(task.getStartTimestamp())}" position="top" />
+      <h:outputText id="startTime" value="#{dateTimeBean.getPrettyTime(task.startTimestamp)}" />
+      <p:tooltip for="startTime" value="#{dateTimeBean.getDateTime(task.startTimestamp)}" position="top" />
     </p:column>
 
     <p:column headerText="Expiry" style="text-align: center;">
-      <h:outputText id="expiryTime" value="#{dateTimeBean.getDateTime(task.getExpiryTimestamp())}" />
+      <h:outputText id="expiryTime" value="#{dateTimeBean.getDateTime(task.expiryTimestamp)}" />
     </p:column>
 
     <p:column style="width: 60px; text-align: center;">
       <h:link outcome="taskDetails">
-        <f:param name="task" value="#{task.getId()}" />
+        <f:param name="task" value="#{task.id}" />
         <i class="si si-lg si-information-circle"></i>
       </h:link>
     </p:column>
