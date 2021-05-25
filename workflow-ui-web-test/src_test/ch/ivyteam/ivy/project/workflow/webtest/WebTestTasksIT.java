@@ -67,6 +67,6 @@ public class WebTestTasksIT
     $("#form\\:taskState").shouldBe(exactText("PARKED"));
     $("#form\\:workingUser\\:userName").shouldBe(exactText($("#sessionUserName").getText()));
 
-    $("#events\\:0\\:eventType").shouldBe(exactText("EVENT_CREATE_TASK_BY_JOINED_TASKS"));
+    $("#form\\:events\\:0\\:eventType").shouldBe(exactText("EVENT_CREATE_TASK_BY_JOINED_TASKS"));
   }
 }

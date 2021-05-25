@@ -5,8 +5,7 @@
   <h:form id="loginTable">
     <h:panelGroup styleClass="card card-w-title custom-card"
       layout="block">
-      <h:outputText value="Login Table" style="font-size:16pt; font-weight:bold" />
-      <br />
+      <h:outputText value="Login Table" styleClass="card-header-title" /><br/>
       <h:outputText value="Click user to login" />
       <p:dataTable id="users" var="user" value="#{loginTableBean.users}" widgetVar="usersTable"
         emptyMessage="No users found with given criteria" style="margin-top:10px"

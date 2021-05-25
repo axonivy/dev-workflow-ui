@@ -19,7 +19,7 @@ public class UserComponentModel
     {
       return "si si-single-neutral-circle";
     }
-    return "si si-cog";
+    return "si si-multiple-neutral-1";
   }
 
   public String getName()

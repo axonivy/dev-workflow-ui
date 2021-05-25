@@ -292,7 +292,8 @@
 
 .custom-card {
   margin: 0px;
-  min-height: 220px;
+  min-height: 100px;
+  height: 100%;
 }
 
 .ui-accordion-content .start-element:hover {

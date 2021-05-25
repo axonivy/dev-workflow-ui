@@ -42,10 +42,10 @@ public class WebTestSignalsIT
     loginDeveloper();
 
     open(viewUrl("signals.xhtml"));
-    Table signalsTable = PrimeUi.table(By.id("signalForm:fired-signals-table"));
+    Table signalsTable = PrimeUi.table(By.id("signalForm:firedSignalsTable"));
     signalsTable.containsNot("Web Test Signal");
 
-    $(By.id("signalForm:signal-code-input_input")).sendKeys("Web Test Signal");
+    $(By.id("signalForm:signalCodeInput_input")).sendKeys("Web Test Signal");
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
     $(By.id("signalForm:growl_container")).shouldBe(visible);
 
@@ -56,14 +56,14 @@ public class WebTestSignalsIT
   public void testSignalAutocomplete()
   {
     open(viewUrl("signals.xhtml"));
-    $(By.id("signalForm:signal-code-input")).findElement(By.tagName("button")).click();
+    $(By.id("signalForm:signalCodeInput")).findElement(By.tagName("button")).click();
 
-    $(By.id("signalForm:signal-code-input_input")).sendKeys("signal");
-    $(By.id("signalForm:signal-code-input_panel")).shouldNotHave(text("airport"));
-    $(By.id("signalForm:signal-code-input_panel")).findElement(By.className("ui-autocomplete-item")).click();
+    $(By.id("signalForm:signalCodeInput_input")).sendKeys("signal");
+    $(By.id("signalForm:signalCodeInput_panel")).shouldNotHave(text("airport"));
+    $(By.id("signalForm:signalCodeInput_panel")).findElement(By.className("ui-autocomplete-item")).click();
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
 
-    Table signalsTable = PrimeUi.table(By.id("signalForm:fired-signals-table"));
+    Table signalsTable = PrimeUi.table(By.id("signalForm:firedSignalsTable"));
     signalsTable.valueAtShoudBe(0, 1, text("test:signal:complete"));
   }
 
@@ -74,14 +74,14 @@ public class WebTestSignalsIT
     loginDeveloper();
 
     open(viewUrl("signals.xhtml"));
-    Table boundaryTable = PrimeUi.table(By.id("signalForm:boundary-signals-table"));
+    Table boundaryTable = PrimeUi.table(By.id("signalForm:boundarySignalsTable"));
     boundaryTable.valueAtShoudBe(0, 0, text("No records found."));
 
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
     open(viewUrl("signals.xhtml"));
     boundaryTable.valueAtShoudBe(0, 1, text("test:data:signal"));
 
-    $(By.id("signalForm:signal-code-input_input")).sendKeys("test:data:signal");
+    $(By.id("signalForm:signalCodeInput_input")).sendKeys("test:data:signal");
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
     boundaryTable.valueAtShoudBe(0, 0, text("No records found."));
   }
@@ -93,13 +93,13 @@ public class WebTestSignalsIT
     loginDeveloper();
 
     open(viewUrl("signals.xhtml"));
-    Table boundaryTable = PrimeUi.table(By.id("signalForm:boundary-signals-table"));
+    Table boundaryTable = PrimeUi.table(By.id("signalForm:boundarySignalsTable"));
     boundaryTable.valueAtShoudBe(0, 0, text("No records found."));
 
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
     open(viewUrl("signals.xhtml"));
 
-    $(By.id("signalForm:boundary-signals-table:0:send-signal-icon")).shouldBe(visible).click();
+    $(By.id("signalForm:boundarySignalsTable:0:sendSignalIcon")).shouldBe(visible).click();
     boundaryTable.valueAtShoudBe(0, 0, text("No records found."));
   }
 }

@@ -4,7 +4,7 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
-  <p:dataTable id="fired-signals-table" var="signal" value="#{signalsBean.firedSignals}" styleClass="margin-top-10"
+  <p:dataTable id="firedSignalsTable" var="signal" value="#{signalsBean.firedSignals}" styleClass="margin-top-10"
     rows="10" paginator="true" paginatorAlwaysVisible="false"
     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" paginatorPosition="bottom"
@@ -24,12 +24,12 @@
     </p:column>
     <p:column headerText="Destoryed tasks">
       <p:repeat var="task" value="#{signal.destroyedTasks}" varStatus="status">
-        <jc:taskLink task="#{task}" id="destroyed-task"/>
+        <jc:taskLink task="#{task}" id="destroyedTask"/>
       </p:repeat>
     </p:column>
     <p:column headerText="Created cases" colspan="2">
       <p:repeat var="task" value="#{signal.createdTasks}" varStatus="status">
-        <jc:caseLink case="#{task.case}" id="created-case"/>
+        <jc:caseLink case="#{task.case}" id="createdCase"/>
       </p:repeat>
     </p:column>
   </p:dataTable>

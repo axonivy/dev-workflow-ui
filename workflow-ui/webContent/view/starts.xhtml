@@ -20,12 +20,13 @@
             <p:accordionPanel var="pmv" value="#{processesBean.PMVs}" id="projectStarts" activeIndex="0" multiple="true">
               <p:tab titleStyleClass="straight-text-icon">
                 <f:facet name="title">
-                  <i class="si si-#{pmv.stateIcon}" title="#{pmv.state} - #{pmv.versionName}"></i>
+                  <h:outputText id="pmvState" styleClass="si si-#{pmv.stateIcon}" />
+                  <p:tooltip for="pmvState" value="#{pmv.state} - #{pmv.versionName}" position="top" />
                   <h:outputText styleClass="starts-project-name" value="#{pmv.projectName}" />
                 </f:facet>
 
                 <h:panelGroup styleClass="margin-top-10" layout="block" rendered="#{!empty pmv.caseMapStarts}">
-                  <b><h:outputText value="Case Map Starts" /></b>
+                  <b><h:outputText value="Case Maps" /></b>
                 </h:panelGroup>
                 <p:repeat value="#{pmv.caseMapStarts}" var="casemapStart">
                   <p:panel styleClass="start-element" rendered="#{pmv.active}">
@@ -40,12 +41,13 @@
                 </p:repeat>
 
                 <h:panelGroup styleClass="margin-top-10" layout="block" rendered="#{!empty pmv.categories}">
-                  <b><h:outputText value="Process Starts" /></b>
+                  <b><h:outputText value="Processes" /></b>
                 </h:panelGroup>
                 <p:repeat value="#{pmv.categories}" var="category">
                   <p:outputPanel styleClass="margin-top-10" rendered="#{!empty category.name}">
                     <i class="#{category.cssIcon} table-icon"></i>
-                    <span title="#{category.tooltip}">#{category.name}</span>
+                    <h:outputText id="categoryName" value="#{category.name}"/>
+                    <p:tooltip for="categoryName" value="#{category.tooltip}" position="top" />
                   </p:outputPanel>
 
                   <p:repeat value="#{category.starts}" var="start">

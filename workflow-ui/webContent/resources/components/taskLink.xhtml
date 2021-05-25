@@ -11,9 +11,10 @@
   <ui:param name="task" value="#{tasksBean.toTaskLinkModel(cc.attrs.task)}"/>
   <p:commandLink styleClass="case-link" actionListener="#{task.redirectToTask()}">
     <i class="si si-task-list-edit case-link-icon margin-right-5" />
-    <i class="si si-#{task.stateIcon} case-link-icon margin-right-5" />
-    <h:outputText id="task-link" value="#{task.name}" />
-    <p:tooltip for="task-link" value="ID: #{task.id}" position="top"/>
+    <h:outputText id="taskState" styleClass="si si-#{task.stateIcon} case-link-icon margin-right-5" />
+    <p:tooltip for="taskState" value="State: #{task.state}" position="top"/>
+    <h:outputText id="taskLink" value="#{task.name}" />
+    <p:tooltip for="taskLink" value="ID: #{task.id}" position="top"/>
   </p:commandLink>
 </cc:implementation>
 </html>

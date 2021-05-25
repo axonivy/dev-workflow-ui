@@ -4,7 +4,7 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
-  <p:dataTable id="boundary-signals-table" var="receiver" value="#{signalsBean.boundarySignals}"
+  <p:dataTable id="boundarySignalsTable" var="receiver" value="#{signalsBean.boundarySignals}"
     styleClass="margin-top-10" rows="5" paginator="true" paginatorPosition="bottom" paginatorAlwaysVisible="false">
     <p:column width="40">
       <i class="si si-lg si-network-signal"/>
@@ -13,13 +13,13 @@
       <h:outputText value="#{receiver.signalPattern}" />
     </p:column>
     <p:column headerText="Waiting task">
-      <jc:taskLink task="#{receiver.waitingTask}" id="waiting-task" />
+      <jc:taskLink task="#{receiver.waitingTask}" id="waitingTask" />
     </p:column>
     <p:column width="40">
-      <p:commandLink id="send-signal-icon" actionListener="#{signalsBean.sendBoundarySignal(receiver.signalPattern)}" update="@form">
+      <p:commandLink id="sendSignalIcon" actionListener="#{signalsBean.sendBoundarySignal(receiver.signalPattern)}" update="@form">
         <i class="si si-lg si-send-email" />
       </p:commandLink>
-      <p:tooltip for="send-signal-icon" value="Send this signal" position="top"/>
+      <p:tooltip for="sendSignalIcon" value="Send this signal" position="top"/>
     </p:column>
   </p:dataTable>
 
