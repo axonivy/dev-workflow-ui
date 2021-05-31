@@ -2,11 +2,11 @@ package ch.ivyteam.ivy.project.workflow.webtest;
 
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.executeJs;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -87,6 +87,13 @@ public class WebDocuScreenshots
     $(".si-information-circle").shouldBe(visible).click();
     takeScreenshot("workflow-ui-caseMap", new Dimension(SCREENSHOT_WIDTH, 800));
 
+    startTestProcess("1750C5211D94569D/testIntermediateEventProcess.ivp");
+    open(viewUrl("intermediateEvents.xhtml"));
+    takeScreenshot("workflow-ui-intermediateEvents", new Dimension(SCREENSHOT_WIDTH, 800));
+
+    $(byText("TestIntermediateEvent")).click();
+    $(By.id("intermediateElementDetailsForm:id")).shouldBe(visible);
+    takeScreenshot("workflow-ui-intermediateElementDetails", new Dimension(SCREENSHOT_WIDTH, 800));
   }
 
   private void takeScreenshot(String fileName, Dimension size)
