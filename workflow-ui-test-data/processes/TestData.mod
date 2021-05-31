@@ -26,6 +26,11 @@ Ta0 @PushWFArc f14 '' #zField
 Ta0 @SignalBoundaryEvent f15 '' #zField
 Ta0 @SignalStartEvent f16 '' #zField
 Ta0 @PushWFArc f17 '' #zField
+Ta0 @StartRequest f18 '' #zField
+Ta0 @IntermediateEvent f19 '' #zField
+Ta0 @EndTask f20 '' #zField
+Ta0 @PushWFArc f22 '' #zField
+Ta0 @PushWFArc f21 '' #zField
 >Proto Ta0 Ta0 TestData #zField
 Ta0 f0 outLink TestData.ivp #txt
 Ta0 f0 inParamDecl '<> param;' #txt
@@ -142,6 +147,43 @@ Ta0 f16 81 337 30 30 0 15 #rect
 Ta0 f17 111 352 352 271 #arcP
 Ta0 f17 1 352 352 #addKink
 Ta0 f17 1 0.17787910602871868 0 0 #arcLabel
+Ta0 f18 outLink testIntermediateEventProcess.ivp #txt
+Ta0 f18 inParamDecl '<> param;' #txt
+Ta0 f18 actionCode 'import java.util.Random;
+Random random = new Random();
+out.eventID = random.nextInt();' #txt
+Ta0 f18 requestEnabled true #txt
+Ta0 f18 triggerEnabled false #txt
+Ta0 f18 callSignature testIntermediateEventProcess() #txt
+Ta0 f18 caseData businessCase.attach=true #txt
+Ta0 f18 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elementInfo>
+    <language>
+        <name>testIntermediateEventProcess.ivp</name>
+    </language>
+</elementInfo>
+' #txt
+Ta0 f18 @C|.responsibility Everybody #txt
+Ta0 f18 81 433 30 30 -91 20 #rect
+Ta0 f19 actionTable 'out=in;
+' #txt
+Ta0 f19 eventIdConfig "in.eventID.toString()" #txt
+Ta0 f19 timeoutConfig 'ACTION_AFTER_TIMEOUT=NOTHING
+EXCEPTION_PROCESS_START=
+TIMEOUT_SCRIPT=' #txt
+Ta0 f19 eventBeanClass "" #txt
+Ta0 f19 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elementInfo>
+    <language>
+        <name>TestIntermediateEvent</name>
+        <desc>intermediate event description</desc>
+    </language>
+</elementInfo>
+' #txt
+Ta0 f19 209 433 30 30 0 16 #rect
+Ta0 f20 337 433 30 30 0 15 #rect
+Ta0 f22 239 448 337 448 #arcP
+Ta0 f21 111 448 209 448 #arcP
 >Proto Ta0 .type workflow.uite.Data #txt
 >Proto Ta0 .processKind NORMAL #txt
 >Proto Ta0 0 0 32 24 18 0 #rect
@@ -160,3 +202,7 @@ Ta0 f12 out f14 tail #connect
 Ta0 f14 head f11 mainIn #connect
 Ta0 f16 mainOut f17 tail #connect
 Ta0 f17 head f11 mainIn #connect
+Ta0 f19 mainOut f22 tail #connect
+Ta0 f22 head f20 mainIn #connect
+Ta0 f18 mainOut f21 tail #connect
+Ta0 f21 head f19 mainIn #connect

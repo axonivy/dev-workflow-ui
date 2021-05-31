@@ -1,2 +1,4 @@
 Data #class
 workflow.uite #namespace
+eventID Integer #field
+eventID PERSISTENT #fieldModifier
