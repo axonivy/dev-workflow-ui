@@ -28,8 +28,10 @@
     </p:column>
 
     <p:column headerText="Name" filterBy="#{task.name}">
-      <h:outputText id="taskName" value="#{tasksDetailsBean.getName(task)}" style="color:#212121" />
-      <p:tooltip for="taskName" value="Task ID: #{task.id}" position="top" />
+      <h:commandLink action="#{tasksBean.executeTask(task.id)}">
+        <h:outputText id="taskName" value="#{tasksDetailsBean.getName(task)}" />
+        <p:tooltip for="taskName" value="Task ID: #{task.id}" position="top" />
+      </h:commandLink>
     </p:column>
 
     <p:column headerText="Responsible" filterBy="#{task.activator}" rendered="#{!tasksBean.checkIfPersonalTasks()}">

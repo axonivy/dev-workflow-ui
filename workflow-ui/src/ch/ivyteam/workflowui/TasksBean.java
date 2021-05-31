@@ -70,7 +70,14 @@ public class TasksBean
   public void executeTask(long taskId)
   {
     ITask task = Ivy.wf().findTask(taskId);
-    RedirectUtil.redirect("frame.xhtml?taskUrl=" + task.getStartLink().getRelative());
+    if (TaskState.END_STATES.contains(task.getState()))
+    {
+      RedirectUtil.redirect("taskDetails.xhtml?task=" + taskId);
+    }
+    else
+    {
+      RedirectUtil.redirect("frame.xhtml?taskUrl=" + task.getStartLink().getRelative());
+    }
   }
 
   public String getPriorityIcon(WorkflowPriority priority)
