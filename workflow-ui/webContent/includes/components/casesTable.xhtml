@@ -28,7 +28,10 @@
     </p:column>
 
     <p:column headerText="Name" filterBy="#{case.getName()}">
-      <h:outputText value="#{casesBean.getName(case)}" />
+      <h:link outcome="caseDetails">
+        <f:param name="case" value="#{case.id}"/>
+        <h:outputText value="#{casesBean.getName(case)}" />
+      </h:link>
     </p:column>
 
     <p:column headerText="Creator" filterBy="#{case.getCreatorUserName()}">
