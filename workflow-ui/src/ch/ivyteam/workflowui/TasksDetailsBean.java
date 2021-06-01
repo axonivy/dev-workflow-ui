@@ -122,4 +122,9 @@ public class TasksDetailsBean
     }
     return task.getName();
   }
+
+  public Boolean isDone()
+  {
+    return TaskState.END_STATES.contains(selectedTask.getState());
+  }
 }
