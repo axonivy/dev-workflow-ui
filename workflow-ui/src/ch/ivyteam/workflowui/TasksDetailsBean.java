@@ -10,6 +10,7 @@ import javax.faces.bean.ViewScoped;
 import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.application.IApplication;
+import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowEvent;
@@ -123,8 +124,14 @@ public class TasksDetailsBean
     return task.getName();
   }
 
-  public Boolean isDone()
+  public boolean isDone()
   {
     return TaskState.END_STATES.contains(selectedTask.getState());
+  }
+
+  public boolean canBeStarted()
+  {
+    return (TaskState.WORKING_OR_SUSPENDED_STATES.contains(selectedTask.getState())
+        && selectedTask.canUserResumeTask(ISession.current().getSessionUser().getUserToken()).wasSuccessful());
   }
 }

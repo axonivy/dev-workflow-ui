@@ -4,6 +4,8 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginD
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
+import static com.codeborne.selenide.Condition.cssClass;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -68,5 +70,28 @@ public class WebTestTasksIT
     $("#form\\:workingUser\\:userName").shouldBe(exactText($("#sessionUserName").getText()));
 
     $("#form\\:events\\:0\\:eventType").shouldBe(exactText("EVENT_CREATE_TASK_BY_JOINED_TASKS"));
+  }
+
+  @Test
+  public void testStartTask()
+  {
+    open(viewUrl("home.xhtml"));
+    loginDeveloper();
+    startTestProcess("1750C5211D94569D/TestData.ivp");
+    open(viewUrl("allTasks.xhtml"));
+
+    $(".si-information-circle").shouldBe(visible).click();
+    $(".case-link").shouldHave(text("TestCase"));
+
+    $("#form\\:taskState").shouldBe(exactText("SUSPENDED"));
+    $("#form\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"));
+
+    $("#form\\:taskStartBtn").shouldBe(enabled).click();
+    open(viewUrl("allTasks.xhtml"));
+    $(".si-information-circle").shouldBe(visible).click();
+    $("#form\\:taskName").shouldBe(exactText("TestTask"));
+
+    $("#form\\:taskState").shouldBe(exactText("DONE"));
+    $("#form\\:taskStartBtn").shouldHave(cssClass("ui-state-disabled"));
   }
 }

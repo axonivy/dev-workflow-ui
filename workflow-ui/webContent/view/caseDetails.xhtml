@@ -22,7 +22,7 @@
               <h:outputText value="Description" />
               <div class="task-detail-action-container action-container">
                 <p:commandLink value="Destroy case" update="form" action="#{casesDetailsBean.selectedCase.destroy}"
-                  class="task-action-item straight-text-icon" id="caseDestroyBtn">
+                  class="task-action-item straight-text-icon" id="caseDestroyBtn" disabled="#{not casesDetailsBean.canBeDestoryed()}">
                   <i class="si si-close detail-action-icon-bold"></i>
                 </p:commandLink>
               </div>
