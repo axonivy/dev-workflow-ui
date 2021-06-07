@@ -1,5 +1,9 @@
 package ch.ivyteam.workflowui;
 
+import static ch.ivyteam.ivy.workflow.CaseState.CREATED;
+import static ch.ivyteam.ivy.workflow.CaseState.RUNNING;
+
+import java.util.Arrays;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -103,5 +107,10 @@ public class CasesDetailsBean
       return "current-hierarchy-case";
     }
     return "";
+  }
+
+  public boolean canBeDestoryed()
+  {
+    return Arrays.asList(CREATED, RUNNING).contains(selectedCase.getState());
   }
 }

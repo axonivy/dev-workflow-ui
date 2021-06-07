@@ -23,11 +23,12 @@
               <div class="task-detail-action-container action-container">
                 <p:commandLink value="Start"
                   action="#{tasksBean.executeTask(tasksDetailsBean.getSelectedTask().getId())}"
-                  class="task-action-item straight-text-icon" id="taskStartBtn">
+                  class="task-action-item straight-text-icon" id="taskStartBtn" disabled="#{not tasksDetailsBean.canBeStarted()}">
                   <i class="si si-arrow-right-1 detail-action-icon-bold"></i>
                 </p:commandLink>
-                <p:commandLink value="Actions" class="task-actions-link straight-text-icon" id="taskActionsBtn">
-                  <i class="si si-arrow-down-1 detail-title-icon"></i>
+                <p:commandLink value="Actions" class="task-actions-link straight-text-icon" id="taskActionsBtn"
+                  disabled="#{tasksDetailsBean.isDone()}">
+                  <i class="si si-arrow-down-1 detail-action-icon"></i>
                 </p:commandLink>
                 <p:menu id="actionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom">
                   <p:menuitem actionListener="#{tasksDetailsBean.selectedTask.reset()}" update="form, events"
