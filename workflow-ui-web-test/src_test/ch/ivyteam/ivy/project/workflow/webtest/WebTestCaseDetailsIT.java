@@ -38,12 +38,12 @@ public class WebTestCaseDetailsIT
     Configuration.fileDownload = FileDownloadMode.PROXY;
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     loginDeveloper();
-    startTestProcess("1750C5211D94569D/TestData.ivp");
   }
 
   @BeforeEach
   void beforeEach()
   {
+    startTestProcess("1750C5211D94569D/TestData.ivp");
     open(viewUrl("cases.xhtml"));
     $(".si-information-circle").shouldBe(visible).click();
     $("#form\\:caseName").shouldBe(text("TestCase"));
@@ -64,6 +64,21 @@ public class WebTestCaseDetailsIT
   {
     Table tasksTable = PrimeUi.table(By.id("form:tasks"));
     tasksTable.valueAt(0, 0).contains("Test Task");
+  }
+
+  @Test
+  public void checkTaskTableSystemTask()
+  {
+    startTestProcess("1750C5211D94569D/testIntermediateEventProcess.ivp");
+    open(viewUrl("cases.xhtml"));
+    $(".si-information-circle").shouldBe(visible).click();
+
+    Table tasksTable = PrimeUi.table(By.id("form:tasks"));
+    tasksTable.containsNot("System");
+
+    $("#form\\:showSystemTasksSwitch").shouldBe(visible).click();
+
+    tasksTable.contains("System");
   }
 
   @Test

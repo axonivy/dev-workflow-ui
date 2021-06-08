@@ -4,8 +4,8 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
-  <p:dataTable id="tasks" var="task" value="#{casesDetailsBean.selectedCase.tasks().all()}"
-    widgetVar="tasksTable" emptyMessage="No Tasks found with given criteria" style="margin-top:10px" lazy="true"
+  <p:dataTable id="tasks" var="task" value="#{casesDetailsBean.tasks}"
+    widgetVar="tasksTable" emptyMessage="No Tasks found with given criteria" lazy="true"
     paginatorPosition="bottom" rows="10" rowsPerPageTemplate="10,20,50" paginator="true" paginatorAlwaysVisible="false"
     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
 
@@ -24,17 +24,18 @@
       <p:tooltip for="taskName" value="Task ID: #{task.id}" position="top" />
     </p:column>
 
-    <p:column headerText="Start Date" style="text-align: center;">
+    <p:column headerText="Responsible" style="text-align: center;">
+      <jc:user user="#{task.activator}" />
+    </p:column>
+
+    <p:column headerText="Start" style="text-align: center;">
       <h:outputText id="startTime" value="#{dateTimeBean.getPrettyTime(task.startTimestamp)}" />
       <p:tooltip for="startTime" value="#{dateTimeBean.getDateTime(task.startTimestamp)}" position="top" />
     </p:column>
 
-    <p:column headerText="Expiry" style="text-align: center;">
-      <h:outputText id="expiryTime" value="#{dateTimeBean.getDateTime(task.expiryTimestamp)}" />
-    </p:column>
-
-    <p:column headerText="Case" style="text-align: center;" rendered="#{casesDetailsBean.selectedCase.businessCase}">
-      <jc:caseLink case="#{task.getCase()}" />
+    <p:column headerText="End" style="text-align: center;">
+      <h:outputText id="endTime" value="#{dateTimeBean.getPrettyTime(task.endTimestamp)}" />
+      <p:tooltip for="endTime" value="#{dateTimeBean.getDateTime(task.endTimestamp)}"/>
     </p:column>
 
     <p:column style="width: 60px; text-align: center;">

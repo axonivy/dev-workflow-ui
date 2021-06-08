@@ -43,9 +43,17 @@
 
           <h:panelGroup styleClass="card card-w-title custom-card case-details-item"
             layout="block">
-            <h:panelGroup layout="block" styleClass="task-detail-title straight-text-icon related-element">
-              <i class="si si-lg si-task-list-approve detail-title-icon" />
-              <h:outputText value="Task list" />
+            <h:panelGroup styleClass="table-title-switch">
+              <h:panelGroup id="cardTitleContainer" styleClass="task-detail-title straight-text-icon related-element">
+                <i class="si si-lg si-task-list-approve detail-title-icon" />
+                <h:outputText value="Task list" />
+              </h:panelGroup>
+              <h:panelGroup id="switchContainer" styleClass="straight-text-icon related-element">
+                <h:outputText value="Show system tasks" class="margin-right-10"/>
+                <p:toggleSwitch id="showSystemTasksSwitch" value="#{casesDetailsBean.showSystemTasks}">
+                  <p:ajax update="tasks"/>
+                </p:toggleSwitch>
+              </h:panelGroup>
             </h:panelGroup>
             <ui:include src="/includes/components/caseDetails/taskList.xhtml" />
           </h:panelGroup>
