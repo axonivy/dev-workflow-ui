@@ -71,8 +71,8 @@ public class WebTestCleanup
   {
     startTestProcess("1750C5211D94569D/TestData.ivp");
     open(viewUrl("cases.xhtml"));
-    Table table = PrimeUi.table(By.id("casesForm:cases"));
-    table.row(0).shouldBe(text("TestCase"));
+    Table casesTable = PrimeUi.table(By.id("casesForm:cases"));
+    casesTable.row(0).shouldBe(text("TestCase"));
 
     open(viewUrl("cleanup.xhtml"));
     $(By.id("clanupForm:growl_container")).shouldNotBe(visible);
@@ -84,14 +84,18 @@ public class WebTestCleanup
     $(By.id("clanupForm:growl_container")).shouldNotBe(visible);
 
     open(viewUrl("cases.xhtml"));
-    table.row(0).shouldBe(text("TestCase"));
+    casesTable.row(0).shouldBe(text("TestCase"));
+    open(viewUrl("starts.xhtml"));
+    $("#startsForm\\:noProjectsText").shouldNotBe(visible);
 
     open(viewUrl("cleanup.xhtml"));
     $(By.id("clanupForm:cleanupBtn")).shouldBe(visible).click();
     $(By.id("clanupForm:growl_container")).shouldBe(visible);
 
     open(viewUrl("cases.xhtml"));
-    table.row(0).shouldBe(text("No Cases found"));
+    casesTable.row(0).shouldBe(text("No Cases found"));
+    open(viewUrl("starts.xhtml"));
+    $("#startsForm\\:noProjectsText").shouldBe(visible);
   }
 
 }

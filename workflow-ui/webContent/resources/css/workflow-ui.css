@@ -348,6 +348,19 @@
 
 .main-starts-container>div.ui-panel-content * {
   border: 0px;
+  margin-bottom: 0;
+}
+
+.main-starts-container-empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+}
+
+.custom-icon {
+  font-size: 1.3em !important;
+  margin-right: 5px;
 }
 
 .flex-space {
