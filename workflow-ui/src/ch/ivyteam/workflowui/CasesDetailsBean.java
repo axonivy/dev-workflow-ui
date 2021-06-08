@@ -31,6 +31,7 @@ public class CasesDetailsBean
   private List<CustomFieldModel> customFields;
   private List<DocumentModel> documents;
   private CaseMapModel caseMapModel;
+  private boolean showSystemTasks = false;
 
   public String getSelectedCaseId()
   {
@@ -112,5 +113,20 @@ public class CasesDetailsBean
   public boolean canBeDestoryed()
   {
     return Arrays.asList(CREATED, RUNNING).contains(selectedCase.getState());
+  }
+
+  public List<ITask> getTasks()
+  {
+    return CaseDetailUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks);
+  }
+
+  public boolean isShowSystemTasks()
+  {
+    return showSystemTasks;
+  }
+
+  public void setShowSystemTasks(boolean showSystemTasks)
+  {
+    this.showSystemTasks = showSystemTasks;
   }
 }
