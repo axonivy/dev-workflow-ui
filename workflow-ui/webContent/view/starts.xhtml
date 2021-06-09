@@ -18,7 +18,7 @@
               </p:outputPanel>
             </f:facet>
             <p:accordionPanel var="pmv" value="#{processesBean.PMVs}" id="projectStarts" activeIndex="0" multiple="true">
-              <p:tab titleStyleClass="straight-text-icon">
+              <p:tab id="project" titleStyleClass="straight-text-icon">
                 <f:facet name="title">
                   <h:outputText id="pmvState" styleClass="si si-#{pmv.stateIcon}" />
                   <p:tooltip for="pmvState" value="#{pmv.state} - #{pmv.versionName}" position="top" />
@@ -29,7 +29,7 @@
                   <b><h:outputText value="Case Maps" /></b>
                 </h:panelGroup>
                 <p:repeat value="#{pmv.caseMapStarts}" var="casemapStart">
-                  <p:panel styleClass="start-element" rendered="#{pmv.active}">
+                  <p:panel id="startElementCaseMap" styleClass="start-element" rendered="#{pmv.active}">
                     <p:commandLink action="#{casemapStart.execute}" class="flex-space start-link">
                       <span class="straight-text-icon">
                         <i class="si si-controls-play margin-right-5"></i>
@@ -44,15 +44,15 @@
                   <b><h:outputText value="Processes" /></b>
                 </h:panelGroup>
                 <p:repeat value="#{pmv.categories}" var="category">
-                  <p:outputPanel styleClass="margin-top-10" rendered="#{!empty category.name}">
+                  <p:outputPanel id="categoryContainer" styleClass="margin-top-10" rendered="#{!empty category.name}">
                     <i class="#{category.cssIcon} table-icon"></i>
                     <h:outputText id="categoryName" value="#{category.name}"/>
                     <p:tooltip for="categoryName" value="#{category.tooltip}" position="top" />
                   </p:outputPanel>
 
                   <p:repeat value="#{category.starts}" var="start">
-                    <p:panel styleClass="start-element" rendered="#{pmv.active}">
-                      <p:commandLink action="#{start.execute}" class="flex-space start-link">
+                    <p:panel id="startElementProcess" styleClass="start-element" rendered="#{pmv.active}">
+                      <p:commandLink id="executeStartLink" action="#{start.execute}" class="flex-space start-link">
                         <span class="straight-text-icon">
                           <i class="si si-controls-play margin-right-5"></i>
                           <span>#{start.displayName}</span>
@@ -65,6 +65,10 @@
 
               </p:tab>
             </p:accordionPanel>
+            <p:outputPanel styleClass="main-starts-container-empty" id="noStartsPanel" rendered="#{processesBean.PMVs.size() == 0}">
+              <i class="si si-alert-circle custom-icon"/>
+              <h:outputText value="No projects available" id="noProjectsText"/>
+            </p:outputPanel>
           </p:panel>
         </h:panelGroup>
       </h:form>
