@@ -38,13 +38,14 @@
       <jc:user user="#{case.creatorUser}" />
     </p:column>
 
-    <p:column headerText="Start Date" style="text-align: center;">
-      <h:outputText id="startTime" value="#{dateTimeBean.getPrettyTime(case.getStartTimestamp())}" />
-      <p:tooltip for="startTime" value="#{dateTimeBean.getDateTime(case.getStartTimestamp())}" position="top" />
+    <p:column headerText="Start" style="text-align: center;">
+      <h:outputText id="startTime" value="#{dateTimeBean.getPrettyTime(case.startTimestamp)}" />
+      <p:tooltip for="startTime" value="#{dateTimeBean.getDateTime(case.startTimestamp)}" position="top" />
     </p:column>
 
-    <p:column headerText="End Time" style="text-align: center;">
-      <h:outputText id="endTime" value="#{dateTimeBean.getDetailTime(case.getEndTimestamp())}" />
+    <p:column headerText="End" style="text-align: center;">
+      <h:outputText id="endTime" value="#{dateTimeBean.getPrettyTime(case.endTimestamp)}" />
+      <p:tooltip for="startTime" value="#{dateTimeBean.getDateTime(case.endTimestamp)}" position="top" />
     </p:column>
 
     <p:column style="width: 60px; text-align: center;">
