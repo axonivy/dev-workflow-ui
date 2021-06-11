@@ -35,7 +35,7 @@
 
     <p:column headerText="End" style="text-align: center;">
       <h:outputText id="endTime" value="#{dateTimeBean.getPrettyTime(task.endTimestamp)}" />
-      <p:tooltip for="endTime" value="#{dateTimeBean.getDateTime(task.endTimestamp)}"/>
+      <p:tooltip for="endTime" value="#{dateTimeBean.getDateTime(task.endTimestamp)}" position="top"/>
     </p:column>
 
     <p:column style="width: 60px; text-align: center;">

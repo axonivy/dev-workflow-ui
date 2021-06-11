@@ -27,14 +27,14 @@ public class DateUtil
     }
     else
     {
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy, HH:mm:ss");
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy, HH:mm");
       return dateThen.format(formatter).toString();
     }
   }
 
   public static String getDateAndTime(Date date)
   {
-    SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
+    SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy, HH:mm");
     return date == null ? "" : formatter.format(date);
   }
 }
