@@ -39,18 +39,15 @@
     </p:column>
 
     <p:column headerText="Start" style="text-align: center;">
-      <h:outputText id="startTime" value="#{dateTimeBean.getPrettyTime(task.startTimestamp)}" />
-      <p:tooltip for="startTime" value="#{dateTimeBean.getDateTime(task.startTimestamp)}" position="top" />
+      <jc:datetime id="startTime" datetime="#{task.startTimestamp}"/>
     </p:column>
 
     <p:column headerText="Expiry" style="text-align: center;" rendered="#{tasksBean.checkIfPersonalTasks()}">
-      <h:outputText id="expiryTime" value="#{dateTimeBean.getPrettyTime(task.expiryTimestamp)}" />
-      <p:tooltip for="expiryTime" value="#{dateTimeBean.getDateTime(task.expiryTimestamp)}" position="top" />
+      <jc:datetime id="expiryTime" datetime="#{task.expiryTimestamp}"/>
     </p:column>
 
     <p:column headerText="End" style="text-align: center;" rendered="#{!tasksBean.checkIfPersonalTasks()}">
-      <h:outputText id="endTime" value="#{dateTimeBean.getPrettyTime(task.endTimestamp)}" />
-      <p:tooltip for="endTime" value="#{dateTimeBean.getDateTime(task.endTimestamp)}" position="top" />
+      <jc:datetime id="endTime" datetime="#{task.endTimestamp}"/>
     </p:column>
 
     <p:column style="width: 60px; text-align: center;">
