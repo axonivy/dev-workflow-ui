@@ -16,16 +16,16 @@
           </a>
           <ul class="animated" style="right: 5px">
             <li role="menuitem">
-              <h:link outcome="loginTable" rendered="#{engineModeBean.demoOrDesigner}">
+              <p:commandLink actionListener="#{loginBean.resetOriginalUrlAndRedirect}" rendered="#{engineModeBean.demoOrDesigner}">
                 <i class="si si-lg si-multiple-neutral-1"></i>
                 <span>Switch user</span>
-              </h:link>
+              </p:commandLink>
             </li>
             <li role="menuitem">
-              <h:link outcome="login">
+              <p:commandLink actionListener="#{loginBean.redirectToLoginPage}">
                 <i class="si si-lg si-login-3"></i>
                 <span>Login</span>
-              </h:link>
+              </p:commandLink>
             </li>
             <li role="menuitem">
               <p:commandLink id="sessionLogoutBtn" actionListener="#{loginBean.logout}"

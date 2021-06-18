@@ -392,3 +392,7 @@
 .cleanup-container {
   min-height: 300px;
 }
+
+.static-message {
+  margin-bottom: 10px;
+}

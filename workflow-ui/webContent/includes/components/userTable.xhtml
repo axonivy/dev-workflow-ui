@@ -10,7 +10,7 @@
       <p:dataTable id="users" var="user" value="#{loginTableBean.users}" widgetVar="usersTable"
         emptyMessage="No users found with given criteria" style="margin-top:10px"
         selectionMode="single" rowKey="#{user.fullname}">
-        <p:ajax event="rowSelect" listener="#{loginBean.login}" update="@form" />
+        <p:ajax event="rowSelect" listener="#{loginBean.loginFromTable}" update="@form" />
 
         <f:facet name="header">
           <p:outputPanel>

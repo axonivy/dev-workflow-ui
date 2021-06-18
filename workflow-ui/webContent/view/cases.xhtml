@@ -5,7 +5,7 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-    <f:event type="preRenderView" listener="#{tasksBean.checkIfLoggedIn}" />
+    <f:event type="preRenderView" listener="#{loginBean.checkIfLoggedIn}" />
     <h:form id="casesForm">
       <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
         <div class="table-title-switch">

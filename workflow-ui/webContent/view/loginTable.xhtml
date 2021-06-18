@@ -6,6 +6,9 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
+      <h:panelGroup layout="block" styleClass="static-message" rendered="#{!empty loginBean.originalUrl}">
+        <p:staticMessage severity="warn" summary="Warning" detail="You need to login to access that page" id="loginMessage"/>
+      </h:panelGroup>
       <ui:include src="/includes/components/userTable.xhtml"/>
     </ui:define>
   </ui:composition>

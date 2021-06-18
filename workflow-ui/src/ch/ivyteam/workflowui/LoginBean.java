@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.event.SelectEvent;
@@ -20,8 +22,9 @@ public class LoginBean
 {
   private String username;
   private String password;
+  private String originalUrl;
 
-  public void login(SelectEvent event)
+  public void loginFromTable(SelectEvent event)
   {
     Object object = event.getObject();
     if (object instanceof User)
@@ -38,18 +41,42 @@ public class LoginBean
     {
       password = username;
     }
-    LoginUtil.login(username, password);
+    LoginUtil.login(username, password, getOriginalUrl());
   }
 
   public void customLogin()
   {
-    LoginUtil.login(getUsername(), password);
+    LoginUtil.login(getUsername(), password, getOriginalUrl());
     password = "";
   }
 
   public void logout()
   {
     LoginUtil.logout();
+  }
+
+  public void checkIfLoggedIn()
+  {
+    evalOriginalUrl();
+    UserUtil.redirectIfNotLoggedIn();
+  }
+
+  public void redirectToLoginPage()
+  {
+    evalOriginalUrl();
+    LoginUtil.redirect();
+  }
+
+  public void resetOriginalUrlAndRedirect()
+  {
+    originalUrl = "";
+    LoginUtil.redirectToTable();
+  }
+
+  private void evalOriginalUrl()
+  {
+    var request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+    originalUrl = request.getRequestURI();
   }
 
   public String getRoles(IUser user)
@@ -85,5 +112,10 @@ public class LoginBean
   public void setPassword(String password)
   {
     this.password = password;
+  }
+
+  public String getOriginalUrl()
+  {
+    return originalUrl;
   }
 }
