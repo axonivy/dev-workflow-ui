@@ -57,11 +57,6 @@ public class TasksBean
     }
   }
 
-  public void checkIfLoggedIn()
-  {
-    UserUtil.redirectIfNotLoggedIn();
-  }
-
   public boolean checkIfPersonalTasks()
   {
     return UserUtil.checkIfPersonalTasks();

@@ -6,6 +6,8 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.logout
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
 import org.junit.jupiter.api.Test;
@@ -33,7 +35,7 @@ public class WebTestLoginIT
   void testLogout()
   {
     loginFromTable("testuser");
-    assertCurrentUrlEndsWith("home.xhtml");
+    assertCurrentUrlEndsWith("loginTable.xhtml");
     logout();
     $("#sessionUserName").shouldBe(text("Unknown User"));
   }
@@ -55,4 +57,33 @@ public class WebTestLoginIT
     WorkflowUiUtil.customLogin("DeveloperTest","DeveloperTest");
   }
 
+  @Test
+  void testRedirectIfNotLogggedIn()
+  {
+    loginFromTable("testuser");
+    logout();
+    Selenide.open(viewUrl("cases.xhtml"));
+    assertCurrentUrlEndsWith("loginTable.xhtml");
+    $("#loginMessage").shouldBe(visible).shouldHave(text("you need to login"));
+
+    Selenide.open(viewUrl("tasks.xhtml"));
+    assertCurrentUrlEndsWith("loginTable.xhtml");
+    $("#loginMessage").shouldBe(visible).shouldHave(text("you need to login"));
+
+    loginFromTable("testuser");
+    Selenide.open(viewUrl("tasks.xhtml"));
+    assertCurrentUrlEndsWith("tasks.xhtml");
+  }
+
+  @Test
+  void testRedirectToOriginalUrl()
+  {
+    loginFromTable("testuser");
+    logout();
+    Selenide.open(viewUrl("cases.xhtml"));
+    assertCurrentUrlEndsWith("loginTable.xhtml");
+    $("#loginMessage").shouldBe(visible).shouldHave(text("you need to login"));
+    $(byText("testuser")).click();
+    assertCurrentUrlEndsWith("cases.xhtml");
+  }
 }
