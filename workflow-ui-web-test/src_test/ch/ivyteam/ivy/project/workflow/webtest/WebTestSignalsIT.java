@@ -48,7 +48,7 @@ public class WebTestSignalsIT
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
     $(By.id("signalForm:growl_container")).shouldBe(visible);
 
-    signalsTable.valueAtShoudBe(0, 1, text("Web Test Signal"));
+    signalsTable.valueAtShouldBe(0, 1, text("Web Test Signal"));
   }
 
   @Test
@@ -63,7 +63,7 @@ public class WebTestSignalsIT
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
 
     Table signalsTable = PrimeUi.table(By.id("signalForm:firedSignalsTable"));
-    signalsTable.valueAtShoudBe(0, 1, text("test:signal:complete"));
+    signalsTable.valueAtShouldBe(0, 1, text("test:signal:complete"));
   }
 
   @Test
@@ -74,15 +74,15 @@ public class WebTestSignalsIT
 
     open(viewUrl("signals.xhtml"));
     Table boundaryTable = PrimeUi.table(By.id("signalForm:boundarySignalsTable"));
-    boundaryTable.valueAtShoudBe(0, 0, text("No records found."));
+    boundaryTable.valueAtShouldBe(0, 0, text("No records found."));
 
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
     open(viewUrl("signals.xhtml"));
-    boundaryTable.valueAtShoudBe(0, 1, text("test:data:signal"));
+    boundaryTable.valueAtShouldBe(0, 1, text("test:data:signal"));
 
     $(By.id("signalForm:signalCodeInput_input")).sendKeys("test:data:signal");
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
-    boundaryTable.valueAtShoudBe(0, 0, text("No records found."));
+    boundaryTable.valueAtShouldBe(0, 0, text("No records found."));
   }
 
   @Test
@@ -93,12 +93,12 @@ public class WebTestSignalsIT
 
     open(viewUrl("signals.xhtml"));
     Table boundaryTable = PrimeUi.table(By.id("signalForm:boundarySignalsTable"));
-    boundaryTable.valueAtShoudBe(0, 0, text("No records found."));
+    boundaryTable.valueAtShouldBe(0, 0, text("No records found."));
 
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
     open(viewUrl("signals.xhtml"));
 
     $(By.id("signalForm:boundarySignalsTable:0:sendSignalIcon")).shouldBe(visible).click();
-    boundaryTable.valueAtShoudBe(0, 0, text("No records found."));
+    boundaryTable.valueAtShouldBe(0, 0, text("No records found."));
   }
 }

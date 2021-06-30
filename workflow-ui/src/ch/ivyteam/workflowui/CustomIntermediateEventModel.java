@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import ch.ivyteam.ivy.application.IApplication;
-import ch.ivyteam.ivy.application.IProcessModel;
 import ch.ivyteam.ivy.workflow.IIntermediateEvent;
 import ch.ivyteam.ivy.workflow.IIntermediateEventElement;
 import ch.ivyteam.ivy.workflow.IPropertyFilter;

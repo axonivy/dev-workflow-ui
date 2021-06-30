@@ -63,8 +63,8 @@ public class WebTestIntermediateEventsIT
     $(By.id("intermediateElementDetailsForm:id")).shouldBe(visible);
 
     Table eventsTable = PrimeUi.table(By.id("intermediateElementDetailsForm:eventsTable"));
-    eventsTable.valueAtShoudBe(0, 0, text("1"));
-    eventsTable.valueAtShoudBe(0, 6, text("NOTHING"));
+    eventsTable.valueAtShouldBe(0, 0, text("1"));
+    eventsTable.valueAtShouldBe(0, 6, text("NOTHING"));
   }
 
 }

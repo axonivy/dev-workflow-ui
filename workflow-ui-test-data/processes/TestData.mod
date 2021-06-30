@@ -1,5 +1,5 @@
 [Ivy]
-1750C5211D94569D 9.2.0 #module
+1750C5211D94569D 9.3.0 #module
 >Proto >Proto Collection #zClass
 Ta0 TestData Big #zClass
 Ta0 B #cInfo
@@ -117,9 +117,19 @@ Ta0 f10 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 Ta0 f10 @C|.responsibility Everybody #txt
 Ta0 f10 81 241 30 30 -72 18 #rect
 Ta0 f11 337 241 30 30 0 15 #rect
+Ta0 f12 dialogId ch.ivyteam.ivy.project.workflow.TestDialog #txt
+Ta0 f12 startMethod start(ch.ivyteam.ivy.project.workflow.Data) #txt
+Ta0 f12 requestActionDecl '<ch.ivyteam.ivy.project.workflow.Data data> param;' #txt
 Ta0 f12 responseMappingAction 'out=in;
 ' #txt
-Ta0 f12 168 234 112 44 0 -7 #rect
+Ta0 f12 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elementInfo>
+    <language>
+        <name>TestDialog</name>
+    </language>
+</elementInfo>
+' #txt
+Ta0 f12 168 234 112 44 -33 -7 #rect
 Ta0 f13 111 256 168 256 #arcP
 Ta0 f14 280 256 337 256 #arcP
 Ta0 f15 actionTable 'out=in;
@@ -171,7 +181,7 @@ Ta0 f19 eventIdConfig "in.eventID.toString()" #txt
 Ta0 f19 timeoutConfig 'ACTION_AFTER_TIMEOUT=NOTHING
 EXCEPTION_PROCESS_START=
 TIMEOUT_SCRIPT=' #txt
-Ta0 f19 eventBeanClass "" #txt
+Ta0 f19 eventBeanClass "ch.ivyteam.workflowuitestdata.TestIntermediateClass" #txt
 Ta0 f19 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>
     <language>

@@ -1,5 +1,5 @@
 [Ivy]
-17425834F1CBA722 9.2.0 #module
+17425834F1CBA722 9.3.0 #module
 >Proto >Proto Collection #zClass
 Mn0 Main Big #zClass
 Mn0 B #cInfo
@@ -39,10 +39,8 @@ Mn0 f0 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 ' #txt
 Mn0 f0 @C|.responsibility Everybody #txt
 Mn0 f0 81 113 30 30 -84 18 #rect
-Mn0 f0 @|StartRequestIcon #fIcon
 Mn0 f1 template "view/home.xhtml" #txt
 Mn0 f1 209 113 30 30 0 15 #rect
-Mn0 f1 @|EndRequestIcon #fIcon
 Mn0 f2 111 128 209 128 #arcP
 Mn0 f3 outLink DefaultProcessStartListPage.ivp #txt
 Mn0 f3 inParamDecl '<> param;' #txt
@@ -59,7 +57,6 @@ Mn0 f3 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 ' #txt
 Mn0 f3 @C|.responsibility Everybody #txt
 Mn0 f3 81 305 30 30 -81 20 #rect
-Mn0 f3 @|StartRequestIcon #fIcon
 Mn0 f4 outLink DefaultTaskListPage.ivp #txt
 Mn0 f4 inParamDecl '<> param;' #txt
 Mn0 f4 requestEnabled true #txt
@@ -75,7 +72,6 @@ Mn0 f4 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 ' #txt
 Mn0 f4 @C|.responsibility Everybody #txt
 Mn0 f4 81 177 30 30 -64 18 #rect
-Mn0 f4 @|StartRequestIcon #fIcon
 Mn0 f5 outLink DefaultEndPage.ivp #txt
 Mn0 f5 inParamDecl '<Number endedTaskId> param;' #txt
 Mn0 f5 requestEnabled true #txt
@@ -91,7 +87,6 @@ Mn0 f5 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 ' #txt
 Mn0 f5 @C|.responsibility Everybody #txt
 Mn0 f5 81 49 30 30 -50 20 #rect
-Mn0 f5 @|StartRequestIcon #fIcon
 Mn0 f6 outLink DefaultLoginPage.ivp #txt
 Mn0 f6 inParamDecl '<String originalUrl> param;' #txt
 Mn0 f6 requestEnabled true #txt
@@ -107,20 +102,16 @@ Mn0 f6 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 ' #txt
 Mn0 f6 @C|.responsibility Everybody #txt
 Mn0 f6 81 241 30 30 -54 17 #rect
-Mn0 f6 @|StartRequestIcon #fIcon
 Mn0 f8 template "view/starts.xhtml" #txt
 Mn0 f8 209 305 30 30 0 15 #rect
-Mn0 f8 @|EndRequestIcon #fIcon
 Mn0 f7 111 320 209 320 #arcP
 Mn0 f9 111 64 224 113 #arcP
 Mn0 f9 1 224 64 #addKink
 Mn0 f9 0 0.6297698674755009 0 0 #arcLabel
 Mn0 f10 template "view/tasks.xhtml" #txt
 Mn0 f10 209 177 30 30 0 15 #rect
-Mn0 f10 @|EndRequestIcon #fIcon
 Mn0 f15 template "view/login.xhtml" #txt
 Mn0 f15 209 241 30 30 0 15 #rect
-Mn0 f15 @|EndRequestIcon #fIcon
 Mn0 f16 111 256 209 256 #arcP
 Mn0 f11 111 192 209 192 #arcP
 Mn0 f12 outLink DefaultFramePage.ivp #txt
@@ -142,7 +133,6 @@ Mn0 f12 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 ' #txt
 Mn0 f12 @C|.responsibility Everybody #txt
 Mn0 f12 80 368 32 32 -63 16 #rect
-Mn0 f12 @|StartRequestIcon #fIcon
 >Proto Mn0 .type ch.ivyteam.ivy.project.workflow.ui.Data #txt
 >Proto Mn0 .processKind NORMAL #txt
 >Proto Mn0 0 0 32 24 18 0 #rect
