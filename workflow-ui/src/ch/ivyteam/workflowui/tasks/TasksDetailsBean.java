@@ -1,4 +1,4 @@
-package ch.ivyteam.workflowui;
+package ch.ivyteam.workflowui.tasks;
 
 import java.util.Date;
 import java.util.EnumSet;

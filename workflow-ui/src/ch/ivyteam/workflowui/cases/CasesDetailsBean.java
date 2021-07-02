@@ -1,4 +1,4 @@
-package ch.ivyteam.workflowui;
+package ch.ivyteam.workflowui.cases;
 
 import static ch.ivyteam.ivy.workflow.CaseState.CREATED;
 import static ch.ivyteam.ivy.workflow.CaseState.RUNNING;
@@ -19,6 +19,7 @@ import ch.ivyteam.ivy.workflow.query.CaseQuery;
 import ch.ivyteam.workflowui.casemap.CaseMapModel;
 import ch.ivyteam.workflowui.customfield.CustomFieldModel;
 import ch.ivyteam.workflowui.document.DocumentModel;
+import ch.ivyteam.workflowui.util.CaseDetailUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 
 @ManagedBean

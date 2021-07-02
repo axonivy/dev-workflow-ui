@@ -1,14 +1,16 @@
-package ch.ivyteam.workflowui;
+package ch.ivyteam.workflowui.intermediateEvents;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 import ch.ivyteam.ivy.workflow.IIntermediateEvent;
 
 @ManagedBean
+@ViewScoped
 public class IntermediateEventDetailsBean
 {
   private String processId;
-  private CustomIntermediateEventModel selectedIntermediateElement;
+  private IntermediateEventElementModel selectedIntermediateElement;
 
   public String getProcessId()
   {
@@ -18,7 +20,7 @@ public class IntermediateEventDetailsBean
   public void setProcessId(String processId)
   {
     this.processId = processId;
-    this.selectedIntermediateElement = CustomIntermediateEventModel.byProcessElementId(processId);
+    this.selectedIntermediateElement = IntermediateEventElementModel.byProcessElementId(processId);
   }
 
   public String getSelectedIntermediateElementId()
@@ -26,7 +28,7 @@ public class IntermediateEventDetailsBean
     return selectedIntermediateElement.getProcessElementId();
   }
 
-  public CustomIntermediateEventModel getSelectedIntermediateElement()
+  public IntermediateEventElementModel getSelectedIntermediateElement()
   {
     return selectedIntermediateElement;
   }
@@ -50,5 +52,4 @@ public class IntermediateEventDetailsBean
       return "si si-question-circle";
     }
   }
-
 }

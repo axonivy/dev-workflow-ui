@@ -1,4 +1,4 @@
-package ch.ivyteam.workflowui;
+package ch.ivyteam.workflowui.util;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -21,13 +21,13 @@
             <p:column width="40">
               <i class="si si-lg si-analytics-graph" />
             </p:column>
-            <p:column headerText="Name">
+            <p:column headerText="Name" sortBy="#{intermediateEvent.name}">
               <h:outputText value="#{intermediateEvent.name}" />
             </p:column>
-            <p:column headerText="Description" colspan="2">
+            <p:column headerText="Description" colspan="2" sortBy="#{intermediateEvent.description}">
               <h:outputText value="#{intermediateEvent.description}" />
             </p:column>
-            <p:column headerText="Waiting">
+            <p:column headerText="Waiting" sortBy="#{intermediateEvent.size}">
               <h:outputText value="#{intermediateEvent.size}" />
             </p:column>
 

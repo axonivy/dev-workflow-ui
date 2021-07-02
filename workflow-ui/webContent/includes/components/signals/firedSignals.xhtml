@@ -4,21 +4,21 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
-  <p:dataTable id="firedSignalsTable" var="signal" value="#{signalsBean.firedSignals}" styleClass="margin-top-10"
-    rows="10" paginator="true" paginatorAlwaysVisible="false"
+  <p:dataTable id="firedSignalsTable" var="signal" value="#{signalsBean.signalsModel}" styleClass="margin-top-10"
+    rows="10" paginator="true" paginatorAlwaysVisible="false" lazy="true"
     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" paginatorPosition="bottom"
     rowsPerPageTemplate="5,10,{ShowAll|'All'}">
     <p:column width="40">
       <i class="si si-lg si-network-signal"/>
     </p:column>
-    <p:column headerText="Code">
+    <p:column headerText="Code" sortBy="#{signal.signalCode}">
       <h:outputText value="#{signal.signalCode}" />
     </p:column>
-    <p:column headerText="Date">
+    <p:column headerText="Date" sortBy="#{signal.sentTimestamp}">
       <jc:datetime id="sentTime" datetime="#{signal.sentTimestamp}"/>
     </p:column>
-    <p:column headerText="Sent by">
+    <p:column headerText="Sent by" sortBy="#{signal.sentByUser}">
       <jc:user user="#{signal.sentByUser}"/>
     </p:column>
     <p:column headerText="Destoryed tasks">

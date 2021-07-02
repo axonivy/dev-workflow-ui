@@ -1,4 +1,4 @@
-package ch.ivyteam.workflowui;
+package ch.ivyteam.workflowui.cases;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,20 +33,20 @@ public class CasesDataModel extends LazyDataModel<ICase>
 
   @Override
   public List<ICase> load(int first, int pageSize, String sortField, SortOrder sortOrder,
-          Map<String, Object> filters)
+      Map<String, Object> filters)
   {
     var caseQuery = CaseQuery.create();
 
     applyFilter(caseQuery);
-    caseQuery.orderBy().caseId().descending();
+    applyOrdering(caseQuery, sortField, sortOrder);
 
     checkIfPersonalCases(caseQuery);
 
     List<ICase> cases = caseQuery.where()
-            .isBusinessCase()
-            .executor()
-            .resultsPaged()
-            .window(first, pageSize);
+        .isBusinessCase()
+        .executor()
+        .resultsPaged()
+        .window(first, pageSize);
     setRowCount((int) caseQuery.executor().count());
     return cases;
   }
@@ -64,14 +64,54 @@ public class CasesDataModel extends LazyDataModel<ICase>
     if (StringUtils.isNotEmpty(filter))
     {
       var caseState = Arrays.asList(CaseState.values()).stream()
-              .filter(state -> StringUtils.startsWithIgnoreCase(state.toString(), filter))
-              .findFirst().orElse(null);
+          .filter(state -> StringUtils.startsWithIgnoreCase(state.toString(), filter))
+          .findFirst().orElse(null);
       var casePriority = Arrays.asList(WorkflowPriority.values()).stream()
-              .filter(priority -> StringUtils.startsWithIgnoreCase(priority.toString(), filter))
-              .findFirst().orElse(null);
+          .filter(priority -> StringUtils.startsWithIgnoreCase(priority.toString(), filter))
+          .findFirst().orElse(null);
       query.where().name().isLikeIgnoreCase("%" + filter + "%")
-              .or().state().isEqual(caseState)
-              .or().priority().isEqual(casePriority);
+          .or().state().isEqual(caseState)
+          .or().priority().isEqual(casePriority);
+    }
+  }
+
+  private static void applyOrdering(CaseQuery query, String sortField, SortOrder sortOrder)
+  {
+    if (StringUtils.isEmpty(sortField))
+    {
+      applySorting(query.orderBy().startTimestamp(), SortOrder.DESCENDING);
+    }
+    if ("state".equals(sortField))
+    {
+      applySorting(query.orderBy().state(), sortOrder);
+    }
+    if ("getName(case)".equals(sortField))
+    {
+      applySorting(query.orderBy().name(), sortOrder);
+    }
+    if ("creatorUserName".equals(sortField))
+    {
+      applySorting(query.orderBy().creatorUserName(), sortOrder);
+    }
+    if ("startTimestamp".equals(sortField))
+    {
+      applySorting(query.orderBy().startTimestamp(), sortOrder);
+    }
+    if ("endTimestamp".equals(sortField))
+    {
+      applySorting(query.orderBy().endTimestamp(), sortOrder);
+    }
+  }
+
+  private static void applySorting(CaseQuery.OrderByColumnQuery query, SortOrder sortOrder)
+  {
+    if (SortOrder.ASCENDING.equals(sortOrder))
+    {
+      query.ascending();
+    }
+    if (SortOrder.DESCENDING.equals(sortOrder))
+    {
+      query.descending();
     }
   }
 

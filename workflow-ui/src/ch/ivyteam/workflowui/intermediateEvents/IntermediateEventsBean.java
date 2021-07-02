@@ -1,9 +1,10 @@
-package ch.ivyteam.workflowui;
+package ch.ivyteam.workflowui.intermediateEvents;
 
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
@@ -11,12 +12,14 @@ import org.primefaces.event.SelectEvent;
 import ch.ivyteam.workflowui.util.UserUtil;
 
 @ManagedBean
+@ViewScoped
 public class IntermediateEventsBean
 {
+  private List<IntermediateEventElementModel> intermediateEvents;
 
-  public List<CustomIntermediateEventModel> getIntermediateEvents()
+  public IntermediateEventsBean()
   {
-    return CustomIntermediateEventModel.create();
+    intermediateEvents = IntermediateEventElementModel.create();
   }
 
   public void onRowSelect(SelectEvent event)
@@ -24,9 +27,9 @@ public class IntermediateEventsBean
     Object object = event.getObject();
     if (UserUtil.isAdmin())
     {
-      if (object instanceof CustomIntermediateEventModel)
+      if (object instanceof IntermediateEventElementModel)
       {
-        ((CustomIntermediateEventModel) object).redirectToElement();
+        ((IntermediateEventElementModel) object).redirectToElement();
       }
     }
     else
@@ -34,5 +37,10 @@ public class IntermediateEventsBean
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Access denied",
           "You need to be an admin user to access this function"));
     }
+  }
+
+  public List<IntermediateEventElementModel> getIntermediateEvents()
+  {
+    return intermediateEvents;
   }
 }
