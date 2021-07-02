@@ -4,15 +4,15 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
-  <p:dataTable id="boundarySignalsTable" var="receiver" value="#{signalsBean.boundarySignals}"
+  <p:dataTable id="boundarySignalsTable" var="receiver" value="#{signalsBean.boundarySignalModel}" lazy="true"
     styleClass="margin-top-10" rows="5" paginator="true" paginatorPosition="bottom" paginatorAlwaysVisible="false">
     <p:column width="40">
       <i class="si si-lg si-network-signal"/>
     </p:column>
-    <p:column headerText="Signal pattern">
+    <p:column headerText="Signal pattern" sortBy="#{receiver.signalPattern}">
       <h:outputText value="#{receiver.signalPattern}" />
     </p:column>
-    <p:column headerText="Waiting task">
+    <p:column headerText="Waiting task" sortBy="#{receiver.waitingTask}">
       <jc:taskLink task="#{receiver.waitingTask}" id="waitingTask" />
     </p:column>
     <p:column width="40">

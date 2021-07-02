@@ -1,4 +1,4 @@
-package ch.ivyteam.workflowui;
+package ch.ivyteam.workflowui.tasks;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -7,6 +7,7 @@ import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
+import ch.ivyteam.workflowui.TaskLinkModel;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.UserUtil;
 

@@ -21,7 +21,7 @@
               <h:outputText styleClass="" value="Description" />
             </div>
             <p:panelGrid id="intermediateElement" columns="2" layout="grid" styleClass="ui-panelgrid-blank"
-              columnClasses="no-padding-left ui-g-3, no-padding-left ui-g-3">
+              columnClasses="no-padding-left ui-g-3, no-padding-left ui-g-9">
 
               <h:outputText value="Element Process ID" />
               <h:outputText value="#{intermediateElement.processElementId}" id="id" />
@@ -40,32 +40,32 @@
               <i class="si si-lg si-analytics-graph margin-right-5" />
               <h:outputText value="Events" />
             </div>
-            <p:dataTable var="event" value="#{intermediateEventDetailsBean.selectedIntermediateElement.events}"
+            <p:dataTable var="event" value="#{intermediateEventDetailsBean.selectedIntermediateElement.eventModel}"
               id="eventsTable" styleClass="margin-top-5" rows="10" paginator="true" paginatorPosition="bottom"
-              paginatorAlwaysVisible="false">
+              paginatorAlwaysVisible="false" lazy="true">
 
-              <p:column headerText="ID" width="60">
+              <p:column headerText="ID" width="70" sortBy="#{event.id}">
                 <h:outputText value="#{event.id}" />
               </p:column>
-              <p:column headerText="State" width="60">
+              <p:column headerText="State" width="90" sortBy="#{event.state}">
                 <h:panelGroup id="eventStateIcon">
                   <i class="si-lg #{intermediateEventDetailsBean.getEventStateIconCss(event)}" />
                 </h:panelGroup>
                 <p:tooltip id="eventStateTooltip" for="eventStateIcon" value="#{event.state}" position="top" />
               </p:column>
-              <p:column headerText="Task">
+              <p:column headerText="Task" sortBy="#{event.task}">
                 <jc:taskLink task="#{event.task}" id="event-task" />
               </p:column>
-              <p:column headerText="Event ID">
+              <p:column headerText="Event ID" sortBy="#{event.eventIdentifier}">
                 <h:outputText value="#{event.eventIdentifier}" />
               </p:column>
-              <p:column headerText="Event received">
+              <p:column headerText="Event received" sortBy="#{event.eventTimestamp}">
                 <h:outputText value="#{event.eventTimestamp}" />
               </p:column>
-              <p:column headerText="Timeout">
+              <p:column headerText="Timeout" sortBy="#{event.timeoutTimestamp}">
                 <h:outputText value="#{event.timeoutTimestamp}" />
               </p:column>
-              <p:column headerText="Timeout action">
+              <p:column headerText="Timeout action" sortBy="#{event.timeoutAction}">
                 <h:outputText value="#{event.timeoutAction}" />
               </p:column>
               <p:column headerText="Result">

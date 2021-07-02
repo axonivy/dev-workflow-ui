@@ -1,6 +1,5 @@
-package ch.ivyteam.workflowui;
+package ch.ivyteam.workflowui.signals;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,9 +14,7 @@ import ch.ivyteam.ivy.process.model.value.SignalCode;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.IWorkflowSession;
 import ch.ivyteam.ivy.workflow.signal.IBpmSignalService;
-import ch.ivyteam.ivy.workflow.signal.ISignalEvent;
 import ch.ivyteam.ivy.workflow.signal.IStartSignalEventElement;
-import ch.ivyteam.ivy.workflow.signal.ITaskBoundarySignalEventReceiver;
 
 @ManagedBean
 @ViewScoped
@@ -25,10 +22,28 @@ public class SignalsBean
 {
   private String code;
   private String payload;
+  private SignalsModel signalsModel;
+  private BoundarySignalModel boundarySignalModel;
 
-  public void sendBoundarySignal(String code)
+  public SignalsBean()
   {
-    this.code = code;
+    signalsModel = new SignalsModel();
+    boundarySignalModel = new BoundarySignalModel();
+  }
+
+  public SignalsModel getSignalsModel()
+  {
+    return signalsModel;
+  }
+
+  public BoundarySignalModel getBoundarySignalModel()
+  {
+    return boundarySignalModel;
+  }
+
+  public void sendBoundarySignal(String signalCode)
+  {
+    this.code = signalCode;
     sendSignal();
   }
 
@@ -55,23 +70,11 @@ public class SignalsBean
         new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", msg));
   }
 
-  public List<ISignalEvent> getFiredSignals()
-  {
-    return new ArrayList<>(IWorkflowContext.current().signals().history().createSignalEventQuery().orderBy()
-        .sentTimestamp().descending().executor().results());
-  }
-
   public List<String> signalsComplete(String query)
   {
     return IWorkflowContext.current().signals().receivers().all().stream()
         .map(IStartSignalEventElement::getName).filter(s -> s.toLowerCase().contains(query.toLowerCase()))
         .collect(Collectors.toList());
-  }
-
-  public List<ITaskBoundarySignalEventReceiver> getBoundarySignals()
-  {
-    return new ArrayList<>(IWorkflowContext.current().signals().receivers().createTaskBoundaryQuery()
-        .orderBy().signalCodePattern().descending().executor().results());
   }
 
   public String getCode()

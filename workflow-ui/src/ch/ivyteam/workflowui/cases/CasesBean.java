@@ -1,4 +1,4 @@
-package ch.ivyteam.workflowui;
+package ch.ivyteam.workflowui.cases;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
