@@ -13,67 +13,64 @@
       <ui:param name="intermediateElement" value="#{intermediateEventDetailsBean.selectedIntermediateElement}"></ui:param>
 
       <h:form id="intermediateElementDetailsForm">
-        <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank case-details-grid grid-smaller-padding"
-          columnClasses="ui-g-12, ui-g-12">
-          <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
-            <div class="task-detail-title straight-text-icon">
-              <i class="si si-lg si-common-file-text detail-title-icon" />
-              <h:outputText styleClass="" value="Description" />
-            </div>
-            <p:panelGrid id="intermediateElement" columns="2" layout="grid" styleClass="ui-panelgrid-blank"
-              columnClasses="no-padding-left ui-g-3, no-padding-left ui-g-9">
+        <h:panelGroup styleClass="card card-w-title" layout="block">
+          <div class="task-detail-title straight-text-icon">
+            <i class="si si-lg si-common-file-text detail-title-icon" />
+            <h:outputText value="Description" />
+          </div>
+          <p:panelGrid id="intermediateElement" columns="2" layout="grid" styleClass="ui-panelgrid-blank"
+            columnClasses="no-padding-left ui-g-3, no-padding-left ui-g-9">
 
-              <h:outputText value="Element Process ID" />
-              <h:outputText value="#{intermediateElement.processElementId}" id="id" />
+            <h:outputText value="Element Process ID" />
+            <h:outputText value="#{intermediateElement.processElementId}" id="id" />
 
-              <h:outputText value="Element Name" />
-              <h:outputText value="#{intermediateElement.name}" id="name" />
+            <h:outputText value="Element Name" />
+            <h:outputText value="#{intermediateElement.name}" id="name" />
 
-              <h:outputText value="Description" />
-              <h:outputText value="#{intermediateElement.description}" id="description" />
+            <h:outputText value="Description" />
+            <h:outputText value="#{intermediateElement.description}" id="description" />
 
-            </p:panelGrid>
-          </h:panelGroup>
+          </p:panelGrid>
+        </h:panelGroup>
 
-          <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
-            <div class="task-detail-title straight-text-icon">
-              <i class="si si-lg si-analytics-graph margin-right-5" />
-              <h:outputText value="Events" />
-            </div>
-            <p:dataTable var="event" value="#{intermediateEventDetailsBean.selectedIntermediateElement.eventModel}"
-              id="eventsTable" styleClass="margin-top-5" rows="10" paginator="true" paginatorPosition="bottom"
-              paginatorAlwaysVisible="false" lazy="true">
+        <h:panelGroup styleClass="card card-w-title" layout="block">
+          <div class="task-detail-title straight-text-icon">
+            <i class="si si-lg si-analytics-graph margin-right-5" />
+            <h:outputText value="Events" />
+          </div>
+          <p:dataTable var="event" value="#{intermediateEventDetailsBean.selectedIntermediateElement.eventModel}"
+            id="eventsTable" styleClass="margin-top-5" rows="10" paginator="true" paginatorPosition="bottom"
+            paginatorAlwaysVisible="false" lazy="true">
 
-              <p:column headerText="ID" width="70" sortBy="#{event.id}">
-                <h:outputText value="#{event.id}" />
-              </p:column>
-              <p:column headerText="State" width="90" sortBy="#{event.state}">
-                <h:panelGroup id="eventStateIcon">
-                  <i class="si-lg #{intermediateEventDetailsBean.getEventStateIconCss(event)}" />
-                </h:panelGroup>
-                <p:tooltip id="eventStateTooltip" for="eventStateIcon" value="#{event.state}" position="top" />
-              </p:column>
-              <p:column headerText="Task" sortBy="#{event.task}">
-                <jc:taskLink task="#{event.task}" id="event-task" />
-              </p:column>
-              <p:column headerText="Event ID" sortBy="#{event.eventIdentifier}">
-                <h:outputText value="#{event.eventIdentifier}" />
-              </p:column>
-              <p:column headerText="Event received" sortBy="#{event.eventTimestamp}">
-                <h:outputText value="#{event.eventTimestamp}" />
-              </p:column>
-              <p:column headerText="Timeout" sortBy="#{event.timeoutTimestamp}">
-                <h:outputText value="#{event.timeoutTimestamp}" />
-              </p:column>
-              <p:column headerText="Timeout action" sortBy="#{event.timeoutAction}">
-                <h:outputText value="#{event.timeoutAction}" />
-              </p:column>
-              <p:column headerText="Result">
-                <h:outputText value="#{event.resultObject}" />
-              </p:column>
-            </p:dataTable>
-          </h:panelGroup>
-        </p:panelGrid>
+            <p:column headerText="ID" width="70" sortBy="#{event.id}">
+              <h:outputText value="#{event.id}" />
+            </p:column>
+            <p:column headerText="State" width="90" sortBy="#{event.state}">
+              <h:panelGroup id="eventStateIcon">
+                <i class="si-lg #{intermediateEventDetailsBean.getEventStateIconCss(event)}" />
+              </h:panelGroup>
+              <p:tooltip id="eventStateTooltip" for="eventStateIcon" value="#{event.state}" position="top" />
+            </p:column>
+            <p:column headerText="Task" sortBy="#{event.task}">
+              <jc:taskLink task="#{event.task}" id="event-task" />
+            </p:column>
+            <p:column headerText="Event ID" sortBy="#{event.eventIdentifier}">
+              <h:outputText value="#{event.eventIdentifier}" />
+            </p:column>
+            <p:column headerText="Event received" sortBy="#{event.eventTimestamp}">
+              <h:outputText value="#{event.eventTimestamp}" />
+            </p:column>
+            <p:column headerText="Timeout" sortBy="#{event.timeoutTimestamp}">
+              <h:outputText value="#{event.timeoutTimestamp}" />
+            </p:column>
+            <p:column headerText="Timeout action" sortBy="#{event.timeoutAction}">
+              <h:outputText value="#{event.timeoutAction}" />
+            </p:column>
+            <p:column headerText="Result">
+              <h:outputText value="#{event.resultObject}" />
+            </p:column>
+          </p:dataTable>
+        </h:panelGroup>
       </h:form>
     </ui:define>
   </ui:composition>

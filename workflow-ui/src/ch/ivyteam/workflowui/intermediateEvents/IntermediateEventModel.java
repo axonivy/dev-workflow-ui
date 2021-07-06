@@ -6,7 +6,6 @@ import java.util.Map;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
-import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.persistence.OrderDirection;
 import ch.ivyteam.ivy.workflow.IIntermediateEvent;
 import ch.ivyteam.ivy.workflow.IIntermediateEventElement;
@@ -27,7 +26,6 @@ public class IntermediateEventModel extends LazyDataModel<IIntermediateEvent>
   public List<IIntermediateEvent> load(int first, int pageSize, String sortField, SortOrder sortOrder,
       Map<String, Object> filters)
   {
-    Ivy.log().fatal(sortOrder);
     var propertyOrder = PropertyOrder.create(getProperty(sortField), getOrder(sortOrder));
     var signalQuery = ie.findIntermediateEvents(null, propertyOrder, 0, -1, true);
     setRowCount(signalQuery.getResultCount());

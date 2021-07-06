@@ -30,7 +30,7 @@
   <repositories>
     <repository>
       <id>axonivy.public</id>
-      <url>http://repo.axonivy.rocks</url>
+      <url>https://repo.axonivy.rocks</url>
       <snapshots>
         <enabled>true</enabled>
       </snapshots>

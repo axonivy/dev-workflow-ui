@@ -31,6 +31,11 @@ Ta0 @IntermediateEvent f19 '' #zField
 Ta0 @EndTask f20 '' #zField
 Ta0 @PushWFArc f22 '' #zField
 Ta0 @PushWFArc f21 '' #zField
+Ta0 @EndTask f23 '' #zField
+Ta0 @StartRequest f24 '' #zField
+Ta0 @TaskSwitchSimple f25 '' #zField
+Ta0 @PushWFArc f26 '' #zField
+Ta0 @TkArc f27 '' #zField
 >Proto Ta0 Ta0 TestData #zField
 Ta0 f0 outLink TestData.ivp #txt
 Ta0 f0 inParamDecl '<> param;' #txt
@@ -194,6 +199,38 @@ Ta0 f19 209 433 30 30 0 16 #rect
 Ta0 f20 337 433 30 30 0 15 #rect
 Ta0 f22 239 448 337 448 #arcP
 Ta0 f21 111 448 209 448 #arcP
+Ta0 f23 337 529 30 30 0 15 #rect
+Ta0 f24 outLink HomePageTestData.ivp #txt
+Ta0 f24 inParamDecl '<> param;' #txt
+Ta0 f24 requestEnabled true #txt
+Ta0 f24 triggerEnabled false #txt
+Ta0 f24 callSignature HomePageTestData() #txt
+Ta0 f24 caseData businessCase.attach=true #txt
+Ta0 f24 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elementInfo>
+    <language>
+        <name>HomePageTestData</name>
+    </language>
+</elementInfo>
+' #txt
+Ta0 f24 @C|.responsibility Everybody #txt
+Ta0 f24 81 529 30 30 -63 17 #rect
+Ta0 f25 actionTable 'out=in1;
+' #txt
+Ta0 f25 caseData case.name=HomePageTestCase #txt
+Ta0 f25 taskData 'TaskA.EXP=new Duration(0, 0, 3, 0, 0, 0)
+TaskA.NAM=HomePageTestTask
+TaskA.PRI=1' #txt
+Ta0 f25 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elementInfo>
+    <language>
+        <name>HomePageTestTask</name>
+    </language>
+</elementInfo>
+' #txt
+Ta0 f25 209 529 30 30 -50 17 #rect
+Ta0 f26 239 544 337 544 #arcP
+Ta0 f27 111 544 209 544 #arcP
 >Proto Ta0 .type workflow.uite.Data #txt
 >Proto Ta0 .processKind NORMAL #txt
 >Proto Ta0 0 0 32 24 18 0 #rect
@@ -216,3 +253,7 @@ Ta0 f19 mainOut f22 tail #connect
 Ta0 f22 head f20 mainIn #connect
 Ta0 f18 mainOut f21 tail #connect
 Ta0 f21 head f19 mainIn #connect
+Ta0 f24 mainOut f27 tail #connect
+Ta0 f27 head f25 in #connect
+Ta0 f25 out f26 tail #connect
+Ta0 f26 head f23 mainIn #connect

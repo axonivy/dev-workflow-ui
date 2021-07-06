@@ -52,6 +52,11 @@ public class UserUtil
     return checkCurrentPage("tasks");
   }
 
+  public static boolean checkIfHomepage()
+  {
+    return checkCurrentPage("home");
+  }
+
   public static boolean isLoggedIn()
   {
     return ISession.current().getSessionUser() != null;
