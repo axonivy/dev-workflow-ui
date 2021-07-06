@@ -13,17 +13,23 @@
           columnClasses="ui-g-12 ui-md-4, ui-g-12 ui-md-8, ui-g-12" >
 
           <h:panelGroup styleClass="card card-w-title custom-card height-100" layout="block">
-            <b><p:outputLabel value="Send signal" styleClass="subtitle" /></b>
+            <div class="straight-text-icon card-header-title">
+              <h:outputText value="Send signal" />
+            </div>
             <ui:include src="/includes/components/signals/sendSignal.xhtml" />
           </h:panelGroup>
 
           <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
-            <b><h:outputText value="Boundary signals" styleClass="subtitle" /></b>
+            <div class="straight-text-icon card-header-title">
+              <h:outputText value="Boundary signals" />
+            </div>
             <ui:include src="/includes/components/signals/boundarySignals.xhtml" />
           </h:panelGroup>
 
           <h:panelGroup styleClass="card card-w-title card-margin-0" layout="block">
-            <b><h:outputText value="Fired signals" styleClass="subtitle" /></b>
+            <div class="straight-text-icon card-header-title">
+              <h:outputText value="Fired signals" />
+            </div>
             <ui:include src="/includes/components/signals/firedSignals.xhtml" />
           </h:panelGroup>
 

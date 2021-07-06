@@ -2,6 +2,7 @@ package ch.ivyteam.ivy.project.workflow.webtest;
 
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestCaseMap;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
@@ -27,13 +28,14 @@ public class WebTestCaseMapIT
     Selenide.closeWebDriver();
     Configuration.proxyEnabled = true;
     Configuration.fileDownload = FileDownloadMode.PROXY;
-    loginDeveloper();
-    startTestCaseMap("0cf1f054-a4ad-4b2b-bcf1-c9c34ec0a2ab.icm");
   }
 
   @Test
   public void caseDetails()
   {
+    startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
+    loginDeveloper();
+    startTestCaseMap("0cf1f054-a4ad-4b2b-bcf1-c9c34ec0a2ab.icm");
     open(viewUrl("cases.xhtml"));
     $(".si-information-circle").shouldBe(visible).click();
 

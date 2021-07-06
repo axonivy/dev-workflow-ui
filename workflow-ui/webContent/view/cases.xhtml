@@ -9,7 +9,9 @@
     <h:form id="casesForm">
       <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
         <div class="table-title-switch">
-          <h:outputText value="Cases" class="card-header-title"/>
+          <div class="straight-text-icon card-header-title">
+            <h:outputText value="Cases"/>
+          </div>
           <h:panelGroup class="action-container" layout="block" rendered="#{adminBean.isWorkflowAdmin()}">
             <h:outputText value="All Cases" class="margin-right-10"/>
             <p:toggleSwitch id="allCasesSwitch" value="#{casesBean.casesDataModel.showAllCases}">

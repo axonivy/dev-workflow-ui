@@ -15,7 +15,7 @@ public class CaseMapModel
   {
     var stageModels = new ArrayList<CaseMapStageModel>();
     var caseMapBusinessCase = ICaseMapBusinessCase.of(selectedCase.getBusinessCase());
-    if (caseMapBusinessCase != null && selectedCase.isBusinessCase())
+    if (caseMapBusinessCase != null)
     {
       var stages = caseMapBusinessCase.getCaseMap().getStages();
       var runningStageIndex = stages.indexOf(caseMapBusinessCase.findCurrentStage());

@@ -95,8 +95,13 @@
   width: 10em;
 }
 
-.grid-smaller-padding .ui-panelgrid-content .ui-g .ui-panelgrid-cell {
-  padding: 8px;
+.grid-smaller-padding > .ui-panelgrid-content > .ui-g > .ui-panelgrid-cell {
+  padding: 0px;
+  padding-bottom: 16px;
+}
+
+.grid-smaller-padding > .ui-panelgrid-content > .ui-g > .ui-panelgrid-cell:nth-child(even){
+  padding-left: 16px;
 }
 
 .case-related-task-table {
@@ -395,4 +400,13 @@
 
 .static-message {
   margin-bottom: 10px;
+}
+
+.table-header-none thead {
+  display: none;
+}
+
+.custom-grid > div{
+  background: 0;
+  border: 0;
 }

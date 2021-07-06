@@ -1,5 +1,8 @@
 package ch.ivyteam.workflowui.tasks;
 
+import static ch.ivyteam.workflowui.util.UserUtil.checkIfHomepage;
+import static ch.ivyteam.workflowui.util.UserUtil.checkIfPersonalTasks;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +42,7 @@ public class TasksDataModel extends LazyDataModel<ITask>
     applyFilter(taskQuery);
     applyOrdering(taskQuery, sortField, sortOrder);
 
-    checkIfPersonalTasks(taskQuery);
+    checkIfPersonalTasksOrHomepage(taskQuery);
 
     List<ITask> tasks = taskQuery
         .executor()
@@ -49,9 +52,9 @@ public class TasksDataModel extends LazyDataModel<ITask>
     return tasks;
   }
 
-  private void checkIfPersonalTasks(TaskQuery taskQuery)
+  private void checkIfPersonalTasksOrHomepage(TaskQuery taskQuery)
   {
-    if (UserUtil.checkIfPersonalTasks())
+    if (checkIfPersonalTasks() || checkIfHomepage())
     {
       taskQuery.where().currentUserCanWorkOn();
     }
@@ -120,6 +123,14 @@ public class TasksDataModel extends LazyDataModel<ITask>
     {
       query.descending();
     }
+  }
+
+  public int getSize()
+  {
+    var taskQuery = TaskQuery.create();
+    applyFilter(taskQuery);
+    checkIfPersonalTasksOrHomepage(taskQuery);
+    return (int) taskQuery.executor().count();
   }
 
   public boolean getShowAllTasks()

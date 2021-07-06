@@ -6,6 +6,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUr
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,14 +39,14 @@ public class WebTestCaseDetailsIT
     Configuration.fileDownload = FileDownloadMode.PROXY;
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     loginDeveloper();
+    startTestProcess("1750C5211D94569D/TestData.ivp");
   }
 
   @BeforeEach
   void beforeEach()
   {
-    startTestProcess("1750C5211D94569D/TestData.ivp");
     open(viewUrl("cases.xhtml"));
-    $(".si-information-circle").shouldBe(visible).click();
+    $(byText("TestCase")).shouldBe(visible).click();
     $("#form\\:caseName").shouldBe(text("TestCase"));
   }
 
