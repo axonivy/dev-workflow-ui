@@ -5,12 +5,10 @@ import java.util.Arrays;
 
 import javax.faces.bean.ManagedBean;
 
-import ch.ivyteam.ivy.environment.Ivy;
+import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.security.IPermission;
-import ch.ivyteam.ivy.security.ISecurityDescriptor;
 import ch.ivyteam.ivy.workflow.IWorkflowSession;
 
-@SuppressWarnings("serial")
 @ManagedBean
 public class AdminBean implements Serializable
 {
@@ -83,11 +81,8 @@ public class AdminBean implements Serializable
 
   private static Boolean hasPermission(IPermission... permissions)
   {
-    IWorkflowSession session = Ivy.session();
-    ISecurityDescriptor securityDescriptor = Ivy
-            .request()
-            .getApplication()
-            .getSecurityDescriptor();
+    var session = IWorkflowSession.current();
+    var securityDescriptor = IApplication.current().getSecurityDescriptor();
     return Arrays
             .stream(permissions)
             .anyMatch(p -> session.hasPermission(securityDescriptor, p));
@@ -95,11 +90,8 @@ public class AdminBean implements Serializable
 
   private static Boolean hasAtLeastOnePermission(IPermission... permissions)
   {
-    IWorkflowSession session = Ivy.session();
-    ISecurityDescriptor securityDescriptor = Ivy
-            .request()
-            .getApplication()
-            .getSecurityDescriptor();
+    var session = IWorkflowSession.current();
+    var securityDescriptor = IApplication.current().getSecurityDescriptor();
     return Arrays
             .stream(permissions)
             .anyMatch(p -> session.hasPermission(securityDescriptor, p));
