@@ -3,8 +3,8 @@ package ch.ivyteam.workflowui.tasks;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.workflow.ITask;
+import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.workflowui.TaskLinkModel;
@@ -65,7 +65,7 @@ public class TasksBean
 
   public void executeTask(long taskId)
   {
-    ITask task = Ivy.wf().findTask(taskId);
+    ITask task = IWorkflowContext.current().findTask(taskId);
     if (TaskState.END_STATES.contains(task.getState()))
     {
       RedirectUtil.redirect("taskDetails.xhtml?task=" + taskId);
