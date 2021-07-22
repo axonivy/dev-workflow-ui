@@ -12,9 +12,10 @@
   <modules>
     <module>workflow-ui</module>
     <module>workflow-ui-test</module>
-    <module>workflow-ui-web-test</module>
     <module>workflow-ui-test-data</module>
+    <module>workflow-ui-web-test</module>
     <module>maven/deploy</module>
+    <module>maven/workflow-ui-jar</module>
   </modules>
 
   <build>
@@ -22,7 +23,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-deploy-plugin</artifactId>
-        <version>2.8.2</version>
         <configuration>
           <skip>true</skip>
         </configuration>
