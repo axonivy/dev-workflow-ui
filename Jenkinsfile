@@ -63,6 +63,7 @@ pipeline {
             junit testDataPublishers: [[$class: 'AttachmentPublisher'], [$class: 'StabilityTestDataPublisher']], testResults: '**/target/surefire-reports/**/*.xml'
             junit testDataPublishers: [[$class: 'AttachmentPublisher'], [$class: 'StabilityTestDataPublisher']], testResults: '**/target/failsafe-reports/*.xml'
             archiveArtifacts '**/target/*.iar'
+            archiveArtifacts '**/target/workflow-ui-jar*.jar'
             archiveArtifacts '**/target/ivyEngine/logs/*'
             archiveArtifacts artifacts: '**/target/selenide/reports/**/*', allowEmptyArchive: true
             currentBuild.description = "<a href='${BUILD_URL}artifact/workflow-ui-web-test/target/screenshotsCompare.html'>&raquo; Screenshots</a><br>" +
