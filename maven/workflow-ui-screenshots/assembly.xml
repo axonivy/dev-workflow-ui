@@ -9,7 +9,7 @@
     </formats>
     <fileSets>
         <fileSet>
-            <directory>target/docu/screenshots</directory>
+            <directory>../../workflow-ui-web-test/target/docu/screenshots</directory>
             <outputDirectory></outputDirectory>
         </fileSet>
     </fileSets>
