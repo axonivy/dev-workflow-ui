@@ -1,3 +1,19 @@
+:root {
+  --accent-color-h: 200;
+  --accent-color-s: 60%;
+  --accent-color-l: 60%;
+  --accent-light-color: hsl(var(--accent-color-h), var(--accent-color-s), 75%);
+  --menuitem-active-bg-color: var(--accent-color);
+}
+
+body {
+  min-width: 375px;
+}
+
+.layout-topbar {
+  min-width: 375px;
+}
+
 .table-icon {
   position: relative;
   top: 3px;
@@ -95,13 +111,8 @@
   width: 10em;
 }
 
-.grid-smaller-padding > .ui-panelgrid-content > .ui-g > .ui-panelgrid-cell {
-  padding: 0px;
-  padding-bottom: 16px;
-}
-
-.grid-smaller-padding > .ui-panelgrid-content > .ui-g > .ui-panelgrid-cell:nth-child(even){
-  padding-left: 16px;
+body .ui-panelgrid .ui-panelgrid-cell {
+  padding: 8px;
 }
 
 .case-related-task-table {
@@ -155,7 +166,7 @@
   max-width: 60px;
 }
 
-.case-map-container .process-flow .flow-txt{
+.case-map-container .process-flow .flow-txt {
   position: relative;
   margin-top: 10px;
   float: left;
@@ -204,11 +215,11 @@
 
 .dot {
   position: absolute;
-  background-color:#fff;
-  border:1px solid #212121;
-  height:20px;
-  width:20px;
-  border-radius:50%;
+  background-color: #fff;
+  border: 1px solid #212121;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
 }
 
 .case-state-finished {
@@ -295,8 +306,12 @@
   font-size: 1.5em;
 }
 
-.custom-card {
+.ui-panelgrid-cell .custom-card {
   margin: 0px;
+}
+
+.custom-card {
+  margin: 8px;
   min-height: 100px;
   height: 100%;
 }
@@ -385,17 +400,12 @@
   color: black;
 }
 
-.task-state-zombie-destroyed, .task-state-failed,
-  .case-state-zombie-destroyed {
+.task-state-zombie-destroyed, .task-state-failed, .case-state-zombie-destroyed {
   color: red;
 }
 
 .task-state-waiting, .task-state-in-progress, .case-state-in-progress {
   color: goldenrod;
-}
-
-.cleanup-container {
-  min-height: 300px;
 }
 
 .static-message {
@@ -409,4 +419,22 @@
 .custom-grid > div{
   background: 0;
   border: 0;
+}
+
+.layout-wrapper .layout-main .layout-content {
+  padding: 8px;
+}
+
+.layout-wrapper.layout-menu-horizontal .layout-topbar .topbar-logo {
+  margin-right: 0px;
+}
+
+.layout-wrapper .layout-main .layout-topbar .layout-topbar-menu-wrapper .topbar-menu > li.profile-item > a .profile-name {
+  max-width: 100px;
+}
+
+@media only screen and (max-width: 480px) {
+  .layout-wrapper.layout-menu-horizontal .layout-topbar .topbar-logo img {
+    max-width: 150px;
+  }
 }
