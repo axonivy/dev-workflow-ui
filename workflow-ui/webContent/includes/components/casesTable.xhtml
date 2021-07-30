@@ -4,9 +4,9 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
-  <p:dataTable id="cases" var="case" value="#{casesBean.casesDataModel}" widgetVar="casesTable"
-    emptyMessage="No Cases found with given criteria" style="margin-top:10px" lazy="true" paginatorPosition="bottom"
-    rows="10" rowsPerPageTemplate="10,20,50" paginator="true" paginatorAlwaysVisible="false"
+  <p:dataTable id="cases" var="case" value="#{casesBean.casesDataModel}" widgetVar="casesTable" style="margin-top:10px"
+    emptyMessage="No Cases found with given criteria" paginatorPosition="bottom" rows="10" lazy="true" paginator="true"
+    rowsPerPageTemplate="10,20,50" paginatorAlwaysVisible="false" sortBy="#{case.startTimestamp}" sortOrder="descending"
     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
 
     <f:facet name="header">
@@ -29,7 +29,7 @@
 
     <p:column headerText="Name" filterBy="#{case.getName(case)}" sortBy="#{case.getName(case)}">
       <h:link outcome="caseDetails">
-        <f:param name="case" value="#{case.id}"/>
+        <f:param name="case" value="#{case.id}" />
         <h:outputText id="caseName" value="#{casesBean.getName(case)}" />
         <p:tooltip for="caseName" value="Case ID: #{case.id}" position="top" />
       </h:link>
@@ -40,11 +40,11 @@
     </p:column>
 
     <p:column headerText="Start" style="text-align: center;" sortBy="#{case.startTimestamp}">
-      <jc:datetime id="startTime" datetime="#{case.startTimestamp}"/>
+      <jc:datetime id="startTime" datetime="#{case.startTimestamp}" />
     </p:column>
 
     <p:column headerText="End" style="text-align: center;" sortBy="#{case.endTimestamp}">
-      <jc:datetime id="endTime" datetime="#{case.endTimestamp}"/>
+      <jc:datetime id="endTime" datetime="#{case.endTimestamp}" />
     </p:column>
 
     <p:column styleClass="icon-row">
