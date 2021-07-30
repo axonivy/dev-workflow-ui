@@ -15,7 +15,7 @@
           <p:dataTable id="intermediateEventsTable" var="intermediateEvent"
             value="#{intermediateEventsBean.intermediateEvents}" styleClass="margin-top-10" rows="5" paginator="true"
             paginatorPosition="bottom" paginatorAlwaysVisible="false" selectionMode="single"
-            rowKey="#{intermediateEvent.processElementId}">
+            rowKey="#{intermediateEvent.processElementId}" sortBy="#{intermediateEvent.size}">
             <p:ajax event="rowSelect" listener="#{intermediateEventsBean.onRowSelect}" update="@form" />
 
             <p:column width="40">

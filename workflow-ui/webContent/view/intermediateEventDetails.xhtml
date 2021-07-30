@@ -40,7 +40,7 @@
           </div>
           <p:dataTable var="event" value="#{intermediateEventDetailsBean.selectedIntermediateElement.eventModel}"
             id="eventsTable" styleClass="margin-top-5" rows="10" paginator="true" paginatorPosition="bottom"
-            paginatorAlwaysVisible="false" lazy="true">
+            paginatorAlwaysVisible="false" lazy="true" sortBy="#{event.id}">
 
             <p:column headerText="ID" width="70" sortBy="#{event.id}">
               <h:outputText value="#{event.id}" />

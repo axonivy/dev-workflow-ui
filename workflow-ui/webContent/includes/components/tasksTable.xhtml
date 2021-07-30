@@ -4,9 +4,9 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
-  <p:dataTable id="tasks" var="task" value="#{tasksBean.tasksDataModel}" widgetVar="tasksTable"
-    emptyMessage="No Tasks found with given criteria" style="margin-top:10px" lazy="true" paginatorPosition="bottom"
-    rows="10" rowsPerPageTemplate="10,20,50" paginator="true" paginatorAlwaysVisible="false"
+  <p:dataTable id="tasks" var="task" value="#{tasksBean.tasksDataModel}" widgetVar="tasksTable" style="margin-top:10px"
+    emptyMessage="No Tasks found with given criteria" lazy="true" paginatorPosition="bottom" rowsPerPageTemplate="10,20,50"
+    rows="10" paginator="true" paginatorAlwaysVisible="false" sortBy="#{task.startTimestamp}" sortOrder="descending"
     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
 
     <f:facet name="header">

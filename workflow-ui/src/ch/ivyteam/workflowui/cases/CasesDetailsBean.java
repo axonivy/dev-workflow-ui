@@ -33,6 +33,7 @@ public class CasesDetailsBean
   private List<DocumentModel> documents;
   private CaseMapModel caseMapModel;
   private boolean showSystemTasks = false;
+  private List<ITask> tasks;
 
   public String getSelectedCaseId()
   {
@@ -51,6 +52,7 @@ public class CasesDetailsBean
     customFields = CustomFieldModel.create(selectedCase);
     documents = DocumentModel.create(selectedCase);
     caseMapModel = CaseMapModel.create(selectedCase);
+    tasks = CaseDetailUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks);
   }
 
   public ICase getCaseById(long id)
@@ -67,12 +69,6 @@ public class CasesDetailsBean
   {
     return StringUtils.isEmpty(selectedCase.getDescription()) ? "No description"
         : selectedCase.getDescription();
-  }
-
-  public List<ITask> getRelatedTasks()
-  {
-    List<ITask> tasks = selectedCase.tasks().all();
-    return tasks.size() > 20 ? tasks.subList(0, 20) : tasks;
   }
 
   public CaseMapModel getCaseMap()
@@ -118,7 +114,7 @@ public class CasesDetailsBean
 
   public List<ITask> getTasks()
   {
-    return CaseDetailUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks);
+    return tasks;
   }
 
   public boolean isShowSystemTasks()
@@ -129,5 +125,6 @@ public class CasesDetailsBean
   public void setShowSystemTasks(boolean showSystemTasks)
   {
     this.showSystemTasks = showSystemTasks;
+    tasks = CaseDetailUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks);
   }
 }

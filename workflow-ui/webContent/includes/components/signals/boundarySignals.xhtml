@@ -5,7 +5,8 @@
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
   <p:dataTable id="boundarySignalsTable" var="receiver" value="#{signalsBean.boundarySignalModel}" lazy="true"
-    styleClass="margin-top-10" rows="5" paginator="true" paginatorPosition="bottom" paginatorAlwaysVisible="false">
+    styleClass="margin-top-10" rows="5" paginator="true" paginatorPosition="bottom" paginatorAlwaysVisible="false"
+    sortBy="#{receiver.signalPattern}">
     <p:column width="40">
       <i class="si si-lg si-network-signal"/>
     </p:column>
