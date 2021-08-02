@@ -3,6 +3,8 @@ package ch.ivyteam.workflowui.tasks;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.event.SelectEvent;
+
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.TaskState;
@@ -63,6 +65,24 @@ public class TasksBean
     return UserUtil.checkIfPersonalTasks();
   }
 
+  public void executeTaskRow(SelectEvent event)
+  {
+    Object object = event.getObject();
+    if (object instanceof ITask && checkIfPersonalTasks())
+    {
+      executeTask(((ITask) object).getId());
+    }
+    else
+    {
+      redirectToTaskDetails(((ITask) object).getId());
+    }
+  }
+
+  public void redirectToTaskDetails(long taskId)
+  {
+    RedirectUtil.redirect("taskDetails.xhtml?task=" + taskId);
+  }
+
   public void executeTask(long taskId)
   {
     ITask task = IWorkflowContext.current().findTask(taskId);
@@ -97,5 +117,4 @@ public class TasksBean
   {
     return new TaskLinkModel(task);
   }
-
 }

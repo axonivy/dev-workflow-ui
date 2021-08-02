@@ -32,6 +32,29 @@ public class CasesDataModel extends LazyDataModel<ICase>
   }
 
   @Override
+  public Object getRowKey(ICase icase) {
+    return icase.getId();
+  }
+
+  @Override
+  public ICase getRowData(String rowKey) {
+    for (ICase icase : getCaseList()) {
+      if (icase.getId() == Long.valueOf(rowKey)) {
+        return icase;
+      }
+    }
+    return null;
+  }
+
+  private List<ICase> getCaseList()
+  {
+    var caseQuery = CaseQuery.create();
+    applyFilter(caseQuery);
+    checkIfPersonalCases(caseQuery);
+    return caseQuery.executor().results();
+  }
+
+  @Override
   public List<ICase> load(int first, int pageSize, String sortField, SortOrder sortOrder,
       Map<String, Object> filters)
   {

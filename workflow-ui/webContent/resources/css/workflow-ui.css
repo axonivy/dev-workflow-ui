@@ -123,11 +123,6 @@ body .ui-panelgrid .ui-panelgrid-cell {
   padding: 0px 10px;
 }
 
-.case-details-item .ui-datascroller-content.ui-widget-content.ui-corner-all {
-  padding: 0;
-  border: none;
-}
-
 .case-related-running {
   line-height: 2.2rem;
 }

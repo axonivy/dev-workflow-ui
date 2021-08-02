@@ -7,8 +7,9 @@
   <p:dataTable id="tasks" var="task" value="#{tasksBean.tasksDataModel}" widgetVar="tasksTable" style="margin-top:10px"
     emptyMessage="No Tasks found with given criteria" lazy="true" paginatorPosition="bottom" rowsPerPageTemplate="10,20,50"
     rows="10" paginator="true" paginatorAlwaysVisible="false" sortBy="#{task.startTimestamp}" sortOrder="descending"
+    selectionMode="single"
     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
-
+    <p:ajax event="rowSelect" listener="#{tasksBean.executeTaskRow}" update="@form" />
     <f:facet name="header">
       <p:outputPanel>
         <h:outputText value="Search:" />
