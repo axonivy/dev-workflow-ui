@@ -34,6 +34,29 @@ public class TasksDataModel extends LazyDataModel<ITask>
   }
 
   @Override
+  public Object getRowKey(ITask task) {
+    return task.getId();
+  }
+
+  @Override
+  public ITask getRowData(String rowKey) {
+    for (ITask task : getTaskList()) {
+      if (task.getId() == Long.valueOf(rowKey)) {
+        return task;
+      }
+    }
+    return null;
+  }
+
+  private List<ITask> getTaskList()
+  {
+    var taskQuery = TaskQuery.create();
+    applyFilter(taskQuery);
+    checkIfPersonalTasksOrHomepage(taskQuery);
+    return taskQuery.executor().results();
+  }
+
+  @Override
   public List<ITask> load(int first, int pageSize, String sortField, SortOrder sortOrder,
       Map<String, Object> filters)
   {

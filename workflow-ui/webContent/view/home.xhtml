@@ -14,8 +14,9 @@
             <div class="straight-text-icon card-header-title">
               <h:outputText value="Last starts" />
             </div>
-            <p:dataTable id="lastStarts" var="start" value="#{homepageBean.lastStarts}"
+            <p:dataTable id="lastStarts" var="start" value="#{homepageBean.lastStarts}" selectionMode="single" rowKey="#{start.displayName}"
                 rows="10" styleClass="margin-top-10 table-header-none" rendered="#{not empty homepageBean.lastStarts}">
+              <p:ajax event="rowSelect" listener="#{homepageBean.executeLastStart}" update="@form" />
               <p:column styleClass="last-start-element">
                 <p:commandLink id="last-start-link" actionListener="#{start.execute}" styleClass="straight-text-icon">
                   <i class="si si-lg si-controls-play margin-right-10"/>
@@ -33,8 +34,10 @@
             <div class="straight-text-icon card-header-title">
               <h:outputText value="My tasks" />
             </div>
-            <p:dataTable id="activeTasks" var="task" value="#{homepageBean.tasksDataModel}" lazy="true" rows="10"
-             styleClass="margin-top-10" rendered="#{homepageBean.tasksSize gt 0}" sortBy="#{task.startTimestamp}" sortOrder="descending">
+            <p:dataTable id="activeTasks" var="task" value="#{homepageBean.tasksDataModel}" lazy="true"
+             rows="10" styleClass="margin-top-10" rendered="#{homepageBean.tasksSize gt 0}"
+             sortBy="#{task.startTimestamp}" sortOrder="descending" selectionMode="single">
+              <p:ajax event="rowSelect" listener="#{tasksBean.executeTaskRow}" update="@form" />
               <p:column styleClass="icon-row">
                 <i class="si si-lg si-task-list-edit margin-right-5" />
               </p:column>

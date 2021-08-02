@@ -7,8 +7,9 @@
   <p:dataTable id="cases" var="case" value="#{casesBean.casesDataModel}" widgetVar="casesTable" style="margin-top:10px"
     emptyMessage="No Cases found with given criteria" paginatorPosition="bottom" rows="10" lazy="true" paginator="true"
     rowsPerPageTemplate="10,20,50" paginatorAlwaysVisible="false" sortBy="#{case.startTimestamp}" sortOrder="descending"
+    selectionMode="single"
     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
-
+    <p:ajax event="rowSelect" listener="#{casesBean.redirectToCaseRow}" update="@form" />
     <f:facet name="header">
       <p:outputPanel>
         <h:outputText value="Search:" />
