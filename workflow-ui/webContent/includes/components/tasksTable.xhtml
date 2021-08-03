@@ -39,19 +39,19 @@
       <jc:user user="#{task.activator}" />
     </p:column>
 
-    <p:column headerText="Start" style="text-align: center;" sortBy="#{task.startTimestamp}">
+    <p:column headerText="Start" style="text-align: center;" sortBy="#{task.startTimestamp}" priority="2">
       <jc:datetime id="startTime" datetime="#{task.startTimestamp}"/>
     </p:column>
 
-    <p:column headerText="Expiry" style="text-align: center;" sortBy="#{task.expiryTimestamp}" rendered="#{tasksBean.checkIfPersonalTasks()}">
+    <p:column headerText="Expiry" style="text-align: center;" sortBy="#{task.expiryTimestamp}" rendered="#{tasksBean.checkIfPersonalTasks()}" priority="2">
       <jc:datetime id="expiryTime" datetime="#{task.expiryTimestamp}"/>
     </p:column>
 
-    <p:column headerText="End" style="text-align: center;" sortBy="#{task.endTimestamp}" rendered="#{!tasksBean.checkIfPersonalTasks()}">
+    <p:column headerText="End" style="text-align: center;" sortBy="#{task.endTimestamp}" rendered="#{!tasksBean.checkIfPersonalTasks()}" priority="3">
       <jc:datetime id="endTime" datetime="#{task.endTimestamp}"/>
     </p:column>
 
-    <p:column styleClass="icon-row">
+    <p:column styleClass="icon-row" priority="2">
       <h:link outcome="taskDetails">
         <f:param name="task" value="#{task.id}" />
         <i class="si si-lg si-information-circle"></i>
