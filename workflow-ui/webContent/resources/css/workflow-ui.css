@@ -428,6 +428,10 @@ body .ui-panelgrid .ui-panelgrid-cell {
   max-width: 100px;
 }
 
+body .ui-treetable thead th.ui-state-active, body .ui-datatable thead th.ui-state-active {
+  background-color: white;
+}
+
 @media only screen and (max-width: 480px) {
   .layout-wrapper.layout-menu-horizontal .layout-topbar .topbar-logo img {
     max-width: 150px;
