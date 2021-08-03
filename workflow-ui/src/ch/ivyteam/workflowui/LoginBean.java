@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.event.SelectEvent;
 
-import ch.ivyteam.ivy.security.ISecurityConstants;
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.workflowui.LoginTableBean.User;
 import ch.ivyteam.workflowui.util.LoginUtil;
@@ -36,12 +35,7 @@ public class LoginBean
   private void login(User user)
   {
     username = user.getName();
-    password = "";
-    if (ISecurityConstants.DEVELOPER_USER_NAME.equals(username))
-    {
-      password = username;
-    }
-    LoginUtil.login(username, password, getOriginalUrl());
+    LoginUtil.tableLogin(username, getOriginalUrl());
   }
 
   public void customLogin()
@@ -64,7 +58,7 @@ public class LoginBean
   public void redirectToLoginPage()
   {
     evalOriginalUrl();
-    LoginUtil.redirect();
+    LoginUtil.redirectToLoginForm();
   }
 
   public void resetOriginalUrlAndRedirect()

@@ -11,14 +11,30 @@ public class LoginUtil
 {
   public static void login(String username, String password, String originalUrl)
   {
+    if (!checkLoginAndRedirect(username, password, originalUrl))
+    {
+      FacesContext.getCurrentInstance().addMessage(null,
+          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login failed", "Login failed"));
+      redirectToLoginForm();
+    }
+  }
+
+  public static void tableLogin(String username,  String originalUrl)
+  {
+    if (!checkLoginAndRedirect(username, "", originalUrl))
+    {
+      login(username, username, originalUrl);
+    }
+  }
+
+  private static boolean checkLoginAndRedirect(String username, String password, String originalUrl)
+  {
     if (ISession.current().loginSessionUser(username, password))
     {
       RedirectUtil.redirect(StringUtils.isNotBlank(originalUrl) ? originalUrl : "home.xhtml");
-      return;
+      return true;
     }
-    FacesContext.getCurrentInstance().addMessage(null,
-            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login failed", "Login failed"));
-    redirect();
+    return false;
   }
 
   public static void logout()
@@ -27,7 +43,7 @@ public class LoginUtil
     RedirectUtil.redirect();
   }
 
-  public static void redirect()
+  public static void redirectToLoginForm()
   {
     RedirectUtil.redirect("login.xhtml");
   }
