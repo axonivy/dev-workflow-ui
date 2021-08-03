@@ -42,7 +42,7 @@ public class UserUtil
       }
       else
       {
-        LoginUtil.redirect();
+        LoginUtil.redirectToLoginForm();
       }
     }
   }
