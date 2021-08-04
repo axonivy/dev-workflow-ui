@@ -131,7 +131,6 @@ public class TasksDetailsBean
 
   public boolean canBeStarted()
   {
-    return (TaskState.WORKING_OR_SUSPENDED_STATES.contains(selectedTask.getState())
-        && selectedTask.canUserResumeTask(ISession.current().getSessionUser().getUserToken()).wasSuccessful());
+    return selectedTask.canUserResumeTask(ISession.current().getSessionUser().getUserToken()).wasSuccessful();
   }
 }
