@@ -9,7 +9,7 @@
     rows="10" paginator="true" paginatorAlwaysVisible="false" sortBy="#{task.startTimestamp}" sortOrder="descending"
     selectionMode="single"
     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
-    <p:ajax event="rowSelect" listener="#{tasksBean.executeTaskRow}" update="@form" />
+    <p:ajax event="rowSelect" listener="#{tasksBean.displayTaskRow}" update="@form" />
     <f:facet name="header">
       <p:outputPanel>
         <h:outputText value="Search:" />
@@ -29,13 +29,13 @@
     </p:column>
 
     <p:column headerText="Name" filterBy="#{task.name}" sortBy="#{task.name}">
-      <h:commandLink action="#{tasksBean.executeTask(task.id)}">
+      <h:commandLink action="#{tasksBean.redirectToTaskDetails(task.id)}">
         <h:outputText id="taskName" value="#{tasksDetailsBean.getName(task)}" />
         <p:tooltip for="taskName" value="Task ID: #{task.id}" position="top" />
       </h:commandLink>
     </p:column>
 
-    <p:column headerText="Responsible" filterBy="#{task.activator}" sortBy="#{task.activatorName}" rendered="#{!tasksBean.checkIfPersonalTasks()}">
+    <p:column headerText="Responsible" filterBy="#{task.activator}" sortBy="#{task.activatorName}">
       <jc:user user="#{task.activator}" />
     </p:column>
 
@@ -43,11 +43,7 @@
       <jc:datetime id="startTime" datetime="#{task.startTimestamp}"/>
     </p:column>
 
-    <p:column headerText="Expiry" style="text-align: center;" sortBy="#{task.expiryTimestamp}" rendered="#{tasksBean.checkIfPersonalTasks()}" priority="2">
-      <jc:datetime id="expiryTime" datetime="#{task.expiryTimestamp}"/>
-    </p:column>
-
-    <p:column headerText="End" style="text-align: center;" sortBy="#{task.endTimestamp}" rendered="#{!tasksBean.checkIfPersonalTasks()}" priority="3">
+    <p:column headerText="End" style="text-align: center;" sortBy="#{task.endTimestamp}" priority="3">
       <jc:datetime id="endTime" datetime="#{task.endTimestamp}"/>
     </p:column>
 

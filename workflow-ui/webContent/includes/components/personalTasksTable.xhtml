@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component"
+  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
+  xmlns:jc="http://java.sun.com/jsf/composite/components">
+
+  <p:dataTable id="tasks" var="task" value="#{tasksBean.tasksDataModel}" widgetVar="tasksTable" style="margin-top:10px"
+    emptyMessage="No Tasks found with given criteria" lazy="true" paginatorPosition="bottom" rowsPerPageTemplate="10,20,50"
+    rows="10" paginator="true" paginatorAlwaysVisible="false" sortBy="#{task.startTimestamp}" sortOrder="descending"
+    selectionMode="single"
+    paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
+    <p:ajax event="rowSelect" listener="#{tasksBean.executeTaskRow}" update="@form" />
+    <f:facet name="header">
+      <p:outputPanel>
+        <h:outputText value="Search:" />
+        <p:inputText id="tasksFilter" onkeyup="PF('tasksTable').filter()" style="width:150px"
+          placeholder="Enter keyword" value="#{tasksBean.tasksDataModel.filter}" />
+      </p:outputPanel>
+    </f:facet>
+
+    <p:column filterBy="#{task.state}" styleClass="icon-row" sortBy="#{task.state}">
+      <h:outputText id="taskState" styleClass="si si-lg si-#{tasksBean.getStateIcon(task.state)}" />
+      <p:tooltip for="taskState" value="State: #{task.state}" position="top" />
+    </p:column>
+
+    <p:column id="priority" filterBy="#{task.priority}" styleClass="icon-row" sortBy="#{task.priority}">
+      <h:outputText id="taskPrio" styleClass="si si-lg si-#{tasksBean.getPriorityIcon(task.priority)}" />
+      <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
+    </p:column>
+
+    <p:column headerText="Name" filterBy="#{task.name}" sortBy="#{task.name}">
+      <h:commandLink action="#{tasksBean.executeTask(task.id)}">
+        <h:outputText id="taskName" value="#{tasksDetailsBean.getName(task)}" />
+        <p:tooltip for="taskName" value="Task ID: #{task.id}" position="top" />
+      </h:commandLink>
+    </p:column>
+
+    <p:column headerText="Start" style="text-align: center;" sortBy="#{task.startTimestamp}" priority="2">
+      <jc:datetime id="startTime" datetime="#{task.startTimestamp}"/>
+    </p:column>
+
+    <p:column headerText="Expiry" style="text-align: center;" sortBy="#{task.expiryTimestamp}" priority="2">
+      <jc:datetime id="expiryTime" datetime="#{task.expiryTimestamp}"/>
+    </p:column>
+
+    <p:column styleClass="icon-row" priority="2">
+      <h:link outcome="taskDetails">
+        <f:param name="task" value="#{task.id}" />
+        <i class="si si-lg si-information-circle"></i>
+      </h:link>
+    </p:column>
+  </p:dataTable>
+</ui:composition>
