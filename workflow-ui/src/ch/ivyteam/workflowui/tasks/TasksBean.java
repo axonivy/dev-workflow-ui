@@ -11,7 +11,6 @@ import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.workflowui.TaskLinkModel;
 import ch.ivyteam.workflowui.util.RedirectUtil;
-import ch.ivyteam.workflowui.util.UserUtil;
 
 @ManagedBean
 @ViewScoped
@@ -60,19 +59,19 @@ public class TasksBean
     }
   }
 
-  public boolean checkIfPersonalTasks()
-  {
-    return UserUtil.checkIfPersonalTasks();
-  }
-
   public void executeTaskRow(SelectEvent event)
   {
     Object object = event.getObject();
-    if (object instanceof ITask && checkIfPersonalTasks())
+    if (object instanceof ITask)
     {
       executeTask(((ITask) object).getId());
     }
-    else
+  }
+
+  public void displayTaskRow(SelectEvent event)
+  {
+    Object object = event.getObject();
+    if (object instanceof ITask)
     {
       redirectToTaskDetails(((ITask) object).getId());
     }
@@ -86,14 +85,7 @@ public class TasksBean
   public void executeTask(long taskId)
   {
     ITask task = IWorkflowContext.current().findTask(taskId);
-    if (TaskState.END_STATES.contains(task.getState()))
-    {
-      RedirectUtil.redirect("taskDetails.xhtml?task=" + taskId);
-    }
-    else
-    {
-      RedirectUtil.redirect("frame.xhtml?taskUrl=" + task.getStartLink().getRelative());
-    }
+    RedirectUtil.redirect("frame.xhtml?taskUrl=" + task.getStartLink().getRelative());
   }
 
   public String getPriorityIcon(WorkflowPriority priority)
