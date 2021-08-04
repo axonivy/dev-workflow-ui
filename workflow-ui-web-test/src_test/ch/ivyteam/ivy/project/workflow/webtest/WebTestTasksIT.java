@@ -94,4 +94,26 @@ public class WebTestTasksIT
     $("#form\\:taskState").shouldBe(exactText("DONE"));
     $("#form\\:taskStartBtn").shouldHave(cssClass("ui-state-disabled"));
   }
+
+  @Test
+  public void testStartParkedTask()
+  {
+    open(viewUrl("home.xhtml"));
+    loginDeveloper();
+    startTestProcess("1750C5211D94569D/TestData.ivp");
+    open(viewUrl("allTasks.xhtml"));
+
+    $(".si-information-circle").shouldBe(visible).click();
+    $(".case-link").shouldHave(text("TestCase"));
+
+    $("#form\\:taskState").shouldBe(exactText("SUSPENDED"));
+    $("#form\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"));
+
+    $("#form\\:taskActionsBtn").click();
+    $("#form\\:taskParkBtn").should(visible).click();
+
+    $("#form\\:taskState").shouldBe(exactText("PARKED"));
+    $("#form\\:workingUser\\:userName").shouldBe(exactText($("#sessionUserName").getText()));
+    $("#form\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"));
+  }
 }
