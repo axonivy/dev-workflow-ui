@@ -22,6 +22,33 @@ body .ui-datatable tbody tr.ui-datatable-even.ui-state-highlight {
   min-width: 375px;
 }
 
+.layout-wrapper.layout-menu-horizontal .layout-sidebar .layout-menu > li > a i.si-house-1 {
+  margin-right: 0px;
+}
+
+
+.active-menu {
+  background: var(--accent-light-color);
+}
+
+.layout-wrapper .layout-sidebar .layout-menu .active-menu > a,
+.layout-wrapper .layout-sidebar .layout-menu .active-menu > a > i {
+  color: var(--primary-color);
+}
+
+.active-submenu {
+  background: var(--accent-light-color);
+}
+
+.active-submenu > span,
+.layout-sidebar .layout-menu .ripplelink.active-submenu > i{
+  color: var(--primary-color);
+}
+
+.active-submenu:hover > span {
+  color: white;
+}
+
 .table-icon {
   position: relative;
   top: 3px;
