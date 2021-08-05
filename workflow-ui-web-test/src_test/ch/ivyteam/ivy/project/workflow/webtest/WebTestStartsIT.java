@@ -60,4 +60,12 @@ public class WebTestStartsIT
     $(By.id("form:testSelectOneMenu")).shouldBe(visible).click();
     $(By.id("form:testSelectOneMenu_1")).shouldBe(visible).click();
   }
+
+  @Test
+  public void testWebservicesVisible()
+  {
+    Selenide.open(viewUrl("starts.xhtml"));
+    $(By.id("startsForm:filter")).sendKeys("testservice");
+    $(By.id("startsForm:projectStarts")).shouldHave(text("TestService"));
+  }
 }
