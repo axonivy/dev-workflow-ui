@@ -8,7 +8,7 @@
       <h:outputText value="Login Table" styleClass="card-header-title" /><br/>
       <h:outputText value="Click user to login" />
       <p:dataTable id="users" var="user" value="#{loginTableBean.users}" widgetVar="usersTable"
-        emptyMessage="No users found with given criteria" style="margin-top:10px"
+        emptyMessage="No users found with given criteria" style="margin-top:10px" selection="#{loginTableBean.currentUser}"
         selectionMode="single" rowKey="#{user.fullname}" sortBy="#{user.name}">
         <p:ajax event="rowSelect" listener="#{loginBean.loginFromTable}" update="@form" />
 

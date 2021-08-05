@@ -58,6 +58,15 @@ public class WebTestLoginIT
   }
 
   @Test
+  void testCustomLoginFailMessage()
+  {
+    Selenide.open(viewUrl("login.xhtml"));
+    $("#loginForm\\:loginMessage").shouldNotBe(visible);
+    WorkflowUiUtil.customLogin("sadgs","sdgasgd");
+    $("#loginForm\\:loginMessage").shouldBe(visible);
+  }
+
+  @Test
   void testRedirectIfNotLogggedIn()
   {
     loginFromTable("testuser");
@@ -86,4 +95,26 @@ public class WebTestLoginIT
     $(byText("testuser")).click();
     assertCurrentUrlEndsWith("cases.xhtml");
   }
+
+  @Test
+  void testLoginTableRedirect()
+  {
+    loginFromTable("DifferentLogin");
+    assertCurrentUrlEndsWith("login.xhtml");
+    WorkflowUiUtil.customLogin("DifferentLogin","DifferentPassword");
+    $("#sessionUserName").shouldBe(text("DifferentLogin"));
+  }
+
+  @Test
+  void testLoginTableHighlightCurrentUser()
+  {
+    loginFromTable("testuser");
+    Selenide.open(viewUrl("loginTable.xhtml"));
+    $("#loginTable\\:users_data > tr.ui-widget-content.ui-datatable-even.ui-datatable-selectable.ui-state-highlight").shouldBe(visible);
+    logout();
+    Selenide.open(viewUrl("loginTable.xhtml"));
+    $("#loginTable\\:users_data > tr.ui-widget-content.ui-datatable-even.ui-datatable-selectable.ui-state-highlight").shouldNotBe(visible);
+  }
+
+
 }
