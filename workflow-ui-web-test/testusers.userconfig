@@ -10,4 +10,8 @@
         <username>DeveloperTest</username>
         <password>DeveloperTest</password>
     </user>
+    <user>
+        <username>DifferentLogin</username>
+        <password>DifferentPassword</password>
+    </user>
 </userConfig>

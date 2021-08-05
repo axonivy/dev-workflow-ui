@@ -15,7 +15,6 @@ public class LoginUtil
     {
       FacesContext.getCurrentInstance().addMessage(null,
           new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login failed", "Login failed"));
-      redirectToLoginForm();
     }
   }
 
@@ -23,7 +22,10 @@ public class LoginUtil
   {
     if (!checkLoginAndRedirect(username, "", originalUrl))
     {
-      login(username, username, originalUrl);
+      if (!checkLoginAndRedirect(username, username, originalUrl))
+      {
+        redirectToLoginForm();
+      }
     }
   }
 

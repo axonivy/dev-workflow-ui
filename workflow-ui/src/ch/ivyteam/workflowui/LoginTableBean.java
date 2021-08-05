@@ -7,6 +7,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.workflowui.util.UserUtil;
 
@@ -26,10 +27,18 @@ public class LoginTableBean
     return users;
   }
 
+  public User getCurrentUser()
+  {
+    return toUser(ISession.current().getSessionUser());
+  }
+
   private static User toUser(IUser user)
   {
-    String roles = UserUtil.getRoles(user);
-    return new User(user.getName(), user.getFullName(), roles);
+    if (user != null) {
+      String roles = UserUtil.getRoles(user);
+      return new User(user.getName(), user.getFullName(), roles);
+    }
+    return null;
   }
 
   public static class User
