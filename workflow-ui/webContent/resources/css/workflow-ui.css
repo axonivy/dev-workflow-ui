@@ -347,6 +347,14 @@ body .ui-panelgrid .ui-panelgrid-cell {
   height: 100%;
 }
 
+.api-browser-frame {
+  border: none;
+  width: 100%;
+  height: calc(100vh - 250px);
+  min-height: 400px;
+  margin-top: 10px;
+}
+
 .ui-accordion-content .start-element:hover {
   cursor: pointer;
   background-color: var(--item-background-hover);

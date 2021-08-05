@@ -17,10 +17,11 @@
               <p:menuitem id="sr_allTasks" value="All Tasks" icon="si si-task-list-edit" url="allTasks.xhtml" rendered="#{adminBean.isWorkflowAdmin()}" containerStyleClass="#{sidebarBean.isActive('allTasks') ? 'active-menu' : ''}" />
               <p:menuitem id="sr_cases" value="Cases" icon="si si-task-list-approve" url="cases.xhtml" containerStyleClass="#{sidebarBean.isActive('cases') ? 'active-menu' : ''}" />
 
-              <p:submenu id="sr_actions" label="Admin" icon="si si-tools-wench" styleClass="#{sidebarBean.isActive('signals', 'intermediateEvents', 'cleanup') ? 'active-menu' : ''}">
+              <p:submenu id="sr_actions" label="Admin" icon="si si-tools-wench" styleClass="#{sidebarBean.isActive('signals', 'intermediateEvents', 'cleanup', 'api-browser') ? 'active-menu' : ''}">
                 <p:menuitem id="sr_signals" value="Signals" icon="si si-network-signal" url="signals.xhtml" styleClass="#{sidebarBean.isActive('signals') ? 'active-submenu' : ''}"/>
                 <p:menuitem id="sr_intermediate_events" value="Intermediate Events" icon="si si-analytics-graph" url="intermediateEvents.xhtml" styleClass="#{sidebarBean.isActive('intermediateEvents') ? 'active-submenu' : ''}"/>
                 <p:menuitem id="sr_cleanup" value="Cleanup" icon="si si-recycling-trash-bin-2" url="cleanup.xhtml" rendered="#{engineModeBean.demoOrDesigner}" styleClass="#{sidebarBean.isActive('cleanup') ? 'active-submenu' : ''}"/>
+                <p:menuitem id="sr_api-browser" value="API Browser" icon="si si-network-browser" url="api-browser.xhtml" styleClass="#{sidebarBean.isActive('api-browser') ? 'active-submenu' : ''}"/>
               </p:submenu>
             </pm:menu>
           </h:form>
