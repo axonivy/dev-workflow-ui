@@ -6,7 +6,7 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <f:event type="preRenderView" listener="#{loginBean.checkIfLoggedIn}" />
+      <f:event type="preRenderView" listener="#{loginBean.redirectIfNotLoggedIn}" />
       <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
         <h:outputText value="Intermediate Event Beans" styleClass="card-header-title" />
 

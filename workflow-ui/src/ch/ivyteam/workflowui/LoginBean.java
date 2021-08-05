@@ -49,13 +49,18 @@ public class LoginBean
     LoginUtil.logout();
   }
 
-  public void checkIfLoggedIn()
+  public boolean isLoggedIn()
+  {
+    return UserUtil.isLoggedIn();
+  }
+
+  public void redirectIfNotLoggedIn()
   {
     evalOriginalUrl();
     UserUtil.redirectIfNotLoggedIn();
   }
 
-  public void redirectToLoginPage()
+  public void redirectToLoginForm()
   {
     evalOriginalUrl();
     LoginUtil.redirectToLoginForm();

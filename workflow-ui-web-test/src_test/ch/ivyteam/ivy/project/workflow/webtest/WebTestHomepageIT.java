@@ -4,6 +4,8 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginD
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.logout;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
 
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -36,22 +38,22 @@ public class WebTestHomepageIT
     tasksTable.contains("HomePageTestTask");
   }
 
-  public void noStartsIfNotLoggedIn()
+  @Test
+  public void noCardsIfNotLoggedIn()
   {
-    // start process to get different data
-    startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
+    loginDeveloper();
     Selenide.open(viewUrl("home.xhtml"));
 
-    Table tasksTable = PrimeUi.table(By.id("form:activeTasks"));
-    Table startsTable = PrimeUi.table(By.id("form:lastStarts"));
+    // cards should be visible when logged in
+    $("#form\\:activeTasks").shouldBe(visible);
+    $("#form\\:lastStarts").shouldBe(visible);
 
-    // make sure data isnt in the tables
-    startsTable.containsNot("startBoundarySignal.ivp");
-    tasksTable.containsNot("[Task:");
-
-    // make sure there is no data if user is not logged in
     logout();
-    startsTable.contains("No records found");
-    tasksTable.contains("No records found");
+
+    // cards should not be visible and starts should appear
+    $("#form\\:activeTasks").shouldNotBe(visible);
+    $("#form\\:lastStarts").shouldNotBe(visible);
+    $(".main-starts-container").shouldBe(visible);
+
   }
 }

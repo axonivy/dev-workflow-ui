@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component"
+  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
+  xmlns:jc="http://java.sun.com/jsf/composite/components">
+
+ <p:panel styleClass="main-starts-container">
+   <f:facet name="header">
+    <p:outputPanel>
+      <p:inputText id="filter" placeholder="Search project or start" value="#{processesBean.filter}">
+        <p:ajax event="keyup" update="projectStarts" />
+      </p:inputText>
+    </p:outputPanel>
+  </f:facet>
+  <p:accordionPanel var="pmv" value="#{processesBean.PMVs}" id="projectStarts" activeIndex="0" multiple="true">
+    <p:tab id="project" titleStyleClass="straight-text-icon">
+      <f:facet name="title">
+        <h:outputText id="pmvState" styleClass="si si-#{pmv.stateIcon}" />
+        <p:tooltip for="pmvState" value="#{pmv.state} - #{pmv.versionName}" position="top" />
+        <h:outputText styleClass="starts-project-name" value="#{pmv.projectName}" />
+      </f:facet>
+
+      <h:panelGroup styleClass="margin-top-10" layout="block" rendered="#{!empty pmv.caseMapStarts}">
+        <b><h:outputText value="Case Maps" /></b>
+      </h:panelGroup>
+      <p:repeat value="#{pmv.caseMapStarts}" var="casemapStart">
+        <p:panel id="startElementCaseMap" styleClass="start-element" rendered="#{pmv.active}">
+          <p:commandLink action="#{casemapStart.execute}" class="flex-space start-link">
+            <span class="straight-text-icon">
+              <i class="si si-controls-play margin-right-5"></i>
+              <span>#{casemapStart.displayName}</span>
+            </span>
+            <span>#{casemapStart.description}</span>
+          </p:commandLink>
+        </p:panel>
+      </p:repeat>
+
+      <h:panelGroup styleClass="margin-top-10" layout="block" rendered="#{!empty pmv.categories}">
+        <b><h:outputText value="Processes" /></b>
+      </h:panelGroup>
+      <p:repeat value="#{pmv.categories}" var="category">
+        <p:outputPanel id="categoryContainer" styleClass="margin-top-10" rendered="#{!empty category.name}">
+          <i class="#{category.cssIcon} table-icon"></i>
+          <h:outputText id="categoryName" value="#{category.name}"/>
+          <p:tooltip for="categoryName" value="#{category.tooltip}" position="top" />
+        </p:outputPanel>
+
+        <p:repeat value="#{category.starts}" var="start">
+          <p:panel id="startElementProcess" styleClass="start-element" rendered="#{pmv.active}">
+            <p:commandLink id="executeStartLink" action="#{start.execute}" class="flex-space start-link">
+              <span class="straight-text-icon">
+                <i class="si si-controls-play margin-right-5"></i>
+                <span>#{start.displayName}</span>
+              </span>
+              <span>#{start.description}</span>
+            </p:commandLink>
+          </p:panel>
+        </p:repeat>
+      </p:repeat>
+
+    </p:tab>
+  </p:accordionPanel>
+  <p:outputPanel styleClass="main-starts-container-empty" id="noStartsPanel" rendered="#{processesBean.PMVs.size() == 0}">
+    <i class="si si-alert-circle custom-icon"/>
+    <h:outputText value="No projects available" id="noProjectsText"/>
+  </p:outputPanel>
+</p:panel>
+</ui:composition>
