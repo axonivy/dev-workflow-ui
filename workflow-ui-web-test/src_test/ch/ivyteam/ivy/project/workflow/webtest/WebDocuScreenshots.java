@@ -94,6 +94,15 @@ public class WebDocuScreenshots
     $(byText("TestIntermediateEvent")).click();
     $(By.id("intermediateElementDetailsForm:id")).shouldBe(visible);
     takeScreenshot("workflow-ui-intermediateElementDetails", new Dimension(SCREENSHOT_WIDTH, 800));
+
+    open(viewUrl("api-browser.xhtml"));
+    if($(By.id("apiBrowser")).is(visible))
+    {
+      Selenide.switchTo().frame("apiBrowser");
+    }
+    $(".computed-url").shouldBe(visible);
+    takeScreenshot("workflow-ui-swagger-ui", new Dimension(SCREENSHOT_WIDTH, 800));
+    Selenide.switchTo().defaultContent();
   }
 
   private void takeScreenshot(String fileName, Dimension size)
