@@ -20,7 +20,7 @@
         <h:outputText styleClass="starts-project-name" value="#{pmv.projectName}" />
       </f:facet>
 
-      <h:panelGroup styleClass="margin-top-10" layout="block" rendered="#{!empty pmv.caseMapStarts}">
+      <h:panelGroup id="caseMapsTitle" styleClass="margin-top-10" layout="block" rendered="#{!empty pmv.caseMapStarts}">
         <b><h:outputText value="Case Maps" /></b>
       </h:panelGroup>
       <p:repeat value="#{pmv.caseMapStarts}" var="casemapStart">
@@ -35,7 +35,7 @@
         </p:panel>
       </p:repeat>
 
-      <h:panelGroup styleClass="margin-top-10" layout="block" rendered="#{!empty pmv.categories}">
+      <h:panelGroup id="processesTitle" styleClass="margin-top-10" layout="block" rendered="#{!empty pmv.categories}">
         <b><h:outputText value="Processes" /></b>
       </h:panelGroup>
       <p:repeat value="#{pmv.categories}" var="category">
@@ -56,6 +56,20 @@
             </p:commandLink>
           </p:panel>
         </p:repeat>
+      </p:repeat>
+
+      <h:panelGroup id="webServicesTitle" styleClass="margin-top-10" layout="block" rendered="#{!empty pmv.webServiceProcesses}">
+       <b><h:outputText value="Web Services (WSDL)" /></b>
+      </h:panelGroup>
+      <p:repeat value="#{pmv.webServiceProcesses}" var="webServiceProcess">
+        <p:panel id="startElementWebServiceProcess" styleClass="start-element" rendered="#{pmv.active}">
+          <p:link href="#{webServiceProcess.link}" target="_blank" styleClass="flex-space start-link">
+            <span class="straight-text-icon">
+              <i class="si si-network-arrow margin-right-5"></i>
+              <span>#{webServiceProcess.name}</span>
+            </span>
+          </p:link>
+        </p:panel>
       </p:repeat>
 
     </p:tab>

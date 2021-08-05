@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.application.ActivityOperationState;
 import ch.ivyteam.ivy.application.IProcessModelVersion;
+import ch.ivyteam.ivy.jsf.bean.info.model.WebServiceProcess;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
 
@@ -22,6 +23,7 @@ public class CustomPMV
   private final IWorkflowProcessModelVersion pmv;
   private final List<CategoryModel> categories;
   private final List<StartableModel> caseMapStarts;
+  private final List<WebServiceProcess> webServiceProcesses;
 
   public static Optional<CustomPMV> create(IWorkflowProcessModelVersion pmv, String filter)
   {
@@ -42,25 +44,29 @@ public class CustomPMV
     var casemapStartElements = pmv.getStartables(ISession.current()).stream()
         .filter(e -> e.getType().equals(CASE_MAP)).map(StartableModel::new).filter(filterPredicate)
         .collect(Collectors.toList());
-    return filterEmptyStartsAndSelf(pmv, categories, casemapStartElements);
+
+    var webServiceProcesses = pmv.getWebServiceProcesses().stream().map(WebServiceProcess::new).filter(wsp -> StringUtils.containsIgnoreCase(wsp.getName(), filter)).collect(Collectors.toList());
+
+    return filterEmptyStartsAndSelf(pmv, categories, casemapStartElements, webServiceProcesses);
   }
 
   private static Optional<CustomPMV> filterEmptyStartsAndSelf(IWorkflowProcessModelVersion pmv,
-      List<CategoryModel> categories, List<StartableModel> caseMaps)
+      List<CategoryModel> categories, List<StartableModel> caseMaps, List<WebServiceProcess> webServiceProcesses)
   {
-    if ((categories.isEmpty() && caseMaps.isEmpty()) || pmv.equals(IProcessModelVersion.current()))
+    if ((categories.isEmpty() && caseMaps.isEmpty() && webServiceProcesses.isEmpty()) || pmv.equals(IProcessModelVersion.current()))
     {
       return Optional.empty();
     }
-    return Optional.of(new CustomPMV(pmv, categories, caseMaps));
+    return Optional.of(new CustomPMV(pmv, categories, caseMaps, webServiceProcesses));
   }
 
   private CustomPMV(IWorkflowProcessModelVersion pmv, List<CategoryModel> categories,
-      List<StartableModel> caseMapStarts)
+      List<StartableModel> caseMapStarts, List<WebServiceProcess> webServiceProcesses)
   {
     this.pmv = pmv;
     this.categories = categories;
     this.caseMapStarts = caseMapStarts;
+    this.webServiceProcesses = webServiceProcesses;
   }
 
   public List<CategoryModel> getCategories()
@@ -110,5 +116,9 @@ public class CustomPMV
   public List<StartableModel> getCaseMapStarts()
   {
     return caseMapStarts;
+  }
+
+  public List<WebServiceProcess> getWebServiceProcesses() {
+    return webServiceProcesses;
   }
 }

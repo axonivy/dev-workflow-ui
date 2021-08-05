@@ -86,7 +86,9 @@ public class WebTestCleanup
     open(viewUrl("cases.xhtml"));
     casesTable.row(0).shouldBe(text("TestCase"));
     open(viewUrl("starts.xhtml"));
-    $("#startsForm\\:noProjectsText").shouldNotBe(visible);
+    $("#startsForm\\:projectStarts\\:0\\:caseMapsTitle").shouldBe(visible);
+    $("#startsForm\\:projectStarts\\:0\\:processesTitle").shouldBe(visible);
+    $("#startsForm\\:projectStarts\\:0\\:webServicesTitle").shouldBe(visible);
 
     open(viewUrl("cleanup.xhtml"));
     $(By.id("clanupForm:cleanupBtn")).shouldBe(visible).click();
@@ -95,7 +97,9 @@ public class WebTestCleanup
     open(viewUrl("cases.xhtml"));
     casesTable.row(0).shouldBe(text("No Cases found"));
     open(viewUrl("starts.xhtml"));
-    $("#startsForm\\:noProjectsText").shouldBe(visible);
+    $("#startsForm\\:projectStarts\\:0\\:caseMapsTitle").shouldNotBe(visible);
+    $("#startsForm\\:projectStarts\\:0\\:processesTitle").shouldNotBe(visible);
+    $("#startsForm\\:projectStarts\\:0\\:webServicesTitle").shouldBe(visible);
   }
 
 }
