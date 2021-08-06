@@ -6,38 +6,32 @@ import java.util.stream.Collectors;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.custom.field.ICustomField;
 
-public class CustomFieldModel
-{
+public class CustomFieldModel {
 
   private final String name;
   private final String value;
   private final String type;
 
-  public static List<CustomFieldModel> create(ICase selectedCase)
-  {
+  public static List<CustomFieldModel> create(ICase selectedCase) {
     return selectedCase.customFields().all().stream()
             .map(CustomFieldModel::new).collect(Collectors.toList());
   }
 
-  public CustomFieldModel(ICustomField<?> field)
-  {
+  public CustomFieldModel(ICustomField<?> field) {
     this.name = field.name();
     this.value = field.get().map(Object::toString).orElse("<null>");
     this.type = field.type().toString();
   }
 
-  public String getName()
-  {
+  public String getName() {
     return name;
   }
 
-  public String getValue()
-  {
+  public String getValue() {
     return value;
   }
 
-  public String getType()
-  {
+  public String getType() {
     return type;
   }
 }

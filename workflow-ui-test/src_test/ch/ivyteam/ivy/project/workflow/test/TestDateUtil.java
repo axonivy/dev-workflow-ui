@@ -13,12 +13,10 @@ import org.junit.jupiter.api.Test;
 import ch.ivyteam.ivy.environment.IvyTest;
 
 @IvyTest
-public class TestDateUtil
-{
+public class TestDateUtil {
 
   @Test
-  public void loginAndRedirect()
-  {
+  public void loginAndRedirect() {
     LocalDateTime date = LocalDateTime.now().minusSeconds(10);
     String prettyTime = getPrettyTime(localDateTimeToDate(date));
     assertThat(prettyTime).isEqualTo("moments ago");
@@ -38,8 +36,7 @@ public class TestDateUtil
 
   }
 
-  private Date localDateTimeToDate(LocalDateTime date)
-  {
+  private Date localDateTimeToDate(LocalDateTime date) {
     return Date.from(date.atZone(ZoneId.systemDefault()).toInstant());
   }
 

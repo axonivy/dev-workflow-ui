@@ -2,8 +2,7 @@ package ch.ivyteam.workflowui.casemap;
 
 import ch.ivyteam.ivy.casemap.runtime.model.IStage;
 
-public class CaseMapStageModel
-{
+public class CaseMapStageModel {
   private final String name;
   private final String iconCss;
   private final String stateCss;
@@ -12,75 +11,59 @@ public class CaseMapStageModel
   private final boolean terminating;
   private final boolean last;
 
-  public CaseMapStageModel(IStage stage, int index, int runningStageIndex, int size)
-  {
+  public CaseMapStageModel(IStage stage, int index, int runningStageIndex, int size) {
     this.name = stage.getName();
     this.iconCss = stage.getIcon().getCssClass();
     this.executed = (index <= runningStageIndex);
     terminating = stage.isTerminating();
     this.stateCss = calculateStateCss(index, runningStageIndex);
     this.stateIconCss = calculateStateIconCss(index, runningStageIndex);
-    this.last = index+1 == size;
+    this.last = index + 1 == size;
   }
 
-  private static String calculateStateCss(int index, int currentStageIndex)
-  {
-    if (currentStageIndex == index)
-    {
+  private static String calculateStateCss(int index, int currentStageIndex) {
+    if (currentStageIndex == index) {
       return "current";
-    }
-    else if (currentStageIndex > index)
-    {
+    } else if (currentStageIndex > index) {
       return "visited";
     }
     return "waiting";
   }
 
-  private static String calculateStateIconCss(int index, int currentStageIndex)
-  {
-    if (currentStageIndex == index)
-    {
+  private static String calculateStateIconCss(int index, int currentStageIndex) {
+    if (currentStageIndex == index) {
       return "si-controls-play case-state-running";
-    }
-    else if (currentStageIndex > index)
-    {
+    } else if (currentStageIndex > index) {
       return "si-check-1 case-state-finished";
     }
     return "";
   }
 
-  public String getName()
-  {
+  public String getName() {
     return name;
   }
 
-  public String getIconCss()
-  {
+  public String getIconCss() {
     return iconCss;
   }
 
-  public String getStateCss()
-  {
+  public String getStateCss() {
     return stateCss;
   }
 
-  public String getStateIconCss()
-  {
+  public String getStateIconCss() {
     return stateIconCss;
   }
 
-  public boolean isExecuted()
-  {
+  public boolean isExecuted() {
     return executed;
   }
 
-  public String getTerminatingCss()
-  {
+  public String getTerminatingCss() {
     return terminating ? "none" : "visible";
   }
 
-  public boolean isLast()
-  {
+  public boolean isLast() {
     return last;
   }
 }

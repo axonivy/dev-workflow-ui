@@ -8,18 +8,15 @@ import ch.ivyteam.ivy.bpm.error.BpmError;
 
 @ManagedBean
 @SessionScoped
-public class FrameBean
-{
-  public String getTaskUrl()
-  {
-    String taskUrl = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("taskUrl");
-    if (taskUrl.startsWith("/"))
-    {
+public class FrameBean {
+  public String getTaskUrl() {
+    String taskUrl = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap()
+            .get("taskUrl");
+    if (taskUrl.startsWith("/")) {
       return taskUrl;
-    }
-    else
-    {
-      BpmError.create("frame:unsupported:url").withMessage("Only relative urls are supported (security reasons)").throwError();
+    } else {
+      BpmError.create("frame:unsupported:url")
+              .withMessage("Only relative urls are supported (security reasons)").throwError();
       return null;
     }
   }

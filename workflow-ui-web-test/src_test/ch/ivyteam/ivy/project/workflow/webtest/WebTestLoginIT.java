@@ -21,19 +21,16 @@ import com.codeborne.selenide.Selenide;
 import ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil;
 
 @IvyWebTest
-public class WebTestLoginIT
-{
+public class WebTestLoginIT {
 
   @Test
-  void testLoginTable()
-  {
+  void testLoginTable() {
     loginFromTable("testuser");
     $("#sessionUserName").shouldBe(exactText("testuser"));
   }
 
   @Test
-  void testLogout()
-  {
+  void testLogout() {
     loginFromTable("testuser");
     assertCurrentUrlEndsWith("loginTable.xhtml");
     logout();
@@ -41,8 +38,7 @@ public class WebTestLoginIT
   }
 
   @Test
-  void testLoginTableSearch() throws Exception
-  {
+  void testLoginTableSearch() throws Exception {
     Selenide.open(viewUrl("loginTable.xhtml"));
     Table table = PrimeUi.table(By.id("loginTable:users"));
     table.contains("DeveloperTest");
@@ -52,23 +48,20 @@ public class WebTestLoginIT
   }
 
   @Test
-  void testCustomLogin()
-  {
-    WorkflowUiUtil.customLogin("DeveloperTest","DeveloperTest");
+  void testCustomLogin() {
+    WorkflowUiUtil.customLogin("DeveloperTest", "DeveloperTest");
   }
 
   @Test
-  void testCustomLoginFailMessage()
-  {
+  void testCustomLoginFailMessage() {
     Selenide.open(viewUrl("login.xhtml"));
     $("#loginForm\\:loginMessage").shouldNotBe(visible);
-    WorkflowUiUtil.customLogin("sadgs","sdgasgd");
+    WorkflowUiUtil.customLogin("sadgs", "sdgasgd");
     $("#loginForm\\:loginMessage").shouldBe(visible);
   }
 
   @Test
-  void testRedirectIfNotLogggedIn()
-  {
+  void testRedirectIfNotLogggedIn() {
     loginFromTable("testuser");
     logout();
     Selenide.open(viewUrl("cases.xhtml"));
@@ -85,8 +78,7 @@ public class WebTestLoginIT
   }
 
   @Test
-  void testRedirectToOriginalUrl()
-  {
+  void testRedirectToOriginalUrl() {
     loginFromTable("testuser");
     logout();
     Selenide.open(viewUrl("cases.xhtml"));
@@ -97,24 +89,23 @@ public class WebTestLoginIT
   }
 
   @Test
-  void testLoginTableRedirect()
-  {
+  void testLoginTableRedirect() {
     loginFromTable("DifferentLogin");
     assertCurrentUrlEndsWith("login.xhtml");
-    WorkflowUiUtil.customLogin("DifferentLogin","DifferentPassword");
+    WorkflowUiUtil.customLogin("DifferentLogin", "DifferentPassword");
     $("#sessionUserName").shouldBe(text("DifferentLogin"));
   }
 
   @Test
-  void testLoginTableHighlightCurrentUser()
-  {
+  void testLoginTableHighlightCurrentUser() {
     loginFromTable("testuser");
     Selenide.open(viewUrl("loginTable.xhtml"));
-    $("#loginTable\\:users_data > tr.ui-widget-content.ui-datatable-even.ui-datatable-selectable.ui-state-highlight").shouldBe(visible);
+    $("#loginTable\\:users_data > tr.ui-widget-content.ui-datatable-even.ui-datatable-selectable.ui-state-highlight")
+            .shouldBe(visible);
     logout();
     Selenide.open(viewUrl("loginTable.xhtml"));
-    $("#loginTable\\:users_data > tr.ui-widget-content.ui-datatable-even.ui-datatable-selectable.ui-state-highlight").shouldNotBe(visible);
+    $("#loginTable\\:users_data > tr.ui-widget-content.ui-datatable-even.ui-datatable-selectable.ui-state-highlight")
+            .shouldNotBe(visible);
   }
-
 
 }

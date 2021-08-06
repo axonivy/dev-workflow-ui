@@ -17,12 +17,10 @@ import com.axonivy.ivy.webtest.engine.EngineUrl;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
-public class WebTestStartsIT
-{
+public class WebTestStartsIT {
 
   @Test
-  public void testFilter()
-  {
+  public void testFilter() {
     startTestProcess("1750C5211D94569D/TestData.ivp");
     Selenide.open(viewUrl("starts.xhtml"));
     $(By.id("startsForm:projectStarts")).shouldBe(visible);
@@ -33,8 +31,7 @@ public class WebTestStartsIT
   }
 
   @Test
-  public void testExecuteStart()
-  {
+  public void testExecuteStart() {
     Selenide.open(viewUrl("starts.xhtml"));
     $(By.id("startsForm:filter")).sendKeys("startTestDialog");
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui-test-data"));
@@ -49,11 +46,10 @@ public class WebTestStartsIT
   }
 
   @Test
-  public void testExecuteDefaultFramePage()
-  {
-    Selenide.open(EngineUrl.createProcessUrl("/workflow-ui-test-data/1750C5211D94569D/startTestDialog.ivp?embedInFrame"));
-    if($(By.id("iFrame")).is(visible))
-    {
+  public void testExecuteDefaultFramePage() {
+    Selenide.open(EngineUrl
+            .createProcessUrl("/workflow-ui-test-data/1750C5211D94569D/startTestDialog.ivp?embedInFrame"));
+    if ($(By.id("iFrame")).is(visible)) {
       Selenide.switchTo().frame("iFrame");
     }
     $(By.id("form:testInput")).sendKeys("test input");
@@ -62,8 +58,7 @@ public class WebTestStartsIT
   }
 
   @Test
-  public void testWebservicesVisible()
-  {
+  public void testWebservicesVisible() {
     Selenide.open(viewUrl("starts.xhtml"));
     $(By.id("startsForm:filter")).sendKeys("testservice");
     $(By.id("startsForm:projectStarts")).shouldHave(text("TestService"));

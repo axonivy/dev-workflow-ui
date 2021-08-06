@@ -24,8 +24,7 @@ import ch.ivyteam.workflowui.util.RedirectUtil;
 
 @ManagedBean
 @ViewScoped
-public class CasesDetailsBean
-{
+public class CasesDetailsBean {
 
   private String selectedCaseId;
   private ICase selectedCase;
@@ -35,18 +34,15 @@ public class CasesDetailsBean
   private boolean showSystemTasks = false;
   private List<ITask> tasks;
 
-  public String getSelectedCaseId()
-  {
+  public String getSelectedCaseId() {
     return selectedCaseId;
   }
 
-  public ICase getSelectedCase()
-  {
+  public ICase getSelectedCase() {
     return selectedCase;
   }
 
-  public void setSelectedCaseId(String selectedCaseId)
-  {
+  public void setSelectedCaseId(String selectedCaseId) {
     this.selectedCaseId = selectedCaseId;
     this.selectedCase = getCaseById(Long.parseLong(selectedCaseId));
     customFields = CustomFieldModel.create(selectedCase);
@@ -55,75 +51,61 @@ public class CasesDetailsBean
     tasks = CaseDetailUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks);
   }
 
-  public ICase getCaseById(long id)
-  {
+  public ICase getCaseById(long id) {
     return WorkflowNavigationUtil.getWorkflowContext(IApplication.current()).findCase(id);
   }
 
-  public String getCreatorUser()
-  {
+  public String getCreatorUser() {
     return selectedCase.getCreatorUserName() == null ? "N/A" : selectedCase.getCreatorUserName();
   }
 
-  public String getDescription()
-  {
+  public String getDescription() {
     return StringUtils.isEmpty(selectedCase.getDescription()) ? "No description"
-        : selectedCase.getDescription();
+            : selectedCase.getDescription();
   }
 
-  public CaseMapModel getCaseMap()
-  {
+  public CaseMapModel getCaseMap() {
     return caseMapModel;
   }
 
-  public List<CustomFieldModel> getCustomFields()
-  {
+  public List<CustomFieldModel> getCustomFields() {
     return customFields;
   }
 
-  public List<DocumentModel> getDocuments()
-  {
+  public List<DocumentModel> getDocuments() {
     return documents;
   }
 
-  public List<ICase> getCaseList()
-  {
+  public List<ICase> getCaseList() {
     return CaseQuery.subCases().where().businessCaseId()
-        .isEqual(selectedCase.getBusinessCase().getId())
-        .executor().results();
+            .isEqual(selectedCase.getBusinessCase().getId())
+            .executor().results();
   }
 
-  public void redirectToCase(ICase toCase)
-  {
+  public void redirectToCase(ICase toCase) {
     RedirectUtil.redirect("caseDetails.xhtml?case=" + toCase.getId());
   }
 
-  public String isCurrentHierarchyCase(ICase caze)
-  {
-    if (caze.equals(selectedCase))
-    {
+  public String isCurrentHierarchyCase(ICase caze) {
+    if (caze.equals(selectedCase)) {
       return "current-hierarchy-case";
     }
     return "";
   }
 
-  public boolean canBeDestoryed()
-  {
+  public boolean canBeDestoryed() {
     return Arrays.asList(CREATED, RUNNING).contains(selectedCase.getState());
   }
 
-  public List<ITask> getTasks()
-  {
+  public List<ITask> getTasks() {
     return tasks;
   }
 
-  public boolean isShowSystemTasks()
-  {
+  public boolean isShowSystemTasks() {
     return showSystemTasks;
   }
 
-  public void setShowSystemTasks(boolean showSystemTasks)
-  {
+  public void setShowSystemTasks(boolean showSystemTasks) {
     this.showSystemTasks = showSystemTasks;
     tasks = CaseDetailUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks);
   }

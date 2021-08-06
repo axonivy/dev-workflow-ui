@@ -13,27 +13,22 @@ import ch.ivyteam.workflowui.util.UserUtil;
 
 @ManagedBean
 @ViewScoped
-public class LoginTableBean
-{
+public class LoginTableBean {
   private final List<User> users;
 
-  public LoginTableBean()
-  {
+  public LoginTableBean() {
     users = UserUtil.getUsers().stream().map(LoginTableBean::toUser).collect(toList());
   }
 
-  public List<User> getUsers()
-  {
+  public List<User> getUsers() {
     return users;
   }
 
-  public User getCurrentUser()
-  {
+  public User getCurrentUser() {
     return toUser(ISession.current().getSessionUser());
   }
 
-  private static User toUser(IUser user)
-  {
+  private static User toUser(IUser user) {
     if (user != null) {
       String roles = UserUtil.getRoles(user);
       return new User(user.getName(), user.getFullName(), roles);
@@ -41,31 +36,26 @@ public class LoginTableBean
     return null;
   }
 
-  public static class User
-  {
+  public static class User {
     private final String name;
     private final String fullname;
     private final String roles;
 
-    private User(String name, String fullname, String roles)
-    {
+    private User(String name, String fullname, String roles) {
       this.name = name;
       this.fullname = fullname;
       this.roles = roles;
     }
 
-    public String getName()
-    {
+    public String getName() {
       return name;
     }
 
-    public String getFullname()
-    {
+    public String getFullname() {
       return fullname;
     }
 
-    public String getRoles()
-    {
+    public String getRoles() {
       return roles;
     }
   }

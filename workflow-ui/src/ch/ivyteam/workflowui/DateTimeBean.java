@@ -9,20 +9,16 @@ import ch.ivyteam.workflowui.util.DateUtil;
 
 @ManagedBean
 @ViewScoped
-public class DateTimeBean
-{
-  public String getPrettyTime(Date date)
-  {
+public class DateTimeBean {
+  public String getPrettyTime(Date date) {
     return DateUtil.getPrettyTime(date);
   }
 
-  public String getDateTime(Date date)
-  {
+  public String getDateTime(Date date) {
     return DateUtil.getDateAndTime(date);
   }
 
-  public String getDetailTime(Date date)
-  {
+  public String getDetailTime(Date date) {
     return date == null ? "N/A" : DateUtil.getDateAndTime(date);
   }
 }

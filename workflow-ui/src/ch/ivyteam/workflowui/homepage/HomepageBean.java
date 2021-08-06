@@ -12,37 +12,30 @@ import ch.ivyteam.workflowui.tasks.TasksDataModel;
 
 @ManagedBean
 @ViewScoped
-public class HomepageBean
-{
+public class HomepageBean {
   private LastStartsModel lastStartsModel;
   private TasksDataModel tasksDataModel;
 
-  public HomepageBean()
-  {
+  public HomepageBean() {
     lastStartsModel = new LastStartsModel();
     tasksDataModel = new TasksDataModel();
   }
 
-  public TasksDataModel getTasksDataModel()
-  {
+  public TasksDataModel getTasksDataModel() {
     return tasksDataModel;
   }
 
-  public List<StartableModel> getLastStarts()
-  {
+  public List<StartableModel> getLastStarts() {
     return lastStartsModel.getStarts();
   }
 
-  public int getTasksSize()
-  {
+  public int getTasksSize() {
     return tasksDataModel.getSize();
   }
 
-  public void executeLastStart(SelectEvent event)
-  {
+  public void executeLastStart(SelectEvent event) {
     Object object = event.getObject();
-    if (object instanceof StartableModel)
-    {
+    if (object instanceof StartableModel) {
       ((StartableModel) object).execute();
     }
   }

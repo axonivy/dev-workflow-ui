@@ -23,13 +23,11 @@ import com.codeborne.selenide.WebDriverRunner;
 import ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil;
 
 @IvyWebTest
-public class WebDocuScreenshots
-{
+public class WebDocuScreenshots {
   private static final int SCREENSHOT_WIDTH = 1500;
 
   @BeforeEach
-  void beforeEach()
-  {
+  void beforeEach() {
     Configuration.reportsFolder = "target/docu/screenshots/";
     Configuration.savePageSource = false;
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
@@ -37,8 +35,7 @@ public class WebDocuScreenshots
   }
 
   @Test
-  public void screenshotMainPages()
-  {
+  public void screenshotMainPages() {
     open(viewUrl("home.xhtml"));
     loginDeveloper();
     startTestProcess("1750C5211D94569D/TestData.ivp");
@@ -96,8 +93,7 @@ public class WebDocuScreenshots
     takeScreenshot("workflow-ui-intermediateElementDetails", new Dimension(SCREENSHOT_WIDTH, 800));
 
     open(viewUrl("api-browser.xhtml"));
-    if($(By.id("apiBrowser")).is(visible))
-    {
+    if ($(By.id("apiBrowser")).is(visible)) {
       Selenide.switchTo().frame("apiBrowser");
     }
     $(".computed-url").shouldBe(visible);
@@ -105,8 +101,7 @@ public class WebDocuScreenshots
     Selenide.switchTo().defaultContent();
   }
 
-  private void takeScreenshot(String fileName, Dimension size)
-  {
+  private void takeScreenshot(String fileName, Dimension size) {
     Dimension oldSize = WebDriverRunner.getWebDriver().manage().window().getSize();
     resizeBrowser(size);
     executeJs("scroll(0,0);");
@@ -114,8 +109,7 @@ public class WebDocuScreenshots
     resizeBrowser(oldSize);
   }
 
-  private void resizeBrowser(Dimension size)
-  {
+  private void resizeBrowser(Dimension size) {
     WebDriverRunner.getWebDriver().manage().window().setSize(size);
   }
 }

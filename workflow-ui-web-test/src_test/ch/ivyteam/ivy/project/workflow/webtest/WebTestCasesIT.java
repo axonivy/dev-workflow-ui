@@ -18,12 +18,10 @@ import com.axonivy.ivy.webtest.primeui.widget.Table;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
-public class WebTestCasesIT
-{
+public class WebTestCasesIT {
 
   @Test
-  public void allCasesOnlyAdmin()
-  {
+  public void allCasesOnlyAdmin() {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     loginFromTable("testuser");
     Selenide.open(viewUrl("cases.xhtml"));
@@ -34,8 +32,7 @@ public class WebTestCasesIT
   }
 
   @Test
-  public void testCasesTable() throws Exception
-  {
+  public void testCasesTable() throws Exception {
     open(viewUrl("home.xhtml"));
     loginDeveloper();
 
