@@ -22,7 +22,13 @@
     <dependency>
       <groupId>ch.ivyteam.demo</groupId>
       <artifactId>workflow-demos</artifactId>
-      <version>9.3.0-SNAPSHOT</version>
+      <version>${revision}</version>
+      <type>iar</type>
+    </dependency>
+    <dependency>
+      <groupId>ch.ivyteam.demo</groupId>
+      <artifactId>connectivity-demos</artifactId>
+      <version>${revision}</version>
       <type>iar</type>
     </dependency>
   </dependencies>
@@ -52,6 +58,7 @@
             <configuration>
               <outputDirectory>${project.build.directory}</outputDirectory>
               <includeArtifactIds>workflow-demos</includeArtifactIds>
+              <includeArtifactIds>connectivity-demos</includeArtifactIds>
             </configuration>
           </execution>
         </executions>
