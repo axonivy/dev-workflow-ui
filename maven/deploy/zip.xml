@@ -35,6 +35,13 @@
       <outputDirectory></outputDirectory>
     </fileSet>
     <fileSet>
+      <directory>${project.build.directory}</directory>
+      <includes>
+        <include>connectivity-demos*.iar</include>
+      </includes>
+      <outputDirectory></outputDirectory>
+    </fileSet>
+    <fileSet>
       <directory></directory>
       <includes>
         <include>app.yaml</include>
