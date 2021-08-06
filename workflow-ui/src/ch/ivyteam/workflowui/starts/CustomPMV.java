@@ -11,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.application.ActivityOperationState;
 import ch.ivyteam.ivy.application.IProcessModelVersion;
-import ch.ivyteam.ivy.jsf.bean.info.model.WebServiceProcess;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
 
