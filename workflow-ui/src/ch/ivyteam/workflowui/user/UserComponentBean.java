@@ -1,4 +1,4 @@
-package ch.ivyteam.workflowui;
+package ch.ivyteam.workflowui.user;
 
 import javax.faces.bean.ManagedBean;
 
