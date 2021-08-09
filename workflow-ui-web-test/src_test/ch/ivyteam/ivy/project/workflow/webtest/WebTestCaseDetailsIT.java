@@ -28,12 +28,10 @@ import com.codeborne.selenide.FileDownloadMode;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
-public class WebTestCaseDetailsIT
-{
+public class WebTestCaseDetailsIT {
 
   @BeforeAll
-  static void setup()
-  {
+  static void setup() {
     Selenide.closeWebDriver();
     Configuration.proxyEnabled = true;
     Configuration.fileDownload = FileDownloadMode.PROXY;
@@ -43,16 +41,14 @@ public class WebTestCaseDetailsIT
   }
 
   @BeforeEach
-  void beforeEach()
-  {
+  void beforeEach() {
     open(viewUrl("cases.xhtml"));
     $(byText("TestCase")).shouldBe(visible).click();
     $("#form\\:caseName").shouldBe(text("TestCase"));
   }
 
   @Test
-  public void caseDetails()
-  {
+  public void caseDetails() {
     $("#form\\:creatorUser\\:userName").shouldBe(exactText("DeveloperTest"));
     $("#form\\:caseState").shouldBe(exactText("RUNNING"));
 
@@ -61,15 +57,13 @@ public class WebTestCaseDetailsIT
   }
 
   @Test
-  public void taskList() throws Exception
-  {
+  public void taskList() throws Exception {
     Table tasksTable = PrimeUi.table(By.id("form:tasks"));
     tasksTable.valueAt(0, 0).contains("Test Task");
   }
 
   @Test
-  public void checkTaskTableSystemTask()
-  {
+  public void checkTaskTableSystemTask() {
     startTestProcess("1750C5211D94569D/testIntermediateEventProcess.ivp");
     open(viewUrl("cases.xhtml"));
     $(".si-information-circle").shouldBe(visible).click();
@@ -83,23 +77,20 @@ public class WebTestCaseDetailsIT
   }
 
   @Test
-  public void caseList() throws Exception
-  {
+  public void caseList() throws Exception {
     $(".current-hierarchy-case").find("a").shouldHave(text("TestCase"));
   }
 
   @Test
-  public void customFields() throws Exception
-  {
+  public void customFields() throws Exception {
     Table fieldsTable = PrimeUi.table(By.id("form:customFieldsTable"));
     fieldsTable.valueAt(1, 0).contains("field 2");
   }
 
   @Test
-  public void downloadDocument() throws IOException
-  {
+  public void downloadDocument() throws IOException {
     $("#form\\:documentsContainer").shouldHave(text("test.txt"));
-    File download = $(".document-entry",0).find("a").shouldBe(visible).download();
+    File download = $(".document-entry", 0).find("a").shouldBe(visible).download();
     assertThat(download).hasName("test.txt");
     assertThat(Files.readString(download.toPath())).isEqualTo("this is test document");
   }

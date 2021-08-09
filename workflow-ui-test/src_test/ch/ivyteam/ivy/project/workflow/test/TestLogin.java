@@ -13,12 +13,10 @@ import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil.RedirectHandler;
 
 @IvyTest
-public class TestLogin
-{
+public class TestLogin {
 
   @Test
-  public void loginAndRedirect()
-  {
+  public void loginAndRedirect() {
     ISession.current().logoutSessionUser();
     assertNull(ISession.current().getSessionUser());
     TestHandler handler = new TestHandler();
@@ -29,26 +27,22 @@ public class TestLogin
   }
 
   @Test
-  public void getUserRoles_commaSeparated()
-  {
+  public void getUserRoles_commaSeparated() {
     login();
     assertThat(getRoles(ISession.current().getSessionUser()))
-      .isEqualTo("Everybody, testRoleJunit");
+            .isEqualTo("Everybody, testRoleJunit");
   }
 
-  private static void login()
-  {
+  private static void login() {
     LoginUtil.login("testJunitUser", "testJunitUser", "");
   }
 
-  private static final class TestHandler implements RedirectHandler
-  {
+  private static final class TestHandler implements RedirectHandler {
 
     private String url;
 
     @Override
-    public void redirect(String url)
-    {
+    public void redirect(String url) {
       this.url = url;
     }
 

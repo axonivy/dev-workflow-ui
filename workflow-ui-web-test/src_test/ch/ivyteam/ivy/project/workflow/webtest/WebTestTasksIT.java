@@ -21,12 +21,10 @@ import com.axonivy.ivy.webtest.primeui.widget.Table;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
-public class WebTestTasksIT
-{
+public class WebTestTasksIT {
 
   @Test
-  public void allTasksOnlyAdmin()
-  {
+  public void allTasksOnlyAdmin() {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     Selenide.open(viewUrl("home.xhtml"));
     loginFromTable("testuser");
@@ -36,8 +34,7 @@ public class WebTestTasksIT
   }
 
   @Test
-  public void testTasksTable() throws Exception
-  {
+  public void testTasksTable() throws Exception {
     open(viewUrl("home.xhtml"));
     loginDeveloper();
 
@@ -50,8 +47,7 @@ public class WebTestTasksIT
   }
 
   @Test
-  public void chceckTaskDetails()
-  {
+  public void chceckTaskDetails() {
     open(viewUrl("home.xhtml"));
     loginDeveloper();
     startTestProcess("1750C5211D94569D/TestData.ivp");
@@ -73,8 +69,7 @@ public class WebTestTasksIT
   }
 
   @Test
-  public void testStartTask()
-  {
+  public void testStartTask() {
     open(viewUrl("home.xhtml"));
     loginDeveloper();
     startTestProcess("1750C5211D94569D/TestData.ivp");
@@ -96,8 +91,7 @@ public class WebTestTasksIT
   }
 
   @Test
-  public void testStartParkedTask()
-  {
+  public void testStartParkedTask() {
     open(viewUrl("home.xhtml"));
     loginDeveloper();
     startTestProcess("1750C5211D94569D/TestData.ivp");

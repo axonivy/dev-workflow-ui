@@ -17,19 +17,16 @@ import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.ivy.workflow.query.TaskQuery;
 import ch.ivyteam.workflowui.util.UserUtil;
 
-public class TasksDataModel extends LazyDataModel<ITask>
-{
+public class TasksDataModel extends LazyDataModel<ITask> {
   private static final long serialVersionUID = -5287014754211109062L;
   private String filter;
   private boolean showAllTasks = UserUtil.isAdmin();
 
-  public String getFilter()
-  {
+  public String getFilter() {
     return filter;
   }
 
-  public void setFilter(String filter)
-  {
+  public void setFilter(String filter) {
     this.filter = filter;
   }
 
@@ -48,8 +45,7 @@ public class TasksDataModel extends LazyDataModel<ITask>
     return null;
   }
 
-  private List<ITask> getTaskList()
-  {
+  private List<ITask> getTaskList() {
     var taskQuery = TaskQuery.create();
     applyFilter(taskQuery);
     checkIfPersonalTasksOrHomepage(taskQuery);
@@ -58,8 +54,7 @@ public class TasksDataModel extends LazyDataModel<ITask>
 
   @Override
   public List<ITask> load(int first, int pageSize, String sortField, SortOrder sortOrder,
-      Map<String, Object> filters)
-  {
+          Map<String, Object> filters) {
     var taskQuery = TaskQuery.create();
 
     applyFilter(taskQuery);
@@ -68,101 +63,82 @@ public class TasksDataModel extends LazyDataModel<ITask>
     checkIfPersonalTasksOrHomepage(taskQuery);
 
     List<ITask> tasks = taskQuery
-        .executor()
-        .resultsPaged()
-        .window(first, pageSize);
+            .executor()
+            .resultsPaged()
+            .window(first, pageSize);
     setRowCount((int) taskQuery.executor().count());
     return tasks;
   }
 
-  private void checkIfPersonalTasksOrHomepage(TaskQuery taskQuery)
-  {
-    if (checkIfPersonalTasks() || checkIfHomepage())
-    {
+  private void checkIfPersonalTasksOrHomepage(TaskQuery taskQuery) {
+    if (checkIfPersonalTasks() || checkIfHomepage()) {
       taskQuery.where().currentUserCanWorkOn();
     }
   }
 
-  private void applyFilter(TaskQuery query)
-  {
-    if (StringUtils.isNotEmpty(filter))
-    {
+  private void applyFilter(TaskQuery query) {
+    if (StringUtils.isNotEmpty(filter)) {
       var taskState = Arrays.asList(TaskState.values()).stream()
-          .filter(state -> StringUtils.startsWithIgnoreCase(state.toString(), filter))
-          .findFirst().orElse(null);
+              .filter(state -> StringUtils.startsWithIgnoreCase(state.toString(), filter))
+              .findFirst().orElse(null);
       var taskPriority = Arrays.asList(WorkflowPriority.values()).stream()
-          .filter(priority -> StringUtils.startsWithIgnoreCase(priority.toString(), filter))
-          .findFirst().orElse(null);
+              .filter(priority -> StringUtils.startsWithIgnoreCase(priority.toString(), filter))
+              .findFirst().orElse(null);
       query.where().name().isLikeIgnoreCase("%" + filter + "%")
-          .or().activatorName().isLikeIgnoreCase(filter + "%")
-          .or().state().isEqual(taskState)
-          .or().priority().isEqual(taskPriority);
+              .or().activatorName().isLikeIgnoreCase(filter + "%")
+              .or().state().isEqual(taskState)
+              .or().priority().isEqual(taskPriority);
     }
   }
 
-  private static void applyOrdering(TaskQuery query, String sortField, SortOrder sortOrder)
-  {
-    if (StringUtils.isEmpty(sortField))
-    {
+  private static void applyOrdering(TaskQuery query, String sortField, SortOrder sortOrder) {
+    if (StringUtils.isEmpty(sortField)) {
       applySorting(query.orderBy().startTimestamp(), SortOrder.DESCENDING);
     }
-    if ("state".equals(sortField))
-    {
+    if ("state".equals(sortField)) {
       applySorting(query.orderBy().state(), sortOrder);
     }
-    if ("priority".equals(sortField))
-    {
+    if ("priority".equals(sortField)) {
       applySorting(query.orderBy().priority(), sortOrder);
     }
-    if ("name".equals(sortField))
-    {
+    if ("name".equals(sortField)) {
       applySorting(query.orderBy().name(), sortOrder);
     }
-    if ("activatorName".equals(sortField))
-    {
+    if ("activatorName".equals(sortField)) {
       applySorting(query.orderBy().activatorName(), sortOrder);
     }
-    if ("startTimestamp".equals(sortField))
-    {
+    if ("startTimestamp".equals(sortField)) {
       applySorting(query.orderBy().startTimestamp(), sortOrder);
     }
-    if ("expiryTimestamp".equals(sortField))
-    {
+    if ("expiryTimestamp".equals(sortField)) {
       applySorting(query.orderBy().expiryTimestamp(), sortOrder);
     }
-    if ("endTimestamp".equals(sortField))
-    {
+    if ("endTimestamp".equals(sortField)) {
       applySorting(query.orderBy().endTimestamp(), sortOrder);
     }
   }
 
-  private static void applySorting(TaskQuery.OrderByColumnQuery query, SortOrder sortOrder)
-  {
-    if (SortOrder.ASCENDING.equals(sortOrder))
-    {
+  private static void applySorting(TaskQuery.OrderByColumnQuery query, SortOrder sortOrder) {
+    if (SortOrder.ASCENDING.equals(sortOrder)) {
       query.ascending();
     }
-    if (SortOrder.DESCENDING.equals(sortOrder))
-    {
+    if (SortOrder.DESCENDING.equals(sortOrder)) {
       query.descending();
     }
   }
 
-  public int getSize()
-  {
+  public int getSize() {
     var taskQuery = TaskQuery.create();
     applyFilter(taskQuery);
     checkIfPersonalTasksOrHomepage(taskQuery);
     return (int) taskQuery.executor().count();
   }
 
-  public boolean getShowAllTasks()
-  {
+  public boolean getShowAllTasks() {
     return showAllTasks;
   }
 
-  public void setShowAllTasks(boolean allTasks)
-  {
+  public void setShowAllTasks(boolean allTasks) {
     this.showAllTasks = allTasks;
   }
 }

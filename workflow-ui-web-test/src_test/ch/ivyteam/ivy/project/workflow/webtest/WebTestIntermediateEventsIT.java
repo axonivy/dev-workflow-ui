@@ -20,18 +20,15 @@ import com.axonivy.ivy.webtest.primeui.widget.Table;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
-public class WebTestIntermediateEventsIT
-{
+public class WebTestIntermediateEventsIT {
   @BeforeAll
-  public static void setup()
-  {
+  public static void setup() {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     startTestProcess("1750C5211D94569D/testIntermediateEventProcess.ivp");
   }
 
   @Test
-  public void adminOnly()
-  {
+  public void adminOnly() {
     Selenide.open(viewUrl("home.xhtml"));
     loginFromTable("testuser");
     Selenide.open(viewUrl("intermediateEvents.xhtml"));
@@ -45,8 +42,7 @@ public class WebTestIntermediateEventsIT
   }
 
   @Test
-  public void checkIntermediateElementDetails()
-  {
+  public void checkIntermediateElementDetails() {
     loginDeveloper();
     Selenide.open(viewUrl("intermediateEvents.xhtml"));
     $(byText("TestIntermediateEvent")).click();
@@ -55,8 +51,7 @@ public class WebTestIntermediateEventsIT
   }
 
   @Test
-  public void checkIntermediateElementEventsTable()
-  {
+  public void checkIntermediateElementEventsTable() {
     loginDeveloper();
     Selenide.open(viewUrl("intermediateEvents.xhtml"));
     $(byText("TestIntermediateEvent")).click();

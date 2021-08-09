@@ -13,34 +13,27 @@ import ch.ivyteam.workflowui.util.UserUtil;
 
 @ManagedBean
 @ViewScoped
-public class IntermediateEventsBean
-{
+public class IntermediateEventsBean {
   private List<IntermediateEventElementModel> intermediateEvents;
 
-  public IntermediateEventsBean()
-  {
+  public IntermediateEventsBean() {
     intermediateEvents = IntermediateEventElementModel.create();
   }
 
-  public void onRowSelect(SelectEvent event)
-  {
+  public void onRowSelect(SelectEvent event) {
     Object object = event.getObject();
-    if (UserUtil.isAdmin())
-    {
-      if (object instanceof IntermediateEventElementModel)
-      {
+    if (UserUtil.isAdmin()) {
+      if (object instanceof IntermediateEventElementModel) {
         ((IntermediateEventElementModel) object).redirectToElement();
       }
-    }
-    else
-    {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Access denied",
-          "You need to be an admin user to access this function"));
+    } else {
+      FacesContext.getCurrentInstance().addMessage(null,
+              new FacesMessage(FacesMessage.SEVERITY_INFO, "Access denied",
+                      "You need to be an admin user to access this function"));
     }
   }
 
-  public List<IntermediateEventElementModel> getIntermediateEvents()
-  {
+  public List<IntermediateEventElementModel> getIntermediateEvents() {
     return intermediateEvents;
   }
 }

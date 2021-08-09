@@ -14,26 +14,21 @@ import ch.ivyteam.workflowui.util.RedirectUtil;
 
 @ManagedBean
 @ViewScoped
-public class TasksBean
-{
+public class TasksBean {
   private TasksDataModel tasksDataModel;
 
-  public TasksBean()
-  {
+  public TasksBean() {
     tasksDataModel = new TasksDataModel();
     tasksDataModel.setFilter("");
   }
 
-  public TasksDataModel getTasksDataModel()
-  {
+  public TasksDataModel getTasksDataModel() {
     return tasksDataModel;
   }
 
   @SuppressWarnings("removal")
-  public String getStateIcon(TaskState taskState)
-  {
-    switch (taskState)
-    {
+  public String getStateIcon(TaskState taskState) {
+    switch (taskState) {
       case DELAYED:
         return "alarm-bell-timer task-state-delayed";
       case DONE:
@@ -59,39 +54,31 @@ public class TasksBean
     }
   }
 
-  public void executeTaskRow(SelectEvent event)
-  {
+  public void executeTaskRow(SelectEvent event) {
     Object object = event.getObject();
-    if (object instanceof ITask)
-    {
+    if (object instanceof ITask) {
       executeTask(((ITask) object).getId());
     }
   }
 
-  public void displayTaskRow(SelectEvent event)
-  {
+  public void displayTaskRow(SelectEvent event) {
     Object object = event.getObject();
-    if (object instanceof ITask)
-    {
+    if (object instanceof ITask) {
       redirectToTaskDetails(((ITask) object).getId());
     }
   }
 
-  public void redirectToTaskDetails(long taskId)
-  {
+  public void redirectToTaskDetails(long taskId) {
     RedirectUtil.redirect("taskDetails.xhtml?task=" + taskId);
   }
 
-  public void executeTask(long taskId)
-  {
+  public void executeTask(long taskId) {
     ITask task = IWorkflowContext.current().findTask(taskId);
     RedirectUtil.redirect("frame.xhtml?taskUrl=" + task.getStartLink().getRelative());
   }
 
-  public String getPriorityIcon(WorkflowPriority priority)
-  {
-    switch (priority)
-    {
+  public String getPriorityIcon(WorkflowPriority priority) {
+    switch (priority) {
       case EXCEPTION:
         return "alert-circle";
       case HIGH:
@@ -105,8 +92,7 @@ public class TasksBean
     }
   }
 
-  public TaskLinkModel toTaskLinkModel(ITask task)
-  {
+  public TaskLinkModel toTaskLinkModel(ITask task) {
     return new TaskLinkModel(task);
   }
 }

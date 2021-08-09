@@ -10,43 +10,35 @@ import ch.ivyteam.ivy.security.IPermission;
 import ch.ivyteam.ivy.workflow.IWorkflowSession;
 
 @ManagedBean
-public class AdminBean implements Serializable
-{
+public class AdminBean implements Serializable {
 
-  public Boolean isWorkflowAdmin()
-  {
+  public Boolean isWorkflowAdmin() {
     return hasTaskPermissions() && hasCasePermissions();
   }
 
-  private Boolean hasTaskPermissions()
-  {
+  private Boolean hasTaskPermissions() {
     return hasPermission(IPermission.TASK_READ_ALL);
   }
 
-  private Boolean hasCasePermissions()
-  {
+  private Boolean hasCasePermissions() {
     return hasPermission(IPermission.CASE_READ_ALL);
   }
 
-  public Boolean hasWorkflowEventReadPermission()
-  {
+  public Boolean hasWorkflowEventReadPermission() {
     return hasPermission(IPermission.WORKFLOW_EVENT_READ_ALL);
   }
 
-  public Boolean hasReadAbsencesPermission()
-  {
+  public Boolean hasReadAbsencesPermission() {
     return hasPermission(IPermission.USER_READ_ABSENCES);
   }
 
-  public Boolean hasAbsencePermission()
-  {
+  public Boolean hasAbsencePermission() {
     return hasPermission(
             IPermission.USER_CREATE_ABSENCE,
             IPermission.USER_READ_ABSENCES);
   }
 
-  public Boolean hasAnyAbsencePermission()
-  {
+  public Boolean hasAnyAbsencePermission() {
     return hasAtLeastOnePermission(
             IPermission.USER_CREATE_ABSENCE,
             IPermission.USER_READ_ABSENCES,
@@ -54,15 +46,13 @@ public class AdminBean implements Serializable
             IPermission.USER_READ_OWN_ABSENCES);
   }
 
-  public Boolean hasSubstitutePermission()
-  {
+  public Boolean hasSubstitutePermission() {
     return hasPermission(
             IPermission.USER_CREATE_SUBSTITUTE,
             IPermission.USER_READ_SUBSTITUTIONS);
   }
 
-  public Boolean hasAnySubstitutePermission()
-  {
+  public Boolean hasAnySubstitutePermission() {
     return hasAtLeastOnePermission(
             IPermission.USER_CREATE_SUBSTITUTE,
             IPermission.USER_READ_SUBSTITUTIONS,
@@ -70,8 +60,7 @@ public class AdminBean implements Serializable
             IPermission.USER_READ_OWN_SUBSTITUTIONS);
   }
 
-  public Boolean hasSessionReadAllPermission()
-  {
+  public Boolean hasSessionReadAllPermission() {
     return hasPermission(
             IPermission.SESSION_READ_ALL,
             IPermission.SESSION_READ_SESSION_USER,
@@ -79,8 +68,7 @@ public class AdminBean implements Serializable
             IPermission.SESSION_READ_ABSENT);
   }
 
-  private static Boolean hasPermission(IPermission... permissions)
-  {
+  private static Boolean hasPermission(IPermission... permissions) {
     var session = IWorkflowSession.current();
     var securityDescriptor = IApplication.current().getSecurityDescriptor();
     return Arrays
@@ -88,8 +76,7 @@ public class AdminBean implements Serializable
             .anyMatch(p -> session.hasPermission(securityDescriptor, p));
   }
 
-  private static Boolean hasAtLeastOnePermission(IPermission... permissions)
-  {
+  private static Boolean hasAtLeastOnePermission(IPermission... permissions) {
     var session = IWorkflowSession.current();
     var securityDescriptor = IApplication.current().getSecurityDescriptor();
     return Arrays

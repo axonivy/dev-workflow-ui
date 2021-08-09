@@ -12,15 +12,12 @@ import com.axonivy.ivy.webtest.IvyWebTest;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
-public class WebTestSwaggerIT
-{
+public class WebTestSwaggerIT {
 
   @Test
-  public void testSwaggerWorking()
-  {
+  public void testSwaggerWorking() {
     Selenide.open(viewUrl("api-browser.xhtml"));
-    if($(By.id("apiBrowser")).is(visible))
-    {
+    if ($(By.id("apiBrowser")).is(visible)) {
       Selenide.switchTo().frame("apiBrowser");
     }
     $(".computed-url").shouldBe(visible);

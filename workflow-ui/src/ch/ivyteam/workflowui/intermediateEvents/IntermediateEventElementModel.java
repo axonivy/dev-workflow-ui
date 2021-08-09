@@ -8,67 +8,56 @@ import ch.ivyteam.ivy.workflow.IIntermediateEventElement;
 import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 
-public class IntermediateEventElementModel
-{
+public class IntermediateEventElementModel {
   private final String processElementId;
   private final String name;
   private final String description;
   private IntermediateEventModel eventModel;
 
-  public static List<IntermediateEventElementModel> create()
-  {
+  public static List<IntermediateEventElementModel> create() {
     return getPMVs().stream().flatMap(pmv -> pmv.getIntermediateEventElements().stream())
-        .map(IntermediateEventElementModel::new).collect(Collectors.toList());
+            .map(IntermediateEventElementModel::new).collect(Collectors.toList());
   }
 
-  public static IntermediateEventElementModel byProcessElementId(String processElementId)
-  {
+  public static IntermediateEventElementModel byProcessElementId(String processElementId) {
     return IntermediateEventElementModel.create().stream()
-        .filter(ie -> ie.getProcessElementId().equals(processElementId)).findFirst().orElse(null);
+            .filter(ie -> ie.getProcessElementId().equals(processElementId)).findFirst().orElse(null);
   }
 
-  private static List<IWorkflowProcessModelVersion> getPMVs()
-  {
+  private static List<IWorkflowProcessModelVersion> getPMVs() {
     return IApplication.current().getProcessModels().stream()
-        .flatMap(pm -> pm.getProcessModelVersions().stream()).map(IWorkflowProcessModelVersion::of)
-        .collect(Collectors.toList());
+            .flatMap(pm -> pm.getProcessModelVersions().stream()).map(IWorkflowProcessModelVersion::of)
+            .collect(Collectors.toList());
   }
 
-  public IntermediateEventElementModel(IIntermediateEventElement ie)
-  {
+  public IntermediateEventElementModel(IIntermediateEventElement ie) {
     this.processElementId = ie.getProcessElementId();
     this.name = ie.getName();
     this.description = ie.getDescription();
     this.eventModel = new IntermediateEventModel(ie);
   }
 
-  public void redirectToElement()
-  {
+  public void redirectToElement() {
     RedirectUtil.redirect("intermediateEventDetails.xhtml?intermediateEvent=" + this.processElementId);
   }
 
-  public String getName()
-  {
+  public String getName() {
     return name;
   }
 
-  public String getDescription()
-  {
+  public String getDescription() {
     return description;
   }
 
-  public String getProcessElementId()
-  {
+  public String getProcessElementId() {
     return processElementId;
   }
 
-  public int getSize()
-  {
+  public int getSize() {
     return getEventModel().getSize();
   }
 
-  public IntermediateEventModel getEventModel()
-  {
+  public IntermediateEventModel getEventModel() {
     return eventModel;
   }
 }

@@ -19,11 +19,9 @@ import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.axonivy.ivy.webtest.primeui.widget.Table;
 
 @IvyWebTest
-public class WebTestSignalsIT
-{
+public class WebTestSignalsIT {
   @Test
-  public void testSignalAdminOnly()
-  {
+  public void testSignalAdminOnly() {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     loginFromTable("testuser");
     open(viewUrl("signals.xhtml"));
@@ -35,8 +33,7 @@ public class WebTestSignalsIT
   }
 
   @Test
-  public void testSendSignals()
-  {
+  public void testSendSignals() {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     loginDeveloper();
 
@@ -52,8 +49,7 @@ public class WebTestSignalsIT
   }
 
   @Test
-  public void testSignalAutocomplete()
-  {
+  public void testSignalAutocomplete() {
     open(viewUrl("signals.xhtml"));
     $(By.id("signalForm:signalCodeInput")).findElement(By.tagName("button")).click();
 
@@ -67,8 +63,7 @@ public class WebTestSignalsIT
   }
 
   @Test
-  public void testBoundarySignals()
-  {
+  public void testBoundarySignals() {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     loginDeveloper();
 
@@ -86,8 +81,7 @@ public class WebTestSignalsIT
   }
 
   @Test
-  public void testBoundarySignalsOnClick()
-  {
+  public void testBoundarySignalsOnClick() {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     loginDeveloper();
 

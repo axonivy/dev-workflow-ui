@@ -11,38 +11,31 @@ import ch.ivyteam.workflowui.util.RedirectUtil;
 
 @ManagedBean
 @ViewScoped
-public class ProcessesBean
-{
+public class ProcessesBean {
   private StartsDataModel startsDataModel;
 
-  public ProcessesBean()
-  {
+  public ProcessesBean() {
     startsDataModel = new StartsDataModel();
     startsDataModel.setFilter("");
   }
 
-  public StartsDataModel getStartsDataModel()
-  {
+  public StartsDataModel getStartsDataModel() {
     return startsDataModel;
   }
 
-  public List<CustomPMV> getPMVs()
-  {
+  public List<CustomPMV> getPMVs() {
     return startsDataModel.getPMVs();
   }
 
-  public String getFilter()
-  {
+  public String getFilter() {
     return this.startsDataModel.getFilter();
   }
 
-  public void setFilter(String filter)
-  {
+  public void setFilter(String filter) {
     this.startsDataModel.setFilter(filter);
   }
 
-  public void redirect()
-  {
+  public void redirect() {
     RedirectUtil.redirect("home.xhtml");
   }
 

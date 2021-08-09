@@ -19,20 +19,17 @@ import com.codeborne.selenide.FileDownloadMode;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
-public class WebTestCaseMapIT
-{
+public class WebTestCaseMapIT {
 
   @BeforeAll
-  static void setup()
-  {
+  static void setup() {
     Selenide.closeWebDriver();
     Configuration.proxyEnabled = true;
     Configuration.fileDownload = FileDownloadMode.PROXY;
   }
 
   @Test
-  public void caseDetails()
-  {
+  public void caseDetails() {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     loginDeveloper();
     startTestCaseMap("0cf1f054-a4ad-4b2b-bcf1-c9c34ec0a2ab.icm");

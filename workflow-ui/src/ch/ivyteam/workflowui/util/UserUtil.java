@@ -17,65 +17,51 @@ import ch.ivyteam.ivy.security.IRole;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.security.IUser;
 
-public class UserUtil
-{
-  public static List<IUser> getUsers()
-  {
+public class UserUtil {
+  public static List<IUser> getUsers() {
     var users = IApplication.current().getSecurityContext()
             .users().paged().stream().collect(toList());
     Collections.sort(users, (user1, user2) -> user1.getName().compareToIgnoreCase(user2.getName()));
     return users;
   }
 
-  public static String getRoles(IUser user)
-  {
+  public static String getRoles(IUser user) {
     return user.getRoles().stream().map(IRole::getDisplayName).collect(Collectors.joining(", "));
   }
 
-  public static void redirectIfNotLoggedIn()
-  {
-    if (!isLoggedIn())
-    {
-      if (EngineModeUtil.isDemoOrDesigner())
-      {
+  public static void redirectIfNotLoggedIn() {
+    if (!isLoggedIn()) {
+      if (EngineModeUtil.isDemoOrDesigner()) {
         LoginUtil.redirectToTable();
-      }
-      else
-      {
+      } else {
         LoginUtil.redirectToLoginForm();
       }
     }
   }
 
-  public static boolean checkIfPersonalTasks()
-  {
+  public static boolean checkIfPersonalTasks() {
     return checkCurrentPage("tasks");
   }
 
-  public static boolean checkIfHomepage()
-  {
+  public static boolean checkIfHomepage() {
     return checkCurrentPage("home");
   }
 
-  public static boolean isLoggedIn()
-  {
+  public static boolean isLoggedIn() {
     return ISession.current().getSessionUser() != null;
   }
 
-  private static boolean checkCurrentPage(String page)
-  {
+  private static boolean checkCurrentPage(String page) {
     String currentUrl = FacesContext.getCurrentInstance().getViewRoot().getViewId();
     String currentPage = StringUtils.substringAfterLast(currentUrl, "/");
     return currentPage.equals(page + ".xhtml");
   }
 
-  public static boolean isAdmin()
-  {
+  public static boolean isAdmin() {
     return hasPermission(IPermission.TASK_READ_ALL) & hasPermission(IPermission.CASE_READ_ALL);
   }
 
-  private static boolean hasPermission(IPermission... permissions)
-  {
+  private static boolean hasPermission(IPermission... permissions) {
     return Arrays.stream(permissions).anyMatch(
             p -> ISession.current().hasPermission(IApplication.current().getSecurityDescriptor(), p));
   }

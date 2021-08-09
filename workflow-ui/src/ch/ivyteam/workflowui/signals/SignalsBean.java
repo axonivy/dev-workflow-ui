@@ -18,82 +18,67 @@ import ch.ivyteam.ivy.workflow.signal.IStartSignalEventElement;
 
 @ManagedBean
 @ViewScoped
-public class SignalsBean
-{
+public class SignalsBean {
   private String code;
   private String payload;
   private SignalsModel signalsModel;
   private BoundarySignalModel boundarySignalModel;
 
-  public SignalsBean()
-  {
+  public SignalsBean() {
     signalsModel = new SignalsModel();
     boundarySignalModel = new BoundarySignalModel();
   }
 
-  public SignalsModel getSignalsModel()
-  {
+  public SignalsModel getSignalsModel() {
     return signalsModel;
   }
 
-  public BoundarySignalModel getBoundarySignalModel()
-  {
+  public BoundarySignalModel getBoundarySignalModel() {
     return boundarySignalModel;
   }
 
-  public void sendBoundarySignal(String signalCode)
-  {
+  public void sendBoundarySignal(String signalCode) {
     this.code = signalCode;
     sendSignal();
   }
 
-  public void sendSignal()
-  {
+  public void sendSignal() {
     IBpmSignalService signals = IWorkflowSession.current().getWorkflowContext().signals();
     SignalCode signalCode = new SignalCode(code);
 
-    if (StringUtils.isBlank(payload))
-    {
+    if (StringUtils.isBlank(payload)) {
       signals.send(signalCode);
-    }
-    else
-    {
+    } else {
       signals.send(signalCode, payload);
     }
     showMessage("Signal " + code + " sent");
     this.code = "";
   }
 
-  private void showMessage(String msg)
-  {
+  private void showMessage(String msg) {
     FacesContext.getCurrentInstance().addMessage(null,
-        new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", msg));
+            new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", msg));
   }
 
-  public List<String> signalsComplete(String query)
-  {
+  public List<String> signalsComplete(String query) {
     return IWorkflowContext.current().signals().receivers().all().stream()
-        .map(IStartSignalEventElement::getName).filter(s -> s.toLowerCase().contains(query.toLowerCase()))
-        .collect(Collectors.toList());
+            .map(IStartSignalEventElement::getName).filter(s -> s.toLowerCase().contains(query.toLowerCase()))
+            .collect(Collectors.toList());
   }
 
-  public String getCode()
-  {
+  public String getCode() {
     return code;
   }
 
-  public void setCode(String code)
-  {
+  public void setCode(String code) {
     this.code = code;
   }
 
-  public String getPayload()
-  {
+  public String getPayload() {
     return payload;
   }
 
-  public void setPayload(String payload)
-  {
+  public void setPayload(String payload) {
     this.payload = payload;
   }
 }

@@ -4,15 +4,13 @@ import java.util.List;
 
 import ch.ivyteam.ivy.workflow.category.Category;
 
-public class CategoryModel implements Comparable<CategoryModel>
-{
+public class CategoryModel implements Comparable<CategoryModel> {
   private final String name;
   private final String cssIcon;
   private final String tooltip;
   private final List<StartableModel> starts;
 
-  public CategoryModel(Category category, List<StartableModel> starts)
-  {
+  public CategoryModel(Category category, List<StartableModel> starts) {
     this.name = category.getName();
     this.cssIcon = category.getLocalizedText("cssIcon");
     this.tooltip = category.getLocalizedText("tooltip");
@@ -20,28 +18,23 @@ public class CategoryModel implements Comparable<CategoryModel>
   }
 
   @Override
-  public int compareTo(CategoryModel category)
-  {
+  public int compareTo(CategoryModel category) {
     return this.name.compareTo(category.getName());
   }
 
-  public List<StartableModel> getStarts()
-  {
+  public List<StartableModel> getStarts() {
     return starts;
   }
 
-  public String getCssIcon()
-  {
+  public String getCssIcon() {
     return cssIcon;
   }
 
-  public String getTooltip()
-  {
+  public String getTooltip() {
     return tooltip;
   }
 
-  public String getName()
-  {
+  public String getName() {
     return name;
   }
 }

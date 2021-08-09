@@ -11,8 +11,7 @@ import ch.ivyteam.ivy.server.restricted.EngineMode;
 @SuppressWarnings("restriction")
 public class ApiBrowserBean {
 
-  public String getApp()
-  {
+  public String getApp() {
     return EngineMode.isEmbeddedInDesigner() ? "designer" : "system";
   }
 

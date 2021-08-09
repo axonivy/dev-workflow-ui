@@ -16,12 +16,10 @@ import com.axonivy.ivy.webtest.primeui.widget.Table;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
-public class WebTestHomepageIT
-{
+public class WebTestHomepageIT {
 
   @Test
-  public void homepageContainers()
-  {
+  public void homepageContainers() {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     loginDeveloper();
     Selenide.open(viewUrl("home.xhtml"));
@@ -39,8 +37,7 @@ public class WebTestHomepageIT
   }
 
   @Test
-  public void noCardsIfNotLoggedIn()
-  {
+  public void noCardsIfNotLoggedIn() {
     loginDeveloper();
     Selenide.open(viewUrl("home.xhtml"));
 

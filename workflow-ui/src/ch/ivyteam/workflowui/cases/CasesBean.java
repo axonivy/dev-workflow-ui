@@ -12,34 +12,27 @@ import ch.ivyteam.workflowui.util.RedirectUtil;
 
 @ManagedBean
 @ViewScoped
-public class CasesBean
-{
+public class CasesBean {
   private CasesDataModel casesDataModel;
 
-  public CasesBean()
-  {
+  public CasesBean() {
     casesDataModel = new CasesDataModel();
     casesDataModel.setFilter("");
   }
 
-  public CasesDataModel getCasesDataModel()
-  {
+  public CasesDataModel getCasesDataModel() {
     return casesDataModel;
   }
 
-  public String getName(ICase icase)
-  {
-    if (StringUtils.isBlank(icase.getName()))
-    {
+  public String getName(ICase icase) {
+    if (StringUtils.isBlank(icase.getName())) {
       return "[Case: " + icase.getId() + "]";
     }
     return icase.getName();
   }
 
-  public String getStateIcon(CaseState caseState)
-  {
-    switch (caseState)
-    {
+  public String getStateIcon(CaseState caseState) {
+    switch (caseState) {
       case DONE:
         return "check-circle-1 case-state-done";
       case CREATED:
@@ -53,12 +46,10 @@ public class CasesBean
     }
   }
 
-  public void redirectToCaseRow(SelectEvent event)
-  {
+  public void redirectToCaseRow(SelectEvent event) {
     Object object = event.getObject();
-    if (object instanceof ICase)
-    {
-      RedirectUtil.redirect("caseDetails.xhtml?case="+((ICase) object).getId());
+    if (object instanceof ICase) {
+      RedirectUtil.redirect("caseDetails.xhtml?case=" + ((ICase) object).getId());
     }
   }
 }

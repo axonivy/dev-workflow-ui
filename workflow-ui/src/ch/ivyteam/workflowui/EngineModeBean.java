@@ -7,10 +7,8 @@ import ch.ivyteam.workflowui.util.EngineModeUtil;
 
 @ManagedBean
 @SessionScoped
-public class EngineModeBean
-{
-  public boolean isDemoOrDesigner()
-  {
+public class EngineModeBean {
+  public boolean isDemoOrDesigner() {
     return EngineModeUtil.isDemoOrDesigner();
   }
 }
