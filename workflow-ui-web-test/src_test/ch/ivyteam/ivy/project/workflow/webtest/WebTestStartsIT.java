@@ -3,11 +3,13 @@ package ch.ivyteam.ivy.project.workflow.webtest;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.assertCurrentUrlEndsWith;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -43,6 +45,8 @@ public class WebTestStartsIT {
     $(By.id("form:testInput")).sendKeys("test input");
     $(By.id("form:testSelectOneMenu")).shouldBe(visible).click();
     $(By.id("form:testSelectOneMenu_2")).shouldBe(visible).click();
+
+    assertCurrentUrlEndsWith("startTestDialog.ivp");
   }
 
   @Test
@@ -62,5 +66,30 @@ public class WebTestStartsIT {
     Selenide.open(viewUrl("starts.xhtml"));
     $(By.id("startsForm:filter")).sendKeys("testservice");
     $(By.id("startsForm:projectStarts")).shouldHave(text("TestService"));
+  }
+
+  @Test
+  public void testRedirectWhenFinished() {
+    Selenide.open(viewUrl("starts.xhtml"));
+    $(By.id("startsForm:projectStarts")).shouldBe(visible);
+    $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui"));
+    $(By.id("startsForm:filter")).sendKeys("testData");
+    $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui-test-data"));
+    $(byText("TestData.ivp")).shouldBe(visible).click();
+
+    open(viewUrl("tasks.xhtml"));
+    $(By.id("tasksForm:tasks")).find("TestTask");
+    assertCurrentUrlEndsWith("tasks.xhtml");
+
+    open(viewUrl("home.xhtml"));
+    $(By.id("form:lastStarts")).find(byText("TestData.ivp")).click();
+    assertCurrentUrlEndsWith("home.xhtml");
+
+    open(viewUrl("allTasks.xhtml"));
+    $(".si-information-circle").shouldBe(visible).click();
+    $(".case-link").shouldHave(text("TestCase"));
+    var taskId = $("#form\\:taskId").getText();
+    $("#form\\:taskStartBtn").shouldBe(enabled).click();
+    assertCurrentUrlEndsWith("taskDetails.xhtml?task="+taskId);
   }
 }

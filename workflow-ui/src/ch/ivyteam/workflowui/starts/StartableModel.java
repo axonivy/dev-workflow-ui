@@ -4,6 +4,7 @@ import ch.ivyteam.ivy.model.value.WebLink;
 import ch.ivyteam.ivy.workflow.category.Category;
 import ch.ivyteam.ivy.workflow.start.IWebStartable;
 import ch.ivyteam.workflowui.util.RedirectUtil;
+import ch.ivyteam.workflowui.util.UrlUtil;
 
 public class StartableModel {
   private final String displayName;
@@ -35,6 +36,7 @@ public class StartableModel {
   }
 
   public void execute() {
-    RedirectUtil.redirect("frame.xhtml?taskUrl=" + getLink());
+    var originalPage = UrlUtil.evalOriginalPage();
+    RedirectUtil.redirect("frame.xhtml?origin=" + originalPage + "&taskUrl=" + getLink());
   }
 }

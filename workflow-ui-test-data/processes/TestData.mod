@@ -36,6 +36,11 @@ Ta0 @StartRequest f24 '' #zField
 Ta0 @TaskSwitchSimple f25 '' #zField
 Ta0 @PushWFArc f26 '' #zField
 Ta0 @TkArc f27 '' #zField
+Ta0 @StartRequest f28 '' #zField
+Ta0 @EndTask f29 '' #zField
+Ta0 @UserDialog f31 '' #zField
+Ta0 @PushWFArc f32 '' #zField
+Ta0 @PushWFArc f30 '' #zField
 >Proto Ta0 Ta0 TestData #zField
 Ta0 f0 outLink TestData.ivp #txt
 Ta0 f0 inParamDecl '<> param;' #txt
@@ -231,6 +236,37 @@ Ta0 f25 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 Ta0 f25 209 529 30 30 -50 17 #rect
 Ta0 f26 239 544 337 544 #arcP
 Ta0 f27 111 544 209 544 #arcP
+Ta0 f28 outLink testDefaultPages.ivp #txt
+Ta0 f28 inParamDecl '<> param;' #txt
+Ta0 f28 requestEnabled true #txt
+Ta0 f28 triggerEnabled false #txt
+Ta0 f28 callSignature testDefaultPages() #txt
+Ta0 f28 caseData businessCase.attach=true #txt
+Ta0 f28 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elementInfo>
+    <language>
+        <name>testDefaultPages.ivp</name>
+    </language>
+</elementInfo>
+' #txt
+Ta0 f28 @C|.responsibility Everybody #txt
+Ta0 f28 81 625 30 30 -58 21 #rect
+Ta0 f29 337 625 30 30 0 15 #rect
+Ta0 f31 dialogId ch.ivyteam.ivy.project.workflow.TestDefaultPage #txt
+Ta0 f31 startMethod start() #txt
+Ta0 f31 requestActionDecl '<> param;' #txt
+Ta0 f31 responseMappingAction 'out=in;
+' #txt
+Ta0 f31 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elementInfo>
+    <language>
+        <name>TestDefaultPage</name>
+    </language>
+</elementInfo>
+' #txt
+Ta0 f31 168 618 112 44 -52 -7 #rect
+Ta0 f32 111 640 168 640 #arcP
+Ta0 f30 280 640 337 640 #arcP
 >Proto Ta0 .type workflow.uite.Data #txt
 >Proto Ta0 .processKind NORMAL #txt
 >Proto Ta0 0 0 32 24 18 0 #rect
@@ -257,3 +293,7 @@ Ta0 f24 mainOut f27 tail #connect
 Ta0 f27 head f25 in #connect
 Ta0 f25 out f26 tail #connect
 Ta0 f26 head f23 mainIn #connect
+Ta0 f28 mainOut f32 tail #connect
+Ta0 f32 head f31 mainIn #connect
+Ta0 f31 mainOut f30 tail #connect
+Ta0 f30 head f29 mainIn #connect

@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
+  xmlns:pe="http://primefaces.org/ui/extensions">
+<h:body>
+  <ui:composition template="/layouts/basic-8.xhtml">
+    <ui:define name="title">TestDefaultPage</ui:define>
+    <ui:define name="content">
+      <h3>
+        This is a test page for default pages.
+      </h3>
+      <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+        <p:button id="homeBtn" href="#{ivy.html.applicationHomeRef()}" value="Home Page" style="width: 100%"/>
+        <p:button id="startsBtn" href="#{ivy.html.processStartListRef()}" value="Process Starts" style="width: 100%"/>
+        <p:button id="tasksBtn" href="#{ivy.html.taskListRef()}" value="Task List" style="width: 100%"/>
+        <p:button id="loginBtn" href="#{ivy.html.loginRef()}" value="Login Page" style="width: 100%"/>
+      </p:panelGrid>
+    </ui:define>
+  </ui:composition>
+</h:body>
+</html>

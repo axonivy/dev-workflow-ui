@@ -20,7 +20,7 @@
 
             <div class="task-detail-action-container action-container">
               <p:commandLink value="Start"
-                action="#{tasksBean.executeTask(tasksDetailsBean.getSelectedTask().getId())}"
+                action="#{tasksDetailsBean.executeTask}"
                 class="task-action-item straight-text-icon" id="taskStartBtn" disabled="#{not tasksDetailsBean.canBeStarted()}">
                 <i class="si si-arrow-right-1 detail-action-icon-bold"></i>
               </p:commandLink>
@@ -53,7 +53,7 @@
           <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank"
             columnClasses="no-padding-left ui-g-6 ui-md-2, ui-g-6 ui-md-4, no-padding-left ui-g-6 ui-md-2, ui-g-6 ui-md-4">
             <h:outputText value="Task ID" />
-            <h:outputText value="#{tasksDetailsBean.selectedTask.getId()}" />
+            <h:outputText id="taskId" value="#{tasksDetailsBean.selectedTask.getId()}" />
 
             <h:outputText value="Task name" />
             <h:outputText value="#{tasksDetailsBean.getName(tasksDetailsBean.selectedTask)}" id="taskName" />
