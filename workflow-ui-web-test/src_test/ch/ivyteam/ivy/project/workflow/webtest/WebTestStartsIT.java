@@ -11,6 +11,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
@@ -18,8 +19,16 @@ import com.axonivy.ivy.webtest.IvyWebTest;
 import com.axonivy.ivy.webtest.engine.EngineUrl;
 import com.codeborne.selenide.Selenide;
 
+import ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil;
+
 @IvyWebTest
 public class WebTestStartsIT {
+
+  @BeforeEach
+  public void prepare()
+  {
+    WorkflowUiUtil.loginDeveloper();
+  }
 
   @Test
   public void testFilter() {
