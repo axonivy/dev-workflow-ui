@@ -11,6 +11,7 @@ import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.workflowui.TaskLinkModel;
 import ch.ivyteam.workflowui.util.RedirectUtil;
+import ch.ivyteam.workflowui.util.UrlUtil;
 
 @ManagedBean
 @ViewScoped
@@ -73,8 +74,9 @@ public class TasksBean {
   }
 
   public void executeTask(long taskId) {
+    var originalPage = UrlUtil.evalOriginalPage();
     ITask task = IWorkflowContext.current().findTask(taskId);
-    RedirectUtil.redirect("frame.xhtml?taskUrl=" + task.getStartLink().getRelative());
+    RedirectUtil.redirect("frame.xhtml?origin=" + originalPage + "&taskUrl=" + task.getStartLink().getRelative());
   }
 
   public String getPriorityIcon(WorkflowPriority priority) {

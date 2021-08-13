@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.event.SelectEvent;
@@ -13,6 +11,7 @@ import org.primefaces.event.SelectEvent;
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.workflowui.LoginTableBean.User;
 import ch.ivyteam.workflowui.util.LoginUtil;
+import ch.ivyteam.workflowui.util.UrlUtil;
 import ch.ivyteam.workflowui.util.UserUtil;
 
 @ManagedBean
@@ -48,23 +47,18 @@ public class LoginBean {
   }
 
   public void redirectIfNotLoggedIn() {
-    evalOriginalUrl();
+    originalUrl = UrlUtil.evalOriginalUrl();
     UserUtil.redirectIfNotLoggedIn();
   }
 
   public void redirectToLoginForm() {
-    evalOriginalUrl();
+    originalUrl = UrlUtil.evalOriginalUrl();
     LoginUtil.redirectToLoginForm();
   }
 
   public void resetOriginalUrlAndRedirect() {
     originalUrl = "";
     LoginUtil.redirectToTable();
-  }
-
-  private void evalOriginalUrl() {
-    var request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-    originalUrl = request.getRequestURI();
   }
 
   public String getRoles(IUser user) {

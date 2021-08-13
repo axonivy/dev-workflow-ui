@@ -17,6 +17,8 @@ import ch.ivyteam.ivy.workflow.IWorkflowEvent;
 import ch.ivyteam.ivy.workflow.IWorkflowSession;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowNavigationUtil;
+import ch.ivyteam.workflowui.util.RedirectUtil;
+import ch.ivyteam.workflowui.util.UrlUtil;
 
 @ManagedBean
 @ViewScoped
@@ -40,6 +42,11 @@ public class TasksDetailsBean {
 
   public ITask getTaskById(long id) {
     return WorkflowNavigationUtil.getWorkflowContext(IApplication.current()).findTask(id);
+  }
+
+  public void executeTask() {
+    var originalPage = UrlUtil.evalOriginalPage() + "?task=" + selectedTaskId;
+    RedirectUtil.redirect("frame.xhtml?origin=" + originalPage + "&taskUrl=" + selectedTask.getStartLink().getRelative());
   }
 
   public void expireTask() {

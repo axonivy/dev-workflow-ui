@@ -17,12 +17,13 @@ Mn0 @StartRequest f5 '' #zField
 Mn0 @StartRequest f6 '' #zField
 Mn0 @EndRequest f8 '' #zField
 Mn0 @PushWFArc f7 '' #zField
-Mn0 @PushWFArc f9 '' #zField
 Mn0 @EndRequest f10 '' #zField
 Mn0 @EndRequest f15 '' #zField
 Mn0 @PushWFArc f16 '' #zField
 Mn0 @PushWFArc f11 '' #zField
 Mn0 @StartRequest f12 '' #zField
+Mn0 @EndRequest f13 '' #zField
+Mn0 @PushWFArc f9 '' #zField
 >Proto Mn0 Mn0 Main #zField
 Mn0 f0 outLink DefaultApplicationHomePage.ivp #txt
 Mn0 f0 inParamDecl '<> param;' #txt
@@ -105,9 +106,6 @@ Mn0 f6 81 241 30 30 -54 17 #rect
 Mn0 f8 template "view/starts.xhtml" #txt
 Mn0 f8 209 305 30 30 0 15 #rect
 Mn0 f7 111 320 209 320 #arcP
-Mn0 f9 111 64 224 113 #arcP
-Mn0 f9 1 224 64 #addKink
-Mn0 f9 0 0.6297698674755009 0 0 #arcLabel
 Mn0 f10 template "view/tasks.xhtml" #txt
 Mn0 f10 209 177 30 30 0 15 #rect
 Mn0 f15 template "view/login.xhtml" #txt
@@ -133,6 +131,9 @@ Mn0 f12 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 ' #txt
 Mn0 f12 @C|.responsibility Everybody #txt
 Mn0 f12 80 368 32 32 -63 16 #rect
+Mn0 f13 template "view/end.xhtml" #txt
+Mn0 f13 209 49 30 30 0 15 #rect
+Mn0 f9 111 64 209 64 #arcP
 >Proto Mn0 .type ch.ivyteam.ivy.project.workflow.ui.Data #txt
 >Proto Mn0 .processKind NORMAL #txt
 >Proto Mn0 0 0 32 24 18 0 #rect
@@ -141,9 +142,9 @@ Mn0 f0 mainOut f2 tail #connect
 Mn0 f2 head f1 mainIn #connect
 Mn0 f3 mainOut f7 tail #connect
 Mn0 f7 head f8 mainIn #connect
-Mn0 f5 mainOut f9 tail #connect
-Mn0 f9 head f1 mainIn #connect
 Mn0 f6 mainOut f16 tail #connect
 Mn0 f16 head f15 mainIn #connect
 Mn0 f4 mainOut f11 tail #connect
 Mn0 f11 head f10 mainIn #connect
+Mn0 f5 mainOut f9 tail #connect
+Mn0 f9 head f13 mainIn #connect
