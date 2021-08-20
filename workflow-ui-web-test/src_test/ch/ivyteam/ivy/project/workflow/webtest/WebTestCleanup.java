@@ -26,8 +26,15 @@ import com.axonivy.ivy.webtest.primeui.widget.Table;
 @IvyWebTest
 @TestMethodOrder(OrderAnnotation.class)
 public class WebTestCleanup {
+
   @BeforeAll
-  public static void makeAdminUser() {
+  public static void prepare() {
+    // check if the engine is running and starts are available
+    open(viewUrl("starts.xhtml"));
+    $(By.id("startsForm:filter")).sendKeys("workflow-ui-test-data");
+    $("#startsForm\\:projectStarts\\:0\\:caseMapsTitle").shouldBe(visible);
+    $("#startsForm\\:projectStarts\\:0\\:processesTitle").shouldBe(visible);
+    $("#startsForm\\:projectStarts\\:0\\:webServicesTitle").shouldBe(visible);
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
   }
 
@@ -80,6 +87,7 @@ public class WebTestCleanup {
     open(viewUrl("cases.xhtml"));
     casesTable.row(0).shouldBe(text("TestCase"));
     open(viewUrl("starts.xhtml"));
+    $(By.id("startsForm:filter")).sendKeys("workflow-ui-test-data");
     $("#startsForm\\:projectStarts\\:0\\:caseMapsTitle").shouldBe(visible);
     $("#startsForm\\:projectStarts\\:0\\:processesTitle").shouldBe(visible);
     $("#startsForm\\:projectStarts\\:0\\:webServicesTitle").shouldBe(visible);
@@ -91,6 +99,7 @@ public class WebTestCleanup {
     open(viewUrl("cases.xhtml"));
     casesTable.row(0).shouldBe(text("No Cases found"));
     open(viewUrl("starts.xhtml"));
+    $(By.id("startsForm:filter")).sendKeys("workflow-ui-test-data");
     $("#startsForm\\:projectStarts\\:0\\:caseMapsTitle").shouldNotBe(visible);
     $("#startsForm\\:projectStarts\\:0\\:processesTitle").shouldNotBe(visible);
     $("#startsForm\\:projectStarts\\:0\\:webServicesTitle").shouldBe(visible);

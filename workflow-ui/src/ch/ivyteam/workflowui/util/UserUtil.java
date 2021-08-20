@@ -32,7 +32,7 @@ public class UserUtil {
   public static void redirectIfNotLoggedIn() {
     if (!isLoggedIn()) {
       if (EngineModeUtil.isDemoOrDesigner()) {
-        LoginUtil.redirectToTable();
+        LoginUtil.redirectToLoginTable();
       } else {
         LoginUtil.redirectToLoginForm();
       }

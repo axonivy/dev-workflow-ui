@@ -4,9 +4,12 @@
   xmlns:pe="http://primefaces.org/ui/extensions">
 
 <h:body>
+  <f:metadata>
+    <f:viewParam name="originalUrl" value="#{loginBean.originalUrl}"/>
+  </f:metadata>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <h:panelGroup layout="block" styleClass="static-message" rendered="#{!empty loginBean.originalUrl}">
+      <h:panelGroup layout="block" styleClass="static-message" rendered="#{!loginBean.loggedIn}">
         <p:staticMessage severity="warn" summary="Warning" detail="You need to login to access that page" id="loginMessage"/>
       </h:panelGroup>
       <ui:include src="/includes/components/userTable.xhtml"/>

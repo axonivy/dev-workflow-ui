@@ -16,6 +16,9 @@
   <h:outputScript name="js/ripple.js" library="serenity-layout" />
 </h:head>
 
+<f:metadata>
+  <f:viewParam name="originalUrl" value="#{loginBean.originalUrl}"/>
+</f:metadata>
 <h:body styleClass="login-body"
   style="background-image: url('#{resource['ivy-webcontent:resources/images/background.jpg']}');">
   <div class="login-panel ui-fluid">

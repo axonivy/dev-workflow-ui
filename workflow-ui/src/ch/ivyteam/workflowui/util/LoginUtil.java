@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import ch.ivyteam.ivy.security.ISession;
 
 public class LoginUtil {
+
   public static void login(String username, String password, String originalUrl) {
     if (!checkLoginAndRedirect(username, password, originalUrl)) {
       FacesContext.getCurrentInstance().addMessage(null,
@@ -37,10 +38,12 @@ public class LoginUtil {
   }
 
   public static void redirectToLoginForm() {
-    RedirectUtil.redirect("login.xhtml");
+    String origin = UrlUtil.evalOriginalPage();
+    RedirectUtil.redirect("login.xhtml?originalUrl=" + origin);
   }
 
-  public static void redirectToTable() {
-    RedirectUtil.redirect("loginTable.xhtml");
+  public static void redirectToLoginTable() {
+    String origin = UrlUtil.evalOriginalPage();
+    RedirectUtil.redirect("loginTable.xhtml?originalUrl=" + origin);
   }
 }

@@ -27,9 +27,12 @@ public class CustomPMV {
     var categories = new ArrayList<CategoryModel>();
 
     Predicate<StartableModel> filterPredicate = startable -> true;
+    Predicate<WebServiceProcess> filterPredicateWSP = wsp -> true;
     if (!StringUtils.containsIgnoreCase(pmv.getName(), filter)) {
       filterPredicate = startable -> StringUtils.containsIgnoreCase(startable.getLink().getRelative(), filter)
               || StringUtils.containsIgnoreCase(startable.getDisplayName(), filter);
+      filterPredicateWSP = wsp -> StringUtils.containsIgnoreCase(wsp.getName(), filter)
+              || StringUtils.containsIgnoreCase(wsp.getLink(), filter);
     }
 
     pmv.getStartables(ISession.current()).stream().filter(e -> e.getType().equals(PROCESS_START))
@@ -42,8 +45,7 @@ public class CustomPMV {
             .collect(Collectors.toList());
 
     var webServiceProcesses = pmv.getWebServiceProcesses().stream().map(WebServiceProcess::new)
-            .filter(wsp -> StringUtils.containsIgnoreCase(wsp.getName(), filter))
-            .collect(Collectors.toList());
+            .filter(filterPredicateWSP).collect(Collectors.toList());
 
     return filterEmptyStartsAndSelf(pmv, categories, casemapStartElements, webServiceProcesses);
   }
