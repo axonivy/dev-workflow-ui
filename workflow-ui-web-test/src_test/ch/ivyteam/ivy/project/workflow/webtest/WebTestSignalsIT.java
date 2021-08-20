@@ -38,13 +38,12 @@ public class WebTestSignalsIT {
     loginDeveloper();
 
     open(viewUrl("signals.xhtml"));
-    Table signalsTable = PrimeUi.table(By.id("signalForm:firedSignalsTable"));
-    signalsTable.containsNot("Web Test Signal");
 
     $(By.id("signalForm:signalCodeInput_input")).sendKeys("Web Test Signal");
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
     $(By.id("signalForm:growl_container")).shouldBe(visible);
 
+    Table signalsTable = PrimeUi.table(By.id("signalForm:firedSignalsTable"));
     signalsTable.valueAtShouldBe(0, 1, text("Web Test Signal"));
   }
 

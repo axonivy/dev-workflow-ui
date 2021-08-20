@@ -11,6 +11,7 @@
     <flatten.plugin.version>1.2.7</flatten.plugin.version>
     <project.build.plugin.version>9.3.0-SNAPSHOT</project.build.plugin.version>
     <buildPlugin.ivyVersion>[9.2.0,]</buildPlugin.ivyVersion>
+    <engineHomeDirectory>${basedir}/../maven/config/target/ivyEngine/</engineHomeDirectory>
   </properties>
 
   <build>
@@ -68,6 +69,10 @@
           <groupId>com.axonivy.ivy.ci</groupId>
           <artifactId>project-build-plugin</artifactId>
           <version>${project.build.plugin.version}</version>
+          <configuration>
+            <engineDirectory>${engineHomeDirectory}</engineDirectory>
+            <testEngine>COPY_FROM_TEMPLATE</testEngine>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.eclipse.m2e</groupId>

@@ -63,11 +63,44 @@
     <testOutputDirectory>target/test-classes</testOutputDirectory>
     <plugins>
       <plugin>
+        <groupId>com.axonivy.ivy.ci</groupId>
+        <artifactId>project-build-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <ivyVersion>${buildPlugin.ivyVersion}</ivyVersion>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.0.2</version>
+        <executions>
+          <execution>
+            <id>copy-resource-one</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/../maven/config/target/ivyEngine/webapps/ivy/WEB-INF/lib/</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${basedir}/../maven/workflow-ui-jar/target/</directory>
+                  <includes>
+                      <include>*.jar</include>
+                  </includes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${maven.surefire.version}</version>
         <configuration>
           <testFailureIgnore>true</testFailureIgnore>
+          <trimStackTrace>false</trimStackTrace>
         </configuration>
         <executions>
           <execution>
@@ -92,6 +125,23 @@
             </configuration>
           </execution>
           <execution>
+            <id>test-integrated-artifact</id>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>**/WebTest*IT.java</include>
+              </includes>
+              <reportNameSuffix>Integrated</reportNameSuffix>
+              <argLine>
+                -Dtest.engine.url=${test.engine.url}
+                -Dtest.engine.app=${test.application}
+                -Dtest.integrated.workflow=true</argLine>
+            </configuration>
+          </execution>
+          <execution>
             <id>cleanup-test</id>
             <phase>integration-test</phase>
             <goals>
@@ -103,18 +153,11 @@
               </includes>
               <argLine>
                 -Dtest.engine.url=${test.engine.url}
-                -Dtest.engine.app=${test.application}</argLine>
+                -Dtest.engine.app=${test.application}
+                -Dtest.integrated.workflow=true</argLine>
             </configuration>
           </execution>
         </executions>
-      </plugin>
-      <plugin>
-        <groupId>com.axonivy.ivy.ci</groupId>
-        <artifactId>project-build-plugin</artifactId>
-        <extensions>true</extensions>
-        <configuration>
-          <ivyVersion>${buildPlugin.ivyVersion}</ivyVersion>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

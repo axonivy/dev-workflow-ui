@@ -59,9 +59,7 @@ pipeline {
                 checkVersions cmd: '-f maven/config/pom.xml'
               }
             }
-
-            junit testDataPublishers: [[$class: 'AttachmentPublisher'], [$class: 'StabilityTestDataPublisher']], testResults: '**/target/surefire-reports/**/*.xml'
-            junit testDataPublishers: [[$class: 'AttachmentPublisher'], [$class: 'StabilityTestDataPublisher']], testResults: '**/target/failsafe-reports/*.xml'
+            junit testDataPublishers: [[$class: 'AttachmentPublisher'], [$class: 'StabilityTestDataPublisher']], testResults: '**/target/*-reports/**/*.xml'
             archiveArtifacts '**/target/*.iar'
             archiveArtifacts '**/target/workflow-ui-jar*.jar'
             archiveArtifacts '**/target/ivyEngine/logs/*'

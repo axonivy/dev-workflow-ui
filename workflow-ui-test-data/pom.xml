@@ -15,15 +15,6 @@
   <version>${revision}</version>
   <packaging>iar</packaging>
 
-  <dependencies>
-    <dependency>
-      <groupId>ch.ivyteam.workflow</groupId>
-      <artifactId>workflow-ui</artifactId>
-      <version>${revision}</version>
-      <type>iar</type>
-    </dependency>
-  </dependencies>
-
   <build>
     <plugins>
       <plugin>
