@@ -11,11 +11,11 @@
 
   <modules>
     <module>workflow-ui</module>
+    <module>maven/workflow-ui-jar</module>
     <module>workflow-ui-test</module>
     <module>workflow-ui-test-data</module>
     <module>workflow-ui-web-test</module>
     <module>maven/deploy</module>
-    <module>maven/workflow-ui-jar</module>
     <module>maven/workflow-ui-screenshots</module>
   </modules>
 
