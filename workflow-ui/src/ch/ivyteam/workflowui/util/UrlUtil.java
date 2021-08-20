@@ -8,12 +8,16 @@ import org.apache.commons.lang3.StringUtils;
 public class UrlUtil {
 
   public static String evalOriginalUrl() {
-    var request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-    return request.getRequestURI();
+    return getHttpServletRequest().getRequestURI();
   }
 
   public static String evalOriginalPage() {
-    var request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-    return StringUtils.substringAfterLast(request.getRequestURI(), "/");
+    return StringUtils.substringAfterLast(getHttpServletRequest().getRequestURI(), "/");
+  }
+
+  public static HttpServletRequest getHttpServletRequest() {
+    var request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+            .getRequest();
+    return request;
   }
 }

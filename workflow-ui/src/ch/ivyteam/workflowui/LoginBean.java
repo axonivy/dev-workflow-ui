@@ -3,7 +3,7 @@ package ch.ivyteam.workflowui;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.event.SelectEvent;
@@ -11,11 +11,10 @@ import org.primefaces.event.SelectEvent;
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.workflowui.LoginTableBean.User;
 import ch.ivyteam.workflowui.util.LoginUtil;
-import ch.ivyteam.workflowui.util.UrlUtil;
 import ch.ivyteam.workflowui.util.UserUtil;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class LoginBean {
   private String username;
   private String password;
@@ -26,6 +25,14 @@ public class LoginBean {
     if (object instanceof User) {
       login((User) object);
     }
+  }
+
+  public String getOriginalUrl() {
+    return originalUrl;
+  }
+
+  public void setOriginalUrl(String originalUrl) {
+    this.originalUrl = originalUrl;
   }
 
   private void login(User user) {
@@ -47,18 +54,15 @@ public class LoginBean {
   }
 
   public void redirectIfNotLoggedIn() {
-    originalUrl = UrlUtil.evalOriginalUrl();
     UserUtil.redirectIfNotLoggedIn();
   }
 
   public void redirectToLoginForm() {
-    originalUrl = UrlUtil.evalOriginalUrl();
     LoginUtil.redirectToLoginForm();
   }
 
-  public void resetOriginalUrlAndRedirect() {
-    originalUrl = "";
-    LoginUtil.redirectToTable();
+  public void redirectToLoginTable() {
+    LoginUtil.redirectToLoginTable();
   }
 
   public String getRoles(IUser user) {
@@ -87,9 +91,5 @@ public class LoginBean {
 
   public void setPassword(String password) {
     this.password = password;
-  }
-
-  public String getOriginalUrl() {
-    return originalUrl;
   }
 }

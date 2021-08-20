@@ -4,6 +4,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.assert
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.logout;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
+import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -31,8 +32,11 @@ public class WebTestLoginIT {
 
   @Test
   void testLogout() {
+    logout();
+    Selenide.open(viewUrl("home.xhtml"));
     loginFromTable("testuser");
-    assertCurrentUrlEndsWith("loginTable.xhtml");
+    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menu"));
+    assertCurrentUrlEndsWith("home.xhtml");
     logout();
     $("#sessionUserName").shouldBe(text("Unknown User"));
   }
@@ -65,11 +69,11 @@ public class WebTestLoginIT {
     loginFromTable("testuser");
     logout();
     Selenide.open(viewUrl("cases.xhtml"));
-    assertCurrentUrlEndsWith("loginTable.xhtml");
+    assertCurrentUrlEndsWith("loginTable.xhtml?originalUrl=cases.xhtml");
     $("#loginMessage").shouldBe(visible).shouldHave(text("you need to login"));
 
     Selenide.open(viewUrl("tasks.xhtml"));
-    assertCurrentUrlEndsWith("loginTable.xhtml");
+    assertCurrentUrlEndsWith("loginTable.xhtml?originalUrl=tasks.xhtml");
     $("#loginMessage").shouldBe(visible).shouldHave(text("you need to login"));
 
     loginFromTable("testuser");
@@ -82,7 +86,7 @@ public class WebTestLoginIT {
     loginFromTable("testuser");
     logout();
     Selenide.open(viewUrl("cases.xhtml"));
-    assertCurrentUrlEndsWith("loginTable.xhtml");
+    assertCurrentUrlEndsWith("loginTable.xhtml?originalUrl=cases.xhtml");
     $("#loginMessage").shouldBe(visible).shouldHave(text("you need to login"));
     $(byText("testuser")).click();
     assertCurrentUrlEndsWith("cases.xhtml");
@@ -91,7 +95,7 @@ public class WebTestLoginIT {
   @Test
   void testLoginTableRedirect() {
     loginFromTable("DifferentLogin");
-    assertCurrentUrlEndsWith("login.xhtml");
+    assertCurrentUrlEndsWith("login.xhtml?originalUrl=loginTable.xhtml");
     WorkflowUiUtil.customLogin("DifferentLogin", "DifferentPassword");
     $("#sessionUserName").shouldBe(text("DifferentLogin"));
   }
