@@ -76,8 +76,8 @@ public class WorkflowUiUtil {
 
   public static void customLogin(String username, String password) {
     Selenide.open(viewUrl("login.xhtml"));
-    $("#loginForm\\:username").clear();
-    $("#loginForm\\:username").sendKeys(username);
+    $("#loginForm\\:userName").clear();
+    $("#loginForm\\:userName").sendKeys(username);
     $("#loginForm\\:password").clear();
     $("#loginForm\\:password").sendKeys(password);
     $("#loginForm\\:login").shouldBe(visible).click();

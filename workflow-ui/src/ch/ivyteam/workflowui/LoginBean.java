@@ -74,7 +74,7 @@ public class LoginBean {
   }
 
   public String focus() {
-    return StringUtils.isEmpty(username) ? "username" : "password";
+    return StringUtils.isEmpty(username) ? "userName" : "password";
   }
 
   public String getUsername() {
