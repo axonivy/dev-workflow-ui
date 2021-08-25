@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import org.apache.commons.lang3.StringUtils;
+import org.primefaces.model.menu.MenuModel;
 
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.workflow.ICase;
@@ -17,6 +18,8 @@ import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.WorkflowNavigationUtil;
 import ch.ivyteam.ivy.workflow.query.CaseQuery;
 import ch.ivyteam.workflowui.casemap.CaseMapModel;
+import ch.ivyteam.workflowui.casemap.SidestepModel;
+import ch.ivyteam.workflowui.casemap.SidestepUtil;
 import ch.ivyteam.workflowui.customfield.CustomFieldModel;
 import ch.ivyteam.workflowui.document.DocumentModel;
 import ch.ivyteam.workflowui.util.CaseDetailUtil;
@@ -33,6 +36,7 @@ public class CasesDetailsBean {
   private CaseMapModel caseMapModel;
   private boolean showSystemTasks = false;
   private List<ITask> tasks;
+  private List<SidestepModel> sidesteps;
 
   public String getSelectedCaseId() {
     return selectedCaseId;
@@ -49,6 +53,7 @@ public class CasesDetailsBean {
     documents = DocumentModel.create(selectedCase);
     caseMapModel = CaseMapModel.create(selectedCase);
     tasks = CaseDetailUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks);
+    sidesteps = SidestepUtil.getSidesteps(selectedCase);
   }
 
   public ICase getCaseById(long id) {
@@ -108,5 +113,14 @@ public class CasesDetailsBean {
   public void setShowSystemTasks(boolean showSystemTasks) {
     this.showSystemTasks = showSystemTasks;
     tasks = CaseDetailUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks);
+  }
+
+  public List<SidestepModel> getSidesteps()
+  {
+    return sidesteps;
+  }
+
+  public MenuModel getSidestepsMenuModel() {
+    return SidestepUtil.createMenuModel(sidesteps);
   }
 }

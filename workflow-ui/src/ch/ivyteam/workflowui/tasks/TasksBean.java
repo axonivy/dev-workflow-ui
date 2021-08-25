@@ -74,9 +74,8 @@ public class TasksBean {
   }
 
   public void executeTask(long taskId) {
-    var originalPage = UrlUtil.evalOriginalPage();
     ITask task = IWorkflowContext.current().findTask(taskId);
-    RedirectUtil.redirect("frame.xhtml?origin=" + originalPage + "&taskUrl=" + task.getStartLink().getRelative());
+    RedirectUtil.redirect(UrlUtil.generateStartFrameUrl(task.getStartLink().getRelative()));
   }
 
   public String getPriorityIcon(WorkflowPriority priority) {
