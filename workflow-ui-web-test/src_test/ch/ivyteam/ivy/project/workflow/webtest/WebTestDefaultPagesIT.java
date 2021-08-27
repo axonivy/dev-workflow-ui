@@ -27,9 +27,9 @@ public class WebTestDefaultPagesIT {
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui-test-data"));
     $(byText("testDefaultPages.ivp")).shouldBe(visible).click();
     $(By.id("iFrame")).shouldBe(visible);
-    assertCurrentUrlEndsWith("testDefaultPages.ivp");
     if ($(By.id("iFrame")).is(visible)) {
       Selenide.switchTo().frame("iFrame");
+      $(By.id("defaultPagesTitle")).shouldBe(visible);
     }
   }
 

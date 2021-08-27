@@ -26,10 +26,16 @@
                 rows="10" styleClass="margin-top-10 table-header-none" rendered="#{not empty homepageBean.lastStarts}">
               <p:ajax event="rowSelect" listener="#{homepageBean.executeLastStart}" update="@form" />
               <p:column styleClass="last-start-element">
-                <p:commandLink id="last-start-link" actionListener="#{start.execute}" styleClass="straight-text-icon">
-                  <i class="si si-lg si-controls-play margin-right-10"/>
-                  <h:outputText value="#{start.displayName}" />
-                </p:commandLink>
+                <div class="flex-space straight-text-icon">
+                  <p:commandLink id="last-start-link" actionListener="#{start.execute}" styleClass="straight-text-icon">
+                    <i class="si si-lg si-controls-play margin-right-10"/>
+                    <h:outputText value="#{start.displayName}" />
+                  </p:commandLink>
+                  <p:link id="openStartFullscreenBtn" href="#{start.link}">
+                    <i class="si si-expand-6"/>
+                  </p:link>
+                  <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="top"/>
+                </div>
               </p:column>
             </p:dataTable>
             <h:panelGrid rendered="#{empty homepageBean.lastStarts}" styleClass="margin-top-10">

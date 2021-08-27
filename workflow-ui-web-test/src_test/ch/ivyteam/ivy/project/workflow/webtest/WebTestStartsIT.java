@@ -48,14 +48,14 @@ public class WebTestStartsIT {
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui-test-data"));
     $(byText("startTestDialog.ivp")).shouldBe(visible).click();
     $(By.id("iFrame")).shouldBe(visible);
-    assertCurrentUrlEndsWith("startTestDialog.ivp");
 
     Selenide.switchTo().frame("iFrame");
+    $(By.id("testDialogTitle")).shouldBe(visible);
     $(By.id("form:testInput")).sendKeys("test input");
     $(By.id("form:testSelectOneMenu")).shouldBe(visible).click();
     $(By.id("form:testSelectOneMenu_2")).shouldBe(visible).click();
-
-    assertCurrentUrlEndsWith("startTestDialog.ivp");
+    $(By.id("form:proceed")).shouldBe(visible).click();
+    assertCurrentUrlEndsWith("starts.xhtml");
   }
 
   @Test
@@ -100,5 +100,15 @@ public class WebTestStartsIT {
     var taskId = $("#form\\:taskId").getText();
     $("#form\\:taskStartBtn").shouldBe(enabled).click();
     assertCurrentUrlEndsWith("taskDetails.xhtml?task="+taskId);
+  }
+
+  @Test
+  public void testExecuteOnFullscreenPage() {
+    Selenide.open(viewUrl("starts.xhtml"));
+    $(By.id("startsForm:filter")).sendKeys("startTestDialog");
+    $(By.className("si-expand-6")).shouldBe(visible).click();
+    $(By.className("topbar-logo")).shouldNotBe(visible);
+    $(By.id("form:proceed")).shouldBe(visible).click();
+    $(By.className("topbar-logo")).shouldBe(visible);
   }
 }
