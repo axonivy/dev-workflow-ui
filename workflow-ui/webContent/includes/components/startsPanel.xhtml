@@ -25,13 +25,17 @@
       </h:panelGroup>
       <p:repeat value="#{pmv.caseMapStarts}" var="casemapStart">
         <p:panel id="startElementCaseMap" styleClass="start-element" rendered="#{pmv.active}">
-          <p:commandLink action="#{casemapStart.execute}" class="flex-space start-link">
+          <p:commandLink actionListener="#{casemapStart.execute}" styleClass="flex-space start-link width-100">
             <span class="straight-text-icon">
               <i class="si si-controls-play margin-right-5"></i>
               <span>#{casemapStart.displayName}</span>
             </span>
             <span>#{casemapStart.description}</span>
           </p:commandLink>
+          <p:link id="openStartFullscreenBtn" href="#{casemapStart.link}" styleClass="margin-right-10">
+            <i class="si si-expand-6"/>
+          </p:link>
+          <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="left"/>
         </p:panel>
       </p:repeat>
 
@@ -47,13 +51,17 @@
 
         <p:repeat value="#{category.starts}" var="start">
           <p:panel id="startElementProcess" styleClass="start-element" rendered="#{pmv.active}">
-            <p:commandLink id="executeStartLink" action="#{start.execute}" class="flex-space start-link">
+            <p:commandLink action="#{start.execute}" styleClass="flex-space start-link width-100">
               <span class="straight-text-icon">
                 <i class="si si-controls-play margin-right-5"></i>
-                <span>#{start.displayName}</span>
+                <span class="margin-right-10">#{start.displayName}</span>
               </span>
               <span>#{start.description}</span>
             </p:commandLink>
+            <p:link id="openStartFullscreenBtn" href="#{start.link}" styleClass="margin-right-10">
+              <i class="si si-expand-6" style=""/>
+            </p:link>
+            <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="left"/>
           </p:panel>
         </p:repeat>
       </p:repeat>

@@ -361,6 +361,8 @@ body .ui-panelgrid .ui-panelgrid-cell {
 }
 
 .start-element > div.ui-panel-content {
+  display: flex;
+  align-items: center;
   padding: 0px;
 }
 

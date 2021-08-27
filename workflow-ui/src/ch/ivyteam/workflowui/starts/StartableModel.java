@@ -11,12 +11,14 @@ public class StartableModel {
   private final String description;
   private final WebLink link;
   private final Category category;
+  private final String executeLink;
 
   public StartableModel(IWebStartable startable) {
     this.displayName = startable.getDisplayName();
     this.description = startable.getDescription();
     this.link = startable.getLink();
     this.category = startable.getCategory();
+    this.executeLink = UrlUtil.generateStartFrameUrl(link);
   }
 
   public String getDescription() {
@@ -35,8 +37,11 @@ public class StartableModel {
     return category;
   }
 
+  public String getExecuteLink() {
+    return executeLink;
+  }
+
   public void execute() {
-    var originalPage = UrlUtil.evalOriginalPage();
-    RedirectUtil.redirect("frame.xhtml?origin=" + originalPage + "&taskUrl=" + getLink());
+    RedirectUtil.redirect(executeLink);
   }
 }
