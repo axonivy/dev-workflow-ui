@@ -62,8 +62,10 @@ public class SignalsBean {
 
   public List<String> signalsComplete(String query) {
     return IWorkflowContext.current().signals().receivers().all().stream()
-            .map(IStartSignalEventElement::getName).filter(s -> s.toLowerCase().contains(query.toLowerCase()))
-            .collect(Collectors.toList());
+            .map(IStartSignalEventElement::getName).map(String::trim)
+            .filter(StringUtils::isNotBlank)
+            .filter(s -> s.toLowerCase().contains(query.toLowerCase()))
+            .distinct().collect(Collectors.toList());
   }
 
   public String getCode() {
