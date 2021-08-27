@@ -11,14 +11,13 @@ import javax.faces.bean.ViewScoped;
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.model.menu.MenuModel;
 
-import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
+import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.IWorkflowEvent;
 import ch.ivyteam.ivy.workflow.IWorkflowSession;
 import ch.ivyteam.ivy.workflow.TaskState;
-import ch.ivyteam.ivy.workflow.WorkflowNavigationUtil;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
 import ch.ivyteam.workflowui.util.UrlUtil;
@@ -46,7 +45,7 @@ public class TasksDetailsBean {
   }
 
   public ITask getTaskById(long id) {
-    return WorkflowNavigationUtil.getWorkflowContext(IApplication.current()).findTask(id);
+    return IWorkflowContext.current().findTask(id);
   }
 
   public String getExecuteTaskLink() {

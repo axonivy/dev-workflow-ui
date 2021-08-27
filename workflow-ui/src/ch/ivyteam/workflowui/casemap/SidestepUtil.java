@@ -7,11 +7,10 @@ import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.MenuModel;
 
-import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.casemap.runtime.ICaseMapService;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
-import ch.ivyteam.ivy.workflow.WorkflowNavigationUtil;
+import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.workflowui.util.UrlUtil;
 
 public class SidestepUtil {
@@ -27,7 +26,7 @@ public class SidestepUtil {
   }
 
   public static List<SidestepModel> getSidesteps(long taskId) {
-    ITask task = WorkflowNavigationUtil.getWorkflowContext(IApplication.current()).findTask(taskId);
+    ITask task = IWorkflowContext.current().findTask(taskId);
     return getSidesteps(task.getCase().getBusinessCase());
   }
 
