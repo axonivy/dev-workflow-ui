@@ -19,11 +19,12 @@
             <h:outputText value="Description" />
 
             <div class="task-detail-action-container action-container">
-              <p:commandLink value="Start"
-                action="#{tasksDetailsBean.executeTask}"
-                class="task-action-item straight-text-icon" id="taskStartBtn" disabled="#{not tasksDetailsBean.canBeStarted()}">
-                <i class="si si-arrow-right-1 detail-action-icon-bold"></i>
-              </p:commandLink>
+              <p:link href="#{tasksDetailsBean.executeTaskLink}"
+                styleClass="task-action-item straight-text-icon" id="taskStartBtn"
+                disabled="#{!tasksDetailsBean.canBeStarted()}">
+                <h:outputText value="Start"/>
+                <i class="si si-arrow-right-1 detail-action-icon-bold"/>
+              </p:link>
               <p:commandLink value="Actions" class="task-actions-link straight-text-icon" id="taskActionsBtn"
                 disabled="#{tasksDetailsBean.isDone()}">
                 <i class="si si-arrow-down-1 detail-action-icon"></i>
@@ -47,6 +48,12 @@
                   <i class="si si-alarm-bell-timer table-icon" />Expire now
                   </p:menuitem>
               </p:menu>
+              <p:commandLink value="Sidesteps" class="sidesteps-button straight-text-icon" id="sidestepsBtn"
+                rendered="#{tasksDetailsBean.renderSidestepBtn()}">
+                <i class="si si-arrow-down-1 detail-action-icon"></i>
+              </p:commandLink>
+              <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
+               model="#{tasksDetailsBean.sidestepsMenuModel}" styleClass="menu-no-icons"/>
             </div>
           </div>
 

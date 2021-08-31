@@ -33,9 +33,19 @@
           <h:panelGroup styleClass="card card-w-title custom-card"
             layout="block">
             <div>
-              <h:panelGroup layout="block" styleClass="task-detail-title straight-text-icon related-element">
-                <i class="si si-lg si-information-circle detail-title-icon" />
-                <h:outputText value="Case Map" />
+              <h:panelGroup layout="block" styleClass="task-detail-title related-element flex-space">
+                <div class="straight-text-icon ">
+                  <i class="si si-lg si-information-circle detail-title-icon" />
+                  <h:outputText value="Case Map" />
+                </div>
+                <div>
+                  <p:commandLink value="Sidesteps" class="task-actions-link straight-text-icon" id="sidestepsBtn"
+                  rendered="#{not empty casesDetailsBean.sidesteps}">
+                    <i class="si si-arrow-down-1 detail-action-icon"/>
+                  </p:commandLink>
+                  <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
+                   model="#{casesDetailsBean.sidestepsMenuModel}" styleClass="menu-no-icons"/>
+                </div>
               </h:panelGroup>
               <ui:include src="/includes/components/caseDetails/caseMap.xhtml" />
             </div>

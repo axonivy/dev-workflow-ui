@@ -111,6 +111,11 @@ body .ui-datatable tbody tr.ui-datatable-even.ui-state-highlight {
   right: 0px;
 }
 
+.task-detail-action-container .ui-commandlink {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
 .action-container {
   display: flex;
   align-items: center;
@@ -189,6 +194,14 @@ body .ui-panelgrid .ui-panelgrid-cell {
   color: #cccccc;
 }
 
+.case-map-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
 .case-map-container .process-flow {
   height: 50px;
   display: flex;
@@ -216,14 +229,6 @@ body .ui-panelgrid .ui-panelgrid-cell {
   height: 2px;
   margin: 0 auto;
   background: #cccccc;
-}
-
-.case-map-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-top: 16px;
-  margin-bottom: 16px;
 }
 
 .case-map-icon {
@@ -345,6 +350,21 @@ body .ui-panelgrid .ui-panelgrid-cell {
   margin: 8px;
   min-height: 100px;
   height: 100%;
+}
+
+.sidesteps-button {
+  border-left: 1px solid gray;
+  margin: 0px;
+  padding-left: 10px;
+  font-weight: normal;
+}
+
+.menu-no-icons {
+  width: 15em;
+}
+
+body .ui-menu.menu-no-icons .ui-menu-list .ui-menuitem .ui-menuitem-link .ui-icon  {
+  display: none;
 }
 
 .api-browser-frame {

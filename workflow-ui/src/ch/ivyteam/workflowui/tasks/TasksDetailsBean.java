@@ -2,22 +2,24 @@ package ch.ivyteam.workflowui.tasks;
 
 import java.util.Date;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import org.apache.commons.lang3.StringUtils;
+import org.primefaces.model.menu.MenuModel;
 
-import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
+import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.IWorkflowEvent;
 import ch.ivyteam.ivy.workflow.IWorkflowSession;
 import ch.ivyteam.ivy.workflow.TaskState;
-import ch.ivyteam.ivy.workflow.WorkflowNavigationUtil;
-import ch.ivyteam.workflowui.util.RedirectUtil;
+import ch.ivyteam.workflowui.casemap.SidestepModel;
+import ch.ivyteam.workflowui.casemap.SidestepUtil;
 import ch.ivyteam.workflowui.util.UrlUtil;
 
 @ManagedBean
@@ -26,6 +28,7 @@ public class TasksDetailsBean {
 
   private String selectedTaskId;
   private ITask selectedTask;
+  private List<SidestepModel> sidesteps;
 
   public String getSelectedTaskId() {
     return selectedTaskId;
@@ -38,15 +41,15 @@ public class TasksDetailsBean {
   public void setSelectedTaskId(String selectedTaskId) {
     this.selectedTaskId = selectedTaskId;
     this.selectedTask = getTaskById(Long.parseLong(selectedTaskId));
+    this.sidesteps = SidestepUtil.getSidesteps(selectedTask.getCase());
   }
 
   public ITask getTaskById(long id) {
-    return WorkflowNavigationUtil.getWorkflowContext(IApplication.current()).findTask(id);
+    return IWorkflowContext.current().findTask(id);
   }
 
-  public void executeTask() {
-    var originalPage = UrlUtil.evalOriginalPage() + "?task=" + selectedTaskId;
-    RedirectUtil.redirect("frame.xhtml?origin=" + originalPage + "&taskUrl=" + selectedTask.getStartLink().getRelative());
+  public String getExecuteTaskLink() {
+    return UrlUtil.generateStartFrameUrl(selectedTask.getStartLink().getRelative());
   }
 
   public void expireTask() {
@@ -117,5 +120,17 @@ public class TasksDetailsBean {
 
   public boolean canBeStarted() {
     return selectedTask.canUserResumeTask(ISession.current().getSessionUser().getUserToken()).wasSuccessful();
+  }
+
+  public boolean renderSidestepBtn() {
+    return (!isDone() && !sidesteps.isEmpty());
+  }
+
+  public MenuModel getSidestepsMenuModel() {
+    return SidestepUtil.createMenuModel(getSidesteps());
+  }
+
+  public List<SidestepModel> getSidesteps() {
+    return sidesteps;
   }
 }

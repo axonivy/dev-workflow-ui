@@ -35,8 +35,12 @@ public class UrlUtil {
   }
 
   public static String generateStartFrameUrl(WebLink startLink) {
+    return generateStartFrameUrl(startLink.getRelative());
+  }
+
+  public static String generateStartFrameUrl(String startLink) {
     var originalPageEncoded = URLEncoder.encode(UrlUtil.evalOriginalPage(), StandardCharsets.UTF_8);
-    String startLinkEncoded = URLEncoder.encode(startLink.getRelative(), StandardCharsets.UTF_8);
+    String startLinkEncoded = URLEncoder.encode(startLink, StandardCharsets.UTF_8);
     return "frame.xhtml?origin=" + originalPageEncoded + "&taskUrl=" + startLinkEncoded;
   }
 }
