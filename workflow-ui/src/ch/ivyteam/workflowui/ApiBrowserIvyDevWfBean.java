@@ -6,7 +6,7 @@ import ch.ivyteam.ivy.server.restricted.EngineMode;
 
 @ManagedBean
 @SuppressWarnings("restriction")
-public class ApiBrowserBean {
+public class ApiBrowserIvyDevWfBean {
 
   public String getApp() {
     return EngineMode.isEmbeddedInDesigner() ? "designer" : "system";

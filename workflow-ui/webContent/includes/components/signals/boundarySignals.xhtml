@@ -4,7 +4,7 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
-  <p:dataTable id="boundarySignalsTable" var="receiver" value="#{signalsBean.boundarySignalModel}" lazy="true"
+  <p:dataTable id="boundarySignalsTable" var="receiver" value="#{signalsIvyDevWfBean.boundarySignalModel}" lazy="true"
     styleClass="margin-top-10" rows="5" paginator="true" paginatorPosition="bottom" paginatorAlwaysVisible="false"
     sortBy="#{receiver.signalPattern}">
     <p:column width="40">
@@ -17,7 +17,7 @@
       <jc:taskLink task="#{receiver.waitingTask}" id="waitingTask" />
     </p:column>
     <p:column width="40">
-      <p:commandLink id="sendSignalIcon" actionListener="#{signalsBean.sendBoundarySignal(receiver.signalPattern)}" update="@form">
+      <p:commandLink id="sendSignalIcon" actionListener="#{signalsIvyDevWfBean.sendBoundarySignal(receiver.signalPattern)}" update="@form">
         <i class="si si-lg si-send-email" />
       </p:commandLink>
       <p:tooltip for="sendSignalIcon" value="Send this signal" position="top"/>

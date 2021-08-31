@@ -6,7 +6,7 @@
 
 <h:body>
   <f:metadata>
-    <f:viewParam name="case" value="#{casesDetailsBean.selectedCaseId}" />
+    <f:viewParam name="case" value="#{casesDetailsIvyDevWfBean.selectedCaseId}" />
   </f:metadata>
 
   <ui:composition template="../includes/template/template.xhtml">
@@ -21,8 +21,8 @@
               <i class="si si-lg si-common-file-text detail-title-icon" />
               <h:outputText value="Description" />
               <div class="task-detail-action-container action-container">
-                <p:commandLink value="Destroy case" update="form" action="#{casesDetailsBean.selectedCase.destroy}"
-                  class="task-action-item straight-text-icon" id="caseDestroyBtn" disabled="#{not casesDetailsBean.canBeDestoryed()}">
+                <p:commandLink value="Destroy case" update="form" action="#{casesDetailsIvyDevWfBean.selectedCase.destroy}"
+                  class="task-action-item straight-text-icon" id="caseDestroyBtn" disabled="#{not casesDetailsIvyDevWfBean.canBeDestoryed()}">
                   <i class="si si-close detail-action-icon-bold"></i>
                 </p:commandLink>
               </div>
@@ -40,11 +40,11 @@
                 </div>
                 <div>
                   <p:commandLink value="Sidesteps" class="task-actions-link straight-text-icon" id="sidestepsBtn"
-                  rendered="#{not empty casesDetailsBean.sidesteps}">
+                  rendered="#{not empty casesDetailsIvyDevWfBean.sidesteps}">
                     <i class="si si-arrow-down-1 detail-action-icon"/>
                   </p:commandLink>
                   <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
-                   model="#{casesDetailsBean.sidestepsMenuModel}" styleClass="menu-no-icons"/>
+                   model="#{casesDetailsIvyDevWfBean.sidestepsMenuModel}" styleClass="menu-no-icons"/>
                 </div>
               </h:panelGroup>
               <ui:include src="/includes/components/caseDetails/caseMap.xhtml" />
@@ -60,7 +60,7 @@
               </h:panelGroup>
               <h:panelGroup id="switchContainer" styleClass="straight-text-icon related-element">
                 <h:outputText value="Show system tasks" class="margin-right-10"/>
-                <p:toggleSwitch id="showSystemTasksSwitch" value="#{casesDetailsBean.showSystemTasks}">
+                <p:toggleSwitch id="showSystemTasksSwitch" value="#{casesDetailsIvyDevWfBean.showSystemTasks}">
                   <p:ajax update="tasks"/>
                 </p:toggleSwitch>
               </h:panelGroup>

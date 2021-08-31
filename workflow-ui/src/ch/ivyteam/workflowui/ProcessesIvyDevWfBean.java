@@ -11,10 +11,10 @@ import ch.ivyteam.workflowui.util.RedirectUtil;
 
 @ManagedBean
 @ViewScoped
-public class ProcessesBean {
+public class ProcessesIvyDevWfBean {
   private StartsDataModel startsDataModel;
 
-  public ProcessesBean() {
+  public ProcessesIvyDevWfBean() {
     startsDataModel = new StartsDataModel();
     startsDataModel.setFilter("");
   }

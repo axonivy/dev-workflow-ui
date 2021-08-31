@@ -5,20 +5,20 @@
 
   <div class="ui-g-12 margin-top-10">
     <h:panelGroup styleClass="md-inputfield margin-top-10">
-      <p:autoComplete id="signalCodeInput" dropdown="true" value="#{signalsBean.code}"
-        completeMethod="#{signalsBean.signalsComplete}" styleClass="width-100 signal-code-input" />
+      <p:autoComplete id="signalCodeInput" dropdown="true" value="#{signalsIvyDevWfBean.code}"
+        completeMethod="#{signalsIvyDevWfBean.signalsComplete}" styleClass="width-100 signal-code-input" />
       <p:outputLabel value="Signal Code" for="@previous" />
     </h:panelGroup>
   </div>
   <div class="ui-g-12 margin-top-10">
     <h:panelGroup styleClass="md-inputfield margin-top-10">
-      <p:inputText id="signalPayloadInput" value="#{signalsBean.payload}" styleClass="width-100" />
+      <p:inputText id="signalPayloadInput" value="#{signalsIvyDevWfBean.payload}" styleClass="width-100" />
       <p:outputLabel value="Payload" for="@previous" />
     </h:panelGroup>
   </div>
   <div class="ui-g-12">
     <p:commandButton id="signalBtn" update="@form"
-      class="margin-top-10 send-signal-button related-element" value="Send" actionListener="#{signalsBean.sendSignal}"
-      disabled="#{!adminBean.isWorkflowAdmin() or !engineModeBean.demoOrDesigner}" icon="si si-send-email"/>
+      class="margin-top-10 send-signal-button related-element" value="Send" actionListener="#{signalsIvyDevWfBean.sendSignal}"
+      disabled="#{!adminIvyDevWfBean.isWorkflowAdmin() or !engineModeIvyDevWfBean.demoOrDesigner}" icon="si si-send-email"/>
   </div>
 </ui:composition>

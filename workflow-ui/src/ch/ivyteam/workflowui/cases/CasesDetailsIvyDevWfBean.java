@@ -26,7 +26,7 @@ import ch.ivyteam.workflowui.util.RedirectUtil;
 
 @ManagedBean
 @ViewScoped
-public class CasesDetailsBean {
+public class CasesDetailsIvyDevWfBean {
 
   private String selectedCaseId;
   private ICase selectedCase;

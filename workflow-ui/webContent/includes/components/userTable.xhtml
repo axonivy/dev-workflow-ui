@@ -7,10 +7,10 @@
       layout="block">
       <h:outputText value="Login Table" styleClass="card-header-title" /><br/>
       <h:outputText value="Click user to login" />
-      <p:dataTable id="users" var="user" value="#{loginTableBean.users}" widgetVar="usersTable"
-        emptyMessage="No users found with given criteria" style="margin-top:10px" selection="#{loginTableBean.currentUser}"
+      <p:dataTable id="users" var="user" value="#{loginTableIvyDevWfBean.users}" widgetVar="usersTable"
+        emptyMessage="No users found with given criteria" style="margin-top:10px" selection="#{loginTableIvyDevWfBean.currentUser}"
         selectionMode="single" rowKey="#{user.fullname}" sortBy="#{user.name}">
-        <p:ajax event="rowSelect" listener="#{loginBean.loginFromTable}" update="@form" />
+        <p:ajax event="rowSelect" listener="#{loginIvyDevWfBean.loginFromTable}" update="@form" />
 
         <f:facet name="header">
           <p:outputPanel>

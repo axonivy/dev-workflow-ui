@@ -6,17 +6,17 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <f:event type="preRenderView" listener="#{loginBean.redirectIfNotLoggedIn}" />
+      <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotLoggedIn}" />
       <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
         <h:outputText value="Intermediate Event Beans" styleClass="card-header-title" />
 
         <h:form id="intermediateEventBeansForm">
           <p:growl id="growl" showDetail="true"/>
           <p:dataTable id="intermediateEventsTable" var="intermediateEvent"
-            value="#{intermediateEventsBean.intermediateEvents}" styleClass="margin-top-10" rows="5" paginator="true"
+            value="#{intermediateEventsIvyDevWfBean.intermediateEvents}" styleClass="margin-top-10" rows="5" paginator="true"
             paginatorPosition="bottom" paginatorAlwaysVisible="false" selectionMode="single"
             rowKey="#{intermediateEvent.processElementId}" sortBy="#{intermediateEvent.size}">
-            <p:ajax event="rowSelect" listener="#{intermediateEventsBean.onRowSelect}" update="@form" />
+            <p:ajax event="rowSelect" listener="#{intermediateEventsIvyDevWfBean.onRowSelect}" update="@form" />
 
             <p:column width="40">
               <i class="si si-lg si-analytics-graph" />

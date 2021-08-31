@@ -10,7 +10,7 @@ import ch.ivyteam.ivy.security.IPermission;
 import ch.ivyteam.ivy.workflow.IWorkflowSession;
 
 @ManagedBean
-public class AdminBean implements Serializable {
+public class AdminIvyDevWfBean implements Serializable {
 
   public Boolean isWorkflowAdmin() {
     return hasTaskPermissions() && hasCasePermissions();

@@ -5,7 +5,7 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-    <f:event type="preRenderView" listener="#{loginBean.redirectIfNotLoggedIn}" />
+    <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotLoggedIn}" />
     <h:form id="tasksForm">
       <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
         <div class="straight-text-icon card-header-title">

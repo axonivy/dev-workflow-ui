@@ -5,7 +5,7 @@ import javax.faces.bean.ManagedBean;
 import ch.ivyteam.ivy.security.ISession;
 
 @ManagedBean
-public class UserBean {
+public class UserIvyDevWfBean {
 
   public String getCurrentUserName() {
     return getSession().getSessionUserName();

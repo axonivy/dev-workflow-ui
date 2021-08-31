@@ -5,16 +5,16 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-    <f:event type="preRenderView" listener="#{loginBean.redirectIfNotLoggedIn}" />
+    <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotLoggedIn}" />
     <h:form id="casesForm">
       <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
         <div class="table-title-switch">
           <div class="straight-text-icon card-header-title">
             <h:outputText value="Cases"/>
           </div>
-          <h:panelGroup class="action-container" layout="block" rendered="#{adminBean.isWorkflowAdmin()}">
+          <h:panelGroup class="action-container" layout="block" rendered="#{adminIvyDevWfBean.isWorkflowAdmin()}">
             <h:outputText value="All Cases" class="margin-right-10"/>
-            <p:toggleSwitch id="allCasesSwitch" value="#{casesBean.casesDataModel.showAllCases}">
+            <p:toggleSwitch id="allCasesSwitch" value="#{casesIvyDevWfBean.casesDataModel.showAllCases}">
               <p:ajax update="casesForm"/>
             </p:toggleSwitch>
             <p:tooltip for="allCasesSwitch" position="top" value="If disabled shows only cases where user is involved"/>

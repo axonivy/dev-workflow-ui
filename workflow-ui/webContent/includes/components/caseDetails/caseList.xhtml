@@ -4,14 +4,14 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
-  <h:panelGroup layout="block" class="action-container #{casesDetailsBean.isCurrentHierarchyCase(casesDetailsBean.selectedCase.getBusinessCase())}">
-    <jc:caseLink case="#{casesDetailsBean.selectedCase.getBusinessCase()}" id="businessCase"/>
+  <h:panelGroup layout="block" class="action-container #{casesDetailsIvyDevWfBean.isCurrentHierarchyCase(casesDetailsIvyDevWfBean.selectedCase.getBusinessCase())}">
+    <jc:caseLink case="#{casesDetailsIvyDevWfBean.selectedCase.getBusinessCase()}" id="businessCase"/>
   </h:panelGroup>
 
   <h:panelGroup layout="block">
     <ul class="subcases-list">
-      <ui:repeat var="case" value="#{casesDetailsBean.caseList}">
-        <li style="list-style-type: none;" class="#{casesDetailsBean.isCurrentHierarchyCase(case)}">
+      <ui:repeat var="case" value="#{casesDetailsIvyDevWfBean.caseList}">
+        <li style="list-style-type: none;" class="#{casesDetailsIvyDevWfBean.isCurrentHierarchyCase(case)}">
           <jc:caseLink case="#{case}" id="subcase"/>
         </li>
       </ui:repeat>

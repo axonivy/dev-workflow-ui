@@ -3,11 +3,11 @@
   xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component"
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
-    <p:dataTable id="events" var="event" value="#{tasksDetailsBean.selectedTask.getWorkflowEvents()}" widgetVar="eventsTable"
+    <p:dataTable id="events" var="event" value="#{tasksDetailsIvyDevWfBean.selectedTask.getWorkflowEvents()}" widgetVar="eventsTable"
       emptyMessage="No Events found with given criteria" reflow="true">
 
       <p:column headerText="Creation Date" sortBy="#{event.getEventTimestamp()}">
-        <h:outputText value="#{dateTimeBean.getDateTime(event.getEventTimestamp())}"/>
+        <h:outputText value="#{dateTimeIvyDevWfBean.getDateTime(event.getEventTimestamp())}"/>
       </p:column>
 
       <p:column headerText="Event type" colspan="2">
@@ -23,7 +23,7 @@
       </p:column>
 
       <p:column headerText="Content">
-        <h:outputText value="#{tasksDetailsBean.getWorkflowInfo(event)}" id="eventInfo"/>
+        <h:outputText value="#{tasksDetailsIvyDevWfBean.getWorkflowInfo(event)}" id="eventInfo"/>
       </p:column>
     </p:dataTable>
 </ui:composition>

@@ -13,10 +13,10 @@ import ch.ivyteam.ivy.application.IApplication;
 
 @ManagedBean
 @RequestScoped
-public class SidebarBean {
+public class SidebarIvyDevWfBean {
   private final String activePage;
 
-  public SidebarBean() {
+  public SidebarIvyDevWfBean() {
     String currentUrl = FacesContext.getCurrentInstance().getViewRoot().getViewId();
     var page = StringUtils.substringAfterLast(currentUrl, "/");
     this.activePage = StringUtils.substringBeforeLast(page, ".");

@@ -1,4 +1,4 @@
-package ch.ivyteam.workflowui;
+package ch.ivyteam.workflowui.login;
 
 import java.util.List;
 
@@ -9,13 +9,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.primefaces.event.SelectEvent;
 
 import ch.ivyteam.ivy.security.IUser;
-import ch.ivyteam.workflowui.LoginTableBean.User;
-import ch.ivyteam.workflowui.util.LoginUtil;
+import ch.ivyteam.workflowui.login.LoginTableIvyDevWfBean.User;
 import ch.ivyteam.workflowui.util.UserUtil;
 
 @ManagedBean
 @ViewScoped
-public class LoginBean {
+public class LoginIvyDevWfBean {
   private String username;
   private String password;
   private String originalUrl;

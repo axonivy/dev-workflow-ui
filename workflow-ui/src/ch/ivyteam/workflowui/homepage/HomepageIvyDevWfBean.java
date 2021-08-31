@@ -12,11 +12,11 @@ import ch.ivyteam.workflowui.tasks.TasksDataModel;
 
 @ManagedBean
 @ViewScoped
-public class HomepageBean {
+public class HomepageIvyDevWfBean {
   private LastStartsModel lastStartsModel;
   private TasksDataModel tasksDataModel;
 
-  public HomepageBean() {
+  public HomepageIvyDevWfBean() {
     lastStartsModel = new LastStartsModel();
     tasksDataModel = new TasksDataModel();
   }

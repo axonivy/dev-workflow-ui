@@ -16,6 +16,7 @@ import ch.ivyteam.ivy.security.IPermission;
 import ch.ivyteam.ivy.security.IRole;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.security.IUser;
+import ch.ivyteam.workflowui.login.LoginUtil;
 
 public class UserUtil {
   public static List<IUser> getUsers() {
