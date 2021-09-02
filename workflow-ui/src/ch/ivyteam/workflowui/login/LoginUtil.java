@@ -1,4 +1,4 @@
-package ch.ivyteam.workflowui.util;
+package ch.ivyteam.workflowui.login;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -6,6 +6,8 @@ import javax.faces.context.FacesContext;
 import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.security.ISession;
+import ch.ivyteam.workflowui.util.RedirectUtil;
+import ch.ivyteam.workflowui.util.UrlUtil;
 
 public class LoginUtil {
 

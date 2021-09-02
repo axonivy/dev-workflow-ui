@@ -6,7 +6,7 @@ import javax.faces.context.FacesContext;
 import ch.ivyteam.ivy.bpm.error.BpmError;
 
 @ManagedBean
-public class FrameBean {
+public class FrameIvyDevWfBean {
   public String getTaskUrl() {
     String taskUrl = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap()
             .get("taskUrl");

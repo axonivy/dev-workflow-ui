@@ -10,9 +10,9 @@
   <h:link styleClass="case-link" outcome="caseDetails">
     <f:param name="case" value="#{cc.attrs.case.id}"/>
     <i class="si si-task-list-approve case-link-icon margin-right-5" />
-    <h:outputText id="caseState" styleClass="si si-#{casesBean.getStateIcon(cc.attrs.case.getState())} case-link-icon margin-right-5"/>
+    <h:outputText id="caseState" styleClass="si si-#{casesIvyDevWfBean.getStateIcon(cc.attrs.case.getState())} case-link-icon margin-right-5"/>
     <p:tooltip for="caseState" value="State: #{cc.attrs.case.state}" position="top"/>
-    <h:outputText id="caseLink" value="#{casesBean.getName(cc.attrs.case)}" />
+    <h:outputText id="caseLink" value="#{casesIvyDevWfBean.getName(cc.attrs.case)}" />
     <p:tooltip for="caseLink" value="ID: #{cc.attrs.case.id}" position="top"/>
   </h:link>
 </cc:implementation>

@@ -4,7 +4,7 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
-  <p:dataTable id="firedSignalsTable" var="signal" value="#{signalsBean.signalsModel}" styleClass="margin-top-10"
+  <p:dataTable id="firedSignalsTable" var="signal" value="#{signalsIvyDevWfBean.signalsModel}" styleClass="margin-top-10"
     rows="10" paginator="true" paginatorAlwaysVisible="false" lazy="true" sortBy="#{signal.sentTimestamp}" sortOrder="descending"
     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" paginatorPosition="bottom"

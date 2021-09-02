@@ -7,35 +7,35 @@
   <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank"
     columnClasses="no-padding-left ui-g-6 ui-md-2, ui-g-6 ui-md-4, no-padding-left ui-g-6 ui-md-2, ui-g-6 ui-md-4">
     <h:outputText value="Case ID" />
-    <h:outputText value="#{casesDetailsBean.selectedCase.getId()}" />
+    <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.getId()}" />
 
     <h:outputText value="Case name" />
-    <h:outputText value="#{casesDetailsBean.selectedCase.getName()}" id="caseName" />
+    <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.getName()}" id="caseName" />
 
     <h:outputText value="Case Owner" />
-    <h:outputText value="#{casesDetailsBean.selectedCase.ownerName}" id="taskResponsible" />
+    <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.ownerName}" id="taskResponsible" />
 
     <h:outputText value="Creator" />
-    <jc:user user="#{casesDetailsBean.selectedCase.creatorUser}" id="creatorUser" />
+    <jc:user user="#{casesDetailsIvyDevWfBean.selectedCase.creatorUser}" id="creatorUser" />
 
     <h:outputText value="Created" />
-    <h:outputText value="#{dateTimeBean.getDateTime(casesDetailsBean.selectedCase.getStartTimestamp())}"
+    <h:outputText value="#{dateTimeIvyDevWfBean.getDateTime(casesDetailsIvyDevWfBean.selectedCase.getStartTimestamp())}"
       id="createdDate" />
 
     <h:outputText value="State" />
     <h:outputText>
-      <i class="si si-#{casesBean.getStateIcon(casesDetailsBean.selectedCase.getState())} table-icon"></i>
-      <h:outputText value="#{casesDetailsBean.selectedCase.getState()}" id="caseState" />
+      <i class="si si-#{casesIvyDevWfBean.getStateIcon(casesDetailsIvyDevWfBean.selectedCase.getState())} table-icon"></i>
+      <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.getState()}" id="caseState" />
     </h:outputText>
 
     <h:outputText value="Completed on" />
-    <h:outputText value="#{dateTimeBean.getDetailTime(casesDetailsBean.selectedCase.getEndTimestamp())}"
+    <h:outputText value="#{dateTimeIvyDevWfBean.getDetailTime(casesDetailsIvyDevWfBean.selectedCase.getEndTimestamp())}"
       id="expiryDate" />
 
     <h:outputText value="Description" />
-    <h:outputText value="#{casesDetailsBean.description}" id="caseDescription" />
+    <h:outputText value="#{casesDetailsIvyDevWfBean.description}" id="caseDescription" />
   </p:panelGrid>
-  <p:tooltip for="createdDate" value="#{dateTimeBean.getPrettyTime(casesDetailsBean.selectedCase.getStartTimestamp())}"
+  <p:tooltip for="createdDate" value="#{dateTimeIvyDevWfBean.getPrettyTime(casesDetailsIvyDevWfBean.selectedCase.getStartTimestamp())}"
     position="top" />
 
 </ui:composition>

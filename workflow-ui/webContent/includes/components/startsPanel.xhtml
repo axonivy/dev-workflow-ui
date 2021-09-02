@@ -7,12 +7,12 @@
  <p:panel styleClass="main-starts-container">
    <f:facet name="header">
     <p:outputPanel>
-      <p:inputText id="filter" placeholder="Search project or start" value="#{processesBean.filter}">
+      <p:inputText id="filter" placeholder="Search project or start" value="#{processesIvyDevWfBean.filter}">
         <p:ajax event="keyup" update="projectStarts" />
       </p:inputText>
     </p:outputPanel>
   </f:facet>
-  <p:accordionPanel var="pmv" value="#{processesBean.PMVs}" id="projectStarts" activeIndex="0" multiple="true">
+  <p:accordionPanel var="pmv" value="#{processesIvyDevWfBean.PMVs}" id="projectStarts" activeIndex="0" multiple="true">
     <p:tab id="project" titleStyleClass="straight-text-icon">
       <f:facet name="title">
         <h:outputText id="pmvState" styleClass="si si-#{pmv.stateIcon}" />
@@ -82,7 +82,7 @@
 
     </p:tab>
   </p:accordionPanel>
-  <p:outputPanel styleClass="main-starts-container-empty" id="noStartsPanel" rendered="#{processesBean.PMVs.size() == 0}">
+  <p:outputPanel styleClass="main-starts-container-empty" id="noStartsPanel" rendered="#{processesIvyDevWfBean.PMVs.size() == 0}">
     <i class="si si-alert-circle custom-icon"/>
     <h:outputText value="No projects available" id="noProjectsText"/>
   </p:outputPanel>

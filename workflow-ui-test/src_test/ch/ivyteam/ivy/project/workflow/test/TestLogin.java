@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import ch.ivyteam.ivy.environment.IvyTest;
 import ch.ivyteam.ivy.security.ISession;
-import ch.ivyteam.workflowui.util.LoginUtil;
+import ch.ivyteam.workflowui.login.LoginUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil.RedirectHandler;
 

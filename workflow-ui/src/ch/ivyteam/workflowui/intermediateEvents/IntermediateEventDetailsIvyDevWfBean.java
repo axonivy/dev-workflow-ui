@@ -7,7 +7,7 @@ import ch.ivyteam.ivy.workflow.IIntermediateEvent;
 
 @ManagedBean
 @ViewScoped
-public class IntermediateEventDetailsBean {
+public class IntermediateEventDetailsIvyDevWfBean {
   private String processId;
   private IntermediateEventElementModel selectedIntermediateElement;
 

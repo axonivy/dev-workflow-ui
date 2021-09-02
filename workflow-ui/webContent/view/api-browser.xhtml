@@ -13,10 +13,10 @@
               <h:outputText value="API Browser" />
             </div>
             <p:linkButton id="browseApiBtn" icon="si si-network-browser" type="button" styleClass="margin-right-5"
-              target="_blank" href="/#{apiBrowserBean.app}/api-browser/index.html"/>
+              target="_blank" href="/#{apiBrowserIvyDevWfBean.app}/api-browser/index.html"/>
             <p:tooltip for="browseApiBtn" value="Open API browser in a new tab" position="top"/>
           </div>
-          <iframe id="apiBrowser" src="/#{apiBrowserBean.app}/api-browser/index.html" class="api-browser-frame"/>
+          <iframe id="apiBrowser" src="/#{apiBrowserIvyDevWfBean.app}/api-browser/index.html" class="api-browser-frame"/>
         </h:panelGroup>
       </h:form>
     </ui:define>

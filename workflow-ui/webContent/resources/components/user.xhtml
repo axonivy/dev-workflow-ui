@@ -7,7 +7,7 @@
 </cc:interface>
 
 <cc:implementation>
-  <ui:param name="userModel" value="#{userComponentBean.toComponentModel(cc.attrs.user)}"/>
+  <ui:param name="userModel" value="#{userComponentIvyDevWfBean.toComponentModel(cc.attrs.user)}"/>
   <h:panelGroup rendered="#{not empty userModel.name}">
     <i class="#{userModel.cssIcon} table-icon"/>
   </h:panelGroup>

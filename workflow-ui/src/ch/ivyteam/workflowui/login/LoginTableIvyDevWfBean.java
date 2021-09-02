@@ -1,4 +1,4 @@
-package ch.ivyteam.workflowui;
+package ch.ivyteam.workflowui.login;
 
 import static java.util.stream.Collectors.toList;
 
@@ -13,11 +13,11 @@ import ch.ivyteam.workflowui.util.UserUtil;
 
 @ManagedBean
 @ViewScoped
-public class LoginTableBean {
+public class LoginTableIvyDevWfBean {
   private final List<User> users;
 
-  public LoginTableBean() {
-    users = UserUtil.getUsers().stream().map(LoginTableBean::toUser).collect(toList());
+  public LoginTableIvyDevWfBean() {
+    users = UserUtil.getUsers().stream().map(LoginTableIvyDevWfBean::toUser).collect(toList());
   }
 
   public List<User> getUsers() {

@@ -24,7 +24,7 @@ import ch.ivyteam.workflowui.util.UrlUtil;
 
 @ManagedBean
 @ViewScoped
-public class TasksDetailsBean {
+public class TasksDetailsIvyDevWfBean {
 
   private String selectedTaskId;
   private ITask selectedTask;

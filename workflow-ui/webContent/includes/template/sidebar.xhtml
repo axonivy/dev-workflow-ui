@@ -11,17 +11,17 @@
         <div class="layout-menu-container">
           <h:form id="menuform">
             <pm:menu widgetVar="sidebar_menu">
-              <p:menuitem id="sr_home" icon="si si-house-1" url="home.xhtml" containerStyleClass="#{sidebarBean.isActive('home') ? 'active-menu' : ''}" />
-              <p:menuitem id="sr_starts" value="Starts" icon="si si-navigation-menu" url="starts.xhtml" containerStyleClass="#{sidebarBean.isActive('starts') ? 'active-menu' : ''}" />
-              <p:menuitem id="sr_tasks" value="Tasks" icon="si si-layout-bullets" url="tasks.xhtml" containerStyleClass="#{sidebarBean.isActive('tasks') ? 'active-menu' : ''}" />
-              <p:menuitem id="sr_allTasks" value="All Tasks" icon="si si-task-list-edit" url="allTasks.xhtml" rendered="#{adminBean.isWorkflowAdmin()}" containerStyleClass="#{sidebarBean.isActive('allTasks') ? 'active-menu' : ''}" />
-              <p:menuitem id="sr_cases" value="Cases" icon="si si-task-list-approve" url="cases.xhtml" containerStyleClass="#{sidebarBean.isActive('cases') ? 'active-menu' : ''}" />
+              <p:menuitem id="sr_home" icon="si si-house-1" url="home.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('home') ? 'active-menu' : ''}" />
+              <p:menuitem id="sr_starts" value="Starts" icon="si si-navigation-menu" url="starts.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('starts') ? 'active-menu' : ''}" />
+              <p:menuitem id="sr_tasks" value="Tasks" icon="si si-layout-bullets" url="tasks.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('tasks') ? 'active-menu' : ''}" />
+              <p:menuitem id="sr_allTasks" value="All Tasks" icon="si si-task-list-edit" url="allTasks.xhtml" rendered="#{adminIvyDevWfBean.isWorkflowAdmin()}" containerStyleClass="#{sidebarIvyDevWfBean.isActive('allTasks') ? 'active-menu' : ''}" />
+              <p:menuitem id="sr_cases" value="Cases" icon="si si-task-list-approve" url="cases.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('cases') ? 'active-menu' : ''}" />
 
-              <p:submenu id="sr_actions" label="Admin" icon="si si-tools-wench" styleClass="#{sidebarBean.isActive('signals', 'intermediateEvents', 'cleanup', 'api-browser') ? 'active-menu' : ''}">
-                <p:menuitem id="sr_signals" value="Signals" icon="si si-network-signal" url="signals.xhtml" styleClass="#{sidebarBean.isActive('signals') ? 'active-submenu' : ''}"/>
-                <p:menuitem id="sr_intermediate_events" value="Intermediate Events" icon="si si-analytics-graph" url="intermediateEvents.xhtml" styleClass="#{sidebarBean.isActive('intermediateEvents') ? 'active-submenu' : ''}"/>
-                <p:menuitem id="sr_cleanup" value="Cleanup" icon="si si-recycling-trash-bin-2" url="cleanup.xhtml" rendered="#{engineModeBean.demoOrDesigner}" styleClass="#{sidebarBean.isActive('cleanup') ? 'active-submenu' : ''}"/>
-                <p:menuitem id="sr_api-browser" value="API Browser" icon="si si-network-browser" url="api-browser.xhtml" styleClass="#{sidebarBean.isActive('api-browser') ? 'active-submenu' : ''}"/>
+              <p:submenu id="sr_actions" label="Admin" icon="si si-tools-wench" styleClass="#{sidebarIvyDevWfBean.isActive('signals', 'intermediateEvents', 'cleanup', 'api-browser') ? 'active-menu' : ''}">
+                <p:menuitem id="sr_signals" value="Signals" icon="si si-network-signal" url="signals.xhtml" styleClass="#{sidebarIvyDevWfBean.isActive('signals') ? 'active-submenu' : ''}"/>
+                <p:menuitem id="sr_intermediate_events" value="Intermediate Events" icon="si si-analytics-graph" url="intermediateEvents.xhtml" styleClass="#{sidebarIvyDevWfBean.isActive('intermediateEvents') ? 'active-submenu' : ''}"/>
+                <p:menuitem id="sr_cleanup" value="Cleanup" icon="si si-recycling-trash-bin-2" url="cleanup.xhtml" rendered="#{engineModeIvyDevWfBean.demoOrDesigner}" styleClass="#{sidebarIvyDevWfBean.isActive('cleanup') ? 'active-submenu' : ''}"/>
+                <p:menuitem id="sr_api-browser" value="API Browser" icon="si si-network-browser" url="api-browser.xhtml" styleClass="#{sidebarIvyDevWfBean.isActive('api-browser') ? 'active-submenu' : ''}"/>
               </p:submenu>
             </pm:menu>
           </h:form>

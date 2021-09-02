@@ -4,17 +4,17 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
-  <p:dataTable id="cases" var="case" value="#{casesBean.casesDataModel}" widgetVar="casesTable" style="margin-top:10px"
+  <p:dataTable id="cases" var="case" value="#{casesIvyDevWfBean.casesDataModel}" widgetVar="casesTable" style="margin-top:10px"
     emptyMessage="No Cases found with given criteria" paginatorPosition="bottom" rows="10" lazy="true" paginator="true"
     rowsPerPageTemplate="10,20,50" paginatorAlwaysVisible="false" sortBy="#{case.startTimestamp}" sortOrder="descending"
     selectionMode="single"
     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
-    <p:ajax event="rowSelect" listener="#{casesBean.redirectToCaseRow}" update="@form" />
+    <p:ajax event="rowSelect" listener="#{casesIvyDevWfBean.redirectToCaseRow}" update="@form" />
     <f:facet name="header">
       <p:outputPanel>
         <h:outputText value="Search:" />
         <p:inputText id="casesFilter" onkeyup="PF('casesTable').filter()" style="width:150px"
-          placeholder="Enter keyword" value="#{casesBean.casesDataModel.filter}" />
+          placeholder="Enter keyword" value="#{casesIvyDevWfBean.casesDataModel.filter}" />
       </p:outputPanel>
     </f:facet>
 
@@ -24,14 +24,14 @@
     </p:column>
 
     <p:column filterBy="#{case.state}" styleClass="icon-row" sortBy="#{case.state}">
-      <h:outputText id="caseState" styleClass="si si-lg si-#{casesBean.getStateIcon(case.state)}" />
+      <h:outputText id="caseState" styleClass="si si-lg si-#{casesIvyDevWfBean.getStateIcon(case.state)}" />
       <p:tooltip for="caseState" value="State: #{case.state}" position="top" />
     </p:column>
 
     <p:column headerText="Name" filterBy="#{case.getName(case)}" sortBy="#{case.getName(case)}">
       <h:link outcome="caseDetails">
         <f:param name="case" value="#{case.id}" />
-        <h:outputText id="caseName" value="#{casesBean.getName(case)}" />
+        <h:outputText id="caseName" value="#{casesIvyDevWfBean.getName(case)}" />
         <p:tooltip for="caseName" value="Case ID: #{case.id}" position="top" />
       </h:link>
     </p:column>

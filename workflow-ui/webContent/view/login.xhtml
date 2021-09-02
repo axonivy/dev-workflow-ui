@@ -17,7 +17,7 @@
 </h:head>
 
 <f:metadata>
-  <f:viewParam name="originalUrl" value="#{loginBean.originalUrl}"/>
+  <f:viewParam name="originalUrl" value="#{loginIvyDevWfBean.originalUrl}"/>
 </f:metadata>
 <h:body styleClass="login-body">
   <div class="login-panel ui-fluid">
@@ -26,7 +26,7 @@
     </div>
     <div class="login-panel-content">
       <h:form id="loginForm">
-        <p:focus for="#{loginBean.focus()}" />
+        <p:focus for="#{loginIvyDevWfBean.focus()}" />
         <div class="ui-g">
           <div class="ui-g-12">
             <h1>Login</h1>
@@ -36,20 +36,20 @@
           </div>
           <div class="ui-g-12">
             <h:panelGroup styleClass="md-inputfield">
-              <p:inputText id="userName" autocomplete="off" value="#{loginBean.username}" required="true" />
+              <p:inputText id="userName" autocomplete="off" value="#{loginIvyDevWfBean.username}" required="true" />
               <p:outputLabel for="userName" indicateRequired="false">Username</p:outputLabel>
               <p:message for="userName" id="userNameMessage" />
             </h:panelGroup>
           </div>
           <div class="ui-g-12">
             <h:panelGroup styleClass="md-inputfield">
-              <p:password id="password" autocomplete="off" value="#{loginBean.password}" required="true" />
+              <p:password id="password" autocomplete="off" value="#{loginIvyDevWfBean.password}" required="true" />
               <p:outputLabel for="password" indicateRequired="false">Password</p:outputLabel>
               <p:message for="password" id="passwordMessage" />
             </h:panelGroup>
           </div>
           <div class="ui-g-12">
-            <p:commandButton update="@form" id="login" actionListener="#{loginBean.customLogin}" value="Sign in"
+            <p:commandButton update="@form" id="login" actionListener="#{loginIvyDevWfBean.customLogin}" value="Sign in"
               icon="si si-login-3" />
           </div>
         </div>
