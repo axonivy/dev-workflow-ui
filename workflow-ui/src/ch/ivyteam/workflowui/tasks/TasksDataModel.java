@@ -61,6 +61,7 @@ public class TasksDataModel extends LazyDataModel<ITask> {
     applyOrdering(taskQuery, sortField, sortOrder);
 
     checkIfPersonalTasksOrHomepage(taskQuery);
+    checkIfAdmin(taskQuery);
 
     List<ITask> tasks = taskQuery
             .executor()
@@ -73,6 +74,12 @@ public class TasksDataModel extends LazyDataModel<ITask> {
   private void checkIfPersonalTasksOrHomepage(TaskQuery taskQuery) {
     if (checkIfPersonalTasks() || checkIfHomepage()) {
       taskQuery.where().currentUserCanWorkOn();
+    }
+  }
+
+  private void checkIfAdmin(TaskQuery taskQuery) {
+    if (!showAllTasks) {
+      taskQuery.where().currentUserIsInvolved();
     }
   }
 
@@ -132,13 +139,5 @@ public class TasksDataModel extends LazyDataModel<ITask> {
     applyFilter(taskQuery);
     checkIfPersonalTasksOrHomepage(taskQuery);
     return (int) taskQuery.executor().count();
-  }
-
-  public boolean getShowAllTasks() {
-    return showAllTasks;
-  }
-
-  public void setShowAllTasks(boolean allTasks) {
-    this.showAllTasks = allTasks;
   }
 }

@@ -3,6 +3,7 @@ package ch.ivyteam.ivy.project.workflow.webtest;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.assertCurrentUrlEndsWith;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
+import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
@@ -88,10 +89,12 @@ public class WebTestStartsIT {
 
     open(viewUrl("tasks.xhtml"));
     $(By.id("tasksForm:tasks")).find("TestTask");
+    $(By.id("menuform:sr_tasks")).shouldHave(cssClass("active-menu"));
     assertCurrentUrlEndsWith("tasks.xhtml");
 
     open(viewUrl("home.xhtml"));
     $(By.id("form:lastStarts")).find(byText("TestData.ivp")).click();
+    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menu"));
     assertCurrentUrlEndsWith("home.xhtml");
 
     open(viewUrl("allTasks.xhtml"));

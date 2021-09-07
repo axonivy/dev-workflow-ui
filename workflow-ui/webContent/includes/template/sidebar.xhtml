@@ -14,7 +14,7 @@
               <p:menuitem id="sr_home" icon="si si-house-1" url="home.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('home') ? 'active-menu' : ''}" />
               <p:menuitem id="sr_starts" value="Starts" icon="si si-navigation-menu" url="starts.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('starts') ? 'active-menu' : ''}" />
               <p:menuitem id="sr_tasks" value="Tasks" icon="si si-layout-bullets" url="tasks.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('tasks') ? 'active-menu' : ''}" />
-              <p:menuitem id="sr_allTasks" value="All Tasks" icon="si si-task-list-edit" url="allTasks.xhtml" rendered="#{adminIvyDevWfBean.isWorkflowAdmin()}" containerStyleClass="#{sidebarIvyDevWfBean.isActive('allTasks') ? 'active-menu' : ''}" />
+              <p:menuitem id="sr_allTasks" value="All Tasks" icon="si si-task-list-edit" url="allTasks.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('allTasks') ? 'active-menu' : ''}" />
               <p:menuitem id="sr_cases" value="Cases" icon="si si-task-list-approve" url="cases.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('cases') ? 'active-menu' : ''}" />
 
               <p:submenu id="sr_actions" label="Admin" icon="si si-tools-wench" styleClass="#{sidebarIvyDevWfBean.isActive('signals', 'intermediateEvents', 'cleanup', 'api-browser') ? 'active-menu' : ''}">

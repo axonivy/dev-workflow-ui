@@ -27,10 +27,18 @@ public class WebTestTasksIT {
   public void allTasksOnlyAdmin() {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     Selenide.open(viewUrl("home.xhtml"));
-    loginFromTable("testuser");
-    $(By.id("menuform:sr_allTasks")).shouldNotBe(visible);
     loginDeveloper();
-    $(By.id("menuform:sr_allTasks")).shouldBe(visible);
+    startTestProcess("1750C5211D94569D/HomePageTestData.ivp");
+    open(viewUrl("allTasks.xhtml"));
+    Table table = PrimeUi.table(By.id("tasksForm:tasks"));
+    table.row(0).shouldBe(text("HomePageTestTask"));
+    $(".si-information-circle").shouldBe(visible).click();
+    $(By.id("form:taskName")).shouldBe(text("HomePageTestTask"));
+    $(By.id("form:taskStartBtn")).shouldBe(enabled).click();
+    loginFromTable("testuser");
+    open(viewUrl("allTasks.xhtml"));
+    table = PrimeUi.table(By.id("tasksForm:tasks"));
+    table.row(0).shouldNotBe(text("HomePageTestTask"));
   }
 
   @Test
