@@ -41,13 +41,28 @@ Ta0 @EndTask f29 '' #zField
 Ta0 @UserDialog f31 '' #zField
 Ta0 @PushWFArc f32 '' #zField
 Ta0 @PushWFArc f30 '' #zField
+Ta0 @StartRequest f33 '' #zField
+Ta0 @UserDialog f34 '' #zField
+Ta0 @EndTask f36 '' #zField
+Ta0 @UserTask f35 '' #zField
+Ta0 @PushWFArc f37 '' #zField
+Ta0 @TkArc f38 '' #zField
+Ta0 @PushWFArc f39 '' #zField
+Ta0 @StartRequest f40 '' #zField
+Ta0 @EndTask f41 '' #zField
+Ta0 @UserDialog f42 '' #zField
+Ta0 @PushWFArc f43 '' #zField
+Ta0 @PushWFArc f44 '' #zField
 >Proto Ta0 Ta0 TestData #zField
 Ta0 f0 outLink TestData.ivp #txt
 Ta0 f0 inParamDecl '<> param;' #txt
 Ta0 f0 requestEnabled true #txt
 Ta0 f0 triggerEnabled false #txt
 Ta0 f0 callSignature TestData() #txt
+Ta0 f0 startDescription 'Process which generates some test task and case data' #txt
+Ta0 f0 taskData 'TaskTriggered.NAM=First task of TestData' #txt
 Ta0 f0 caseData 'businessCase.attach=true
+case.name=First case of TestData
 customFields.STRING.field\ 2="value"
 customFields.STRING.test\ 3\ ="test string"
 customFields.STRING.test\ field\ 1="test value"' #txt
@@ -62,11 +77,11 @@ Ta0 f0 @C|.responsibility Everybody #txt
 Ta0 f0 81 49 30 30 -25 17 #rect
 Ta0 f3 actionTable 'out=in1;
 ' #txt
-Ta0 f3 caseData case.name=TestCase #txt
+Ta0 f3 caseData 'case.name=Created case of TestData' #txt
 Ta0 f3 taskData 'TaskA.EXP=new Duration(0, 0, 3, 0, 0, 0)
-TaskA.NAM=TestTask
+TaskA.NAM=Created task of TestData
 TaskA.PRI=1
-TaskA.SCRIPT=import ch.ivyteam.ivy.workflow.document.Path;\r\ntask.getCase().documents().add(new Path("Test/test.txt")).write().withContentFrom("this is test document");\r\ntask.getCase().documents().add(new Path("Test/documentTest.txt")).write().withContentFrom("document. you can read this correctly");' #txt
+TaskA.SCRIPT=import ch.ivyteam.ivy.workflow.document.Path;\r\nimport java.util.Random;\r\n\r\nRandom random \= new Random();\r\nString number \= random.nextInt(100000).toString();\r\n\r\ntask.getCase().documents().add(new Path("Test" + number + "/test.txt")).write().withContentFrom("this is test document");\r\ntask.getCase().documents().add(new Path("Test" + number + "/documentTest.txt")).write().withContentFrom("document. you can read this correctly");' #txt
 Ta0 f3 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>
     <language>
@@ -79,25 +94,29 @@ Ta0 f3 209 49 30 30 -27 16 #rect
 Ta0 f2 111 64 209 64 #arcP
 Ta0 f4 239 64 337 64 #arcP
 Ta0 f1 337 49 30 30 0 15 #rect
-Ta0 f5 outLink startTestDialog.ivp #txt
+Ta0 f5 outLink startTestDialog1.ivp #txt
 Ta0 f5 inParamDecl '<> param;' #txt
 Ta0 f5 requestEnabled true #txt
 Ta0 f5 triggerEnabled false #txt
-Ta0 f5 callSignature startTestDialog() #txt
+Ta0 f5 callSignature startTestDialog1() #txt
+Ta0 f5 startDescription 'Dialog 1 for testing Developer Workflow-UI' #txt
 Ta0 f5 startCategory exampleDialogs #txt
-Ta0 f5 taskData 'TaskTriggered.NAM=Test Developer Workflow-UI Dialog Task' #txt
-Ta0 f5 caseData businessCase.attach=true #txt
+Ta0 f5 taskData 'TaskTriggered.NAM=Test Developer Workflow-UI Dialog 1' #txt
+Ta0 f5 caseData 'businessCase.attach=true
+case.name=Test Developer Workflow-UI Dialog Case 1' #txt
+Ta0 f5 showInStartList 1 #txt
 Ta0 f5 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>
     <language>
-        <name>startTestDialog.ivp</name>
+        <name>startTestDialog1.ivp</name>
+        <desc>Test dialog for testing Developer Workflow UI</desc>
     </language>
 </elementInfo>
 ' #txt
 Ta0 f5 @C|.responsibility Everybody #txt
 Ta0 f5 81 145 30 30 -63 16 #rect
 Ta0 f6 337 145 30 30 0 15 #rect
-Ta0 f7 dialogId ch.ivyteam.ivy.project.workflow.TestDialog #txt
+Ta0 f7 dialogId ch.ivyteam.ivy.project.workflow.TestDialog1 #txt
 Ta0 f7 startMethod start(ch.ivyteam.ivy.project.workflow.Data) #txt
 Ta0 f7 requestActionDecl '<ch.ivyteam.ivy.project.workflow.Data data> param;' #txt
 Ta0 f7 responseMappingAction 'out=in;
@@ -117,7 +136,10 @@ Ta0 f10 inParamDecl '<> param;' #txt
 Ta0 f10 requestEnabled true #txt
 Ta0 f10 triggerEnabled false #txt
 Ta0 f10 callSignature startBoundarySignal() #txt
-Ta0 f10 caseData businessCase.attach=true #txt
+Ta0 f10 startDescription 'Creates a waiting boundary signal' #txt
+Ta0 f10 taskData 'TaskTriggered.NAM=First task of startBoundarySignal' #txt
+Ta0 f10 caseData 'businessCase.attach=true
+case.name=First case of startBoundarySignal' #txt
 Ta0 f10 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>
     <language>
@@ -128,11 +150,13 @@ Ta0 f10 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 Ta0 f10 @C|.responsibility Everybody #txt
 Ta0 f10 81 241 30 30 -72 18 #rect
 Ta0 f11 337 241 30 30 0 15 #rect
-Ta0 f12 dialogId ch.ivyteam.ivy.project.workflow.TestDialog #txt
+Ta0 f12 dialogId ch.ivyteam.ivy.project.workflow.TestDialog1 #txt
 Ta0 f12 startMethod start(ch.ivyteam.ivy.project.workflow.Data) #txt
 Ta0 f12 requestActionDecl '<ch.ivyteam.ivy.project.workflow.Data data> param;' #txt
 Ta0 f12 responseMappingAction 'out=in;
 ' #txt
+Ta0 f12 caseData 'case.name=case created in UserTask during startBoundarySignal process' #txt
+Ta0 f12 taskData 'TaskA.NAM=task created in UserTask during startBoundarySignal process' #txt
 Ta0 f12 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>
     <language>
@@ -176,7 +200,10 @@ out.eventID = random.nextInt();' #txt
 Ta0 f18 requestEnabled true #txt
 Ta0 f18 triggerEnabled false #txt
 Ta0 f18 callSignature testIntermediateEventProcess() #txt
-Ta0 f18 caseData businessCase.attach=true #txt
+Ta0 f18 startDescription 'Creates test intermediate event process' #txt
+Ta0 f18 taskData 'TaskTriggered.NAM=testIntermediateEventProcess task' #txt
+Ta0 f18 caseData 'businessCase.attach=true
+case.name=testIntermediateEventProcess case' #txt
 Ta0 f18 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>
     <language>
@@ -211,7 +238,11 @@ Ta0 f24 inParamDecl '<> param;' #txt
 Ta0 f24 requestEnabled true #txt
 Ta0 f24 triggerEnabled false #txt
 Ta0 f24 callSignature HomePageTestData() #txt
-Ta0 f24 caseData businessCase.attach=true #txt
+Ta0 f24 startDescription 'Different process which generates test data. Mostly used for CI tests' #txt
+Ta0 f24 startCategory TestData #txt
+Ta0 f24 taskData 'TaskTriggered.NAM=First task of HomePageTestData' #txt
+Ta0 f24 caseData 'businessCase.attach=true
+case.name=First case of HomePageTestData' #txt
 Ta0 f24 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>
     <language>
@@ -223,9 +254,9 @@ Ta0 f24 @C|.responsibility Everybody #txt
 Ta0 f24 81 529 30 30 -63 17 #rect
 Ta0 f25 actionTable 'out=in1;
 ' #txt
-Ta0 f25 caseData case.name=HomePageTestCase #txt
+Ta0 f25 caseData 'case.name=Created case of HomePageTestData' #txt
 Ta0 f25 taskData 'TaskA.EXP=new Duration(0, 0, 3, 0, 0, 0)
-TaskA.NAM=HomePageTestTask
+TaskA.NAM=Created task of HomePageTestData
 TaskA.PRI=1' #txt
 Ta0 f25 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>
@@ -242,7 +273,10 @@ Ta0 f28 inParamDecl '<> param;' #txt
 Ta0 f28 requestEnabled true #txt
 Ta0 f28 triggerEnabled false #txt
 Ta0 f28 callSignature testDefaultPages() #txt
-Ta0 f28 caseData businessCase.attach=true #txt
+Ta0 f28 startDescription 'Dialog with buttons that redirect to Default Pages using ivy.html' #txt
+Ta0 f28 taskData 'TaskTriggered.NAM=First task of testDefaultPages' #txt
+Ta0 f28 caseData 'businessCase.attach=true
+case.name=First case of testDefaultPages' #txt
 Ta0 f28 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>
     <language>
@@ -268,6 +302,93 @@ Ta0 f31 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 Ta0 f31 168 618 112 44 -52 -7 #rect
 Ta0 f32 111 640 168 640 #arcP
 Ta0 f30 280 640 337 640 #arcP
+Ta0 f33 outLink doubleDialog.ivp #txt
+Ta0 f33 inParamDecl '<> param;' #txt
+Ta0 f33 requestEnabled true #txt
+Ta0 f33 triggerEnabled false #txt
+Ta0 f33 callSignature doubleDialog() #txt
+Ta0 f33 startDescription 'Process with 2 dialogs. Used for testing frame header bar' #txt
+Ta0 f33 taskData 'TaskTriggered.NAM=First task of doubleDialog' #txt
+Ta0 f33 caseData 'businessCase.attach=true
+case.name=First case of doubleDialog' #txt
+Ta0 f33 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elementInfo>
+    <language>
+        <name>doubleDialog.ivp</name>
+    </language>
+</elementInfo>
+' #txt
+Ta0 f33 @C|.responsibility Everybody #txt
+Ta0 f33 81 721 30 30 -25 17 #rect
+Ta0 f34 dialogId ch.ivyteam.ivy.project.workflow.TestDialog1 #txt
+Ta0 f34 startMethod start(ch.ivyteam.ivy.project.workflow.Data) #txt
+Ta0 f34 requestActionDecl '<ch.ivyteam.ivy.project.workflow.Data data> param;' #txt
+Ta0 f34 responseMappingAction 'out=in;
+' #txt
+Ta0 f34 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elementInfo>
+    <language>
+        <name>TestDialog</name>
+    </language>
+</elementInfo>
+' #txt
+Ta0 f34 168 714 112 44 -33 -7 #rect
+Ta0 f36 497 721 30 30 0 15 #rect
+Ta0 f35 dialogId ch.ivyteam.ivy.project.workflow.TestDialog2 #txt
+Ta0 f35 startMethod start() #txt
+Ta0 f35 requestActionDecl '<> param;' #txt
+Ta0 f35 responseMappingAction 'out=in;
+' #txt
+Ta0 f35 caseData 'case.name=Case created in UserTask during doubleDialog process' #txt
+Ta0 f35 taskData 'TaskA.NAM=User task created during doubleDialog process
+TaskA.SKIP_TASK_LIST=true' #txt
+Ta0 f35 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elementInfo>
+    <language>
+        <name>TestDialog2</name>
+    </language>
+</elementInfo>
+' #txt
+Ta0 f35 328 714 112 44 -37 -7 #rect
+Ta0 f37 111 736 168 736 #arcP
+Ta0 f38 280 736 328 736 #arcP
+Ta0 f39 440 736 497 736 #arcP
+Ta0 f40 outLink startTestDialog2.ivp #txt
+Ta0 f40 inParamDecl '<> param;' #txt
+Ta0 f40 requestEnabled true #txt
+Ta0 f40 triggerEnabled false #txt
+Ta0 f40 callSignature startTestDialog2() #txt
+Ta0 f40 startDescription 'Dialog 2 for testing Developer Workflow-UI' #txt
+Ta0 f40 startCategory exampleDialogs #txt
+Ta0 f40 taskData 'TaskTriggered.NAM=Test Developer Workflow-UI Dialog 2' #txt
+Ta0 f40 caseData 'businessCase.attach=true
+case.name=Test Developer Workflow-UI Dialog Case 2' #txt
+Ta0 f40 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elementInfo>
+    <language>
+        <name>startTestDialog2.ivp</name>
+        <desc>Test dialog for testing Developer Workflow UI</desc>
+    </language>
+</elementInfo>
+' #txt
+Ta0 f40 @C|.responsibility Everybody #txt
+Ta0 f40 409 145 30 30 -50 21 #rect
+Ta0 f41 665 145 30 30 0 15 #rect
+Ta0 f42 dialogId ch.ivyteam.ivy.project.workflow.TestDialog2 #txt
+Ta0 f42 startMethod start() #txt
+Ta0 f42 requestActionDecl '<> param;' #txt
+Ta0 f42 responseMappingAction 'out=in;
+' #txt
+Ta0 f42 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elementInfo>
+    <language>
+        <name>TestDialog</name>
+    </language>
+</elementInfo>
+' #txt
+Ta0 f42 496 138 112 44 -33 -7 #rect
+Ta0 f43 439 160 496 160 #arcP
+Ta0 f44 608 160 665 160 #arcP
 >Proto Ta0 .type workflow.uite.Data #txt
 >Proto Ta0 .processKind NORMAL #txt
 >Proto Ta0 0 0 32 24 18 0 #rect
@@ -298,3 +419,13 @@ Ta0 f28 mainOut f32 tail #connect
 Ta0 f32 head f31 mainIn #connect
 Ta0 f31 mainOut f30 tail #connect
 Ta0 f30 head f29 mainIn #connect
+Ta0 f33 mainOut f37 tail #connect
+Ta0 f37 head f34 mainIn #connect
+Ta0 f34 mainOut f38 tail #connect
+Ta0 f38 head f35 in #connect
+Ta0 f35 out f39 tail #connect
+Ta0 f39 head f36 mainIn #connect
+Ta0 f40 mainOut f43 tail #connect
+Ta0 f43 head f42 mainIn #connect
+Ta0 f42 mainOut f44 tail #connect
+Ta0 f44 head f41 mainIn #connect

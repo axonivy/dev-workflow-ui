@@ -7,27 +7,27 @@
     "name" : "stage1",
     "icon" : "css:fa fa-ambulance",
     "processes" : [ {
-      "id" : "process_1",
-      "name" : "process 1",
-      "processToExecute" : "ch.ivyteam.workflow:workflow-ui-test-data:1750C5211D94569D/startTestDialog.ivp"
+      "id" : "testdialog1",
+      "name" : "TestDialog1",
+      "processToExecute" : "ch.ivyteam.workflow:workflow-ui-test-data:1750C5211D94569D/startTestDialog1.ivp"
     } ],
     "sidesteps" : [ {
-      "id" : "test_sidestep_dialog",
-      "name" : "Test sidestep dialog",
-      "processToExecute" : "ch.ivyteam.workflow:workflow-ui-test-data:1750C5211D94569D/startTestDialog.ivp"
+      "id" : "testdialog2",
+      "name" : "TestDialog2",
+      "processToExecute" : "ch.ivyteam.workflow:workflow-ui-test-data:1750C5211D94569D/startTestDialog2.ivp"
     } ]
   }, {
     "id" : "stage_2",
     "name" : "stage 2",
     "icon" : "css:fa fa-apple",
     "processes" : [ {
-      "id" : "make_admin_user",
-      "name" : "make Admin User",
-      "processToExecute" : "ch.ivyteam.workflow:workflow-ui-test-data:175461E47A870BF8/makeAdminUser.ivp"
+      "id" : "homepage_test_data",
+      "name" : "HomePageTestData",
+      "processToExecute" : "ch.ivyteam.workflow:workflow-ui-test-data:1750C5211D94569D/HomePageTestData.ivp"
     } ],
     "sidesteps" : [ {
-      "id" : "test_data",
-      "name" : "Test Data",
+      "id" : "testdata_stage2_sidestep",
+      "name" : "TestData",
       "processToExecute" : "ch.ivyteam.workflow:workflow-ui-test-data:1750C5211D94569D/TestData.ivp"
     } ]
   } ]

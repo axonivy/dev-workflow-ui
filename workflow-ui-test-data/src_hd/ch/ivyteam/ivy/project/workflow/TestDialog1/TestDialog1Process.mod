@@ -1,7 +1,7 @@
 [Ivy]
 1766582B372C9AEB 9.3.0 #module
 >Proto >Proto Collection #zClass
-Ts0 TestDialogProcess Big #zClass
+Ts0 TestDialog1Process Big #zClass
 Ts0 RD #cInfo
 Ts0 #process
 Ts0 @TextInP .type .type #zField
@@ -14,7 +14,7 @@ Ts0 @PushWFArc f2 '' #zField
 Ts0 @UdEvent f3 '' #zField
 Ts0 @UdExitEnd f4 '' #zField
 Ts0 @PushWFArc f5 '' #zField
->Proto Ts0 Ts0 TestDialogProcess #zField
+>Proto Ts0 Ts0 TestDialog1Process #zField
 Ts0 f0 guid 1766582B3C412DD8 #txt
 Ts0 f0 method start(ch.ivyteam.ivy.project.workflow.Data) #txt
 Ts0 f0 inParameterDecl '<ch.ivyteam.ivy.project.workflow.Data data> param;' #txt
@@ -46,7 +46,7 @@ Ts0 f3 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 Ts0 f3 83 147 26 26 -16 15 #rect
 Ts0 f4 211 147 26 26 0 12 #rect
 Ts0 f5 109 160 211 160 #arcP
->Proto Ts0 .type ch.ivyteam.ivy.project.workflow.TestDialog.TestDialogData #txt
+>Proto Ts0 .type ch.ivyteam.ivy.project.workflow.TestDialog1.TestDialog1Data #txt
 >Proto Ts0 .processKind HTML_DIALOG #txt
 >Proto Ts0 -8 -8 16 16 16 26 #rect
 Ts0 f0 mainOut f2 tail #connect

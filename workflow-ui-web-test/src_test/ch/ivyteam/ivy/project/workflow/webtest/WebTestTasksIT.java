@@ -31,14 +31,14 @@ public class WebTestTasksIT {
     startTestProcess("1750C5211D94569D/HomePageTestData.ivp");
     open(viewUrl("allTasks.xhtml"));
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
-    table.row(0).shouldBe(text("HomePageTestTask"));
+    table.row(0).shouldBe(text("Created task of HomePageTestData"));
     $(".si-information-circle").shouldBe(visible).click();
-    $(By.id("form:taskName")).shouldBe(text("HomePageTestTask"));
+    $(By.id("form:taskName")).shouldBe(text("Created task of HomePageTestData"));
     $(By.id("form:taskStartBtn")).shouldBe(enabled).click();
     loginFromTable("testuser");
     open(viewUrl("allTasks.xhtml"));
     table = PrimeUi.table(By.id("tasksForm:tasks"));
-    table.row(0).shouldNotBe(text("HomePageTestTask"));
+    table.row(0).shouldNotBe(text("Created task of HomePageTestData"));
   }
 
   @Test
@@ -49,7 +49,7 @@ public class WebTestTasksIT {
     startTestProcess("1750C5211D94569D/TestData.ivp");
     open(viewUrl("allTasks.xhtml"));
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
-    table.row(0).shouldBe(text("TestTask"));
+    table.row(0).shouldBe(text("Created task of TestData"));
 
     table.valueAt(0, 1).contains("pause");
   }
@@ -62,7 +62,7 @@ public class WebTestTasksIT {
     open(viewUrl("allTasks.xhtml"));
 
     $(".si-information-circle").shouldBe(visible).click();
-    $(".case-link").shouldHave(text("TestCase"));
+    $(".case-link").shouldHave(text("Created case of TestData"));
 
     $("#form\\:taskResponsible\\:userName").shouldBe(exactText("Everybody"));
     $("#form\\:taskState").shouldBe(exactText("SUSPENDED"));
@@ -84,7 +84,7 @@ public class WebTestTasksIT {
     open(viewUrl("allTasks.xhtml"));
 
     $(".si-information-circle").shouldBe(visible).click();
-    $(".case-link").shouldHave(text("TestCase"));
+    $(".case-link").shouldHave(text("Created case of TestData"));
 
     $("#form\\:taskState").shouldBe(exactText("SUSPENDED"));
     $("#form\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"));
@@ -92,7 +92,7 @@ public class WebTestTasksIT {
     $("#form\\:taskStartBtn").shouldBe(enabled).click();
     open(viewUrl("allTasks.xhtml"));
     $(".si-information-circle").shouldBe(visible).click();
-    $("#form\\:taskName").shouldBe(exactText("TestTask"));
+    $("#form\\:taskName").shouldBe(exactText("Created task of TestData"));
 
     $("#form\\:taskState").shouldBe(exactText("DONE"));
     $("#form\\:taskStartBtn").shouldHave(cssClass("ui-state-disabled"));
@@ -106,7 +106,7 @@ public class WebTestTasksIT {
     open(viewUrl("allTasks.xhtml"));
 
     $(".si-information-circle").shouldBe(visible).click();
-    $(".case-link").shouldHave(text("TestCase"));
+    $(".case-link").shouldHave(text("Created case of TestData"));
 
     $("#form\\:taskState").shouldBe(exactText("SUSPENDED"));
     $("#form\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"));

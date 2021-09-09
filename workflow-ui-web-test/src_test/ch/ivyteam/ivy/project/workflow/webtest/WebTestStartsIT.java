@@ -50,9 +50,9 @@ public class WebTestStartsIT {
   @Test
   public void testExecuteStart() {
     Selenide.open(viewUrl("starts.xhtml"));
-    $(By.id("startsForm:filter")).sendKeys("startTestDialog");
+    $(By.id("startsForm:filter")).sendKeys("startTestDialog1");
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui-test-data"));
-    $(byText("startTestDialog.ivp")).shouldBe(visible).click();
+    $(byText("startTestDialog1.ivp")).shouldBe(visible).click();
     $(By.id("iFrame")).shouldBe(visible);
 
     Selenide.switchTo().frame("iFrame");
@@ -67,7 +67,7 @@ public class WebTestStartsIT {
   @Test
   public void testExecuteDefaultFramePage() {
     Selenide.open(EngineUrl
-            .createProcessUrl("/workflow-ui-test-data/1750C5211D94569D/startTestDialog.ivp?embedInFrame"));
+            .createProcessUrl("/workflow-ui-test-data/1750C5211D94569D/startTestDialog1.ivp?embedInFrame"));
     if ($(By.id("iFrame")).is(visible)) {
       Selenide.switchTo().frame("iFrame");
     }
@@ -104,7 +104,7 @@ public class WebTestStartsIT {
 
     open(viewUrl("allTasks.xhtml"));
     $(".si-information-circle").shouldBe(visible).click();
-    $(".case-link").shouldHave(text("TestCase"));
+    $(".case-link").shouldHave(text("Created case of TestData"));
     var taskId = $("#form\\:taskId").getText();
     $("#form\\:taskStartBtn").shouldBe(enabled).click();
     assertCurrentUrlEndsWith("taskDetails.xhtml?task="+taskId);
@@ -113,7 +113,8 @@ public class WebTestStartsIT {
   @Test
   public void testExecuteOnFullscreenPage() {
     Selenide.open(viewUrl("starts.xhtml"));
-    $(By.id("startsForm:filter")).sendKeys("startTestDialog");
+    $(By.id("startsForm:filter")).sendKeys("startTestDialog1");
+    $(byText("startTestDialog1.ivp")).shouldBe(visible);
     $(By.className("si-expand-6")).shouldBe(visible).click();
     $(By.className("topbar-logo")).shouldNotBe(visible);
     $(By.id("form:proceed")).shouldBe(visible).click();
@@ -125,9 +126,10 @@ public class WebTestStartsIT {
     Selenide.open(viewUrl("starts.xhtml"));
     $(By.id("startsForm:filter")).sendKeys("test _ case _ map");
     $(byText("test _ case _ map")).shouldBe(visible).click();
-    $(By.id("iFrameForm:frameTaskName")).shouldHave(text("Test Developer Workflow-UI Dialog Task"));
+    $(By.id("iFrameForm:frameTaskName")).shouldHave(text("Test Developer Workflow-UI Dialog 1"));
     $(By.id("iFrameForm:sidestepsBtn")).shouldBe(visible).click();
     $(By.id("iFrameForm:sidestepMenu")).shouldBe(visible).find(By.className("ui-menuitem-link")).click();
+    $(By.id("iFrameForm:frameTaskName")).shouldHave(text("Test Developer Workflow-UI Dialog 2"));
     Selenide.switchTo().frame("iFrame");
     $(By.id("form:proceed")).shouldBe(enabled).click();
     Selenide.switchTo().defaultContent();
