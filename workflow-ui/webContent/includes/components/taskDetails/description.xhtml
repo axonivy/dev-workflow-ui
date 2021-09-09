@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component"
+  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
+  xmlns:jc="http://java.sun.com/jsf/composite/components">
+
+  <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank"
+    columnClasses="no-padding-left text-secondary ui-g-6 ui-md-2, ui-g-6 ui-md-4, no-padding-left text-secondary ui-g-6 ui-md-2, ui-g-6 ui-md-4">
+    <h:outputText value="Task ID" />
+    <h:outputText id="taskId" value="#{tasksDetailsIvyDevWfBean.selectedTask.getId()}" />
+
+    <h:outputText value="Task name" />
+    <h:outputText value="#{tasksDetailsIvyDevWfBean.getName(tasksDetailsIvyDevWfBean.selectedTask)}" id="taskName" />
+
+    <h:outputText value="Priority" />
+    <h:outputText>
+      <i class="si si-#{tasksIvyDevWfBean.getPriorityIcon(tasksDetailsIvyDevWfBean.selectedTask.getPriority())} table-icon" />
+      <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.getPriority()}" id="taskPriority" />
+    </h:outputText>
+
+    <h:outputText value="State" />
+    <h:outputText>
+      <i class="si si-#{tasksIvyDevWfBean.getStateIcon(tasksDetailsIvyDevWfBean.selectedTask.getState())} table-icon" />
+      <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.getState()}" id="taskState" />
+    </h:outputText>
+
+    <h:outputText value="Business case" />
+    <jc:caseLink case="#{tasksDetailsIvyDevWfBean.selectedTask.case.getBusinessCase()}" id="businessCase" />
+
+    <h:outputText value="Technical case" />
+    <jc:caseLink case="#{tasksDetailsIvyDevWfBean.selectedTask.case}" id="technicalCase" />
+
+    <h:outputText value="Working user" />
+    <jc:user user="#{tasksDetailsIvyDevWfBean.selectedTask.workerUser}" id="workingUser" />
+
+    <h:outputText value="Responsible" />
+    <jc:user id="taskResponsible" user="#{tasksDetailsIvyDevWfBean.selectedTask.activator().get()}" />
+
+    <h:outputText value="Created" />
+    <h:outputText value="#{dateTimeIvyDevWfBean.getDateTime(tasksDetailsIvyDevWfBean.selectedTask.getStartTimestamp())}"
+      id="createdDate" />
+
+    <h:outputText value="Expiry" />
+    <h:outputText value="#{dateTimeIvyDevWfBean.getDetailTime(tasksDetailsIvyDevWfBean.selectedTask.getExpiryTimestamp())}"
+      id="expiryDate" />
+
+    <h:outputText value="Completed on" />
+    <h:outputText value="#{dateTimeIvyDevWfBean.getDetailTime(tasksDetailsIvyDevWfBean.selectedTask.getEndTimestamp())}"
+      id="completedDate" />
+
+    <h:outputText value="Description" />
+    <h:outputText value="#{tasksDetailsIvyDevWfBean.getDescription()}" id="taskDescription" />
+  </p:panelGrid>
+
+</ui:composition>
