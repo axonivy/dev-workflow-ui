@@ -17,93 +17,10 @@
           <div class="task-detail-title straight-text-icon">
             <i class="si si-lg si-common-file-text detail-title-icon" />
             <h:outputText value="Description" />
-
-            <div class="task-detail-action-container action-container">
-              <p:link href="#{tasksDetailsIvyDevWfBean.executeTaskLink}"
-                styleClass="task-action-item straight-text-icon" id="taskStartBtn"
-                disabled="#{!tasksDetailsIvyDevWfBean.canBeStarted()}">
-                <h:outputText value="Start"/>
-                <i class="si si-arrow-right-1 detail-action-icon-bold"/>
-              </p:link>
-              <p:commandLink value="Actions" class="task-actions-link straight-text-icon" id="taskActionsBtn"
-                disabled="#{tasksDetailsIvyDevWfBean.isDone()}">
-                <i class="si si-arrow-down-1 detail-action-icon"></i>
-              </p:commandLink>
-              <p:menu id="actionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom">
-                <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.selectedTask.reset()}" update="form, events"
-                  disabled="#{!tasksDetailsIvyDevWfBean.canReset()}" id="taskResetBtn">
-                  <i class="si si-road-sign-u-turn-left table-icon" />Reset
-                  </p:menuitem>
-                <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.park()}" update="form, events"
-                  disabled="#{!tasksDetailsIvyDevWfBean.canPark()}" id="taskParkBtn">
-                  <i class="si si-road-sign-u-turn-right table-icon" />Park
-                  </p:menuitem>
-                <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.selectedTask.destroy()}" update="form, events"
-                  disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.getState().isActive()}" id="taskDestoryBtn">
-                  <i class="si si-close table-icon" />Destroy
-                  </p:menuitem>
-                <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.expireTask}" update="form, events"
-                  disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.getState().isActive()}"
-                  rendered="#{engineModeIvyDevWfBean.demoOrDesigner}" id="taskExpireBtn">
-                  <i class="si si-alarm-bell-timer table-icon" />Expire now
-                  </p:menuitem>
-              </p:menu>
-              <p:commandLink value="Sidesteps" class="sidesteps-button straight-text-icon" id="sidestepsBtn"
-                rendered="#{tasksDetailsIvyDevWfBean.renderSidestepBtn()}">
-                <i class="si si-arrow-down-1 detail-action-icon"></i>
-              </p:commandLink>
-              <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
-               model="#{tasksDetailsIvyDevWfBean.sidestepsMenuModel}" styleClass="menu-no-icons"/>
-            </div>
+            <ui:include src="/includes/components/taskDetails/descriptionCardHeaderActions.xhtml"/>
           </div>
 
-          <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank"
-            columnClasses="no-padding-left ui-g-6 ui-md-2, ui-g-6 ui-md-4, no-padding-left ui-g-6 ui-md-2, ui-g-6 ui-md-4">
-            <h:outputText value="Task ID" />
-            <h:outputText id="taskId" value="#{tasksDetailsIvyDevWfBean.selectedTask.getId()}" />
-
-            <h:outputText value="Task name" />
-            <h:outputText value="#{tasksDetailsIvyDevWfBean.getName(tasksDetailsIvyDevWfBean.selectedTask)}" id="taskName" />
-
-            <h:outputText value="Priority" />
-            <h:outputText>
-              <i class="si si-#{tasksIvyDevWfBean.getPriorityIcon(tasksDetailsIvyDevWfBean.selectedTask.getPriority())} table-icon"></i>
-              <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.getPriority()}" id="taskPriority" />
-            </h:outputText>
-
-            <h:outputText value="State" />
-            <h:outputText>
-              <i class="si si-#{tasksIvyDevWfBean.getStateIcon(tasksDetailsIvyDevWfBean.selectedTask.getState())} table-icon"></i>
-              <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.getState()}" id="taskState" />
-            </h:outputText>
-
-            <h:outputText value="Business case" />
-            <jc:caseLink case="#{tasksDetailsIvyDevWfBean.selectedTask.case.getBusinessCase()}" id="businessCase" />
-
-            <h:outputText value="Technical case" />
-            <jc:caseLink case="#{tasksDetailsIvyDevWfBean.selectedTask.case}" id="technicalCase" />
-
-            <h:outputText value="Working user" />
-            <jc:user user="#{tasksDetailsIvyDevWfBean.selectedTask.workerUser}" id="workingUser" />
-
-            <h:outputText value="Responsible" />
-            <jc:user id="taskResponsible" user="#{tasksDetailsIvyDevWfBean.selectedTask.activator().get()}" />
-
-            <h:outputText value="Created" />
-            <h:outputText value="#{dateTimeIvyDevWfBean.getDateTime(tasksDetailsIvyDevWfBean.selectedTask.getStartTimestamp())}"
-              id="createdDate" />
-
-            <h:outputText value="Expiry" />
-            <h:outputText value="#{dateTimeIvyDevWfBean.getDetailTime(tasksDetailsIvyDevWfBean.selectedTask.getExpiryTimestamp())}"
-              id="expiryDate" />
-
-            <h:outputText value="Completed on" />
-            <h:outputText value="#{dateTimeIvyDevWfBean.getDetailTime(tasksDetailsIvyDevWfBean.selectedTask.getEndTimestamp())}"
-              id="completedDate" />
-
-            <h:outputText value="Description" />
-            <h:outputText value="#{tasksDetailsIvyDevWfBean.getDescription()}" id="taskDescription" />
-          </p:panelGrid>
+          <ui:include src="/includes/components/taskDetails/description.xhtml"/>
         </h:panelGroup>
 
         <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
@@ -111,7 +28,7 @@
             <i class="si si-lg si-synchronize-arrow-clock detail-title-icon" />
             <h:outputText value="Workflow Events" />
           </div>
-          <ui:include src="/includes/components/workflowEventsTable.xhtml" />
+          <ui:include src="/includes/components/taskDetails/workflowEventsTable.xhtml" />
         </h:panelGroup>
       </h:form>
     </ui:define>

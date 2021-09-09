@@ -99,6 +99,11 @@ body .ui-datatable tbody tr.ui-datatable-even.ui-state-highlight {
   display: none;
 }
 
+.text-secondary {
+  opacity: 0.65;
+  font-size: 12px;
+}
+
 .task-detail-title {
   position: relative;
   margin-bottom: 14px;
