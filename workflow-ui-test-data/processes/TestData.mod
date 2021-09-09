@@ -85,6 +85,7 @@ Ta0 f5 requestEnabled true #txt
 Ta0 f5 triggerEnabled false #txt
 Ta0 f5 callSignature startTestDialog() #txt
 Ta0 f5 startCategory exampleDialogs #txt
+Ta0 f5 taskData 'TaskTriggered.NAM=Test Developer Workflow-UI Dialog Task' #txt
 Ta0 f5 caseData businessCase.attach=true #txt
 Ta0 f5 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>

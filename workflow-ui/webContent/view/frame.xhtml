@@ -3,8 +3,30 @@
   xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
   xmlns:pe="http://primefaces.org/ui/extensions">
 <h:body>
+  <f:metadata>
+    <f:viewParam name="originalUrl" value="#{frameIvyDevWfBean.originalUrl}"/>
+  </f:metadata>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
+      <h:form id="iFrameForm">
+        <div id="header-container" class="card header-container">
+          <div class="straight-text-icon">
+            <i class="si si-lg si-task-list-edit margin-right-5" />
+            <span><h:outputText id="frameTaskName" value="#{frameIvyDevWfBean.taskName}" /></span>
+          </div>
+          <div class="straight-text-icon">
+            <p:linkButton id="openStartFullscreenBtn" href="#{frameIvyDevWfBean.taskUrl}" icon="si si-expand-6" styleClass="margin-right-10"/>
+            <p:tooltip for="openStartFullscreenBtn" value="Open current process start on a fullscreen page" position="left"/>
+            <p:commandLink value="Sidesteps" class="sidesteps-button straight-text-icon" id="sidestepsBtn"
+              rendered="#{frameIvyDevWfBean.renderSidestepBtn()}">
+              <i class="si si-arrow-down-1 detail-action-icon"></i>
+            </p:commandLink>
+            <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
+              model="#{frameIvyDevWfBean.sidestepsMenuModel}" styleClass="menu-no-icons" />
+          </div>
+        </div>
+        <p:remoteCommand name="useTaskInIFrame" actionListener="#{frameIvyDevWfBean.useTaskInIFrame()}" update="@form" />
+      </h:form>
       <div class="card custom-card">
         <iframe id="iFrame" src="#{frameIvyDevWfBean.taskUrl}"
           style="height: calc(100vh - 195px); width: 100%; border: 0;"></iframe>
@@ -15,6 +37,11 @@
           var lastDispatched = null;
 
           var dispatchChange = function() {
+            useTaskInIFrame([{
+              name: 'url',
+              value: iframe.contentWindow.location.pathname
+            }]);
+
             var newHref = iframe.contentWindow.location.href;
 
             if (newHref !== lastDispatched) {
@@ -72,7 +99,7 @@
         }
 
         iframeURLChange(document.getElementById("iFrame"), function(newURL, iframe) {
-          var originPage = new URLSearchParams(window.location.search).get('origin');
+          var originPage = new URLSearchParams(window.location.search).get('originalUrl');
           if (iframe.contentWindow.location.pathname.match("/default/redirect.xhtml")) {
             var redirectedPage = new URLSearchParams(iframe.contentWindow.location.search).get("redirectPage");
             var newPage = checkAndReturnUrl(redirectedPage, originPage);

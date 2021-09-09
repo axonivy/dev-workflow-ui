@@ -10,6 +10,11 @@
       "id" : "process_1",
       "name" : "process 1",
       "processToExecute" : "ch.ivyteam.workflow:workflow-ui-test-data:1750C5211D94569D/startTestDialog.ivp"
+    } ],
+    "sidesteps" : [ {
+      "id" : "test_sidestep_dialog",
+      "name" : "Test sidestep dialog",
+      "processToExecute" : "ch.ivyteam.workflow:workflow-ui-test-data:1750C5211D94569D/startTestDialog.ivp"
     } ]
   }, {
     "id" : "stage_2",
