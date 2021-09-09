@@ -75,7 +75,7 @@ public class TasksIvyDevWfBean {
 
   public void executeTask(long taskId) {
     ITask task = IWorkflowContext.current().findTask(taskId);
-    RedirectUtil.redirect(UrlUtil.generateStartFrameUrl(task.getStartLink().getRelative()));
+    RedirectUtil.redirect(UrlUtil.generateStartFrameUrl(task.getStartLink()));
   }
 
   public String getPriorityIcon(WorkflowPriority priority) {

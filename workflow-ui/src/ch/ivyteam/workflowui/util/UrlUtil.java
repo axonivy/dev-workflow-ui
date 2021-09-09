@@ -19,6 +19,9 @@ public class UrlUtil {
   public static String evalOriginalPage() {
     var page = StringUtils.substringAfterLast(getHttpServletRequest().getRequestURI(), "/");
     var parameter = getHttpServletRequest().getQueryString();
+    if (page.equals("frame.xhtml")) {
+      page = "allTasks.xhtml";
+    }
     if (!StringUtils.isBlank(parameter)) {
       page += "?" + parameter;
     }
@@ -35,12 +38,16 @@ public class UrlUtil {
   }
 
   public static String generateStartFrameUrl(WebLink startLink) {
-    return generateStartFrameUrl(startLink.getRelative());
+    return generateStartFrameUrl(startLink, evalOriginalPage());
   }
 
-  public static String generateStartFrameUrl(String startLink) {
-    var originalPageEncoded = URLEncoder.encode(UrlUtil.evalOriginalPage(), StandardCharsets.UTF_8);
-    String startLinkEncoded = URLEncoder.encode(startLink, StandardCharsets.UTF_8);
-    return "frame.xhtml?origin=" + originalPageEncoded + "&taskUrl=" + startLinkEncoded;
+  public static String generateStartFrameUrl(WebLink startLink, String redirectUrl) {
+    return generateFrameUrl(startLink, redirectUrl);
+  }
+
+  public static String generateFrameUrl(WebLink startLink, String redirectUrl) {
+    var originalPageEncoded = URLEncoder.encode(redirectUrl, StandardCharsets.UTF_8);
+    String startLinkEncoded = URLEncoder.encode(startLink.getRelative(), StandardCharsets.UTF_8);
+    return "frame.xhtml?originalUrl=" + originalPageEncoded + "&taskUrl=" + startLinkEncoded;
   }
 }

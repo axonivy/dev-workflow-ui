@@ -12,6 +12,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -25,9 +26,13 @@ import ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil;
 @IvyWebTest
 public class WebTestStartsIT {
 
+  @BeforeAll
+  public static void prepare() {
+    startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
+  }
+
   @BeforeEach
-  public void prepare()
-  {
+  public void loginAdmin() {
     WorkflowUiUtil.loginDeveloper();
   }
 
@@ -113,5 +118,19 @@ public class WebTestStartsIT {
     $(By.className("topbar-logo")).shouldNotBe(visible);
     $(By.id("form:proceed")).shouldBe(visible).click();
     $(By.className("topbar-logo")).shouldBe(visible);
+  }
+
+  @Test
+  public void testFrameHeaderBarSidestep() {
+    Selenide.open(viewUrl("starts.xhtml"));
+    $(By.id("startsForm:filter")).sendKeys("test _ case _ map");
+    $(byText("test _ case _ map")).shouldBe(visible).click();
+    $(By.id("iFrameForm:frameTaskName")).shouldHave(text("Test Developer Workflow-UI Dialog Task"));
+    $(By.id("iFrameForm:sidestepsBtn")).shouldBe(visible).click();
+    $(By.id("iFrameForm:sidestepMenu")).shouldBe(visible).find(By.className("ui-menuitem-link")).click();
+    Selenide.switchTo().frame("iFrame");
+    $(By.id("form:proceed")).shouldBe(enabled).click();
+    Selenide.switchTo().defaultContent();
+    $(By.id("menuform:sr_starts")).shouldHave(cssClass("active-menu"));
   }
 }

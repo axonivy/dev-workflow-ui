@@ -372,6 +372,12 @@ body .ui-menu.menu-no-icons .ui-menu-list .ui-menuitem .ui-menuitem-link .ui-ico
   display: none;
 }
 
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px;
+}
+
 .api-browser-frame {
   border: none;
   width: 100%;

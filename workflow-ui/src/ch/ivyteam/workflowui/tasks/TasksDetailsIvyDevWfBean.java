@@ -20,6 +20,7 @@ import ch.ivyteam.ivy.workflow.IWorkflowSession;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
+import ch.ivyteam.workflowui.util.TaskDetailUtil;
 import ch.ivyteam.workflowui.util.UrlUtil;
 
 @ManagedBean
@@ -49,7 +50,7 @@ public class TasksDetailsIvyDevWfBean {
   }
 
   public String getExecuteTaskLink() {
-    return UrlUtil.generateStartFrameUrl(selectedTask.getStartLink().getRelative());
+    return UrlUtil.generateStartFrameUrl(selectedTask.getStartLink());
   }
 
   public void expireTask() {
@@ -108,14 +109,11 @@ public class TasksDetailsIvyDevWfBean {
   }
 
   public String getName(ITask task) {
-    if (StringUtils.isBlank(task.getName())) {
-      return "[Task: " + task.getId() + "]";
-    }
-    return task.getName();
+    return TaskDetailUtil.getName(task);
   }
 
   public boolean isDone() {
-    return TaskState.END_STATES.contains(selectedTask.getState());
+    return TaskDetailUtil.isDone(selectedTask);
   }
 
   public boolean canBeStarted() {
