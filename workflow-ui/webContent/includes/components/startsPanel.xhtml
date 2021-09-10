@@ -53,7 +53,7 @@
           <p:panel id="startElementProcess" styleClass="start-element" rendered="#{pmv.active}">
             <p:commandLink action="#{start.execute}" styleClass="flex-space start-link width-100">
               <span class="straight-text-icon">
-                <i class="si si-controls-play margin-right-5"></i>
+                <i class="#{start.icon} margin-right-5"></i>
                 <span class="margin-right-10">#{start.displayName}</span>
               </span>
               <span>#{start.description}</span>
