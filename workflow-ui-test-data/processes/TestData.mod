@@ -60,6 +60,8 @@ Ta0 f0 requestEnabled true #txt
 Ta0 f0 triggerEnabled false #txt
 Ta0 f0 callSignature TestData() #txt
 Ta0 f0 startDescription 'Process which generates some test task and case data' #txt
+Ta0 f0 startCategory TestData #txt
+Ta0 f0 startCustomFields 'cssIcon=si si-add' #txt
 Ta0 f0 taskData 'TaskTriggered.NAM=First task of TestData' #txt
 Ta0 f0 caseData 'businessCase.attach=true
 case.name=First case of TestData
@@ -232,7 +234,7 @@ Ta0 f19 209 433 30 30 0 16 #rect
 Ta0 f20 337 433 30 30 0 15 #rect
 Ta0 f22 239 448 337 448 #arcP
 Ta0 f21 111 448 209 448 #arcP
-Ta0 f23 337 529 30 30 0 15 #rect
+Ta0 f23 665 49 30 30 0 15 #rect
 Ta0 f24 outLink HomePageTestData.ivp #txt
 Ta0 f24 inParamDecl '<> param;' #txt
 Ta0 f24 requestEnabled true #txt
@@ -240,6 +242,7 @@ Ta0 f24 triggerEnabled false #txt
 Ta0 f24 callSignature HomePageTestData() #txt
 Ta0 f24 startDescription 'Different process which generates test data. Mostly used for CI tests' #txt
 Ta0 f24 startCategory TestData #txt
+Ta0 f24 startCustomFields 'cssIcon=si si-house-1' #txt
 Ta0 f24 taskData 'TaskTriggered.NAM=First task of HomePageTestData' #txt
 Ta0 f24 caseData 'businessCase.attach=true
 case.name=First case of HomePageTestData' #txt
@@ -251,7 +254,7 @@ Ta0 f24 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 </elementInfo>
 ' #txt
 Ta0 f24 @C|.responsibility Everybody #txt
-Ta0 f24 81 529 30 30 -63 17 #rect
+Ta0 f24 409 49 30 30 -63 17 #rect
 Ta0 f25 actionTable 'out=in1;
 ' #txt
 Ta0 f25 caseData 'case.name=Created case of HomePageTestData' #txt
@@ -265,9 +268,9 @@ Ta0 f25 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     </language>
 </elementInfo>
 ' #txt
-Ta0 f25 209 529 30 30 -50 17 #rect
-Ta0 f26 239 544 337 544 #arcP
-Ta0 f27 111 544 209 544 #arcP
+Ta0 f25 537 49 30 30 -50 17 #rect
+Ta0 f26 567 64 665 64 #arcP
+Ta0 f27 439 64 537 64 #arcP
 Ta0 f28 outLink testDefaultPages.ivp #txt
 Ta0 f28 inParamDecl '<> param;' #txt
 Ta0 f28 requestEnabled true #txt
@@ -285,8 +288,8 @@ Ta0 f28 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 </elementInfo>
 ' #txt
 Ta0 f28 @C|.responsibility Everybody #txt
-Ta0 f28 81 625 30 30 -58 21 #rect
-Ta0 f29 337 625 30 30 0 15 #rect
+Ta0 f28 409 241 30 30 -58 21 #rect
+Ta0 f29 665 241 30 30 0 15 #rect
 Ta0 f31 dialogId ch.ivyteam.ivy.project.workflow.TestDefaultPage #txt
 Ta0 f31 startMethod start() #txt
 Ta0 f31 requestActionDecl '<> param;' #txt
@@ -299,9 +302,9 @@ Ta0 f31 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     </language>
 </elementInfo>
 ' #txt
-Ta0 f31 168 618 112 44 -52 -7 #rect
-Ta0 f32 111 640 168 640 #arcP
-Ta0 f30 280 640 337 640 #arcP
+Ta0 f31 496 234 112 44 -52 -7 #rect
+Ta0 f32 439 256 496 256 #arcP
+Ta0 f30 608 256 665 256 #arcP
 Ta0 f33 outLink doubleDialog.ivp #txt
 Ta0 f33 inParamDecl '<> param;' #txt
 Ta0 f33 requestEnabled true #txt
@@ -319,7 +322,7 @@ Ta0 f33 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 </elementInfo>
 ' #txt
 Ta0 f33 @C|.responsibility Everybody #txt
-Ta0 f33 81 721 30 30 -25 17 #rect
+Ta0 f33 409 337 30 30 -25 17 #rect
 Ta0 f34 dialogId ch.ivyteam.ivy.project.workflow.TestDialog1 #txt
 Ta0 f34 startMethod start(ch.ivyteam.ivy.project.workflow.Data) #txt
 Ta0 f34 requestActionDecl '<ch.ivyteam.ivy.project.workflow.Data data> param;' #txt
@@ -332,8 +335,8 @@ Ta0 f34 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     </language>
 </elementInfo>
 ' #txt
-Ta0 f34 168 714 112 44 -33 -7 #rect
-Ta0 f36 497 721 30 30 0 15 #rect
+Ta0 f34 496 330 112 44 -33 -7 #rect
+Ta0 f36 825 337 30 30 0 15 #rect
 Ta0 f35 dialogId ch.ivyteam.ivy.project.workflow.TestDialog2 #txt
 Ta0 f35 startMethod start() #txt
 Ta0 f35 requestActionDecl '<> param;' #txt
@@ -349,10 +352,10 @@ Ta0 f35 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     </language>
 </elementInfo>
 ' #txt
-Ta0 f35 328 714 112 44 -37 -7 #rect
-Ta0 f37 111 736 168 736 #arcP
-Ta0 f38 280 736 328 736 #arcP
-Ta0 f39 440 736 497 736 #arcP
+Ta0 f35 656 330 112 44 -37 -7 #rect
+Ta0 f37 439 352 496 352 #arcP
+Ta0 f38 608 352 656 352 #arcP
+Ta0 f39 768 352 825 352 #arcP
 Ta0 f40 outLink startTestDialog2.ivp #txt
 Ta0 f40 inParamDecl '<> param;' #txt
 Ta0 f40 requestEnabled true #txt

@@ -135,4 +135,13 @@ public class WebTestStartsIT {
     Selenide.switchTo().defaultContent();
     $(By.id("menuform:sr_starts")).shouldHave(cssClass("active-menu"));
   }
+
+  @Test
+  public void testStartableIcons() {
+    Selenide.open(viewUrl("starts.xhtml"));
+    $(By.id("startsForm:filter")).setValue("makeAdminUser.ivp");
+    $(By.id("startableIcon")).shouldBe(visible).shouldHave(cssClass("si-controls-play"));
+    $(By.id("startsForm:filter")).setValue("HomePageTestData.ivp");
+    $(By.id("startableIcon")).shouldBe(visible).shouldHave(cssClass("si-house-1"));
+  }
 }
