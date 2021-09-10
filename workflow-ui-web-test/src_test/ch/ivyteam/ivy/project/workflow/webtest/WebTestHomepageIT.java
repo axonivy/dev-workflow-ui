@@ -33,7 +33,7 @@ public class WebTestHomepageIT {
 
     // check if the data is in the containers
     startsTable.contains("HomePageTestData.ivp");
-    tasksTable.contains("HomePageTestTask");
+    tasksTable.contains("Created task of HomePageTestData");
   }
 
   @Test

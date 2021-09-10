@@ -19,6 +19,7 @@ mr0 f0 inParamDecl '<> param;' #txt
 mr0 f0 requestEnabled true #txt
 mr0 f0 triggerEnabled false #txt
 mr0 f0 callSignature makeAdminUser() #txt
+mr0 f0 startDescription 'Creates admin user (DeveloperTest)' #txt
 mr0 f0 startCategory actions #txt
 mr0 f0 caseData businessCase.attach=true #txt
 mr0 f0 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>

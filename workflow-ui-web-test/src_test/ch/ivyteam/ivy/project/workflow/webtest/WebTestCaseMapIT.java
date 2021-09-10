@@ -19,8 +19,6 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.FileDownloadMode;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
@@ -29,8 +27,6 @@ public class WebTestCaseMapIT {
   @BeforeAll
   static void setup() {
     Selenide.closeWebDriver();
-    Configuration.proxyEnabled = true;
-    Configuration.fileDownload = FileDownloadMode.PROXY;
   }
 
   @BeforeEach
@@ -59,12 +55,12 @@ public class WebTestCaseMapIT {
     open(viewUrl("cases.xhtml"));
     $(".si-information-circle").shouldBe(visible).click();
 
-    $(".current-hierarchy-case").find("a").shouldNotHave(text("TestCase"));
+    $(".current-hierarchy-case").find("a").shouldNotHave(text("Created case of TestData"));
 
     $(By.id("form:sidestepsBtn")).shouldBe(visible).click();
     $(By.id("form:sidestepMenu")).shouldBe(visible).find(By.className("ui-menuitem-link")).click();
 
-    $$(".case-link").find(text("TestCase")).shouldBe(visible);
+    $$(".case-link").find(text("Created case of TestData")).shouldBe(visible);
   }
 
   @Test

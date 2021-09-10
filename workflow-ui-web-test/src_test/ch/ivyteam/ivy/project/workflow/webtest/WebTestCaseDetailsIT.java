@@ -43,8 +43,8 @@ public class WebTestCaseDetailsIT {
   @BeforeEach
   void beforeEach() {
     open(viewUrl("cases.xhtml"));
-    $(byText("TestCase")).shouldBe(visible).click();
-    $("#form\\:caseName").shouldBe(text("TestCase"));
+    $(byText("Created case of TestData")).shouldBe(visible).click();
+    $("#form\\:caseName").shouldBe(text("Created case of TestData"));
   }
 
   @Test
@@ -78,7 +78,7 @@ public class WebTestCaseDetailsIT {
 
   @Test
   public void caseList() throws Exception {
-    $(".current-hierarchy-case").find("a").shouldHave(text("TestCase"));
+    $(".current-hierarchy-case").find("a").shouldHave(text("Created case of TestData"));
   }
 
   @Test

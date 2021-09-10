@@ -1,4 +1,4 @@
-TestDialogData #class
-ch.ivyteam.ivy.project.workflow.TestDialog #namespace
+TestDialog1Data #class
+ch.ivyteam.ivy.project.workflow.TestDialog1 #namespace
 data ch.ivyteam.ivy.project.workflow.Data #field
 data PERSISTENT #fieldModifier

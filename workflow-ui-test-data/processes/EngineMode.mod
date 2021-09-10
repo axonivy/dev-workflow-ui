@@ -25,6 +25,7 @@ Ee0 f10 inParamDecl '<> param;' #txt
 Ee0 f10 requestEnabled true #txt
 Ee0 f10 triggerEnabled false #txt
 Ee0 f10 callSignature designerEmbedded() #txt
+Ee0 f10 startDescription 'Sets designer mode to Embedded. Used for CI testing. Might break the designer if executed' #txt
 Ee0 f10 startCategory actions #txt
 Ee0 f10 caseData businessCase.attach=true #txt
 Ee0 f10 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -59,6 +60,7 @@ Ee0 f2 inParamDecl '<> param;' #txt
 Ee0 f2 requestEnabled true #txt
 Ee0 f2 triggerEnabled false #txt
 Ee0 f2 callSignature designerStandard() #txt
+Ee0 f2 startDescription 'Sets designer mode to Standard. Used for CI testing. Might break the designer if executed' #txt
 Ee0 f2 startCategory actions #txt
 Ee0 f2 caseData businessCase.attach=true #txt
 Ee0 f2 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
