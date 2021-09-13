@@ -1,7 +1,10 @@
 package ch.ivyteam.workflowui.starts;
 
+import org.apache.commons.lang3.StringUtils;
+
 import ch.ivyteam.ivy.model.value.WebLink;
 import ch.ivyteam.ivy.workflow.category.Category;
+import ch.ivyteam.ivy.workflow.start.IStartCustomFields;
 import ch.ivyteam.ivy.workflow.start.IWebStartable;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.UrlUtil;
@@ -12,6 +15,7 @@ public class StartableModel {
   private final WebLink link;
   private final Category category;
   private final String executeLink;
+  private final String icon;
 
   public StartableModel(IWebStartable startable) {
     this.displayName = startable.getDisplayName();
@@ -19,6 +23,15 @@ public class StartableModel {
     this.link = startable.getLink();
     this.category = startable.getCategory();
     this.executeLink = UrlUtil.generateStartFrameUrl(link);
+    this.icon = getIcon(startable.customFields());
+  }
+
+  private String getIcon(IStartCustomFields customFields) {
+    var customIcon = customFields.value("cssIcon");
+    if (StringUtils.isBlank(customIcon)) {
+      return "si si-controls-play";
+    }
+    return customIcon;
   }
 
   public String getDescription() {
@@ -43,5 +56,9 @@ public class StartableModel {
 
   public void execute() {
     RedirectUtil.redirect(executeLink);
+  }
+
+  public String getIcon() {
+    return icon;
   }
 }
