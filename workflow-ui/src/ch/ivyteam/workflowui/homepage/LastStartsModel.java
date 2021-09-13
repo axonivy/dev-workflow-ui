@@ -1,14 +1,17 @@
 package ch.ivyteam.workflowui.homepage;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.application.IProcessModel;
+import ch.ivyteam.ivy.model.value.WebLink;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.ICase;
+import ch.ivyteam.ivy.workflow.IProcessStart;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
 import ch.ivyteam.ivy.workflow.IWorkflowSession;
@@ -20,11 +23,13 @@ public class LastStartsModel {
 
   public LastStartsModel() {
     var lastRelativStartLinks = getLastStartedCasesOfUser()
-            .map(c -> c.getProcessStart().getLink().getRelative()).distinct().collect(Collectors.toList());
+            .map(ICase::getProcessStart).filter(Objects::nonNull)
+            .map(IProcessStart::getLink).map(WebLink::getRelative)
+            .distinct().collect(toList());
 
     starts = getAllStarts().stream()
             .filter(start -> lastRelativStartLinks.contains(start.getLink().getRelative())).limit(10)
-            .collect(Collectors.toList());
+            .collect(toList());
   }
 
   private List<StartableModel> getAllStarts() {
@@ -33,7 +38,7 @@ public class LastStartsModel {
             .map(IWorkflowProcessModelVersion::of).filter(Objects::nonNull)
             .flatMap(pmv -> pmv.getStartables(ISession.current()).stream())
             .map(StartableModel::new)
-            .collect(Collectors.toList());
+            .collect(toList());
   }
 
   private static Stream<ICase> getLastStartedCasesOfUser() {
