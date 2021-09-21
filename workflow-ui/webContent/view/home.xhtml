@@ -10,37 +10,39 @@
         styleClass="ui-message ui-staticmessage ui-message-warn">
         <span class="ui-message-warn-icon"></span>
         <span class="ui-message-warn-summary">Warning</span>
-        <span class="ui-message-warn-detail">Please
-          <a href="#{engineModeIvyDevWfBean.demoOrDesigner ? 'loginTable' : 'login'}.xhtml"> log in</a> to enable all features.
+        <span class="ui-message-warn-detail">Please <a
+          href="#{engineModeIvyDevWfBean.demoOrDesigner ? 'loginTable' : 'login'}.xhtml"> log in</a> to enable all
+          features.
         </span>
       </h:panelGroup>
       <h:form id="form">
-        <p:panelGrid columns="2" layout="grid" styleClass="custom-grid"
-          columnClasses="ui-g-12 ui-lg-4, ui-g-12 ui-lg-8" rendered="#{loginIvyDevWfBean.loggedIn}">
+        <p:panelGrid columns="2" layout="grid" styleClass="custom-grid" columnClasses="ui-g-12 ui-lg-4, ui-g-12 ui-lg-8"
+          rendered="#{loginIvyDevWfBean.loggedIn}">
 
           <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
             <div class="straight-text-icon card-header-title">
               <h:outputText value="Last starts" />
             </div>
-            <p:dataTable id="lastStarts" var="start" value="#{homepageIvyDevWfBean.lastStarts}" selectionMode="single" rowKey="#{start.displayName}"
-                rows="10" styleClass="margin-top-10 table-header-none" rendered="#{not empty homepageIvyDevWfBean.lastStarts}">
+            <p:dataTable id="lastStarts" var="start" value="#{homepageIvyDevWfBean.lastStarts}" selectionMode="single"
+              rowKey="#{start.displayName}" rows="10" styleClass="margin-top-10 table-header-none"
+              rendered="#{not empty homepageIvyDevWfBean.lastStarts}">
               <p:ajax event="rowSelect" listener="#{homepageIvyDevWfBean.executeLastStart}" update="@form" />
               <p:column styleClass="last-start-element">
                 <div class="flex-space straight-text-icon">
                   <p:commandLink id="last-start-link" actionListener="#{start.execute}" styleClass="straight-text-icon">
-                    <i class="si si-lg si-controls-play margin-right-10"/>
+                    <i class="si si-lg si-controls-play margin-right-10" />
                     <h:outputText value="#{start.displayName}" />
                   </p:commandLink>
                   <p:link id="openStartFullscreenBtn" href="#{start.link}">
-                    <i class="si si-expand-6"/>
+                    <i class="si si-expand-6" />
                   </p:link>
-                  <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="top"/>
+                  <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="top" />
                 </div>
               </p:column>
             </p:dataTable>
             <h:panelGrid rendered="#{empty homepageIvyDevWfBean.lastStarts}" styleClass="margin-top-10">
               <h:outputText>You haven't started any processes yet</h:outputText>
-              <p:button value="Go to starts page" outcome="starts.xhtml" icon="si si-navigation-menu"/>
+              <p:button value="Go to starts page" outcome="starts.xhtml" icon="si si-navigation-menu" />
             </h:panelGrid>
           </h:panelGroup>
 
@@ -49,19 +51,19 @@
               <h:outputText value="My tasks" />
             </div>
             <p:dataTable id="activeTasks" var="task" value="#{homepageIvyDevWfBean.tasksDataModel}" lazy="true"
-             rows="10" styleClass="margin-top-10" rendered="#{homepageIvyDevWfBean.tasksSize gt 0}"
-             sortBy="#{task.startTimestamp}" sortOrder="descending" selectionMode="single">
+              rows="10" styleClass="margin-top-10" rendered="#{homepageIvyDevWfBean.tasksSize gt 0}"
+              sortBy="#{task.startTimestamp}" sortOrder="descending" selectionMode="single">
               <p:ajax event="rowSelect" listener="#{tasksIvyDevWfBean.executeTaskRow}" update="@form" />
               <p:column styleClass="icon-row" priority="2">
                 <i class="si si-lg si-task-list-edit margin-right-5" />
               </p:column>
               <p:column styleClass="icon-row" sortBy="#{task.priority}">
-                <h:outputText id="taskPrio" styleClass="si si-lg si-#{tasksIvyDevWfBean.getPriorityIcon(task.priority)}" />
+                <h:outputText id="taskPrio" styleClass="si si-lg si-#{task.priorityIcon}" />
                 <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
               </p:column>
               <p:column headerText="Name" sortBy="#{task.name}">
                 <h:commandLink id="startTaskLink" action="#{tasksIvyDevWfBean.executeTask(task.id)}">
-                  <h:outputText id="taskName" value="#{tasksDetailsIvyDevWfBean.getName(task)}" />
+                  <h:outputText id="taskName" value="#{task.name}" />
                   <p:tooltip for="taskName" value="Task ID: #{task.id}" position="top" />
                 </h:commandLink>
               </p:column>
@@ -79,16 +81,17 @@
               </p:column>
             </p:dataTable>
             <h:panelGrid rendered="#{homepageIvyDevWfBean.tasksSize eq 0}" styleClass="margin-top-10">
-              <h:outputText value="You don't have any active tasks. Go take a coffee break 😊☕"/>
+              <h:outputText value="You don't have any active tasks. Go take a coffee break 😊☕" />
             </h:panelGrid>
           </h:panelGroup>
 
         </p:panelGrid>
-        <h:panelGroup styleClass="card card-w-title custom-card" layout="block" rendered="#{!loginIvyDevWfBean.loggedIn}">
+        <h:panelGroup styleClass="card card-w-title custom-card" layout="block"
+          rendered="#{!loginIvyDevWfBean.loggedIn}">
           <div class="straight-text-icon card-header-title">
-            <h:outputText value="Starts"/>
+            <h:outputText value="Starts" />
           </div>
-          <ui:include src="/includes/components/startsPanel.xhtml"/>
+          <ui:include src="/includes/components/startsPanel.xhtml" />
         </h:panelGroup>
       </h:form>
     </ui:define>

@@ -11,13 +11,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
-import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.ivy.workflow.query.TaskQuery;
+import ch.ivyteam.workflowui.util.TaskUtil;
 import ch.ivyteam.workflowui.util.UserUtil;
 
-public class TasksDataModel extends LazyDataModel<ITask> {
+public class TasksDataModel extends LazyDataModel<TaskModel> {
   private static final long serialVersionUID = -5287014754211109062L;
   private String filter;
   private boolean showAllTasks = UserUtil.isAdmin();
@@ -31,13 +31,13 @@ public class TasksDataModel extends LazyDataModel<ITask> {
   }
 
   @Override
-  public Object getRowKey(ITask task) {
+  public Object getRowKey(TaskModel task) {
     return task.getId();
   }
 
   @Override
-  public ITask getRowData(String rowKey) {
-    for (ITask task : getTaskList()) {
+  public TaskModel getRowData(String rowKey) {
+    for (TaskModel task : getTaskList()) {
       if (task.getId() == Long.valueOf(rowKey)) {
         return task;
       }
@@ -45,15 +45,15 @@ public class TasksDataModel extends LazyDataModel<ITask> {
     return null;
   }
 
-  private List<ITask> getTaskList() {
+  private List<TaskModel> getTaskList() {
     var taskQuery = TaskQuery.create();
     applyFilter(taskQuery);
     checkIfPersonalTasksOrHomepage(taskQuery);
-    return taskQuery.executor().results();
+    return TaskUtil.ITaskToTaskModelList(taskQuery.executor().results());
   }
 
   @Override
-  public List<ITask> load(int first, int pageSize, String sortField, SortOrder sortOrder,
+  public List<TaskModel> load(int first, int pageSize, String sortField, SortOrder sortOrder,
           Map<String, Object> filters) {
     var taskQuery = TaskQuery.create();
 
@@ -63,10 +63,7 @@ public class TasksDataModel extends LazyDataModel<ITask> {
     checkIfPersonalTasksOrHomepage(taskQuery);
     checkIfAdmin(taskQuery);
 
-    List<ITask> tasks = taskQuery
-            .executor()
-            .resultsPaged()
-            .window(first, pageSize);
+    List<TaskModel> tasks = TaskUtil.ITaskToTaskModelList(taskQuery.executor().resultsPaged().window(first, pageSize));
     setRowCount((int) taskQuery.executor().count());
     return tasks;
   }

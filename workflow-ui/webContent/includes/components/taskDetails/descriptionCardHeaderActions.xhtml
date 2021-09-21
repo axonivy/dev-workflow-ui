@@ -7,7 +7,7 @@
   <div class="task-detail-action-container action-container">
 
     <p:link href="#{tasksDetailsIvyDevWfBean.executeTaskLink}" styleClass="task-action-item straight-text-icon"
-      id="taskStartBtn" disabled="#{!tasksDetailsIvyDevWfBean.canBeStarted()}">
+      id="taskStartBtn" disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.canBeStarted()}">
       <h:outputText value="Start" />
       <i class="si si-arrow-right-1 detail-action-icon-bold" />
     </p:link>
@@ -17,7 +17,7 @@
       <i class="si si-arrow-down-1 detail-action-icon"></i>
     </p:commandLink>
     <p:menu id="actionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom">
-      <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.selectedTask.reset()}" update="form, events"
+      <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.reset()}" update="form, events"
         disabled="#{!tasksDetailsIvyDevWfBean.canReset()}" id="taskResetBtn">
         <i class="si si-road-sign-u-turn-left table-icon" />Reset
       </p:menuitem>
@@ -25,7 +25,7 @@
         disabled="#{!tasksDetailsIvyDevWfBean.canPark()}" id="taskParkBtn">
         <i class="si si-road-sign-u-turn-right table-icon" />Park
       </p:menuitem>
-      <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.selectedTask.destroy()}" update="form, events"
+      <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.destroy()}" update="form, events"
         disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.getState().isActive()}" id="taskDestoryBtn">
         <i class="si si-close table-icon" />Destroy
       </p:menuitem>

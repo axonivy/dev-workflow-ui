@@ -13,7 +13,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.primefaces.model.menu.MenuModel;
 
 import ch.ivyteam.ivy.workflow.ICase;
-import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.query.CaseQuery;
 import ch.ivyteam.workflowui.casemap.CaseMapModel;
@@ -21,8 +20,10 @@ import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
 import ch.ivyteam.workflowui.customfield.CustomFieldModel;
 import ch.ivyteam.workflowui.document.DocumentModel;
+import ch.ivyteam.workflowui.tasks.TaskModel;
 import ch.ivyteam.workflowui.util.CaseDetailUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
+import ch.ivyteam.workflowui.util.TaskUtil;
 
 @ManagedBean
 @ViewScoped
@@ -34,7 +35,7 @@ public class CasesDetailsIvyDevWfBean {
   private List<DocumentModel> documents;
   private CaseMapModel caseMapModel;
   private boolean showSystemTasks = false;
-  private List<ITask> tasks;
+  private List<TaskModel> tasks;
   private List<SidestepModel> sidesteps;
   private MenuModel sidestepsMenuModel;
 
@@ -52,7 +53,7 @@ public class CasesDetailsIvyDevWfBean {
     customFields = CustomFieldModel.create(selectedCase);
     documents = DocumentModel.create(selectedCase);
     caseMapModel = CaseMapModel.create(selectedCase);
-    tasks = CaseDetailUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks);
+    tasks = TaskUtil.ITaskToTaskModelList(CaseDetailUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks));
     sidesteps = SidestepUtil.getSidesteps(selectedCase);
     sidestepsMenuModel = SidestepUtil.createMenuModel(sidesteps);
   }
@@ -103,7 +104,7 @@ public class CasesDetailsIvyDevWfBean {
     return Arrays.asList(CREATED, RUNNING).contains(selectedCase.getState());
   }
 
-  public List<ITask> getTasks() {
+  public List<TaskModel> getTasks() {
     return tasks;
   }
 
@@ -113,7 +114,7 @@ public class CasesDetailsIvyDevWfBean {
 
   public void setShowSystemTasks(boolean showSystemTasks) {
     this.showSystemTasks = showSystemTasks;
-    tasks = CaseDetailUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks);
+    tasks = TaskUtil.ITaskToTaskModelList(CaseDetailUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks));
   }
 
   public List<SidestepModel> getSidesteps()
