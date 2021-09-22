@@ -5,7 +5,7 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotLoggedIn}" />
+      <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotAdmin}" />
       <h:form id="clanupForm">
         <p:growl id="growl" showDetail="true" />
         <h:panelGroup styleClass="card card-w-title custom-card cleanup-container" layout="block">

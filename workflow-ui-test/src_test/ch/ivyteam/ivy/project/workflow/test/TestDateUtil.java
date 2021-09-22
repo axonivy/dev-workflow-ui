@@ -31,7 +31,7 @@ public class TestDateUtil {
 
     date = date.minusDays(1);
     prettyTime = getPrettyTime(localDateTimeToDate(date));
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy, HH:mm");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm");
     assertThat(prettyTime).isEqualTo(date.format(formatter));
 
   }

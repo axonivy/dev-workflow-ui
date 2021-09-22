@@ -4,6 +4,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginD
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
+import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.text;
@@ -60,7 +61,7 @@ public class WebTestCleanup {
 
     loginFromTable("testuser");
     open(viewUrl("cleanup.xhtml"));
-    $(By.id("clanupForm:cleanupBtn")).shouldBe(disabled);
+    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menu"));
 
     loginDeveloper();
     open(viewUrl("cleanup.xhtml"));

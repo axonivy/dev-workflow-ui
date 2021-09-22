@@ -40,6 +40,12 @@ public class UserUtil {
     }
   }
 
+  public static void redirectIfNotAdmin() {
+    if (!isAdmin()) {
+      RedirectUtil.redirect();
+    }
+  }
+
   public static boolean checkIfPersonalTasks() {
     return checkCurrentPage("tasks");
   }

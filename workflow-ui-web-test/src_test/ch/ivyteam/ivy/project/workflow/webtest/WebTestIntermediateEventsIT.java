@@ -1,16 +1,17 @@
 package ch.ivyteam.ivy.project.workflow.webtest;
 
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.assertCurrentUrlEndsWith;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
+import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
@@ -27,13 +28,17 @@ public class WebTestIntermediateEventsIT {
     startTestProcess("1750C5211D94569D/testIntermediateEventProcess.ivp");
   }
 
+  @BeforeEach
+  void beforeEach() {
+    loginDeveloper();
+  }
+
   @Test
   public void adminOnly() {
     Selenide.open(viewUrl("home.xhtml"));
     loginFromTable("testuser");
     Selenide.open(viewUrl("intermediateEvents.xhtml"));
-    $(byText("TestIntermediateEvent")).click();
-    assertCurrentUrlEndsWith("intermediateEvents.xhtml");
+    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menu"));
 
     loginDeveloper();
     Selenide.open(viewUrl("intermediateEvents.xhtml"));
@@ -43,7 +48,6 @@ public class WebTestIntermediateEventsIT {
 
   @Test
   public void checkIntermediateElementDetails() {
-    loginDeveloper();
     Selenide.open(viewUrl("intermediateEvents.xhtml"));
     $(byText("TestIntermediateEvent")).click();
     $(By.id("intermediateElementDetailsForm:name")).shouldBe(text("TestIntermediateEvent"));
@@ -52,7 +56,6 @@ public class WebTestIntermediateEventsIT {
 
   @Test
   public void checkIntermediateElementEventsTable() {
-    loginDeveloper();
     Selenide.open(viewUrl("intermediateEvents.xhtml"));
     $(byText("TestIntermediateEvent")).click();
     $(By.id("intermediateElementDetailsForm:id")).shouldBe(visible);

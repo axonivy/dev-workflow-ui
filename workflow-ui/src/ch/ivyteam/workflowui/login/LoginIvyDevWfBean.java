@@ -56,6 +56,10 @@ public class LoginIvyDevWfBean {
     UserUtil.redirectIfNotLoggedIn();
   }
 
+  public void redirectIfNotAdmin() {
+    UserUtil.redirectIfNotAdmin();
+  }
+
   public void redirectToLoginForm() {
     LoginUtil.redirectToLoginForm();
   }
