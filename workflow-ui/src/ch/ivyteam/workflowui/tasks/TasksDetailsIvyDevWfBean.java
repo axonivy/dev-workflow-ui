@@ -9,7 +9,6 @@ import org.primefaces.model.menu.MenuModel;
 
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
-import ch.ivyteam.ivy.workflow.IWorkflowEvent;
 import ch.ivyteam.ivy.workflow.IWorkflowSession;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
 import ch.ivyteam.workflowui.util.TaskUtil;
@@ -43,34 +42,13 @@ public class TasksDetailsIvyDevWfBean {
     return UrlUtil.generateStartFrameUrl(selectedTask.getStartLink());
   }
 
-  public String getDescription() {
-    return selectedTask.getDescription();
-  }
-
-  public String getWorkflowEventInfo(IWorkflowEvent event) {
-    return TaskUtil.getWorkflowEventInfo(event);
-  }
-
   public MenuModel getSidestepsMenuModel() {
     return SidestepUtil.createMenuModel(selectedTask.getSidesteps());
   }
-
-  public boolean canBeStarted() {
-    return selectedTask.canBeStarted();
-  }
-
-  public boolean canReset() {
-    return selectedTask.canReset();
-  }
-
   public void reset() {
     var itask = IWorkflowContext.current().findTask(selectedTask.getId());
     itask.reset();
     selectedTask = new TaskModel(itask);
-  }
-
-  public boolean canPark() {
-    return selectedTask.canPark();
   }
 
   public void park() {
@@ -83,14 +61,6 @@ public class TasksDetailsIvyDevWfBean {
     var itask = IWorkflowContext.current().findTask(selectedTask.getId());
     itask.destroy();
     selectedTask = new TaskModel(itask);
-  }
-
-  public boolean isDone() {
-    return selectedTask.isDone();
-  }
-
-  public boolean renderSidestepBtn() {
-    return selectedTask.renderSidestepBtn();
   }
 
   public void expireTask() {

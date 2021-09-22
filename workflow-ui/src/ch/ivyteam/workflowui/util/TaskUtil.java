@@ -8,7 +8,6 @@ import org.primefaces.event.SelectEvent;
 
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
-import ch.ivyteam.ivy.workflow.IWorkflowEvent;
 import ch.ivyteam.workflowui.tasks.TaskModel;
 
 public class TaskUtil {
@@ -20,7 +19,7 @@ public class TaskUtil {
     return task.getName();
   }
 
-  public static List<TaskModel> ITaskToTaskModelList(List<ITask> tasks) {
+  public static List<TaskModel> toTaskModelList(List<ITask> tasks) {
     return tasks.stream().map(TaskModel::new).collect(Collectors.toList());
   }
 
@@ -63,10 +62,6 @@ public class TaskUtil {
       default:
         return "subtract";
     }
-  }
-
-  public static String getWorkflowEventInfo(IWorkflowEvent event){
-    return event.getAdditionalInfo().stream().collect(Collectors.joining(", "));
   }
 
   public static ITask getTaskById(long id) {

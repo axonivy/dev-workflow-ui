@@ -13,7 +13,6 @@ import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
-import ch.ivyteam.ivy.workflow.IWorkflowEvent;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
@@ -39,7 +38,7 @@ public class TaskModel {
   private final String description;
 
   private final WebLink startLink;
-  private final List<IWorkflowEvent> workflowEvents;
+  private final List<WorkflowEventModel> workflowEvents;
   private List<SidestepModel> sidesteps;
 
   public TaskModel(long taskId) {
@@ -63,7 +62,7 @@ public class TaskModel {
     this.endTimestamp = task.getEndTimestamp();
     this.description = task.getDescription();
     this.startLink = task.getStartLink();
-    this.workflowEvents = task.getWorkflowEvents();
+    this.workflowEvents = WorkflowEventModel.toList(task.getWorkflowEvents());
     this.sidesteps = SidestepUtil.getSidesteps(task.getCase());
   }
 
@@ -157,7 +156,7 @@ public class TaskModel {
     return (!isDone() && !sidesteps.isEmpty());
   }
 
-  public List<IWorkflowEvent> getWorkflowEvents() {
+  public List<WorkflowEventModel> getWorkflowEvents() {
     return workflowEvents;
   }
 

@@ -49,7 +49,7 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
     var taskQuery = TaskQuery.create();
     applyFilter(taskQuery);
     checkIfPersonalTasksOrHomepage(taskQuery);
-    return TaskUtil.ITaskToTaskModelList(taskQuery.executor().results());
+    return TaskUtil.toTaskModelList(taskQuery.executor().results());
   }
 
   @Override
@@ -63,7 +63,7 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
     checkIfPersonalTasksOrHomepage(taskQuery);
     checkIfAdmin(taskQuery);
 
-    List<TaskModel> tasks = TaskUtil.ITaskToTaskModelList(taskQuery.executor().resultsPaged().window(first, pageSize));
+    List<TaskModel> tasks = TaskUtil.toTaskModelList(taskQuery.executor().resultsPaged().window(first, pageSize));
     setRowCount((int) taskQuery.executor().count());
     return tasks;
   }

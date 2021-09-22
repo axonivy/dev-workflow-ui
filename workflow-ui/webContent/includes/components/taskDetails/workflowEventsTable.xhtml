@@ -11,19 +11,19 @@
       </p:column>
 
       <p:column headerText="Event type" colspan="2">
-        <h:outputText value="#{event.eventKind}" id="eventType"/>
+        <h:outputText value="#{event.eventType}" id="eventType"/>
       </p:column>
 
       <p:column headerText="State" sortBy="#{event.taskState}">
         <h:outputText value="#{event.taskState}" id="eventState"/>
       </p:column>
 
-      <p:column headerText="Author" sortBy="#{event.userName}">
-        <jc:user user="#{event.user}" id="eventAuthor"/>
+      <p:column headerText="Author" sortBy="#{event.author.displayName}">
+        <jc:user user="#{event.author}" id="eventAuthor"/>
       </p:column>
 
       <p:column headerText="Content">
-        <h:outputText value="#{tasksDetailsIvyDevWfBean.getWorkflowEventInfo(event)}" id="eventInfo"/>
+        <h:outputText value="#{event.additionalInfo}" id="eventInfo"/>
       </p:column>
     </p:dataTable>
 </ui:composition>

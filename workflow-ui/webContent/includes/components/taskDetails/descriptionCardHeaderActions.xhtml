@@ -13,31 +13,31 @@
     </p:link>
 
     <p:commandLink value="Actions" class="task-actions-link straight-text-icon" id="taskActionsBtn"
-      disabled="#{tasksDetailsIvyDevWfBean.isDone()}">
+      disabled="#{tasksDetailsIvyDevWfBean.selectedTask.done}">
       <i class="si si-arrow-down-1 detail-action-icon"></i>
     </p:commandLink>
     <p:menu id="actionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom">
       <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.reset()}" update="form, events"
-        disabled="#{!tasksDetailsIvyDevWfBean.canReset()}" id="taskResetBtn">
+        disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.canReset()}" id="taskResetBtn">
         <i class="si si-road-sign-u-turn-left table-icon" />Reset
       </p:menuitem>
       <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.park()}" update="form, events"
-        disabled="#{!tasksDetailsIvyDevWfBean.canPark()}" id="taskParkBtn">
+        disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.canPark()}" id="taskParkBtn">
         <i class="si si-road-sign-u-turn-right table-icon" />Park
       </p:menuitem>
       <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.destroy()}" update="form, events"
-        disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.getState().isActive()}" id="taskDestoryBtn">
+        disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.state.active}" id="taskDestoryBtn">
         <i class="si si-close table-icon" />Destroy
       </p:menuitem>
       <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.expireTask}" update="form, events"
-        disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.getState().isActive()}"
+        disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.state.active}"
         rendered="#{engineModeIvyDevWfBean.demoOrDesigner}" id="taskExpireBtn">
         <i class="si si-alarm-bell-timer table-icon" />Expire now
       </p:menuitem>
     </p:menu>
 
     <p:commandLink value="Sidesteps" class="sidesteps-button straight-text-icon" id="sidestepsBtn"
-      rendered="#{tasksDetailsIvyDevWfBean.renderSidestepBtn()}">
+      rendered="#{tasksDetailsIvyDevWfBean.selectedTask.renderSidestepBtn()}">
       <i class="si si-arrow-down-1 detail-action-icon"></i>
     </p:commandLink>
     <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"

@@ -53,7 +53,7 @@ public class CasesDetailsIvyDevWfBean {
     customFields = CustomFieldModel.create(selectedCase);
     documents = DocumentModel.create(selectedCase);
     caseMapModel = CaseMapModel.create(selectedCase);
-    tasks = TaskUtil.ITaskToTaskModelList(CaseDetailUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks));
+    tasks = TaskUtil.toTaskModelList(CaseDetailUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks));
     sidesteps = SidestepUtil.getSidesteps(selectedCase);
     sidestepsMenuModel = SidestepUtil.createMenuModel(sidesteps);
   }
@@ -114,7 +114,7 @@ public class CasesDetailsIvyDevWfBean {
 
   public void setShowSystemTasks(boolean showSystemTasks) {
     this.showSystemTasks = showSystemTasks;
-    tasks = TaskUtil.ITaskToTaskModelList(CaseDetailUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks));
+    tasks = TaskUtil.toTaskModelList(CaseDetailUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks));
   }
 
   public List<SidestepModel> getSidesteps()
