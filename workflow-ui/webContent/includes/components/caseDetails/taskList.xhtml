@@ -9,17 +9,17 @@
     paginatorPosition="bottom" rows="10" rowsPerPageTemplate="10,20,50" paginator="true" paginatorAlwaysVisible="false"
     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
     <p:column filterBy="#{task.state}" styleClass="icon-row">
-      <h:outputText id="taskState" styleClass="si si-lg si-#{tasksIvyDevWfBean.getStateIcon(task.state)}" />
+      <h:outputText id="taskState" styleClass="si si-lg si-#{task.stateIcon}" />
       <p:tooltip for="taskState" value="State: #{task.state}" position="top" />
     </p:column>
 
     <p:column id="priority" filterBy="#{task.priority}" styleClass="icon-row">
-      <h:outputText id="taskPrio" styleClass="si si-lg si-#{tasksIvyDevWfBean.getPriorityIcon(task.priority)}" />
+      <h:outputText id="taskPrio" styleClass="si si-lg si-#{task.priorityIcon}" />
       <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
     </p:column>
 
     <p:column headerText="Name" filterBy="#{task.name}">
-      <h:outputText id="taskName" value="#{tasksDetailsIvyDevWfBean.getName(task)}" style="color:#212121" />
+      <h:outputText id="taskName" value="#{task.name}"/>
       <p:tooltip for="taskName" value="Task ID: #{task.id}" position="top" />
     </p:column>
 

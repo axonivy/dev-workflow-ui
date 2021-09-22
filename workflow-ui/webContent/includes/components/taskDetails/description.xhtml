@@ -7,21 +7,21 @@
   <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank"
     columnClasses="no-padding-left text-secondary ui-g-6 ui-md-2, ui-g-6 ui-md-4, no-padding-left text-secondary ui-g-6 ui-md-2, ui-g-6 ui-md-4">
     <h:outputText value="Task ID" />
-    <h:outputText id="taskId" value="#{tasksDetailsIvyDevWfBean.selectedTask.getId()}" />
+    <h:outputText id="taskId" value="#{tasksDetailsIvyDevWfBean.selectedTask.id}" />
 
     <h:outputText value="Task name" />
-    <h:outputText value="#{tasksDetailsIvyDevWfBean.getName(tasksDetailsIvyDevWfBean.selectedTask)}" id="taskName" />
+    <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.name}" id="taskName" />
 
     <h:outputText value="Priority" />
     <h:outputText>
-      <i class="si si-#{tasksIvyDevWfBean.getPriorityIcon(tasksDetailsIvyDevWfBean.selectedTask.getPriority())} table-icon" />
-      <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.getPriority()}" id="taskPriority" />
+      <i class="si si-#{tasksDetailsIvyDevWfBean.selectedTask.priorityIcon} table-icon" />
+      <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.priority}" id="taskPriority" />
     </h:outputText>
 
     <h:outputText value="State" />
     <h:outputText>
-      <i class="si si-#{tasksIvyDevWfBean.getStateIcon(tasksDetailsIvyDevWfBean.selectedTask.getState())} table-icon" />
-      <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.getState()}" id="taskState" />
+      <i class="si si-#{tasksDetailsIvyDevWfBean.selectedTask.stateIcon} table-icon" />
+      <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.state}" id="taskState" />
     </h:outputText>
 
     <h:outputText value="Business case" />
@@ -34,22 +34,22 @@
     <jc:user user="#{tasksDetailsIvyDevWfBean.selectedTask.workerUser}" id="workingUser" />
 
     <h:outputText value="Responsible" />
-    <jc:user id="taskResponsible" user="#{tasksDetailsIvyDevWfBean.selectedTask.activator().get()}" />
+    <jc:user id="taskResponsible" user="#{tasksDetailsIvyDevWfBean.selectedTask.activator}" />
 
     <h:outputText value="Created" />
-    <h:outputText value="#{dateTimeIvyDevWfBean.getDateTime(tasksDetailsIvyDevWfBean.selectedTask.getStartTimestamp())}"
+    <h:outputText value="#{dateTimeIvyDevWfBean.getDateTime(tasksDetailsIvyDevWfBean.selectedTask.startTimestamp)}"
       id="createdDate" />
 
     <h:outputText value="Expiry" />
-    <h:outputText value="#{dateTimeIvyDevWfBean.getDetailTime(tasksDetailsIvyDevWfBean.selectedTask.getExpiryTimestamp())}"
+    <h:outputText value="#{dateTimeIvyDevWfBean.getDetailTime(tasksDetailsIvyDevWfBean.selectedTask.expiryTimestamp)}"
       id="expiryDate" />
 
     <h:outputText value="Completed on" />
-    <h:outputText value="#{dateTimeIvyDevWfBean.getDetailTime(tasksDetailsIvyDevWfBean.selectedTask.getEndTimestamp())}"
+    <h:outputText value="#{dateTimeIvyDevWfBean.getDetailTime(tasksDetailsIvyDevWfBean.selectedTask.endTimestamp)}"
       id="completedDate" />
 
     <h:outputText value="Description" />
-    <h:outputText value="#{tasksDetailsIvyDevWfBean.getDescription()}" id="taskDescription" />
+    <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.description}" id="taskDescription" />
   </p:panelGrid>
 
 </ui:composition>

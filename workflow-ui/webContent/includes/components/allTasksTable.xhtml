@@ -19,18 +19,18 @@
     </f:facet>
 
     <p:column filterBy="#{task.state}" styleClass="icon-row" sortBy="#{task.state}">
-      <h:outputText id="taskState" styleClass="si si-lg si-#{tasksIvyDevWfBean.getStateIcon(task.state)}" />
+      <h:outputText id="taskState" styleClass="si si-lg si-#{task.stateIcon}" />
       <p:tooltip for="taskState" value="State: #{task.state}" position="top" />
     </p:column>
 
     <p:column id="priority" filterBy="#{task.priority}" styleClass="icon-row" sortBy="#{task.priority}">
-      <h:outputText id="taskPrio" styleClass="si si-lg si-#{tasksIvyDevWfBean.getPriorityIcon(task.priority)}" />
+      <h:outputText id="taskPrio" styleClass="si si-lg si-#{task.priorityIcon}" />
       <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
     </p:column>
 
     <p:column headerText="Name" filterBy="#{task.name}" sortBy="#{task.name}">
       <h:commandLink action="#{tasksIvyDevWfBean.redirectToTaskDetails(task.id)}">
-        <h:outputText id="taskName" value="#{tasksDetailsIvyDevWfBean.getName(task)}" />
+        <h:outputText id="taskName" value="#{task.name}" />
         <p:tooltip for="taskName" value="Task ID: #{task.id}" position="top" />
       </h:commandLink>
     </p:column>

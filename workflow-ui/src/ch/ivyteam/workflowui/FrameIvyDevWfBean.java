@@ -12,7 +12,7 @@ import ch.ivyteam.ivy.bpm.error.BpmError;
 import ch.ivyteam.ivy.dialog.execution.api.DialogInstance;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
-import ch.ivyteam.workflowui.util.TaskDetailUtil;
+import ch.ivyteam.workflowui.util.TaskUtil;
 import ch.ivyteam.workflowui.util.UrlUtil;
 
 @ViewScoped
@@ -32,7 +32,7 @@ public class FrameIvyDevWfBean {
     var processUrl = UrlUtil.getUrlParameter("url");
     var task = DialogInstance.of(processUrl).task();
     if (StringUtils.isNotBlank(processUrl)) {
-      this.taskName = TaskDetailUtil.getName(task);
+      this.taskName = TaskUtil.getName(task);
       this.sidesteps = SidestepUtil.getSidesteps(task.getCase());
       this.sidestepMenuModel = SidestepUtil.createMenuModel(getSidesteps(), getOriginalUrl());
     }
