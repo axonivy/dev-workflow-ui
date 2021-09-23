@@ -10,7 +10,8 @@ import org.ocpsoft.prettytime.PrettyTime;
 
 public class DateUtil {
   private static final PrettyTime pretty = new PrettyTime();
-  private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm");
+  private static final DateTimeFormatter defaultFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm");
+  private static final DateTimeFormatter detailedFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm:ss");
 
   public static String getPrettyTime(Date date) {
     if (date == null) {
@@ -22,14 +23,23 @@ public class DateUtil {
     if (hoursPassed < 24) {
       return pretty.format(date);
     }
-    return dateThen.format(formatter).toString();
+    return dateThen.format(defaultFormatter).toString();
   }
 
   public static String getDateAndTime(Date date) {
+    return formatDate(date, defaultFormatter);
+  }
+
+  public static String getDetailedDateAndTime(Date date) {
+    return formatDate(date, detailedFormatter);
+  }
+
+  private static String formatDate(Date date, DateTimeFormatter format)
+  {
     if (date == null) {
       return "";
     }
     LocalDateTime localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-    return localDate.format(formatter).toString();
+    return localDate.format(format).toString();
   }
 }
