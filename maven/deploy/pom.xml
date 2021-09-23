@@ -57,8 +57,7 @@
             </goals>
             <configuration>
               <outputDirectory>${project.build.directory}</outputDirectory>
-              <includeArtifactIds>workflow-demos</includeArtifactIds>
-              <includeArtifactIds>connectivity-demos</includeArtifactIds>
+              <includeArtifactIds>workflow-demos,connectivity-demos</includeArtifactIds>
             </configuration>
           </execution>
         </executions>

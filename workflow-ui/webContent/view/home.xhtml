@@ -19,7 +19,7 @@
         <p:panelGrid columns="2" layout="grid" styleClass="custom-grid" columnClasses="ui-g-12 ui-lg-4, ui-g-12 ui-lg-8"
           rendered="#{loginIvyDevWfBean.loggedIn}">
 
-          <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
+          <h:panelGroup id="lastStartsCard" styleClass="card card-w-title custom-card" layout="block">
             <div class="straight-text-icon card-header-title">
               <h:outputText value="Last starts" />
             </div>
@@ -46,7 +46,7 @@
             </h:panelGrid>
           </h:panelGroup>
 
-          <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
+          <h:panelGroup id="activeTasksCard" styleClass="card card-w-title custom-card" layout="block">
             <div class="straight-text-icon card-header-title">
               <h:outputText value="My tasks" />
             </div>

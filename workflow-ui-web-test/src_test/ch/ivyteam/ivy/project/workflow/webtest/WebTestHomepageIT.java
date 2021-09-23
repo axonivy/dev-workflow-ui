@@ -42,15 +42,15 @@ public class WebTestHomepageIT {
     Selenide.open(viewUrl("home.xhtml"));
 
     // cards should be visible when logged in
-    $("#form\\:activeTasks").shouldBe(visible);
-    $("#form\\:lastStarts").shouldBe(visible);
+    $(By.id("form:activeTasksCard")).shouldBe(visible);
+    $(By.id("form:lastStartsCard")).shouldBe(visible);
 
     logout();
 
     // cards should not be visible and starts should appear
-    $("#form\\:activeTasks").shouldNotBe(visible);
-    $("#form\\:lastStarts").shouldNotBe(visible);
-    $(".main-starts-container").shouldBe(visible);
+    $(By.id("form:activeTasksCard")).shouldNotBe(visible);
+    $(By.id("form:lastStartsCard")).shouldNotBe(visible);
+    $(By.className("main-starts-container")).shouldBe(visible);
 
   }
 }

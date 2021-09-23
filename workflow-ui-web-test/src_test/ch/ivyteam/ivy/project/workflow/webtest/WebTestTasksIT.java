@@ -32,13 +32,17 @@ public class WebTestTasksIT {
     open(viewUrl("allTasks.xhtml"));
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldBe(text("Created task of HomePageTestData"));
-    $(".si-information-circle").shouldBe(visible).click();
+    $(By.className("si-information-circle")).shouldBe(visible).click();
     $(By.id("form:taskName")).shouldBe(text("Created task of HomePageTestData"));
+    String taskId = $(By.id("form:taskId")).text();
     $(By.id("form:taskStartBtn")).shouldBe(enabled).click();
     loginFromTable("testuser");
     open(viewUrl("allTasks.xhtml"));
     table = PrimeUi.table(By.id("tasksForm:tasks"));
-    table.row(0).shouldNotBe(text("Created task of HomePageTestData"));
+    if (table.row(0).text().equals("Created task of HomePageTestData")) {
+      $(By.className("si-information-circle")).shouldBe(visible).click();
+      $(By.id("form:taskId")).shouldNotBe(text(taskId));
+    }
   }
 
   @Test

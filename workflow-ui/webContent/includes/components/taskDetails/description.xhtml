@@ -37,15 +37,15 @@
     <jc:user id="taskResponsible" user="#{tasksDetailsIvyDevWfBean.selectedTask.activator}" />
 
     <h:outputText value="Created" />
-    <h:outputText value="#{dateTimeIvyDevWfBean.getDateTime(tasksDetailsIvyDevWfBean.selectedTask.startTimestamp)}"
+    <h:outputText value="#{dateTimeIvyDevWfBean.getDetailedDateAndTime(tasksDetailsIvyDevWfBean.selectedTask.startTimestamp)}"
       id="createdDate" />
 
     <h:outputText value="Expiry" />
-    <h:outputText value="#{dateTimeIvyDevWfBean.getDetailTime(tasksDetailsIvyDevWfBean.selectedTask.expiryTimestamp)}"
+    <h:outputText value="#{dateTimeIvyDevWfBean.getDetailedDateAndTime(tasksDetailsIvyDevWfBean.selectedTask.expiryTimestamp)}"
       id="expiryDate" />
 
     <h:outputText value="Completed on" />
-    <h:outputText value="#{dateTimeIvyDevWfBean.getDetailTime(tasksDetailsIvyDevWfBean.selectedTask.endTimestamp)}"
+    <h:outputText value="#{dateTimeIvyDevWfBean.getDetailedDateAndTime(tasksDetailsIvyDevWfBean.selectedTask.endTimestamp)}"
       id="completedDate" />
 
     <h:outputText value="Description" />

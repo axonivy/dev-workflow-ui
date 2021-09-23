@@ -18,7 +18,7 @@ public class DateTimeIvyDevWfBean {
     return DateUtil.getDateAndTime(date);
   }
 
-  public String getDetailTime(Date date) {
-    return date == null ? "N/A" : DateUtil.getDateAndTime(date);
+  public String getDetailedDateAndTime(Date date) {
+    return date == null ? "N/A" : DateUtil.getDetailedDateAndTime(date);
   }
 }
