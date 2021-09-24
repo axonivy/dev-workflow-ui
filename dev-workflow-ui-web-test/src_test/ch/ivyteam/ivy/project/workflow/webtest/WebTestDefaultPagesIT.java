@@ -24,7 +24,7 @@ public class WebTestDefaultPagesIT {
     loginDeveloper();
     Selenide.open(viewUrl("starts.xhtml"));
     $(By.id("startsForm:filter")).sendKeys("testDefaultPages");
-    $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui-test-data"));
+    $(By.id("startsForm:projectStarts")).shouldHave(text("dev-workflow-ui-test-data"));
     $(byText("testDefaultPages.ivp")).shouldBe(visible).click();
     $(By.id("iFrame")).shouldBe(visible);
     if ($(By.id("iFrame")).is(visible)) {

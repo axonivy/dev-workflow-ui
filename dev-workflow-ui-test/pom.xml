@@ -5,19 +5,19 @@
 
   <parent>
     <groupId>ch.ivyteam.workflow</groupId>
-    <artifactId>workflow-ui-config-iar</artifactId>
+    <artifactId>dev-workflow-ui-config-iar</artifactId>
     <version>${revision}</version>
     <relativePath>../maven/config/iar</relativePath>
   </parent>
 
   <groupId>ch.ivyteam.workflow</groupId>
-  <artifactId>workflow-ui-test</artifactId>
+  <artifactId>dev-workflow-ui-test</artifactId>
   <packaging>iar</packaging>
 
   <dependencies>
     <dependency>
       <groupId>ch.ivyteam.workflow</groupId>
-      <artifactId>workflow-ui</artifactId>
+      <artifactId>dev-workflow-ui</artifactId>
       <version>${revision}</version>
       <type>iar</type>
     </dependency>

@@ -9,12 +9,12 @@
     "processes" : [ {
       "id" : "testdialog1",
       "name" : "TestDialog1",
-      "processToExecute" : "ch.ivyteam.workflow:workflow-ui-test-data:1750C5211D94569D/startTestDialog1.ivp"
+      "processToExecute" : "ch.ivyteam.workflow:dev-workflow-ui-test-data:1750C5211D94569D/startTestDialog1.ivp"
     } ],
     "sidesteps" : [ {
       "id" : "testdialog2",
       "name" : "TestDialog2",
-      "processToExecute" : "ch.ivyteam.workflow:workflow-ui-test-data:1750C5211D94569D/startTestDialog2.ivp"
+      "processToExecute" : "ch.ivyteam.workflow:dev-workflow-ui-test-data:1750C5211D94569D/startTestDialog2.ivp"
     } ]
   }, {
     "id" : "stage_2",
@@ -23,12 +23,12 @@
     "processes" : [ {
       "id" : "homepage_test_data",
       "name" : "HomePageTestData",
-      "processToExecute" : "ch.ivyteam.workflow:workflow-ui-test-data:1750C5211D94569D/HomePageTestData.ivp"
+      "processToExecute" : "ch.ivyteam.workflow:dev-workflow-ui-test-data:1750C5211D94569D/HomePageTestData.ivp"
     } ],
     "sidesteps" : [ {
       "id" : "testdata_stage2_sidestep",
       "name" : "TestData",
-      "processToExecute" : "ch.ivyteam.workflow:workflow-ui-test-data:1750C5211D94569D/TestData.ivp"
+      "processToExecute" : "ch.ivyteam.workflow:dev-workflow-ui-test-data:1750C5211D94569D/TestData.ivp"
     } ]
   } ]
 }

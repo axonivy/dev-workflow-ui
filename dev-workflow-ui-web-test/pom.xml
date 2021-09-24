@@ -5,29 +5,29 @@
 
   <parent>
     <groupId>ch.ivyteam.workflow</groupId>
-    <artifactId>workflow-ui-config-test</artifactId>
+    <artifactId>dev-workflow-ui-config-test</artifactId>
     <version>${revision}</version>
     <relativePath>../maven/config/test</relativePath>
   </parent>
 
   <groupId>ch.ivyteam.workflow</groupId>
-  <artifactId>workflow-ui-web-test</artifactId>
+  <artifactId>dev-workflow-ui-web-test</artifactId>
   <packaging>iar-integration-test</packaging>
 
   <properties>
-    <test.application>workflowuiwebtest</test.application>
+    <test.application>devworkflowuiwebtest</test.application>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>ch.ivyteam.workflow</groupId>
-      <artifactId>workflow-ui</artifactId>
+      <artifactId>dev-workflow-ui</artifactId>
       <version>${revision}</version>
       <type>iar</type>
     </dependency>
     <dependency>
       <groupId>ch.ivyteam.workflow</groupId>
-      <artifactId>workflow-ui-test-data</artifactId>
+      <artifactId>dev-workflow-ui-test-data</artifactId>
       <version>${revision}</version>
       <type>iar</type>
     </dependency>
@@ -84,7 +84,7 @@
               <outputDirectory>${basedir}/../maven/config/target/ivyEngine/webapps/ivy/WEB-INF/lib/</outputDirectory>
               <resources>
                 <resource>
-                  <directory>${basedir}/../maven/workflow-ui-jar/target/</directory>
+                  <directory>${basedir}/../maven/dev-workflow-ui-jar/target/</directory>
                   <includes>
                       <include>*.jar</include>
                   </includes>

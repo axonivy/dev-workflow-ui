@@ -21,15 +21,15 @@ import ch.ivyteam.workflowui.util.UserUtil;
 
 public class WorkflowUiUtil {
   public static String pmvName() {
-    return System.getProperty("test.engine.pmv", "workflow-ui");
+    return System.getProperty("test.engine.pmv", "dev-workflow-ui");
   }
 
   public static void startTestProcess(String pathToIvp) {
-    Selenide.open(EngineUrl.createProcessUrl("/workflow-ui-test-data/" + pathToIvp));
+    Selenide.open(EngineUrl.createProcessUrl("/dev-workflow-ui-test-data/" + pathToIvp));
   }
 
   public static void startTestCaseMap(String path) {
-    Selenide.open(EngineUrl.createCaseMapUrl("/workflow-ui-test-data/" + path));
+    Selenide.open(EngineUrl.createCaseMapUrl("/dev-workflow-ui-test-data/" + path));
   }
 
   public static String viewUrl(String page) {

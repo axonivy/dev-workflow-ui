@@ -116,7 +116,7 @@ Mn0 f12 outLink DefaultFramePage.ivp #txt
 Mn0 f12 inParamDecl '<String relativeUrl,Number runningTaskId> param;' #txt
 Mn0 f12 actionCode 'import ch.ivyteam.ivy.application.IApplication;
 
-ch.ivyteam.ivy.request.IHttpResponse.current().sendRedirect(IApplication.current().getContextPath()+"/faces/view/workflow-ui/frame.xhtml?taskUrl="+param.relativeUrl);
+ch.ivyteam.ivy.request.IHttpResponse.current().sendRedirect(IApplication.current().getContextPath()+"/faces/view/dev-workflow-ui/frame.xhtml?taskUrl="+param.relativeUrl);
 ' #txt
 Mn0 f12 requestEnabled true #txt
 Mn0 f12 triggerEnabled false #txt

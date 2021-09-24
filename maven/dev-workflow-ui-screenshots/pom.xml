@@ -3,13 +3,13 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>ch.ivyteam.workflow</groupId>
-  <artifactId>workflow-ui-jar</artifactId>
+  <artifactId>dev-workflow-ui-screenshots</artifactId>
   <version>${revision}</version>
   <packaging>pom</packaging>
 
   <parent>
     <groupId>ch.ivyteam.workflow</groupId>
-    <artifactId>workflow-ui-config</artifactId>
+    <artifactId>dev-workflow-ui-config</artifactId>
     <version>${revision}</version>
     <relativePath>../config</relativePath>
   </parent>
@@ -28,8 +28,8 @@
         <version>3.1.0</version>
         <executions>
           <execution>
-            <id>jar</id>
-            <phase>package</phase>
+            <id>zip</id>
+            <phase>integration-test</phase>
             <goals>
               <goal>single</goal>
             </goals>

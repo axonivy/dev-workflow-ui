@@ -2,21 +2,21 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>ch.ivyteam.workflow</groupId>
-    <artifactId>workflow-ui-config</artifactId>
+    <artifactId>dev-workflow-ui-config</artifactId>
     <version>${revision}</version>
     <relativePath>maven/config</relativePath>
   </parent>
-  <artifactId>workflow-ui-module</artifactId>
+  <artifactId>dev-workflow-ui-module</artifactId>
   <packaging>pom</packaging>
 
   <modules>
-    <module>workflow-ui</module>
-    <module>maven/workflow-ui-jar</module>
-    <module>workflow-ui-test</module>
-    <module>workflow-ui-test-data</module>
-    <module>workflow-ui-web-test</module>
+    <module>dev-workflow-ui</module>
+    <module>maven/dev-workflow-ui-jar</module>
+    <module>dev-workflow-ui-test</module>
+    <module>dev-workflow-ui-test-data</module>
+    <module>dev-workflow-ui-web-test</module>
     <module>maven/deploy</module>
-    <module>maven/workflow-ui-screenshots</module>
+    <module>maven/dev-workflow-ui-screenshots</module>
   </modules>
 
   <build>

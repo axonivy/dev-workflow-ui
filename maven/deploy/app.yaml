@@ -1,2 +1,2 @@
 StandardProcess:
-  DefaultPages: ch.ivyteam.workflow:workflow-ui
+  DefaultPages: ch.ivyteam.workflow:dev-workflow-ui
