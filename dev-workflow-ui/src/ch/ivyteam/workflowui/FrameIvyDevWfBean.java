@@ -31,10 +31,12 @@ public class FrameIvyDevWfBean {
   public void useTaskInIFrame() {
     var processUrl = UrlUtil.getUrlParameter("url");
     var task = DialogInstance.of(processUrl).task();
-    if (StringUtils.isNotBlank(processUrl)) {
+    if (StringUtils.isNotBlank(processUrl) && task != null) {
       this.taskName = TaskUtil.getName(task);
       this.sidesteps = SidestepUtil.getSidesteps(task.getCase());
       this.sidestepMenuModel = SidestepUtil.createMenuModel(getSidesteps(), getOriginalUrl());
+    } else {
+      this.taskName = "[No Task Name]";
     }
   }
 
@@ -42,8 +44,7 @@ public class FrameIvyDevWfBean {
     String url = UrlUtil.getUrlParameter("taskUrl");
     if (url.startsWith("/")) {
       return url;
-    }
-    else {
+    } else {
       throw BpmError.create("frame:unsupported:url")
               .withMessage("Only relative urls are supported (security reasons)").build();
     }
