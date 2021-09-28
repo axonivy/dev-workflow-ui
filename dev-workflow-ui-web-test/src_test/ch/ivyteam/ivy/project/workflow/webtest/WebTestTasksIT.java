@@ -12,6 +12,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
@@ -22,6 +23,11 @@ import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
 public class WebTestTasksIT {
+
+  @BeforeAll
+  public static void prepare() {
+    startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
+  }
 
   @Test
   public void allTasksOnlyAdmin() {
@@ -121,5 +127,25 @@ public class WebTestTasksIT {
     $("#form\\:taskState").shouldBe(exactText("PARKED"));
     $("#form\\:workingUser\\:userName").shouldBe(exactText($("#sessionUserName").getText()));
     $("#form\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"));
+  }
+
+  @Test
+  public void workflowEventsPermission() {
+    open(viewUrl("home.xhtml"));
+    loginDeveloper();
+    startTestProcess("1750C5211D94569D/TestData.ivp");
+
+    open(viewUrl("allTasks.xhtml"));
+    $(By.className("si-information-circle")).shouldBe(visible).click();
+    $(By.className("case-link")).shouldHave(text("Created case of TestData"));
+    var taskId = $(By.id("form:taskId")).getText();
+    $(By.id("form:events")).shouldBe(visible);
+
+    loginFromTable("testuser");
+    open(viewUrl("allTasks.xhtml"));
+    $(By.className("si-information-circle")).shouldBe(visible).click();
+    $(By.id("form:taskId")).shouldBe(exactText(taskId));
+    $(By.id("form:events")).shouldNotBe(visible);
+    $(By.id("form:noWorkflowEventsPermissionMessage")).shouldBe(visible).shouldHave(text("No permissions"));
   }
 }
