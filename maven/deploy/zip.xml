@@ -7,23 +7,23 @@
   </formats>
   <fileSets>
     <fileSet>
-      <directory>../../workflow-ui/target/</directory>
+      <directory>../../dev-workflow-ui/target/</directory>
       <includes>
-        <include>workflow-ui-*.iar</include>
+        <include>dev-workflow-ui-*.iar</include>
       </includes>
       <outputDirectory></outputDirectory>
     </fileSet>
     <fileSet>
-      <directory>../../workflow-ui-test/target/</directory>
+      <directory>../../dev-workflow-ui-test/target/</directory>
       <includes>
-        <include>workflow-ui-*.iar</include>
+        <include>dev-workflow-ui-*.iar</include>
       </includes>
       <outputDirectory></outputDirectory>
     </fileSet>
     <fileSet>
-      <directory>../../workflow-ui-test-data/target/</directory>
+      <directory>../../dev-workflow-ui-test-data/target/</directory>
       <includes>
-        <include>workflow-ui-*.iar</include>
+        <include>dev-workflow-ui-*.iar</include>
       </includes>
       <outputDirectory></outputDirectory>
     </fileSet>
@@ -31,12 +31,6 @@
       <directory>${project.build.directory}</directory>
       <includes>
         <include>workflow-demos*.iar</include>
-      </includes>
-      <outputDirectory></outputDirectory>
-    </fileSet>
-    <fileSet>
-      <directory>${project.build.directory}</directory>
-      <includes>
         <include>connectivity-demos*.iar</include>
       </includes>
       <outputDirectory></outputDirectory>

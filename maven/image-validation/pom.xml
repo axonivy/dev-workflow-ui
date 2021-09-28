@@ -3,16 +3,16 @@
 
   <parent>
     <groupId>ch.ivyteam.workflow</groupId>
-    <artifactId>workflow-ui-config</artifactId>
+    <artifactId>dev-workflow-ui-config</artifactId>
     <version>${revision}</version>
     <relativePath>../config</relativePath>
   </parent>
 
-  <artifactId>workflow-ui-image-validation</artifactId>
+  <artifactId>dev-workflow-ui-image-validation</artifactId>
 
   <properties>
-    <test.target.dir>${project.basedir}/../../workflow-ui-web-test/target/</test.target.dir>
-    <screenshotArtifactId>workflow-ui-screenshots</screenshotArtifactId>
+    <test.target.dir>${project.basedir}/../../dev-workflow-ui-web-test/target/</test.target.dir>
+    <screenshotArtifactId>dev-workflow-ui-screenshots</screenshotArtifactId>
   </properties>
 
   <dependencies>
@@ -73,7 +73,7 @@
               <goal>generate-html</goal>
             </goals>
             <configuration>
-              <artifactTargetPath>/artifact/workflow-ui-web-test/target/</artifactTargetPath>
+              <artifactTargetPath>/artifact/dev-workflow-ui-web-test/target/</artifactTargetPath>
               <images>
                 <directory>${test.target.dir}docu</directory>
                 <includes>

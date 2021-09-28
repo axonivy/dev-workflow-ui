@@ -16,7 +16,7 @@ classes/
 src_dataClasses/
 src_wsproc/
 
-workflow-ui/lib/
+dev-workflow-ui/lib/
 .flattened-pom.xml
 
-workflow-ui-web-test/build/downloads/
+dev-workflow-ui-web-test/build/downloads/

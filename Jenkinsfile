@@ -50,7 +50,7 @@ pipeline {
               docker.build('maven').inside("--name ${ivyName} --network ${networkName}") {
                 maven cmd: 'clean verify ' +
                       '-Dmaven.test.failure.ignore=true ' +
-                      "-DdeployApplicationName=workflow-ui-${deployApplicationName} " +
+                      "-DdeployApplicationName=dev-workflow-ui-${deployApplicationName} " +
                       "-Dengine.page.url=${params.engineSource} " +
                       "-Dtest.engine.url=http://${ivyName}:8080 " +
                       "-Dselenide.remote=http://${seleniumName}:4444/wd/hub "
@@ -61,11 +61,11 @@ pipeline {
             }
             junit testDataPublishers: [[$class: 'AttachmentPublisher'], [$class: 'StabilityTestDataPublisher']], testResults: '**/target/*-reports/**/*.xml'
             archiveArtifacts '**/target/*.iar'
-            archiveArtifacts '**/target/workflow-ui-jar*.jar'
+            archiveArtifacts '**/target/dev-workflow-ui-jar*.jar'
             archiveArtifacts '**/target/ivyEngine/logs/*'
             archiveArtifacts artifacts: '**/target/selenide/reports/**/*', allowEmptyArchive: true
-            currentBuild.description = "<a href='${BUILD_URL}artifact/workflow-ui-web-test/target/screenshotsCompare.html'>&raquo; Screenshots</a><br>" +
-                                      "<a href='https://nightly.demo.ivyteam.io/workflow-ui-${deployApplicationName}/faces/view/workflow-ui/home.xhtml'>&raquo; Demo</a>"
+            currentBuild.description = "<a href='${BUILD_URL}artifact/dev-workflow-ui-web-test/target/screenshotsCompare.html'>&raquo; Screenshots</a><br>" +
+                                      "<a href='https://nightly.demo.ivyteam.io/dev-workflow-ui-${deployApplicationName}/faces/view/dev-workflow-ui/home.xhtml'>&raquo; Demo</a>"
           } finally {
             sh "docker network rm ${networkName}"
           }
