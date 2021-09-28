@@ -33,6 +33,7 @@ public class WebTestStartsIT {
 
   @BeforeEach
   public void loginAdmin() {
+    Selenide.switchTo().defaultContent();
     WorkflowUiUtil.loginDeveloper();
   }
 
@@ -52,7 +53,7 @@ public class WebTestStartsIT {
     Selenide.open(viewUrl("starts.xhtml"));
     $(By.id("startsForm:filter")).sendKeys("startTestDialog1");
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui-test-data"));
-    $(byText("startTestDialog1.ivp")).shouldBe(visible).click();
+    $(By.className("start-link")).shouldBe(visible).shouldHave(text("startTestDialog1.ivp")).click();
     $(By.id("iFrame")).shouldBe(visible);
 
     Selenide.switchTo().frame("iFrame");
