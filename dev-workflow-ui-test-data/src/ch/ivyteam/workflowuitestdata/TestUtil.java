@@ -2,6 +2,7 @@ package ch.ivyteam.workflowuitestdata;
 
 import static ch.ivyteam.ivy.security.IPermission.CASE_READ_ALL;
 import static ch.ivyteam.ivy.security.IPermission.TASK_READ_ALL;
+import static ch.ivyteam.ivy.security.IPermission.WORKFLOW_EVENT_READ_ALL;
 
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.security.IUser;
@@ -22,6 +23,8 @@ public class TestUtil
       IApplication.current().getSecurityDescriptor().grantPermission(TASK_READ_ALL,
               developerTestUser);
       IApplication.current().getSecurityDescriptor().grantPermission(CASE_READ_ALL,
+              developerTestUser);
+      IApplication.current().getSecurityDescriptor().grantPermission(WORKFLOW_EVENT_READ_ALL,
               developerTestUser);
     });
   }

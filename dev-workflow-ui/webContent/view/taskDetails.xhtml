@@ -28,8 +28,17 @@
             <i class="si si-lg si-synchronize-arrow-clock detail-title-icon" />
             <h:outputText value="Workflow Events" />
           </div>
-          <ui:include src="/includes/components/taskDetails/workflowEventsTable.xhtml" />
+          <h:panelGroup rendered="#{adminIvyDevWfBean.hasWorkflowEventReadPermission()}">
+            <ui:include src="/includes/components/taskDetails/workflowEventsTable.xhtml" />
+          </h:panelGroup>
+          <h:panelGroup id="noWorkflowEventsPermissionMessage" layout="block" rendered="#{!adminIvyDevWfBean.hasWorkflowEventReadPermission()}"
+            styleClass="ui-message ui-staticmessage ui-message-warn">
+            <span class="ui-message-warn-icon"/>
+            <span class="ui-message-warn-summary">No permissions</span>
+            <span class="ui-message-warn-detail">You need Workflow Events read permission in order to see them.</span>
+          </h:panelGroup>
         </h:panelGroup>
+
       </h:form>
     </ui:define>
   </ui:composition>
