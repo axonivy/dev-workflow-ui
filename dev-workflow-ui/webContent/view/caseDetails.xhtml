@@ -2,7 +2,7 @@
   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
   xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
   xmlns:pe="http://primefaces.org/ui/extensions" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-  xmlns:pm="http://primefaces.org/serenity-ivy">
+  xmlns:pm="http://primefaces.org/serenity-ivy" xmlns:jc="http://java.sun.com/jsf/composite/components">
 
 <h:body>
   <f:metadata>
@@ -13,7 +13,7 @@
     <ui:define name="content">
 
       <h:form id="form">
-        <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank case-details-grid grid-smaller-padding"
+        <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank grid-smaller-padding"
           columnClasses="ui-g-12 ui-lg-8, ui-g-12 ui-lg-4">
 
           <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
@@ -83,7 +83,7 @@
               <i class="si si-lg si-cog detail-title-icon" />
               <h:outputText value="Custom fields" />
             </h:panelGroup>
-            <ui:include src="/includes/components/caseDetails/customFields.xhtml" />
+            <jc:customFields id="customFields" customFields="#{casesDetailsIvyDevWfBean.customFields}"/>
           </h:panelGroup>
 
           <h:panelGroup id="documentsContainer" styleClass="card card-w-title custom-card"

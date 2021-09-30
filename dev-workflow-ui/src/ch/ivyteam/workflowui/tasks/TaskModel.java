@@ -17,6 +17,7 @@ import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
+import ch.ivyteam.workflowui.customfield.CustomFieldModel;
 import ch.ivyteam.workflowui.util.TaskUtil;
 
 public class TaskModel {
@@ -40,6 +41,7 @@ public class TaskModel {
   private final WebLink startLink;
   private final List<WorkflowEventModel> workflowEvents;
   private List<SidestepModel> sidesteps;
+  private final List<CustomFieldModel> customFields;
 
   public TaskModel(long taskId) {
     this(IWorkflowContext.current().findTask(taskId));
@@ -64,6 +66,7 @@ public class TaskModel {
     this.startLink = task.getStartLink();
     this.workflowEvents = WorkflowEventModel.toList(task.getWorkflowEvents());
     this.sidesteps = SidestepUtil.getSidesteps(task.getCase());
+    this.customFields = CustomFieldModel.create(task);
   }
 
   public long getId() {
@@ -159,5 +162,10 @@ public class TaskModel {
   public List<WorkflowEventModel> getWorkflowEvents() {
     return workflowEvents;
   }
+
+  public List<CustomFieldModel> getCustomFields() {
+    return customFields;
+  }
+
 
 }

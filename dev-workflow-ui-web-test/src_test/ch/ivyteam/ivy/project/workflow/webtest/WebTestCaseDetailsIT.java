@@ -83,7 +83,7 @@ public class WebTestCaseDetailsIT {
 
   @Test
   public void customFields() throws Exception {
-    Table fieldsTable = PrimeUi.table(By.id("form:customFieldsTable"));
+    Table fieldsTable = PrimeUi.table(By.id("form:customFields:customFieldsTable"));
     fieldsTable.valueAt(1, 0).contains("field 2");
   }
 

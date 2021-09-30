@@ -13,13 +13,13 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.axonivy.ivy.webtest.primeui.widget.Table;
-import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
 public class WebTestTasksIT {
@@ -29,10 +29,16 @@ public class WebTestTasksIT {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
   }
 
+  @BeforeEach
+  void beforeEach() {
+    open(viewUrl("home.xhtml"));
+    loginDeveloper();
+    startTestProcess("1750C5211D94569D/TestData.ivp");
+    open(viewUrl("home.xhtml"));
+  }
+
   @Test
   public void allTasksOnlyAdmin() {
-    startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
-    Selenide.open(viewUrl("home.xhtml"));
     loginDeveloper();
     startTestProcess("1750C5211D94569D/HomePageTestData.ivp");
     open(viewUrl("allTasks.xhtml"));
@@ -53,22 +59,15 @@ public class WebTestTasksIT {
 
   @Test
   public void testTasksTable() throws Exception {
-    open(viewUrl("home.xhtml"));
-    loginDeveloper();
-
     startTestProcess("1750C5211D94569D/TestData.ivp");
     open(viewUrl("allTasks.xhtml"));
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldBe(text("Created task of TestData"));
-
     table.valueAt(0, 1).contains("pause");
   }
 
   @Test
-  public void chceckTaskDetails() {
-    open(viewUrl("home.xhtml"));
-    loginDeveloper();
-    startTestProcess("1750C5211D94569D/TestData.ivp");
+  public void checkTaskDetails() {
     open(viewUrl("allTasks.xhtml"));
 
     $(".si-information-circle").shouldBe(visible).click();
@@ -77,20 +76,16 @@ public class WebTestTasksIT {
     $("#form\\:taskResponsible\\:userName").shouldBe(exactText("Everybody"));
     $("#form\\:taskState").shouldBe(exactText("SUSPENDED"));
 
+    $("#form\\:events\\:0\\:eventType").shouldBe(exactText("EVENT_CREATE_TASK_BY_JOINED_TASKS"));
     $("#form\\:taskActionsBtn").click();
     $("#form\\:taskParkBtn").should(visible).click();
-
     $("#form\\:taskState").shouldBe(exactText("PARKED"));
     $("#form\\:workingUser\\:userName").shouldBe(exactText($("#sessionUserName").getText()));
-
-    $("#form\\:events\\:0\\:eventType").shouldBe(exactText("EVENT_CREATE_TASK_BY_JOINED_TASKS"));
+    $("#form\\:events\\:0\\:eventType").shouldBe(exactText("EVENT_PARK_TASK"));
   }
 
   @Test
   public void testStartTask() {
-    open(viewUrl("home.xhtml"));
-    loginDeveloper();
-    startTestProcess("1750C5211D94569D/TestData.ivp");
     open(viewUrl("allTasks.xhtml"));
 
     $(".si-information-circle").shouldBe(visible).click();
@@ -131,10 +126,6 @@ public class WebTestTasksIT {
 
   @Test
   public void workflowEventsPermission() {
-    open(viewUrl("home.xhtml"));
-    loginDeveloper();
-    startTestProcess("1750C5211D94569D/TestData.ivp");
-
     open(viewUrl("allTasks.xhtml"));
     $(By.className("si-information-circle")).shouldBe(visible).click();
     $(By.className("case-link")).shouldHave(text("Created case of TestData"));
@@ -147,5 +138,15 @@ public class WebTestTasksIT {
     $(By.id("form:taskId")).shouldBe(exactText(taskId));
     $(By.id("form:events")).shouldNotBe(visible);
     $(By.id("form:noWorkflowEventsPermissionMessage")).shouldBe(visible).shouldHave(text("No permissions"));
+  }
+
+  @Test
+  public void taskCustomFields() {
+    open(viewUrl("allTasks.xhtml"));
+    $(By.className("si-information-circle")).shouldBe(visible).click();
+    $(By.className("case-link")).shouldHave(text("Created case of TestData"));
+
+    Table fieldsTable = PrimeUi.table(By.id("form:customFields:customFieldsTable"));
+    fieldsTable.valueAt(1, 0).contains("task test value");
   }
 }

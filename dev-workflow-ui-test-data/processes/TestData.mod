@@ -83,7 +83,9 @@ Ta0 f3 caseData 'case.name=Created case of TestData' #txt
 Ta0 f3 taskData 'TaskA.EXP=new Duration(0, 0, 3, 0, 0, 0)
 TaskA.NAM=Created task of TestData
 TaskA.PRI=1
-TaskA.SCRIPT=import ch.ivyteam.ivy.workflow.document.Path;\r\nimport java.util.Random;\r\n\r\nRandom random \= new Random();\r\nString number \= random.nextInt(100000).toString();\r\n\r\ntask.getCase().documents().add(new Path("Test" + number + "/test.txt")).write().withContentFrom("this is test document");\r\ntask.getCase().documents().add(new Path("Test" + number + "/documentTest.txt")).write().withContentFrom("document. you can read this correctly");' #txt
+TaskA.SCRIPT=import ch.ivyteam.ivy.workflow.document.Path;\r\nimport java.util.Random;\r\n\r\nRandom random \= new Random();\r\nString number \= random.nextInt(100000).toString();\r\n\r\ntask.getCase().documents().add(new Path("Test" + number + "/test.txt")).write().withContentFrom("this is test document");\r\ntask.getCase().documents().add(new Path("Test" + number + "/documentTest.txt")).write().withContentFrom("document. you can read this correctly");
+TaskA.customFields.STRING.field\ 2="test task string"
+TaskA.customFields.STRING.test\ field\ 1="task test value"' #txt
 Ta0 f3 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <elementInfo>
     <language>
