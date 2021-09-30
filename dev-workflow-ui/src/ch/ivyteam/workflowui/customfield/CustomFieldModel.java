@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import ch.ivyteam.ivy.workflow.ICase;
+import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.custom.field.ICustomField;
 
 public class CustomFieldModel {
@@ -14,6 +15,11 @@ public class CustomFieldModel {
 
   public static List<CustomFieldModel> create(ICase selectedCase) {
     return selectedCase.customFields().all().stream()
+            .map(CustomFieldModel::new).collect(Collectors.toList());
+  }
+
+  public static List<CustomFieldModel> create(ITask task) {
+    return task.customFields().all().stream()
             .map(CustomFieldModel::new).collect(Collectors.toList());
   }
 

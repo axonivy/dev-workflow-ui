@@ -13,32 +13,44 @@
     <ui:define name="content">
 
       <h:form id="form">
-        <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
-          <div class="task-detail-title straight-text-icon">
-            <i class="si si-lg si-common-file-text detail-title-icon" />
-            <h:outputText value="Description" />
-            <ui:include src="/includes/components/taskDetails/descriptionCardHeaderActions.xhtml"/>
-          </div>
+        <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-smaller-padding"
+          columnClasses="ui-g-12">
+          <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
+            <div class="task-detail-title straight-text-icon">
+              <i class="si si-lg si-common-file-text detail-title-icon" />
+              <h:outputText value="Description" />
+              <ui:include src="/includes/components/taskDetails/descriptionCardHeaderActions.xhtml" />
+            </div>
 
-          <ui:include src="/includes/components/taskDetails/description.xhtml"/>
-        </h:panelGroup>
-
-        <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
-          <div class="task-detail-title straight-text-icon">
-            <i class="si si-lg si-synchronize-arrow-clock detail-title-icon" />
-            <h:outputText value="Workflow Events" />
-          </div>
-          <h:panelGroup rendered="#{adminIvyDevWfBean.hasWorkflowEventReadPermission()}">
-            <ui:include src="/includes/components/taskDetails/workflowEventsTable.xhtml" />
+            <ui:include src="/includes/components/taskDetails/description.xhtml" />
           </h:panelGroup>
-          <h:panelGroup id="noWorkflowEventsPermissionMessage" layout="block" rendered="#{!adminIvyDevWfBean.hasWorkflowEventReadPermission()}"
-            styleClass="ui-message ui-staticmessage ui-message-warn">
-            <span class="ui-message-warn-icon"/>
-            <span class="ui-message-warn-summary">No permissions</span>
-            <span class="ui-message-warn-detail">You need Workflow Events read permission in order to see them.</span>
-          </h:panelGroup>
-        </h:panelGroup>
 
+          <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
+            <h:panelGroup layout="block" styleClass="task-detail-title straight-text-icon related-element">
+              <i class="si si-lg si-cog detail-title-icon" />
+              <h:outputText value="Custom fields" />
+            </h:panelGroup>
+            <jc:customFields id="customFields" customFields="#{tasksDetailsIvyDevWfBean.selectedTask.customFields}" />
+          </h:panelGroup>
+
+          <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
+            <div class="task-detail-title straight-text-icon">
+              <i class="si si-lg si-synchronize-arrow-clock detail-title-icon" />
+              <h:outputText value="Workflow Events" />
+            </div>
+            <h:panelGroup rendered="#{adminIvyDevWfBean.hasWorkflowEventReadPermission()}">
+              <ui:include src="/includes/components/taskDetails/workflowEventsTable.xhtml" />
+            </h:panelGroup>
+            <h:panelGroup id="noWorkflowEventsPermissionMessage" layout="block"
+              rendered="#{!adminIvyDevWfBean.hasWorkflowEventReadPermission()}"
+              styleClass="ui-message ui-staticmessage ui-message-warn">
+              <span class="ui-message-warn-icon" />
+              <span class="ui-message-warn-summary">No permissions</span>
+              <span class="ui-message-warn-detail">You need Workflow Events read permission in order to see them.</span>
+            </h:panelGroup>
+          </h:panelGroup>
+
+        </p:panelGrid>
       </h:form>
     </ui:define>
   </ui:composition>

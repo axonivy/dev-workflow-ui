@@ -3,27 +3,29 @@
   xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component"
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
-    <p:dataTable id="events" var="event" value="#{tasksDetailsIvyDevWfBean.selectedTask.workflowEvents}" widgetVar="eventsTable"
-      emptyMessage="No Events found with given criteria" reflow="true">
+  <p:dataTable id="events" var="event" value="#{tasksDetailsIvyDevWfBean.selectedTask.workflowEvents}"
+    widgetVar="eventsTable" emptyMessage="No Events found with given criteria" reflow="true" rows="5" paginator="true"
+    paginatorAlwaysVisible="false" paginatorPosition="bottom" sortOrder="descending" sortBy="#{event.eventTimestamp}"
+    paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
 
-      <p:column headerText="Creation Date" sortBy="#{event.eventTimestamp}">
-        <h:outputText value="#{dateTimeIvyDevWfBean.getDateTime(event.eventTimestamp)}"/>
-      </p:column>
+    <p:column headerText="Creation Date" sortBy="#{event.eventTimestamp}">
+      <h:outputText value="#{dateTimeIvyDevWfBean.getDateTime(event.eventTimestamp)}" />
+    </p:column>
 
-      <p:column headerText="Event type" colspan="2">
-        <h:outputText value="#{event.eventType}" id="eventType"/>
-      </p:column>
+    <p:column headerText="Event type" colspan="2">
+      <h:outputText value="#{event.eventType}" id="eventType" />
+    </p:column>
 
-      <p:column headerText="State" sortBy="#{event.taskState}">
-        <h:outputText value="#{event.taskState}" id="eventState"/>
-      </p:column>
+    <p:column headerText="State" sortBy="#{event.taskState}">
+      <h:outputText value="#{event.taskState}" id="eventState" />
+    </p:column>
 
-      <p:column headerText="Author" sortBy="#{event.author.displayName}">
-        <jc:user user="#{event.author}" id="eventAuthor"/>
-      </p:column>
+    <p:column headerText="Author" sortBy="#{event.author.displayName}">
+      <jc:user user="#{event.author}" id="eventAuthor" />
+    </p:column>
 
-      <p:column headerText="Content">
-        <h:outputText value="#{event.additionalInfo}" id="eventInfo"/>
-      </p:column>
-    </p:dataTable>
+    <p:column headerText="Content">
+      <h:outputText value="#{event.additionalInfo}" id="eventInfo" />
+    </p:column>
+  </p:dataTable>
 </ui:composition>
