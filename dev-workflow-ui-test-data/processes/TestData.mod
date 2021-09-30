@@ -53,6 +53,11 @@ Ta0 @EndTask f41 '' #zField
 Ta0 @UserDialog f42 '' #zField
 Ta0 @PushWFArc f43 '' #zField
 Ta0 @PushWFArc f44 '' #zField
+Ta0 @TaskSwitchSimple f45 '' #zField
+Ta0 @EndTask f46 '' #zField
+Ta0 @StartRequest f47 '' #zField
+Ta0 @PushWFArc f48 '' #zField
+Ta0 @TkArc f49 '' #zField
 >Proto Ta0 Ta0 TestData #zField
 Ta0 f0 outLink TestData.ivp #txt
 Ta0 f0 inParamDecl '<> param;' #txt
@@ -237,7 +242,7 @@ Ta0 f19 209 433 30 30 0 16 #rect
 Ta0 f20 337 433 30 30 0 15 #rect
 Ta0 f22 239 448 337 448 #arcP
 Ta0 f21 111 448 209 448 #arcP
-Ta0 f23 665 49 30 30 0 15 #rect
+Ta0 f23 657 49 30 30 0 15 #rect
 Ta0 f24 outLink HomePageTestData.ivp #txt
 Ta0 f24 inParamDecl '<> param;' #txt
 Ta0 f24 requestEnabled true #txt
@@ -271,9 +276,9 @@ Ta0 f25 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     </language>
 </elementInfo>
 ' #txt
-Ta0 f25 537 49 30 30 -50 17 #rect
-Ta0 f26 567 64 665 64 #arcP
-Ta0 f27 439 64 537 64 #arcP
+Ta0 f25 529 49 30 30 -50 17 #rect
+Ta0 f26 559 64 657 64 #arcP
+Ta0 f27 439 64 529 64 #arcP
 Ta0 f28 outLink testDefaultPages.ivp #txt
 Ta0 f28 inParamDecl '<> param;' #txt
 Ta0 f28 requestEnabled true #txt
@@ -292,7 +297,7 @@ Ta0 f28 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 ' #txt
 Ta0 f28 @C|.responsibility Everybody #txt
 Ta0 f28 409 241 30 30 -58 21 #rect
-Ta0 f29 665 241 30 30 0 15 #rect
+Ta0 f29 657 241 30 30 0 15 #rect
 Ta0 f31 dialogId ch.ivyteam.ivy.project.workflow.TestDefaultPage #txt
 Ta0 f31 startMethod start() #txt
 Ta0 f31 requestActionDecl '<> param;' #txt
@@ -305,9 +310,9 @@ Ta0 f31 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     </language>
 </elementInfo>
 ' #txt
-Ta0 f31 496 234 112 44 -52 -7 #rect
-Ta0 f32 439 256 496 256 #arcP
-Ta0 f30 608 256 665 256 #arcP
+Ta0 f31 488 234 112 44 -52 -7 #rect
+Ta0 f32 439 256 488 256 #arcP
+Ta0 f30 600 256 657 256 #arcP
 Ta0 f33 outLink doubleDialog.ivp #txt
 Ta0 f33 inParamDecl '<> param;' #txt
 Ta0 f33 requestEnabled true #txt
@@ -338,8 +343,8 @@ Ta0 f34 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     </language>
 </elementInfo>
 ' #txt
-Ta0 f34 496 330 112 44 -33 -7 #rect
-Ta0 f36 825 337 30 30 0 15 #rect
+Ta0 f34 488 330 112 44 -33 -7 #rect
+Ta0 f36 817 337 30 30 0 15 #rect
 Ta0 f35 dialogId ch.ivyteam.ivy.project.workflow.TestDialog2 #txt
 Ta0 f35 startMethod start() #txt
 Ta0 f35 requestActionDecl '<> param;' #txt
@@ -355,10 +360,10 @@ Ta0 f35 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     </language>
 </elementInfo>
 ' #txt
-Ta0 f35 656 330 112 44 -37 -7 #rect
-Ta0 f37 439 352 496 352 #arcP
-Ta0 f38 608 352 656 352 #arcP
-Ta0 f39 768 352 825 352 #arcP
+Ta0 f35 648 330 112 44 -37 -7 #rect
+Ta0 f37 439 352 488 352 #arcP
+Ta0 f38 600 352 648 352 #arcP
+Ta0 f39 760 352 817 352 #arcP
 Ta0 f40 outLink startTestDialog2.ivp #txt
 Ta0 f40 inParamDecl '<> param;' #txt
 Ta0 f40 requestEnabled true #txt
@@ -379,7 +384,7 @@ Ta0 f40 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 ' #txt
 Ta0 f40 @C|.responsibility Everybody #txt
 Ta0 f40 409 145 30 30 -50 21 #rect
-Ta0 f41 665 145 30 30 0 15 #rect
+Ta0 f41 657 145 30 30 0 15 #rect
 Ta0 f42 dialogId ch.ivyteam.ivy.project.workflow.TestDialog2 #txt
 Ta0 f42 startMethod start() #txt
 Ta0 f42 requestActionDecl '<> param;' #txt
@@ -392,9 +397,48 @@ Ta0 f42 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     </language>
 </elementInfo>
 ' #txt
-Ta0 f42 496 138 112 44 -33 -7 #rect
-Ta0 f43 439 160 496 160 #arcP
-Ta0 f44 608 160 665 160 #arcP
+Ta0 f42 488 138 112 44 -33 -7 #rect
+Ta0 f43 439 160 488 160 #arcP
+Ta0 f44 600 160 657 160 #arcP
+Ta0 f45 actionTable 'out=in1;
+' #txt
+Ta0 f45 caseData 'case.name=Created case of DelayedTask' #txt
+Ta0 f45 taskData 'TaskA.DEL=new Duration(0, 0, 1, 0, 0, 0)
+TaskA.EXP=new Duration(0, 0, 3, 0, 0, 0)
+TaskA.NAM=Created delayed task
+TaskA.PRI=1
+TaskA.SKIP_TASK_LIST=false' #txt
+Ta0 f45 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elementInfo>
+    <language>
+        <name>DelayedTask</name>
+    </language>
+</elementInfo>
+' #txt
+Ta0 f45 881 49 30 30 -27 16 #rect
+Ta0 f46 1009 49 30 30 0 15 #rect
+Ta0 f47 outLink DelayedTestTask.ivp #txt
+Ta0 f47 inParamDecl '<> param;' #txt
+Ta0 f47 requestEnabled true #txt
+Ta0 f47 triggerEnabled false #txt
+Ta0 f47 callSignature DelayedTestTask() #txt
+Ta0 f47 startDescription 'Process which generates some test task and case data' #txt
+Ta0 f47 startCategory TestData #txt
+Ta0 f47 startCustomFields 'cssIcon=si si-time-clock-circle' #txt
+Ta0 f47 taskData 'TaskTriggered.NAM=First task of DelayedTest' #txt
+Ta0 f47 caseData 'businessCase.attach=true
+case.name=First case of DelayTestData' #txt
+Ta0 f47 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elementInfo>
+    <language>
+        <name>DelayedTestTask</name>
+    </language>
+</elementInfo>
+' #txt
+Ta0 f47 @C|.responsibility Everybody #txt
+Ta0 f47 753 49 30 30 -25 17 #rect
+Ta0 f48 911 64 1009 64 #arcP
+Ta0 f49 783 64 881 64 #arcP
 >Proto Ta0 .type workflow.uite.Data #txt
 >Proto Ta0 .processKind NORMAL #txt
 >Proto Ta0 0 0 32 24 18 0 #rect
@@ -435,3 +479,7 @@ Ta0 f40 mainOut f43 tail #connect
 Ta0 f43 head f42 mainIn #connect
 Ta0 f42 mainOut f44 tail #connect
 Ta0 f44 head f41 mainIn #connect
+Ta0 f47 mainOut f49 tail #connect
+Ta0 f49 head f45 in #connect
+Ta0 f45 out f48 tail #connect
+Ta0 f48 head f46 mainIn #connect

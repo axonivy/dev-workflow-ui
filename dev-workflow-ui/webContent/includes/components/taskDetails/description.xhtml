@@ -48,6 +48,10 @@
     <h:outputText value="#{dateTimeIvyDevWfBean.getDetailedDateAndTime(tasksDetailsIvyDevWfBean.selectedTask.expiryTimestamp)}"
       id="expiryDate" />
 
+    <h:outputText value="Delay date" />
+    <h:outputText value="#{dateTimeIvyDevWfBean.getDetailedDateAndTime(tasksDetailsIvyDevWfBean.selectedTask.delayTimestamp)}"
+      id="delayDate" />
+
     <h:outputText value="Completed on" />
     <h:outputText value="#{dateTimeIvyDevWfBean.getDetailedDateAndTime(tasksDetailsIvyDevWfBean.selectedTask.endTimestamp)}"
       id="completedDate" />

@@ -148,4 +148,18 @@ public class WebTestTasksIT {
     Table fieldsTable = PrimeUi.table(By.id("form:customFields:customFieldsTable"));
     fieldsTable.valueAt(1, 0).contains("task test value");
   }
+
+  @Test
+  public void checkDelayedTask() {
+    loginDeveloper();
+    startTestProcess("1750C5211D94569D/DelayedTestTask.ivp");
+    open(viewUrl("allTasks.xhtml"));
+    Table table = PrimeUi.table(By.id("tasksForm:tasks"));
+    table.row(0).shouldBe(text("Created delayed task"));
+    $(By.className("si-information-circle")).shouldBe(visible).click();
+    $(By.id("form:taskName")).shouldBe(exactText("Created delayed task"));
+    $(By.id("form:taskState")).shouldBe(exactText("DELAYED"));
+    $(By.id("form:delayDate")).shouldNotBe(exactText("N/A"));
+    $(By.id("form:taskStartBtn")).shouldHave(cssClass("ui-state-disabled"));
+  }
 }
