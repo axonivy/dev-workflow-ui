@@ -31,6 +31,7 @@ public class TaskModel {
   private final ICase businessCase;
   private final ICase technicalCase;
   private final IUser workerUser;
+  private final String category;
   private final ISecurityMember activator;
   private final String activatorName;
   private final Date startTimestamp;
@@ -57,6 +58,7 @@ public class TaskModel {
     this.businessCase = task.getCase().getBusinessCase();
     this.technicalCase = task.getCase();
     this.workerUser = task.getWorkerUser();
+    this.category = task.getCategory().getName();
     this.activator = task.getActivator();
     this.activatorName = task.getActivatorName();
     this.startTimestamp = task.getStartTimestamp();
@@ -165,6 +167,10 @@ public class TaskModel {
 
   public List<CustomFieldModel> getCustomFields() {
     return customFields;
+  }
+
+  public String getCategory() {
+    return category;
   }
 
 

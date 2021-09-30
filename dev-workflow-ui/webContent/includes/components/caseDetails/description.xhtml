@@ -18,6 +18,9 @@
     <h:outputText value="Creator" />
     <jc:user user="#{casesDetailsIvyDevWfBean.selectedCase.creatorUser}" id="creatorUser" />
 
+    <h:outputText value="Category" />
+    <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.category.name}" id="category" />
+
     <h:outputText value="Created" />
     <h:outputText value="#{dateTimeIvyDevWfBean.getDateTime(casesDetailsIvyDevWfBean.selectedCase.getStartTimestamp())}"
       id="createdDate" />

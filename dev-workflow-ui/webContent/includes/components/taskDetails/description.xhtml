@@ -6,6 +6,7 @@
 
   <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank"
     columnClasses="no-padding-left text-secondary ui-g-6 ui-md-2, ui-g-6 ui-md-4, no-padding-left text-secondary ui-g-6 ui-md-2, ui-g-6 ui-md-4">
+
     <h:outputText value="Task ID" />
     <h:outputText id="taskId" value="#{tasksDetailsIvyDevWfBean.selectedTask.id}" />
 
@@ -29,6 +30,9 @@
 
     <h:outputText value="Technical case" />
     <jc:caseLink case="#{tasksDetailsIvyDevWfBean.selectedTask.case}" id="technicalCase" />
+
+    <h:outputText value="Category" />
+    <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.category}" id="category" />
 
     <h:outputText value="Working user" />
     <jc:user user="#{tasksDetailsIvyDevWfBean.selectedTask.workerUser}" id="workingUser" />

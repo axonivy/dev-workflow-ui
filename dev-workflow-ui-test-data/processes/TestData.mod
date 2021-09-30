@@ -80,7 +80,8 @@ Ta0 f0 81 49 30 30 -25 17 #rect
 Ta0 f3 actionTable 'out=in1;
 ' #txt
 Ta0 f3 caseData 'case.name=Created case of TestData' #txt
-Ta0 f3 taskData 'TaskA.EXP=new Duration(0, 0, 3, 0, 0, 0)
+Ta0 f3 taskData 'TaskA.CATEGORY=TaskWithACategory
+TaskA.EXP=new Duration(0, 0, 3, 0, 0, 0)
 TaskA.NAM=Created task of TestData
 TaskA.PRI=1
 TaskA.SCRIPT=import ch.ivyteam.ivy.workflow.document.Path;\r\nimport java.util.Random;\r\n\r\nRandom random \= new Random();\r\nString number \= random.nextInt(100000).toString();\r\n\r\ntask.getCase().documents().add(new Path("Test" + number + "/test.txt")).write().withContentFrom("this is test document");\r\ntask.getCase().documents().add(new Path("Test" + number + "/documentTest.txt")).write().withContentFrom("document. you can read this correctly");
