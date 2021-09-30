@@ -39,7 +39,6 @@ public class WebTestTasksIT {
 
   @Test
   public void allTasksOnlyAdmin() {
-    loginDeveloper();
     startTestProcess("1750C5211D94569D/HomePageTestData.ivp");
     open(viewUrl("allTasks.xhtml"));
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
@@ -69,12 +68,12 @@ public class WebTestTasksIT {
   @Test
   public void checkTaskDetails() {
     open(viewUrl("allTasks.xhtml"));
-
     $(".si-information-circle").shouldBe(visible).click();
-    $(".case-link").shouldHave(text("Created case of TestData"));
 
+    $(".case-link").shouldHave(text("Created case of TestData"));
     $("#form\\:taskResponsible\\:userName").shouldBe(exactText("Everybody"));
     $("#form\\:taskState").shouldBe(exactText("SUSPENDED"));
+    $(By.id("form:category")).shouldHave(exactText("TaskWithACategory"));
 
     $(By.id("form:workflowEvents:eventsTable:0:eventType")).shouldBe(exactText("EVENT_CREATE_TASK_BY_JOINED_TASKS"));
     $("#form\\:taskActionsBtn").click();

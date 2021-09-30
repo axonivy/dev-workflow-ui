@@ -52,6 +52,7 @@ public class WebTestCaseDetailsIT {
   @Test
   public void caseDetails() {
     $("#form\\:creatorUser\\:userName").shouldBe(exactText("DeveloperTest"));
+    $(By.id("form:category")).shouldHave(exactText("TestData"));
     $("#form\\:caseState").shouldBe(exactText("RUNNING"));
 
     $("#form\\:caseDestroyBtn").should(visible).click();
