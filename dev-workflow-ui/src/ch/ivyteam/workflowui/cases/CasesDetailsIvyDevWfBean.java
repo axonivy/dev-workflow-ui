@@ -21,6 +21,7 @@ import ch.ivyteam.workflowui.casemap.SidestepUtil;
 import ch.ivyteam.workflowui.customfield.CustomFieldModel;
 import ch.ivyteam.workflowui.document.DocumentModel;
 import ch.ivyteam.workflowui.tasks.TaskModel;
+import ch.ivyteam.workflowui.tasks.WorkflowEventModel;
 import ch.ivyteam.workflowui.util.CaseDetailUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.TaskUtil;
@@ -124,5 +125,9 @@ public class CasesDetailsIvyDevWfBean {
 
   public MenuModel getSidestepsMenuModel() {
     return sidestepsMenuModel;
+  }
+
+  public List<WorkflowEventModel> getWorkflowEvents() {
+    return WorkflowEventModel.toList(selectedCase.getWorkflowEvents());
   }
 }

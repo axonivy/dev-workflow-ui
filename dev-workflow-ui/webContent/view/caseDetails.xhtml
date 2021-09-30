@@ -96,6 +96,15 @@
           </h:panelGroup>
 
         </p:panelGrid>
+
+        <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
+          <div class="task-detail-title straight-text-icon">
+            <i class="si si-lg si-synchronize-arrow-clock detail-title-icon" />
+            <h:outputText value="Workflow Events" />
+          </div>
+          <jc:workflowEventsTable id="workflowEvents" workflowEvents="#{casesDetailsIvyDevWfBean.workflowEvents}"/>
+        </h:panelGroup>
+
       </h:form>
 
     </ui:define>

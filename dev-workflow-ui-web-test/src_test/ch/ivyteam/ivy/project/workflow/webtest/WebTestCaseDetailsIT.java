@@ -1,6 +1,7 @@
 package ch.ivyteam.ivy.project.workflow.webtest;
 
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.Condition.exactText;
@@ -42,6 +43,7 @@ public class WebTestCaseDetailsIT {
 
   @BeforeEach
   void beforeEach() {
+    loginDeveloper();
     open(viewUrl("cases.xhtml"));
     $(byText("Created case of TestData")).shouldBe(visible).click();
     $("#form\\:caseName").shouldBe(text("Created case of TestData"));
@@ -93,5 +95,17 @@ public class WebTestCaseDetailsIT {
     File download = $(".document-entry", 0).find("a").shouldBe(visible).download();
     assertThat(download).hasName("test.txt");
     assertThat(Files.readString(download.toPath())).isEqualTo("this is test document");
+  }
+
+  @Test
+  public void workflowEvents() {
+    var caseId = $(By.id("form:caseId")).getText();
+    $(By.id("form:workflowEvents:eventsTable")).shouldBe(visible);
+    loginFromTable("testuser");
+    open(viewUrl("cases.xhtml"));
+    $(By.className("si-information-circle")).shouldBe(visible).click();
+    $(By.id("form:caseId")).shouldBe(exactText(caseId));
+    $(By.id("form:workflowEvents:eventsTable")).shouldNotBe(visible);
+    $(By.id("form:workflowEvents:noPermissionMessage")).shouldBe(visible).shouldHave(text("No permissions"));
   }
 }
