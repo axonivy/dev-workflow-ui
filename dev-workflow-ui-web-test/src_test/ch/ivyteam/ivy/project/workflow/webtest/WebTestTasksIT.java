@@ -76,12 +76,12 @@ public class WebTestTasksIT {
     $("#form\\:taskResponsible\\:userName").shouldBe(exactText("Everybody"));
     $("#form\\:taskState").shouldBe(exactText("SUSPENDED"));
 
-    $("#form\\:events\\:0\\:eventType").shouldBe(exactText("EVENT_CREATE_TASK_BY_JOINED_TASKS"));
+    $(By.id("form:workflowEvents:eventsTable:0:eventType")).shouldBe(exactText("EVENT_CREATE_TASK_BY_JOINED_TASKS"));
     $("#form\\:taskActionsBtn").click();
     $("#form\\:taskParkBtn").should(visible).click();
     $("#form\\:taskState").shouldBe(exactText("PARKED"));
     $("#form\\:workingUser\\:userName").shouldBe(exactText($("#sessionUserName").getText()));
-    $("#form\\:events\\:0\\:eventType").shouldBe(exactText("EVENT_PARK_TASK"));
+    $(By.id("form:workflowEvents:eventsTable:0:eventType")).shouldBe(exactText("EVENT_PARK_TASK"));
   }
 
   @Test
@@ -130,14 +130,14 @@ public class WebTestTasksIT {
     $(By.className("si-information-circle")).shouldBe(visible).click();
     $(By.className("case-link")).shouldHave(text("Created case of TestData"));
     var taskId = $(By.id("form:taskId")).getText();
-    $(By.id("form:events")).shouldBe(visible);
+    $(By.id("form:workflowEvents:eventsTable")).shouldBe(visible);
 
     loginFromTable("testuser");
     open(viewUrl("allTasks.xhtml"));
     $(By.className("si-information-circle")).shouldBe(visible).click();
     $(By.id("form:taskId")).shouldBe(exactText(taskId));
-    $(By.id("form:events")).shouldNotBe(visible);
-    $(By.id("form:noWorkflowEventsPermissionMessage")).shouldBe(visible).shouldHave(text("No permissions"));
+    $(By.id("form:workflowEvents:eventsTable")).shouldNotBe(visible);
+    $(By.id("form:workflowEvents:noPermissionMessage")).shouldBe(visible).shouldHave(text("No permissions"));
   }
 
   @Test

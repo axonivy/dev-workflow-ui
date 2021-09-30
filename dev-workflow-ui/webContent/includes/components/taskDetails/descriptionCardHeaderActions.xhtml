@@ -17,19 +17,19 @@
       <i class="si si-arrow-down-1 detail-action-icon"></i>
     </p:commandLink>
     <p:menu id="actionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom">
-      <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.reset()}" update="form, events"
+      <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.reset()}" update="form"
         disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.canReset()}" id="taskResetBtn">
         <i class="si si-road-sign-u-turn-left table-icon" />Reset
       </p:menuitem>
-      <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.park()}" update="form, events"
+      <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.park()}" update="form"
         disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.canPark()}" id="taskParkBtn">
         <i class="si si-road-sign-u-turn-right table-icon" />Park
       </p:menuitem>
-      <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.destroy()}" update="form, events"
+      <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.destroy()}" update="form"
         disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.state.active}" id="taskDestoryBtn">
         <i class="si si-close table-icon" />Destroy
       </p:menuitem>
-      <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.expireTask}" update="form, events"
+      <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.expireTask}" update="form"
         disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.state.active}"
         rendered="#{engineModeIvyDevWfBean.demoOrDesigner}" id="taskExpireBtn">
         <i class="si si-alarm-bell-timer table-icon" />Expire now
