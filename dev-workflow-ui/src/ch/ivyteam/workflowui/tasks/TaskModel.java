@@ -37,6 +37,7 @@ public class TaskModel {
   private final Date startTimestamp;
   private final Date expiryTimestamp;
   private final Date endTimestamp;
+  private final Date delayTimestamp;
   private final String description;
 
   private final WebLink startLink;
@@ -64,6 +65,7 @@ public class TaskModel {
     this.startTimestamp = task.getStartTimestamp();
     this.expiryTimestamp = task.getExpiryTimestamp();
     this.endTimestamp = task.getEndTimestamp();
+    this.delayTimestamp = task.getDelayTimestamp();
     this.description = task.getDescription();
     this.startLink = task.getStartLink();
     this.workflowEvents = WorkflowEventModel.toList(task.getWorkflowEvents());
@@ -171,6 +173,9 @@ public class TaskModel {
 
   public String getCategory() {
     return category;
+  }
+  public Date getDelayTimestamp() {
+    return delayTimestamp;
   }
 
 
