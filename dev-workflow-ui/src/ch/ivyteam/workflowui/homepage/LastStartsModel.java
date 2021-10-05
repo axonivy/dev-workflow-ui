@@ -8,7 +8,9 @@ import java.util.stream.Stream;
 
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.application.IProcessModel;
+import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.model.value.WebLink;
+import ch.ivyteam.ivy.persistence.PersistentObjectDeletedException;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.IProcessStart;
@@ -42,13 +44,17 @@ public class LastStartsModel {
   }
 
   private static Stream<ICase> getLastStartedCasesOfUser() {
-    var transientCases = IWorkflowSession.current().findCreatedAndResumedWorkTasks(0, 50).stream()
-            .map(ITask::getCase).map(ICase::getBusinessCase);
-
     var casequery = CaseQuery.create().where().isBusinessCase()
             .and(CaseQuery.create().where().currentUserHasStarted().or().currentUserIsOwner())
             .orderBy().startTimestamp().descending();
-    return Stream.concat(transientCases, casequery.executor().results(0, 500).stream());
+    try {
+      var transientCases = IWorkflowSession.current().findCreatedAndResumedWorkTasks(0, 50).stream()
+              .map(ITask::getCase).map(ICase::getBusinessCase);
+      return Stream.concat(transientCases, casequery.executor().results(0, 500).stream());
+    } catch (PersistentObjectDeletedException ex) {
+      Ivy.log().error("Could not get transient cases", ex);
+      return casequery.executor().results(0, 500).stream();
+    }
   }
 
   public List<StartableModel> getStarts() {
