@@ -6,6 +6,7 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
+      <f:event type="preRenderView" listener="#{homepageIvyDevWfBean.redirectIfNoTasksOrLastStarts}" />
       <h:panelGroup layout="block" rendered="#{!loginIvyDevWfBean.loggedIn}"
         styleClass="ui-message ui-staticmessage ui-message-warn">
         <span class="ui-message-warn-icon"></span>
