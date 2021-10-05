@@ -7,8 +7,10 @@ import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.SelectEvent;
 
+import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.workflowui.starts.StartableModel;
 import ch.ivyteam.workflowui.tasks.TasksDataModel;
+import ch.ivyteam.workflowui.util.RedirectUtil;
 
 @ManagedBean
 @ViewScoped
@@ -37,6 +39,13 @@ public class HomepageIvyDevWfBean {
     Object object = event.getObject();
     if (object instanceof StartableModel) {
       ((StartableModel) object).execute();
+    }
+  }
+
+  public void redirectIfNoTasksOrLastStarts() {
+    if (lastStartsModel.getStarts().isEmpty() && tasksDataModel.getSize() < 1 && Ivy.session().getAttribute("redirectedToStarts") == null) {
+      RedirectUtil.redirect("starts.xhtml");
+      Ivy.session().setAttribute("redirectedToStarts", true);
     }
   }
 }

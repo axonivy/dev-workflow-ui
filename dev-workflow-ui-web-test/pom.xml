@@ -125,6 +125,22 @@
             </configuration>
           </execution>
           <execution>
+            <id>homepage-redirect-test</id>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>**/WebTestHomeRedirect.java</include>
+              </includes>
+              <argLine>
+                -Dtest.engine.url=${test.engine.url}
+                -Dtest.engine.app=${test.application}
+                -Dtest.integrated.workflow=true</argLine>
+            </configuration>
+          </execution>
+          <execution>
             <id>test-integrated-artifact</id>
             <phase>integration-test</phase>
             <goals>
