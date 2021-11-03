@@ -511,6 +511,10 @@ body .ui-treetable thead th.ui-state-active, body .ui-datatable thead th.ui-stat
   background-color: white;
 }
 
+.topbar-logo img {
+  width: 200px;
+}
+
 @media only screen and (max-width: 480px) {
   .layout-wrapper.layout-menu-horizontal .layout-topbar .topbar-logo img {
     max-width: 150px;
