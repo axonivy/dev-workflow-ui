@@ -14,6 +14,7 @@ import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
 public class StartsDataModel extends LazyDataModel<CustomPMV> {
   private static final long serialVersionUID = 6607241324190280974L;
   private String filter;
+  private String activeIndex;
 
   public String getFilter() {
     return filter;
@@ -24,10 +25,24 @@ public class StartsDataModel extends LazyDataModel<CustomPMV> {
   }
 
   public List<CustomPMV> getPMVs() {
-    return IApplication.current().getProcessModels().stream()
+    List<CustomPMV> pmvs = IApplication.current().getProcessModels().stream()
             .map(IProcessModel::getReleasedProcessModelVersion)
             .map(IWorkflowProcessModelVersion::of).filter(Objects::nonNull)
-            .map(pmv -> CustomPMV.create(pmv, filter)).filter(Optional::isPresent).map(Optional::get)
-            .collect(Collectors.toList());
+            .map(pmv -> CustomPMV.create(pmv, filter)).filter(Optional::isPresent)
+            .map(Optional::get).collect(Collectors.toList());
+    setActiveIndex(pmvs);
+    return pmvs;
+  }
+
+  private void setActiveIndex(List<CustomPMV> pmvs) {
+    if (pmvs.size() == 1) {
+      activeIndex = "0";
+    } else {
+      activeIndex = "null";
+    }
+  }
+
+  public String getActiveIndex() {
+    return activeIndex;
   }
 }
