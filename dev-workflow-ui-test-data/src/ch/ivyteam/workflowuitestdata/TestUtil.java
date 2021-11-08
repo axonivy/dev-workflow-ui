@@ -14,7 +14,7 @@ public class TestUtil
   public static void makeAdmin()
   {
     String testDevUser = "DeveloperTest";
-    Sudo.exec(() -> {
+    Sudo.run(() -> {
       IUser developerTestUser = IApplication.current().getSecurityContext().users().find(testDevUser);
       if (developerTestUser == null)
       {
