@@ -13,24 +13,26 @@ import ch.ivyteam.ivy.model.value.WebLink;
 import ch.ivyteam.ivy.persistence.PersistentObjectDeletedException;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.ICase;
-import ch.ivyteam.ivy.workflow.IProcessStart;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
 import ch.ivyteam.ivy.workflow.IWorkflowSession;
+import ch.ivyteam.ivy.workflow.businesscase.IBusinessCase;
 import ch.ivyteam.ivy.workflow.query.CaseQuery;
+import ch.ivyteam.ivy.workflow.start.IWebStartable;
 import ch.ivyteam.workflowui.starts.StartableModel;
 
 public class LastStartsModel {
   private List<StartableModel> starts;
 
   public LastStartsModel() {
-    var lastRelativStartLinks = getLastStartedCasesOfUser()
-            .map(ICase::getProcessStart).filter(Objects::nonNull)
-            .map(IProcessStart::getLink).map(WebLink::getRelative)
+    var lastRelativeStartLinks = getLastStartedCasesOfUser()
+            .map(IBusinessCase::getStartedFrom).filter(Objects::nonNull)
+            .map(IWebStartable::getLink).map(WebLink::getRelative)
             .distinct().collect(toList());
 
+    // make sure starts from lastRelativeStartLinks are available in currently deployed projects
     starts = getAllStarts().stream()
-            .filter(start -> lastRelativStartLinks.contains(start.getLink().getRelative())).limit(10)
+            .filter(start -> lastRelativeStartLinks.contains(start.getLink().getRelative())).limit(10)
             .collect(toList());
   }
 
@@ -43,17 +45,17 @@ public class LastStartsModel {
             .collect(toList());
   }
 
-  private static Stream<ICase> getLastStartedCasesOfUser() {
+  private static Stream<IBusinessCase> getLastStartedCasesOfUser() {
     var casequery = CaseQuery.create().where().isBusinessCase()
             .and(CaseQuery.create().where().currentUserHasStarted().or().currentUserIsOwner())
             .orderBy().startTimestamp().descending();
     try {
       var transientCases = IWorkflowSession.current().findCreatedAndResumedWorkTasks(0, 50).stream()
               .map(ITask::getCase).map(ICase::getBusinessCase);
-      return Stream.concat(transientCases, casequery.executor().results(0, 500).stream());
+      return Stream.concat(transientCases, casequery.executor().results(0, 500).stream().map(ICase::getBusinessCase));
     } catch (PersistentObjectDeletedException ex) {
       Ivy.log().error("Could not get transient cases", ex);
-      return casequery.executor().results(0, 500).stream();
+      return casequery.executor().results(0, 500).stream().map(ICase::getBusinessCase);
     }
   }
 
