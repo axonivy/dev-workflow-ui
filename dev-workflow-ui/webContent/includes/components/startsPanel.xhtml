@@ -12,7 +12,8 @@
       </p:inputText>
     </p:outputPanel>
   </f:facet>
-  <p:accordionPanel var="pmv" value="#{processesIvyDevWfBean.PMVs}" id="projectStarts" activeIndex="0" multiple="true">
+  <p:accordionPanel var="pmv" value="#{processesIvyDevWfBean.PMVs}" id="projectStarts"
+   activeIndex="#{processesIvyDevWfBean.startsDataModel.activeIndex}" multiple="true">
     <p:tab id="project" titleStyleClass="straight-text-icon">
       <f:facet name="title">
         <h:outputText id="pmvState" styleClass="si si-#{pmv.stateIcon}" />
