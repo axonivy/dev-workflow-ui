@@ -105,7 +105,6 @@ public class WebTestTasksIT {
   @Test
   public void testStartParkedTask() {
     open(viewUrl("home.xhtml"));
-    loginDeveloper();
     startTestProcess("1750C5211D94569D/TestData.ivp");
     open(viewUrl("allTasks.xhtml"));
 
@@ -151,7 +150,6 @@ public class WebTestTasksIT {
 
   @Test
   public void checkDelayedTask() {
-    loginDeveloper();
     startTestProcess("1750C5211D94569D/DelayedTestTask.ivp");
     open(viewUrl("allTasks.xhtml"));
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
@@ -161,5 +159,16 @@ public class WebTestTasksIT {
     $(By.id("form:taskState")).shouldBe(exactText("DELAYED"));
     $(By.id("form:delayDate")).shouldNotBe(exactText("N/A"));
     $(By.id("form:taskStartBtn")).shouldHave(cssClass("ui-state-disabled"));
+  }
+
+  @Test
+  public void checkCustomResponsibleUser() {
+    startTestProcess("1750C5211D94569D/customUser.ivp");
+    open(viewUrl("allTasks.xhtml"));
+    Table table = PrimeUi.table(By.id("tasksForm:tasks"));
+    table.row(0).shouldBe(text("Created task of CustomUser"));
+    $(By.className("si-information-circle")).shouldBe(visible).click();
+    $(By.id("form:taskName")).shouldBe(exactText("Created task of CustomUser"));
+    $(By.id("form:taskResponsible:userName")).shouldBe(exactText("CustomUserTest"));
   }
 }

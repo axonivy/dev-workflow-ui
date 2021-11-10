@@ -7,7 +7,6 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.model.value.WebLink;
-import ch.ivyteam.ivy.security.ISecurityMember;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.ivy.workflow.ICase;
@@ -15,6 +14,7 @@ import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
+import ch.ivyteam.ivy.workflow.task.IActivator;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
 import ch.ivyteam.workflowui.customfield.CustomFieldModel;
@@ -32,7 +32,7 @@ public class TaskModel {
   private final ICase technicalCase;
   private final IUser workerUser;
   private final String category;
-  private final ISecurityMember activator;
+  private final IActivator activator;
   private final String activatorName;
   private final Date startTimestamp;
   private final Date expiryTimestamp;
@@ -60,7 +60,7 @@ public class TaskModel {
     this.technicalCase = task.getCase();
     this.workerUser = task.getWorkerUser();
     this.category = task.getCategory().getName();
-    this.activator = task.getActivator();
+    this.activator = task.activator();
     this.activatorName = task.getActivatorName();
     this.startTimestamp = task.getStartTimestamp();
     this.expiryTimestamp = task.getExpiryTimestamp();
@@ -101,7 +101,7 @@ public class TaskModel {
     return workerUser;
   }
 
-  public ISecurityMember getActivator() {
+  public IActivator getActivator() {
     return activator;
   }
 
