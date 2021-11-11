@@ -6,7 +6,7 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <h:form id="startsForm">
+      <h:form id="startsForm" onkeypress="if (event.keyCode == 13) { return false; }">
         <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
           <div class="straight-text-icon card-header-title">
             <h:outputText value="Starts"/>

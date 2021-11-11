@@ -8,84 +8,86 @@
    <f:facet name="header">
     <p:outputPanel>
       <p:inputText id="filter" placeholder="Search project or start" value="#{processesIvyDevWfBean.filter}">
-        <p:ajax event="keyup" update="projectStarts" />
+        <p:ajax event="keyup" update="accordionContainer" />
       </p:inputText>
     </p:outputPanel>
   </f:facet>
-  <p:accordionPanel var="pmv" value="#{processesIvyDevWfBean.PMVs}" id="projectStarts"
-   activeIndex="#{processesIvyDevWfBean.startsDataModel.activeIndex}" multiple="true">
-    <p:tab id="project" titleStyleClass="straight-text-icon">
-      <f:facet name="title">
-        <h:outputText id="pmvState" styleClass="si si-#{pmv.stateIcon}" />
-        <p:tooltip for="pmvState" value="#{pmv.state} - #{pmv.versionName}" position="top" />
-        <h:outputText styleClass="starts-project-name" value="#{pmv.projectName}" />
-      </f:facet>
+  <h:panelGroup id="accordionContainer">
+    <p:accordionPanel var="pmv" value="#{processesIvyDevWfBean.PMVs}" id="projectStarts"
+     activeIndex="#{processesIvyDevWfBean.startsDataModel.activeIndex}" multiple="true">
+      <p:tab id="project" titleStyleClass="straight-text-icon">
+        <f:facet name="title">
+          <h:outputText id="pmvState" styleClass="si si-#{pmv.stateIcon}" />
+          <p:tooltip for="pmvState" value="#{pmv.state} - #{pmv.versionName}" position="top" />
+          <h:outputText styleClass="starts-project-name" value="#{pmv.projectName}" />
+        </f:facet>
 
-      <h:panelGroup id="caseMapsTitle" styleClass="margin-top-10" layout="block" rendered="#{!empty pmv.caseMapStarts}">
-        <b><h:outputText value="Case Maps" /></b>
-      </h:panelGroup>
-      <p:repeat value="#{pmv.caseMapStarts}" var="casemapStart">
-        <p:panel id="startElementCaseMap" styleClass="start-element" rendered="#{pmv.active}">
-          <p:commandLink actionListener="#{casemapStart.execute}" styleClass="flex-space start-link width-100">
-            <span class="straight-text-icon">
-              <i class="si si-controls-play margin-right-5"></i>
-              <span>#{casemapStart.displayName}</span>
-            </span>
-            <span>#{casemapStart.description}</span>
-          </p:commandLink>
-          <p:link id="openStartFullscreenBtn" href="#{casemapStart.link}" styleClass="margin-right-10">
-            <i class="si si-expand-6"/>
-          </p:link>
-          <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="left"/>
-        </p:panel>
-      </p:repeat>
-
-      <h:panelGroup id="processesTitle" styleClass="margin-top-10" layout="block" rendered="#{!empty pmv.categories}">
-        <b><h:outputText value="Processes" /></b>
-      </h:panelGroup>
-      <p:repeat value="#{pmv.categories}" var="category">
-        <p:outputPanel id="categoryContainer" styleClass="margin-top-10" rendered="#{!empty category.name}">
-          <i class="#{category.cssIcon} table-icon"></i>
-          <h:outputText id="categoryName" value="#{category.name}"/>
-          <p:tooltip for="categoryName" value="#{category.tooltip}" position="top" />
-        </p:outputPanel>
-
-        <p:repeat value="#{category.starts}" var="start">
-          <p:panel id="startElementProcess" styleClass="start-element" rendered="#{pmv.active}">
-            <p:commandLink action="#{start.execute}" styleClass="flex-space start-link width-100">
+        <h:panelGroup id="caseMapsTitle" styleClass="margin-top-10" layout="block" rendered="#{!empty pmv.caseMapStarts}">
+          <b><h:outputText value="Case Maps" /></b>
+        </h:panelGroup>
+        <p:repeat value="#{pmv.caseMapStarts}" var="casemapStart">
+          <p:panel id="startElementCaseMap" styleClass="start-element" rendered="#{pmv.active}">
+            <p:commandLink actionListener="#{casemapStart.execute}" styleClass="flex-space start-link width-100">
               <span class="straight-text-icon">
-                <i id="startableIcon" class="#{start.icon} margin-right-5"/>
-                <span class="margin-right-10">#{start.displayName}</span>
+                <i class="si si-controls-play margin-right-5"></i>
+                <span>#{casemapStart.displayName}</span>
               </span>
-              <span>#{start.description}</span>
+              <span>#{casemapStart.description}</span>
             </p:commandLink>
-            <p:link id="openStartFullscreenBtn" href="#{start.link}" styleClass="margin-right-10">
-              <i class="si si-expand-6" style=""/>
+            <p:link id="openStartFullscreenBtn" href="#{casemapStart.link}" styleClass="margin-right-10">
+              <i class="si si-expand-6"/>
             </p:link>
             <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="left"/>
           </p:panel>
         </p:repeat>
-      </p:repeat>
 
-      <h:panelGroup id="webServicesTitle" styleClass="margin-top-10" layout="block" rendered="#{!empty pmv.webServiceProcesses}">
-       <b><h:outputText value="Web Services (WSDL)" /></b>
-      </h:panelGroup>
-      <p:repeat value="#{pmv.webServiceProcesses}" var="webServiceProcess">
-        <p:panel id="startElementWebServiceProcess" styleClass="start-element" rendered="#{pmv.active}">
-          <p:link href="#{webServiceProcess.link}" target="_blank" styleClass="flex-space start-link">
-            <span class="straight-text-icon">
-              <i class="si si-network-arrow margin-right-5"></i>
-              <span>#{webServiceProcess.name}</span>
-            </span>
-          </p:link>
-        </p:panel>
-      </p:repeat>
+        <h:panelGroup id="processesTitle" styleClass="margin-top-10" layout="block" rendered="#{!empty pmv.categories}">
+          <b><h:outputText value="Processes" /></b>
+        </h:panelGroup>
+        <p:repeat value="#{pmv.categories}" var="category">
+          <p:outputPanel id="categoryContainer" styleClass="margin-top-10" rendered="#{!empty category.name}">
+            <i class="#{category.cssIcon} table-icon"></i>
+            <h:outputText id="categoryName" value="#{category.name}"/>
+            <p:tooltip for="categoryName" value="#{category.tooltip}" position="top" />
+          </p:outputPanel>
 
-    </p:tab>
-  </p:accordionPanel>
-  <p:outputPanel styleClass="main-starts-container-empty" id="noStartsPanel" rendered="#{processesIvyDevWfBean.PMVs.size() == 0}">
-    <i class="si si-alert-circle custom-icon"/>
-    <h:outputText value="No projects available" id="noProjectsText"/>
-  </p:outputPanel>
+          <p:repeat value="#{category.starts}" var="start">
+            <p:panel id="startElementProcess" styleClass="start-element" rendered="#{pmv.active}">
+              <p:commandLink action="#{start.execute}" styleClass="flex-space start-link width-100">
+                <span class="straight-text-icon">
+                  <i id="startableIcon" class="#{start.icon} margin-right-5"/>
+                  <span class="margin-right-10">#{start.displayName}</span>
+                </span>
+                <span>#{start.description}</span>
+              </p:commandLink>
+              <p:link id="openStartFullscreenBtn" href="#{start.link}" styleClass="margin-right-10">
+                <i class="si si-expand-6"/>
+              </p:link>
+              <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="left"/>
+            </p:panel>
+          </p:repeat>
+        </p:repeat>
+
+        <h:panelGroup id="webServicesTitle" styleClass="margin-top-10" layout="block" rendered="#{!empty pmv.webServiceProcesses}">
+         <b><h:outputText value="Web Services (WSDL)" /></b>
+        </h:panelGroup>
+        <p:repeat value="#{pmv.webServiceProcesses}" var="webServiceProcess">
+          <p:panel id="startElementWebServiceProcess" styleClass="start-element" rendered="#{pmv.active}">
+            <p:link href="#{webServiceProcess.link}" target="_blank" styleClass="flex-space start-link">
+              <span class="straight-text-icon">
+                <i class="si si-network-arrow margin-right-5"></i>
+                <span>#{webServiceProcess.name}</span>
+              </span>
+            </p:link>
+          </p:panel>
+        </p:repeat>
+
+      </p:tab>
+    </p:accordionPanel>
+    <p:outputPanel styleClass="main-starts-container-empty" id="noStartsPanel" rendered="#{processesIvyDevWfBean.PMVs.size() == 0}">
+      <i class="si si-alert-circle custom-icon"/>
+      <h:outputText value="No projects available" id="noProjectsText"/>
+    </p:outputPanel>
+  </h:panelGroup>
 </p:panel>
 </ui:composition>
