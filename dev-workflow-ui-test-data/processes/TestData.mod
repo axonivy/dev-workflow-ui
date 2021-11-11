@@ -58,6 +58,11 @@ Ta0 @EndTask f46 '' #zField
 Ta0 @StartRequest f47 '' #zField
 Ta0 @PushWFArc f48 '' #zField
 Ta0 @TkArc f49 '' #zField
+Ta0 @EndTask f50 '' #zField
+Ta0 @StartRequest f51 '' #zField
+Ta0 @TaskSwitchSimple f52 '' #zField
+Ta0 @PushWFArc f53 '' #zField
+Ta0 @TkArc f54 '' #zField
 >Proto Ta0 Ta0 TestData #zField
 Ta0 f0 outLink TestData.ivp #txt
 Ta0 f0 inParamDecl '<> param;' #txt
@@ -198,7 +203,7 @@ Ta0 f16 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     </language>
 </elementInfo>
 ' #txt
-Ta0 f16 81 337 30 30 0 15 #rect
+Ta0 f16 81 337 30 30 -59 18 #rect
 Ta0 f17 111 352 352 271 #arcP
 Ta0 f17 1 352 352 #addKink
 Ta0 f17 1 0.17787910602871868 0 0 #arcLabel
@@ -439,6 +444,52 @@ Ta0 f47 @C|.responsibility Everybody #txt
 Ta0 f47 753 49 30 30 -25 17 #rect
 Ta0 f48 911 64 1009 64 #arcP
 Ta0 f49 783 64 881 64 #arcP
+Ta0 f50 1009 145 30 30 0 15 #rect
+Ta0 f51 outLink customUser.ivp #txt
+Ta0 f51 inParamDecl '<> param;' #txt
+Ta0 f51 requestEnabled true #txt
+Ta0 f51 triggerEnabled false #txt
+Ta0 f51 callSignature customUser() #txt
+Ta0 f51 startDescription 'Process which generates some test task and case data' #txt
+Ta0 f51 startCategory TestData #txt
+Ta0 f51 startCustomFields 'cssIcon=si si-single-neutral-circle' #txt
+Ta0 f51 taskData 'TaskTriggered.NAM=First task CustomUser' #txt
+Ta0 f51 caseData 'businessCase.attach=true
+case.name=First case CustomUser' #txt
+Ta0 f51 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elementInfo>
+    <language>
+        <name>customUser</name>
+    </language>
+</elementInfo>
+' #txt
+Ta0 f51 @C|.responsibility Everybody #txt
+Ta0 f51 753 145 30 30 -25 17 #rect
+Ta0 f52 actionTable 'out=in1;
+' #txt
+Ta0 f52 caseData 'case.name=Created case CustomUser' #txt
+Ta0 f52 taskData 'TaskA.CATEGORY=TaskWithCustomUser
+TaskA.DESC=This should have custom user
+TaskA.EXPRI=1
+TaskA.EXTYPE=0
+TaskA.NAM=Created task of CustomUser
+TaskA.PRI=1
+TaskA.ROL="CustomUserTest"
+TaskA.SCRIPT=import ch.ivyteam.ivy.workflow.document.Path;\r\nimport java.util.Random;\r\n\r\nRandom random \= new Random();\r\nString number \= random.nextInt(100000).toString();\r\n\r\ntask.getCase().documents().add(new Path("Test" + number + "/test.txt")).write().withContentFrom("this is test document");\r\ntask.getCase().documents().add(new Path("Test" + number + "/documentTest.txt")).write().withContentFrom("document. you can read this correctly");
+TaskA.TYPE=3
+TaskA.customFields.STRING.field\ 2="test task string"
+TaskA.customFields.STRING.test\ field\ 1="task test value"' #txt
+Ta0 f52 @C|.xml '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<elementInfo>
+    <language>
+        <name>TestTask
+</name>
+    </language>
+</elementInfo>
+' #txt
+Ta0 f52 881 145 30 30 -27 16 #rect
+Ta0 f53 911 160 1009 160 #arcP
+Ta0 f54 783 160 881 160 #arcP
 >Proto Ta0 .type workflow.uite.Data #txt
 >Proto Ta0 .processKind NORMAL #txt
 >Proto Ta0 0 0 32 24 18 0 #rect
@@ -483,3 +534,7 @@ Ta0 f47 mainOut f49 tail #connect
 Ta0 f49 head f45 in #connect
 Ta0 f45 out f48 tail #connect
 Ta0 f48 head f46 mainIn #connect
+Ta0 f51 mainOut f54 tail #connect
+Ta0 f54 head f52 in #connect
+Ta0 f52 out f53 tail #connect
+Ta0 f53 head f50 mainIn #connect
