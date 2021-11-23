@@ -1,4 +1,4 @@
-package ch.ivyteam.workflowui;
+package ch.ivyteam.workflowui.tasks;
 
 import org.apache.commons.lang3.StringUtils;
 

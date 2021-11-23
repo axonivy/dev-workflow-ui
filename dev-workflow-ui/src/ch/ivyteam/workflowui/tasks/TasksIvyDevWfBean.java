@@ -6,7 +6,6 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.event.SelectEvent;
 
 import ch.ivyteam.ivy.workflow.ITask;
-import ch.ivyteam.workflowui.TaskLinkModel;
 import ch.ivyteam.workflowui.util.TaskUtil;
 
 @ManagedBean

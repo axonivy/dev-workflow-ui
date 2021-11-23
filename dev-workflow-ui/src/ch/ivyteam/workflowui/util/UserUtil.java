@@ -12,6 +12,7 @@ import javax.faces.context.FacesContext;
 import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.application.IApplication;
+import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.security.IPermission;
 import ch.ivyteam.ivy.security.IRole;
 import ch.ivyteam.ivy.security.ISession;
@@ -19,9 +20,9 @@ import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.workflowui.login.LoginUtil;
 
 public class UserUtil {
+
   public static List<IUser> getUsers() {
-    var users = IApplication.current().getSecurityContext()
-            .users().paged().stream().collect(toList());
+    var users = Ivy.security().users().paged().stream().collect(toList());
     Collections.sort(users, (user1, user2) -> user1.getName().compareToIgnoreCase(user2.getName()));
     return users;
   }

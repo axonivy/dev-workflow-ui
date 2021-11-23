@@ -13,7 +13,7 @@ public class UserComponentModel {
   }
 
   public UserComponentModel(IActivator user) {
-    this.name = user.displayName();
+    this.name = user.name();
     this.cssIcon = getCssIcon(user.get());
   }
 
