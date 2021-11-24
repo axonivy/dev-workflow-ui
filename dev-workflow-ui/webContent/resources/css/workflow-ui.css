@@ -515,6 +515,19 @@ body .ui-treetable thead th.ui-state-active, body .ui-datatable thead th.ui-stat
   width: 200px;
 }
 
+.dialog-button-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 14px;
+  margin-right: 8px;
+}
+
+.dialog-cancel-button {
+  margin-right: 8px;
+  color: #555555;
+}
+
 @media only screen and (max-width: 480px) {
   .layout-wrapper.layout-menu-horizontal .layout-topbar .topbar-logo img {
     max-width: 150px;

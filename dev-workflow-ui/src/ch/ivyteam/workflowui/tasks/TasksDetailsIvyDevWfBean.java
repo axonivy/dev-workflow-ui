@@ -1,18 +1,24 @@
 package ch.ivyteam.workflowui.tasks;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import org.primefaces.model.menu.MenuModel;
 
+import ch.ivyteam.ivy.environment.Ivy;
+import ch.ivyteam.ivy.security.IRole;
+import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.IWorkflowSession;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
+import ch.ivyteam.workflowui.util.RoleUtil;
 import ch.ivyteam.workflowui.util.TaskUtil;
 import ch.ivyteam.workflowui.util.UrlUtil;
+import ch.ivyteam.workflowui.util.UserUtil;
 
 @ManagedBean
 @ViewScoped
@@ -20,6 +26,8 @@ public class TasksDetailsIvyDevWfBean {
 
   private String selectedTaskId;
   private TaskModel selectedTask;
+  private boolean showUsers = true;
+  private String delegateMember;
 
   public String getSelectedTaskId() {
     return selectedTaskId;
@@ -67,6 +75,39 @@ public class TasksDetailsIvyDevWfBean {
     var itask = IWorkflowContext.current().findTask(selectedTask.getId());
     itask.setExpiryTimestamp(new Date());
     selectedTask = new TaskModel(itask);
+  }
+
+  public String getDelegateMember() {
+    return delegateMember;
+  }
+
+  public void setDelegateMember(String delegateMember) {
+    this.delegateMember = delegateMember;
+  }
+
+  public void setShowUsers(boolean showUsers) {
+    this.showUsers = showUsers;
+  }
+
+  public boolean isShowUsers() {
+    return showUsers;
+  }
+
+  public List<IUser> getAllUsers() {
+    return UserUtil.getUsers();
+  }
+
+  public List<IRole> getAllRoles() {
+    return RoleUtil.getRoles();
+  }
+
+  public void delegateTask() {
+    var itask = IWorkflowContext.current().findTask(selectedTask.getId());
+    var member = Ivy.security().members().find(delegateMember);
+    if (member != null) {
+      itask.setActivator(member);
+      selectedTask = new TaskModel(itask);
+    }
   }
 
 }

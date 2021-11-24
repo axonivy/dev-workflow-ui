@@ -21,6 +21,10 @@
         disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.canReset()}" id="taskResetBtn">
         <i class="si si-road-sign-u-turn-left table-icon" />Reset
       </p:menuitem>
+      <p:menuitem onclick="PF('delegateTaskModal').show()" id="taskDelegateBtn"
+        disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.state.active}">
+        <i class="si si-move-to-bottom table-icon" />Delegate
+      </p:menuitem>
       <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.park()}" update="form"
         disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.canPark()}" id="taskParkBtn">
         <i class="si si-road-sign-u-turn-right table-icon" />Park

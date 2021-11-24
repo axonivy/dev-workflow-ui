@@ -169,6 +169,25 @@ public class WebTestTasksIT {
     table.row(0).shouldBe(text("Created task of CustomUser"));
     $(By.className("si-information-circle")).shouldBe(visible).click();
     $(By.id("form:taskName")).shouldBe(exactText("Created task of CustomUser"));
-    $(By.id("form:taskResponsible:userName")).shouldBe(exactText("CustomUserTest"));
+    $(By.id("form:taskResponsible:userName")).shouldHave(text("CustomUserTest"));
+  }
+
+  @Test
+  public void delegateTask() {
+    startTestProcess("1750C5211D94569D/TestData.ivp");
+    open(viewUrl("allTasks.xhtml"));
+    Table table = PrimeUi.table(By.id("tasksForm:tasks"));
+    table.row(0).shouldBe(text("Created task of TestData"));
+    $(By.className("si-information-circle")).shouldBe(visible).click();
+    $(By.id("form:taskName")).shouldBe(exactText("Created task of TestData"));
+    $(By.id("form:taskResponsible:userName")).shouldBe(exactText("Everybody"));
+
+    $(By.id("form:taskActionsBtn")).click();
+    $(By.id("form:taskDelegateBtn")).should(visible).click();
+    $(By.id("delegateTaskDialog")).shouldBe(visible);
+    PrimeUi.selectOne(By.id("delegateTaskForm:selectUserMenu")).selectItemByLabel("testuser");
+
+    $(By.id("delegateTaskForm:delegateProceedButton")).click();
+    $(By.id("form:taskResponsible:userName")).shouldHave(text("testuser"));
   }
 }
