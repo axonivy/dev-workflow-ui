@@ -17,7 +17,11 @@ public class UrlUtil {
   }
 
   public static String evalOriginalPage() {
-    var page = StringUtils.substringAfterLast(getHttpServletRequest().getRequestURI(), "/");
+    HttpServletRequest httpRequest = getHttpServletRequest();
+    if (httpRequest == null) {
+      return null;
+    }
+    var page = StringUtils.substringAfterLast(httpRequest.getRequestURI(), "/");
     var parameter = getHttpServletRequest().getQueryString();
     if (page.equals("frame.xhtml")) {
       page = "allTasks.xhtml";
@@ -29,8 +33,11 @@ public class UrlUtil {
   }
 
   public static HttpServletRequest getHttpServletRequest() {
-    return (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-            .getRequest();
+    FacesContext fc = FacesContext.getCurrentInstance();
+    if (fc == null) {
+      return null;
+    }
+    return (HttpServletRequest) fc.getExternalContext().getRequest();
   }
 
   public static String getUrlParameter(String parameter) {
