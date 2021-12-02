@@ -15,9 +15,11 @@ import ch.ivyteam.workflowui.util.UserUtil;
 @ViewScoped
 public class LoginTableIvyDevWfBean {
   private final List<User> users;
+  private final User currentUser;
 
   public LoginTableIvyDevWfBean() {
     users = UserUtil.getUsers().stream().map(LoginTableIvyDevWfBean::toUser).collect(toList());
+    currentUser = toUser(ISession.current().getSessionUser());
   }
 
   public List<User> getUsers() {
@@ -25,8 +27,10 @@ public class LoginTableIvyDevWfBean {
   }
 
   public User getCurrentUser() {
-    return toUser(ISession.current().getSessionUser());
+    return currentUser;
   }
+
+  public void setCurrentUser(User user) {}
 
   private static User toUser(IUser user) {
     if (user != null) {
