@@ -6,6 +6,7 @@ import ch.ivyteam.ivy.model.value.WebLink;
 import ch.ivyteam.ivy.workflow.category.Category;
 import ch.ivyteam.ivy.workflow.start.IStartCustomFields;
 import ch.ivyteam.ivy.workflow.start.IWebStartable;
+import ch.ivyteam.workflowui.util.LastSessionStarts;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.UrlUtil;
 
@@ -17,16 +18,27 @@ public class StartableModel {
   private final String executeLink;
   private final String icon;
 
-  public StartableModel(IWebStartable startable) {
-    this.displayName = startable.getDisplayName();
-    this.description = startable.getDescription();
-    this.link = startable.getLink();
-    this.category = startable.getCategory();
-    this.executeLink = UrlUtil.generateStartFrameUrl(link);
-    this.icon = getIcon(startable.customFields());
+  public StartableModel(String displayName, String description, WebLink link, Category category,
+          String executeLink, String icon) {
+    this.displayName = displayName;
+    this.description = description;
+    this.link = link;
+    this.category = category;
+    this.executeLink = executeLink;
+    this.icon = icon;
   }
 
-  private String getIcon(IStartCustomFields customFields) {
+  public StartableModel(IWebStartable startable) {
+    this(startable.getDisplayName(),
+      startable.getDescription(),
+      startable.getLink(),
+      startable.getCategory(),
+      UrlUtil.generateStartFrameUrl(startable.getLink()),
+      getIcon(startable.customFields())
+    );
+  }
+
+  private static String getIcon(IStartCustomFields customFields) {
     var customIcon = customFields.value("cssIcon");
     if (StringUtils.isBlank(customIcon)) {
       return "si si-controls-play";
@@ -55,7 +67,9 @@ public class StartableModel {
   }
 
   public void execute() {
-    RedirectUtil.redirect(executeLink);
+    LastSessionStarts.current().add(this);
+    var freshLink = UrlUtil.generateStartFrameUrl(this.getLink());
+    RedirectUtil.redirect(freshLink);
   }
 
   public String getIcon() {

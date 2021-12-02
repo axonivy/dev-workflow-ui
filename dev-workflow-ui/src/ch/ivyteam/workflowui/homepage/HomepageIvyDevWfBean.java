@@ -10,16 +10,15 @@ import org.primefaces.event.SelectEvent;
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.workflowui.starts.StartableModel;
 import ch.ivyteam.workflowui.tasks.TasksDataModel;
+import ch.ivyteam.workflowui.util.LastSessionStarts;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 
 @ManagedBean
 @ViewScoped
 public class HomepageIvyDevWfBean {
-  private LastStartsModel lastStartsModel;
   private TasksDataModel tasksDataModel;
 
   public HomepageIvyDevWfBean() {
-    lastStartsModel = new LastStartsModel();
     tasksDataModel = new TasksDataModel();
   }
 
@@ -28,7 +27,7 @@ public class HomepageIvyDevWfBean {
   }
 
   public List<StartableModel> getLastStarts() {
-    return lastStartsModel.getStarts();
+    return LastSessionStarts.current().getAll();
   }
 
   public int getTasksSize() {
@@ -43,7 +42,7 @@ public class HomepageIvyDevWfBean {
   }
 
   public void redirectIfNoTasksOrLastStarts() {
-    if (lastStartsModel.getStarts().isEmpty() && tasksDataModel.getSize() < 1 && Ivy.session().getAttribute("redirectedToStarts") == null) {
+    if (LastSessionStarts.current().getAll().isEmpty() && tasksDataModel.getSize() < 1 && Ivy.session().getAttribute("redirectedToStarts") == null) {
       RedirectUtil.redirect("starts.xhtml");
       Ivy.session().setAttribute("redirectedToStarts", true);
     }

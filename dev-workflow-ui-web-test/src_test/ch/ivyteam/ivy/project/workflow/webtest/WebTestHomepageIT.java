@@ -5,6 +5,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.logout
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,9 @@ public class WebTestHomepageIT {
     Selenide.open(viewUrl("home.xhtml"));
 
     // start process to create test data
-    startTestProcess("1750C5211D94569D/HomePageTestData.ivp");
+    Selenide.open(viewUrl("starts.xhtml"));
+    $(By.id("startsForm:filter")).setValue("HomePageTestData.ivp");
+    $(byText("HomePageTestData.ivp")).shouldBe(visible).click();
     Selenide.open(viewUrl("home.xhtml"));
 
     Table tasksTable = PrimeUi.table(By.id("form:activeTasks"));

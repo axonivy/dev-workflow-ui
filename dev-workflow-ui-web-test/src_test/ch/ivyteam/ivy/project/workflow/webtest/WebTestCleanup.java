@@ -101,8 +101,8 @@ public class WebTestCleanup {
     casesTable.row(0).shouldBe(text("No Cases found"));
     open(viewUrl("starts.xhtml"));
     $(By.id("startsForm:filter")).sendKeys("workflow-ui-test-data");
-    $("#startsForm\\:projectStarts\\:0\\:caseMapsTitle").shouldNotBe(visible);
-    $("#startsForm\\:projectStarts\\:0\\:processesTitle").shouldNotBe(visible);
+    $("#startsForm\\:projectStarts\\:0\\:caseMapsTitle").shouldBe(visible);
+    $("#startsForm\\:projectStarts\\:0\\:processesTitle").shouldBe(visible);
     $("#startsForm\\:projectStarts\\:0\\:webServicesTitle").shouldBe(visible);
   }
 
