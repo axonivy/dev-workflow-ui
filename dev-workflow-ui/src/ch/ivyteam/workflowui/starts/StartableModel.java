@@ -75,4 +75,24 @@ public class StartableModel {
   public String getIcon() {
     return icon;
   }
+
+  @Override
+  public int hashCode() {
+    return link.hashCode();
+  }
+
+  @Override
+  public boolean equals(Object otherObject) {
+    if (this == otherObject) {
+      return true;
+    }
+    if (otherObject == null) {
+      return false;
+    }
+    if (getClass() != otherObject.getClass()) {
+      return false;
+    }
+    StartableModel otherStartable = (StartableModel) otherObject;
+    return this.link.equals(otherStartable.link);
+  }
 }
