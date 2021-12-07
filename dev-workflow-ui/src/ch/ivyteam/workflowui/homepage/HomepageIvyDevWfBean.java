@@ -1,6 +1,6 @@
 package ch.ivyteam.workflowui.homepage;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -26,7 +26,7 @@ public class HomepageIvyDevWfBean {
     return tasksDataModel;
   }
 
-  public List<StartableModel> getLastStarts() {
+  public Set<StartableModel> getLastStarts() {
     return LastSessionStarts.current().getAll();
   }
 
