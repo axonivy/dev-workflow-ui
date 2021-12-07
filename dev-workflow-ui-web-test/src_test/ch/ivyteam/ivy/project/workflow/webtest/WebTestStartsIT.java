@@ -66,6 +66,14 @@ public class WebTestStartsIT {
   }
 
   @Test
+  public void startNotEmbedInFrame() {
+    Selenide.open(viewUrl("starts.xhtml"));
+    $(By.id("startsForm:filter")).sendKeys("embed in frame");
+    $(By.className("start-link")).shouldBe(visible).shouldHave(text("Do not embed in Frame")).click();
+    $(By.id("testDialogTitle")).shouldBe(visible);
+  }
+
+  @Test
   public void testExecuteDefaultFramePage() {
     Selenide.open(EngineUrl
             .createProcessUrl("/dev-workflow-ui-test-data/1750C5211D94569D/startTestDialog1.ivp?embedInFrame"));
