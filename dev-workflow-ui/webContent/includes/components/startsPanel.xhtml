@@ -60,10 +60,10 @@
                 </span>
                 <span>#{start.description}</span>
               </p:commandLink>
-              <p:link id="openStartFullscreenBtn" href="#{start.link}" styleClass="margin-right-10">
+              <p:link id="openStartFullscreenBtn" href="#{start.link}" styleClass="margin-right-10" rendered="#{start.embedInFrame}">
                 <i class="si si-expand-6"/>
               </p:link>
-              <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="left"/>
+              <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="left" rendered="#{start.embedInFrame}"/>
             </p:panel>
           </p:repeat>
         </p:repeat>

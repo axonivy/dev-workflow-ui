@@ -3,6 +3,7 @@ package ch.ivyteam.ivy.project.workflow.webtest;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.assertCurrentUrlEndsWith;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
@@ -69,7 +70,9 @@ public class WebTestStartsIT {
   public void startNotEmbedInFrame() {
     Selenide.open(viewUrl("starts.xhtml"));
     $(By.id("startsForm:filter")).sendKeys("embed in frame");
-    $(By.className("start-link")).shouldBe(visible).shouldHave(text("Do not embed in Frame")).click();
+    // open in fullscreen link icon shouldn't be visible
+    $(By.className("start-element")).findAll("a").shouldBe(size(1));
+    $(By.className("start-link")).shouldBe(visible, text("Do not embed in Frame")).click();
     $(By.id("testDialogTitle")).shouldBe(visible);
   }
 

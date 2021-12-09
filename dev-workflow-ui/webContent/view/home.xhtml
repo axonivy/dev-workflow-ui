@@ -34,10 +34,10 @@
                     <i class="si si-lg si-controls-play margin-right-10" />
                     <h:outputText value="#{start.displayName}" />
                   </p:commandLink>
-                  <p:link id="openStartFullscreenBtn" href="#{start.link}">
+                  <p:link id="openStartFullscreenBtn" href="#{start.link}" rendered="#{start.embedInFrame}">
                     <i class="si si-expand-6" />
                   </p:link>
-                  <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="top" />
+                  <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="top" rendered="#{start.embedInFrame}" />
                 </div>
               </p:column>
             </p:dataTable>

@@ -67,6 +67,10 @@ public class StartableModel {
     return category;
   }
 
+  public boolean isEmbedInFrame() {
+    return embedInFrame;
+  }
+
   public void execute() {
     LastSessionStarts.current().add(this);
     if (embedInFrame) {
