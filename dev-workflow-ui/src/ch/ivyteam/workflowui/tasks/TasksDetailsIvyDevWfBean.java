@@ -10,11 +10,13 @@ import org.primefaces.model.menu.MenuModel;
 
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.security.IRole;
+import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.IWorkflowSession;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
+import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.RoleUtil;
 import ch.ivyteam.workflowui.util.TaskUtil;
 import ch.ivyteam.workflowui.util.UrlUtil;
@@ -108,6 +110,39 @@ public class TasksDetailsIvyDevWfBean {
       itask.setActivator(member);
       selectedTask = new TaskModel(itask);
     }
+  }
+
+  public void redirectIfCantResume() {
+    if (!canResume()) {
+      RedirectUtil.redirect();
+    }
+  }
+
+  private boolean canResume() {
+    if (selectedTaskId == null) {
+      return false;
+    }
+    var session = ISession.current();
+    if (session == null) {
+      return false;
+    }
+    var user = session.getSessionUser();
+    if (user == null) {
+      return false;
+    }
+    var task = IWorkflowContext.current().findTask(Long.parseLong(selectedTaskId));
+    if (task == null) {
+      return false;
+    }
+    if (UserUtil.isAdmin()) {
+      return true;
+    }
+    var isActivator = task.activator().isMember(user.getUserToken());
+    if (task.getWorkerUser() == null) {
+      return isActivator;
+    }
+    var isWorker = task.getWorkerUser().isMember(user.getUserToken(), false);
+    return isActivator || isWorker;
   }
 
 }

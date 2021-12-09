@@ -142,8 +142,12 @@ public class TaskModel {
   }
 
   public boolean canBeStarted() {
+    var sessionUser = ISession.current().getSessionUser();
+    if (sessionUser == null) {
+      return false;
+    }
     return IWorkflowContext.current().findTask(id)
-            .canUserResumeTask(ISession.current().getSessionUser().getUserToken()).wasSuccessful();
+            .canUserResumeTask(sessionUser.getUserToken()).wasSuccessful();
   }
 
   public boolean canReset() {
