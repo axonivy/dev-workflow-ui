@@ -15,17 +15,17 @@ public class StartableModel {
   private final String description;
   private final WebLink link;
   private final Category category;
-  private final String executeLink;
   private final String icon;
+  private boolean embedInFrame;
 
   public StartableModel(String displayName, String description, WebLink link, Category category,
-          String executeLink, String icon) {
+          String icon, boolean embedInFrame) {
     this.displayName = displayName;
     this.description = description;
     this.link = link;
     this.category = category;
-    this.executeLink = executeLink;
     this.icon = icon;
+    this.embedInFrame = embedInFrame;
   }
 
   public StartableModel(IWebStartable startable) {
@@ -33,8 +33,8 @@ public class StartableModel {
       startable.getDescription(),
       startable.getLink(),
       startable.getCategory(),
-      UrlUtil.generateStartFrameUrl(startable.getLink()),
-      getIcon(startable.customFields())
+      getIcon(startable.customFields()),
+      evaluateEmbedInFrame(startable.customFields().value("embedInFrame"))
     );
   }
 
@@ -44,6 +44,11 @@ public class StartableModel {
       return "si si-controls-play";
     }
     return customIcon;
+  }
+
+  public static boolean evaluateEmbedInFrame(String value) {
+    // default is true
+    return !StringUtils.contains(value, "false");
   }
 
   public String getDescription() {
@@ -62,14 +67,17 @@ public class StartableModel {
     return category;
   }
 
-  public String getExecuteLink() {
-    return executeLink;
+  public boolean isEmbedInFrame() {
+    return embedInFrame;
   }
 
   public void execute() {
     LastSessionStarts.current().add(this);
-    var freshLink = UrlUtil.generateStartFrameUrl(this.getLink());
-    RedirectUtil.redirect(freshLink);
+    if (embedInFrame) {
+      RedirectUtil.redirect(UrlUtil.generateStartFrameUrl(this.getLink()));
+    } else {
+      RedirectUtil.redirect(link.toString());
+    }
   }
 
   public String getIcon() {
