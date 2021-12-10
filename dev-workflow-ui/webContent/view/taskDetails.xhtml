@@ -11,6 +11,7 @@
 
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
+      <f:event type="preRenderView" listener="#{tasksDetailsIvyDevWfBean.redirectIfCantResume}" />
 
       <h:form id="form">
         <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-smaller-padding"
