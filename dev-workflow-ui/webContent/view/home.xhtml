@@ -31,7 +31,7 @@
               <p:column styleClass="last-start-element">
                 <div class="flex-space straight-text-icon">
                   <p:commandLink id="last-start-link" actionListener="#{start.execute}" styleClass="straight-text-icon">
-                    <i class="si si-lg si-controls-play margin-right-10" />
+                    <i class="#{start.icon} margin-right-10" />
                     <h:outputText value="#{start.displayName}" />
                   </p:commandLink>
                   <p:link id="openStartFullscreenBtn" href="#{start.link}" rendered="#{start.embedInFrame}">
