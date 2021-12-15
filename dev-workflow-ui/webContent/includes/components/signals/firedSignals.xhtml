@@ -21,7 +21,7 @@
     <p:column headerText="Sent by" sortBy="#{signal.sentByUser}">
       <jc:user user="#{signal.sentByUser}"/>
     </p:column>
-    <p:column headerText="Destoryed tasks">
+    <p:column headerText="Destroyed tasks">
       <p:repeat var="task" value="#{signal.destroyedTasks}" varStatus="status">
         <jc:taskLink task="#{task}" id="destroyedTask"/>
       </p:repeat>
