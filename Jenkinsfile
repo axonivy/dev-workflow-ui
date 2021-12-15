@@ -13,7 +13,7 @@ pipeline {
   }
 
   parameters {
-    string(name: 'engineSource', defaultValue: 'https://jenkins.ivyteam.io/job/ivy-core_product/job/master/lastSuccessfulBuild/', description: 'Engine page url')
+    string(name: 'engineSource', defaultValue: 'https://jenkins.ivyteam.io/job/ivy-core_product/job/release%252F9.3/lastSuccessfulBuild/', description: 'Engine page url')
     booleanParam(name: 'deployScreenshots', defaultValue: false, description: 'Deploy new screenshots')
   }
 
@@ -91,7 +91,7 @@ pipeline {
 
           archiveArtifacts '**/target/docu/**/*'
           archiveArtifacts '**/target/*.html'
-          testFailsCount = (env.BRANCH_NAME == 'master') ? 1 : 2
+          testFailsCount = (env.BRANCH_NAME == 'release/9.3') ? 1 : 2
           recordIssues filters: [includeType('screenshot-html-plugin:compare-images')], tools: [mavenConsole(name: 'Image')], unstableNewAll: testFailsCount,
           qualityGates: [[threshold: testFailsCount, type: 'TOTAL', unstable: true]]
         }
@@ -100,7 +100,7 @@ pipeline {
 
     stage('verify-manually') {
       when {
-        branch 'master'
+        branch 'release/9.3'
         not {
           triggeredBy 'TimerTrigger'
         }
@@ -127,7 +127,7 @@ pipeline {
       }
       when {
         allOf {
-          branch 'master'
+          branch 'release/9.3'
           expression { return currentBuild.currentResult == 'SUCCESS' || params.deployScreenshots || manualDeploy }
         }
       }
