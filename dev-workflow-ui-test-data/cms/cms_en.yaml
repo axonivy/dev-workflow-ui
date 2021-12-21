@@ -1,0 +1,9 @@
+Categories:
+  actions:
+    cssIcon: si si-cog-double-2
+    name: 1. Actions
+    tooltip: Starts that change or add something
+  exampleDialogs:
+    cssIcon: si si-copy-paste
+    name: 2. Example dialogs
+    tooltip: Example dialogs
