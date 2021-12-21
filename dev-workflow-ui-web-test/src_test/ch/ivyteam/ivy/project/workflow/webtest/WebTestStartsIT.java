@@ -102,7 +102,7 @@ public class WebTestStartsIT {
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui"));
     $(By.id("startsForm:filter")).sendKeys("testData");
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui-test-data"));
-    $(byText("TestData.ivp")).shouldBe(visible).click();
+    $(byText("TestData/TestData.ivp")).shouldBe(visible).click();
 
     open(viewUrl("tasks.xhtml"));
     $(By.id("tasksForm:tasks")).find("TestTask");
@@ -110,7 +110,7 @@ public class WebTestStartsIT {
     assertCurrentUrlEndsWith("tasks.xhtml");
 
     open(viewUrl("home.xhtml"));
-    $(By.id("form:lastStarts")).find(byText("TestData.ivp")).click();
+    $(By.id("form:lastStarts")).find(byText("TestData/TestData.ivp")).click();
     $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menu"));
     assertCurrentUrlEndsWith("home.xhtml");
 
@@ -126,7 +126,7 @@ public class WebTestStartsIT {
   public void testExecuteOnFullscreenPage() {
     Selenide.open(viewUrl("starts.xhtml"));
     $(By.id("startsForm:filter")).sendKeys("startTestDialog1");
-    $(byText("startTestDialog1.ivp")).shouldBe(visible);
+    $(byText("TestData/startTestDialog1.ivp")).shouldBe(visible);
     $(By.className("si-expand-6")).shouldBe(visible).click();
     $(By.className("topbar-logo")).shouldNotBe(visible);
     $(By.id("form:proceed")).shouldBe(visible).click();
