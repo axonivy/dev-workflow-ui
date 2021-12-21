@@ -28,7 +28,7 @@ public class WebTestHomepageIT {
     // start process to create test data
     Selenide.open(viewUrl("starts.xhtml"));
     $(By.id("startsForm:filter")).setValue("HomePageTestData.ivp");
-    $(byText("HomePageTestData.ivp")).shouldBe(visible).click();
+    $(byText("TestData/HomePageTestData.ivp")).shouldBe(visible).click();
     Selenide.open(viewUrl("home.xhtml"));
 
     Table tasksTable = PrimeUi.table(By.id("form:activeTasks"));
