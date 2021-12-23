@@ -25,7 +25,9 @@ body .ui-datatable tbody tr.ui-datatable-even.ui-state-highlight {
 .layout-wrapper.layout-menu-horizontal .layout-sidebar .layout-menu > li > a i.si-house-1 {
   margin-right: 0px;
 }
-
+.layout-sidebar {
+  max-height: 44px;
+}
 
 .active-menu {
   background: var(--accent-light-color);
