@@ -1,9 +1,9 @@
 :root {
-  --accent-color-h: 200;
-  --accent-color-s: 60%;
-  --accent-color-l: 65%;
-  --accent-light-color: hsl(var(--accent-color-h), var(--accent-color-s), 80%);
-  --menuitem-active-bg-color: var(--accent-color);
+  --submenu-bg-color: hsl(195, 100%, 29%);
+  --menuitem-active-bg-color: hsl(200, 60%, 43%);
+  --menuitem-active-text-color: var(--menuitem-text-color);
+  --sub-menuitem-active-bg-color: var(--menuitem-active-bg-color);
+  --sub-menuitem-active-text-color: var(--menuitem-text-color);
   --item-background-hover: rgba(144, 221, 233, 0.24);
 }
 
@@ -27,28 +27,6 @@ body .ui-datatable tbody tr.ui-datatable-even.ui-state-highlight {
 }
 .layout-sidebar {
   max-height: 44px;
-}
-
-.active-menu {
-  background: var(--accent-light-color);
-}
-
-.layout-wrapper .layout-sidebar .layout-menu .active-menu > a,
-.layout-wrapper .layout-sidebar .layout-menu .active-menu > a > i {
-  color: var(--primary-color);
-}
-
-.active-submenu {
-  background: var(--accent-light-color);
-}
-
-.active-submenu > span,
-.layout-sidebar .layout-menu .ripplelink.active-submenu > i{
-  color: var(--primary-color);
-}
-
-.active-submenu:hover > span {
-  color: white;
 }
 
 .table-icon {
