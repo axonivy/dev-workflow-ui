@@ -17,10 +17,10 @@
   <h:outputStylesheet name="css/ripple.css" library="serenity-layout" />
   <h:outputStylesheet name="css/layout-ivy-designer.css" library="serenity-layout" />
   <h:outputStylesheet name="css/cockpit.css" library="serenity-layout" />
-  <h:outputStylesheet name="resources/workflow-layout/horizontal-container.css" />
+  <h:outputStylesheet name="resources/css/horizontal-container.css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <title><ui:insert name="title">#{ivyAdvisor.applicationName} #{ivyAdvisor.versionShort}</ui:insert></title>
-  <link rel="shortcut icon" href="#{resource['images/ivy_favicon_48.png']}" />
+  <link rel="shortcut icon" href="#{resource['ivy-branding:favicon']}" />
 </h:head>
 <h:body>
   <div class="layout-wrapper layout-wrapper-static layout-menu-horizontal">
@@ -34,6 +34,7 @@
     </div>
   </div>
   <h:outputStylesheet name="resources/css/workflow-ui.css" />
+  <h:outputStylesheet name="colors.css" library="ivy-branding" />
 </h:body>
 
 </html>

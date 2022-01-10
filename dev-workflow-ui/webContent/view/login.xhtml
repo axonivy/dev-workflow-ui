@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
   </f:facet>
   <title>Login - #{ivyAdvisor.applicationName} #{ivyAdvisor.versionShort}</title>
-  <link rel="shortcut icon" href="#{resource['ivy-webcontent:resources/images/ivy_favicon_48.png']}" />
+  <link rel="shortcut icon" href="#{resource['ivy-branding:favicon']}" />
   <h:outputScript name="js/layout.js" library="serenity-layout" />
   <h:outputScript name="js/ripple.js" library="serenity-layout" />
 </h:head>
@@ -22,7 +22,7 @@
 <h:body styleClass="login-body">
   <div class="login-panel ui-fluid">
     <div class="login-panel-header">
-      <p:graphicImage name="resources/images/axon_ivy_logo_round.svg" />
+      <p:graphicImage name="logo_small" library="ivy-branding" alt="Logo" />
     </div>
     <div class="login-panel-content">
       <h:form id="loginForm">
@@ -59,6 +59,7 @@
 
   <h:outputStylesheet name="css/layout-ivy.css" library="serenity-layout" />
   <h:outputStylesheet name="css/cockpit.css" library="serenity-layout" />
+  <h:outputStylesheet name="colors.css" library="ivy-branding" />
 </h:body>
 
 </html>
