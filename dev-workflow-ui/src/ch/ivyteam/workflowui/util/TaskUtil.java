@@ -8,6 +8,7 @@ import org.primefaces.event.SelectEvent;
 
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
+import ch.ivyteam.workflowui.starts.CustomFieldsHelper;
 import ch.ivyteam.workflowui.tasks.TaskModel;
 
 public class TaskUtil {
@@ -88,6 +89,22 @@ public class TaskUtil {
 
   public static void executeTask(long id) {
     ITask task = IWorkflowContext.current().findTask(id);
-    RedirectUtil.redirect(UrlUtil.generateStartFrameUrl(task.getStartLink()));
+    RedirectUtil.redirect(createTaskUrl(new TaskModel(task)));
+  }
+
+  public static String createTaskUrl(TaskModel task) {
+    if (shouldOpenInFrame(task)) {
+      return UrlUtil.generateStartFrameUrl(task.getStartLink());
+    }
+    return task.getStartLink().getAbsolute();
+  }
+
+  private static boolean shouldOpenInFrame(TaskModel task) {
+    var taskEmbedField = new CustomFieldsHelper(task).getEmbedInFrame();
+    var caseEmbedField = task.getBusinessCase().customFields().stringField(CustomFieldsHelper.EMBED_IN_FRAME);
+    if (taskEmbedField == null) {
+      return caseEmbedField.getOrDefault("true").equals("true");
+    }
+    return taskEmbedField.getValue().equals("true");
   }
 }

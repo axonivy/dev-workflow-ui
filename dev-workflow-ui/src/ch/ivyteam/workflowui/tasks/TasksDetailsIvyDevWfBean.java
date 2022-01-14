@@ -19,7 +19,6 @@ import ch.ivyteam.workflowui.casemap.SidestepUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.RoleUtil;
 import ch.ivyteam.workflowui.util.TaskUtil;
-import ch.ivyteam.workflowui.util.UrlUtil;
 import ch.ivyteam.workflowui.util.UserUtil;
 
 @ManagedBean
@@ -49,7 +48,7 @@ public class TasksDetailsIvyDevWfBean {
   }
 
   public String getExecuteTaskLink() {
-    return UrlUtil.generateStartFrameUrl(selectedTask.getStartLink());
+    return TaskUtil.createTaskUrl(selectedTask);
   }
 
   public MenuModel getSidestepsMenuModel() {

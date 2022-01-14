@@ -18,6 +18,7 @@ import ch.ivyteam.ivy.workflow.task.IActivator;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
 import ch.ivyteam.workflowui.customfield.CustomFieldModel;
+import ch.ivyteam.workflowui.starts.CustomFieldsHelper;
 import ch.ivyteam.workflowui.util.TaskUtil;
 
 public class TaskModel {
@@ -173,6 +174,11 @@ public class TaskModel {
 
   public List<CustomFieldModel> getCustomFields() {
     return customFields;
+  }
+
+  public CustomFieldModel getCustomField(String customFieldName)
+  {
+    return new CustomFieldsHelper(this).find(customFieldName);
   }
 
   public String getCategory() {

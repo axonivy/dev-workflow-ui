@@ -190,4 +190,17 @@ public class WebTestTasksIT {
     $(By.id("delegateTaskForm:delegateProceedButton")).click();
     $(By.id("form:taskResponsible:userName")).shouldHave(text("testuser"));
   }
+
+  @Test
+  public void customFielEmbedInFrame() {
+    open(viewUrl("starts.xhtml"));
+    $(By.id("startsForm:filter")).sendKeys("embed in frame");
+    $(By.className("start-link")).shouldBe(visible, text("Do not embed in Frame")).click();
+    $(By.id("form:proceed")).shouldBe(visible).click();
+    open(viewUrl("allTasks.xhtml"));
+    Table table = PrimeUi.table(By.id("tasksForm:tasks"));
+    table.row(0).shouldBe(text("notEmbedTask"));
+    $(By.className("si-information-circle")).shouldBe(visible).click();
+    $(By.id("form:taskStartBtn")).shouldNotHave(text("?taskUrl"));
+  }
 }

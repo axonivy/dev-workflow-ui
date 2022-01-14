@@ -34,7 +34,7 @@ public class StartableModel {
       startable.getLink(),
       startable.getCategory(),
       getIcon(startable.customFields()),
-      evaluateEmbedInFrame(startable.customFields().value("embedInFrame"))
+      evaluateEmbedInFrame(startable.customFields().value(CustomFieldsHelper.EMBED_IN_FRAME))
     );
   }
 
