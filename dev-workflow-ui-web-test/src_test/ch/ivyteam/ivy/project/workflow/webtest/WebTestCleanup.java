@@ -82,6 +82,7 @@ public class WebTestCleanup {
     $(By.id("clanupForm:casesAndTasksCheckbox")).shouldBe(enabled).click();
     $(By.id("clanupForm:businessDataCheckbox")).shouldBe(enabled).click();
     $(By.id("clanupForm:identityProviderTokenCheckbox")).shouldBe(enabled).click();
+    $(By.id("clanupForm:dataCaches")).shouldBe(enabled).click();
     $(By.id("clanupForm:cleanupBtn")).shouldNotBe(disabled).click();
     $(By.id("clanupForm:growl_container")).shouldNotBe(visible);
 

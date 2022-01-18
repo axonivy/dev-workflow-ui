@@ -7,6 +7,7 @@ import javax.faces.context.FacesContext;
 
 import ch.ivyteam.di.restricted.DiCore;
 import ch.ivyteam.ivy.business.data.store.restricted.BusinessDataPersistence;
+import ch.ivyteam.ivy.data.cache.restricted.IDataCacheManager;
 import ch.ivyteam.ivy.rest.client.oauth2.SessionTokenStore;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 
@@ -17,6 +18,7 @@ public class CleanupIvyDevWfBean {
   private boolean casesTasksAndDependent = true;
   private boolean businessDataAndSearchIndex = true;
   private boolean identityProviderTokens = true;
+  private boolean dataCaches = true;
 
   public boolean isCasesTasksAndDependent() {
     return casesTasksAndDependent;
@@ -42,6 +44,14 @@ public class CleanupIvyDevWfBean {
     this.identityProviderTokens = identityProviderTokens;
   }
 
+  public boolean isDataCaches() {
+    return dataCaches;
+  }
+
+  public void setDataCaches(boolean dataCaches) {
+    this.dataCaches = dataCaches;
+  }
+
   public void cleanup() {
     if (casesTasksAndDependent) {
       IWorkflowContext.current().cleanup();
@@ -54,6 +64,10 @@ public class CleanupIvyDevWfBean {
     if (identityProviderTokens) {
       SessionTokenStore.clear();
       showMessage("All identity provider tokens have been deleted");
+    }
+    if (dataCaches) {
+      DiCore.getGlobalInjector().getInstance(IDataCacheManager.class).invalidateAll();
+      showMessage("All data caches have been cleared");
     }
   }
 
