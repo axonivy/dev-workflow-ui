@@ -19,6 +19,7 @@
             <p:selectBooleanCheckbox id="casesAndTasksCheckbox" value="#{cleanupIvyDevWfBean.casesTasksAndDependent}" itemLabel="All Cases, Tasks and dependent objects" />
             <p:selectBooleanCheckbox id="businessDataCheckbox" value="#{cleanupIvyDevWfBean.businessDataAndSearchIndex}" itemLabel="All Business Data and the search index" />
             <p:selectBooleanCheckbox id="identityProviderTokenCheckbox" value="#{cleanupIvyDevWfBean.identityProviderTokens}" itemLabel="All identity provider tokens" />
+            <p:selectBooleanCheckbox id="dataCaches" value="#{cleanupIvyDevWfBean.dataCaches}" itemLabel="Data caches" />
             <p:commandButton id="cleanupBtn" value="Cleanup" icon="si si-recycling-trash-bin-2 " actionListener="#{cleanupIvyDevWfBean.cleanup}" update="growl" disabled="#{!adminIvyDevWfBean.isWorkflowAdmin() or !engineModeIvyDevWfBean.demoOrDesigner}"/>
           </p:panelGrid>
         </h:panelGroup>
