@@ -5,7 +5,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import ch.ivyteam.di.restricted.DiCore;
 import ch.ivyteam.ivy.business.data.store.restricted.BusinessDataPersistence;
 import ch.ivyteam.ivy.data.cache.restricted.IDataCacheManager;
 import ch.ivyteam.ivy.rest.client.oauth2.SessionTokenStore;
@@ -58,7 +57,7 @@ public class CleanupIvyDevWfBean {
       showMessage("All existing Cases and Tasks have been deleted");
     }
     if (businessDataAndSearchIndex) {
-      DiCore.getGlobalInjector().getInstance(BusinessDataPersistence.class).clearAll();
+      BusinessDataPersistence.instance().clearAll();
       showMessage("All Business Data and the search index has been deleted");
     }
     if (identityProviderTokens) {
@@ -66,7 +65,7 @@ public class CleanupIvyDevWfBean {
       showMessage("All identity provider tokens have been deleted");
     }
     if (dataCaches) {
-      DiCore.getGlobalInjector().getInstance(IDataCacheManager.class).invalidateAll();
+      IDataCacheManager.instance().invalidateAll();
       showMessage("All data caches have been cleared");
     }
   }
