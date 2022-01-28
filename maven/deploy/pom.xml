@@ -100,7 +100,7 @@
             <configuration>
               <deployMethod>HTTP</deployMethod>
               <deployServerId>axonivy.engine</deployServerId>
-              <deployEngineUrl>https://nightly.demo.ivyteam.io</deployEngineUrl>
+              <deployEngineUrl>https://93.demo.ivyteam.io</deployEngineUrl>
               <deployFile>${project.build.directory}/${project.artifactId}-${project.version}.zip</deployFile>
               <deployToEngineApplication>${deployApplicationName}</deployToEngineApplication>
               <deployTestUsers>true</deployTestUsers>
