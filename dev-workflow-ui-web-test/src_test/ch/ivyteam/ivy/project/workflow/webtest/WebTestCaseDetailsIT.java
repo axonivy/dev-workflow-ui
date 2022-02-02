@@ -4,6 +4,8 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginD
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
+import static com.codeborne.selenide.CollectionCondition.size;
+import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -108,5 +110,21 @@ public class WebTestCaseDetailsIT {
     $(By.id("form:caseId")).shouldBe(exactText(caseId));
     $(By.id("form:workflowEvents:eventsTable")).shouldNotBe(visible);
     $(By.id("form:workflowEvents:noPermissionMessage")).shouldBe(visible).shouldHave(text("No permissions"));
+  }
+
+  @Test
+  public void destoryCase() {
+    startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
+    open(viewUrl("cases.xhtml"));
+    $(By.id("casesForm:cases:0:caseName")).shouldBe(visible).click();
+    $(By.id("form:caseState")).shouldBe(exactText("RUNNING"));
+    $(By.id("form:caseDestroyBtn")).shouldBe(visible).shouldNotHave(cssClass("ui-state-disabled"));
+    $(".current-hierarchy-case").findAll(".case-link").shouldBe(size(1));
+    $(".current-hierarchy-case").findAll(".case-state-in-progress").shouldBe(size(1));
+
+    $(By.id("form:caseDestroyBtn")).click();
+    $(".current-hierarchy-case").findAll(".case-link").shouldBe(size(1));
+    $(".current-hierarchy-case").findAll(".case-state-zombie-destroyed").shouldBe(size(1));
+    $(By.id("form:caseDestroyBtn")).shouldHave(cssClass("ui-state-disabled"));
   }
 }
