@@ -63,7 +63,7 @@
                 <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
               </p:column>
               <p:column headerText="Name" sortBy="#{task.name}">
-                <h:commandLink id="startTaskLink" action="#{tasksIvyDevWfBean.executeTask(task.id)}">
+                <h:commandLink id="startTaskLink" actionListener="#{tasksIvyDevWfBean.executeTask(task.id)}">
                   <h:outputText id="taskName" value="#{task.name}" />
                   <p:tooltip for="taskName" value="Task ID: #{task.id}" position="top" />
                 </h:commandLink>

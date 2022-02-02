@@ -30,7 +30,7 @@ public class LoginTableIvyDevWfBean {
     return currentUser;
   }
 
-  public void setCurrentUser(User user) {}
+  public void setCurrentUser(@SuppressWarnings("unused") User user) {}
 
   private static User toUser(IUser user) {
     if (user != null) {

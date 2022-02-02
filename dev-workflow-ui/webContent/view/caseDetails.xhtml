@@ -21,7 +21,7 @@
               <i class="si si-lg si-common-file-text detail-title-icon" />
               <h:outputText value="Description" />
               <div class="task-detail-action-container action-container">
-                <p:commandLink value="Destroy case" update="form" action="#{casesDetailsIvyDevWfBean.selectedCase.destroy}"
+                <p:commandLink value="Destroy case" update="form" actionListener="#{casesDetailsIvyDevWfBean.selectedCase.destroy}"
                   class="task-action-item straight-text-icon" id="caseDestroyBtn" disabled="#{not casesDetailsIvyDevWfBean.canBeDestoryed()}">
                   <i class="si si-close detail-action-icon-bold"></i>
                 </p:commandLink>
