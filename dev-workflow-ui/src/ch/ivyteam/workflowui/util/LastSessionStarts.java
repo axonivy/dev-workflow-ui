@@ -1,6 +1,5 @@
 package ch.ivyteam.workflowui.util;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -34,7 +33,7 @@ public class LastSessionStarts {
   }
 
   public void add(StartableModel startable) {
-    Set<StartableModel> startsSet = getStarts();
+    var startsSet = new HashSet<>(getStarts());
     startsSet.add(startable);
     session.setAttribute(ATTRIBUTE_NAME, startsSet);
   }
@@ -46,7 +45,7 @@ public class LastSessionStarts {
   private Set<StartableModel> getStarts() {
     var starts = session.getAttribute(ATTRIBUTE_NAME);
     if (starts == null) {
-      return new HashSet<>();
+      return Set.of();
     }
     var deployedStartables = getDeployedStartables();
     if (deployedStartables == null) {
