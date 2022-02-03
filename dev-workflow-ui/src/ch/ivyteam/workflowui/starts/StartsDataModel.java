@@ -42,7 +42,7 @@ public class StartsDataModel extends LazyDataModel<CustomPMV> {
     }
   }
 
-  public void setActiveIndex(String index) {}
+  public void setActiveIndex(@SuppressWarnings("unused") String index) {}
 
   public String getActiveIndex() {
     return activeIndex;

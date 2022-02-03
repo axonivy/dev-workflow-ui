@@ -24,7 +24,7 @@ public class RedirectUtil {
   }
 
   private static final class DefaultHandler implements RedirectHandler {
-
+    @Override
     public void redirect(String url) {
       try {
         FacesContext context = FacesContext.getCurrentInstance();

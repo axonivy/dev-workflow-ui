@@ -1,6 +1,5 @@
 package ch.ivyteam.workflowui;
 
-import java.io.Serializable;
 import java.util.Arrays;
 
 import javax.faces.bean.ManagedBean;
@@ -10,7 +9,7 @@ import ch.ivyteam.ivy.security.IPermission;
 import ch.ivyteam.ivy.workflow.IWorkflowSession;
 
 @ManagedBean
-public class AdminIvyDevWfBean implements Serializable {
+public class AdminIvyDevWfBean {
 
   public Boolean isWorkflowAdmin() {
     return hasTaskPermissions() && hasCasePermissions();
