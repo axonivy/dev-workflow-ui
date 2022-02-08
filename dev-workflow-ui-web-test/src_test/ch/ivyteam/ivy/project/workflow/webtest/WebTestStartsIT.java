@@ -71,7 +71,7 @@ public class WebTestStartsIT {
     Selenide.open(viewUrl("starts.xhtml"));
     $(By.id("startsForm:filter")).sendKeys("embed in frame");
     // open in fullscreen link icon shouldn't be visible
-    $(By.className("start-element")).findAll("a").shouldBe(size(1));
+    $(By.className("start-element")).findAll("a").shouldBe(size(2));
     $(By.className("start-link")).shouldBe(visible, text("Do not embed in Frame")).click();
     $(By.id("testDialogTitle")).shouldBe(visible);
   }

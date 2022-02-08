@@ -20,7 +20,7 @@ public class TestLastSessionStarts {
     var starts = new LastSessionStarts(new MapAttributeStore());
 
     assertThat(starts.getAll()).isEmpty();
-    var startable = new StartableModel("myown", null, new WebLink("test"), null, null, true);
+    var startable = new StartableModel("myown", null, new WebLink("test"), null, null, true, null, true);
 
     starts.add(startable);
     assertThat(starts.getAll()).hasSize(1);

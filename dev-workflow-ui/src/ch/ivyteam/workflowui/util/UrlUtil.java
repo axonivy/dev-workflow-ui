@@ -50,4 +50,9 @@ public class UrlUtil {
     String startLinkEncoded = URLEncoder.encode(startLink.getRelative(), StandardCharsets.UTF_8);
     return "frame.xhtml?originalUrl=" + originalPageEncoded + "&taskUrl=" + startLinkEncoded;
   }
+
+  public static String generateViewerFrameUrl(WebLink viewerLink) {
+    String viewerLinkEncoded = URLEncoder.encode(viewerLink.getRelative(), StandardCharsets.UTF_8);
+    return "viewerFrame.xhtml?viewerUrl=" + viewerLinkEncoded;
+  }
 }
