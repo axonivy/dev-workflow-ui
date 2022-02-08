@@ -21,6 +21,10 @@
     </p:link>
     <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page. Add 'embedInFrame' request custom field to set this as default."
      position="left"/>
+    <p:commandLink id="openNextGenProcessEditor" actionListener="#{cc.attrs.start.openViewer}" styleClass="margin-right-10" rendered="#{cc.attrs.start.processStart}">
+      <i class="si si-hierarchy-6 si-rotate-270"/>
+    </p:commandLink>
+    <p:tooltip for="openNextGenProcessEditor" value="Open Next Gen Process Editor." position="left"/>
   </p:panel>
 </cc:implementation>
 </html>

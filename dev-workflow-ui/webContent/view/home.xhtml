@@ -34,10 +34,16 @@
                     <i class="#{start.icon} margin-right-10" />
                     <h:outputText value="#{start.displayName}" />
                   </p:commandLink>
-                  <p:link id="openStartFullscreenBtn" href="#{start.link}" rendered="#{start.embedInFrame}">
-                    <i class="si si-expand-6" />
-                  </p:link>
-                  <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="top" rendered="#{start.embedInFrame}" />
+                  <div>
+                    <p:link id="openStartFullscreenBtn" href="#{start.link}" styleClass="margin-right-10" rendered="#{start.embedInFrame}">
+                      <i class="si si-expand-6" />
+                    </p:link>
+                    <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="top" rendered="#{start.embedInFrame}" />
+                    <p:commandLink id="openNextGenProcessEditor" actionListener="#{start.openViewer}" styleClass="margin-right-10" rendered="#{start.processStart}">
+                      <i class="si si-hierarchy-6 si-rotate-270"/>
+                    </p:commandLink>
+                    <p:tooltip for="openNextGenProcessEditor" value="Open Next Gen Process Editor." position="top"/>
+                  </div>
                 </div>
               </p:column>
             </p:dataTable>

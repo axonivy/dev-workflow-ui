@@ -17,15 +17,19 @@ public class StartableModel {
   private final Category category;
   private final String icon;
   private boolean embedInFrame;
+  private final WebLink viewerLink;
+  private final boolean isProcessStart;
 
   public StartableModel(String displayName, String description, WebLink link, Category category,
-          String icon, boolean embedInFrame) {
+          String icon, boolean embedInFrame, WebLink viewerLink, boolean isProcessStart) {
     this.displayName = displayName;
     this.description = description;
     this.link = link;
     this.category = category;
     this.icon = icon;
     this.embedInFrame = embedInFrame;
+    this.viewerLink = viewerLink;
+    this.isProcessStart = isProcessStart;
   }
 
   public StartableModel(IWebStartable startable) {
@@ -34,7 +38,9 @@ public class StartableModel {
       startable.getLink(),
       startable.getCategory(),
       getIcon(startable.customFields()),
-      evaluateEmbedInFrame(startable.customFields().value(CustomFieldsHelper.EMBED_IN_FRAME))
+      evaluateEmbedInFrame(startable.customFields().value(CustomFieldsHelper.EMBED_IN_FRAME)),
+      startable.viewerLink(),
+      StringUtils.equalsAnyIgnoreCase(startable.getType(), "process-start")
     );
   }
 
@@ -71,6 +77,14 @@ public class StartableModel {
     return embedInFrame;
   }
 
+  public WebLink getViewerLink() {
+    return viewerLink;
+  }
+
+  public boolean isProcessStart() {
+    return isProcessStart;
+  }
+
   public void execute() {
     LastSessionStarts.current().add(this);
     if (embedInFrame) {
@@ -78,6 +92,10 @@ public class StartableModel {
     } else {
       RedirectUtil.redirect(link.toString());
     }
+  }
+
+  public void openViewer() {
+    RedirectUtil.redirect(UrlUtil.generateViewerFrameUrl(this.viewerLink));
   }
 
   public String getIcon() {

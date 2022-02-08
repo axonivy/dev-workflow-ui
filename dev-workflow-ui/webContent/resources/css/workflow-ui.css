@@ -337,6 +337,13 @@ body .ui-panelgrid .ui-panelgrid-cell {
   height: 100%;
 }
 
+.glsp-card {
+  margin: 8px;
+  min-height: 200px;
+  height: 100%;
+  padding: 0;
+}
+
 .sidesteps-button {
   border-left: 1px solid gray;
   margin: 0px;
