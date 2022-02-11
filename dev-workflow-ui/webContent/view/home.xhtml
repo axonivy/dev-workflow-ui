@@ -39,10 +39,10 @@
                       <i class="si si-expand-6" />
                     </p:link>
                     <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="top" rendered="#{start.embedInFrame}" />
-                    <p:commandLink id="openNextGenProcessEditor" actionListener="#{start.openViewer}" styleClass="margin-right-10" rendered="#{start.processStart}">
+                    <p:link id="openProcessViewer" href="#{start.viewerUrl}" styleClass="margin-right-10" rendered="#{start.processStart}">
                       <i class="si si-hierarchy-6 si-rotate-270"/>
-                    </p:commandLink>
-                    <p:tooltip for="openNextGenProcessEditor" value="Open Next Gen Process Editor." position="top"/>
+                    </p:link>
+                    <p:tooltip for="openProcessViewer" value="Open Process Viewer." position="top"/>
                   </div>
                 </div>
               </p:column>
