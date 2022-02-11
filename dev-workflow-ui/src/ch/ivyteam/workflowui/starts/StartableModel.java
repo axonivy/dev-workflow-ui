@@ -94,8 +94,8 @@ public class StartableModel {
     }
   }
 
-  public void openViewer() {
-    RedirectUtil.redirect(UrlUtil.generateViewerFrameUrl(this.viewerLink));
+  public String getViewerUrl() {
+    return UrlUtil.generateViewerFrameUrl(this.viewerLink);
   }
 
   public String getIcon() {
