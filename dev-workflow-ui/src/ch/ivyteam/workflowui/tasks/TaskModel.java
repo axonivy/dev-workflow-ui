@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.model.value.WebLink;
+import ch.ivyteam.ivy.process.model.value.PID;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.ivy.workflow.ICase;
@@ -15,11 +16,13 @@ import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.ivy.workflow.task.IActivator;
+import ch.ivyteam.util.net.UriBuilder;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
 import ch.ivyteam.workflowui.customfield.CustomFieldModel;
 import ch.ivyteam.workflowui.starts.CustomFieldsHelper;
 import ch.ivyteam.workflowui.util.TaskUtil;
+import ch.ivyteam.workflowui.util.UrlUtil;
 
 public class TaskModel {
 
@@ -40,6 +43,9 @@ public class TaskModel {
   private final Date endTimestamp;
   private final Date delayTimestamp;
   private final String description;
+  private final String pmv;
+  private final String currentElement;
+  private final String viewerLink;
 
   private final WebLink startLink;
   private final List<WorkflowEventModel> workflowEvents;
@@ -72,6 +78,9 @@ public class TaskModel {
     this.workflowEvents = WorkflowEventModel.toList(task.getWorkflowEvents());
     this.sidesteps = SidestepUtil.getSidesteps(task.getCase());
     this.customFields = CustomFieldModel.create(task);
+    this.pmv = task.getProcessModelVersion().getVersionName();
+    this.currentElement = getCurrentElementId(task);
+    this.viewerLink = buildViewerLink(task);
   }
 
   public long getId() {
@@ -124,6 +133,18 @@ public class TaskModel {
 
   public String getDescription() {
     return StringUtils.isEmpty(description) ? "No description" : description;
+  }
+
+  public String getPmv() {
+    return pmv;
+  }
+
+  public String getCurrentElement() {
+    return currentElement;
+  }
+
+  public String getViewerLink() {
+    return viewerLink;
   }
 
   public WebLink getStartLink() {
@@ -184,9 +205,30 @@ public class TaskModel {
   public String getCategory() {
     return category;
   }
+
   public Date getDelayTimestamp() {
     return delayTimestamp;
   }
 
+  private String getCurrentElementId(ITask task) {
+    return task.getStart().getTaskElement().getProcessElementId();
+  }
 
+  private String buildViewerLink(ITask task) {
+    return new WebLink(UriBuilder.create()
+            .path(task.getApplication().getContextPath())
+            .path("process-editor")
+            .path("diagram.html")
+            .toUri()
+            .toString())
+            .queryParam("pmv", pmv)
+            .queryParam("pid", new PID(currentElement).getProcessGuid())
+            .queryParam("highlight", currentElement)
+            .queryParam("readonly", "true")
+            .getRelativeEncoded();
+  }
+
+  public String getViewerFrameUrl() {
+    return UrlUtil.generateViewerFrameUrl(viewerLink);
+  }
 }
