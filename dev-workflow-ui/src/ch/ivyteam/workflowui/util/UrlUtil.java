@@ -55,4 +55,9 @@ public class UrlUtil {
     String viewerLinkEncoded = URLEncoder.encode(viewerLink.getRelative(), StandardCharsets.UTF_8);
     return "viewerFrame.xhtml?viewerUrl=" + viewerLinkEncoded;
   }
+
+  public static String generateViewerFrameUrl(String viewerLink) {
+    String viewerLinkEncoded = URLEncoder.encode(viewerLink, StandardCharsets.UTF_8);
+    return "viewerFrame.xhtml?viewerUrl=" + viewerLinkEncoded;
+  }
 }

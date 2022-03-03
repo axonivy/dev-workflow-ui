@@ -58,6 +58,15 @@
 
     <h:outputText value="Description" />
     <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.description}" id="taskDescription" />
+
+    <h:outputText value="PMV" />
+    <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.pmv}" id="pmv" />
+
+    <h:outputText value="Current Element" />
+    <h:outputLink value="#{tasksDetailsIvyDevWfBean.selectedTask.viewerFrameUrl}" >
+      <i class="si si-hierarchy-6 si-rotate-270" />
+      #{tasksDetailsIvyDevWfBean.selectedTask.currentElement}
+    </h:outputLink>
   </p:panelGrid>
 
 </ui:composition>
