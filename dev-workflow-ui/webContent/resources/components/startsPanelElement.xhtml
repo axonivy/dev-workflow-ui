@@ -21,7 +21,7 @@
     </p:link>
     <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page. Add 'embedInFrame' request custom field to set this as default."
      position="left"/>
-    <p:link id="openProcessViewer" href="#{cc.attrs.start.viewerUrl}" styleClass="margin-right-10" rendered="#{cc.attrs.start.processStart}">
+    <p:link id="openProcessViewer" href="#{cc.attrs.start.viewerUrl}" styleClass="margin-right-10" rendered="#{cc.attrs.start.processStart and loginIvyDevWfBean.loggedIn}">
       <i class="si si-hierarchy-6 si-rotate-270"/>
     </p:link>
     <p:tooltip for="openProcessViewer" value="Open Process Viewer." position="left"/>

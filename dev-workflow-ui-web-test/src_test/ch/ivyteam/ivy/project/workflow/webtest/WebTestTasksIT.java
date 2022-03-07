@@ -74,6 +74,8 @@ public class WebTestTasksIT {
     $("#form\\:taskResponsible\\:userName").shouldBe(exactText("Everybody"));
     $("#form\\:taskState").shouldBe(exactText("SUSPENDED"));
     $(By.id("form:category")).shouldHave(exactText("TaskWithACategory"));
+    $(By.id("form:pmv")).shouldBe(exactText("dev-workflow-ui-test-data$1"));
+    $(By.className("si-hierarchy-6")).shouldBe(visible);
 
     $(By.id("form:workflowEvents:eventsTable:0:eventType")).shouldBe(exactText("EVENT_CREATE_TASK_BY_JOINED_TASKS"));
     $("#form\\:taskActionsBtn").click();

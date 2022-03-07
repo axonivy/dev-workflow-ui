@@ -8,10 +8,10 @@ import ch.ivyteam.workflowui.util.UrlUtil;
 
 @ViewScoped
 @ManagedBean
-public class ViewerFrameIvyDevWfBean {
+public class ProcessViewerIvyDevWfBean {
   private String viewerUrl;
 
-  public ViewerFrameIvyDevWfBean() {
+  public ProcessViewerIvyDevWfBean() {
     this.viewerUrl = checkViewerUrl();
   }
 

@@ -228,7 +228,7 @@ public class TaskModel {
             .getRelativeEncoded();
   }
 
-  public String getViewerFrameUrl() {
-    return UrlUtil.generateViewerFrameUrl(viewerLink);
+  public String getViewerUrl() {
+    return UrlUtil.generateProcessViewerUrl(viewerLink);
   }
 }

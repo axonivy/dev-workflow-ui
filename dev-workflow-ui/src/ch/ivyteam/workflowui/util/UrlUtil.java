@@ -51,13 +51,13 @@ public class UrlUtil {
     return "frame.xhtml?originalUrl=" + originalPageEncoded + "&taskUrl=" + startLinkEncoded;
   }
 
-  public static String generateViewerFrameUrl(WebLink viewerLink) {
+  public static String generateProcessViewerUrl(WebLink viewerLink) {
     String viewerLinkEncoded = URLEncoder.encode(viewerLink.getRelative(), StandardCharsets.UTF_8);
-    return "viewerFrame.xhtml?viewerUrl=" + viewerLinkEncoded;
+    return "process-viewer.xhtml?viewerUrl=" + viewerLinkEncoded;
   }
 
-  public static String generateViewerFrameUrl(String viewerLink) {
+  public static String generateProcessViewerUrl(String viewerLink) {
     String viewerLinkEncoded = URLEncoder.encode(viewerLink, StandardCharsets.UTF_8);
-    return "viewerFrame.xhtml?viewerUrl=" + viewerLinkEncoded;
+    return "process-viewer.xhtml?viewerUrl=" + viewerLinkEncoded;
   }
 }

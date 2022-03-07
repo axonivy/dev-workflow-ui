@@ -5,8 +5,9 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
+    <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotLoggedIn}" />
       <div class="card glsp-card">
-        <iframe id="iFrame" src="#{viewerFrameIvyDevWfBean.viewerUrl}"
+        <iframe id="iFrame" src="#{processViewerIvyDevWfBean.viewerUrl}"
           style="height: calc(100vh - 145px); width: 100%; border: 0;"></iframe>
       </div>
     </ui:define>
