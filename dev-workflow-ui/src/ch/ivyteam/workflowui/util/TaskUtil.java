@@ -69,14 +69,14 @@ public class TaskUtil {
     return IWorkflowContext.current().findTask(id);
   }
 
-  public static void displayTaskRow(SelectEvent event) {
+  public static void displayTaskRow(SelectEvent<?> event) {
     Object object = event.getObject();
     if (object instanceof TaskModel) {
       redirectToTaskDetails(((TaskModel) object).getId());
     }
   }
 
-  public static void executeTaskRow(SelectEvent event) {
+  public static void executeTaskRow(SelectEvent<?> event) {
     Object object = event.getObject();
     if (object instanceof TaskModel) {
       executeTask(((TaskModel) object).getId());

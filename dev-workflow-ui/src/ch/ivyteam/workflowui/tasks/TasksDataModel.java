@@ -8,16 +8,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
+import ch.ivyteam.ivy.jsf.primefaces.legazy.LazyDataModel7;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.ivy.workflow.query.TaskQuery;
 import ch.ivyteam.workflowui.util.TaskUtil;
 import ch.ivyteam.workflowui.util.UserUtil;
 
-public class TasksDataModel extends LazyDataModel<TaskModel> {
+public class TasksDataModel extends LazyDataModel7<TaskModel> {
   private static final long serialVersionUID = -5287014754211109062L;
   private String filter;
   private boolean showAllTasks = UserUtil.isAdmin();
@@ -31,8 +31,8 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
   }
 
   @Override
-  public Object getRowKey(TaskModel task) {
-    return task.getId();
+  public String getRowKey(TaskModel task) {
+    return Long.toString(task.getId());
   }
 
   @Override

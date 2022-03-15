@@ -5,12 +5,11 @@
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
   <p:dataTable id="boundarySignalsTable" var="receiver" value="#{signalsIvyDevWfBean.boundarySignalModel}" lazy="true"
-    styleClass="margin-top-10" rows="5" paginator="true" paginatorPosition="bottom" paginatorAlwaysVisible="false"
-    sortBy="#{receiver.signalPattern}">
+    styleClass="margin-top-10" rows="5" paginator="true" paginatorPosition="bottom" paginatorAlwaysVisible="false">
     <p:column width="40">
       <i class="si si-lg si-network-signal"/>
     </p:column>
-    <p:column headerText="Signal pattern" sortBy="#{receiver.signalPattern}">
+    <p:column headerText="Signal pattern" sortBy="#{receiver.signalPattern}" sortOrder="ascending">
       <h:outputText value="#{receiver.signalPattern}" />
     </p:column>
     <p:column headerText="Waiting task" sortBy="#{receiver.waitingTask}">

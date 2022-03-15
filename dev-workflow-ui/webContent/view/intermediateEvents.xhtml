@@ -15,7 +15,7 @@
           <p:dataTable id="intermediateEventsTable" var="intermediateEvent"
             value="#{intermediateEventsIvyDevWfBean.intermediateEvents}" styleClass="margin-top-10" rows="5" paginator="true"
             paginatorPosition="bottom" paginatorAlwaysVisible="false" selectionMode="single"
-            rowKey="#{intermediateEvent.processElementId}" sortBy="#{intermediateEvent.size}">
+            rowKey="#{intermediateEvent.processElementId}">
             <p:ajax event="rowSelect" listener="#{intermediateEventsIvyDevWfBean.onRowSelect}" update="@form" />
 
             <p:column width="40">
@@ -27,7 +27,7 @@
             <p:column headerText="Description" colspan="2" sortBy="#{intermediateEvent.description}">
               <h:outputText value="#{intermediateEvent.description}" />
             </p:column>
-            <p:column headerText="Waiting" sortBy="#{intermediateEvent.size}">
+            <p:column headerText="Waiting" sortBy="#{intermediateEvent.size}" sortOrder="ascending">
               <h:outputText value="#{intermediateEvent.size}" />
             </p:column>
 

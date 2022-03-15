@@ -39,6 +39,7 @@ public class CasesDetailsIvyDevWfBean {
   private List<TaskModel> tasks;
   private List<SidestepModel> sidesteps;
   private MenuModel sidestepsMenuModel;
+  private List<WorkflowEventModel> workflowEvents;
 
   public String getSelectedCaseId() {
     return selectedCaseId;
@@ -57,6 +58,7 @@ public class CasesDetailsIvyDevWfBean {
     tasks = TaskUtil.toTaskModelList(CaseDetailUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks));
     sidesteps = SidestepUtil.getSidesteps(selectedCase);
     sidestepsMenuModel = SidestepUtil.createMenuModel(sidesteps);
+    workflowEvents = WorkflowEventModel.toList(selectedCase.getWorkflowEvents());
   }
 
   public ICase getCaseById(long id) {
@@ -128,6 +130,6 @@ public class CasesDetailsIvyDevWfBean {
   }
 
   public List<WorkflowEventModel> getWorkflowEvents() {
-    return WorkflowEventModel.toList(selectedCase.getWorkflowEvents());
+    return workflowEvents;
   }
 }

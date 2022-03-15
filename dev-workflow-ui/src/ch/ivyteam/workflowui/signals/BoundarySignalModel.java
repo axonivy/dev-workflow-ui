@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
+import ch.ivyteam.ivy.jsf.primefaces.legazy.LazyDataModel7;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.query.TaskBoundarySignalEventReceiverQuery;
 import ch.ivyteam.ivy.workflow.signal.ITaskBoundarySignalEventReceiver;
 
-public class BoundarySignalModel extends LazyDataModel<ITaskBoundarySignalEventReceiver> {
+public class BoundarySignalModel extends LazyDataModel7<ITaskBoundarySignalEventReceiver> {
 
   private static final long serialVersionUID = -7194541143134204696L;
 
@@ -31,7 +31,7 @@ public class BoundarySignalModel extends LazyDataModel<ITaskBoundarySignalEventR
     if (StringUtils.isEmpty(sortField)) {
       return;
     }
-    if ("signalCodePattern".equals(sortField)) {
+    if ("signalPattern".equals(sortField)) {
       applySorting(query.orderBy().signalCodePattern(), sortOrder);
     }
     if ("waitingTask".equals(sortField)) {

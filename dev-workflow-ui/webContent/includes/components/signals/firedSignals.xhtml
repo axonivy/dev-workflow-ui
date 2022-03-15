@@ -5,7 +5,7 @@
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
   <p:dataTable id="firedSignalsTable" var="signal" value="#{signalsIvyDevWfBean.signalsModel}" styleClass="margin-top-10"
-    rows="10" paginator="true" paginatorAlwaysVisible="false" lazy="true" sortBy="#{signal.sentTimestamp}" sortOrder="descending"
+    rows="10" paginator="true" paginatorAlwaysVisible="false" lazy="true"
     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" paginatorPosition="bottom"
     rowsPerPageTemplate="5,10,{ShowAll|'All'}">
@@ -15,7 +15,7 @@
     <p:column headerText="Code" sortBy="#{signal.signalCode}">
       <h:outputText value="#{signal.signalCode}" />
     </p:column>
-    <p:column headerText="Date" sortBy="#{signal.sentTimestamp}">
+    <p:column headerText="Date" sortBy="#{signal.sentTimestamp}" sortOrder="descending">
       <jc:datetime id="sentTime" datetime="#{signal.sentTimestamp}"/>
     </p:column>
     <p:column headerText="Sent by" sortBy="#{signal.sentByUser}">

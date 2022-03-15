@@ -40,9 +40,9 @@
           </div>
           <p:dataTable var="event" value="#{intermediateEventDetailsIvyDevWfBean.selectedIntermediateElement.eventModel}"
             id="eventsTable" styleClass="margin-top-5" rows="10" paginator="true" paginatorPosition="bottom"
-            paginatorAlwaysVisible="false" lazy="true" sortBy="#{event.id}">
+            paginatorAlwaysVisible="false" lazy="true">
 
-            <p:column headerText="ID" width="70" sortBy="#{event.id}">
+            <p:column headerText="ID" width="70" sortBy="#{event.id}" sortOrder="ascending">
               <h:outputText value="#{event.id}" />
             </p:column>
             <p:column headerText="State" width="90" sortBy="#{event.state}">
