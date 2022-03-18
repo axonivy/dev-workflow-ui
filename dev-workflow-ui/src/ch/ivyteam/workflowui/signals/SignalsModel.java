@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
+import ch.ivyteam.ivy.jsf.primefaces.legazy.LazyDataModel7;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.query.SignalEventQuery;
 import ch.ivyteam.ivy.workflow.signal.ISignalEvent;
 
-public class SignalsModel extends LazyDataModel<ISignalEvent> {
+public class SignalsModel extends LazyDataModel7<ISignalEvent> {
 
   private static final long serialVersionUID = -7194541143134204696L;
 

@@ -6,7 +6,7 @@
 
   <p:dataTable id="cases" var="case" value="#{casesIvyDevWfBean.casesDataModel}" widgetVar="casesTable" style="margin-top:10px"
     emptyMessage="No Cases found with given criteria" paginatorPosition="bottom" rows="10" lazy="true" paginator="true"
-    rowsPerPageTemplate="10,20,50" paginatorAlwaysVisible="false" sortBy="#{case.startTimestamp}" sortOrder="descending"
+    rowsPerPageTemplate="10,20,50" paginatorAlwaysVisible="false"
     selectionMode="single"
     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
     <p:ajax event="rowSelect" listener="#{casesIvyDevWfBean.redirectToCaseRow}" update="@form" />
@@ -18,7 +18,7 @@
       </p:outputPanel>
     </f:facet>
 
-    <p:column styleClass="icon-row" priority="2">
+    <p:column styleClass="icon-row" responsivePriority="2">
       <h:outputText id="caseIcon" styleClass="si si-lg si-task-list-approve" />
       <p:tooltip for="caseIcon" value="ID: #{case.id}" position="top" />
     </p:column>
@@ -28,7 +28,7 @@
       <p:tooltip for="caseState" value="State: #{case.state}" position="top" />
     </p:column>
 
-    <p:column headerText="Name" filterBy="#{case.getName(case)}" sortBy="#{case.getName(case)}">
+    <p:column headerText="Name" filterBy="#{case.getName(case)}" sortBy="#{case.name}">
       <h:link outcome="caseDetails">
         <f:param name="case" value="#{case.id}" />
         <h:outputText id="caseName" value="#{casesIvyDevWfBean.getName(case)}" />
@@ -36,15 +36,15 @@
       </h:link>
     </p:column>
 
-    <p:column headerText="Creator" filterBy="#{case.creatorUserName}" sortBy="#{case.creatorUserName}" priority="2">
+    <p:column headerText="Creator" filterBy="#{case.creatorUserName}" sortBy="#{case.creatorUserName}" responsivePriority="2">
       <jc:user user="#{case.creatorUser}" />
     </p:column>
 
-    <p:column headerText="Start" style="text-align: center;" sortBy="#{case.startTimestamp}">
+    <p:column headerText="Start" style="text-align: center;" sortBy="#{case.startTimestamp}" sortOrder="descending">
       <jc:datetime id="startTime" datetime="#{case.startTimestamp}" />
     </p:column>
 
-    <p:column headerText="End" style="text-align: center;" sortBy="#{case.endTimestamp}" priority="3">
+    <p:column headerText="End" style="text-align: center;" sortBy="#{case.endTimestamp}" responsivePriority="3">
       <jc:datetime id="endTime" datetime="#{case.endTimestamp}" />
     </p:column>
 

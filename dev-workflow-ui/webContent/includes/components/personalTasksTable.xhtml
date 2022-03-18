@@ -6,7 +6,7 @@
 
   <p:dataTable id="tasks" var="task" value="#{tasksIvyDevWfBean.tasksDataModel}" widgetVar="tasksTable" style="margin-top:10px"
     emptyMessage="No Tasks found with given criteria" lazy="true" paginatorPosition="bottom" rowsPerPageTemplate="10,20,50"
-    rows="10" paginator="true" paginatorAlwaysVisible="false" sortBy="#{task.startTimestamp}" sortOrder="descending"
+    rows="10" paginator="true" paginatorAlwaysVisible="false"
     selectionMode="single"
     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
     <p:ajax event="rowSelect" listener="#{tasksIvyDevWfBean.executeTaskRow}" update="@form" />
@@ -35,15 +35,15 @@
       </h:commandLink>
     </p:column>
 
-    <p:column headerText="Start" style="text-align: center;" sortBy="#{task.startTimestamp}" priority="2">
+    <p:column headerText="Start" style="text-align: center;" sortBy="#{task.startTimestamp}" sortOrder="descending" responsivePriority="2">
       <jc:datetime id="startTime" datetime="#{task.startTimestamp}"/>
     </p:column>
 
-    <p:column headerText="Expiry" style="text-align: center;" sortBy="#{task.expiryTimestamp}" priority="2">
+    <p:column headerText="Expiry" style="text-align: center;" sortBy="#{task.expiryTimestamp}" responsivePriority="2">
       <jc:datetime id="expiryTime" datetime="#{task.expiryTimestamp}"/>
     </p:column>
 
-    <p:column styleClass="icon-row" priority="2">
+    <p:column styleClass="icon-row" responsivePriority="2">
       <h:link outcome="taskDetails">
         <f:param name="task" value="#{task.id}" />
         <i class="si si-lg si-information-circle"></i>

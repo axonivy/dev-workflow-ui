@@ -58,10 +58,9 @@
               <h:outputText value="My tasks" />
             </div>
             <p:dataTable id="activeTasks" var="task" value="#{homepageIvyDevWfBean.tasksDataModel}" lazy="true"
-              rows="10" styleClass="margin-top-10" rendered="#{homepageIvyDevWfBean.tasksSize gt 0}"
-              sortBy="#{task.startTimestamp}" sortOrder="descending" selectionMode="single">
+              rows="10" styleClass="margin-top-10" rendered="#{homepageIvyDevWfBean.tasksSize gt 0}" selectionMode="single">
               <p:ajax event="rowSelect" listener="#{tasksIvyDevWfBean.executeTaskRow}" update="@form" />
-              <p:column styleClass="icon-row" priority="2">
+              <p:column styleClass="icon-row" responsivePriority="2">
                 <i class="si si-lg si-task-list-edit margin-right-5" />
               </p:column>
               <p:column styleClass="icon-row" sortBy="#{task.priority}">
@@ -74,10 +73,10 @@
                   <p:tooltip for="taskName" value="Task ID: #{task.id}" position="top" />
                 </h:commandLink>
               </p:column>
-              <p:column headerText="Start" sortBy="#{task.startTimestamp}">
+              <p:column headerText="Start" sortBy="#{task.startTimestamp}" sortOrder="descending">
                 <jc:datetime id="startTime" datetime="#{task.startTimestamp}" />
               </p:column>
-              <p:column headerText="Expiry" sortBy="#{task.expiryTimestamp}" priority="2">
+              <p:column headerText="Expiry" sortBy="#{task.expiryTimestamp}" responsivePriority="2">
                 <jc:datetime id="expiryTime" datetime="#{task.expiryTimestamp}" />
               </p:column>
               <p:column styleClass="icon-row">

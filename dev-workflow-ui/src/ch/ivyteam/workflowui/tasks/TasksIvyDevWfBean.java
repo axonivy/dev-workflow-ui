@@ -22,11 +22,11 @@ public class TasksIvyDevWfBean {
     return tasksDataModel;
   }
 
-  public void executeTaskRow(SelectEvent event) {
+  public void executeTaskRow(SelectEvent<?> event) {
     TaskUtil.executeTaskRow(event);
   }
 
-  public void displayTaskRow(SelectEvent event) {
+  public void displayTaskRow(SelectEvent<?> event) {
     TaskUtil.displayTaskRow(event);
   }
 

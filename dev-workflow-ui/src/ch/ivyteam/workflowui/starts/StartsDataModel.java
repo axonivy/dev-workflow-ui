@@ -5,14 +5,11 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.primefaces.model.LazyDataModel;
-
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.application.IProcessModel;
 import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
 
-public class StartsDataModel extends LazyDataModel<CustomPMV> {
-  private static final long serialVersionUID = 6607241324190280974L;
+public class StartsDataModel {
   private String filter;
   private String activeIndex;
 

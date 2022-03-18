@@ -1,7 +1,9 @@
 package ch.ivyteam.workflowui.document;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UncheckedIOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -50,11 +52,15 @@ public class DocumentModel {
     return "common-file-text";
   }
 
-  public StreamedContent getStreamedContent() throws FileNotFoundException {
+  public StreamedContent getStreamedContent() {
     String contentType = FacesContext.getCurrentInstance().getExternalContext()
             .getMimeType(this.path.asString());
-    String filePath = IApplication.current().getFileArea().getAbsolutePath() + "/" + this.path.asString();
-    return new DefaultStreamedContent(new FileInputStream(filePath), contentType, this.path.getLastSegment());
+    return DefaultStreamedContent
+        .builder()
+        .stream(this::openStream)
+        .contentType(contentType)
+        .name(path.getLastSegment())
+        .build();
   }
 
   public String getName() {
@@ -67,5 +73,14 @@ public class DocumentModel {
 
   public Path getPath() {
     return path;
+  }
+
+  private InputStream openStream() {
+    try {
+      String filePath = IApplication.current().getFileArea().getAbsolutePath() + "/" + this.path.asString();
+      return new FileInputStream(filePath);
+    } catch (IOException ex) {
+      throw new UncheckedIOException(ex);
+    }
   }
 }

@@ -11,10 +11,10 @@
   <h:panelGroup rendered="#{adminIvyDevWfBean.hasWorkflowEventReadPermission()}">
     <p:dataTable id="eventsTable" var="event" value="#{cc.attrs.workflowEvents}" widgetVar="eventsTable"
       emptyMessage="No Events found with given criteria" reflow="true" rows="5" paginator="true"
-      paginatorAlwaysVisible="false" paginatorPosition="bottom" sortOrder="descending" sortBy="#{event.eventTimestamp}"
+      paginatorAlwaysVisible="false" paginatorPosition="bottom"
       paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
 
-      <p:column headerText="Creation Date" sortBy="#{event.eventTimestamp}">
+      <p:column headerText="Creation Date" sortBy="#{event.eventTimestamp}" sortOrder="descending">
         <h:outputText value="#{dateTimeIvyDevWfBean.getDateTime(event.eventTimestamp)}" />
       </p:column>
 

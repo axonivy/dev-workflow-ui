@@ -19,7 +19,7 @@ public class LoginIvyDevWfBean {
   private String password;
   private String originalUrl;
 
-  public void loginFromTable(SelectEvent event) {
+  public void loginFromTable(SelectEvent<?> event) {
     Object object = event.getObject();
     if (object instanceof User) {
       login((User) object);

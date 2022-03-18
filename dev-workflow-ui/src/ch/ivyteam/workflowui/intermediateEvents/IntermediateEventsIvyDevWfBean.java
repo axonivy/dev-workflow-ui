@@ -20,7 +20,7 @@ public class IntermediateEventsIvyDevWfBean {
     intermediateEvents = IntermediateEventElementModel.create();
   }
 
-  public void onRowSelect(SelectEvent event) {
+  public void onRowSelect(SelectEvent<?> event) {
     Object object = event.getObject();
     if (UserUtil.isAdmin()) {
       if (object instanceof IntermediateEventElementModel) {

@@ -3,16 +3,16 @@ package ch.ivyteam.workflowui.intermediateEvents;
 import java.util.List;
 import java.util.Map;
 
-import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
+import ch.ivyteam.ivy.jsf.primefaces.legazy.LazyDataModel7;
 import ch.ivyteam.ivy.persistence.OrderDirection;
 import ch.ivyteam.ivy.workflow.IIntermediateEvent;
 import ch.ivyteam.ivy.workflow.IIntermediateEventElement;
 import ch.ivyteam.ivy.workflow.IntermediateEventProperty;
 import ch.ivyteam.ivy.workflow.PropertyOrder;
 
-public class IntermediateEventModel extends LazyDataModel<IIntermediateEvent> {
+public class IntermediateEventModel extends LazyDataModel7<IIntermediateEvent> {
   private static final long serialVersionUID = -7194541143134204696L;
   private IIntermediateEventElement ie;
 

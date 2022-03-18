@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortMeta;
 import org.primefaces.model.SortOrder;
 
+import ch.ivyteam.ivy.jsf.primefaces.sort.SortMetaConverter;
 import ch.ivyteam.ivy.workflow.CaseState;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
@@ -29,8 +32,8 @@ public class CasesDataModel extends LazyDataModel<ICase> {
   }
 
   @Override
-  public Object getRowKey(ICase icase) {
-    return icase.getId();
+  public String getRowKey(ICase icase) {
+    return Long.toString(icase.getId());
   }
 
   @Override
@@ -51,22 +54,31 @@ public class CasesDataModel extends LazyDataModel<ICase> {
   }
 
   @Override
-  public List<ICase> load(int first, int pageSize, String sortField, SortOrder sortOrder,
-          Map<String, Object> filters) {
-    var caseQuery = CaseQuery.create();
+  public int count(Map<String, FilterMeta> filterBy) {
+    return (int)createCaseQuery().executor().count();
+  }
 
-    applyFilter(caseQuery);
-    applyOrdering(caseQuery, sortField, sortOrder);
-
-    checkIfPersonalCases(caseQuery);
-
-    List<ICase> cases = caseQuery.where()
-            .isBusinessCase()
+  @Override
+  public List<ICase> load(int first, int pageSize, Map<String, SortMeta> sortBy,
+          Map<String, FilterMeta> filterBy) {
+    var caseQuery = createCaseQuery();
+    applyOrdering(caseQuery, sortBy);
+    List<ICase> cases = caseQuery
             .executor()
             .resultsPaged()
             .window(first, pageSize);
-    setRowCount((int) caseQuery.executor().count());
     return cases;
+  }
+
+  private CaseQuery createCaseQuery() {
+    var caseQuery = CaseQuery.create();
+
+    applyFilter(caseQuery);
+    checkIfPersonalCases(caseQuery);
+
+    caseQuery.where()
+            .isBusinessCase();
+    return caseQuery;
   }
 
   private void checkIfPersonalCases(CaseQuery caseQuery) {
@@ -89,24 +101,32 @@ public class CasesDataModel extends LazyDataModel<ICase> {
     }
   }
 
-  private static void applyOrdering(CaseQuery query, String sortField, SortOrder sortOrder) {
-    if (StringUtils.isEmpty(sortField)) {
+  private static void applyOrdering(CaseQuery query, Map<String, SortMeta> sortBy) {
+    var sorts = new SortMetaConverter(sortBy).toList();
+    if (sorts.isEmpty()) {
       applySorting(query.orderBy().startTimestamp(), SortOrder.DESCENDING);
+      return;
     }
-    if ("state".equals(sortField)) {
-      applySorting(query.orderBy().state(), sortOrder);
+    for (SortMeta meta : sortBy.values()) {
+      applyOrdering(query, meta);
     }
-    if ("getName(case)".equals(sortField)) {
-      applySorting(query.orderBy().name(), sortOrder);
+  }
+
+  private static void applyOrdering(CaseQuery query, SortMeta sort) {
+    if ("state".equals(sort.getField())) {
+      applySorting(query.orderBy().state(), sort.getOrder());
     }
-    if ("creatorUserName".equals(sortField)) {
-      applySorting(query.orderBy().creatorUserName(), sortOrder);
+    if ("name".equals(sort.getField())) {
+      applySorting(query.orderBy().name(), sort.getOrder());
     }
-    if ("startTimestamp".equals(sortField)) {
-      applySorting(query.orderBy().startTimestamp(), sortOrder);
+    if ("creatorUserName".equals(sort.getField())) {
+      applySorting(query.orderBy().creatorUserName(), sort.getOrder());
     }
-    if ("endTimestamp".equals(sortField)) {
-      applySorting(query.orderBy().endTimestamp(), sortOrder);
+    if ("startTimestamp".equals(sort.getField())) {
+      applySorting(query.orderBy().startTimestamp(), sort.getOrder());
+    }
+    if ("endTimestamp".equals(sort.getField())) {
+      applySorting(query.orderBy().endTimestamp(), sort.getOrder());
     }
   }
 
