@@ -211,7 +211,7 @@ public class TaskModel {
   }
 
   private String getCurrentElementId(ITask task) {
-    return task.getStart().getTaskElement().getProcessElementId();
+    return task.getStart().getProcessElementId().getRawPid();
   }
 
   private String buildViewerLink(ITask task) {
