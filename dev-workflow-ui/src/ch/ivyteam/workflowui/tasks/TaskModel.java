@@ -44,7 +44,7 @@ public class TaskModel {
   private final Date delayTimestamp;
   private final String description;
   private final String pmv;
-  private final String currentElement;
+  private final PID currentElement;
   private final String viewerLink;
 
   private final WebLink startLink;
@@ -139,7 +139,7 @@ public class TaskModel {
     return pmv;
   }
 
-  public String getCurrentElement() {
+  public PID getCurrentElement() {
     return currentElement;
   }
 
@@ -210,8 +210,8 @@ public class TaskModel {
     return delayTimestamp;
   }
 
-  private String getCurrentElementId(ITask task) {
-    return task.getStart().getProcessElementId().getRawPid();
+  private PID getCurrentElementId(ITask task) {
+    return task.getStart().getProcessElementId();
   }
 
   private String buildViewerLink(ITask task) {
@@ -222,8 +222,8 @@ public class TaskModel {
             .toUri()
             .toString())
             .queryParam("pmv", pmv)
-            .queryParam("pid", new PID(currentElement).getProcessGuid())
-            .queryParam("highlight", currentElement)
+            .queryParam("pid", currentElement.getProcessGuid())
+            .queryParam("highlight", currentElement.getRawPid())
             .queryParam("readonly", "true")
             .getRelativeEncoded();
   }
