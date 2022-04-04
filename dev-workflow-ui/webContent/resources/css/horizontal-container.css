@@ -2,7 +2,6 @@
   .layout-topbar-menu-wrapper, .container {
     max-width: 1170px;
     margin: 0 auto;
-    padding: 0;
   }
   .container .topbar-logo {
     margin-right: 0;
@@ -23,4 +22,7 @@
   .layout-wrapper .layout-sidebar .layout-menu>li>a>.menuitem-text {
     display: none;
   }
+}
+.container {
+  padding: 0;
 }
