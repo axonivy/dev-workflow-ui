@@ -11,17 +11,20 @@ import org.openqa.selenium.By;
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.codeborne.selenide.Selenide;
 
+import ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil;
+
 @IvyWebTest
 public class WebTestSwaggerIT {
 
   @Test
   public void testSwaggerWorking() {
+    WorkflowUiUtil.loginDeveloper();
+    $(By.id("menuform:sr_actions")).shouldBe(visible);
     Selenide.open(viewUrl("api-browser.xhtml"));
-    if ($(By.id("apiBrowser")).is(visible)) {
-      Selenide.switchTo().frame("apiBrowser");
-    }
-    $(".computed-url").shouldBe(visible);
-    $(".computed-url").shouldHave(text("http"));
+    $(By.id("apiBrowser")).shouldBe(visible);
+    Selenide.switchTo().frame("apiBrowser");
+    $(By.className("computed-url")).shouldBe(visible);
+    $(By.className("computed-url")).shouldHave(text("http"));
   }
 
 }
