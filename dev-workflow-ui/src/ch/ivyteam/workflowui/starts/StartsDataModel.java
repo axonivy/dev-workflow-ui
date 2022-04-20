@@ -6,10 +6,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import ch.ivyteam.ivy.application.IApplication;
+import ch.ivyteam.ivy.application.IApplicationRepository;
 import ch.ivyteam.ivy.application.IProcessModel;
 import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
 
 public class StartsDataModel {
+
   private String filter;
   private String activeIndex;
 
@@ -22,11 +24,16 @@ public class StartsDataModel {
   }
 
   public List<CustomPMV> getPMVs() {
-    List<CustomPMV> pmvs = IApplication.current().getProcessModels().stream()
+    var currentSecurtyContext = IApplication.current().getSecurityContext();
+    var pmvs = IApplicationRepository.instance().allOf(currentSecurtyContext).stream()
+            .flatMap(app -> app.getProcessModels().stream())
             .map(IProcessModel::getReleasedProcessModelVersion)
-            .map(IWorkflowProcessModelVersion::of).filter(Objects::nonNull)
-            .map(pmv -> CustomPMV.create(pmv, filter)).filter(Optional::isPresent)
-            .map(Optional::get).collect(Collectors.toList());
+            .map(IWorkflowProcessModelVersion::of)
+            .filter(Objects::nonNull)
+            .map(pmv -> CustomPMV.create(pmv, filter))
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .collect(Collectors.toList());
     setActiveIndex(pmvs);
     return pmvs;
   }
