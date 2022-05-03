@@ -18,4 +18,18 @@ public class ViewerUtil {
     }
     return startable.getCaseMapLink();
   }
+
+  public static String getViewerDialogTitle(IWebStartable startable) {
+    return getViewerDialogTitle(new StartableModel(startable));
+  }
+
+  public static String getViewerDialogTitle(StartableModel startable) {
+    if (startable == null) {
+      return "";
+    }
+    else if (startable.isProcessStart()) {
+      return "Process of: " + startable.getDisplayName();
+    }
+    return "Case Map for: " + startable.getDisplayName();
+  }
 }

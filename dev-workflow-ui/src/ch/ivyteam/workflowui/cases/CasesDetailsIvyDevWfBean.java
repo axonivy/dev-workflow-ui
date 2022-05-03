@@ -21,12 +21,10 @@ import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
 import ch.ivyteam.workflowui.customfield.CustomFieldModel;
 import ch.ivyteam.workflowui.document.DocumentModel;
-import ch.ivyteam.workflowui.starts.StartableModel;
 import ch.ivyteam.workflowui.tasks.TaskModel;
 import ch.ivyteam.workflowui.tasks.WorkflowEventModel;
 import ch.ivyteam.workflowui.util.CaseUtil;
 import ch.ivyteam.workflowui.util.TaskUtil;
-import ch.ivyteam.workflowui.util.UrlUtil;
 import ch.ivyteam.workflowui.util.ViewerUtil;
 
 @ManagedBean
@@ -147,18 +145,8 @@ public class CasesDetailsIvyDevWfBean {
     return this.viewerLink;
   }
 
-  public String getViewerFrameUrl() {
-    if (isCaseMap()) {
-      return new StartableModel(startable).getCaseMapLink();
-    }
-    return UrlUtil.generateProcessViewerUrl(startable.viewerLink());
-  }
-
   public String getViewerDialogTitle() {
-    if (isCaseMap()) {
-      return "CaseMap for: " + CaseUtil.getPrettyName(selectedCase);
-    }
-    return "Process Viewer for: " + CaseUtil.getPrettyName(selectedCase);
+    return ViewerUtil.getViewerDialogTitle(startable);
   }
 
 }

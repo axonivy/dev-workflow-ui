@@ -13,13 +13,7 @@ public class ViewerIvyDevWfBean {
   private StartableModel selectedStartable;
 
   public String getViewerDialogTitle() {
-    if (selectedStartable == null) {
-      return "";
-    }
-    else if (selectedStartable.isProcessStart()) {
-      return "Process Viewer for: " + selectedStartable.getDisplayName();
-    }
-    return "CaseMap for: " + selectedStartable.getDisplayName();
+    return ViewerUtil.getViewerDialogTitle(selectedStartable);
   }
 
   public void setStartable(StartableModel startable) {
