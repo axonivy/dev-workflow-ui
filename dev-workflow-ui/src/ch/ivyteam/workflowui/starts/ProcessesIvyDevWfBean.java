@@ -1,12 +1,10 @@
-package ch.ivyteam.workflowui;
+package ch.ivyteam.workflowui.starts;
 
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import ch.ivyteam.workflowui.starts.CustomPMV;
-import ch.ivyteam.workflowui.starts.StartsDataModel;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 
 @ManagedBean

@@ -17,17 +17,19 @@
         <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-smaller-padding"
           columnClasses="ui-g-12">
           <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
-            <div class="task-detail-title straight-text-icon">
-              <i class="si si-lg si-common-file-text detail-title-icon" />
-              <h:outputText value="Description" />
+            <div class="detail-card-header">
+              <div class="detail-card-title">
+                <i class="si si-lg si-common-file-text detail-title-icon" />
+                <h:outputText value="Description" />
+              </div>
               <ui:include src="/includes/components/taskDetails/descriptionCardHeaderActions.xhtml" />
             </div>
-
+            <p:separator />
             <ui:include src="/includes/components/taskDetails/description.xhtml" />
           </h:panelGroup>
 
           <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
-            <h:panelGroup layout="block" styleClass="task-detail-title straight-text-icon related-element">
+            <h:panelGroup layout="block" styleClass="detail-card-title related-element">
               <i class="si si-lg si-cog detail-title-icon" />
               <h:outputText value="Custom fields" />
             </h:panelGroup>
@@ -35,7 +37,7 @@
           </h:panelGroup>
 
           <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
-            <div class="task-detail-title straight-text-icon">
+            <div class="detail-card-title">
               <i class="si si-lg si-synchronize-arrow-clock detail-title-icon" />
               <h:outputText value="Workflow Events" />
             </div>
@@ -43,6 +45,19 @@
           </h:panelGroup>
 
         </p:panelGrid>
+
+        <p:dialog id="processViewerDialog" widgetVar="process-viewer-dlg" width="80%" showEffect="fade" modal="true"
+          style="margin-top: 6em">
+          <f:facet name="header">
+            <h:outputText value="Process Viewer for: #{tasksDetailsIvyDevWfBean.selectedTask.name}" styleClass="margin-right-10" />
+            <p:link id="openViewerNewPage" styleClass="staight-text-icon" href="#{tasksDetailsIvyDevWfBean.selectedTask.viewerLink}">
+              <i class="si si-expand-6" style="font-size: 0.75em" />
+            </p:link>
+          </f:facet>
+          <iframe id="iFrame" src="#{tasksDetailsIvyDevWfBean.viewerLink}"
+            style="height: calc(100vh - 195px); width: 100%; border: 0;" />
+        </p:dialog>
+
       </h:form>
 
       <p:dialog header="Delegate task" id="delegateTaskDialog" widgetVar="delegateTaskModal" modal="true" height="150" width="400">

@@ -3,9 +3,9 @@
   xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component"
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
 
-  <div class="ui-g-12 u-padding-0">
-    <div class="case-map-container">
-      <p:repeat var="stage" value="#{casesDetailsIvyDevWfBean.caseMap.stages}" varStatus="count">
+  <div class="u-padding-0 flex-center height-100">
+    <h:panelGroup layout="block" styleClass="case-map-container" rendered="#{not empty casesDetailsIvyDevWfBean.getCaseMap().stages}">
+      <p:repeat var="stage" value="#{casesDetailsIvyDevWfBean.getCaseMap().stages}" varStatus="count">
         <h:panelGroup styleClass="case-map-column">
           <div class="case-map-icon-container">
             <i class="case-map-icon #{stage.iconCss} #{stage.stateCss}" />
@@ -23,10 +23,11 @@
           </span>
         </h:panelGroup>
       </p:repeat>
-      <c:if test="#{empty casesDetailsIvyDevWfBean.caseMap.stages}">
-        <h:outputText value="No Case Map found" />
-      </c:if>
-    </div>
+    </h:panelGroup>
+    <c:if test="#{empty casesDetailsIvyDevWfBean.getCaseMap().stages}">
+      <i class="si si-road-sign-warning margin-right-5"/>
+      <h:outputText value="No Case Map found." />
+    </c:if>
   </div>
 
 </ui:composition>

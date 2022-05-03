@@ -34,7 +34,7 @@ public class HomepageIvyDevWfBean {
     return tasksDataModel.getSize();
   }
 
-  public void executeLastStart(SelectEvent event) {
+  public void executeLastStart(SelectEvent<?> event) {
     Object object = event.getObject();
     if (object instanceof StartableModel) {
       ((StartableModel) object).execute();

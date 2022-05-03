@@ -12,11 +12,6 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,18 +21,12 @@ import org.openqa.selenium.By;
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.axonivy.ivy.webtest.primeui.widget.Table;
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.FileDownloadMode;
-import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
 public class WebTestCaseDetailsIT {
 
   @BeforeAll
   static void setup() {
-    Selenide.closeWebDriver();
-    Configuration.proxyEnabled = true;
-    Configuration.fileDownload = FileDownloadMode.PROXY;
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     loginDeveloper();
     startTestProcess("1750C5211D94569D/TestData.ivp");
@@ -93,14 +82,6 @@ public class WebTestCaseDetailsIT {
   }
 
   @Test
-  public void downloadDocument() throws IOException {
-    $("#form\\:documentsContainer").shouldHave(text("test.txt"));
-    File download = $(".document-entry", 0).find("a").shouldBe(visible).download();
-    assertThat(download).hasName("test.txt");
-    assertThat(Files.readString(download.toPath())).isEqualTo("this is test document");
-  }
-
-  @Test
   public void workflowEvents() {
     var caseId = $(By.id("form:caseId")).getText();
     $(By.id("form:workflowEvents:eventsTable")).shouldBe(visible);
@@ -127,4 +108,15 @@ public class WebTestCaseDetailsIT {
     $(".current-hierarchy-case").findAll(".case-state-zombie-destroyed").shouldBe(size(1));
     $(By.id("form:caseDestroyBtn")).shouldHave(cssClass("ui-state-disabled"));
   }
+
+  @Test
+  public void processViewer() {
+    $(By.id("form:cardOpenprocessViewerBtn")).shouldBe(visible);
+    $(By.id("form:openProcessViewerBtn")).shouldBe(visible).click();
+    $(By.id("form:processViewerDialog")).shouldBe(visible);
+    $(By.id("viewerFrame")).shouldBe(visible);
+    $(By.id("form:openViewerNewPage")).shouldBe(visible).click();
+    $(By.id("form:category")).shouldNotBe(visible);
+  }
+
 }

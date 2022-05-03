@@ -15,6 +15,7 @@ import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
+import ch.ivyteam.ivy.workflow.businesscase.IBusinessCase;
 import ch.ivyteam.ivy.workflow.task.IActivator;
 import ch.ivyteam.util.net.UriBuilder;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
@@ -32,7 +33,7 @@ public class TaskModel {
   private final String priorityIcon;
   private final TaskState state;
   private final String stateIcon;
-  private final ICase businessCase;
+  private final IBusinessCase businessCase;
   private final ICase technicalCase;
   private final IUser workerUser;
   private final String category;
@@ -99,7 +100,7 @@ public class TaskModel {
     return state;
   }
 
-  public ICase getBusinessCase() {
+  public IBusinessCase getBusinessCase() {
     return businessCase;
   }
 

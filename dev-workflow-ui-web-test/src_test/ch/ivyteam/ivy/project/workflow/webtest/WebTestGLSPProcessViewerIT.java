@@ -10,6 +10,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -42,11 +43,16 @@ public class WebTestGLSPProcessViewerIT {
   }
 
   @Test
-  public void testNoViewerForCaseMap() {
+  public void testCaseMapUiViewer() {
     loginDeveloper();
     Selenide.open(viewUrl("starts.xhtml"));
     $(By.id("startsForm:filter")).sendKeys("test _ case _ map");
-    $(By.className("si-hierarchy-6")).shouldNotBe(visible);
+    $(By.className("si-hierarchy-6")).shouldBe(visible).click();
+    $(By.id("startsForm:processViewerDialog")).shouldBe(visible);
+    $(By.id("iFrame")).shouldBe(visible);
+    Selenide.switchTo().frame("iFrame");
+    $(By.className("fa-apple")).shouldBe(visible);
+    assertThat($(By.id("name-id")).getAttribute("value")).contains("test _ case _ map");
   }
 
   @Test

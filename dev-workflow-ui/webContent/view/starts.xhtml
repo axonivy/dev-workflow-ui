@@ -7,12 +7,25 @@
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
       <h:form id="startsForm" onkeypress="if (event.keyCode == 13) { return false; }">
+
         <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
           <div class="straight-text-icon card-header-title">
-            <h:outputText value="Starts"/>
+            <h:outputText value="Starts" />
           </div>
-          <ui:include src="/includes/components/startsPanel.xhtml"/>
+          <ui:include src="/includes/components/startsPanel.xhtml" />
         </h:panelGroup>
+
+        <p:dialog id="processViewerDialog" widgetVar="process-viewer-dlg" width="80%" showEffect="fade" modal="true"
+          style="margin-top: 6em">
+          <f:facet name="header">
+            <h:outputText value="#{viewerIvyDevWfBean.viewerDialogTitle}" styleClass="margin-right-10" />
+            <p:link styleClass="staight-text-icon" href="#{viewerIvyDevWfBean.viewerLink}">
+              <i class="si si-expand-6" style="font-size: 0.75em" />
+            </p:link>
+          </f:facet>
+          <iframe id="iFrame" src="#{viewerIvyDevWfBean.viewerLink}" style="height: calc(100vh - 195px); width: 100%; border: 0;" />
+        </p:dialog>
+
       </h:form>
     </ui:define>
   </ui:composition>

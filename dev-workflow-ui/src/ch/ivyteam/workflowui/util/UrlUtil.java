@@ -2,15 +2,19 @@ package ch.ivyteam.workflowui.util;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.UUID;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 
+import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.model.value.WebLink;
+import ch.ivyteam.ivy.request.EngineUriResolver;
 
 public class UrlUtil {
+  private static final String IVY_CASEMAPUI_PATH = "/casemapui/index.html";
 
   public static String evalOriginalUrl() {
     return getHttpServletRequest().getRequestURI();
@@ -52,12 +56,25 @@ public class UrlUtil {
   }
 
   public static String generateProcessViewerUrl(WebLink viewerLink) {
-    String viewerLinkEncoded = URLEncoder.encode(viewerLink.getRelative(), StandardCharsets.UTF_8);
-    return "process-viewer.xhtml?viewerUrl=" + viewerLinkEncoded;
+    return generateProcessViewerUrl(viewerLink.getRelative());
   }
 
   public static String generateProcessViewerUrl(String viewerLink) {
     String viewerLinkEncoded = URLEncoder.encode(viewerLink, StandardCharsets.UTF_8);
     return "process-viewer.xhtml?viewerUrl=" + viewerLinkEncoded;
   }
+
+  public static String generateCaseMapUrl(UUID caseMapId) {
+    StringBuilder appUrl = new StringBuilder(EngineUriResolver.instance().external().toASCIIString());
+    appUrl.append("/" + IApplication.current().getName());
+    appUrl.append(IVY_CASEMAPUI_PATH);
+    if (StringUtils.contains(appUrl, "?")) {
+      appUrl.append("&");
+    } else {
+      appUrl.append("?");
+    }
+    appUrl.append("uuid=").append(caseMapId.toString());
+    return appUrl.toString();
+  }
+
 }

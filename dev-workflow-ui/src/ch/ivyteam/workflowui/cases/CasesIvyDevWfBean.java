@@ -3,11 +3,11 @@ package ch.ivyteam.workflowui.cases;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import org.apache.commons.lang3.StringUtils;
 import org.primefaces.event.SelectEvent;
 
 import ch.ivyteam.ivy.workflow.CaseState;
 import ch.ivyteam.ivy.workflow.ICase;
+import ch.ivyteam.workflowui.util.CaseUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 
 @ManagedBean
@@ -25,10 +25,7 @@ public class CasesIvyDevWfBean {
   }
 
   public String getName(ICase icase) {
-    if (StringUtils.isBlank(icase.getName())) {
-      return "[Case: " + icase.getId() + "]";
-    }
-    return icase.getName();
+    return CaseUtil.getPrettyName(icase);
   }
 
   public String getStateIcon(CaseState caseState) {

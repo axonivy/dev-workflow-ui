@@ -15,16 +15,19 @@ import org.primefaces.model.menu.MenuModel;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.query.CaseQuery;
+import ch.ivyteam.ivy.workflow.start.IWebStartable;
 import ch.ivyteam.workflowui.casemap.CaseMapModel;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
 import ch.ivyteam.workflowui.customfield.CustomFieldModel;
 import ch.ivyteam.workflowui.document.DocumentModel;
+import ch.ivyteam.workflowui.starts.StartableModel;
 import ch.ivyteam.workflowui.tasks.TaskModel;
 import ch.ivyteam.workflowui.tasks.WorkflowEventModel;
-import ch.ivyteam.workflowui.util.CaseDetailUtil;
-import ch.ivyteam.workflowui.util.RedirectUtil;
+import ch.ivyteam.workflowui.util.CaseUtil;
 import ch.ivyteam.workflowui.util.TaskUtil;
+import ch.ivyteam.workflowui.util.UrlUtil;
+import ch.ivyteam.workflowui.util.ViewerUtil;
 
 @ManagedBean
 @ViewScoped
@@ -40,6 +43,8 @@ public class CasesDetailsIvyDevWfBean {
   private List<SidestepModel> sidesteps;
   private MenuModel sidestepsMenuModel;
   private List<WorkflowEventModel> workflowEvents;
+  private IWebStartable startable;
+  private String viewerLink;
 
   public String getSelectedCaseId() {
     return selectedCaseId;
@@ -55,10 +60,11 @@ public class CasesDetailsIvyDevWfBean {
     customFields = CustomFieldModel.create(selectedCase);
     documents = DocumentModel.create(selectedCase);
     caseMapModel = CaseMapModel.create(selectedCase);
-    tasks = TaskUtil.toTaskModelList(CaseDetailUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks));
+    tasks = TaskUtil.toTaskModelList(CaseUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks));
     sidesteps = SidestepUtil.getSidesteps(selectedCase);
     sidestepsMenuModel = SidestepUtil.createMenuModel(sidesteps);
     workflowEvents = WorkflowEventModel.toList(selectedCase.getWorkflowEvents());
+    startable = selectedCase.getBusinessCase().getStartedFrom();
   }
 
   public ICase getCaseById(long id) {
@@ -92,10 +98,6 @@ public class CasesDetailsIvyDevWfBean {
             .executor().results();
   }
 
-  public void redirectToCase(ICase toCase) {
-    RedirectUtil.redirect("caseDetails.xhtml?case=" + toCase.getId());
-  }
-
   public String isCurrentHierarchyCase(ICase caze) {
     if (caze.equals(selectedCase)) {
       return "current-hierarchy-case";
@@ -117,7 +119,7 @@ public class CasesDetailsIvyDevWfBean {
 
   public void setShowSystemTasks(boolean showSystemTasks) {
     this.showSystemTasks = showSystemTasks;
-    tasks = TaskUtil.toTaskModelList(CaseDetailUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks));
+    tasks = TaskUtil.toTaskModelList(CaseUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks));
   }
 
   public List<SidestepModel> getSidesteps()
@@ -132,4 +134,31 @@ public class CasesDetailsIvyDevWfBean {
   public List<WorkflowEventModel> getWorkflowEvents() {
     return workflowEvents;
   }
+
+  public boolean isCaseMap() {
+    return startable.getType().equals("casemap");
+  }
+
+  public void setViewerLink() {
+    this.viewerLink = ViewerUtil.getViewerLink(startable);
+  }
+
+  public String getViewerLink() {
+    return this.viewerLink;
+  }
+
+  public String getViewerFrameUrl() {
+    if (isCaseMap()) {
+      return new StartableModel(startable).getCaseMapLink();
+    }
+    return UrlUtil.generateProcessViewerUrl(startable.viewerLink());
+  }
+
+  public String getViewerDialogTitle() {
+    if (isCaseMap()) {
+      return "CaseMap for: " + CaseUtil.getPrettyName(selectedCase);
+    }
+    return "Process Viewer for: " + CaseUtil.getPrettyName(selectedCase);
+  }
+
 }
