@@ -4,48 +4,39 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
-  <div class="task-detail-action-container action-container">
+  <div class="detail-action-container">
 
-    <p:link href="#{tasksDetailsIvyDevWfBean.executeTaskLink}" styleClass="task-action-item straight-text-icon"
+    <p:link href="#{tasksDetailsIvyDevWfBean.executeTaskLink}" styleClass="margin-right-5 straight-text-icon"
       id="taskStartBtn" disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.canBeStarted()}">
       <h:outputText value="Start" />
       <i class="si si-arrow-right-1 detail-action-icon-bold" />
     </p:link>
 
-    <p:commandLink value="Actions" class="task-actions-link straight-text-icon" id="taskActionsBtn"
-      disabled="#{tasksDetailsIvyDevWfBean.selectedTask.done}">
-      <i class="si si-arrow-down-1 detail-action-icon"></i>
-    </p:commandLink>
-    <p:menu id="actionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom">
-      <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.reset()}" update="form"
-        disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.canReset()}" id="taskResetBtn">
-        <i class="si si-road-sign-u-turn-left table-icon" />Reset
-      </p:menuitem>
-      <p:menuitem onclick="PF('delegateTaskModal').show()" id="taskDelegateBtn"
-        disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.state.active}">
-        <i class="si si-move-to-bottom table-icon" />Delegate
-      </p:menuitem>
-      <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.park()}" update="form"
-        disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.canPark()}" id="taskParkBtn">
-        <i class="si si-road-sign-u-turn-right table-icon" />Park
-      </p:menuitem>
-      <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.destroy()}" update="form"
-        disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.state.active}" id="taskDestoryBtn">
-        <i class="si si-close table-icon" />Destroy
-      </p:menuitem>
-      <p:menuitem actionListener="#{tasksDetailsIvyDevWfBean.expireTask}" update="form"
-        disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.state.active}"
-        rendered="#{engineModeIvyDevWfBean.demoOrDesigner}" id="taskExpireBtn">
-        <i class="si si-alarm-bell-timer table-icon" />Expire now
-      </p:menuitem>
-    </p:menu>
-
-    <p:commandLink value="Sidesteps" class="sidesteps-button straight-text-icon" id="sidestepsBtn"
+    <p:commandLink value="Sidesteps" class="margin-right-10 straight-text-icon" id="sidestepsBtn"
       rendered="#{tasksDetailsIvyDevWfBean.selectedTask.renderSidestepBtn()}">
       <i class="si si-arrow-down-1 detail-action-icon"></i>
     </p:commandLink>
     <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
       model="#{tasksDetailsIvyDevWfBean.sidestepsMenuModel}" styleClass="menu-no-icons" />
+
+    <p:commandLink class="divider-left margin-right-10" id="taskActionsBtn"
+      disabled="#{tasksDetailsIvyDevWfBean.selectedTask.done}">
+      <i class="fa-solid fa-ellipsis-vertical options-button"></i>
+    </p:commandLink>
+    <p:menu id="actionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom">
+      <p:menuitem value="Reset" actionListener="#{tasksDetailsIvyDevWfBean.reset()}" update="form"
+        disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.canReset()}" id="taskResetBtn"
+        icon="si si-road-sign-u-turn-left" />
+      <p:menuitem value="Delegate" onclick="PF('delegateTaskModal').show()" id="taskDelegateBtn"
+        disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.state.active}" icon="si si-move-to-bottom" />
+      <p:menuitem value="Park" actionListener="#{tasksDetailsIvyDevWfBean.park()}" update="form" id="taskParkBtn"
+        disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.canPark()}" icon="si si-road-sign-u-turn-right" />
+      <p:menuitem value="Destroy" actionListener="#{tasksDetailsIvyDevWfBean.destroy()}" update="form"
+        disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.state.active}" id="taskDestoryBtn" icon="si si-delete-1" />
+      <p:menuitem value="Expire now" actionListener="#{tasksDetailsIvyDevWfBean.expireTask}" update="form"
+        disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.state.active}" icon="si si-alarm-bell-timer"
+        rendered="#{engineModeIvyDevWfBean.demoOrDesigner}" id="taskExpireBtn" />
+    </p:menu>
   </div>
 
 </ui:composition>

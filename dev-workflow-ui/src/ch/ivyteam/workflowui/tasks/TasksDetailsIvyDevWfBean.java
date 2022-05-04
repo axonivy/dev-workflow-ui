@@ -29,6 +29,7 @@ public class TasksDetailsIvyDevWfBean {
   private TaskModel selectedTask;
   private boolean showUsers = true;
   private String delegateMember;
+  private String viewerLink;
 
   public String getSelectedTaskId() {
     return selectedTaskId;
@@ -142,6 +143,14 @@ public class TasksDetailsIvyDevWfBean {
     }
     var isWorker = task.getWorkerUser().isMember(user.getUserToken(), false);
     return isActivator || isWorker;
+  }
+
+  public String getViewerLink() {
+    return viewerLink;
+  }
+
+  public void setViewerLink() {
+    this.viewerLink = selectedTask.getViewerLink();
   }
 
 }

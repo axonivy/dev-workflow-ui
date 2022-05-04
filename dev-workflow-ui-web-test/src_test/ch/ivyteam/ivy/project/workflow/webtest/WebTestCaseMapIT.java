@@ -12,6 +12,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.open;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -76,5 +77,20 @@ public class WebTestCaseMapIT {
     $("#form\\:taskStartBtn").shouldBe(enabled).click();
     $("#form\\:taskStartBtn").shouldHave(cssClass("ui-state-disabled"));
     $(By.id("form:sidestepsBtn")).shouldNotBe(visible);
+  }
+
+
+  @Test
+  public void caseMapUi() {
+    open(viewUrl("cases.xhtml"));
+    $(By.className("si-information-circle")).shouldBe(visible).click();
+    $(By.className("current-hierarchy-case")).find("a").shouldNotHave(text("Created case of TestData"));
+    $(By.className("casemap-card")).shouldBe(visible);
+    $(By.id("form:openCaseMapUiViewerBtn")).shouldBe(visible).click();
+    $(By.id("form:processViewerDialog")).shouldBe(visible);
+    $(By.id("viewerFrame")).shouldBe(visible);
+    Selenide.switchTo().frame("viewerFrame");
+    $(By.className("fa-apple")).shouldBe(visible);
+    assertThat($(By.id("name-id")).getAttribute("value")).contains("test _ case _ map");
   }
 }

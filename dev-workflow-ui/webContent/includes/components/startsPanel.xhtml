@@ -13,6 +13,7 @@
     </p:outputPanel>
   </f:facet>
   <h:panelGroup id="accordionContainer">
+
     <p:accordionPanel var="pmv" value="#{processesIvyDevWfBean.PMVs}" id="projectStarts"
      activeIndex="#{processesIvyDevWfBean.startsDataModel.activeIndex}" multiple="true">
       <p:tab id="project" titleStyleClass="straight-text-icon">
@@ -60,10 +61,12 @@
 
       </p:tab>
     </p:accordionPanel>
+
     <p:outputPanel styleClass="main-starts-container-empty" id="noStartsPanel" rendered="#{processesIvyDevWfBean.PMVs.size() == 0}">
       <i class="si si-alert-circle custom-icon"/>
       <h:outputText value="No projects available" id="noProjectsText"/>
     </p:outputPanel>
+
   </h:panelGroup>
 </p:panel>
 </ui:composition>

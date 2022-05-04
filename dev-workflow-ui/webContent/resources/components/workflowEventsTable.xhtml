@@ -36,13 +36,8 @@
     </p:dataTable>
   </h:panelGroup>
 
-  <h:panelGroup id="noPermissionMessage" layout="block"
-    rendered="#{!adminIvyDevWfBean.hasWorkflowEventReadPermission()}"
-    styleClass="ui-message ui-staticmessage ui-message-warn">
-    <span class="ui-message-warn-icon" />
-    <span class="ui-message-warn-summary">No permissions</span>
-    <span class="ui-message-warn-detail">You need Workflow Events read permission in order to see them.</span>
-  </h:panelGroup>
+  <p:staticMessage id="noPermissionMessage" severity="warn" rendered="#{!adminIvyDevWfBean.hasWorkflowEventReadPermission()}"
+   summary="No permissions" detail="You need Workflow Events read permission in order to see them."/>
 
 </cc:implementation>
 </html>

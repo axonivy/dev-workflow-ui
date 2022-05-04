@@ -126,6 +126,7 @@ public class WebTestStartsIT {
   public void testExecuteOnFullscreenPage() {
     Selenide.open(viewUrl("starts.xhtml"));
     $(By.id("startsForm:filter")).sendKeys("startTestDialog1");
+    $(byText("TestData/startTestDialog2.ivp")).shouldNotBe(visible);
     $(byText("TestData/startTestDialog1.ivp")).shouldBe(visible);
     $(By.className("si-expand-6")).shouldBe(visible).click();
     $(By.className("topbar-logo")).shouldNotBe(visible);

@@ -5,7 +5,7 @@
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
   <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank"
-    columnClasses="no-padding-left text-secondary ui-g-6 ui-md-2, ui-g-6 ui-md-4, no-padding-left text-secondary ui-g-6 ui-md-2, ui-g-6 ui-md-4">
+    columnClasses="details-description-label ui-g-6 ui-md-2, ui-g-6 ui-md-4, details-description-label ui-g-6 ui-md-2, ui-g-6 ui-md-4">
 
     <h:outputText value="Task ID" />
     <h:outputText id="taskId" value="#{tasksDetailsIvyDevWfBean.selectedTask.id}" />
@@ -63,10 +63,12 @@
     <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.pmv}" id="pmv" />
 
     <h:outputText value="Current Element" />
-    <h:outputLink value="#{tasksDetailsIvyDevWfBean.selectedTask.viewerUrl}" >
+    <p:commandLink id="openProcessViewerBtn" styleClass="margin-right-10"
+      actionListener="#{tasksDetailsIvyDevWfBean.setViewerLink()}" oncomplete="PF('process-viewer-dlg').show()"
+      update="form:processViewerDialog">
       <i class="si si-hierarchy-6 si-rotate-270" />
       #{tasksDetailsIvyDevWfBean.selectedTask.currentElement}
-    </h:outputLink>
+    </p:commandLink>
   </p:panelGrid>
 
 </ui:composition>

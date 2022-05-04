@@ -12,7 +12,7 @@
           <div class="straight-text-icon card-header-title">
             <h:outputText value="Cases"/>
           </div>
-          <h:panelGroup class="action-container" layout="block" rendered="#{adminIvyDevWfBean.isWorkflowAdmin()}">
+          <h:panelGroup class="straight-text-icon" layout="block" rendered="#{adminIvyDevWfBean.isWorkflowAdmin()}">
             <h:outputText value="All Cases" class="margin-right-10"/>
             <p:toggleSwitch id="allCasesSwitch" value="#{casesIvyDevWfBean.casesDataModel.showAllCases}">
               <p:ajax update="casesForm"/>

@@ -7,12 +7,14 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.axonivy.ivy.webtest.primeui.PrimeUi;
+import com.codeborne.selenide.Selenide;
 
 import ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil;
 
@@ -55,5 +57,27 @@ public class WebTestHomepageIT {
     $(By.id("form:activeTasksCard")).shouldNotBe(visible);
     $(By.id("form:lastStartsCard")).shouldNotBe(visible);
     $(By.className("main-starts-container")).shouldBe(visible);
+  }
+
+  @Test
+  public void testHomePageViewer() {
+    loginDeveloper();
+
+    open(viewUrl("starts.xhtml"));
+    $(By.id("startsForm:filter")).setValue("case");
+    $(byText("test _ case _ map")).shouldBe(visible).click();
+    $(By.id("iFrame")).shouldBe(visible);
+    open(viewUrl("home.xhtml"));
+    $(By.id("form:lastStartsCard")).shouldBe(visible);
+
+    var startsTable = PrimeUi.table(By.id("form:lastStarts"));
+    startsTable.row(0).getText().contains("test _ case _ map");
+
+    $(By.id("form:lastStarts:0:openProcessViewer")).shouldBe(visible).click();
+    $(By.id("form:processViewerDialog")).shouldBe(visible);
+    $(By.id("iFrame")).shouldBe(visible);
+    Selenide.switchTo().frame("iFrame");
+    $(By.className("fa-apple")).shouldBe(visible);
+    assertThat($(By.id("name-id")).getAttribute("value")).contains("test _ case _ map");
   }
 }
