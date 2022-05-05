@@ -13,10 +13,7 @@ public class ViewerUtil {
     if (startable == null) {
       return "";
     }
-    else if (startable.isProcessStart()) {
-      return startable.getViewerLink().toString();
-    }
-    return startable.getCaseMapLink();
+    return startable.getViewerLink().toString();
   }
 
   public static String getViewerDialogTitle(IWebStartable startable) {
@@ -27,7 +24,7 @@ public class ViewerUtil {
     if (startable == null) {
       return "";
     }
-    else if (startable.isProcessStart()) {
+    if (startable.isProcessStart()) {
       return "Process of: " + startable.getDisplayName();
     }
     return "Case Map for: " + startable.getDisplayName();

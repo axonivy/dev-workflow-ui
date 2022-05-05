@@ -64,7 +64,7 @@ public class UrlUtil {
     return "process-viewer.xhtml?viewerUrl=" + viewerLinkEncoded;
   }
 
-  public static String generateCaseMapUrl(UUID caseMapId) {
+  public static String generateCaseMapUrl(String pmvVersionName, UUID caseMapId) {
     StringBuilder appUrl = new StringBuilder(EngineUriResolver.instance().external().toASCIIString());
     appUrl.append("/" + IApplication.current().getName());
     appUrl.append(IVY_CASEMAPUI_PATH);
@@ -74,6 +74,7 @@ public class UrlUtil {
       appUrl.append("?");
     }
     appUrl.append("uuid=").append(caseMapId.toString());
+    appUrl.append("&pmv=").append(pmvVersionName);
     return appUrl.toString();
   }
 
