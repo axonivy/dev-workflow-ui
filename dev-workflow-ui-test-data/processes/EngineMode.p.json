@@ -1,0 +1,82 @@
+{
+  "format" : "9.4.8",
+  "id" : "1783B19164F69B78",
+  "data" : "ch.ivyteam.ivy.project.workflow.Data",
+  "elements" : [ {
+      "id" : "f10",
+      "type" : "RequestStart",
+      "name" : "designerEmbedded",
+      "config" : {
+        "callSignature" : "designerEmbedded",
+        "startCategory" : "actions",
+        "outLink" : "designerEmbedded.ivp",
+        "startDescription" : "Sets designer mode to Embedded. Used for CI testing. Might break the designer if executed"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 },
+        "labelOffset" : { "x" : -60, "y" : 18 }
+      },
+      "connect" : { "id" : "f13", "to" : "f11" }
+    }, {
+      "id" : "f12",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 64 }
+      }
+    }, {
+      "id" : "f11",
+      "type" : "Script",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.server.restricted.EngineMode;",
+            "",
+            "",
+            "EngineMode.set(EngineMode.DESIGNER_EMBEDDED);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 }
+      },
+      "connect" : { "id" : "f14", "to" : "f12" }
+    }, {
+      "id" : "f0",
+      "type" : "Script",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.server.restricted.EngineMode;",
+            "",
+            "",
+            "EngineMode.set(EngineMode.STANDARD);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 160 }
+      },
+      "connect" : { "id" : "f3", "to" : "f1" }
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 160 }
+      }
+    }, {
+      "id" : "f2",
+      "type" : "RequestStart",
+      "name" : "designerStandard",
+      "config" : {
+        "callSignature" : "designerStandard",
+        "startCategory" : "actions",
+        "outLink" : "designerStandard.ivp",
+        "startDescription" : "Sets designer mode to Standard. Used for CI testing. Might break the designer if executed"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 160 },
+        "labelOffset" : { "x" : -57, "y" : 20 }
+      },
+      "connect" : { "id" : "f4", "to" : "f0" }
+    } ]
+}

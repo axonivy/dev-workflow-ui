@@ -1,0 +1,560 @@
+{
+  "format" : "9.4.8",
+  "id" : "1750C5211D94569D",
+  "data" : "workflow.uite.Data",
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "RequestStart",
+      "name" : "TestData",
+      "config" : {
+        "callSignature" : "TestData",
+        "startCategory" : "TestData",
+        "case" : {
+          "name" : "First case of TestData",
+          "customFields" : [
+            { "name" : "field 2", "type" : "String", "value" : "\"value\"" },
+            { "name" : "test 3 ", "type" : "String", "value" : "\"test string\"" },
+            { "name" : "test field 1", "type" : "String", "value" : "\"test value\"" }
+          ]
+        },
+        "outLink" : "TestData.ivp",
+        "startDescription" : "Process which generates some test task and case data",
+        "startCustomFields" : [
+          { "name" : "cssIcon", "value" : "si si-add" }
+        ],
+        "task" : {
+          "name" : "First task of TestData"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 }
+      },
+      "connect" : { "id" : "f2", "to" : "f3" }
+    }, {
+      "id" : "f3",
+      "type" : "TaskSwitchEvent",
+      "name" : "TestTask",
+      "config" : {
+        "case" : {
+          "name" : "Created case of TestData"
+        },
+        "task" : {
+          "name" : "Created task of TestData",
+          "category" : "TaskWithACategory",
+          "priority" : "HIGH",
+          "expiry" : {
+            "timeout" : "new Duration(0, 0, 3, 0, 0, 0)"
+          },
+          "customFields" : [
+            { "name" : "field 2", "type" : "String", "value" : "\"test task string\"" },
+            { "name" : "test field 1", "type" : "String", "value" : "\"task test value\"" }
+          ],
+          "code" : [
+            "import ch.ivyteam.ivy.workflow.document.Path;",
+            "import java.util.Random;",
+            "",
+            "Random random = new Random();",
+            "String number = random.nextInt(100000).toString();",
+            "",
+            "task.getCase().documents().add(new Path(\"Test\" + number + \"/test.txt\")).write().withContentFrom(\"this is test document\");",
+            "task.getCase().documents().add(new Path(\"Test\" + number + \"/documentTest.txt\")).write().withContentFrom(\"document. you can read this correctly\");"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 },
+        "labelOffset" : { "x" : -27, "y" : 16 }
+      },
+      "connect" : { "id" : "f4", "to" : "f1" }
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 64 }
+      }
+    }, {
+      "id" : "f5",
+      "type" : "RequestStart",
+      "name" : "startTestDialog1.ivp",
+      "config" : {
+        "callSignature" : "startTestDialog1",
+        "startCategory" : "exampleDialogs",
+        "case" : {
+          "name" : "Test Developer Workflow-UI Dialog Case 1"
+        },
+        "outLink" : "startTestDialog1.ivp",
+        "startDescription" : "Dialog 1 for testing Developer Workflow-UI",
+        "task" : {
+          "name" : "Test Developer Workflow-UI Dialog 1"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 160 },
+        "labelOffset" : { "x" : -63, "y" : 16 },
+        "description" : "Test dialog for testing Developer Workflow UI"
+      },
+      "connect" : { "id" : "f8", "to" : "f7" }
+    }, {
+      "id" : "f6",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 160 }
+      }
+    }, {
+      "id" : "f7",
+      "type" : "DialogCall",
+      "name" : "TestDialog",
+      "config" : {
+        "dialogId" : "ch.ivyteam.ivy.project.workflow.TestDialog1",
+        "startMethod" : "start(ch.ivyteam.ivy.project.workflow.Data)",
+        "call" : {
+          "params" : [
+            { "name" : "data", "type" : "ch.ivyteam.ivy.project.workflow.Data" }
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 160 },
+        "labelOffset" : { "x" : -33, "y" : -7 }
+      },
+      "connect" : { "id" : "f9", "to" : "f6" }
+    }, {
+      "id" : "f10",
+      "type" : "RequestStart",
+      "name" : "startBoundarySignal.ivp",
+      "config" : {
+        "callSignature" : "startBoundarySignal",
+        "case" : {
+          "name" : "First case of startBoundarySignal"
+        },
+        "outLink" : "startBoundarySignal.ivp",
+        "startDescription" : "Creates a waiting boundary signal",
+        "task" : {
+          "name" : "First task of startBoundarySignal"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 256 },
+        "labelOffset" : { "x" : -72, "y" : 18 }
+      },
+      "connect" : { "id" : "f13", "to" : "f12" }
+    }, {
+      "id" : "f11",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 256 }
+      }
+    }, {
+      "id" : "f12",
+      "type" : "UserTask",
+      "name" : "TestDialog",
+      "config" : {
+        "dialogId" : "ch.ivyteam.ivy.project.workflow.TestDialog1",
+        "startMethod" : "start(ch.ivyteam.ivy.project.workflow.Data)",
+        "case" : {
+          "name" : "case created in UserTask during startBoundarySignal process"
+        },
+        "task" : {
+          "name" : "task created in UserTask during startBoundarySignal process"
+        },
+        "call" : {
+          "params" : [
+            { "name" : "data", "type" : "ch.ivyteam.ivy.project.workflow.Data" }
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 256 },
+        "labelOffset" : { "x" : -33, "y" : -7 }
+      },
+      "boundaries" : [ {
+          "id" : "f15",
+          "type" : "SignalBoundaryEvent",
+          "name" : "test:data:signal",
+          "config" : {
+            "signalCode" : "test:data:signal"
+          },
+          "visual" : {
+            "at" : { "x" : 256, "y" : 288 },
+            "labelOffset" : { "x" : 0, "y" : 15 }
+          }
+        } ],
+      "connect" : { "id" : "f14", "to" : "f11" }
+    }, {
+      "id" : "f16",
+      "type" : "SignalStartEvent",
+      "name" : "test:signal:complete",
+      "config" : {
+        "signalCode" : "test:signal:complete"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 352 },
+        "labelOffset" : { "x" : -59, "y" : 18 }
+      },
+      "connect" : { "id" : "f17", "to" : "f11", "via" : [ { "x" : 352, "y" : 352 } ] }
+    }, {
+      "id" : "f18",
+      "type" : "RequestStart",
+      "name" : "testIntermediateEventProcess.ivp",
+      "config" : {
+        "callSignature" : "testIntermediateEventProcess",
+        "case" : {
+          "name" : "testIntermediateEventProcess case"
+        },
+        "outLink" : "testIntermediateEventProcess.ivp",
+        "startDescription" : "Creates test intermediate event process",
+        "task" : {
+          "name" : "testIntermediateEventProcess task"
+        },
+        "input" : {
+          "code" : [
+            "import java.util.Random;",
+            "Random random = new Random();",
+            "out.eventID = random.nextInt();"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 448 },
+        "labelOffset" : { "x" : -91, "y" : 20 }
+      },
+      "connect" : { "id" : "f21", "to" : "f19" }
+    }, {
+      "id" : "f19",
+      "type" : "WaitEvent",
+      "name" : "TestIntermediateEvent",
+      "config" : {
+        "eventBeanClass" : "ch.ivyteam.workflowuitestdata.TestIntermediateClass",
+        "eventIdConfig" : "in.eventID.toString()"
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 448 },
+        "labelOffset" : { "x" : 0, "y" : 16 },
+        "description" : "intermediate event description"
+      },
+      "connect" : { "id" : "f22", "to" : "f20" }
+    }, {
+      "id" : "f20",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 448 }
+      }
+    }, {
+      "id" : "f23",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 672, "y" : 64 }
+      }
+    }, {
+      "id" : "f24",
+      "type" : "RequestStart",
+      "name" : "HomePageTestData",
+      "config" : {
+        "callSignature" : "HomePageTestData",
+        "startCategory" : "TestData",
+        "case" : {
+          "name" : "First case of HomePageTestData"
+        },
+        "outLink" : "HomePageTestData.ivp",
+        "startDescription" : "Different process which generates test data. Mostly used for CI tests",
+        "startCustomFields" : [
+          { "name" : "cssIcon", "value" : "si si-house-1" }
+        ],
+        "task" : {
+          "name" : "First task of HomePageTestData"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 424, "y" : 64 },
+        "labelOffset" : { "x" : -63, "y" : 17 }
+      },
+      "connect" : { "id" : "f27", "to" : "f25" }
+    }, {
+      "id" : "f25",
+      "type" : "TaskSwitchEvent",
+      "name" : "HomePageTestTask",
+      "config" : {
+        "case" : {
+          "name" : "Created case of HomePageTestData"
+        },
+        "task" : {
+          "name" : "Created task of HomePageTestData",
+          "priority" : "HIGH",
+          "expiry" : {
+            "timeout" : "new Duration(0, 0, 3, 0, 0, 0)"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 544, "y" : 64 },
+        "labelOffset" : { "x" : -50, "y" : 17 }
+      },
+      "connect" : { "id" : "f26", "to" : "f23" }
+    }, {
+      "id" : "f28",
+      "type" : "RequestStart",
+      "name" : "testDefaultPages.ivp",
+      "config" : {
+        "callSignature" : "testDefaultPages",
+        "case" : {
+          "name" : "First case of testDefaultPages"
+        },
+        "outLink" : "testDefaultPages.ivp",
+        "startDescription" : "Dialog with buttons that redirect to Default Pages using ivy.html",
+        "task" : {
+          "name" : "First task of testDefaultPages"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 424, "y" : 256 },
+        "labelOffset" : { "x" : -58, "y" : 21 }
+      },
+      "connect" : { "id" : "f32", "to" : "f31" }
+    }, {
+      "id" : "f29",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 672, "y" : 256 }
+      }
+    }, {
+      "id" : "f31",
+      "type" : "DialogCall",
+      "name" : "TestDefaultPage",
+      "config" : {
+        "dialogId" : "ch.ivyteam.ivy.project.workflow.TestDefaultPage",
+        "startMethod" : "start()"
+      },
+      "visual" : {
+        "at" : { "x" : 544, "y" : 256 },
+        "labelOffset" : { "x" : -52, "y" : -7 }
+      },
+      "connect" : { "id" : "f30", "to" : "f29" }
+    }, {
+      "id" : "f33",
+      "type" : "RequestStart",
+      "name" : "doubleDialog.ivp",
+      "config" : {
+        "callSignature" : "doubleDialog",
+        "case" : {
+          "name" : "First case of doubleDialog"
+        },
+        "outLink" : "doubleDialog.ivp",
+        "startDescription" : "Process with 2 dialogs. Used for testing frame header bar",
+        "task" : {
+          "name" : "First task of doubleDialog"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 424, "y" : 352 },
+        "labelOffset" : { "x" : -25, "y" : 17 }
+      },
+      "connect" : { "id" : "f37", "to" : "f34" }
+    }, {
+      "id" : "f34",
+      "type" : "DialogCall",
+      "name" : "TestDialog",
+      "config" : {
+        "dialogId" : "ch.ivyteam.ivy.project.workflow.TestDialog1",
+        "startMethod" : "start(ch.ivyteam.ivy.project.workflow.Data)",
+        "call" : {
+          "params" : [
+            { "name" : "data", "type" : "ch.ivyteam.ivy.project.workflow.Data" }
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 544, "y" : 352 },
+        "labelOffset" : { "x" : -33, "y" : -7 }
+      },
+      "connect" : { "id" : "f38", "to" : "f35" }
+    }, {
+      "id" : "f36",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 832, "y" : 352 }
+      }
+    }, {
+      "id" : "f35",
+      "type" : "UserTask",
+      "name" : "TestDialog2",
+      "config" : {
+        "dialogId" : "ch.ivyteam.ivy.project.workflow.TestDialog2",
+        "startMethod" : "start()",
+        "case" : {
+          "name" : "Case created in UserTask during doubleDialog process"
+        },
+        "task" : {
+          "name" : "User task created during doubleDialog process",
+          "skipTasklist" : true
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 704, "y" : 352 },
+        "labelOffset" : { "x" : -37, "y" : -7 }
+      },
+      "connect" : { "id" : "f39", "to" : "f36" }
+    }, {
+      "id" : "f40",
+      "type" : "RequestStart",
+      "name" : "startTestDialog2.ivp",
+      "config" : {
+        "callSignature" : "startTestDialog2",
+        "startCategory" : "exampleDialogs",
+        "case" : {
+          "name" : "Test Developer Workflow-UI Dialog Case 2"
+        },
+        "outLink" : "startTestDialog2.ivp",
+        "startDescription" : "Dialog 2 for testing Developer Workflow-UI",
+        "task" : {
+          "name" : "Test Developer Workflow-UI Dialog 2"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 424, "y" : 160 },
+        "labelOffset" : { "x" : -50, "y" : 21 },
+        "description" : "Test dialog for testing Developer Workflow UI"
+      },
+      "connect" : { "id" : "f43", "to" : "f42" }
+    }, {
+      "id" : "f41",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 672, "y" : 160 }
+      }
+    }, {
+      "id" : "f42",
+      "type" : "DialogCall",
+      "name" : "TestDialog",
+      "config" : {
+        "dialogId" : "ch.ivyteam.ivy.project.workflow.TestDialog2",
+        "startMethod" : "start()"
+      },
+      "visual" : {
+        "at" : { "x" : 544, "y" : 160 },
+        "labelOffset" : { "x" : -33, "y" : -7 }
+      },
+      "connect" : { "id" : "f44", "to" : "f41" }
+    }, {
+      "id" : "f45",
+      "type" : "TaskSwitchEvent",
+      "name" : "DelayedTask",
+      "config" : {
+        "case" : {
+          "name" : "Created case of DelayedTask"
+        },
+        "task" : {
+          "name" : "Created delayed task",
+          "priority" : "HIGH",
+          "delay" : "new Duration(0, 0, 1, 0, 0, 0)",
+          "expiry" : {
+            "timeout" : "new Duration(0, 0, 3, 0, 0, 0)"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 896, "y" : 64 },
+        "labelOffset" : { "x" : -27, "y" : 16 }
+      },
+      "connect" : { "id" : "f48", "to" : "f46" }
+    }, {
+      "id" : "f46",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 1024, "y" : 64 }
+      }
+    }, {
+      "id" : "f47",
+      "type" : "RequestStart",
+      "name" : "DelayedTestTask",
+      "config" : {
+        "callSignature" : "DelayedTestTask",
+        "startCategory" : "TestData",
+        "case" : {
+          "name" : "First case of DelayTestData"
+        },
+        "outLink" : "DelayedTestTask.ivp",
+        "startDescription" : "Process which generates some test task and case data",
+        "startCustomFields" : [
+          { "name" : "cssIcon", "value" : "si si-time-clock-circle" }
+        ],
+        "task" : {
+          "name" : "First task of DelayedTest"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 768, "y" : 64 },
+        "labelOffset" : { "x" : -25, "y" : 17 }
+      },
+      "connect" : { "id" : "f49", "to" : "f45" }
+    }, {
+      "id" : "f50",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 1024, "y" : 160 }
+      }
+    }, {
+      "id" : "f51",
+      "type" : "RequestStart",
+      "name" : "customUser",
+      "config" : {
+        "callSignature" : "customUser",
+        "startCategory" : "TestData",
+        "case" : {
+          "name" : "First case CustomUser"
+        },
+        "outLink" : "customUser.ivp",
+        "startDescription" : "Process which generates some test task and case data",
+        "startCustomFields" : [
+          { "name" : "cssIcon", "value" : "si si-single-neutral-circle" }
+        ],
+        "task" : {
+          "name" : "First task CustomUser"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 768, "y" : 160 },
+        "labelOffset" : { "x" : -25, "y" : 17 }
+      },
+      "connect" : { "id" : "f54", "to" : "f52" }
+    }, {
+      "id" : "f52",
+      "type" : "TaskSwitchEvent",
+      "name" : "TestTask",
+      "config" : {
+        "case" : {
+          "name" : "Created case CustomUser"
+        },
+        "task" : {
+          "name" : "Created task of CustomUser",
+          "description" : "This should have custom user",
+          "category" : "TaskWithCustomUser",
+          "responsible" : {
+            "userFromAttribute" : "\"CustomUserTest\""
+          },
+          "priority" : "HIGH",
+          "expiry" : {
+            "priority" : "HIGH"
+          },
+          "customFields" : [
+            { "name" : "field 2", "type" : "String", "value" : "\"test task string\"" },
+            { "name" : "test field 1", "type" : "String", "value" : "\"task test value\"" }
+          ],
+          "code" : [
+            "import ch.ivyteam.ivy.workflow.document.Path;",
+            "import java.util.Random;",
+            "",
+            "Random random = new Random();",
+            "String number = random.nextInt(100000).toString();",
+            "",
+            "task.getCase().documents().add(new Path(\"Test\" + number + \"/test.txt\")).write().withContentFrom(\"this is test document\");",
+            "task.getCase().documents().add(new Path(\"Test\" + number + \"/documentTest.txt\")).write().withContentFrom(\"document. you can read this correctly\");"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 896, "y" : 160 },
+        "labelOffset" : { "x" : -27, "y" : 16 }
+      },
+      "connect" : { "id" : "f53", "to" : "f50" }
+    } ]
+}

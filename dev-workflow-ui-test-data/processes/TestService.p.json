@@ -1,0 +1,26 @@
+{
+  "format" : "9.4.8",
+  "id" : "17B167C2EEBFD5CF",
+  "data" : "ch.ivyteam.ivy.project.workflow.Data",
+  "kind" : "WEB_SERVICE",
+  "wsTypeName" : "ch.ivyteam.ivy.project.workflow.TestService",
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "WebserviceStart",
+      "name" : "call()",
+      "config" : {
+        "callSignature" : "call"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 },
+        "labelOffset" : { "x" : -15, "y" : 17 }
+      },
+      "connect" : { "id" : "f2", "to" : "f1" }
+    }, {
+      "id" : "f1",
+      "type" : "WebserviceEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 64 }
+      }
+    } ]
+}
