@@ -30,8 +30,8 @@ public class ViewerUtil {
   }
 
   private static StartableModel caseToStartable(ICase caze) {
-    String pmvVersionName = caze.getProcessModelVersion().getVersionName();
+    var pmv = caze.getProcessModelVersion();
     IWebStartable startable = caze.getBusinessCase().getStartedFrom();
-    return startable.getType().equals("casemap") ? new CaseMapStartableModel(startable, pmvVersionName) : new StartableModel(startable);
+    return startable.getType().equals("casemap") ? new CaseMapStartableModel(startable, pmv) : new StartableModel(startable);
   }
 }

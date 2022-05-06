@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import ch.ivyteam.api.API;
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.application.IProcessModel;
+import ch.ivyteam.ivy.application.IProcessModelVersion;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
 import ch.ivyteam.ivy.workflow.start.IWebStartable;
@@ -70,15 +71,15 @@ public class LastSessionStarts {
     for (IWorkflowProcessModelVersion pmv : pmvs) {
       var listOfStartables = pmv.getStartables(ISession.current());
       for (IWebStartable startable : listOfStartables) {
-        starts.add(createCaseMapOrProcessStartable(startable, pmv.getVersionName()));
+        starts.add(createCaseMapOrProcessStartable(startable, pmv));
       }
     }
     return starts;
   }
 
-  private StartableModel createCaseMapOrProcessStartable(IWebStartable startable, String pmvVersionName) {
+  private StartableModel createCaseMapOrProcessStartable(IWebStartable startable, IProcessModelVersion pmv) {
     if (startable.getType().equals("casemap")) {
-      return new CaseMapStartableModel(startable, pmvVersionName);
+      return new CaseMapStartableModel(startable, pmv);
     }
     return new StartableModel(startable);
   }

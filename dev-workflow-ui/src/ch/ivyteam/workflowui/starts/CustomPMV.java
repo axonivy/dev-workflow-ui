@@ -24,10 +24,9 @@ public class CustomPMV {
   private final List<WebServiceProcess> webServiceProcesses;
 
   public static Optional<CustomPMV> create(IWorkflowProcessModelVersion pmv, String filter) {
-    var categories = new ArrayList<CategoryModel>();
-
     Predicate<StartableModel> filterPredicate = startable -> true;
     Predicate<WebServiceProcess> filterPredicateWSP = wsp -> true;
+
     if (!StringUtils.containsIgnoreCase(pmv.getName(), filter)) {
       filterPredicate = startable -> StringUtils.containsIgnoreCase(startable.getLink().getRelative(), filter)
               || StringUtils.containsIgnoreCase(startable.getDisplayName(), filter);
@@ -35,13 +34,14 @@ public class CustomPMV {
               || StringUtils.containsIgnoreCase(wsp.getLink(), filter);
     }
 
+    var categories = new ArrayList<CategoryModel>();
     pmv.getStartables(ISession.current()).stream().filter(e -> e.getType().equals(PROCESS_START))
             .map(StartableModel::new).filter(filterPredicate)
             .collect(Collectors.groupingBy(StartableModel::getCategory))
             .forEach((cat, starts) -> categories.add(new CategoryModel(cat, starts)));
 
     var casemapStartElements = pmv.getStartables(ISession.current()).stream()
-            .filter(e -> e.getType().equals(CASE_MAP)).map(e -> new CaseMapStartableModel(e, pmv.getVersionName())).filter(filterPredicate)
+            .filter(e -> e.getType().equals(CASE_MAP)).map(e -> new CaseMapStartableModel(e, pmv)).filter(filterPredicate)
             .collect(Collectors.toList());
 
     var webServiceProcesses = pmv.getWebServiceProcesses().stream().map(WebServiceProcess::new)
