@@ -18,6 +18,19 @@
     <deployApplicationName>dev-workflow-ui-${user.name}</deployApplicationName>
   </properties>
 
+  <repositories>
+    <repository>
+      <id>nexus.axonivy.com.snapshots</id>
+      <url>https://nexus.axonivy.com/repository/maven-snapshots/</url>
+      <snapshots>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
+  </repositories>
+
   <dependencies>
     <dependency>
       <groupId>ch.ivyteam.demo</groupId>
@@ -32,16 +45,6 @@
       <type>iar</type>
     </dependency>
   </dependencies>
-
-  <repositories>
-    <repository>
-      <id>axonivy.public</id>
-      <url>https://repo.axonivy.rocks</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
 
   <build>
     <plugins>
