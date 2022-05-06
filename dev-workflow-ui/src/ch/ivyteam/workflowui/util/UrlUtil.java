@@ -66,7 +66,7 @@ public class UrlUtil {
 
   public static String generateCaseMapUrl(IProcessModelVersion pmv, UUID caseMapId) {
     StringBuilder appUrl = new StringBuilder(EngineUriResolver.instance().external().toASCIIString());
-    appUrl.append("/" + pmv.getApplication().getName());
+    appUrl.append(pmv.getApplication().getContextPath());
     appUrl.append(IVY_CASEMAPUI_PATH);
     if (StringUtils.contains(appUrl, "?")) {
       appUrl.append("&");

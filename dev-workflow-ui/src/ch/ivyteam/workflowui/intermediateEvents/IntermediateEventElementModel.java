@@ -3,9 +3,9 @@ package ch.ivyteam.workflowui.intermediateEvents;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.workflow.IIntermediateEventElement;
 import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
+import ch.ivyteam.workflowui.util.ProcessModelsUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 
 public class IntermediateEventElementModel {
@@ -25,9 +25,7 @@ public class IntermediateEventElementModel {
   }
 
   private static List<IWorkflowProcessModelVersion> getPMVs() {
-    return IApplication.current().getProcessModels().stream()
-            .flatMap(pm -> pm.getProcessModelVersions().stream()).map(IWorkflowProcessModelVersion::of)
-            .collect(Collectors.toList());
+    return ProcessModelsUtil.getWorkflowPMVs();
   }
 
   public IntermediateEventElementModel(IIntermediateEventElement ie) {
