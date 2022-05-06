@@ -138,7 +138,7 @@ public class CasesDetailsIvyDevWfBean {
   }
 
   public void setViewerLink() {
-    this.viewerLink = ViewerUtil.getViewerLink(startable);
+    this.viewerLink = ViewerUtil.getViewerLink(selectedCase);
   }
 
   public String getViewerLink() {
@@ -146,7 +146,7 @@ public class CasesDetailsIvyDevWfBean {
   }
 
   public String getViewerDialogTitle() {
-    return ViewerUtil.getViewerDialogTitle(startable);
+    return ViewerUtil.getViewerDialogTitle(selectedCase);
   }
 
 }

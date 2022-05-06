@@ -1,8 +1,8 @@
 package ch.ivyteam.workflowui.util;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -11,7 +11,9 @@ import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.application.IProcessModel;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
+import ch.ivyteam.ivy.workflow.start.IWebStartable;
 import ch.ivyteam.util.IAttributeStore;
+import ch.ivyteam.workflowui.starts.CaseMapStartableModel;
 import ch.ivyteam.workflowui.starts.StartableModel;
 
 public class LastSessionStarts {
@@ -59,10 +61,25 @@ public class LastSessionStarts {
     if (application == null) {
       return null;
     }
-    return application.getProcessModels().stream()
+    var pmvs = application.getProcessModels().stream()
             .map(IProcessModel::getReleasedProcessModelVersion)
-            .map(IWorkflowProcessModelVersion::of).filter(Objects::nonNull)
-            .flatMap(pmv -> pmv.getStartables(ISession.current()).stream())
-            .map(StartableModel::new).collect(Collectors.toList());
+            .map(IWorkflowProcessModelVersion::of).collect(Collectors.toList());
+
+    List<StartableModel> starts = new ArrayList<>();
+
+    for (IWorkflowProcessModelVersion pmv : pmvs) {
+      var listOfStartables = pmv.getStartables(ISession.current());
+      for (IWebStartable startable : listOfStartables) {
+        starts.add(createCaseMapOrProcessStartable(startable, pmv.getVersionName()));
+      }
+    }
+    return starts;
+  }
+
+  private StartableModel createCaseMapOrProcessStartable(IWebStartable startable, String pmvVersionName) {
+    if (startable.getType().equals("casemap")) {
+      return new CaseMapStartableModel(startable, pmvVersionName);
+    }
+    return new StartableModel(startable);
   }
 }

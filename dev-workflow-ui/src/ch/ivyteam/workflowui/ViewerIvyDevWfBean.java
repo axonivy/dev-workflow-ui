@@ -28,6 +28,6 @@ public class ViewerIvyDevWfBean {
   }
 
   public String getViewerLink(ICase caze) {
-    return ViewerUtil.getViewerLink(caze.getBusinessCase().getStartedFrom());
+    return ViewerUtil.getViewerLink(caze);
   }
 }
