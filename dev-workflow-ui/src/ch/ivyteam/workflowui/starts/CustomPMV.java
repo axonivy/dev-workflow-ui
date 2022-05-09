@@ -20,7 +20,7 @@ public class CustomPMV {
 
   private final IWorkflowProcessModelVersion pmv;
   private final List<CategoryModel> categories;
-  private final List<StartableModel> caseMapStarts;
+  private final List<CaseMapStartableModel> caseMapStarts;
   private final List<WebServiceProcess> webServiceProcesses;
 
   public static Optional<CustomPMV> create(IWorkflowProcessModelVersion pmv, String filter) {
@@ -41,7 +41,7 @@ public class CustomPMV {
             .forEach((cat, starts) -> categories.add(new CategoryModel(cat, starts)));
 
     var casemapStartElements = pmv.getStartables(ISession.current()).stream()
-            .filter(e -> e.getType().equals(CASE_MAP)).map(StartableModel::new).filter(filterPredicate)
+            .filter(e -> e.getType().equals(CASE_MAP)).map(e -> new CaseMapStartableModel(e, pmv.getVersionName())).filter(filterPredicate)
             .collect(Collectors.toList());
 
     var webServiceProcesses = pmv.getWebServiceProcesses().stream().map(WebServiceProcess::new)
@@ -51,7 +51,7 @@ public class CustomPMV {
   }
 
   private static Optional<CustomPMV> filterEmptyStartsAndSelf(IWorkflowProcessModelVersion pmv,
-          List<CategoryModel> categories, List<StartableModel> caseMaps,
+          List<CategoryModel> categories, List<CaseMapStartableModel> caseMaps,
           List<WebServiceProcess> webServiceProcesses) {
     if ((categories.isEmpty() && caseMaps.isEmpty() && webServiceProcesses.isEmpty())
             || pmv.equals(IProcessModelVersion.current())) {
@@ -61,7 +61,7 @@ public class CustomPMV {
   }
 
   private CustomPMV(IWorkflowProcessModelVersion pmv, List<CategoryModel> categories,
-          List<StartableModel> caseMapStarts, List<WebServiceProcess> webServiceProcesses) {
+          List<CaseMapStartableModel> caseMapStarts, List<WebServiceProcess> webServiceProcesses) {
     this.pmv = pmv;
     this.categories = categories;
     this.caseMapStarts = caseMapStarts;
@@ -103,7 +103,7 @@ public class CustomPMV {
     return pmv.getVersionName();
   }
 
-  public List<StartableModel> getCaseMapStarts() {
+  public List<CaseMapStartableModel> getCaseMapStarts() {
     return caseMapStarts;
   }
 

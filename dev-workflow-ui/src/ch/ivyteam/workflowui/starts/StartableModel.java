@@ -1,7 +1,5 @@
 package ch.ivyteam.workflowui.starts;
 
-import java.util.UUID;
-
 import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.model.value.WebLink;
@@ -20,11 +18,10 @@ public class StartableModel {
   private final String icon;
   private boolean embedInFrame;
   private final WebLink viewerLink;
-  private final boolean isProcessStart;
-  private final String caseMapUuid;
+
 
   public StartableModel(String displayName, String description, WebLink link, Category category,
-          String icon, boolean embedInFrame, WebLink viewerLink, boolean isProcessStart, String caseMapUuid) {
+          String icon, boolean embedInFrame, WebLink viewerLink) {
     this.displayName = displayName;
     this.description = description;
     this.link = link;
@@ -32,8 +29,7 @@ public class StartableModel {
     this.icon = icon;
     this.embedInFrame = embedInFrame;
     this.viewerLink = viewerLink;
-    this.isProcessStart = isProcessStart;
-    this.caseMapUuid = caseMapUuid;
+
   }
 
   public StartableModel(IWebStartable startable) {
@@ -43,9 +39,7 @@ public class StartableModel {
       startable.getCategory(),
       getIcon(startable.customFields()),
       evaluateEmbedInFrame(startable.customFields().value(CustomFieldsHelper.EMBED_IN_FRAME)),
-      startable.viewerLink(),
-      StringUtils.equalsAnyIgnoreCase(startable.getType(), "process-start"),
-      getCaseMapUuid(startable.getLink())
+      startable.viewerLink()
     );
   }
 
@@ -57,10 +51,6 @@ public class StartableModel {
     return customIcon;
   }
 
-  private static String getCaseMapUuid(WebLink link) {
-    String icm = StringUtils.substringAfterLast(link.getAbsolute(), "/");
-    return StringUtils.substringBefore(icm, ".icm");
-  }
 
   public static boolean evaluateEmbedInFrame(String value) {
     // default is true
@@ -91,12 +81,8 @@ public class StartableModel {
     return viewerLink;
   }
 
-  public String getCaseMapLink() {
-    return UrlUtil.generateCaseMapUrl(UUID.fromString(getCaseMapUuid()));
-  }
-
   public boolean isProcessStart() {
-    return isProcessStart;
+    return true;
   }
 
   public void execute() {
@@ -136,7 +122,4 @@ public class StartableModel {
     return this.link.equals(otherStartable.link);
   }
 
-  public String getCaseMapUuid() {
-    return caseMapUuid;
-  }
 }
