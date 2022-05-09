@@ -18,53 +18,8 @@
     <deployApplicationName>dev-workflow-ui-${user.name}</deployApplicationName>
   </properties>
 
-  <repositories>
-    <repository>
-      <id>nexus.axonivy.com.snapshots</id>
-      <url>https://nexus.axonivy.com/repository/maven-snapshots/</url>
-      <snapshots>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-    </repository>
-  </repositories>
-
-  <dependencies>
-    <dependency>
-      <groupId>ch.ivyteam.demo</groupId>
-      <artifactId>workflow-demos</artifactId>
-      <version>${revision}</version>
-      <type>iar</type>
-    </dependency>
-    <dependency>
-      <groupId>ch.ivyteam.demo</groupId>
-      <artifactId>connectivity-demos</artifactId>
-      <version>${revision}</version>
-      <type>iar</type>
-    </dependency>
-  </dependencies>
-
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>thirdparty.libs</id>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>copy-dependencies</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${project.build.directory}</outputDirectory>
-              <includeArtifactIds>workflow-demos,connectivity-demos</includeArtifactIds>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <executions>
