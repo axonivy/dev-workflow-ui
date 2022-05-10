@@ -1,6 +1,7 @@
 package ch.ivyteam.workflowui.util;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import ch.ivyteam.ivy.application.IApplication;
@@ -15,29 +16,33 @@ import ch.ivyteam.workflowui.starts.StartableModel;
 
 public class ProcessModelsUtil {
 
-  public static List<IProcessModel> getProcessModels() {
-    var apps = IApplicationRepository.instance().allOf(IApplication.current().getSecurityContext());
-    return apps.stream().flatMap(app -> app.getProcessModels().stream()).collect(Collectors.toList());
-  }
-
-  public static List<IProcessModelVersion> getPMVs() {
-    return getProcessModels().stream().flatMap(pm -> pm.getProcessModelVersions().stream())
-            .collect(Collectors.toList());
+  private static List<IProcessModel> getProcessModels() {
+    var app = Optional.ofNullable(IApplication.current());
+    return app.stream().map(IApplication::getSecurityContext)
+      .flatMap(security -> IApplicationRepository.instance().allOf(security).stream())
+      .flatMap(a -> a.getProcessModels().stream())
+      .collect(Collectors.toList());
   }
 
   public static List<IWorkflowProcessModelVersion> getWorkflowPMVs() {
-    return getPMVs().stream().map(IWorkflowProcessModelVersion::of).collect(Collectors.toList());
+    return getProcessModels().stream()
+      .flatMap(pm -> pm.getProcessModelVersions().stream())
+      .map(IWorkflowProcessModelVersion::of)
+      .collect(Collectors.toList());
   }
 
   public static List<IWorkflowProcessModelVersion> getReleasedWorkflowPMVs() {
-    return getProcessModels().stream().map(IProcessModel::getReleasedProcessModelVersion)
-            .map(IWorkflowProcessModelVersion::of).collect(Collectors.toList());
+    return getProcessModels().stream()
+      .map(IProcessModel::getReleasedProcessModelVersion)
+      .map(IWorkflowProcessModelVersion::of)
+      .collect(Collectors.toList());
   }
 
-  public static List<StartableModel> getStartables() {
-    return getWorkflowPMVs().stream().flatMap(pmv -> pmv.getStartables(ISession.current()).stream()
-            .map(s -> createCaseMapOrProcessStartable(s, pmv)))
-            .collect(Collectors.toList());
+  public static List<StartableModel> getDeployedStartables() {
+    return getReleasedWorkflowPMVs().stream()
+      .flatMap(pmv -> pmv.getStartables(ISession.current()).stream()
+      .map(s -> createCaseMapOrProcessStartable(s, pmv)))
+      .collect(Collectors.toList());
   }
 
   private static StartableModel createCaseMapOrProcessStartable(IWebStartable startable, IProcessModelVersion pmv) {

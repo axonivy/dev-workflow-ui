@@ -42,11 +42,11 @@ public class LastSessionStarts {
     if (starts == null) {
       return Set.of();
     }
-    var deployedStartables = ProcessModelsUtil.getStartables();
-    if (deployedStartables == null) {
+    var deployedStartables = ProcessModelsUtil.getDeployedStartables();
+    if (deployedStartables.isEmpty()) {
       return starts;
     }
-    return starts.stream().filter(s -> deployedStartables.contains(s)).collect(Collectors.toSet());
+    return starts.stream().filter(deployedStartables::contains).collect(Collectors.toSet());
   }
 
 }

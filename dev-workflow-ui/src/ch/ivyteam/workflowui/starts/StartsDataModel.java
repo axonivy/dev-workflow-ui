@@ -1,7 +1,6 @@
 package ch.ivyteam.workflowui.starts;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -22,7 +21,6 @@ public class StartsDataModel {
 
   public List<CustomPMV> getPMVs() {
     var pmvs = ProcessModelsUtil.getReleasedWorkflowPMVs().stream()
-            .filter(Objects::nonNull)
             .map(pmv -> CustomPMV.create(pmv, filter))
             .filter(Optional::isPresent)
             .map(Optional::get)
