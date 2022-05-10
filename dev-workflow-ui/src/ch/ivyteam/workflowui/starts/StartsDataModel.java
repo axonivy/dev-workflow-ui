@@ -1,14 +1,10 @@
 package ch.ivyteam.workflowui.starts;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import ch.ivyteam.ivy.application.IApplication;
-import ch.ivyteam.ivy.application.IApplicationRepository;
-import ch.ivyteam.ivy.application.IProcessModel;
-import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
+import ch.ivyteam.workflowui.util.ProcessModelsUtil;
 
 public class StartsDataModel {
 
@@ -24,12 +20,7 @@ public class StartsDataModel {
   }
 
   public List<CustomPMV> getPMVs() {
-    var currentSecurtyContext = IApplication.current().getSecurityContext();
-    var pmvs = IApplicationRepository.instance().allOf(currentSecurtyContext).stream()
-            .flatMap(app -> app.getProcessModels().stream())
-            .map(IProcessModel::getReleasedProcessModelVersion)
-            .map(IWorkflowProcessModelVersion::of)
-            .filter(Objects::nonNull)
+    var pmvs = ProcessModelsUtil.getReleasedWorkflowPMVs().stream()
             .map(pmv -> CustomPMV.create(pmv, filter))
             .filter(Optional::isPresent)
             .map(Optional::get)

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 
-import ch.ivyteam.ivy.application.IApplication;
+import ch.ivyteam.ivy.application.IProcessModelVersion;
 import ch.ivyteam.ivy.model.value.WebLink;
 import ch.ivyteam.ivy.request.EngineUriResolver;
 
@@ -64,9 +64,9 @@ public class UrlUtil {
     return "process-viewer.xhtml?viewerUrl=" + viewerLinkEncoded;
   }
 
-  public static String generateCaseMapUrl(String pmvVersionName, UUID caseMapId) {
+  public static String generateCaseMapUrl(IProcessModelVersion pmv, UUID caseMapId) {
     StringBuilder appUrl = new StringBuilder(EngineUriResolver.instance().external().toASCIIString());
-    appUrl.append("/" + IApplication.current().getName());
+    appUrl.append(pmv.getApplication().getContextPath());
     appUrl.append(IVY_CASEMAPUI_PATH);
     if (StringUtils.contains(appUrl, "?")) {
       appUrl.append("&");
@@ -74,7 +74,7 @@ public class UrlUtil {
       appUrl.append("?");
     }
     appUrl.append("uuid=").append(caseMapId.toString());
-    appUrl.append("&pmv=").append(pmvVersionName);
+    appUrl.append("&pmv=").append(pmv.getVersionName());
     return appUrl.toString();
   }
 
