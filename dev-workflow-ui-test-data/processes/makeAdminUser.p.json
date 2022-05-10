@@ -1,0 +1,43 @@
+{
+  "format" : "9.4.8",
+  "id" : "175461E47A870BF8",
+  "data" : "workflow.uite.Data",
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "RequestStart",
+      "name" : "makeAdminUser.ivp",
+      "config" : {
+        "callSignature" : "makeAdminUser",
+        "startCategory" : "actions",
+        "outLink" : "makeAdminUser.ivp",
+        "startDescription" : "Creates admin user (DeveloperTest)"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 },
+        "labelOffset" : { "x" : -55, "y" : 23 }
+      },
+      "connect" : { "id" : "f3", "to" : "f2" }
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 64 }
+      }
+    }, {
+      "id" : "f2",
+      "type" : "Script",
+      "config" : {
+        "security" : "system",
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.workflowuitestdata.TestUtil;",
+            "TestUtil.makeAdmin();"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 }
+      },
+      "connect" : { "id" : "f4", "to" : "f1" }
+    } ]
+}
