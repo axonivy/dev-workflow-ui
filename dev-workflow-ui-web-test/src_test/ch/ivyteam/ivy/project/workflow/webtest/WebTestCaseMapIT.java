@@ -92,5 +92,6 @@ public class WebTestCaseMapIT {
     Selenide.switchTo().frame("viewerFrame");
     $(By.className("fa-apple")).shouldBe(visible);
     assertThat($(By.id("name-id")).getAttribute("value")).contains("test _ case _ map");
+    assertThat($(By.id("name-id")).getAttribute("value")).contains("(read only)");
   }
 }

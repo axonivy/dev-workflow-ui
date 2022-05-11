@@ -24,7 +24,7 @@ public class ViewerIvyDevWfBean {
     if (selectedStartable == null) {
       return "";
     }
-    return ViewerUtil.getStartableModelViewerLink(selectedStartable);
+    return selectedStartable.getViewerLink().getRelativeEncoded().replace("$", "%24");
   }
 
   public String getViewerLink(ICase caze) {

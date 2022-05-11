@@ -68,12 +68,8 @@ public class UrlUtil {
     StringBuilder appUrl = new StringBuilder(EngineUriResolver.instance().external().toASCIIString());
     appUrl.append(pmv.getApplication().getContextPath());
     appUrl.append(IVY_CASEMAPUI_PATH);
-    if (StringUtils.contains(appUrl, "?")) {
-      appUrl.append("&");
-    } else {
-      appUrl.append("?");
-    }
-    appUrl.append("uuid=").append(caseMapId.toString());
+    appUrl.append("?uuid=").append(caseMapId.toString());
+    appUrl.append("&mode=viewer");
     appUrl.append("&pmv=").append(pmv.getVersionName());
     return appUrl.toString();
   }
