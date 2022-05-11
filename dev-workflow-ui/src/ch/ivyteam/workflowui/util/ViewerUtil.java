@@ -8,11 +8,7 @@ import ch.ivyteam.workflowui.starts.StartableModel;
 public class ViewerUtil {
 
   public static String getViewerLink(ICase caze) {
-    return getStartableModelViewerLink(caseToStartable(caze));
-  }
-
-  public static String getStartableModelViewerLink(StartableModel startable) {
-    return startable.getViewerLink().toString();
+    return caseToStartable(caze).getViewerLink().toString();
   }
 
   public static String getViewerDialogTitle(ICase caze) {
