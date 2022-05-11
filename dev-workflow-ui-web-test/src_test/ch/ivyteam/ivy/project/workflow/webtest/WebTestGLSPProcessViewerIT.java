@@ -37,9 +37,9 @@ public class WebTestGLSPProcessViewerIT {
     $(By.id("iFrame")).shouldBe(visible);
     Selenide.switchTo().frame("iFrame");
     $(By.id("sprotty_1750C5211D94569D-f0")).shouldBe(visible, text("TestData"));
-    $$(By.className("start")).shouldBe(sizeGreaterThanOrEqual(1));
+    $$(By.className("start:requestStart")).shouldBe(sizeGreaterThanOrEqual(1));
     $$(By.className("sprotty-edge")).shouldBe(sizeGreaterThanOrEqual(1));
-    $$(By.className("end")).shouldBe(sizeGreaterThanOrEqual(1));
+    $$(By.className("end:taskEnd")).shouldBe(sizeGreaterThanOrEqual(1));
   }
 
   @Test
