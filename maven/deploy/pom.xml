@@ -18,50 +18,8 @@
     <deployApplicationName>dev-workflow-ui-${user.name}</deployApplicationName>
   </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>ch.ivyteam.demo</groupId>
-      <artifactId>workflow-demos</artifactId>
-      <version>${revision}</version>
-      <type>iar</type>
-    </dependency>
-    <dependency>
-      <groupId>ch.ivyteam.demo</groupId>
-      <artifactId>connectivity-demos</artifactId>
-      <version>${revision}</version>
-      <type>iar</type>
-    </dependency>
-  </dependencies>
-
-  <repositories>
-    <repository>
-      <id>axonivy.public</id>
-      <url>https://repo.axonivy.rocks</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>thirdparty.libs</id>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>copy-dependencies</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${project.build.directory}</outputDirectory>
-              <includeArtifactIds>workflow-demos,connectivity-demos</includeArtifactIds>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <executions>
