@@ -8,10 +8,9 @@ import java.util.stream.Collectors;
 
 import javax.faces.context.FacesContext;
 
+import org.apache.commons.io.FilenameUtils;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
-
-import com.google.common.io.Files;
 
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.workflow.ICase;
@@ -36,7 +35,7 @@ public class DocumentModel {
   public DocumentModel(IDocument doc) {
     this.name = doc.getName();
     this.path = doc.getPath();
-    this.icon = getDocumentIcon(Files.getFileExtension(this.name));
+    this.icon = getDocumentIcon(FilenameUtils.getExtension(this.name));
   }
 
   private static String getDocumentIcon(String extension) {
