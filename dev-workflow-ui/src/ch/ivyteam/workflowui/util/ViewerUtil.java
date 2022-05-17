@@ -22,7 +22,7 @@ public class ViewerUtil {
     if (startable.isProcessStart()) {
       return "Process of: " + startable.getDisplayName();
     }
-    return "Case Map for: " + startable.getDisplayName();
+    return "Case Map Viewer";
   }
 
   private static StartableModel caseToStartable(ICase caze) {

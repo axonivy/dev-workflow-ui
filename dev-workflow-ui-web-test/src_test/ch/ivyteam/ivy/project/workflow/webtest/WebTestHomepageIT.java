@@ -3,6 +3,7 @@ package ch.ivyteam.ivy.project.workflow.webtest;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.logout;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
+import static com.codeborne.selenide.Condition.readonly;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
@@ -77,8 +78,8 @@ public class WebTestHomepageIT {
     $(By.id("form:processViewerDialog")).shouldBe(visible);
     $(By.id("iFrame")).shouldBe(visible);
     Selenide.switchTo().frame("iFrame");
+    $(By.id("name-id")).shouldBe(readonly);
+    assertThat($(By.id("name-id")).getAttribute("value")).isEqualTo("test _ case _ map");
     $(By.className("fa-apple")).shouldBe(visible);
-    assertThat($(By.id("name-id")).getAttribute("value")).contains("test _ case _ map");
-    assertThat($(By.id("name-id")).getAttribute("value")).contains("(read only)");
   }
 }
