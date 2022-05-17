@@ -3,11 +3,10 @@ package ch.ivyteam.workflowui;
 import java.util.stream.Stream;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import org.apache.commons.lang3.StringUtils;
-
-import com.google.inject.servlet.RequestScoped;
 
 import ch.ivyteam.ivy.application.IApplication;
 
