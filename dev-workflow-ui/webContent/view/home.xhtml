@@ -50,6 +50,10 @@
                     <h:outputText value="#{start.displayName}" />
                   </p:commandLink>
                   <div>
+                    <p:link id="copyStartLinkBtn" href="#" onclick="copyToClipboard('#{start.link}')" styleClass="margin-right-10">
+                      <i class="si si-copy-paste" />
+                    </p:link>
+                    <p:tooltip for="copyStartLinkBtn" value="Copy to clipboard" position="left" />
                     <p:link id="openStartFullscreenBtn" href="#{start.link}" styleClass="margin-right-10" rendered="#{start.embedInFrame}">
                       <i class="si si-expand-6" />
                     </p:link>
