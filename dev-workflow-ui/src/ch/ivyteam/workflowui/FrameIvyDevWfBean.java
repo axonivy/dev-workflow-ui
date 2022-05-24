@@ -41,8 +41,8 @@ public class FrameIvyDevWfBean {
   }
 
   private String checkTaskUrl() {
-    String url = UrlUtil.getUrlParameter("taskUrl");
-    if (url.startsWith("/")) {
+    var url = UrlUtil.getUrlParameter("taskUrl");
+    if (StringUtils.startsWith(url, "/")) {
       return url;
     } else {
       throw BpmError.create("frame:unsupported:url")
