@@ -1,5 +1,5 @@
 {
-  "format" : "9.4.8",
+  "format" : "9.4.10",
   "id" : "17B167C2EEBFD5CF",
   "data" : "ch.ivyteam.ivy.project.workflow.Data",
   "kind" : "WEB_SERVICE",
@@ -12,8 +12,7 @@
         "callSignature" : "call"
       },
       "visual" : {
-        "at" : { "x" : 96, "y" : 64 },
-        "labelOffset" : { "x" : -15, "y" : 17 }
+        "at" : { "x" : 96, "y" : 64 }
       },
       "connect" : { "id" : "f2", "to" : "f1" }
     }, {
