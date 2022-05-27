@@ -31,11 +31,11 @@ public class WebTestGLSPProcessViewerIT {
   public void testOpenViewer() {
     loginDeveloper();
     Selenide.open(viewUrl("starts.xhtml"));
-    $(By.id("startsForm:filter")).sendKeys("testdata/testdata.ivp");
+    $(By.id("startsForm:globalFilter")).sendKeys("testdata/testdata.ivp");
     $$(By.className("si-hierarchy-6")).shouldBe(size(1)).get(0).click();
 
-    $(By.id("iFrame")).shouldBe(visible);
-    Selenide.switchTo().frame("iFrame");
+    $(By.id("viewerFrame")).shouldBe(visible);
+    Selenide.switchTo().frame("viewerFrame");
     $(By.id("sprotty_1750C5211D94569D-f0")).shouldBe(visible, text("TestData"));
     $$(By.className("start:requestStart")).shouldBe(sizeGreaterThanOrEqual(1));
     $$(By.className("sprotty-edge")).shouldBe(sizeGreaterThanOrEqual(1));
@@ -46,11 +46,11 @@ public class WebTestGLSPProcessViewerIT {
   public void testCaseMapUiViewer() {
     loginDeveloper();
     Selenide.open(viewUrl("starts.xhtml"));
-    $(By.id("startsForm:filter")).sendKeys("test _ case _ map");
+    $(By.id("startsForm:globalFilter")).sendKeys("test _ case _ map");
     $(By.className("si-hierarchy-6")).shouldBe(visible).click();
-    $(By.id("startsForm:processViewerDialog")).shouldBe(visible);
-    $(By.id("iFrame")).shouldBe(visible);
-    Selenide.switchTo().frame("iFrame");
+    $(By.id("startsForm:processViewer:processViewerDialog")).shouldBe(visible);
+    $(By.id("viewerFrame")).shouldBe(visible);
+    Selenide.switchTo().frame("viewerFrame");
     $(By.className("fa-apple")).shouldBe(visible);
     assertThat($(By.id("name-id")).getAttribute("value")).contains("test _ case _ map");
   }
@@ -59,7 +59,7 @@ public class WebTestGLSPProcessViewerIT {
   public void testNoViewerForUnknownUser() {
     Selenide.open(viewUrl("starts.xhtml"));
     logout();
-    $(By.id("startsForm:filter")).sendKeys("testdata/testdata.ivp");
+    $(By.id("startsForm:globalFilter")).sendKeys("testdata/testdata.ivp");
     $(By.className("si-hierarchy-6")).shouldNotBe(visible);
   }
 }

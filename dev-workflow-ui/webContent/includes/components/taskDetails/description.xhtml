@@ -4,8 +4,8 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
-  <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank"
-    columnClasses="details-description-label ui-g-6 ui-md-2, ui-g-6 ui-md-4, details-description-label ui-g-6 ui-md-2, ui-g-6 ui-md-4">
+  <p:panelGrid id="taskDetail" columns="4" layout="flex"
+    columnClasses="details-description-label p-col-6 p-md-2, p-col-6 p-md-4, details-description-label p-col-6 p-md-2, p-col-6 p-md-4">
 
     <h:outputText value="Task ID" />
     <h:outputText id="taskId" value="#{tasksDetailsIvyDevWfBean.selectedTask.id}" />
@@ -15,13 +15,13 @@
 
     <h:outputText value="Priority" />
     <h:outputText>
-      <i class="si si-#{tasksDetailsIvyDevWfBean.selectedTask.priorityIcon} table-icon" />
+      <i class="si si-#{tasksDetailsIvyDevWfBean.selectedTask.priorityIcon} p-mr-1" />
       <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.priority}" id="taskPriority" />
     </h:outputText>
 
     <h:outputText value="State" />
     <h:outputText>
-      <i class="si si-#{tasksDetailsIvyDevWfBean.selectedTask.stateIcon} table-icon" />
+      <i class="si si-#{tasksDetailsIvyDevWfBean.selectedTask.stateIcon} p-mr-1" />
       <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.state}" id="taskState" />
     </h:outputText>
 
@@ -63,10 +63,10 @@
     <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.pmv}" id="pmv" />
 
     <h:outputText value="Current Element" />
-    <p:commandLink id="openProcessViewerBtn" styleClass="margin-right-10"
+    <p:commandLink id="openProcessViewerBtn" styleClass="p-d-flex p-ai-center"
       actionListener="#{tasksDetailsIvyDevWfBean.setViewerLink()}" oncomplete="PF('process-viewer-dlg').show()"
-      update="form:processViewerDialog">
-      <i class="si si-hierarchy-6 si-rotate-270" />
+      update="processViewer:processViewerDialog">
+      <i class="si si-hierarchy-6 si-rotate-270 p-mr-1" />
       #{tasksDetailsIvyDevWfBean.selectedTask.currentElement}
     </p:commandLink>
   </p:panelGrid>

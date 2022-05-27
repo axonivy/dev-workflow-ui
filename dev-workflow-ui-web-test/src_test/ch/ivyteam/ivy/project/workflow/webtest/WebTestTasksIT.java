@@ -44,15 +44,15 @@ public class WebTestTasksIT {
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldBe(text("Created task of HomePageTestData"));
     $(By.className("si-information-circle")).shouldBe(visible).click();
-    $(By.id("form:taskName")).shouldBe(text("Created task of HomePageTestData"));
-    String taskId = $(By.id("form:taskId")).text();
-    $(By.id("form:taskStartBtn")).shouldBe(enabled).click();
+    $(By.id("taskName")).shouldBe(text("Created task of HomePageTestData"));
+    String taskId = $(By.id("taskId")).text();
+    $(By.id("actionMenuForm:taskStartBtn")).shouldBe(enabled).click();
     loginFromTable("testuser");
     open(viewUrl("allTasks.xhtml"));
     table = PrimeUi.table(By.id("tasksForm:tasks"));
     if (table.row(0).text().equals("Created task of HomePageTestData")) {
       $(By.className("si-information-circle")).shouldBe(visible).click();
-      $(By.id("form:taskId")).shouldNotBe(text(taskId));
+      $(By.id("taskId")).shouldNotBe(text(taskId));
     }
   }
 
@@ -71,18 +71,18 @@ public class WebTestTasksIT {
     $(".si-information-circle").shouldBe(visible).click();
 
     $(".case-link").shouldHave(text("Created case of TestData"));
-    $("#form\\:taskResponsible\\:userName").shouldBe(exactText("Everybody"));
-    $("#form\\:taskState").shouldBe(exactText("SUSPENDED"));
-    $(By.id("form:category")).shouldHave(exactText("TaskWithACategory"));
-    $(By.id("form:pmv")).shouldBe(exactText("dev-workflow-ui-test-data$1"));
+    $(By.id("taskResponsible:userName")).shouldBe(exactText("Everybody"));
+    $(By.id("taskState")).shouldBe(exactText("SUSPENDED"));
+    $(By.id("category")).shouldHave(exactText("TaskWithACategory"));
+    $(By.id("pmv")).shouldBe(exactText("dev-workflow-ui-test-data$1"));
     $(By.className("si-hierarchy-6")).shouldBe(visible);
 
-    $(By.id("form:workflowEvents:eventsTable:0:eventType")).shouldBe(exactText("EVENT_CREATE_TASK_BY_JOINED_TASKS"));
-    $("#form\\:taskActionsBtn").click();
-    $("#form\\:taskParkBtn").should(visible).click();
-    $("#form\\:taskState").shouldBe(exactText("PARKED"));
-    $("#form\\:workingUser\\:userName").shouldBe(exactText($("#sessionUserName").getText()));
-    $(By.id("form:workflowEvents:eventsTable:0:eventType")).shouldBe(exactText("EVENT_PARK_TASK"));
+    $(By.id("workflowEvents:eventsTable:0:eventType")).shouldBe(exactText("EVENT_CREATE_TASK_BY_JOINED_TASKS"));
+    $(By.id("actionMenuForm:taskActionsBtn")).click();
+    $(By.id("actionMenuForm:taskParkBtn")).should(visible).click();
+    $(By.id("taskState")).shouldBe(exactText("PARKED"));
+    $(By.id("workingUser:userName")).shouldBe(exactText($("#sessionUserName").getText()));
+    $(By.id("workflowEvents:eventsTable:0:eventType")).shouldBe(exactText("EVENT_PARK_TASK"));
   }
 
   @Test
@@ -92,16 +92,15 @@ public class WebTestTasksIT {
     $(".si-information-circle").shouldBe(visible).click();
     $(".case-link").shouldHave(text("Created case of TestData"));
 
-    $("#form\\:taskState").shouldBe(exactText("SUSPENDED"));
-    $("#form\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"));
-
-    $("#form\\:taskStartBtn").shouldBe(enabled).click();
+    $("#taskState").shouldBe(exactText("SUSPENDED"));
+    $("#actionMenuForm\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"))
+            .shouldBe(enabled).click();
     open(viewUrl("allTasks.xhtml"));
     $(".si-information-circle").shouldBe(visible).click();
-    $("#form\\:taskName").shouldBe(exactText("Created task of TestData"));
+    $("#taskName").shouldBe(exactText("Created task of TestData"));
 
-    $("#form\\:taskState").shouldBe(exactText("DONE"));
-    $("#form\\:taskStartBtn").shouldHave(cssClass("ui-state-disabled"));
+    $("#taskState").shouldBe(exactText("DONE"));
+    $("#actionMenuForm\\:taskStartBtn").shouldHave(cssClass("ui-state-disabled"));
   }
 
   @Test
@@ -113,15 +112,15 @@ public class WebTestTasksIT {
     $(".si-information-circle").shouldBe(visible).click();
     $(".case-link").shouldHave(text("Created case of TestData"));
 
-    $("#form\\:taskState").shouldBe(exactText("SUSPENDED"));
-    $("#form\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"));
+    $("#taskState").shouldBe(exactText("SUSPENDED"));
+    $("#actionMenuForm\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"));
 
-    $("#form\\:taskActionsBtn").click();
-    $("#form\\:taskParkBtn").should(visible).click();
+    $("#actionMenuForm\\:taskActionsBtn").click();
+    $("#actionMenuForm\\:taskParkBtn").should(visible).click();
 
-    $("#form\\:taskState").shouldBe(exactText("PARKED"));
-    $("#form\\:workingUser\\:userName").shouldBe(exactText($("#sessionUserName").getText()));
-    $("#form\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"));
+    $("#taskState").shouldBe(exactText("PARKED"));
+    $("#workingUser\\:userName").shouldBe(exactText($("#sessionUserName").getText()));
+    $("#actionMenuForm\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"));
   }
 
   @Test
@@ -129,15 +128,15 @@ public class WebTestTasksIT {
     open(viewUrl("allTasks.xhtml"));
     $(By.className("si-information-circle")).shouldBe(visible).click();
     $(By.className("case-link")).shouldHave(text("Created case of TestData"));
-    var taskId = $(By.id("form:taskId")).getText();
-    $(By.id("form:workflowEvents:eventsTable")).shouldBe(visible);
+    var taskId = $(By.id("taskId")).getText();
+    $(By.id("workflowEvents:eventsTable")).shouldBe(visible);
 
     loginFromTable("testuser");
     open(viewUrl("allTasks.xhtml"));
     $(By.className("si-information-circle")).shouldBe(visible).click();
-    $(By.id("form:taskId")).shouldBe(exactText(taskId));
-    $(By.id("form:workflowEvents:eventsTable")).shouldNotBe(visible);
-    $(By.id("form:workflowEvents:noPermissionMessage")).shouldBe(visible).shouldHave(text("No permissions"));
+    $(By.id("taskId")).shouldBe(exactText(taskId));
+    $(By.id("workflowEvents:eventsTable")).shouldNotBe(visible);
+    $(By.id("workflowEvents:noPermissionMessage")).shouldBe(visible).shouldHave(text("No permissions"));
   }
 
   @Test
@@ -146,7 +145,7 @@ public class WebTestTasksIT {
     $(By.className("si-information-circle")).shouldBe(visible).click();
     $(By.className("case-link")).shouldHave(text("Created case of TestData"));
 
-    Table fieldsTable = PrimeUi.table(By.id("form:customFields:customFieldsTable"));
+    Table fieldsTable = PrimeUi.table(By.id("customFields:customFieldsTable"));
     fieldsTable.valueAt(1, 0).contains("task test value");
   }
 
@@ -157,10 +156,10 @@ public class WebTestTasksIT {
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldBe(text("Created delayed task"));
     $(By.className("si-information-circle")).shouldBe(visible).click();
-    $(By.id("form:taskName")).shouldBe(exactText("Created delayed task"));
-    $(By.id("form:taskState")).shouldBe(exactText("DELAYED"));
-    $(By.id("form:delayDate")).shouldNotBe(exactText("N/A"));
-    $(By.id("form:taskStartBtn")).shouldHave(cssClass("ui-state-disabled"));
+    $(By.id("taskName")).shouldBe(exactText("Created delayed task"));
+    $(By.id("taskState")).shouldBe(exactText("DELAYED"));
+    $(By.id("delayDate")).shouldNotBe(exactText("N/A"));
+    $(By.id("actionMenuForm:taskStartBtn")).shouldHave(cssClass("ui-state-disabled"));
   }
 
   @Test
@@ -170,8 +169,8 @@ public class WebTestTasksIT {
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldBe(text("Created task of CustomUser"));
     $(By.className("si-information-circle")).shouldBe(visible).click();
-    $(By.id("form:taskName")).shouldBe(exactText("Created task of CustomUser"));
-    $(By.id("form:taskResponsible:userName")).shouldHave(text("CustomUserTest"));
+    $(By.id("taskName")).shouldBe(exactText("Created task of CustomUser"));
+    $(By.id("taskResponsible:userName")).shouldHave(text("CustomUserTest"));
   }
 
   @Test
@@ -181,28 +180,28 @@ public class WebTestTasksIT {
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldBe(text("Created task of TestData"));
     $(By.className("si-information-circle")).shouldBe(visible).click();
-    $(By.id("form:taskName")).shouldBe(exactText("Created task of TestData"));
-    $(By.id("form:taskResponsible:userName")).shouldBe(exactText("Everybody"));
+    $(By.id("taskName")).shouldBe(exactText("Created task of TestData"));
+    $(By.id("taskResponsible:userName")).shouldBe(exactText("Everybody"));
 
-    $(By.id("form:taskActionsBtn")).click();
-    $(By.id("form:taskDelegateBtn")).should(visible).click();
+    $(By.id("actionMenuForm:taskActionsBtn")).click();
+    $(By.id("actionMenuForm:taskDelegateBtn")).should(visible).click();
     $(By.id("delegateTaskDialog")).shouldBe(visible);
     PrimeUi.selectOne(By.id("delegateTaskForm:selectUserMenu")).selectItemByLabel("testuser");
 
     $(By.id("delegateTaskForm:delegateProceedButton")).click();
-    $(By.id("form:taskResponsible:userName")).shouldHave(text("testuser"));
+    $(By.id("taskResponsible:userName")).shouldHave(text("testuser"));
   }
 
   @Test
   public void customFielEmbedInFrame() {
     open(viewUrl("starts.xhtml"));
-    $(By.id("startsForm:filter")).sendKeys("embed in frame");
+    $(By.id("startsForm:globalFilter")).sendKeys("embed in frame");
     $(By.className("start-link")).shouldBe(visible, text("Do not embed in Frame")).click();
     $(By.id("form:proceed")).shouldBe(visible).click();
     open(viewUrl("allTasks.xhtml"));
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldBe(text("notEmbedTask"));
     $(By.className("si-information-circle")).shouldBe(visible).click();
-    $(By.id("form:taskStartBtn")).shouldNotHave(text("?taskUrl"));
+    $(By.id("actionMenuForm:taskStartBtn")).shouldNotHave(text("?taskUrl"));
   }
 }

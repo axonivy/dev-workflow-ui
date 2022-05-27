@@ -94,10 +94,6 @@ public class StartableModel {
     }
   }
 
-  public String getViewerUrl() {
-    return UrlUtil.generateProcessViewerUrl(this.viewerLink);
-  }
-
   public String getIcon() {
     return icon;
   }

@@ -45,8 +45,8 @@ public class WebTestCaseMapIT {
     open(viewUrl("cases.xhtml"));
     $(".si-information-circle").shouldBe(visible).click();
 
-    $("#form\\:creatorUser\\:userName").shouldBe(exactText("DeveloperTest"));
-    $("#form\\:caseState").shouldBe(exactText("CREATED"));
+    $(By.id("form:creatorUser:userName")).shouldBe(exactText("DeveloperTest"));
+    $(By.id("form:caseState")).shouldBe(exactText("CREATED"));
 
     $(".case-map-column").shouldHave(text("stage1"));
     $(".process-flow").shouldBe(visible);
@@ -70,16 +70,15 @@ public class WebTestCaseMapIT {
     open(viewUrl("allTasks.xhtml"));
     $(".si-information-circle").shouldBe(visible).click();
 
-    $(By.id("form:sidestepsBtn")).shouldBe(visible).click();
-    $(By.id("form:sidestepMenu")).shouldBe(visible).find(By.className("ui-menuitem-link")).click();
-    $(By.id("form:sidestepsBtn")).shouldBe(visible);
+    $(By.id("actionMenuForm:sidestepsBtn")).shouldBe(visible).click();
+    $(By.id("actionMenuForm:sidestepMenu")).shouldBe(visible).find(By.className("ui-menuitem-link")).click();
+    $(By.id("actionMenuForm:sidestepsBtn")).shouldBe(visible);
 
-    $("#form\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"));
-    $("#form\\:taskStartBtn").shouldBe(enabled).click();
-    $("#form\\:taskStartBtn").shouldHave(cssClass("ui-state-disabled"));
-    $(By.id("form:sidestepsBtn")).shouldNotBe(visible);
+    $(By.id("actionMenuForm:taskStartBtn")).shouldNotHave(cssClass("ui-state-disabled"));
+    $(By.id("actionMenuForm:taskStartBtn")).shouldBe(enabled).click();
+    $(By.id("actionMenuForm:taskStartBtn")).shouldHave(cssClass("ui-state-disabled"));
+    $(By.id("actionMenuForm:sidestepsBtn")).shouldNotBe(visible);
   }
-
 
   @Test
   public void caseMapUi() {
@@ -88,7 +87,7 @@ public class WebTestCaseMapIT {
     $(By.className("current-hierarchy-case")).find("a").shouldNotHave(text("Created case of TestData"));
     $(By.className("casemap-card")).shouldBe(visible);
     $(By.id("form:openCaseMapUiViewerBtn")).shouldBe(visible).click();
-    $(By.id("form:processViewerDialog")).shouldBe(visible);
+    $(By.id("form:processViewer:processViewerDialog")).shouldBe(visible);
     $(By.id("viewerFrame")).shouldBe(visible);
     Selenide.switchTo().frame("viewerFrame");
     $(By.className("fa-apple")).shouldBe(visible);

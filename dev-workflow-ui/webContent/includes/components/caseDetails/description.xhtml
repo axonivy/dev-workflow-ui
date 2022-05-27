@@ -4,8 +4,8 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
-  <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank"
-    columnClasses="details-description-label ui-g-6 ui-md-2, ui-g-6 ui-md-4, details-description-label ui-g-6 ui-md-2, ui-g-6 ui-md-4">
+  <p:panelGrid columns="4" layout="flex" id="caseDetails"
+    columnClasses="details-description-label p-col-6 p-md-2, p-col-6 p-md-4, details-description-label p-col-6 p-md-2, p-col-6 p-md-4">
     <h:outputText value="Case ID" />
     <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.getId()}" id="caseId"/>
 
@@ -27,7 +27,7 @@
 
     <h:outputText value="State" />
     <h:outputText>
-      <i class="si si-#{casesIvyDevWfBean.getStateIcon(casesDetailsIvyDevWfBean.selectedCase.getState())} table-icon"></i>
+      <i class="si si-#{casesIvyDevWfBean.getStateIcon(casesDetailsIvyDevWfBean.selectedCase.getState())} p-mr-1"></i>
       <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.getState()}" id="caseState" />
     </h:outputText>
 

@@ -18,109 +18,115 @@
         </span>
       </h:panelGroup>
 
-      <h:form id="form">
-
-        <p:dialog id="processViewerDialog" widgetVar="process-viewer-dlg" width="80%" showEffect="fade" modal="true"
-          style="margin-top: 6em">
-          <f:facet name="header">
-            <h:outputText value="#{viewerIvyDevWfBean.viewerDialogTitle}" styleClass="margin-right-10" />
-            <p:link id="openViewerNewPage" styleClass="staight-text-icon" href="#{viewerIvyDevWfBean.viewerLink}">
-              <i class="si si-expand-6" style="font-size: 0.75em" />
-            </p:link>
-          </f:facet>
-          <iframe id="iFrame" src="#{viewerIvyDevWfBean.viewerLink}"
-            style="height: calc(100vh - 195px); width: 100%; border: 0;" />
-        </p:dialog>
-
-        <p:panelGrid columns="2" layout="grid" styleClass="custom-grid" columnClasses="ui-g-12 ui-lg-4, ui-g-12 ui-lg-8"
-          rendered="#{loginIvyDevWfBean.loggedIn}">
-
-          <h:panelGroup id="lastStartsCard" styleClass="card card-w-title custom-card" layout="block">
-            <div class="straight-text-icon card-header-title">
-              <h:outputText value="Last starts" />
-            </div>
-            <p:dataTable id="lastStarts" var="start" value="#{homepageIvyDevWfBean.lastStarts}" selectionMode="single"
-              rowKey="#{start.displayName}" rows="10" styleClass="margin-top-10 table-header-none"
-              rendered="#{not empty homepageIvyDevWfBean.lastStarts}">
-              <p:ajax event="rowSelect" listener="#{homepageIvyDevWfBean.executeLastStart}" update="@form" />
-              <p:column styleClass="last-start-element">
-                <div class="flex-space straight-text-icon">
-                  <p:commandLink id="last-start-link" actionListener="#{start.execute}" styleClass="straight-text-icon">
-                    <i class="#{start.icon} margin-right-10" />
-                    <h:outputText value="#{start.displayName}" />
-                  </p:commandLink>
-                  <div>
-                    <p:link id="copyStartLinkBtn" href="#" onclick="copyToClipboard('#{start.link}')" styleClass="margin-right-10">
-                      <i class="si si-copy-paste" />
-                    </p:link>
-                    <p:tooltip for="copyStartLinkBtn" value="Copy to clipboard" position="left" />
-                    <p:link id="openStartFullscreenBtn" href="#{start.link}" styleClass="margin-right-10" rendered="#{start.embedInFrame}">
-                      <i class="si si-expand-6" />
-                    </p:link>
-                    <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="top" rendered="#{start.embedInFrame}" />
-                    <p:commandLink id="openProcessViewer" oncomplete="PF('process-viewer-dlg').show()" styleClass="margin-right-10"
-                      update="form:processViewerDialog" actionListener="#{viewerIvyDevWfBean.setStartable(start)}">
-                      <i class="si si-hierarchy-6 si-rotate-270" />
-                    </p:commandLink>
-                    <p:tooltip for="openProcessViewer" position="top"
-                      value="#{start.isProcessStart() ? 'Open Process Viewer' : 'Open Case Map Viewer'}" />
-                  </div>
+      <div class="layout-dashboard">
+        <h:panelGroup styleClass="p-grid" layout="block" rendered="#{loginIvyDevWfBean.loggedIn}">
+          <div class="p-col-12 p-lg-4">
+            <div class="card last-starts-card">
+              <div class="card-header">
+                <div class="card-title p-d-flex p-ai-center">
+                  <i class="p-pr-3 si si-navigation-menu"></i>
+                  <h6 class="p-m-0">Last starts</h6>
                 </div>
-              </p:column>
-            </p:dataTable>
-            <h:panelGrid rendered="#{empty homepageIvyDevWfBean.lastStarts}" styleClass="margin-top-10">
-              <h:outputText>You haven't started any processes yet</h:outputText>
-              <p:button value="Go to starts page" outcome="starts.xhtml" icon="si si-navigation-menu" />
-            </h:panelGrid>
-          </h:panelGroup>
+              </div>
+              <p:dataTable id="lastStarts" var="start" value="#{homepageIvyDevWfBean.lastStarts}" selectionMode="single"
+                rowKey="#{start.displayName}" rows="10" styleClass="table-header-none"
+                rendered="#{not empty homepageIvyDevWfBean.lastStarts}">
+                <p:ajax event="rowSelect" listener="#{homepageIvyDevWfBean.executeLastStart}" />
+                <p:column styleClass="last-start-element">
+                  <div class="p-d-flex straight-text-icon">
+                    <p:commandLink id="last-start-link" actionListener="#{start.execute}" styleClass="straight-text-icon">
+                      <i class="#{start.icon} p-mr-1" />
+                      <h:outputText value="#{start.displayName}" />
+                    </p:commandLink>
+                    <p:tooltip for="last-start-link" value="#{start.displayName}" position="top" />
 
-          <h:panelGroup id="activeTasksCard" styleClass="card card-w-title custom-card" layout="block">
-            <div class="straight-text-icon card-header-title">
-              <h:outputText value="My tasks" />
+                    <div class="p-ml-auto">
+                      <p:link id="copyStartLinkBtn" href="#" onclick="copyToClipboard('#{start.link}')">
+                        <i class="si si-copy-paste" />
+                      </p:link>
+                      <p:tooltip for="copyStartLinkBtn" value="Copy to clipboard" position="top" />
+
+                      <p:link id="openStartFullscreenBtn" href="#{start.link}" styleClass="p-ml-1" rendered="#{start.embedInFrame}">
+                        <i class="si si-expand-6" />
+                      </p:link>
+                      <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="top" rendered="#{start.embedInFrame}" />
+
+                      <p:commandLink id="openProcessViewer" oncomplete="PF('process-viewer-dlg').show()" styleClass="p-ml-1"
+                        update="processViewer:processViewerDialog" actionListener="#{viewerIvyDevWfBean.setStartable(start)}">
+                        <i class="si si-hierarchy-6 si-rotate-270" />
+                      </p:commandLink>
+                      <p:tooltip for="openProcessViewer" position="top"
+                        value="#{start.isProcessStart() ? 'Open Process Viewer' : 'Open Case Map Viewer'}" />
+                    </div>
+                  </div>
+                </p:column>
+              </p:dataTable>
+              <h:panelGrid rendered="#{empty homepageIvyDevWfBean.lastStarts}">
+                <h:outputText>You haven't started any processes yet</h:outputText>
+                <p:button value="Go to starts page" outcome="starts.xhtml" icon="si si-navigation-menu" />
+              </h:panelGrid>
             </div>
-            <p:dataTable id="activeTasks" var="task" value="#{homepageIvyDevWfBean.tasksDataModel}" lazy="true"
-              rows="10" styleClass="margin-top-10" rendered="#{homepageIvyDevWfBean.tasksSize gt 0}" selectionMode="single">
-              <p:ajax event="rowSelect" listener="#{tasksIvyDevWfBean.executeTaskRow}" update="@form" />
-              <p:column styleClass="icon-row" responsivePriority="2">
-                <i class="si si-lg si-task-list-edit margin-right-5" />
-              </p:column>
-              <p:column styleClass="icon-row" sortBy="#{task.priority}">
-                <h:outputText id="taskPrio" styleClass="si si-lg si-#{task.priorityIcon}" />
-                <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
-              </p:column>
-              <p:column headerText="Name" sortBy="#{task.name}">
-                <h:commandLink id="startTaskLink" actionListener="#{tasksIvyDevWfBean.executeTask(task.id)}">
-                  <h:outputText id="taskName" value="#{task.name}" />
-                  <p:tooltip for="taskName" value="Task ID: #{task.id}" position="top" />
-                </h:commandLink>
-              </p:column>
-              <p:column headerText="Start" sortBy="#{task.startTimestamp}" sortOrder="descending">
-                <jc:datetime id="startTime" datetime="#{task.startTimestamp}" />
-              </p:column>
-              <p:column headerText="Expiry" sortBy="#{task.expiryTimestamp}" responsivePriority="2">
-                <jc:datetime id="expiryTime" datetime="#{task.expiryTimestamp}" />
-              </p:column>
-              <p:column styleClass="icon-row">
-                <h:link outcome="taskDetails">
-                  <f:param name="task" value="#{task.id}" />
-                  <i class="si si-lg si-information-circle"></i>
-                </h:link>
-              </p:column>
-            </p:dataTable>
-            <h:panelGrid rendered="#{homepageIvyDevWfBean.tasksSize eq 0}" styleClass="margin-top-10">
-              <h:outputText value="You don't have any active tasks. Go take a coffee break 😊☕" />
-            </h:panelGrid>
-          </h:panelGroup>
-
-        </p:panelGrid>
-        <h:panelGroup styleClass="card card-w-title custom-card" layout="block"
-          rendered="#{!loginIvyDevWfBean.loggedIn}">
-          <div class="straight-text-icon card-header-title">
-            <h:outputText value="Starts" />
           </div>
-          <ui:include src="/includes/components/startsPanel.xhtml" />
+
+          <div class="p-col-12 p-lg-8">
+            <div class="card active-tasks-card">
+              <div class="card-header">
+                <div class="card-title p-d-flex p-ai-center">
+                  <i class="p-pr-3 si si-layout-bullets"></i>
+                  <h6 class="p-m-0">My tasks</h6>
+                </div>
+              </div>
+              <p:dataTable id="activeTasks" var="task" value="#{homepageIvyDevWfBean.tasksDataModel}" lazy="true"
+                rows="10" paginator="true" paginatorAlwaysVisible="false" rendered="#{homepageIvyDevWfBean.tasksSize gt 0}"
+                paginatorPosition="bottom" selectionMode="single">
+                <p:ajax event="rowSelect" listener="#{tasksIvyDevWfBean.executeTaskRow}" />
+                <p:column styleClass="icon-row" responsivePriority="2">
+                  <i class="si si-lg si-task-list-edit" />
+                </p:column>
+                <p:column styleClass="icon-row" sortBy="#{task.priority}">
+                  <h:outputText id="taskPrio" styleClass="si si-lg si-#{task.priorityIcon}" />
+                  <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
+                </p:column>
+                <p:column headerText="Name" sortBy="#{task.name}">
+                  <p:commandLink id="startTaskLink" actionListener="#{tasksIvyDevWfBean.executeTask(task.id)}">
+                    <h:outputText id="taskName" value="#{task.name}" />
+                    <p:tooltip for="taskName" value="Task ID: #{task.id}" position="top" />
+                  </p:commandLink>
+                </p:column>
+                <p:column headerText="Start" sortBy="#{task.startTimestamp}" sortOrder="descending">
+                  <jc:datetime id="startTime" datetime="#{task.startTimestamp}" />
+                </p:column>
+                <p:column headerText="Expiry" sortBy="#{task.expiryTimestamp}" responsivePriority="2">
+                  <jc:datetime id="expiryTime" datetime="#{task.expiryTimestamp}" />
+                </p:column>
+                <p:column styleClass="table-btn-1">
+                  <p:linkButton icon="si si-information-circle" styleClass="ui-button-outlined rounded-button"
+                    href="taskDetails.xhtml?task=#{task.id}" />
+                </p:column>
+              </p:dataTable>
+              <h:panelGrid rendered="#{homepageIvyDevWfBean.tasksSize eq 0}">
+                <h:outputText value="You don't have any active tasks. Go take a coffee break 😊☕" />
+              </h:panelGrid>
+            </div>
+          </div>
         </h:panelGroup>
-      </h:form>
+
+        <h:panelGroup styleClass="p-grid" layout="block" rendered="#{!loginIvyDevWfBean.loggedIn}">
+          <div class="p-col-12">
+            <div class="card starts-card">
+              <div class="card-header">
+                <div class="card-title p-d-flex p-ai-center">
+                  <i class="p-pr-3 si si-navigation-menu"></i>
+                  <h6 class="p-m-0">Starts</h6>
+                </div>
+              </div>
+              <ui:include src="/includes/components/startsPanel.xhtml" />
+            </div>
+          </div>
+        </h:panelGroup>
+      </div>
+
+      <jc:processViewer id="processViewer" title="#{viewerIvyDevWfBean.viewerDialogTitle}" link="#{viewerIvyDevWfBean.viewerLink}" />
     </ui:define>
   </ui:composition>
 </h:body>

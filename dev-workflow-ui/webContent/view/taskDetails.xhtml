@@ -13,77 +13,74 @@
     <ui:define name="content">
       <f:event type="preRenderView" listener="#{tasksDetailsIvyDevWfBean.redirectIfCantResume}" />
 
-      <h:form id="form">
-        <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-smaller-padding"
-          columnClasses="ui-g-12">
-          <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
-            <div class="detail-card-header">
-              <div class="detail-card-title">
-                <i class="si si-lg si-common-file-text detail-title-icon" />
-                <h:outputText value="Description" />
+      <div class="layout-dashboard">
+        <div class="p-grid">
+          <div class="p-col-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title p-d-flex p-ai-center">
+                  <i class="p-pr-3 si si-common-file-text"></i>
+                  <h6 class="p-m-0">Description</h6>
+                </div>
+                <ui:include src="/includes/components/taskDetails/descriptionCardHeaderActions.xhtml" />
               </div>
-              <ui:include src="/includes/components/taskDetails/descriptionCardHeaderActions.xhtml" />
+              <ui:include src="/includes/components/taskDetails/description.xhtml" />
             </div>
-            <p:separator />
-            <ui:include src="/includes/components/taskDetails/description.xhtml" />
-          </h:panelGroup>
+          </div>
 
-          <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
-            <h:panelGroup layout="block" styleClass="detail-card-title related-element">
-              <i class="si si-lg si-cog detail-title-icon" />
-              <h:outputText value="Custom fields" />
-            </h:panelGroup>
-            <jc:customFields id="customFields" customFields="#{tasksDetailsIvyDevWfBean.selectedTask.customFields}" />
-          </h:panelGroup>
-
-          <h:panelGroup styleClass="card card-w-title custom-card" layout="block">
-            <div class="detail-card-title">
-              <i class="si si-lg si-synchronize-arrow-clock detail-title-icon" />
-              <h:outputText value="Workflow Events" />
+          <div class="p-col-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title p-d-flex p-ai-center">
+                  <i class="p-pr-3 si si-cog"></i>
+                  <h6 class="p-m-0">Custom fields</h6>
+                </div>
+              </div>
+              <jc:customFields id="customFields" customFields="#{tasksDetailsIvyDevWfBean.selectedTask.customFields}" />
             </div>
-            <jc:workflowEventsTable id="workflowEvents" workflowEvents="#{tasksDetailsIvyDevWfBean.selectedTask.workflowEvents}"/>
-          </h:panelGroup>
+          </div>
 
-        </p:panelGrid>
+          <div class="p-col-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title p-d-flex p-ai-center">
+                  <i class="p-pr-3 si si-synchronize-arrow-clock"></i>
+                  <h6 class="p-m-0">Workflow Events</h6>
+                </div>
+              </div>
+              <jc:workflowEventsTable id="workflowEvents" workflowEvents="#{tasksDetailsIvyDevWfBean.selectedTask.workflowEvents}"/>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        <p:dialog id="processViewerDialog" widgetVar="process-viewer-dlg" width="80%" showEffect="fade" modal="true"
-          style="margin-top: 6em">
-          <f:facet name="header">
-            <h:outputText value="Process of: #{tasksDetailsIvyDevWfBean.selectedTask.name}" styleClass="margin-right-10" />
-            <p:link id="openViewerNewPage" styleClass="staight-text-icon" href="#{tasksDetailsIvyDevWfBean.selectedTask.viewerLink}">
-              <i class="si si-expand-6" style="font-size: 0.75em" />
-            </p:link>
-          </f:facet>
-          <iframe id="iFrame" src="#{tasksDetailsIvyDevWfBean.viewerLink}"
-            style="height: calc(100vh - 195px); width: 100%; border: 0;" />
-        </p:dialog>
+      <jc:processViewer id="processViewer" title="Process of: #{tasksDetailsIvyDevWfBean.selectedTask.name}" link="#{tasksDetailsIvyDevWfBean.viewerLink}" />
 
-      </h:form>
-
-      <p:dialog header="Delegate task" id="delegateTaskDialog" widgetVar="delegateTaskModal" modal="true" height="150" width="400">
+      <p:dialog header="Delegate task" id="delegateTaskDialog" widgetVar="delegateTaskModal" modal="true" width="400">
         <h:form id="delegateTaskForm">
           <h:outputText value="Delegate the task to a specified user or group"/>
-          <h:panelGroup id="delegateElements" layout="block">
+          <h:panelGroup id="delegateElements" layout="block" styleClass="ui-fluid">
             <p:selectOneRadio value="#{tasksDetailsIvyDevWfBean.showUsers}" layout="responsive"
-              columns="2" styleClass="margin-top-10">
+              columns="2" styleClass="p-mt-2">
               <f:selectItem itemLabel="User" itemValue="true"/>
               <f:selectItem itemLabel="Role" itemValue="false"/>
               <p:ajax update="delegateElements" event="valueChange"/>
             </p:selectOneRadio>
-            <p:selectOneMenu styleClass="margin-top-10 width-100" value="#{tasksDetailsIvyDevWfBean.delegateMember}"
+            <p:selectOneMenu styleClass="p-mt-2" value="#{tasksDetailsIvyDevWfBean.delegateMember}"
               rendered="#{tasksDetailsIvyDevWfBean.showUsers}" id="selectUserMenu" immediate="true">
               <f:selectItems value="#{tasksDetailsIvyDevWfBean.allUsers}" var="member" itemLabel="#{member.displayName}" itemValue="#{member.memberName}"/>
             </p:selectOneMenu>
-            <p:selectOneMenu styleClass="margin-top-10 width-100" value="#{tasksDetailsIvyDevWfBean.delegateMember}"
+            <p:selectOneMenu styleClass="p-mt-2" value="#{tasksDetailsIvyDevWfBean.delegateMember}"
               rendered="#{!tasksDetailsIvyDevWfBean.showUsers}" id="selectRoleMenu" immediate="true">
               <f:selectItems value="#{tasksDetailsIvyDevWfBean.allRoles}" var="member" itemLabel="#{member.displayName}" itemValue="#{member.memberName}"/>
             </p:selectOneMenu>
           </h:panelGroup>
-          <h:panelGroup layout="block" styleClass="dialog-button-container">
-            <p:commandLink value="Cancel" styleClass="dialog-cancel-button" onclick="PF('delegateTaskModal').hide();"/>
+          <h:panelGroup layout="block" styleClass="p-mt-2 dialog-button-container">
             <p:commandButton id="delegateProceedButton" value="Assign task"
               actionListener="#{tasksDetailsIvyDevWfBean.delegateTask}" icon="si si-move-to-bottom"
-              update="form" onsuccess="PF('delegateTaskModal').hide();"/>
+              update="taskDetail" onsuccess="PF('delegateTaskModal').hide();"/>
+            <p:commandButton value="Cancel" styleClass="ui-button-secondary ui-button-flat dialog-cancel-button"
+              onclick="PF('delegateTaskModal').hide();"/>
           </h:panelGroup>
         </h:form>
       </p:dialog>

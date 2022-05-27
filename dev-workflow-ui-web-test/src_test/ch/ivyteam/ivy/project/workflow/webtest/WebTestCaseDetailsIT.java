@@ -7,6 +7,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUr
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
@@ -37,17 +38,17 @@ public class WebTestCaseDetailsIT {
     loginDeveloper();
     open(viewUrl("cases.xhtml"));
     $(byText("Created case of TestData")).shouldBe(visible).click();
-    $("#form\\:caseName").shouldBe(text("Created case of TestData"));
+    $(By.id("form:caseName")).shouldBe(text("Created case of TestData"));
   }
 
   @Test
   public void caseDetails() {
-    $("#form\\:creatorUser\\:userName").shouldBe(exactText("DeveloperTest"));
+    $(By.id("form:creatorUser:userName")).shouldBe(exactText("DeveloperTest"));
     $(By.id("form:category")).shouldHave(exactText("TestData"));
-    $("#form\\:caseState").shouldBe(exactText("RUNNING"));
+    $(By.id("form:caseState")).shouldBe(exactText("RUNNING"));
 
-    $("#form\\:caseDestroyBtn").should(visible).click();
-    $("#form\\:caseState").shouldBe(exactText("DESTROYED"));
+    $(By.id("form:caseDestroyBtn")).should(visible).click();
+    $(By.id("form:caseState")).shouldBe(exactText("DESTROYED"));
   }
 
   @Test
@@ -65,7 +66,7 @@ public class WebTestCaseDetailsIT {
     Table tasksTable = PrimeUi.table(By.id("form:tasks"));
     tasksTable.containsNot("System");
 
-    $("#form\\:showSystemTasksSwitch").shouldBe(visible).click();
+    $(By.id("form:showSystemTasksSwitch")).shouldBe(visible).click();
 
     tasksTable.contains("System");
   }
@@ -113,10 +114,11 @@ public class WebTestCaseDetailsIT {
   public void processViewer() {
     $(By.id("form:cardOpenprocessViewerBtn")).shouldBe(visible);
     $(By.id("form:openProcessViewerBtn")).shouldBe(visible).click();
-    $(By.id("form:processViewerDialog")).shouldBe(visible);
+    $(By.id("form:processViewer:processViewerDialog")).shouldBe(visible);
     $(By.id("viewerFrame")).shouldBe(visible);
-    $(By.id("form:openViewerNewPage")).shouldBe(visible).click();
-    $(By.id("form:category")).shouldNotBe(visible);
+    $(By.id("form:processViewer:openViewerNewPage")).shouldBe(visible).click();
+    $(By.id("form:openProcessViewerBtn")).shouldNot(exist);
+    $(By.id("form:processViewer:processViewerDialog")).shouldNotBe(visible);
   }
 
 }

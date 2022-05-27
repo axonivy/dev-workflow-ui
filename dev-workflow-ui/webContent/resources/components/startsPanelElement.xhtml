@@ -8,31 +8,33 @@
 </cc:interface>
 
 <cc:implementation>
-  <p:panel id="startElement" styleClass="start-element" rendered="#{cc.attrs.pmv.active}">
-    <p:commandLink actionListener="#{cc.attrs.start.execute}" styleClass="flex-space start-link width-100">
-      <span class="straight-text-icon"> <i id="startableIcon" class="#{cc.attrs.start.icon} margin-right-5"></i>
+  <h:panelGroup id="startElement" styleClass="p-d-flex p-ai-center start-element" rendered="#{cc.attrs.pmv.active}">
+    <p:commandLink actionListener="#{cc.attrs.start.execute}" styleClass="straight-text-icon start-link">
+      <span>
+        <i id="startableIcon" class="#{cc.attrs.start.icon} p-mr-1"></i>
         <span>#{cc.attrs.start.displayName}</span>
       </span>
       <span>#{cc.attrs.start.description}</span>
     </p:commandLink>
-    <p:link id="copyStartLinkBtn" href="#" onclick="copyToClipboard('#{cc.attrs.start.link}')" styleClass="margin-right-10">
+    <p:link id="copyStartLinkBtn" href="#" onclick="copyToClipboard('#{cc.attrs.start.link}')">
       <i class="si si-copy-paste" />
     </p:link>
     <p:tooltip for="copyStartLinkBtn" value="Copy to clipboard" position="left" />
-    <p:link id="openStartFullscreenBtn" href="#{cc.attrs.start.link}" styleClass="margin-right-10"
+
+    <p:link id="openStartFullscreenBtn" href="#{cc.attrs.start.link}" styleClass="p-ml-2"
       rendered="#{cc.attrs.start.embedInFrame}">
       <i class="si si-expand-6" />
     </p:link>
-    <p:tooltip for="openStartFullscreenBtn"
-      value="Open start on a fullscreen page. Add 'embedInFrame' request custom field to set this as default."
-      position="left" />
-    <p:commandLink id="openProcessViewer" oncomplete="PF('process-viewer-dlg').show()" styleClass="margin-right-10"
-      rendered="#{loginIvyDevWfBean.loggedIn}" update="startsForm:processViewerDialog"
+    <p:tooltip for="openStartFullscreenBtn" position="left"
+      value="Open start on a fullscreen page. Add 'embedInFrame' request custom field to set this as default." />
+
+    <p:commandLink id="openProcessViewer" oncomplete="PF('process-viewer-dlg').show()" styleClass="p-ml-2 p-mr-2"
+      rendered="#{loginIvyDevWfBean.loggedIn}" update="startsForm:processViewer:processViewerDialog"
       actionListener="#{viewerIvyDevWfBean.setStartable(cc.attrs.start)}">
       <i class="si si-hierarchy-6 si-rotate-270" />
     </p:commandLink>
     <p:tooltip for="openProcessViewer" position="left"
       value="#{cc.attrs.start.isProcessStart() ? 'Open Process Viewer' : 'Open Case Map Viewer'}" />
-  </p:panel>
+  </h:panelGroup>
 </cc:implementation>
 </html>

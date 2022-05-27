@@ -104,11 +104,11 @@ public class WebTestLoginIT {
   void testLoginTableHighlightCurrentUser() {
     loginFromTable("testuser");
     Selenide.open(viewUrl("loginTable.xhtml"));
-    $("#loginTable\\:users_data > tr.ui-widget-content.ui-datatable-even.ui-datatable-selectable.ui-state-highlight")
+    $("#loginTable\\:users_data > .ui-state-highlight")
             .shouldBe(visible);
     logout();
     Selenide.open(viewUrl("loginTable.xhtml"));
-    $("#loginTable\\:users_data > tr.ui-widget-content.ui-datatable-even.ui-datatable-selectable.ui-state-highlight")
+    $("#loginTable\\:users_data > .ui-state-highlight")
             .shouldNotBe(visible);
   }
 

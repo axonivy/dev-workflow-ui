@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:cc="http://xmlns.jcp.org/jsf/composite" xmlns:ic="http://ivyteam.ch/jsf/component"
+  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
+<cc:interface>
+  <cc:attribute name="title" />
+  <cc:attribute name="link" />
+</cc:interface>
+
+<cc:implementation>
+  <p:dialog id="processViewerDialog" widgetVar="process-viewer-dlg" width="80%" showEffect="fade" modal="true">
+    <f:facet name="header">
+      <h:outputText value="#{cc.attrs.title}" />
+      <p:link id="openViewerNewPage" styleClass="staight-text-icon" href="#{cc.attrs.link}">
+        <i class="si si-expand-6 p-ml-2" />
+      </p:link>
+    </f:facet>
+    <iframe id="viewerFrame" src="#{cc.attrs.link}" style="height: calc(100vh - 195px); width: 100%; border: 0;" />
+  </p:dialog>
+</cc:implementation>
+</html>

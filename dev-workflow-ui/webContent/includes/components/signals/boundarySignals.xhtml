@@ -5,8 +5,8 @@
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
   <p:dataTable id="boundarySignalsTable" var="receiver" value="#{signalsIvyDevWfBean.boundarySignalModel}" lazy="true"
-    styleClass="margin-top-10" rows="5" paginator="true" paginatorPosition="bottom" paginatorAlwaysVisible="false">
-    <p:column width="40">
+    rows="5" paginator="true" paginatorPosition="bottom" paginatorAlwaysVisible="false">
+    <p:column styleClass="icon-row">
       <i class="si si-lg si-network-signal"/>
     </p:column>
     <p:column headerText="Signal pattern" sortBy="#{receiver.signalPattern}" sortOrder="ascending">
@@ -15,10 +15,10 @@
     <p:column headerText="Waiting task" sortBy="#{receiver.waitingTask}">
       <jc:taskLink task="#{receiver.waitingTask}" id="waitingTask" />
     </p:column>
-    <p:column width="40">
-      <p:commandLink id="sendSignalIcon" actionListener="#{signalsIvyDevWfBean.sendBoundarySignal(receiver.signalPattern)}" update="@form">
-        <i class="si si-lg si-send-email" />
-      </p:commandLink>
+    <p:column styleClass="table-btn-1">
+      <p:commandButton id="sendSignalIcon" actionListener="#{signalsIvyDevWfBean.sendBoundarySignal(receiver.signalPattern)}"
+        update="signalForm, firedSignalsTable, boundarySignalsTable"
+        icon="si si-send-email" styleClass="ui-button-outlined rounded-button" />
       <p:tooltip for="sendSignalIcon" value="Send this signal" position="top"/>
     </p:column>
   </p:dataTable>

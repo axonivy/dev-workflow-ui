@@ -2,37 +2,88 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" lang="en">
 <h:head>
-  <f:attribute name="primefaces.THEME" value="serenity-ivy" />
+  <f:attribute name="primefaces.THEME" value="freya-ivy-#{ivyFreyaTheme.mode}" />
   <f:facet name="first">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
   </f:facet>
-  <h:outputScript name="js/nanoscroller.js" library="serenity-layout" />
-  <h:outputScript name="js/layout.js" library="serenity-layout" />
-  <h:outputScript name="js/ripple.js" library="serenity-layout" />
-  <h:outputScript name="resources/js/polyfill.js" />
+  <h:outputScript name="js/layout.js" library="freya-layout" />
   <h:outputScript name="resources/js/copyToClipboard.js" />
-  <h:outputStylesheet name="css/nanoscroller.css" library="serenity-layout" />
-  <h:outputStylesheet name="css/ripple.css" library="serenity-layout" />
-  <h:outputStylesheet name="css/layout-ivy-designer.css" library="serenity-layout" />
-  <h:outputStylesheet name="css/cockpit.css" library="serenity-layout" />
-  <h:outputStylesheet name="resources/css/horizontal-container.css" />
+
   <title><ui:insert name="title">#{ivyAdvisor.applicationName} #{ivyAdvisor.versionShort}</ui:insert></title>
   <link rel="shortcut icon" href="#{resource['ivy-branding:favicon']}" />
 </h:head>
 <h:body>
-  <div class="layout-wrapper layout-wrapper-static layout-menu-horizontal">
-    <ui:include src="./sidebar.xhtml" />
+  <div class="layout-wrapper layout-topbar-#{ivyFreyaTheme.mode} layout-menu-#{ivyFreyaTheme.mode} layout-horizontal layout-designer">
+    <div class="layout-topbar" style="padding-right: 24px;">
+      <div class="layout-topbar-wrapper">
+        <div class="layout-topbar-left">
+          <a href="#" class="menu-button">
+           <i class="pi pi-bars"/>
+          </a>
+          <a id="bannerLogo" class="layout-topbar-logo" href="/system">
+            <p:graphicImage name="#{ivyFreyaTheme.logo}" library="ivy-branding" alt="Logo" />
+          </a>
+        </div>
+
+        <ui:include src="./sidebar.xhtml" />
+
+        <div class="layout-topbar-right">
+          <ul class="layout-topbar-actions">
+            <li class="themeswitch-item">
+              <p:commandLink id="themeSwitcher" onclick="PrimeFaces.FreyaConfigurator.changeLayout('ivy', '#{ivyFreyaTheme.mode == 'light' ? 'dark' : 'light'}');"
+                style="text-decoration: none;">
+                <i class="topbar-icon pi pi-#{ivyFreyaTheme.mode == 'light' ? 'moon' : 'sun'}"/>
+                <p:ajax onstart="PrimeFaces.FreyaConfigurator.beforeResourceChange();" listener="#{ivyFreyaTheme.toggleTheme}" update="themeSwitcher" />
+              </p:commandLink>
+            </li>
+            <li class="topbar-item user-profile">
+              <a href="#">
+                <span class="profile-image-wrapper">
+                  <i class="si si-single-neutral-circle" style="font-size: 28px; padding: 2px;"></i>
+                </span>
+                <span id="sessionUserName" class="topbar-item-name profile-name">
+                  <span>#{userIvyDevWfBean.currentUserName}</span>
+                </span>
+              </a>
+              <ul>
+                <li>
+                  <p:commandLink id="loginTableBtn" actionListener="#{loginIvyDevWfBean.redirectToLoginTable}" rendered="#{engineModeIvyDevWfBean.demoOrDesigner}">
+                    <i class="si si-lg si-multiple-neutral-1"></i>
+                    <span>Switch user</span>
+                  </p:commandLink>
+                </li>
+                <li>
+                  <p:commandLink id="loginFormBtn" actionListener="#{loginIvyDevWfBean.redirectToLoginForm}">
+                    <i class="si si-lg si-login-3"></i>
+                    <span>Login</span>
+                  </p:commandLink>
+                </li>
+                <li>
+                  <p:commandLink id="sessionLogoutBtn" actionListener="#{loginIvyDevWfBean.logout}"
+                    rendered="#{!userIvyDevWfBean.sessionUserUnknown}">
+                    <i class="si si-lg si-logout-1"></i><span>Logout</span>
+                  </p:commandLink>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <div class="layout-main">
-      <ui:include src="./topbar.xhtml" />
-      <div class="layout-breadcrumb" style="min-height: 0px;"></div>
-      <div class="layout-content container">
+      <div class="layout-content">
         <ui:insert name="content" />
       </div>
     </div>
   </div>
+
+  <ui:include src="progress-loader.xhtml" />
+
+  <h:outputStylesheet name="css/layout-ivy-#{ivyFreyaTheme.mode}.css" library="freya-layout" />
+  <h:outputStylesheet name="primeflex-2.min.css" library="primeflex" />
   <h:outputStylesheet name="resources/css/workflow-ui.css" />
   <h:outputStylesheet name="custom.css" library="ivy-branding" />
 </h:body>
