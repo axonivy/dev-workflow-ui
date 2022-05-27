@@ -13,7 +13,7 @@ pipeline {
   }
 
   parameters {
-    string(name: 'engineSource', defaultValue: 'https://jenkins.ivyteam.io/job/ivy-core_product/job/master/lastSuccessfulBuild/', description: 'Engine page url')
+    string(name: 'engineSource', defaultValue: 'https://jenkins.ivyteam.io/job/core_product/job/master/lastSuccessfulBuild/', description: 'Engine page url')
     booleanParam(name: 'deployScreenshots', defaultValue: false, description: 'Deploy new screenshots')
   }
 
