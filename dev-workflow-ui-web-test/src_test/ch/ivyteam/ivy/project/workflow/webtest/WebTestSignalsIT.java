@@ -43,7 +43,7 @@ public class WebTestSignalsIT {
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
     $(By.id("signalForm:growl_container")).shouldBe(visible);
 
-    Table signalsTable = PrimeUi.table(By.id("signalForm:firedSignalsTable"));
+    Table signalsTable = PrimeUi.table(By.id("firedSignalsTable"));
     signalsTable.valueAtShouldBe(0, 1, text("Web Test Signal"));
   }
 
@@ -57,7 +57,7 @@ public class WebTestSignalsIT {
     $(By.id("signalForm:signalCodeInput_panel")).findElement(By.className("ui-autocomplete-item")).click();
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
 
-    Table signalsTable = PrimeUi.table(By.id("signalForm:firedSignalsTable"));
+    Table signalsTable = PrimeUi.table(By.id("firedSignalsTable"));
     signalsTable.valueAtShouldBe(0, 1, text("test:signal:complete"));
   }
 
@@ -67,7 +67,7 @@ public class WebTestSignalsIT {
     loginDeveloper();
 
     open(viewUrl("signals.xhtml"));
-    Table boundaryTable = PrimeUi.table(By.id("signalForm:boundarySignalsTable"));
+    Table boundaryTable = PrimeUi.table(By.id("boundarySignalsTable"));
     boundaryTable.valueAtShouldBe(0, 0, text("No records found."));
 
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
@@ -85,13 +85,13 @@ public class WebTestSignalsIT {
     loginDeveloper();
 
     open(viewUrl("signals.xhtml"));
-    Table boundaryTable = PrimeUi.table(By.id("signalForm:boundarySignalsTable"));
+    Table boundaryTable = PrimeUi.table(By.id("boundarySignalsTable"));
     boundaryTable.valueAtShouldBe(0, 0, text("No records found."));
 
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
     open(viewUrl("signals.xhtml"));
 
-    $(By.id("signalForm:boundarySignalsTable:0:sendSignalIcon")).shouldBe(visible).click();
+    $(By.id("boundarySignalsTable:0:sendSignalIcon")).shouldBe(visible).click();
     boundaryTable.valueAtShouldBe(0, 0, text("No records found."));
   }
 }

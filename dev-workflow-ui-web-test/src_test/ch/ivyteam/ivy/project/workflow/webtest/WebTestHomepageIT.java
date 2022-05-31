@@ -29,18 +29,17 @@ public class WebTestHomepageIT {
 
     // start process to create test data
     open(viewUrl("starts.xhtml"));
-    $(By.id("startsForm:filter")).setValue("case");
+    $(By.id("startsForm:globalFilter")).setValue("case");
     $(byText("test _ case _ map")).shouldBe(visible).click();
     $(By.id("iFrame")).shouldBe(visible);
     open(viewUrl("home.xhtml"));
-    $(By.id("form:lastStartsCard")).shouldBe(visible);
-
-    var tasksTable = PrimeUi.table(By.id("form:activeTasks"));
-    var startsTable = PrimeUi.table(By.id("form:lastStarts"));
+    $(".last-starts-card").shouldBe(visible);
 
     // check if the data is in the containers
-    startsTable.contains("test _ case _ map");
-    tasksTable.contains("Test Developer Workflow-UI Dialog 1");
+    PrimeUi.table(By.id("activeTasks"))
+            .contains("Test Developer Workflow-UI Dialog 1");
+    PrimeUi.table(By.id("lastStarts"))
+            .contains("test _ case _ map");
   }
 
   @Test
@@ -49,15 +48,15 @@ public class WebTestHomepageIT {
     open(viewUrl("home.xhtml"));
 
     // cards should be visible when logged in
-    $(By.id("form:activeTasksCard")).shouldBe(visible);
-    $(By.id("form:lastStartsCard")).shouldBe(visible);
+    $(".active-tasks-card").shouldBe(visible);
+    $(".last-starts-card").shouldBe(visible);
 
     logout();
 
     // cards should not be visible and starts should appear
-    $(By.id("form:activeTasksCard")).shouldNotBe(visible);
-    $(By.id("form:lastStartsCard")).shouldNotBe(visible);
-    $(By.className("main-starts-container")).shouldBe(visible);
+    $(".active-tasks-card").shouldNotBe(visible);
+    $(".last-starts-card").shouldNotBe(visible);
+    $(".main-starts-container").shouldBe(visible);
   }
 
   @Test
@@ -65,19 +64,19 @@ public class WebTestHomepageIT {
     loginDeveloper();
 
     open(viewUrl("starts.xhtml"));
-    $(By.id("startsForm:filter")).setValue("case");
+    $(By.id("startsForm:globalFilter")).setValue("case");
     $(byText("test _ case _ map")).shouldBe(visible).click();
     $(By.id("iFrame")).shouldBe(visible);
     open(viewUrl("home.xhtml"));
-    $(By.id("form:lastStartsCard")).shouldBe(visible);
+    $(".last-starts-card").shouldBe(visible);
 
-    var startsTable = PrimeUi.table(By.id("form:lastStarts"));
+    var startsTable = PrimeUi.table(By.id("lastStarts"));
     startsTable.row(0).getText().contains("test _ case _ map");
 
-    $(By.id("form:lastStarts:0:openProcessViewer")).shouldBe(visible).click();
-    $(By.id("form:processViewerDialog")).shouldBe(visible);
-    $(By.id("iFrame")).shouldBe(visible);
-    Selenide.switchTo().frame("iFrame");
+    $(By.id("lastStarts:0:openProcessViewer")).shouldBe(visible).click();
+    $(By.id("processViewer:processViewerDialog")).shouldBe(visible);
+    $(By.id("viewerFrame")).shouldBe(visible);
+    Selenide.switchTo().frame("viewerFrame");
     $(By.id("name-id")).shouldBe(readonly);
     assertThat($(By.id("name-id")).getAttribute("value")).isEqualTo("test _ case _ map");
     $(By.className("fa-apple")).shouldBe(visible);

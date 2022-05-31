@@ -55,15 +55,6 @@ public class UrlUtil {
     return "frame.xhtml?originalUrl=" + originalPageEncoded + "&taskUrl=" + startLinkEncoded;
   }
 
-  public static String generateProcessViewerUrl(WebLink viewerLink) {
-    return generateProcessViewerUrl(viewerLink.getRelative());
-  }
-
-  public static String generateProcessViewerUrl(String viewerLink) {
-    String viewerLinkEncoded = URLEncoder.encode(viewerLink, StandardCharsets.UTF_8);
-    return "process-viewer.xhtml?viewerUrl=" + viewerLinkEncoded;
-  }
-
   public static String generateCaseMapUrl(IProcessModelVersion pmv, UUID caseMapId) {
     StringBuilder appUrl = new StringBuilder(EngineUriResolver.instance().external().toASCIIString());
     appUrl.append(pmv.getApplication().getContextPath());

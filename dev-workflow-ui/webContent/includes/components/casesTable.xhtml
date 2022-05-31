@@ -4,18 +4,15 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
-  <p:dataTable id="cases" var="case" value="#{casesIvyDevWfBean.casesDataModel}" widgetVar="casesTable" style="margin-top:10px"
+  <p:dataTable id="cases" var="case" value="#{casesIvyDevWfBean.casesDataModel}" widgetVar="casesTable" styleClass="ui-fluid"
     emptyMessage="No Cases found with given criteria" paginatorPosition="bottom" rows="10" lazy="true" paginator="true"
-    rowsPerPageTemplate="10,20,50" paginatorAlwaysVisible="false"
-    selectionMode="single"
-    paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
-    <p:ajax event="rowSelect" listener="#{casesIvyDevWfBean.redirectToCaseRow}" update="@form" />
+    paginatorAlwaysVisible="false" selectionMode="single">
+    <p:ajax event="rowSelect" listener="#{casesIvyDevWfBean.redirectToCaseRow}" />
     <f:facet name="header">
-      <p:outputPanel>
-        <h:outputText value="Search:" />
-        <p:inputText id="casesFilter" onkeyup="PF('casesTable').filter()" style="width:150px"
-          placeholder="Enter keyword" value="#{casesIvyDevWfBean.casesDataModel.filter}" />
-      </p:outputPanel>
+      <div class="ui-input-icon-left filter-container">
+        <i class="pi pi-search"/>
+        <p:inputText id="globalFilter" onkeyup="PF('casesTable').filter()" placeholder="Search" value="#{casesIvyDevWfBean.casesDataModel.filter}" />
+      </div>
     </f:facet>
 
     <p:column styleClass="icon-row" responsivePriority="2">
@@ -48,11 +45,9 @@
       <jc:datetime id="endTime" datetime="#{case.endTimestamp}" />
     </p:column>
 
-    <p:column styleClass="icon-row">
-      <h:link outcome="caseDetails">
-        <f:param name="case" value="#{case.id}" />
-        <i class="si si-lg si-information-circle"></i>
-      </h:link>
+    <p:column styleClass="table-btn-1">
+      <p:linkButton icon="si si-information-circle" styleClass="ui-button-outlined rounded-button"
+        href="caseDetails.xhtml?case=#{case.id}" />
     </p:column>
   </p:dataTable>
 </ui:composition>

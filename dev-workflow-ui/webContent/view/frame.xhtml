@@ -9,30 +9,27 @@
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
       <h:form id="iFrameForm">
-        <div id="header-container" class="card header-container">
-          <div class="straight-text-icon">
-            <i class="si si-lg si-task-list-edit margin-right-5" />
-            <span><h:outputText id="frameTaskName" value="#{frameIvyDevWfBean.taskName}" /></span>
-          </div>
-          <div class="straight-text-icon">
-            <p:linkButton id="openStartFullscreenBtn" href="#{frameIvyDevWfBean.taskUrl}" icon="si si-expand-6" styleClass="margin-right-10"/>
+        <div class="card">
+          <div class="card-header p-pb-0">
+            <div class="card-title p-d-flex p-ai-center">
+              <i class="p-pr-3 si si-task-list-edit"></i>
+              <h6 class="p-m-0"><h:outputText id="frameTaskName" value="#{frameIvyDevWfBean.taskName}" /></h6>
+            </div>
+            <p:linkButton id="openStartFullscreenBtn" href="#{frameIvyDevWfBean.taskUrl}" icon="si si-expand-6"
+              styleClass="p-ml-auto ui-button-secondary rounded-button"/>
             <p:tooltip for="openStartFullscreenBtn" value="Open current process start on a fullscreen page" position="left"/>
-            <p:commandLink value="Sidesteps" class="sidesteps-button straight-text-icon" id="sidestepsBtn"
-              rendered="#{frameIvyDevWfBean.renderSidestepBtn()}">
-              <i class="si si-arrow-down-1 detail-action-icon"></i>
-            </p:commandLink>
+            <p:commandButton value="Sidesteps" styleClass="p-ml-1" id="sidestepsBtn"
+              rendered="#{frameIvyDevWfBean.renderSidestepBtn()}" icon="si si-arrow-down-1" />
             <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
               model="#{frameIvyDevWfBean.sidestepsMenuModel}" styleClass="menu-no-icons" />
           </div>
         </div>
         <p:remoteCommand name="useTaskInIFrame" actionListener="#{frameIvyDevWfBean.useTaskInIFrame()}" update="@form" />
       </h:form>
-      <div class="card custom-card">
-        <iframe id="iFrame" src="#{frameIvyDevWfBean.taskUrl}"
-          style="height: calc(100vh - 195px); width: 100%; border: 0;"></iframe>
+      <div class="card p-mb-0">
+        <iframe id="iFrame" src="#{frameIvyDevWfBean.taskUrl}" style="height: calc(100vh - 250px); width: 100%; border: 0;"></iframe>
       </div>
       <script>
-
         function iframeURLChange(iframe, callback) {
           var lastDispatched = null;
 

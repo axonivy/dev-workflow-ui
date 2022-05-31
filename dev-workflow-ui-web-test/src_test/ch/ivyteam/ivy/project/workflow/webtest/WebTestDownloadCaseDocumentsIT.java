@@ -16,6 +16,7 @@ import java.nio.file.Files;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.codeborne.selenide.Configuration;
@@ -40,8 +41,8 @@ public class WebTestDownloadCaseDocumentsIT {
     loginDeveloper();
     open(viewUrl("cases.xhtml"));
     $(byText("Created case of TestData")).shouldBe(visible).click();
-    $("#form\\:caseName").shouldBe(text("Created case of TestData"));
-    $("#form\\:documentsContainer").shouldHave(text("test.txt"));
+    $(By.id("form:caseName")).shouldBe(text("Created case of TestData"));
+    $(".documents-card").shouldHave(text("test.txt"));
     File download = $(".document-entry", 0).find("a").shouldBe(visible).download();
     assertThat(download).hasName("test.txt");
     assertThat(Files.readString(download.toPath())).isEqualTo("this is test document");

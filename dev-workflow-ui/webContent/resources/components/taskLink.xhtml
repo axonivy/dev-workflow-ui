@@ -11,8 +11,8 @@
   <ui:param name="task" value="#{tasksIvyDevWfBean.toTaskLinkModel(cc.attrs.task)}"/>
   <h:link styleClass="case-link" outcome="taskDetails">
     <f:param name="task" value="#{task.id}"/>
-    <i class="si si-task-list-edit case-link-icon margin-right-5" />
-    <h:outputText id="taskState" styleClass="si si-#{task.stateIcon} case-link-icon margin-right-5" />
+    <i class="si si-task-list-edit case-link-icon p-mr-1" />
+    <h:outputText id="taskState" styleClass="si si-#{task.stateIcon} case-link-icon p-mr-1" />
     <p:tooltip for="taskState" value="State: #{task.state}" position="top"/>
     <h:outputText id="taskLink" value="#{task.name}" />
     <p:tooltip for="taskLink" value="ID: #{task.id}" position="top"/>

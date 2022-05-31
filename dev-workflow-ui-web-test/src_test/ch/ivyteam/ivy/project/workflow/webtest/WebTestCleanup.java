@@ -32,7 +32,7 @@ public class WebTestCleanup {
   public static void prepare() {
     // check if the engine is running and starts are available
     open(viewUrl("starts.xhtml"));
-    $(By.id("startsForm:filter")).sendKeys("workflow-ui-test-data");
+    $(By.id("startsForm:globalFilter")).sendKeys("workflow-ui-test-data");
     $("#startsForm\\:projectStarts\\:0\\:caseMapsTitle").shouldBe(visible);
     $("#startsForm\\:projectStarts\\:0\\:processesTitle").shouldBe(visible);
     $("#startsForm\\:projectStarts\\:0\\:webServicesTitle").shouldBe(visible);
@@ -89,7 +89,7 @@ public class WebTestCleanup {
     open(viewUrl("cases.xhtml"));
     casesTable.row(0).shouldBe(text("Created case of TestData"));
     open(viewUrl("starts.xhtml"));
-    $(By.id("startsForm:filter")).sendKeys("workflow-ui-test-data");
+    $(By.id("startsForm:globalFilter")).sendKeys("workflow-ui-test-data");
     $("#startsForm\\:projectStarts\\:0\\:caseMapsTitle").shouldBe(visible);
     $("#startsForm\\:projectStarts\\:0\\:processesTitle").shouldBe(visible);
     $("#startsForm\\:projectStarts\\:0\\:webServicesTitle").shouldBe(visible);
@@ -101,7 +101,7 @@ public class WebTestCleanup {
     open(viewUrl("cases.xhtml"));
     casesTable.row(0).shouldBe(text("No Cases found"));
     open(viewUrl("starts.xhtml"));
-    $(By.id("startsForm:filter")).sendKeys("workflow-ui-test-data");
+    $(By.id("startsForm:globalFilter")).sendKeys("workflow-ui-test-data");
     $("#startsForm\\:projectStarts\\:0\\:caseMapsTitle").shouldBe(visible);
     $("#startsForm\\:projectStarts\\:0\\:processesTitle").shouldBe(visible);
     $("#startsForm\\:projectStarts\\:0\\:webServicesTitle").shouldBe(visible);

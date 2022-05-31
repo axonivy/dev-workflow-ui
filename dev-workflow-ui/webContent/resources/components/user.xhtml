@@ -8,9 +8,9 @@
 
 <cc:implementation>
   <ui:param name="userModel" value="#{userComponentIvyDevWfBean.toComponentModel(cc.attrs.user)}" />
-  <h:panelGroup styleClass="straight-text-icon">
+  <h:panelGroup styleClass="p-d-flex p-ai-center">
     <h:panelGroup rendered="#{not empty userModel.name}">
-      <i class="user-component-icon #{userModel.cssIcon}" />
+      <i class="p-mr-1 si-lg #{userModel.cssIcon}" />
     </h:panelGroup>
     <h:outputText id="userName" value="#{userModel.name}" />
   </h:panelGroup>

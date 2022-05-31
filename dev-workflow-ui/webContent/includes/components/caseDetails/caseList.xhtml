@@ -4,18 +4,20 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
-  <h:panelGroup layout="block" class="#{casesDetailsIvyDevWfBean.isCurrentHierarchyCase(casesDetailsIvyDevWfBean.selectedCase.getBusinessCase())}">
-    <jc:caseLink case="#{casesDetailsIvyDevWfBean.selectedCase.getBusinessCase()}" id="businessCase"/>
-  </h:panelGroup>
+  <h:panelGroup id="caseHierarchy">
+    <h:panelGroup layout="block" class="#{casesDetailsIvyDevWfBean.isCurrentHierarchyCase(casesDetailsIvyDevWfBean.selectedCase.getBusinessCase())}">
+      <jc:caseLink case="#{casesDetailsIvyDevWfBean.selectedCase.getBusinessCase()}" id="businessCase"/>
+    </h:panelGroup>
 
-  <h:panelGroup layout="block">
-    <ul class="subcases-list">
-      <ui:repeat var="case" value="#{casesDetailsIvyDevWfBean.caseList}">
-        <li style="list-style-type: none;" class="#{casesDetailsIvyDevWfBean.isCurrentHierarchyCase(case)}">
-          <jc:caseLink case="#{case}" id="subcase"/>
-        </li>
-      </ui:repeat>
-    </ul>
+    <h:panelGroup layout="block">
+      <ul class="subcases-list">
+        <ui:repeat var="case" value="#{casesDetailsIvyDevWfBean.caseList}">
+          <li style="list-style-type: none;" class="#{casesDetailsIvyDevWfBean.isCurrentHierarchyCase(case)}">
+            <jc:caseLink case="#{case}" id="subcase"/>
+          </li>
+        </ui:repeat>
+      </ul>
+    </h:panelGroup>
   </h:panelGroup>
 
 </ui:composition>

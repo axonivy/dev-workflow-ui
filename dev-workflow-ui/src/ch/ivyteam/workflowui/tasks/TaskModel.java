@@ -23,7 +23,6 @@ import ch.ivyteam.workflowui.casemap.SidestepUtil;
 import ch.ivyteam.workflowui.customfield.CustomFieldModel;
 import ch.ivyteam.workflowui.starts.CustomFieldsHelper;
 import ch.ivyteam.workflowui.util.TaskUtil;
-import ch.ivyteam.workflowui.util.UrlUtil;
 
 public class TaskModel {
 
@@ -227,9 +226,5 @@ public class TaskModel {
             .queryParam("highlight", currentElement.getRawPid())
             .queryParam("readonly", "true")
             .getRelativeEncoded();
-  }
-
-  public String getViewerUrl() {
-    return UrlUtil.generateProcessViewerUrl(viewerLink);
   }
 }

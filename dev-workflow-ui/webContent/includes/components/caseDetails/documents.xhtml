@@ -6,7 +6,7 @@
   <ul class="custom-list">
     <ui:repeat var="document" value="#{casesDetailsIvyDevWfBean.documents}">
       <li class="document-entry" style="list-style-type: none;">
-        <span class="margin-right-5 si si-lg si-#{document.icon}"/>
+        <span class="p-mr-1 si si-#{document.icon}"/>
         <h:commandLink value="#{document.name}">
           <p:fileDownload value="#{document.streamedContent}"></p:fileDownload>
         </h:commandLink>

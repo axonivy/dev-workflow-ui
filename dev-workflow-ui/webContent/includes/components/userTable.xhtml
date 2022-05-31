@@ -3,26 +3,26 @@
   xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component"
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
   <h:form id="loginTable">
-    <h:panelGroup styleClass="card card-w-title custom-card"
-      layout="block">
-      <h:outputText value="Login Table" styleClass="card-header-title" /><br/>
-      <h:outputText value="Click user to login" />
+    <div class="card ui-fluid">
+      <div class="p-d-flex p-ai-center p-mb-3">
+        <i class="p-pr-3 si si-login-3 card-title-icon"></i>
+        <h2 class="p-m-0">Login</h2>
+      </div>
+      <p>Click user to login</p>
       <p:dataTable id="users" var="user" value="#{loginTableIvyDevWfBean.users}" widgetVar="usersTable"
-        emptyMessage="No users found with given criteria" style="margin-top:10px" selection="#{loginTableIvyDevWfBean.currentUser}"
+        emptyMessage="No users found with given criteria" selection="#{loginTableIvyDevWfBean.currentUser}"
         selectionMode="single" rowKey="#{user.fullname}">
-        <p:ajax event="rowSelect" listener="#{loginIvyDevWfBean.loginFromTable}" update="@form" />
-
+        <p:ajax event="rowSelect" listener="#{loginIvyDevWfBean.loginFromTable}" />
         <f:facet name="header">
-          <p:outputPanel>
-            <h:outputText value="Search:" />
-            <p:inputText id="globalFilter" onkeyup="PF('usersTable').filter()"
-              placeholder="Enter keyword" />
-          </p:outputPanel>
+          <div class="ui-input-icon-left filter-container">
+            <i class="pi pi-search"/>
+            <p:inputText id="globalFilter" onkeyup="PF('usersTable').filter()" placeholder="Search" />
+          </div>
         </f:facet>
 
         <p:column headerText="Username" filterBy="#{user.name}" sortBy="#{user.name}" sortOrder="ascending">
           <h:outputText value="#{user.name}">
-            <i class="si si-single-neutral-actions table-icon"></i>
+            <i class="si si-single-neutral-actions p-mr-1"></i>
           </h:outputText>
         </p:column>
 
@@ -34,12 +34,7 @@
          filterStyle="display: none" colspan="2">
           <h:outputText value="#{user.roles}" />
         </p:column>
-
-        <p:column width="64">
-          <i class="si si-lg si-login-3"></i>
-        </p:column>
-
       </p:dataTable>
-    </h:panelGroup>
+    </div>
   </h:form>
 </ui:composition>

@@ -8,7 +8,7 @@
 </cc:interface>
 
 <cc:implementation>
-  <h:panelGroup rendered="#{adminIvyDevWfBean.hasWorkflowEventReadPermission()}">
+  <h:panelGroup id="workflowEvents" rendered="#{adminIvyDevWfBean.hasWorkflowEventReadPermission()}">
     <p:dataTable id="eventsTable" var="event" value="#{cc.attrs.workflowEvents}" widgetVar="eventsTable"
       emptyMessage="No Events found with given criteria" reflow="true" rows="5" paginator="true"
       paginatorAlwaysVisible="false" paginatorPosition="bottom"

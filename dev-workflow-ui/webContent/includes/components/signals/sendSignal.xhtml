@@ -3,22 +3,18 @@
   xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component"
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
 
-  <div class="ui-g-12 margin-top-10">
-    <h:panelGroup styleClass="md-inputfield margin-top-10">
-      <p:autoComplete id="signalCodeInput" dropdown="true" value="#{signalsIvyDevWfBean.code}"
-        completeMethod="#{signalsIvyDevWfBean.signalsComplete}" styleClass="width-100 signal-code-input" />
-      <p:outputLabel value="Signal Code" for="@previous" />
-    </h:panelGroup>
-  </div>
-  <div class="ui-g-12 margin-top-10">
-    <h:panelGroup styleClass="md-inputfield margin-top-10">
-      <p:inputText id="signalPayloadInput" value="#{signalsIvyDevWfBean.payload}" styleClass="width-100" />
-      <p:outputLabel value="Payload" for="@previous" />
-    </h:panelGroup>
-  </div>
-  <div class="ui-g-12">
-    <p:commandButton id="signalBtn" update="@form"
-      class="margin-top-10 send-signal-button related-element" value="Send" actionListener="#{signalsIvyDevWfBean.sendSignal}"
-      disabled="#{!adminIvyDevWfBean.isWorkflowAdmin() or !engineModeIvyDevWfBean.demoOrDesigner}" icon="si si-send-email"/>
-  </div>
+  <h:panelGroup styleClass="ui-float-label">
+    <p:autoComplete id="signalCodeInput" dropdown="true" value="#{signalsIvyDevWfBean.code}"
+      completeMethod="#{signalsIvyDevWfBean.signalsComplete}" styleClass="width-100 signal-code-input" />
+    <p:outputLabel value="Signal Code" for="@previous" />
+  </h:panelGroup>
+
+  <h:panelGroup styleClass="ui-float-label p-mt-2">
+    <p:inputText id="signalPayloadInput" value="#{signalsIvyDevWfBean.payload}" styleClass="width-100" />
+    <p:outputLabel value="Payload" for="@previous" />
+  </h:panelGroup>
+
+  <p:commandButton id="signalBtn" update="@form, boundarySignalsTable, firedSignalsTable"
+    styleClass="p-mt-2 send-signal-button" value="Send" actionListener="#{signalsIvyDevWfBean.sendSignal}"
+    disabled="#{!adminIvyDevWfBean.isWorkflowAdmin() or !engineModeIvyDevWfBean.demoOrDesigner}" icon="si si-send-email"/>
 </ui:composition>

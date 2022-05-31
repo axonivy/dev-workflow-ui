@@ -17,7 +17,6 @@ import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.axonivy.ivy.webtest.primeui.PrimeUi;
-import com.axonivy.ivy.webtest.primeui.widget.Table;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
@@ -43,25 +42,24 @@ public class WebTestIntermediateEventsIT {
     loginDeveloper();
     Selenide.open(viewUrl("intermediateEvents.xhtml"));
     $(byText("TestIntermediateEvent")).click();
-    $(By.id("intermediateElementDetailsForm:id")).shouldBe(visible);
+    $(By.id("id")).shouldBe(visible);
   }
 
   @Test
   public void checkIntermediateElementDetails() {
     Selenide.open(viewUrl("intermediateEvents.xhtml"));
     $(byText("TestIntermediateEvent")).click();
-    $(By.id("intermediateElementDetailsForm:name")).shouldBe(text("TestIntermediateEvent"));
-    $(By.id("intermediateElementDetailsForm:description")).shouldBe(text("intermediate event description"));
+    $(By.id("name")).shouldBe(text("TestIntermediateEvent"));
+    $(By.id("description")).shouldBe(text("intermediate event description"));
   }
 
   @Test
   public void checkIntermediateElementEventsTable() {
     Selenide.open(viewUrl("intermediateEvents.xhtml"));
     $(byText("TestIntermediateEvent")).click();
-    $(By.id("intermediateElementDetailsForm:id")).shouldBe(visible);
+    $(By.id("id")).shouldBe(visible);
 
-    Table eventsTable = PrimeUi.table(By.id("intermediateElementDetailsForm:eventsTable"));
-    eventsTable.valueAtShouldBe(0, 0, text("1"));
+    var eventsTable = PrimeUi.table(By.id("eventsTable"));
     eventsTable.valueAtShouldBe(0, 6, text("NOTHING"));
   }
 

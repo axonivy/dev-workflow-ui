@@ -4,12 +4,9 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
-  <p:dataTable id="firedSignalsTable" var="signal" value="#{signalsIvyDevWfBean.signalsModel}" styleClass="margin-top-10"
-    rows="10" paginator="true" paginatorAlwaysVisible="false" lazy="true"
-    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-    currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" paginatorPosition="bottom"
-    rowsPerPageTemplate="5,10,{ShowAll|'All'}">
-    <p:column width="40">
+  <p:dataTable id="firedSignalsTable" var="signal" value="#{signalsIvyDevWfBean.signalsModel}"
+    rows="10" paginator="true" paginatorAlwaysVisible="false" lazy="true" paginatorPosition="bottom">
+    <p:column styleClass="icon-row">
       <i class="si si-lg si-network-signal"/>
     </p:column>
     <p:column headerText="Code" sortBy="#{signal.signalCode}">
