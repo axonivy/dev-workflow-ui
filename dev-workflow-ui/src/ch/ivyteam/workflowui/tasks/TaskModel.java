@@ -218,7 +218,6 @@ public class TaskModel {
     return new WebLink(UriBuilder.create()
             .path(task.getApplication().getContextPath())
             .path("process-editor")
-            .path("diagram.html")
             .toUri()
             .toString())
             .queryParam("pmv", pmv)
