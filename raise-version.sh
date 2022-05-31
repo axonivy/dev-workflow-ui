@@ -1,4 +1,4 @@
 #!/bin/bash
 
-mvn versions:set -DnewVersion=${1} -DprocessAllModules
-mvn versions:commit -DprocessAllModules
+mvn -B versions:set -DnewVersion=${1} -DprocessAllModules
+mvn -B versions:commit -DprocessAllModules
