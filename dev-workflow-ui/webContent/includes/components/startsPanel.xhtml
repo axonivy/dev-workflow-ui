@@ -17,7 +17,7 @@
   <h:panelGroup id="accordionContainer">
     <p:accordionPanel var="pmv" value="#{processesIvyDevWfBean.PMVs}" id="projectStarts"
      activeIndex="#{processesIvyDevWfBean.startsDataModel.activeIndex}" multiple="true">
-      <p:tab id="project" titleStyleClass="straight-text-icon">
+      <p:tab id="project" titleStyleClass="start-title">
         <f:facet name="title">
           <h:outputText id="pmvState" styleClass="p-mr-1 si si-#{pmv.stateIcon}" />
           <p:tooltip for="pmvState" value="#{pmv.state} - #{pmv.versionName}" position="top" />
