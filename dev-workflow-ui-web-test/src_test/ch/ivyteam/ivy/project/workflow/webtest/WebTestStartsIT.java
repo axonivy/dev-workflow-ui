@@ -115,7 +115,7 @@ public class WebTestStartsIT {
     assertCurrentUrlEndsWith("home.xhtml");
 
     open(viewUrl("allTasks.xhtml"));
-    $(".si-information-circle").shouldBe(visible).click();
+    $(".detail-btn").shouldBe(visible).click();
     $(".case-link").shouldHave(text("Created case of TestData"));
     $("#actionMenuForm\\:taskStartBtn").shouldBe(enabled).click();
   }
