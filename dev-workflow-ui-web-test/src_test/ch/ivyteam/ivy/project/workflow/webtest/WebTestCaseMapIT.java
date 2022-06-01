@@ -43,7 +43,7 @@ public class WebTestCaseMapIT {
   public void caseDetails() {
     startTestCaseMap("0cf1f054-a4ad-4b2b-bcf1-c9c34ec0a2ab.icm");
     open(viewUrl("cases.xhtml"));
-    $(".si-information-circle").shouldBe(visible).click();
+    $(".detail-btn").shouldBe(visible).click();
 
     $(By.id("form:creatorUser:userName")).shouldBe(exactText("DeveloperTest"));
     $(By.id("form:caseState")).shouldBe(exactText("CREATED"));
@@ -55,7 +55,7 @@ public class WebTestCaseMapIT {
   @Test
   public void sidestepsCaseDetails() {
     open(viewUrl("cases.xhtml"));
-    $(".si-information-circle").shouldBe(visible).click();
+    $(".detail-btn").shouldBe(visible).click();
 
     $(".current-hierarchy-case").find("a").shouldNotHave(text("Created case of TestData"));
 
@@ -68,7 +68,7 @@ public class WebTestCaseMapIT {
   @Test
   public void sidestepsTaskDetails() {
     open(viewUrl("allTasks.xhtml"));
-    $(".si-information-circle").shouldBe(visible).click();
+    $(".detail-btn").shouldBe(visible).click();
 
     $(By.id("actionMenuForm:sidestepsBtn")).shouldBe(visible).click();
     $(By.id("actionMenuForm:sidestepMenu")).shouldBe(visible).find(By.className("ui-menuitem-link")).click();
@@ -83,7 +83,7 @@ public class WebTestCaseMapIT {
   @Test
   public void caseMapUi() {
     open(viewUrl("cases.xhtml"));
-    $(By.className("si-information-circle")).shouldBe(visible).click();
+    $(By.className("detail-btn")).shouldBe(visible).click();
     $(By.className("current-hierarchy-case")).find("a").shouldNotHave(text("Created case of TestData"));
     $(By.className("casemap-card")).shouldBe(visible);
     $(By.id("form:openCaseMapUiViewerBtn")).shouldBe(visible).click();

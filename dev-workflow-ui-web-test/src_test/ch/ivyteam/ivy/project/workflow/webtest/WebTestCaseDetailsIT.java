@@ -61,7 +61,7 @@ public class WebTestCaseDetailsIT {
   public void checkTaskTableSystemTask() {
     startTestProcess("1750C5211D94569D/testIntermediateEventProcess.ivp");
     open(viewUrl("cases.xhtml"));
-    $(".si-information-circle").shouldBe(visible).click();
+    $(".detail-btn").shouldBe(visible).click();
 
     Table tasksTable = PrimeUi.table(By.id("form:tasks"));
     tasksTable.containsNot("System");
@@ -88,7 +88,7 @@ public class WebTestCaseDetailsIT {
     $(By.id("form:workflowEvents:eventsTable")).shouldBe(visible);
     loginFromTable("testuser");
     open(viewUrl("cases.xhtml"));
-    $(By.className("si-information-circle")).shouldBe(visible).click();
+    $(By.className("detail-btn")).shouldBe(visible).click();
     $(By.id("form:caseId")).shouldBe(exactText(caseId));
     $(By.id("form:workflowEvents:eventsTable")).shouldNotBe(visible);
     $(By.id("form:workflowEvents:noPermissionMessage")).shouldBe(visible).shouldHave(text("No permissions"));
