@@ -16,7 +16,7 @@ import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.ivy.workflow.businesscase.IBusinessCase;
-import ch.ivyteam.ivy.workflow.restricted.start.ProcessViewerUrl;
+import ch.ivyteam.ivy.workflow.start.ProcessViewerUrl;
 import ch.ivyteam.ivy.workflow.task.IActivator;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
