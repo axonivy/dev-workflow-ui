@@ -63,9 +63,7 @@
     <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.pmv}" id="pmv" />
 
     <h:outputText value="Current Element" />
-    <p:commandLink id="openProcessViewerBtn" styleClass="p-d-flex p-ai-center"
-      actionListener="#{tasksDetailsIvyDevWfBean.setViewerLink()}" oncomplete="PF('process-viewer-dlg').show()"
-      update="processViewer:processViewerDialog">
+    <p:commandLink id="openProcessViewerBtn" styleClass="p-d-flex p-ai-center" onclick="PF('process-viewer-dlg').show()">
       <i class="si si-hierarchy-6 si-rotate-270 p-mr-1" />
       #{tasksDetailsIvyDevWfBean.selectedTask.currentElement}
     </p:commandLink>

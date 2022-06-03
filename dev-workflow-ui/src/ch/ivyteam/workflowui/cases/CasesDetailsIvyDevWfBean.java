@@ -43,6 +43,7 @@ public class CasesDetailsIvyDevWfBean {
   private List<WorkflowEventModel> workflowEvents;
   private IWebStartable startable;
   private String viewerLink;
+  private String viewerTitle;
 
   public String getSelectedCaseId() {
     return selectedCaseId;
@@ -63,6 +64,8 @@ public class CasesDetailsIvyDevWfBean {
     sidestepsMenuModel = SidestepUtil.createMenuModel(sidesteps);
     workflowEvents = WorkflowEventModel.toList(selectedCase.getWorkflowEvents());
     startable = selectedCase.getBusinessCase().getStartedFrom();
+    viewerLink = ViewerUtil.getViewerLink(selectedCase);
+    viewerTitle = ViewerUtil.getViewerDialogTitle(selectedCase);
   }
 
   public ICase getCaseById(long id) {
@@ -137,16 +140,12 @@ public class CasesDetailsIvyDevWfBean {
     return startable.getType().equals("casemap");
   }
 
-  public void setViewerLink() {
-    this.viewerLink = ViewerUtil.getViewerLink(selectedCase);
-  }
-
   public String getViewerLink() {
-    return this.viewerLink;
+    return viewerLink;
   }
 
   public String getViewerDialogTitle() {
-    return ViewerUtil.getViewerDialogTitle(selectedCase);
+    return viewerTitle;
   }
 
 }

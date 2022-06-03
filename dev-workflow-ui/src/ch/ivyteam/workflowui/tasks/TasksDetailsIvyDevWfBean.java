@@ -42,6 +42,7 @@ public class TasksDetailsIvyDevWfBean {
   public void setSelectedTaskId(String selectedTaskId) {
     this.selectedTaskId = selectedTaskId;
     this.selectedTask = new TaskModel(getTaskById(Long.parseLong(selectedTaskId)));
+    this.viewerLink = selectedTask.getViewerLink();
   }
 
   public ITask getTaskById(long id) {
@@ -147,10 +148,6 @@ public class TasksDetailsIvyDevWfBean {
 
   public String getViewerLink() {
     return viewerLink;
-  }
-
-  public void setViewerLink() {
-    this.viewerLink = selectedTask.getViewerLink();
   }
 
 }

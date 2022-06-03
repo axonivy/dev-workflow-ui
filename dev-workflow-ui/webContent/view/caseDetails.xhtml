@@ -45,8 +45,7 @@
                   </div>
                 </div>
                 <ui:include src="/includes/components/caseDetails/caseMap.xhtml" />
-                <p:commandLink id="openCaseMapUiViewerBtn" styleClass="p-d-flex p-jc-center"
-                  oncomplete="PF('process-viewer-dlg').show()" update="form:processViewer:processViewerDialog" actionListener="#{casesDetailsIvyDevWfBean.setViewerLink()}">
+                <p:commandLink id="openCaseMapUiViewerBtn" styleClass="p-d-flex p-jc-center" onclick="PF('process-viewer-dlg').show()">
                   <h:outputText value="Open Case Map Viewer" />
                   <i class="p-ml-1 si si-expand-6" />
                 </p:commandLink>
@@ -61,13 +60,10 @@
                     <h6 class="p-m-0">Process Viewer</h6>
                   </div>
                   <p:commandButton id="openProcessViewerBtn" icon="si si-expand-6" styleClass="ui-button-secondary rounded-button"
-                    actionListener="#{casesDetailsIvyDevWfBean.setViewerLink()}"
-                    oncomplete="PF('process-viewer-dlg').show()" update="form:processViewer:processViewerDialog" />
+                    onclick="PF('process-viewer-dlg').show()" />
                 </div>
                 <div class="height-100 p-d-flex p-jc-center p-ai-center">
-                  <p:commandLink id="cardOpenprocessViewerBtn"
-                    actionListener="#{casesDetailsIvyDevWfBean.setViewerLink()}"
-                    oncomplete="PF('process-viewer-dlg').show()" update="form:processViewer:processViewerDialog">
+                  <p:commandLink id="cardOpenprocessViewerBtn" onclick="PF('process-viewer-dlg').show()">
                     <i class="si si-hierarchy-6 si-rotate-270 p-mr-1" />
                     <h:outputText value="Open Process Viewer" />
                   </p:commandLink>
