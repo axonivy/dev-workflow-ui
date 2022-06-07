@@ -2,19 +2,15 @@ package ch.ivyteam.workflowui.util;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.UUID;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 
-import ch.ivyteam.ivy.application.IProcessModelVersion;
 import ch.ivyteam.ivy.model.value.WebLink;
-import ch.ivyteam.ivy.request.EngineUriResolver;
 
 public class UrlUtil {
-  private static final String IVY_CASEMAPUI_PATH = "/casemapui/index.html";
 
   public static String evalOriginalUrl() {
     return getHttpServletRequest().getRequestURI();
@@ -53,16 +49,6 @@ public class UrlUtil {
     var originalPageEncoded = URLEncoder.encode(redirectUrl, StandardCharsets.UTF_8);
     String startLinkEncoded = URLEncoder.encode(startLink.getRelative(), StandardCharsets.UTF_8);
     return "frame.xhtml?originalUrl=" + originalPageEncoded + "&taskUrl=" + startLinkEncoded;
-  }
-
-  public static String generateCaseMapUrl(IProcessModelVersion pmv, UUID caseMapId) {
-    StringBuilder appUrl = new StringBuilder(EngineUriResolver.instance().external().toASCIIString());
-    appUrl.append(pmv.getApplication().getContextPath());
-    appUrl.append(IVY_CASEMAPUI_PATH);
-    appUrl.append("?uuid=").append(caseMapId.toString());
-    appUrl.append("&mode=viewer");
-    appUrl.append("&pmv=").append(pmv.getVersionName());
-    return appUrl.toString();
   }
 
 }

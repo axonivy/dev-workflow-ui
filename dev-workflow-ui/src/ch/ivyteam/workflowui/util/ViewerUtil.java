@@ -1,6 +1,8 @@
 package ch.ivyteam.workflowui.util;
 
+import ch.ivyteam.ivy.casemap.runtime.ICaseMapService;
 import ch.ivyteam.ivy.workflow.ICase;
+import ch.ivyteam.ivy.workflow.businesscase.IBusinessCase;
 import ch.ivyteam.ivy.workflow.start.IWebStartable;
 import ch.ivyteam.workflowui.starts.CaseMapStartableModel;
 import ch.ivyteam.workflowui.starts.StartableModel;
@@ -27,7 +29,12 @@ public class ViewerUtil {
 
   private static StartableModel caseToStartable(ICase caze) {
     var pmv = caze.getProcessModelVersion();
-    IWebStartable startable = caze.getBusinessCase().getStartedFrom();
-    return startable.getType().equals("casemap") ? new CaseMapStartableModel(startable, pmv) : new StartableModel(startable);
+    var businessCase = caze.getBusinessCase();
+    IWebStartable startable = businessCase.getStartedFrom();
+    return hasCaseMap(businessCase) ? new CaseMapStartableModel(startable, pmv) : new StartableModel(startable);
+  }
+
+  private static boolean hasCaseMap(IBusinessCase businessCase) {
+    return ICaseMapService.current().find().byBusinessCase(businessCase) != null;
   }
 }

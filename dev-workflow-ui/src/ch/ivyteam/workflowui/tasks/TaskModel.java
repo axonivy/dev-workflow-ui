@@ -16,8 +16,8 @@ import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.ivy.workflow.businesscase.IBusinessCase;
+import ch.ivyteam.ivy.workflow.start.ProcessViewerUrl;
 import ch.ivyteam.ivy.workflow.task.IActivator;
-import ch.ivyteam.util.net.UriBuilder;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
 import ch.ivyteam.workflowui.customfield.CustomFieldModel;
@@ -215,15 +215,6 @@ public class TaskModel {
   }
 
   private String buildViewerLink(ITask task) {
-    return new WebLink(UriBuilder.create()
-            .path(task.getApplication().getContextPath())
-            .path("process-editor")
-            .toUri()
-            .toString())
-            .queryParam("pmv", pmv)
-            .queryParam("pid", currentElement.getProcessGuid())
-            .queryParam("highlight", currentElement.getRawPid())
-            .queryParam("readonly", "true")
-            .getRelativeEncoded();
+    return ProcessViewerUrl.of(task).toWebLink().getRelativeEncoded();
   }
 }
