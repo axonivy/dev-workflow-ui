@@ -99,22 +99,12 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight {
 .main-starts-container .ui-panel-content.ui-widget-content {
   padding: 0px;
 }
-.custom-accordion.ui-accordion .ui-accordion-header.start-title {
+body .custom-accordion.ui-accordion .ui-accordion-header,
+body .custom-accordion.ui-accordion .ui-accordion-content {
   border: 0px;
-  border-bottom: 1px solid #D4D6D9;
 }
-.custom-accordion.ui-accordion .ui-accordion-header.start-title:first-child {
+body .custom-accordion.ui-accordion .ui-accordion-header:first-child {
   border-radius: 0px;
-}
-.custom-accordion.ui-accordion .ui-accordion-header.start-title.ui-accordion-header-last{
-  border: 0px;
-}
-.custom-accordion.ui-accordion .ui-accordion-header.start-title.ui-state-active {
-  border-bottom: 1px solid #D4D6D9;
-}
-.custom-accordion.ui-accordion .ui-accordion-content {
-  border: 0px;
-  border-bottom: 1px solid #D4D6D9;
 }
 
 /* Send Signal */
