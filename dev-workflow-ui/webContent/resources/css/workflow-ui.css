@@ -96,6 +96,16 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight {
 .start-element:hover {
   background-color: var(--primary-lighter-color);
 }
+.main-starts-container .ui-panel-content.ui-widget-content {
+  padding: 0px;
+}
+body .custom-accordion.ui-accordion .ui-accordion-header,
+body .custom-accordion.ui-accordion .ui-accordion-content {
+  border: 0px;
+}
+body .custom-accordion.ui-accordion .ui-accordion-header:first-child {
+  border-radius: 0px;
+}
 
 /* Send Signal */
 .ui-button.send-signal-button {
