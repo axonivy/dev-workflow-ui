@@ -96,6 +96,26 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight {
 .start-element:hover {
   background-color: var(--primary-lighter-color);
 }
+.main-starts-container .ui-panel-content.ui-widget-content {
+  padding: 0px;
+}
+.custom-accordion.ui-accordion .ui-accordion-header.start-title {
+  border: 0px;
+  border-bottom: 1px solid #D4D6D9;
+}
+.custom-accordion.ui-accordion .ui-accordion-header.start-title:first-child {
+  border-radius: 0px;
+}
+.custom-accordion.ui-accordion .ui-accordion-header.start-title.ui-accordion-header-last{
+  border: 0px;
+}
+.custom-accordion.ui-accordion .ui-accordion-header.start-title.ui-state-active {
+  border-bottom: 1px solid #D4D6D9;
+}
+.custom-accordion.ui-accordion .ui-accordion-content {
+  border: 0px;
+  border-bottom: 1px solid #D4D6D9;
+}
 
 /* Send Signal */
 .ui-button.send-signal-button {
