@@ -1,11 +1,10 @@
 package ch.ivyteam.workflowui.starts;
 
-import ch.ivyteam.ivy.application.IProcessModelVersion;
 import ch.ivyteam.ivy.workflow.start.IWebStartable;
 
 public class CaseMapStartableModel extends StartableModel {
 
-  public CaseMapStartableModel(IWebStartable startable, IProcessModelVersion pmv) {
+  public CaseMapStartableModel(IWebStartable startable) {
     super(startable);
   }
 

@@ -41,7 +41,7 @@ public class CustomPMV {
             .forEach((cat, starts) -> categories.add(new CategoryModel(cat, starts)));
 
     var casemapStartElements = pmv.getStartables(ISession.current()).stream()
-            .filter(e -> e.getType().equals(CASE_MAP)).map(e -> new CaseMapStartableModel(e, pmv)).filter(filterPredicate)
+            .filter(e -> e.getType().equals(CASE_MAP)).map(e -> new CaseMapStartableModel(e)).filter(filterPredicate)
             .collect(Collectors.toList());
 
     var webServiceProcesses = pmv.getWebServiceProcesses().stream().map(WebServiceProcess::new)
