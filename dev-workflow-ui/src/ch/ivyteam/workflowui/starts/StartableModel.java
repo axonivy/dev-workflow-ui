@@ -9,6 +9,7 @@ import ch.ivyteam.ivy.workflow.start.IWebStartable;
 import ch.ivyteam.workflowui.util.LastSessionStarts;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.UrlUtil;
+import ch.ivyteam.workflowui.util.ViewerUtil;
 
 public class StartableModel {
   private final String displayName;
@@ -39,7 +40,7 @@ public class StartableModel {
       startable.getCategory(),
       getIcon(startable.customFields()),
       evaluateEmbedInFrame(startable.customFields().value(CustomFieldsHelper.EMBED_IN_FRAME)),
-      startable.viewerLink()
+      ViewerUtil.getViewerLink(startable)
     );
   }
 
