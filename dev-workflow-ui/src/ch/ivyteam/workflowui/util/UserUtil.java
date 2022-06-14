@@ -11,10 +11,10 @@ import javax.faces.context.FacesContext;
 
 import org.apache.commons.lang3.StringUtils;
 
-import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.security.IPermission;
 import ch.ivyteam.ivy.security.IRole;
+import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.workflowui.login.LoginUtil;
@@ -70,8 +70,8 @@ public class UserUtil {
   }
 
   private static boolean hasPermission(IPermission... permissions) {
+    var securityDescriptor = ISecurityContext.current().securityDescriptor();
     return Arrays.stream(permissions).anyMatch(
-            p -> ISession.current().hasPermission(IApplication.current().getSecurityDescriptor(), p));
+            p -> ISession.current().hasPermission(securityDescriptor, p));
   }
-
 }
