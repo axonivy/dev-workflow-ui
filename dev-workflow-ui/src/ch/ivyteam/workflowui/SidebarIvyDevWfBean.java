@@ -8,11 +8,10 @@ import javax.faces.context.FacesContext;
 
 import org.apache.commons.lang3.StringUtils;
 
-import ch.ivyteam.ivy.application.IApplication;
-
 @ManagedBean
 @RequestScoped
 public class SidebarIvyDevWfBean {
+
   private final String activePage;
 
   public SidebarIvyDevWfBean() {
@@ -23,9 +22,5 @@ public class SidebarIvyDevWfBean {
 
   public boolean isActive(String... pages) {
     return Stream.of(pages).anyMatch(page -> activePage.equals(page));
-  }
-
-  public String getAppContextPath() {
-    return IApplication.current().getContextPath();
   }
 }
