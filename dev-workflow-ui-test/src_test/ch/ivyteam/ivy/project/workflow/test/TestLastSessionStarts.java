@@ -8,25 +8,27 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import ch.ivyteam.ivy.environment.IvyTest;
 import ch.ivyteam.ivy.model.value.WebLink;
 import ch.ivyteam.util.IAttributeStore;
 import ch.ivyteam.workflowui.starts.StartableModel;
 import ch.ivyteam.workflowui.util.LastSessionStarts;
 
-public class TestLastSessionStarts {
+@IvyTest
+class TestLastSessionStarts {
 
   @Test
   void storeStartsOnSession() {
     var starts = new LastSessionStarts(new MapAttributeStore());
 
-    assertThat(starts.getAll()).isEmpty();
+    assertThat(starts.storedStarts()).isNull();
     var startable = new StartableModel("myown", null, new WebLink("test"), null, null, true, null);
 
     starts.add(startable);
-    assertThat(starts.getAll()).hasSize(1);
-    // shouldn't add duplicates
+    assertThat(starts.storedStarts()).hasSize(1);
+
     starts.add(startable);
-    assertThat(starts.getAll()).hasSize(1);
+    assertThat(starts.storedStarts()).as("shouldn't add duplicates").hasSize(1);
   }
 
   private static class MapAttributeStore implements IAttributeStore<Set<StartableModel>>  {
@@ -53,5 +55,4 @@ public class TestLastSessionStarts {
       return starts.keySet();
     }
   }
-
 }
