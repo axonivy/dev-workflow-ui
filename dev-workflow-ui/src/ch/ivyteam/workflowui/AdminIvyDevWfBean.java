@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 import javax.faces.bean.ManagedBean;
 
-import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.security.IPermission;
+import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.workflow.IWorkflowSession;
 
 @ManagedBean
@@ -69,7 +69,7 @@ public class AdminIvyDevWfBean {
 
   private static Boolean hasPermission(IPermission... permissions) {
     var session = IWorkflowSession.current();
-    var securityDescriptor = IApplication.current().getSecurityDescriptor();
+    var securityDescriptor = ISecurityContext.current().securityDescriptor();
     return Arrays
             .stream(permissions)
             .anyMatch(p -> session.hasPermission(securityDescriptor, p));
@@ -77,7 +77,7 @@ public class AdminIvyDevWfBean {
 
   private static Boolean hasAtLeastOnePermission(IPermission... permissions) {
     var session = IWorkflowSession.current();
-    var securityDescriptor = IApplication.current().getSecurityDescriptor();
+    var securityDescriptor = ISecurityContext.current().securityDescriptor();
     return Arrays
             .stream(permissions)
             .anyMatch(p -> session.hasPermission(securityDescriptor, p));
