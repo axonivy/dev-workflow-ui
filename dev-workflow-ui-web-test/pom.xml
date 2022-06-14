@@ -14,7 +14,7 @@
   <packaging>iar-integration-test</packaging>
 
   <properties>
-    <test.application>devworkflowuiwebtest</test.application>
+    <test.application>default-workflow</test.application>
   </properties>
 
   <dependencies>
@@ -70,6 +70,29 @@
         </configuration>
       </plugin>
       <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>2.5</version>
+        <executions>
+          <execution>
+            <id>remove-bundled-dev-wf-ui</id>
+            <phase>package</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+            <configuration>
+            <filesets>
+                <fileset>
+                  <directory>${basedir}/../maven/config/target/ivyEngine/webapps/workflow/</directory>
+                  <includes>
+                    <include>dev-workflow-ui-jar*.jar</include>
+                  </includes>
+                </fileset>
+              </filesets>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <version>3.0.2</version>
         <executions>
@@ -80,7 +103,7 @@
               <goal>copy-resources</goal>
             </goals>
             <configuration>
-              <outputDirectory>${basedir}/../maven/config/target/ivyEngine/webapps/ivy/WEB-INF/lib/</outputDirectory>
+              <outputDirectory>${basedir}/../maven/config/target/ivyEngine/webapps/workflow/</outputDirectory>
               <resources>
                 <resource>
                   <directory>${basedir}/../maven/dev-workflow-ui-jar/target/</directory>
