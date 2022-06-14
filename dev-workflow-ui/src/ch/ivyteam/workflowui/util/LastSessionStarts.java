@@ -37,8 +37,12 @@ public class LastSessionStarts {
     return getStarts();
   }
 
+  public Set<StartableModel> storedStarts() {
+    return session.getAttribute(ATTRIBUTE_NAME);
+  }
+
   private Set<StartableModel> getStarts() {
-    var starts = session.getAttribute(ATTRIBUTE_NAME);
+    var starts = storedStarts();
     if (starts == null) {
       return Set.of();
     }
@@ -48,5 +52,4 @@ public class LastSessionStarts {
     }
     return starts.stream().filter(deployedStartables::contains).collect(Collectors.toSet());
   }
-
 }
