@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.application.IProcessModel;
-import ch.ivyteam.ivy.application.IProcessModelVersion;
 import ch.ivyteam.ivy.application.app.IApplicationRepository;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
@@ -41,13 +40,13 @@ public class ProcessModelsUtil {
   public static List<StartableModel> getDeployedStartables() {
     return getReleasedWorkflowPMVs().stream()
       .flatMap(pmv -> pmv.getStartables(ISession.current()).stream()
-      .map(s -> createCaseMapOrProcessStartable(s, pmv)))
+      .map(s -> createCaseMapOrProcessStartable(s)))
       .collect(Collectors.toList());
   }
 
-  private static StartableModel createCaseMapOrProcessStartable(IWebStartable startable, IProcessModelVersion pmv) {
+  private static StartableModel createCaseMapOrProcessStartable(IWebStartable startable) {
     if (startable.getType().equals("casemap")) {
-      return new CaseMapStartableModel(startable, pmv);
+      return new CaseMapStartableModel(startable);
     }
     return new StartableModel(startable);
   }
