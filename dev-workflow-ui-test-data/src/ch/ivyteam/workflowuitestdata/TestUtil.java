@@ -13,14 +13,15 @@ public class TestUtil {
     var name = "DeveloperTest";
     Sudo.run(() -> {
       var securityContext = ISecurityContext.current();
-      var user = securityContext.users().find(name);
+      var users = securityContext.users();
+      var user = users.find(name);
       if (user == null) {
-        user = securityContext.users().create(name, name);
+        user = users.create(name, name);
       }
-      var securityDescritpor = securityContext.securityDescriptor();
-      securityDescritpor.grantPermission(TASK_READ_ALL, user);
-      securityDescritpor.grantPermission(CASE_READ_ALL, user);
-      securityDescritpor.grantPermission(WORKFLOW_EVENT_READ_ALL, user);
+      var securityDescriptor = securityContext.securityDescriptor();
+      securityDescriptor.grantPermission(TASK_READ_ALL, user);
+      securityDescriptor.grantPermission(CASE_READ_ALL, user);
+      securityDescriptor.grantPermission(WORKFLOW_EVENT_READ_ALL, user);
     });
   }
 }
