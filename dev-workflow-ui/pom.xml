@@ -30,9 +30,9 @@
             <configuration>
              <filesets>
                 <fileset>
-                  <directory>${basedir}/../maven/config/target/ivyEngine/webapps/ivy/WEB-INF/lib/</directory>
+                  <directory>${basedir}/../maven/config/target/ivyEngine/webapps/workflow/</directory>
                   <includes>
-                    <include>dev-workflow-ui-jar-9.4.0-SNAPSHOT.jar</include>
+                    <include>dev-workflow-ui-jar-*.jar</include>
                   </includes>
                 </fileset>
               </filesets>
