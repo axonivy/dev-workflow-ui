@@ -69,6 +69,8 @@
           <ivyVersion>${buildPlugin.ivyVersion}</ivyVersion>
         </configuration>
       </plugin>
+
+      <!--
       <plugin>
         <artifactId>maven-clean-plugin</artifactId>
         <version>2.5</version>
@@ -80,7 +82,7 @@
               <goal>clean</goal>
             </goals>
             <configuration>
-            <filesets>
+              <filesets>
                 <fileset>
                   <directory>${basedir}/../maven/config/target/ivyEngine/webapps/workflow/</directory>
                   <includes>
@@ -92,6 +94,7 @@
           </execution>
         </executions>
       </plugin>
+-->
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <version>3.0.2</version>
