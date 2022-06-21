@@ -7,7 +7,6 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUr
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
@@ -22,6 +21,7 @@ import org.openqa.selenium.By;
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.axonivy.ivy.webtest.primeui.widget.Table;
+import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
 public class WebTestCaseDetailsIT {
@@ -112,13 +112,9 @@ public class WebTestCaseDetailsIT {
 
   @Test
   public void processViewer() {
-    $(By.id("form:cardOpenprocessViewerBtn")).shouldBe(visible);
-    $(By.id("form:openProcessViewerBtn")).shouldBe(visible).click();
-    $(By.id("form:processViewer:processViewerDialog")).shouldBe(visible);
-    $(By.id("viewerFrame")).shouldBe(visible);
-    $(By.id("form:processViewer:openViewerNewPage")).shouldBe(visible).click();
-    $(By.id("form:openProcessViewerBtn")).shouldNot(exist);
-    $(By.id("form:processViewer:processViewerDialog")).shouldNotBe(visible);
+    $(By.id("processViewerFrame")).shouldBe(visible);
+    Selenide.switchTo().frame("processViewerFrame");
+    $(By.id("sprotty_1750C5211D94569D-f0")).is(visible);
   }
 
 }

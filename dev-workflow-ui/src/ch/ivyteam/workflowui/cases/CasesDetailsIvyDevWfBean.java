@@ -16,6 +16,8 @@ import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.query.CaseQuery;
 import ch.ivyteam.ivy.workflow.start.IWebStartable;
+import ch.ivyteam.ivy.workflow.start.ProcessViewerUrl;
+import ch.ivyteam.ivy.workflow.start.ProcessViewerUrl.ProcessViewerMode;
 import ch.ivyteam.workflowui.casemap.CaseMapModel;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
@@ -43,6 +45,7 @@ public class CasesDetailsIvyDevWfBean {
   private List<WorkflowEventModel> workflowEvents;
   private IWebStartable startable;
   private String viewerLink;
+  private String processPreviewLink;
 
   public String getSelectedCaseId() {
     return selectedCaseId;
@@ -63,6 +66,12 @@ public class CasesDetailsIvyDevWfBean {
     sidestepsMenuModel = SidestepUtil.createMenuModel(sidesteps);
     workflowEvents = WorkflowEventModel.toList(selectedCase.getWorkflowEvents());
     startable = selectedCase.getBusinessCase().getStartedFrom();
+    viewerLink = ViewerUtil.getViewerLink(selectedCase);
+    processPreviewLink = generateProcessPreviewLink();
+  }
+
+  private String generateProcessPreviewLink() {
+    return ProcessViewerUrl.of(selectedCase).mode(ProcessViewerMode.PREVIEW).zoom(75).toWebLink().toString();
   }
 
   public ICase getCaseById(long id) {
@@ -137,16 +146,16 @@ public class CasesDetailsIvyDevWfBean {
     return startable.getType().equals("casemap");
   }
 
-  public void setViewerLink() {
-    this.viewerLink = ViewerUtil.getViewerLink(selectedCase);
-  }
-
   public String getViewerLink() {
     return this.viewerLink;
   }
 
   public String getViewerDialogTitle() {
     return ViewerUtil.getViewerDialogTitle(selectedCase);
+  }
+
+  public String getProcessPreviewLink() {
+    return processPreviewLink;
   }
 
 }
