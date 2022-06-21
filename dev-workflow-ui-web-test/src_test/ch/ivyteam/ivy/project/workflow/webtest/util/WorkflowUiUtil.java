@@ -25,16 +25,22 @@ public class WorkflowUiUtil {
   }
 
   public static void startTestProcess(String pathToIvp) {
-    Selenide.open(EngineUrl.createProcessUrl("/dev-workflow-ui-test-data/" + pathToIvp));
+    var url = EngineUrl.createProcessUrl("/dev-workflow-ui-test-data/" + pathToIvp);
+    System.out.println(url);
+    Selenide.open(url);
   }
 
   public static void startTestCaseMap(String path) {
-    Selenide.open(EngineUrl.createCaseMapUrl("/dev-workflow-ui-test-data/" + path));
+    var url = EngineUrl.createCaseMapUrl("/dev-workflow-ui-test-data/" + path);
+    System.out.println(url);
+    Selenide.open(url);
   }
 
   public static String viewUrl(String page) {
-    if ("true".equalsIgnoreCase(System.getProperty("test.integrated.workflow"))) {
-      String url = EngineUrl.create().path("/faces/" + page).toUrl();
+    var securityContext = System.getProperty("test.integrated.workflow");
+    if (StringUtils.isNotEmpty(securityContext)) {
+      var engineUri = System.getProperty("test.engine.url");
+      var url = engineUri + "/" + securityContext + "/faces/" + page;
       System.out.println("Engine URL integrated:" + url);
       return url;
     }
