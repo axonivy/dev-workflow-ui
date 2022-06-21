@@ -14,7 +14,7 @@
   <packaging>iar-integration-test</packaging>
 
   <properties>
-    <test.application>devworkflowuiwebtest</test.application>
+    <test.application>default-workflow</test.application>
   </properties>
 
   <dependencies>
