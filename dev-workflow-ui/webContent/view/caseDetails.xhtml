@@ -60,17 +60,11 @@
                     <i class="p-pr-3 si si-information-circle"></i>
                     <h6 class="p-m-0">Process Viewer</h6>
                   </div>
-                  <p:commandButton id="openProcessViewerBtn" icon="si si-expand-6" styleClass="ui-button-secondary rounded-button"
-                    actionListener="#{casesDetailsIvyDevWfBean.setViewerLink()}"
-                    oncomplete="PF('process-viewer-dlg').show()" update="form:processViewer:processViewerDialog" />
+                  <p:commandButton id="openProcessViewerBtn" icon="si si-expand-6"
+                    styleClass="ui-button-secondary rounded-button" onclick="PF('process-viewer-dlg').show()"/>
                 </div>
                 <div class="height-100 p-d-flex p-jc-center p-ai-center">
-                  <p:commandLink id="cardOpenprocessViewerBtn"
-                    actionListener="#{casesDetailsIvyDevWfBean.setViewerLink()}"
-                    oncomplete="PF('process-viewer-dlg').show()" update="form:processViewer:processViewerDialog">
-                    <i class="si si-hierarchy-6 si-rotate-270 p-mr-1" />
-                    <h:outputText value="Open Process Viewer" />
-                  </p:commandLink>
+                  <iframe id="processViewerFrame" src="#{casesDetailsIvyDevWfBean.processPreviewLink}"/>
                 </div>
               </div>
             </h:panelGroup>
