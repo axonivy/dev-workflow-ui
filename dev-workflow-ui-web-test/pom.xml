@@ -80,7 +80,7 @@
               <goal>copy-resources</goal>
             </goals>
             <configuration>
-              <outputDirectory>${basedir}/../maven/config/target/ivyEngine/webapps/ivy/WEB-INF/lib/</outputDirectory>
+              <outputDirectory>${basedir}/../maven/config/target/ivyEngine/webapps/workflow/</outputDirectory>
               <resources>
                 <resource>
                   <directory>${basedir}/../maven/dev-workflow-ui-jar/target/</directory>
@@ -136,7 +136,7 @@
               <argLine>
                 -Dtest.engine.url=${test.engine.url}
                 -Dtest.engine.app=${test.application}
-                -Dtest.integrated.workflow=true</argLine>
+                -Dtest.integrated.workflow=default-workflow</argLine>
             </configuration>
           </execution>
           <execution>
@@ -153,7 +153,7 @@
               <argLine>
                 -Dtest.engine.url=${test.engine.url}
                 -Dtest.engine.app=${test.application}
-                -Dtest.integrated.workflow=true</argLine>
+                -Dtest.integrated.workflow=default-workflow</argLine>
             </configuration>
           </execution>
           <execution>
@@ -169,7 +169,7 @@
               <argLine>
                 -Dtest.engine.url=${test.engine.url}
                 -Dtest.engine.app=${test.application}
-                -Dtest.integrated.workflow=true</argLine>
+                -Dtest.integrated.workflow=default-workflow</argLine>
             </configuration>
           </execution>
         </executions>
