@@ -38,18 +38,16 @@
                   </div>
                   <div class="straight-text-icon">
                     <h:panelGroup layout="block" rendered="#{not empty casesDetailsIvyDevWfBean.sidesteps}">
-                      <p:commandButton value="Sidesteps" icon="si si-arrow-down-1" id="sidestepsBtn" />
+                      <p:commandButton value="Sidesteps" icon="si si-arrow-down-1" id="sidestepsBtn" styleClass="p-mr-1"/>
                       <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
                         model="#{casesDetailsIvyDevWfBean.sidestepsMenuModel}" styleClass="menu-no-icons" />
                     </h:panelGroup>
+                    <p:commandButton id="openCaseMapUiViewerBtn" icon="si si-expand-6"
+                      styleClass="ui-button-secondary rounded-button" onclick="PF('process-viewer-dlg').show()"/>
+                    <p:tooltip for="openCaseMapUiViewerBtn" position="top" value="Open Case Map Viewer" />
                   </div>
                 </div>
                 <ui:include src="/includes/components/caseDetails/caseMap.xhtml" />
-                <p:commandLink id="openCaseMapUiViewerBtn" styleClass="p-d-flex p-jc-center"
-                  oncomplete="PF('process-viewer-dlg').show()">
-                  <h:outputText value="Open Case Map Viewer" />
-                  <i class="p-ml-1 si si-expand-6" />
-                </p:commandLink>
               </div>
             </h:panelGroup>
 
@@ -62,6 +60,7 @@
                   </div>
                   <p:commandButton id="openProcessViewerBtn" icon="si si-expand-6"
                     styleClass="ui-button-secondary rounded-button" onclick="PF('process-viewer-dlg').show()"/>
+                  <p:tooltip for="openProcessViewerBtn" position="top" value="Open Process Viewer" />
                 </div>
                 <div class="height-100 p-d-flex p-jc-center p-ai-center">
                   <iframe id="processViewerFrame" src="#{casesDetailsIvyDevWfBean.processPreviewLink}"/>
