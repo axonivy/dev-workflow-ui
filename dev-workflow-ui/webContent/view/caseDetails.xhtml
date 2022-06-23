@@ -46,7 +46,7 @@
                 </div>
                 <ui:include src="/includes/components/caseDetails/caseMap.xhtml" />
                 <p:commandLink id="openCaseMapUiViewerBtn" styleClass="p-d-flex p-jc-center"
-                  oncomplete="PF('process-viewer-dlg').show()" update="form:processViewer:processViewerDialog" actionListener="#{casesDetailsIvyDevWfBean.setViewerLink()}">
+                  oncomplete="PF('process-viewer-dlg').show()">
                   <h:outputText value="Open Case Map Viewer" />
                   <i class="p-ml-1 si si-expand-6" />
                 </p:commandLink>
