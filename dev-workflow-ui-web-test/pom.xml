@@ -69,6 +69,32 @@
           <ivyVersion>${buildPlugin.ivyVersion}</ivyVersion>
         </configuration>
       </plugin>
+
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>clean-wf-ui-from-engine</id>
+            <phase>package</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+            <configuration>
+             <excludeDefaultDirectories>true</excludeDefaultDirectories>
+             <filesets>
+                <fileset>
+                  <directory>${basedir}/../maven/config/target/ivyEngine/webapps/workflow/</directory>
+                  <includes>
+                    <include>dev-workflow-ui-jar-*.jar</include>
+                  </includes>
+                </fileset>
+              </filesets>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <version>3.0.2</version>
