@@ -2,14 +2,13 @@ package ch.ivyteam.ivy.project.workflow.webtest;
 
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -24,11 +23,11 @@ public class WebTestSignalsIT {
   public void testSignalAdminOnly() {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     loginFromTable("testuser");
-    open(viewUrl("signals.xhtml"));
+    openView("signals.xhtml");
     $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menu"));
 
     loginDeveloper();
-    open(viewUrl("signals.xhtml"));
+    openView("signals.xhtml");
     $(By.id("signalForm:signalBtn")).shouldBe(enabled);
   }
 
@@ -37,7 +36,7 @@ public class WebTestSignalsIT {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     loginDeveloper();
 
-    open(viewUrl("signals.xhtml"));
+    openView("signals.xhtml");
 
     $(By.id("signalForm:signalCodeInput_input")).sendKeys("Web Test Signal");
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
@@ -49,7 +48,7 @@ public class WebTestSignalsIT {
 
   @Test
   public void testSignalAutocomplete() {
-    open(viewUrl("signals.xhtml"));
+    openView("signals.xhtml");
     $(By.id("signalForm:signalCodeInput")).findElement(By.tagName("button")).click();
 
     $(By.id("signalForm:signalCodeInput_input")).sendKeys("signal");
@@ -66,12 +65,12 @@ public class WebTestSignalsIT {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     loginDeveloper();
 
-    open(viewUrl("signals.xhtml"));
+    openView("signals.xhtml");
     Table boundaryTable = PrimeUi.table(By.id("boundarySignalsTable"));
     boundaryTable.valueAtShouldBe(0, 0, text("No records found."));
 
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
-    open(viewUrl("signals.xhtml"));
+    openView("signals.xhtml");
     boundaryTable.valueAtShouldBe(0, 1, text("test:data:signal"));
 
     $(By.id("signalForm:signalCodeInput_input")).sendKeys("test:data:signal");
@@ -84,12 +83,12 @@ public class WebTestSignalsIT {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     loginDeveloper();
 
-    open(viewUrl("signals.xhtml"));
+    openView("signals.xhtml");
     Table boundaryTable = PrimeUi.table(By.id("boundarySignalsTable"));
     boundaryTable.valueAtShouldBe(0, 0, text("No records found."));
 
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
-    open(viewUrl("signals.xhtml"));
+    openView("signals.xhtml");
 
     $(By.id("boundarySignalsTable:0:sendSignalIcon")).shouldBe(visible).click();
     boundaryTable.valueAtShouldBe(0, 0, text("No records found."));

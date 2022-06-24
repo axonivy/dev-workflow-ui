@@ -1,13 +1,15 @@
 package ch.ivyteam.ivy.project.workflow.webtest;
 
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.customLogin;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.logout;
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static com.codeborne.selenide.Condition.readonly;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.$$;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
@@ -17,22 +19,19 @@ import com.axonivy.ivy.webtest.IvyWebTest;
 import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.codeborne.selenide.Selenide;
 
-import ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil;
-
 @IvyWebTest
 public class WebTestHomepageIT {
 
   @Test
   public void homepageContainers() {
-    WorkflowUiUtil.customLogin("DifferentLogin", "DifferentPassword");
-    open(viewUrl("home.xhtml"));
+    customLogin("DifferentLogin", "DifferentPassword");
 
     // start process to create test data
-    open(viewUrl("starts.xhtml"));
+    openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).setValue("case");
     $(byText("test _ case _ map")).shouldBe(visible).click();
     $(By.id("iFrame")).shouldBe(visible);
-    open(viewUrl("home.xhtml"));
+    openView("home.xhtml");
     $(".last-starts-card").shouldBe(visible);
 
     // check if the data is in the containers
@@ -45,7 +44,6 @@ public class WebTestHomepageIT {
   @Test
   public void noCardsIfNotLoggedIn() {
     loginDeveloper();
-    open(viewUrl("home.xhtml"));
 
     // cards should be visible when logged in
     $(".active-tasks-card").shouldBe(visible);
@@ -63,17 +61,17 @@ public class WebTestHomepageIT {
   public void testHomePageViewer() {
     loginDeveloper();
 
-    open(viewUrl("starts.xhtml"));
+    openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).setValue("case");
     $(byText("test _ case _ map")).shouldBe(visible).click();
     $(By.id("iFrame")).shouldBe(visible);
-    open(viewUrl("home.xhtml"));
+    openView("home.xhtml");
     $(".last-starts-card").shouldBe(visible);
 
-    var startsTable = PrimeUi.table(By.id("lastStarts"));
-    startsTable.row(0).getText().contains("test _ case _ map");
+    PrimeUi.table(By.id("lastStarts")).contains("test _ case _ map");
 
-    $(By.id("lastStarts:0:openProcessViewer")).shouldBe(visible).click();
+    $$(".last-start-element .straight-text-icon").find(text("test _ case _ map"))
+            .parent().findAll("a").last().click();
     $(By.id("processViewer:processViewerDialog")).shouldBe(visible);
     $(By.id("viewerFrame")).shouldBe(visible);
     Selenide.switchTo().frame("viewerFrame");

@@ -1,8 +1,9 @@
 package ch.ivyteam.ivy.project.workflow.webtest;
 
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.assertCurrentUrlEndsWith;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.assertCurrentUrlContains;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.enabled;
@@ -11,7 +12,6 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,8 +21,6 @@ import org.openqa.selenium.By;
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.axonivy.ivy.webtest.engine.EngineUrl;
 import com.codeborne.selenide.Selenide;
-
-import ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil;
 
 @IvyWebTest
 public class WebTestStartsIT {
@@ -35,13 +33,13 @@ public class WebTestStartsIT {
   @BeforeEach
   public void loginAdmin() {
     Selenide.switchTo().defaultContent();
-    WorkflowUiUtil.loginDeveloper();
+    loginDeveloper();
   }
 
   @Test
   public void testFilter() {
     startTestProcess("1750C5211D94569D/TestData.ivp");
-    Selenide.open(viewUrl("starts.xhtml"));
+    openView("starts.xhtml");
     $(By.id("startsForm:projectStarts")).shouldBe(visible);
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui"));
     $(By.id("startsForm:globalFilter")).sendKeys("makeAdmin");
@@ -51,7 +49,7 @@ public class WebTestStartsIT {
 
   @Test
   public void testExecuteStart() {
-    Selenide.open(viewUrl("starts.xhtml"));
+    openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).sendKeys("startTestDialog1");
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui-test-data"));
     $(By.className("start-link")).shouldBe(visible).shouldHave(text("startTestDialog1.ivp")).click();
@@ -63,12 +61,12 @@ public class WebTestStartsIT {
     $(By.id("form:testSelectOneMenu")).shouldBe(visible).click();
     $(By.id("form:testSelectOneMenu_2")).shouldBe(visible).click();
     $(By.id("form:proceed")).shouldBe(visible).click();
-    assertCurrentUrlEndsWith("starts.xhtml");
+    assertCurrentUrlContains("starts.xhtml");
   }
 
   @Test
   public void startNotEmbedInFrame() {
-    Selenide.open(viewUrl("starts.xhtml"));
+    openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).sendKeys("embed in frame");
     // open in fullscreen link icon shouldn't be visible
     $(By.className("start-element")).findAll("a").shouldBe(size(3));
@@ -78,8 +76,7 @@ public class WebTestStartsIT {
 
   @Test
   public void testExecuteDefaultFramePage() {
-    Selenide.open(EngineUrl
-            .createProcessUrl("/dev-workflow-ui-test-data/1750C5211D94569D/startTestDialog1.ivp?embedInFrame"));
+    Selenide.open(EngineUrl.createProcessUrl("/dev-workflow-ui-test-data/1750C5211D94569D/startTestDialog1.ivp?embedInFrame"));
     if ($(By.id("iFrame")).is(visible)) {
       Selenide.switchTo().frame("iFrame");
     }
@@ -90,31 +87,31 @@ public class WebTestStartsIT {
 
   @Test
   public void testWebservicesVisible() {
-    Selenide.open(viewUrl("starts.xhtml"));
+    openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).sendKeys("testservice");
     $(By.id("startsForm:projectStarts")).shouldHave(text("TestService"));
   }
 
   @Test
   public void testRedirectWhenFinished() {
-    Selenide.open(viewUrl("starts.xhtml"));
+    openView("starts.xhtml");
     $(By.id("startsForm:projectStarts")).shouldBe(visible);
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui"));
     $(By.id("startsForm:globalFilter")).sendKeys("testData");
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui-test-data"));
     $(byText("TestData/TestData.ivp")).shouldBe(visible).click();
 
-    open(viewUrl("tasks.xhtml"));
+    openView("tasks.xhtml");
     $(By.id("tasksForm:tasks")).find("TestTask");
     $(By.id("menuform:sr_tasks")).shouldHave(cssClass("active-menu"));
-    assertCurrentUrlEndsWith("tasks.xhtml");
+    assertCurrentUrlContains("tasks.xhtml");
 
-    open(viewUrl("home.xhtml"));
+    openView("home.xhtml");
     $(By.id("lastStarts")).find(byText("TestData/TestData.ivp")).click();
     $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menu"));
-    assertCurrentUrlEndsWith("home.xhtml");
+    assertCurrentUrlContains("home.xhtml");
 
-    open(viewUrl("allTasks.xhtml"));
+    openView("allTasks.xhtml");
     $(".detail-btn").shouldBe(visible).click();
     $(".case-link").shouldHave(text("Created case of TestData"));
     $("#actionMenuForm\\:taskStartBtn").shouldBe(enabled).click();
@@ -122,7 +119,7 @@ public class WebTestStartsIT {
 
   @Test
   public void testExecuteOnFullscreenPage() {
-    Selenide.open(viewUrl("starts.xhtml"));
+    openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).sendKeys("startTestDialog1");
     $(byText("TestData/startTestDialog2.ivp")).shouldNotBe(visible);
     $(byText("TestData/startTestDialog1.ivp")).shouldBe(visible);
@@ -134,7 +131,7 @@ public class WebTestStartsIT {
 
   @Test
   public void testFrameHeaderBarSidestep() {
-    Selenide.open(viewUrl("starts.xhtml"));
+    openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).sendKeys("test _ case _ map");
     $(byText("test _ case _ map")).shouldBe(visible).click();
     $(By.id("iFrameForm:frameTaskName")).shouldHave(text("Test Developer Workflow-UI Dialog 1"));
@@ -149,7 +146,7 @@ public class WebTestStartsIT {
 
   @Test
   public void testStartableIcons() {
-    Selenide.open(viewUrl("starts.xhtml"));
+    openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).setValue("makeAdminUser.ivp");
     $(By.id("startableIcon")).shouldBe(visible).shouldHave(cssClass("si-controls-play"));
     $(By.id("startsForm:globalFilter")).setValue("HomePageTestData.ivp");

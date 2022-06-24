@@ -2,8 +2,8 @@ package ch.ivyteam.ivy.project.workflow.webtest;
 
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -17,7 +17,6 @@ import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.axonivy.ivy.webtest.primeui.PrimeUi;
-import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
 public class WebTestIntermediateEventsIT {
@@ -34,20 +33,20 @@ public class WebTestIntermediateEventsIT {
 
   @Test
   public void adminOnly() {
-    Selenide.open(viewUrl("home.xhtml"));
+    openView("home.xhtml");
     loginFromTable("testuser");
-    Selenide.open(viewUrl("intermediateEvents.xhtml"));
+    openView("intermediateEvents.xhtml");
     $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menu"));
 
     loginDeveloper();
-    Selenide.open(viewUrl("intermediateEvents.xhtml"));
+    openView("intermediateEvents.xhtml");
     $(byText("TestIntermediateEvent")).click();
     $(By.id("id")).shouldBe(visible);
   }
 
   @Test
   public void checkIntermediateElementDetails() {
-    Selenide.open(viewUrl("intermediateEvents.xhtml"));
+    openView("intermediateEvents.xhtml");
     $(byText("TestIntermediateEvent")).click();
     $(By.id("name")).shouldBe(text("TestIntermediateEvent"));
     $(By.id("description")).shouldBe(text("intermediate event description"));
@@ -55,7 +54,7 @@ public class WebTestIntermediateEventsIT {
 
   @Test
   public void checkIntermediateElementEventsTable() {
-    Selenide.open(viewUrl("intermediateEvents.xhtml"));
+    openView("intermediateEvents.xhtml");
     $(byText("TestIntermediateEvent")).click();
     $(By.id("id")).shouldBe(visible);
 

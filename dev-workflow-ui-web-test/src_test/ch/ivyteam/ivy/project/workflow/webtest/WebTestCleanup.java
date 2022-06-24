@@ -2,15 +2,14 @@ package ch.ivyteam.ivy.project.workflow.webtest;
 
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +30,7 @@ public class WebTestCleanup {
   @BeforeAll
   public static void prepare() {
     // check if the engine is running and starts are available
-    open(viewUrl("starts.xhtml"));
+    openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).sendKeys("workflow-ui-test-data");
     $("#startsForm\\:projectStarts\\:0\\:caseMapsTitle").shouldBe(visible);
     $("#startsForm\\:projectStarts\\:0\\:processesTitle").shouldBe(visible);
@@ -47,10 +46,10 @@ public class WebTestCleanup {
   @Test
   @Order(1)
   public void testNoCleanupEngine() {
-    open(viewUrl("cleanup.xhtml"));
+    openView("cleanup.xhtml");
     $(By.id("clanupForm:cleanupBtn")).shouldBe(enabled);
     startTestProcess("1783B19164F69B78/designerStandard.ivp");
-    open(viewUrl("cleanup.xhtml"));
+    openView("cleanup.xhtml");
     $(By.id("clanupForm:cleanupBtn")).shouldNotBe(enabled);
   }
 
@@ -60,11 +59,11 @@ public class WebTestCleanup {
     startTestProcess("1783B19164F69B78/designerEmbedded.ivp");
 
     loginFromTable("testuser");
-    open(viewUrl("cleanup.xhtml"));
+    openView("cleanup.xhtml");
     $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menu"));
 
     loginDeveloper();
-    open(viewUrl("cleanup.xhtml"));
+    openView("cleanup.xhtml");
     $(By.id("clanupForm:cleanupBtn")).shouldNotBe(disabled);
   }
 
@@ -72,11 +71,11 @@ public class WebTestCleanup {
   @Order(3)
   public void testClean() {
     startTestProcess("1750C5211D94569D/TestData.ivp");
-    open(viewUrl("cases.xhtml"));
+    openView("cases.xhtml");
     Table casesTable = PrimeUi.table(By.id("casesForm:cases"));
     casesTable.row(0).shouldBe(text("Created case of TestData"));
 
-    open(viewUrl("cleanup.xhtml"));
+    openView("cleanup.xhtml");
     $(By.id("clanupForm:growl_container")).shouldNotBe(visible);
 
     $(By.id("clanupForm:casesAndTasksCheckbox")).shouldBe(enabled).click();
@@ -86,21 +85,21 @@ public class WebTestCleanup {
     $(By.id("clanupForm:cleanupBtn")).shouldNotBe(disabled).click();
     $(By.id("clanupForm:growl_container")).shouldNotBe(visible);
 
-    open(viewUrl("cases.xhtml"));
+    openView("cases.xhtml");
     casesTable.row(0).shouldBe(text("Created case of TestData"));
-    open(viewUrl("starts.xhtml"));
+    openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).sendKeys("workflow-ui-test-data");
     $("#startsForm\\:projectStarts\\:0\\:caseMapsTitle").shouldBe(visible);
     $("#startsForm\\:projectStarts\\:0\\:processesTitle").shouldBe(visible);
     $("#startsForm\\:projectStarts\\:0\\:webServicesTitle").shouldBe(visible);
 
-    open(viewUrl("cleanup.xhtml"));
+    openView("cleanup.xhtml");
     $(By.id("clanupForm:cleanupBtn")).shouldBe(visible).click();
     $(By.id("clanupForm:growl_container")).shouldBe(visible);
 
-    open(viewUrl("cases.xhtml"));
+    openView("cases.xhtml");
     casesTable.row(0).shouldBe(text("No Cases found"));
-    open(viewUrl("starts.xhtml"));
+    openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).sendKeys("workflow-ui-test-data");
     $("#startsForm\\:projectStarts\\:0\\:caseMapsTitle").shouldBe(visible);
     $("#startsForm\\:projectStarts\\:0\\:processesTitle").shouldBe(visible);

@@ -2,8 +2,8 @@ package ch.ivyteam.ivy.project.workflow.webtest;
 
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.exactText;
@@ -11,7 +11,6 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,7 +35,7 @@ public class WebTestCaseDetailsIT {
   @BeforeEach
   void beforeEach() {
     loginDeveloper();
-    open(viewUrl("cases.xhtml"));
+    openView("cases.xhtml");
     $(byText("Created case of TestData")).shouldBe(visible).click();
     $(By.id("form:caseName")).shouldBe(text("Created case of TestData"));
   }
@@ -60,7 +59,7 @@ public class WebTestCaseDetailsIT {
   @Test
   public void checkTaskTableSystemTask() {
     startTestProcess("1750C5211D94569D/testIntermediateEventProcess.ivp");
-    open(viewUrl("cases.xhtml"));
+    openView("cases.xhtml");
     $(".detail-btn").shouldBe(visible).click();
 
     Table tasksTable = PrimeUi.table(By.id("form:tasks"));
@@ -87,7 +86,7 @@ public class WebTestCaseDetailsIT {
     var caseId = $(By.id("form:caseId")).getText();
     $(By.id("form:workflowEvents:eventsTable")).shouldBe(visible);
     loginFromTable("testuser");
-    open(viewUrl("cases.xhtml"));
+    openView("cases.xhtml");
     $(By.className("detail-btn")).shouldBe(visible).click();
     $(By.id("form:caseId")).shouldBe(exactText(caseId));
     $(By.id("form:workflowEvents:eventsTable")).shouldNotBe(visible);
@@ -97,7 +96,7 @@ public class WebTestCaseDetailsIT {
   @Test
   public void destoryCase() {
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
-    open(viewUrl("cases.xhtml"));
+    openView("cases.xhtml");
     $(By.id("casesForm:cases:0:caseName")).shouldBe(visible).click();
     $(By.id("form:caseState")).shouldBe(exactText("RUNNING"));
     $(By.id("form:caseDestroyBtn")).shouldBe(visible).shouldNotHave(cssClass("ui-state-disabled"));

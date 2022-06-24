@@ -46,7 +46,7 @@ public class FrameIvyDevWfBean {
       return url;
     } else {
       throw BpmError.create("frame:unsupported:url")
-              .withMessage("Only relative urls are supported (security reasons)").build();
+              .withMessage("Only relative urls are supported (security reasons): " + url).build();
     }
   }
 

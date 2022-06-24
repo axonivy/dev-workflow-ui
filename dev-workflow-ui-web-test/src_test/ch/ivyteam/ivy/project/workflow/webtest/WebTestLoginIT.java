@@ -1,9 +1,9 @@
 package ch.ivyteam.ivy.project.workflow.webtest;
 
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.assertCurrentUrlEndsWith;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.assertCurrentUrlContains;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.logout;
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
@@ -17,7 +17,6 @@ import org.openqa.selenium.By;
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.axonivy.ivy.webtest.primeui.widget.Table;
-import com.codeborne.selenide.Selenide;
 
 import ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil;
 
@@ -33,17 +32,17 @@ public class WebTestLoginIT {
   @Test
   void testLogout() {
     logout();
-    Selenide.open(viewUrl("home.xhtml"));
+    openView("home.xhtml");
     loginFromTable("testuser");
     $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menu"));
-    assertCurrentUrlEndsWith("home.xhtml");
+    assertCurrentUrlContains("home.xhtml");
     logout();
     $("#sessionUserName").shouldBe(text("Unknown User"));
   }
 
   @Test
   void testLoginTableSearch() throws Exception {
-    Selenide.open(viewUrl("loginTable.xhtml"));
+    openView("loginTable.xhtml");
     Table table = PrimeUi.table(By.id("loginTable:users"));
     table.contains("DeveloperTest");
     table.searchGlobal("testuser");
@@ -58,7 +57,7 @@ public class WebTestLoginIT {
 
   @Test
   void testCustomLoginFailMessage() {
-    Selenide.open(viewUrl("login.xhtml"));
+    openView("login.xhtml");
     $("#loginForm\\:loginMessage").shouldNotBe(visible);
     WorkflowUiUtil.customLogin("sadgs", "sdgasgd");
     $("#loginForm\\:loginMessage").shouldBe(visible);
@@ -68,34 +67,34 @@ public class WebTestLoginIT {
   void testRedirectIfNotLogggedIn() {
     loginFromTable("testuser");
     logout();
-    Selenide.open(viewUrl("cases.xhtml"));
-    assertCurrentUrlEndsWith("loginTable.xhtml?originalUrl=cases.xhtml");
+    openView("cases.xhtml");
+    assertCurrentUrlContains("loginTable.xhtml?originalUrl=cases.xhtml");
     $("#loginMessage").shouldBe(visible).shouldHave(text("you need to login"));
 
-    Selenide.open(viewUrl("tasks.xhtml"));
-    assertCurrentUrlEndsWith("loginTable.xhtml?originalUrl=tasks.xhtml");
+    openView("tasks.xhtml");
+    assertCurrentUrlContains("loginTable.xhtml?originalUrl=tasks.xhtml");
     $("#loginMessage").shouldBe(visible).shouldHave(text("you need to login"));
 
     loginFromTable("testuser");
-    Selenide.open(viewUrl("tasks.xhtml"));
-    assertCurrentUrlEndsWith("tasks.xhtml");
+    openView("tasks.xhtml");
+    assertCurrentUrlContains("tasks.xhtml");
   }
 
   @Test
   void testRedirectToOriginalUrl() {
     loginFromTable("testuser");
     logout();
-    Selenide.open(viewUrl("cases.xhtml"));
-    assertCurrentUrlEndsWith("loginTable.xhtml?originalUrl=cases.xhtml");
+    openView("cases.xhtml");
+    assertCurrentUrlContains("loginTable.xhtml?originalUrl=cases.xhtml");
     $("#loginMessage").shouldBe(visible).shouldHave(text("you need to login"));
     $(byText("testuser")).click();
-    assertCurrentUrlEndsWith("cases.xhtml");
+    assertCurrentUrlContains("cases.xhtml");
   }
 
   @Test
   void testLoginTableRedirect() {
     loginFromTable("DifferentLogin");
-    assertCurrentUrlEndsWith("login.xhtml?originalUrl=loginTable.xhtml");
+    assertCurrentUrlContains("login.xhtml?originalUrl=loginTable.xhtml");
     WorkflowUiUtil.customLogin("DifferentLogin", "DifferentPassword");
     $("#sessionUserName").shouldBe(text("DifferentLogin"));
   }
@@ -103,11 +102,11 @@ public class WebTestLoginIT {
   @Test
   void testLoginTableHighlightCurrentUser() {
     loginFromTable("testuser");
-    Selenide.open(viewUrl("loginTable.xhtml"));
+    openView("loginTable.xhtml");
     $("#loginTable\\:users_data > .ui-state-highlight")
             .shouldBe(visible);
     logout();
-    Selenide.open(viewUrl("loginTable.xhtml"));
+    openView("loginTable.xhtml");
     $("#loginTable\\:users_data > .ui-state-highlight")
             .shouldNotBe(visible);
   }
