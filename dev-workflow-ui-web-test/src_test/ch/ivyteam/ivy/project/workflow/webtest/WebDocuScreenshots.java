@@ -1,14 +1,12 @@
 package ch.ivyteam.ivy.project.workflow.webtest;
 
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.executeJs;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,63 +34,63 @@ public class WebDocuScreenshots {
 
   @Test
   public void screenshotMainPages() {
-    open(viewUrl("home.xhtml"));
+    openView("home.xhtml");
     loginDeveloper();
     startTestProcess("1750C5211D94569D/TestData.ivp");
 
-    open(viewUrl("home.xhtml"));
+    openView("home.xhtml");
     takeScreenshot("workflow-ui-home", new Dimension(SCREENSHOT_WIDTH, 800));
 
-    open(viewUrl("loginTable.xhtml"));
+    openView("loginTable.xhtml");
     takeScreenshot("workflow-ui-loginTable", new Dimension(SCREENSHOT_WIDTH, 800));
 
-    open(viewUrl("login.xhtml"));
+    openView("login.xhtml");
     takeScreenshot("workflow-ui-login", new Dimension(SCREENSHOT_WIDTH, 800));
 
-    open(viewUrl("tasks.xhtml"));
+    openView("tasks.xhtml");
     takeScreenshot("workflow-ui-tasks", new Dimension(SCREENSHOT_WIDTH, 800));
 
-    open(viewUrl("allTasks.xhtml"));
+    openView("allTasks.xhtml");
     takeScreenshot("workflow-ui-allTasksAndCases", new Dimension(SCREENSHOT_WIDTH, 800));
 
     $(".detail-btn").shouldBe(visible).click();
     $("#actionMenuForm\\:taskActionsBtn").click();
     takeScreenshot("workflow-ui-taskDetails", new Dimension(SCREENSHOT_WIDTH, 800));
 
-    open(viewUrl("cases.xhtml"));
+    openView("cases.xhtml");
     takeScreenshot("workflow-ui-cases", new Dimension(SCREENSHOT_WIDTH, 800));
 
     $(".detail-btn").shouldBe(visible).click();
     takeScreenshot("workflow-ui-caseDetails", new Dimension(SCREENSHOT_WIDTH, 800));
 
-    open(viewUrl("starts.xhtml"));
+    openView("starts.xhtml");
     takeScreenshot("workflow-ui-starts", new Dimension(SCREENSHOT_WIDTH, 800));
 
-    open(viewUrl("cleanup.xhtml"));
+    openView("cleanup.xhtml");
     takeScreenshot("workflow-ui-cleanup", new Dimension(SCREENSHOT_WIDTH, 800));
 
-    open(viewUrl("signals.xhtml"));
+    openView("signals.xhtml");
     $(By.id("signalForm:signalCodeInput_input")).sendKeys("Screenshot data signal");
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
-    open(viewUrl("signals.xhtml"));
+    openView("signals.xhtml");
     takeScreenshot("workflow-ui-signals", new Dimension(SCREENSHOT_WIDTH, 800));
     $(By.id("boundarySignalsTable:0:sendSignalIcon")).shouldBe(visible).click();
 
     WorkflowUiUtil.startTestCaseMap("0cf1f054-a4ad-4b2b-bcf1-c9c34ec0a2ab.icm");
-    open(viewUrl("cases.xhtml"));
+    openView("cases.xhtml");
     $(".detail-btn").shouldBe(visible).click();
     takeScreenshot("workflow-ui-caseMap", new Dimension(SCREENSHOT_WIDTH, 800));
 
     startTestProcess("1750C5211D94569D/testIntermediateEventProcess.ivp");
-    open(viewUrl("intermediateEvents.xhtml"));
+    openView("intermediateEvents.xhtml");
     takeScreenshot("workflow-ui-intermediateEvents", new Dimension(SCREENSHOT_WIDTH, 800));
 
     $(byText("TestIntermediateEvent")).click();
     $(By.id("id")).shouldBe(visible);
     takeScreenshot("workflow-ui-intermediateElementDetails", new Dimension(SCREENSHOT_WIDTH, 800));
 
-    open(viewUrl("api-browser.xhtml"));
+    openView("api-browser.xhtml");
     if ($(By.id("apiBrowser")).is(visible)) {
       Selenide.switchTo().frame("apiBrowser");
     }
@@ -104,7 +102,7 @@ public class WebDocuScreenshots {
   private void takeScreenshot(String fileName, Dimension size) {
     Dimension oldSize = WebDriverRunner.getWebDriver().manage().window().getSize();
     resizeBrowser(size);
-    executeJs("scroll(0,0);");
+    Selenide.executeJavaScript("scroll(0,0);");
     Selenide.screenshot(fileName);
     resizeBrowser(oldSize);
   }

@@ -5,16 +5,14 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.axonivy.ivy.webtest.engine.EngineUrl;
 import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.WebDriverConditions;
 
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.workflowui.util.UserUtil;
@@ -28,15 +26,22 @@ public class WorkflowUiUtil {
     var url = EngineUrl.createProcessUrl("/dev-workflow-ui-test-data/" + pathToIvp);
     System.out.println(url);
     Selenide.open(url);
+    assertCurrentUrlContains("starts.xhtml");
   }
 
   public static void startTestCaseMap(String path) {
     var url = EngineUrl.createCaseMapUrl("/dev-workflow-ui-test-data/" + path);
     System.out.println(url);
     Selenide.open(url);
+    assertCurrentUrlContains("starts.xhtml");
   }
 
-  public static String viewUrl(String page) {
+  public static void openView(String page) {
+    Selenide.open(viewUrl(page));
+    assertCurrentUrlContains(page);
+  }
+
+  private static String viewUrl(String page) {
     var securityContext = System.getProperty("test.integrated.workflow");
     if (StringUtils.isNotEmpty(securityContext)) {
       var engineUri = System.getProperty("test.engine.url");
@@ -49,20 +54,8 @@ public class WorkflowUiUtil {
     return url;
   }
 
-  public static void assertCurrentUrlEndsWith(String endsWith) {
-    String url = getCurrentUrl();
-    if (url.contains(";jsessionid")) {
-      url = url.substring(0, url.indexOf(";jsessionid"));
-    }
-    assertThat(url).endsWith(endsWith);
-  }
-
-  private static String getCurrentUrl() {
-    return WebDriverRunner.getWebDriver().getCurrentUrl();
-  }
-
-  public static void executeJs(String js) {
-    ((RemoteWebDriver) WebDriverRunner.getWebDriver()).executeScript(js);
+  public static void assertCurrentUrlContains(String contains) {
+    WebDriverConditions.currentFrameUrlContaining(contains);
   }
 
   public static List<IUser> getUsers() {
@@ -71,9 +64,8 @@ public class WorkflowUiUtil {
 
   public static void loginFromTable(String username) {
     Selenide.open(viewUrl("loginTable.xhtml"));
-    if (StringUtils.substringAfterLast(getCurrentUrl(), "/").startsWith("loginTable.xhtml")) {
-      $(byText(username)).click();
-    }
+    $(byText(username)).should(visible).click();
+    assertCurrentUrlContains("home.xhtml");
   }
 
   public static void loginDeveloper() {
@@ -87,6 +79,7 @@ public class WorkflowUiUtil {
     $("#loginForm\\:password").clear();
     $("#loginForm\\:password").sendKeys(password);
     $("#loginForm\\:login").shouldBe(visible).click();
+    assertCurrentUrlContains("home.xhtml");
   }
 
   public static void logout() {

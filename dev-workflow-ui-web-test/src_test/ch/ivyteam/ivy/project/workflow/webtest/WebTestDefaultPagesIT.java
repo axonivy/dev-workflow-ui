@@ -1,8 +1,8 @@
 package ch.ivyteam.ivy.project.workflow.webtest;
 
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.assertCurrentUrlEndsWith;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.assertCurrentUrlContains;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -22,7 +22,7 @@ public class WebTestDefaultPagesIT {
   @BeforeEach
   void beforeEach() {
     loginDeveloper();
-    Selenide.open(viewUrl("starts.xhtml"));
+    openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).sendKeys("testDefaultPages");
     $(By.id("startsForm:projectStarts")).shouldHave(text("dev-workflow-ui-test-data"));
     $(byText("TestData/testDefaultPages.ivp")).shouldBe(visible).click();
@@ -38,7 +38,7 @@ public class WebTestDefaultPagesIT {
     $(By.id("homeBtn")).shouldBe(visible).click();
     Selenide.switchTo().defaultContent();
     $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menu"));
-    assertCurrentUrlEndsWith("home.xhtml");
+    assertCurrentUrlContains("home.xhtml");
   }
 
   @Test
@@ -46,7 +46,7 @@ public class WebTestDefaultPagesIT {
     $(By.id("startsBtn")).shouldBe(visible).click();
     Selenide.switchTo().defaultContent();
     $(By.id("menuform:sr_starts")).shouldHave(cssClass("active-menu"));
-    assertCurrentUrlEndsWith("starts.xhtml");
+    assertCurrentUrlContains("starts.xhtml");
   }
 
   @Test
@@ -54,7 +54,7 @@ public class WebTestDefaultPagesIT {
     $(By.id("tasksBtn")).shouldBe(visible).click();
     Selenide.switchTo().defaultContent();
     $(By.id("menuform:sr_tasks")).shouldHave(cssClass("active-menu"));
-    assertCurrentUrlEndsWith("tasks.xhtml");
+    assertCurrentUrlContains("tasks.xhtml");
   }
 
   @Test
@@ -62,6 +62,6 @@ public class WebTestDefaultPagesIT {
     $(By.id("loginBtn")).shouldBe(visible).click();
     Selenide.switchTo().defaultContent();
     $(By.id("loginForm")).shouldBe(visible);
-    assertCurrentUrlEndsWith("login.xhtml");
+    assertCurrentUrlContains("login.xhtml");
   }
 }

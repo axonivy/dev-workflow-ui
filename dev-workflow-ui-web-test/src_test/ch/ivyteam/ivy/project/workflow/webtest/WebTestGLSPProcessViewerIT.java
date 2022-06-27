@@ -2,8 +2,8 @@ package ch.ivyteam.ivy.project.workflow.webtest;
 
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.logout;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThanOrEqual;
 import static com.codeborne.selenide.Condition.text;
@@ -30,7 +30,7 @@ public class WebTestGLSPProcessViewerIT {
   @Test
   public void testOpenViewer() {
     loginDeveloper();
-    Selenide.open(viewUrl("starts.xhtml"));
+    openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).sendKeys("testdata/testdata.ivp");
     $$(By.className("si-hierarchy-6")).shouldBe(size(1)).get(0).click();
 
@@ -45,7 +45,7 @@ public class WebTestGLSPProcessViewerIT {
   @Test
   public void testCaseMapUiViewer() {
     loginDeveloper();
-    Selenide.open(viewUrl("starts.xhtml"));
+    openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).sendKeys("test _ case _ map");
     $(By.className("si-hierarchy-6")).shouldBe(visible).click();
     $(By.id("startsForm:processViewer:processViewerDialog")).shouldBe(visible);
@@ -57,7 +57,7 @@ public class WebTestGLSPProcessViewerIT {
 
   @Test
   public void testNoViewerForUnknownUser() {
-    Selenide.open(viewUrl("starts.xhtml"));
+    openView("starts.xhtml");
     logout();
     $(By.id("startsForm:globalFilter")).sendKeys("testdata/testdata.ivp");
     $(By.className("si-hierarchy-6")).shouldNotBe(visible);

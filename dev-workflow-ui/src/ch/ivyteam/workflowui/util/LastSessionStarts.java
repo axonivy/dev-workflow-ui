@@ -50,6 +50,10 @@ public class LastSessionStarts {
     if (deployedStartables.isEmpty()) {
       return starts;
     }
-    return starts.stream().filter(deployedStartables::contains).collect(Collectors.toSet());
+    try {
+      return starts.stream().filter(deployedStartables::contains).collect(Collectors.toSet());
+    } catch (ClassCastException ex) {
+      return Set.of();
+    }
   }
 }

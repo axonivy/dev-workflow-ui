@@ -2,15 +2,14 @@ package ch.ivyteam.ivy.project.workflow.webtest;
 
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,16 +30,15 @@ public class WebTestTasksIT {
 
   @BeforeEach
   void beforeEach() {
-    open(viewUrl("home.xhtml"));
     loginDeveloper();
     startTestProcess("1750C5211D94569D/TestData.ivp");
-    open(viewUrl("home.xhtml"));
+    openView("home.xhtml");
   }
 
   @Test
   public void allTasksOnlyAdmin() {
     startTestProcess("1750C5211D94569D/HomePageTestData.ivp");
-    open(viewUrl("allTasks.xhtml"));
+    openView("allTasks.xhtml");
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldBe(text("Created task of HomePageTestData"));
     $(By.className("detail-btn")).shouldBe(visible).click();
@@ -48,7 +46,7 @@ public class WebTestTasksIT {
     String taskId = $(By.id("taskId")).text();
     $(By.id("actionMenuForm:taskStartBtn")).shouldBe(enabled).click();
     loginFromTable("testuser");
-    open(viewUrl("allTasks.xhtml"));
+    openView("allTasks.xhtml");
     table = PrimeUi.table(By.id("tasksForm:tasks"));
     if (table.row(0).text().equals("Created task of HomePageTestData")) {
       $(By.className("detail-btn")).shouldBe(visible).click();
@@ -59,7 +57,7 @@ public class WebTestTasksIT {
   @Test
   public void testTasksTable() throws Exception {
     startTestProcess("1750C5211D94569D/TestData.ivp");
-    open(viewUrl("allTasks.xhtml"));
+    openView("allTasks.xhtml");
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldBe(text("Created task of TestData"));
     table.valueAt(0, 1).contains("pause");
@@ -67,7 +65,7 @@ public class WebTestTasksIT {
 
   @Test
   public void checkTaskDetails() {
-    open(viewUrl("allTasks.xhtml"));
+    openView("allTasks.xhtml");
     $(".detail-btn").shouldBe(visible).click();
 
     $(".case-link").shouldHave(text("Created case of TestData"));
@@ -87,7 +85,7 @@ public class WebTestTasksIT {
 
   @Test
   public void testStartTask() {
-    open(viewUrl("allTasks.xhtml"));
+    openView("allTasks.xhtml");
 
     $(".detail-btn").shouldBe(visible).click();
     $(".case-link").shouldHave(text("Created case of TestData"));
@@ -95,7 +93,7 @@ public class WebTestTasksIT {
     $("#taskState").shouldBe(exactText("SUSPENDED"));
     $("#actionMenuForm\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"))
             .shouldBe(enabled).click();
-    open(viewUrl("allTasks.xhtml"));
+    openView("allTasks.xhtml");
     $(".detail-btn").shouldBe(visible).click();
     $("#taskName").shouldBe(exactText("Created task of TestData"));
 
@@ -105,9 +103,8 @@ public class WebTestTasksIT {
 
   @Test
   public void testStartParkedTask() {
-    open(viewUrl("home.xhtml"));
     startTestProcess("1750C5211D94569D/TestData.ivp");
-    open(viewUrl("allTasks.xhtml"));
+    openView("allTasks.xhtml");
 
     $(".detail-btn").shouldBe(visible).click();
     $(".case-link").shouldHave(text("Created case of TestData"));
@@ -125,14 +122,14 @@ public class WebTestTasksIT {
 
   @Test
   public void workflowEventsPermission() {
-    open(viewUrl("allTasks.xhtml"));
+    openView("allTasks.xhtml");
     $(By.className("detail-btn")).shouldBe(visible).click();
     $(By.className("case-link")).shouldHave(text("Created case of TestData"));
     var taskId = $(By.id("taskId")).getText();
     $(By.id("workflowEvents:eventsTable")).shouldBe(visible);
 
     loginFromTable("testuser");
-    open(viewUrl("allTasks.xhtml"));
+    openView("allTasks.xhtml");
     $(By.className("detail-btn")).shouldBe(visible).click();
     $(By.id("taskId")).shouldBe(exactText(taskId));
     $(By.id("workflowEvents:eventsTable")).shouldNotBe(visible);
@@ -141,7 +138,7 @@ public class WebTestTasksIT {
 
   @Test
   public void taskCustomFields() {
-    open(viewUrl("allTasks.xhtml"));
+    openView("allTasks.xhtml");
     $(By.className("detail-btn")).shouldBe(visible).click();
     $(By.className("case-link")).shouldHave(text("Created case of TestData"));
 
@@ -152,7 +149,7 @@ public class WebTestTasksIT {
   @Test
   public void checkDelayedTask() {
     startTestProcess("1750C5211D94569D/DelayedTestTask.ivp");
-    open(viewUrl("allTasks.xhtml"));
+    openView("allTasks.xhtml");
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldBe(text("Created delayed task"));
     $(By.className("detail-btn")).shouldBe(visible).click();
@@ -165,7 +162,7 @@ public class WebTestTasksIT {
   @Test
   public void checkCustomResponsibleUser() {
     startTestProcess("1750C5211D94569D/customUser.ivp");
-    open(viewUrl("allTasks.xhtml"));
+    openView("allTasks.xhtml");
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldBe(text("Created task of CustomUser"));
     $(By.className("detail-btn")).shouldBe(visible).click();
@@ -176,7 +173,7 @@ public class WebTestTasksIT {
   @Test
   public void delegateTask() {
     startTestProcess("1750C5211D94569D/TestData.ivp");
-    open(viewUrl("allTasks.xhtml"));
+    openView("allTasks.xhtml");
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldBe(text("Created task of TestData"));
     $(By.className("detail-btn")).shouldBe(visible).click();
@@ -194,11 +191,11 @@ public class WebTestTasksIT {
 
   @Test
   public void customFielEmbedInFrame() {
-    open(viewUrl("starts.xhtml"));
+    openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).sendKeys("embed in frame");
     $(By.className("start-link")).shouldBe(visible, text("Do not embed in Frame")).click();
     $(By.id("form:proceed")).shouldBe(visible).click();
-    open(viewUrl("allTasks.xhtml"));
+    openView("allTasks.xhtml");
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldBe(text("notEmbedTask"));
     $(By.className("detail-btn")).shouldBe(visible).click();

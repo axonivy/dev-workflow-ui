@@ -12,14 +12,19 @@ import ch.ivyteam.workflowui.starts.StartableModel;
 import ch.ivyteam.workflowui.tasks.TasksDataModel;
 import ch.ivyteam.workflowui.util.LastSessionStarts;
 import ch.ivyteam.workflowui.util.RedirectUtil;
+import ch.ivyteam.workflowui.util.ViewerUtil;
 
 @ManagedBean
 @ViewScoped
 public class HomepageIvyDevWfBean {
   private TasksDataModel tasksDataModel;
+  private Set<StartableModel> lastStarts;
+  private String viewerTitle;
+  private String viewerLink;
 
   public HomepageIvyDevWfBean() {
     tasksDataModel = new TasksDataModel();
+    lastStarts = LastSessionStarts.current().getAll();
   }
 
   public TasksDataModel getTasksDataModel() {
@@ -27,7 +32,7 @@ public class HomepageIvyDevWfBean {
   }
 
   public Set<StartableModel> getLastStarts() {
-    return LastSessionStarts.current().getAll();
+    return lastStarts;
   }
 
   public int getTasksSize() {
@@ -42,9 +47,26 @@ public class HomepageIvyDevWfBean {
   }
 
   public void redirectIfNoTasksOrLastStarts() {
-    if (LastSessionStarts.current().getAll().isEmpty() && tasksDataModel.getSize() < 1 && Ivy.session().getAttribute("redirectedToStarts") == null) {
+    if (lastStarts.isEmpty() && tasksDataModel.getSize() < 1 && Ivy.session().getAttribute("redirectedToStarts") == null) {
       RedirectUtil.redirect("starts.xhtml");
       Ivy.session().setAttribute("redirectedToStarts", true);
     }
+  }
+
+  public void setViewerStart(String link) {
+    viewerTitle = lastStarts.stream()
+            .filter(start -> start.getViewerLink().toString().equals(link))
+            .findFirst()
+            .map(start -> ViewerUtil.getViewerDialogTitle(start))
+            .orElse("");
+    viewerLink = link;
+  }
+
+  public String getViewerTitle() {
+    return viewerTitle;
+  }
+
+  public String getViewerLink() {
+    return viewerLink;
   }
 }
