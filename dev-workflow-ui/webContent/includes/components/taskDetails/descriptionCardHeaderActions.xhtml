@@ -26,6 +26,8 @@
           disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.canPark()}" icon="si si-road-sign-u-turn-right" />
         <p:menuitem value="Destroy" actionListener="#{tasksDetailsIvyDevWfBean.destroy()}" update="taskDetail, workflowEvents:workflowEvents, @form"
           disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.state.active}" id="taskDestoryBtn" icon="si si-delete-1" />
+        <p:menuitem value="Clear delay" actionListener="#{tasksDetailsIvyDevWfBean.clearDelay}" update="taskDetail, workflowEvents:workflowEvents, @form"
+          disabled="#{tasksDetailsIvyDevWfBean.selectedTask.delayTimestamp == null}" icon="si si-button-refresh-arrows" id="taskClearDelayBtn" />
         <p:menuitem value="Expire now" actionListener="#{tasksDetailsIvyDevWfBean.expireTask}" update="taskDetail, workflowEvents:workflowEvents, @form"
           disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.state.active}" icon="si si-alarm-bell-timer"
           rendered="#{engineModeIvyDevWfBean.demoOrDesigner}" id="taskExpireBtn" />

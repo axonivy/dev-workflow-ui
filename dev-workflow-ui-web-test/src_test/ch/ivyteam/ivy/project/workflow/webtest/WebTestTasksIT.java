@@ -190,6 +190,24 @@ public class WebTestTasksIT {
   }
 
   @Test
+  public void clearDelayOnTask() {
+    startTestProcess("1750C5211D94569D/DelayedTestTask.ivp");
+    openView("allTasks.xhtml");
+    Table table = PrimeUi.table(By.id("tasksForm:tasks"));
+    table.row(0).shouldBe(text("Created delayed task"));
+    $(By.className("detail-btn")).shouldBe(visible).click();
+
+    $(By.id("taskState")).shouldBe(exactText("DELAYED"));
+    $(By.id("delayDate")).shouldNotBe(exactText("N/A"));
+
+    $(By.id("actionMenuForm:taskActionsBtn")).click();
+    $(By.id("actionMenuForm:taskClearDelayBtn")).should(visible).click();
+
+    $(By.id("taskState")).shouldBe(exactText("SUSPENDED"));
+    $(By.id("delayDate")).shouldBe(exactText("N/A"));
+  }
+
+  @Test
   public void customFielEmbedInFrame() {
     openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).sendKeys("embed in frame");
