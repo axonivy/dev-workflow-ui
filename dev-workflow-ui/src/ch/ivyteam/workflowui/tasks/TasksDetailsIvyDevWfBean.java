@@ -79,6 +79,12 @@ public class TasksDetailsIvyDevWfBean {
     selectedTask = new TaskModel(itask);
   }
 
+  public void clearDelay() {
+    var itask = IWorkflowContext.current().findTask(selectedTask.getId());
+    itask.setDelayTimestamp(null);
+    selectedTask = new TaskModel(itask);
+  }
+
   public String getDelegateMember() {
     return delegateMember;
   }
