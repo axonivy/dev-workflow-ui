@@ -8,16 +8,19 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.primefaces.model.FilterMeta;
+import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortMeta;
 import org.primefaces.model.SortOrder;
 
-import ch.ivyteam.ivy.jsf.primefaces.legazy.LazyDataModel7;
+import ch.ivyteam.ivy.jsf.primefaces.sort.SortMetaConverter;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.ivy.workflow.query.TaskQuery;
 import ch.ivyteam.workflowui.util.TaskUtil;
 import ch.ivyteam.workflowui.util.UserUtil;
 
-public class TasksDataModel extends LazyDataModel7<TaskModel> {
+public class TasksDataModel extends LazyDataModel<TaskModel> {
   private static final long serialVersionUID = -5287014754211109062L;
   private String filter;
   private boolean showAllTasks = UserUtil.isAdmin();
@@ -53,12 +56,18 @@ public class TasksDataModel extends LazyDataModel7<TaskModel> {
   }
 
   @Override
-  public List<TaskModel> load(int first, int pageSize, String sortField, SortOrder sortOrder,
-          Map<String, Object> filters) {
+  public int count(Map<String, FilterMeta> filterBy) {
+    return 0;
+  }
+
+  @Override
+  public List<TaskModel> load(int first, int pageSize, Map<String, SortMeta> sortBy,
+          Map<String, FilterMeta> filterBy) {
+    var sort = new SortMetaConverter(sortBy);
     var taskQuery = TaskQuery.create();
 
     applyFilter(taskQuery);
-    applyOrdering(taskQuery, sortField, sortOrder);
+    applyOrdering(taskQuery, sort.toField(), sort.toOrder());
 
     checkIfPersonalTasksOrHomepage(taskQuery);
     checkIfAdmin(taskQuery);
