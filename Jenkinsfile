@@ -59,6 +59,10 @@ pipeline {
                 checkVersions cmd: '-f maven/config/pom.xml'
               }
             }
+            recordIssues tools: [mavenConsole()], unstableTotalAll: 1, filters: [
+              excludeMessage('The system property test.engine.url is configured twice!*'),
+              excludeMessage('Can not load credentials from settings.xml*'),
+            ]
             junit testDataPublishers: [[$class: 'AttachmentPublisher'], [$class: 'StabilityTestDataPublisher']], testResults: '**/target/*-reports/**/*.xml'
             archiveArtifacts '**/target/*.iar'
             archiveArtifacts '**/target/dev-workflow-ui-jar*.jar'
@@ -92,7 +96,7 @@ pipeline {
           archiveArtifacts '**/target/docu/**/*'
           archiveArtifacts '**/target/*.html'
           testFailsCount = (env.BRANCH_NAME == 'master') ? 1 : 2
-          recordIssues filters: [includeType('screenshot-html-plugin:compare-images')], tools: [mavenConsole(name: 'Image')], unstableNewAll: testFailsCount,
+          recordIssues filters: [includeType('screenshot-html-plugin:compare-images')], tools: [mavenConsole(name: 'Image', id: 'image-warnings')], unstableNewAll: testFailsCount,
           qualityGates: [[threshold: testFailsCount, type: 'TOTAL', unstable: true]]
         }
       }
