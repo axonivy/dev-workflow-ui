@@ -1,5 +1,3 @@
-def manualDeploy
-
 pipeline {
   agent any
 
@@ -102,27 +100,6 @@ pipeline {
       }
     }
 
-    stage('verify-manually') {
-      when {
-        branch 'master'
-        not {
-          triggeredBy 'TimerTrigger'
-        }
-      }
-      steps {
-        script{
-          if (currentBuild.currentResult == 'FAILURE') {
-            timeout(time: 10, unit: 'MINUTES')
-            {
-              manualDeploy = input(
-                message: 'Screenshot comparison failed. Please check them manually.', parameters: [
-                [$class: 'BooleanParameterDefinition', defaultValue: false, description: '', name: 'Deploy screenshots?']])
-            }
-          }
-        }
-      }
-    }
-
     stage('deploy') {
       agent {
         dockerfile {
@@ -132,7 +109,7 @@ pipeline {
       when {
         allOf {
           branch 'master'
-          expression { return currentBuild.currentResult == 'SUCCESS' || params.deployScreenshots || manualDeploy }
+          expression { return currentBuild.currentResult == 'SUCCESS' || params.deployScreenshots }
         }
       }
       steps {
