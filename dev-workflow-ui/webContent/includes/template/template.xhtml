@@ -50,7 +50,13 @@
               </a>
               <ul>
                 <li>
-                  <p:commandLink id="loginTableBtn" actionListener="#{loginIvyDevWfBean.redirectToLoginTable}" rendered="#{engineModeIvyDevWfBean.demoOrDesigner}">
+                  <p:link id="profileBtn" outcome="profile.xhtml" rendered="#{loginIvyDevWfBean.loggedIn}">
+                    <i class="si si-lg si-single-neutral-circle"></i>
+                    <span>Profile</span>
+                  </p:link>
+                </li>
+                <li>
+                  <p:commandLink id="loginTableBtn" actionListener="#{loginIvyDevWfBean.redirectToLoginForm}" rendered="#{engineModeIvyDevWfBean.demoOrDesigner}">
                     <i class="si si-lg si-multiple-neutral-1"></i>
                     <span>Switch user</span>
                   </p:commandLink>
