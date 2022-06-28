@@ -22,7 +22,7 @@ public class TestLogin {
     TestHandler handler = new TestHandler();
     RedirectUtil.setHandler(handler);
     login();
-    assertThat(handler.url).isEqualTo("home.xhtml");
+    assertThat(handler.redirectUrl).isEqualTo("home.xhtml");
     assertThat(ISession.current().getSessionUser().getName()).isEqualTo("testJunitUser");
   }
 
@@ -39,11 +39,11 @@ public class TestLogin {
 
   private static final class TestHandler implements RedirectHandler {
 
-    private String url;
+    private String redirectUrl;
 
     @Override
     public void redirect(String url) {
-      this.url = url;
+      this.redirectUrl = url;
     }
 
   }
