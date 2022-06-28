@@ -91,11 +91,11 @@ public class ProfileBean {
   }
 
   public String getContentLanguageSource() {
-    return "Current language " + getCurrentContentLocale().toString() + " (from " + session().getContentLocaleInfo().source() + ")";
+    return "Current language is " + getCurrentContentLocale().toString() + " (from " + session().getContentLocaleInfo().source() + ")";
   }
 
   public String getFormattingLanguageSource() {
-    return "Current formatting language " + getCurrentFormattingLocale().toString() + " (from " + session().getFormattingLocaleInfo().source() + ")";
+    return "Current formatting language is " + getCurrentFormattingLocale().toString() + " (from " + session().getFormattingLocaleInfo().source() + ")";
   }
 
   public void save() {
