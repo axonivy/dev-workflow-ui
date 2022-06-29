@@ -44,7 +44,7 @@ class WebTestProfileIT {
     $("#profileForm\\:saveBtn").click();
     Selenide.refresh();
 
-    contentLanguage.selectedItemShould(text("Deutsch (de)"));
-    formattingLanguage.selectedItemShould(text("Deutsch (Schweiz) (de_CH)"));
+    contentLanguage.selectedItemShould(text("de"));
+    formattingLanguage.selectedItemShould(text("de_CH"));
   }
 }
