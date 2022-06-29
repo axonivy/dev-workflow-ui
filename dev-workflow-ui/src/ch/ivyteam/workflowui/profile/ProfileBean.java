@@ -76,11 +76,11 @@ public class ProfileBean {
   }
 
   public List<Locale> getContentLanguages() {
-    return locales(LanguageRepository::allContent, contentLocale);
+    return locales(LanguageRepository::allContent);
   }
 
   public List<Locale> getFormattingLanguages() {
-    return locales(LanguageRepository::allFormatting, formattingLocale);
+    return locales(LanguageRepository::allFormatting);
   }
 
   public String toDisplayName(Locale locale) {
@@ -103,16 +103,12 @@ public class ProfileBean {
     user().setFormattingLanguage(formattingLocale);
   }
 
-  private List<Locale> locales(Function<LanguageRepository, List<Locale>> loader, Locale currentLocale) {
+  private List<Locale> locales(Function<LanguageRepository, List<Locale>> loader) {
     var locales = loader.apply(LanguageManager.instance().languages(session().getSecurityContext())).stream()
-            .filter(l -> !l.equals(currentLocale))
             .sorted(Comparator.comparing(Locale::getDisplayName))
             .collect(Collectors.toList());
     var l = new ArrayList<Locale>();
     l.add(Locale.ROOT);
-    if (currentLocale != null) {
-      l.add(currentLocale);
-    }
     l.addAll(locales);
     return l;
   }
