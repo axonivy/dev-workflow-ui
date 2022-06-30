@@ -39,7 +39,7 @@ class WebTestProfileIT {
     $("#profileForm\\:saveBtn").click();
     Selenide.refresh();
 
-    fullName.shouldBe(exactText("testuser"));
+    fullName.shouldBe(exactText("fullname for test"));
     email.shouldBe(exactText("any@email.com"));
     contentLanguage.selectedItemShould(empty);
     contentLanguage.selectItemByValue("de");
