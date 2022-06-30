@@ -7,7 +7,9 @@ import java.util.Locale;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 import ch.ivyteam.ivy.language.LanguageManager;
 import ch.ivyteam.ivy.language.LanguageRepository;
@@ -19,10 +21,14 @@ import ch.ivyteam.ivy.security.IUser;
 @ManagedBean
 public class ProfileBean {
 
+  private String fullName;
+  private String email;
   private Locale contentLocale;
   private Locale formattingLocale;
 
   public ProfileBean() {
+    fullName = user().getFullName();
+    email = user().getEMailAddress();
     contentLocale = user().getLanguage();
     formattingLocale = user().getFormattingLanguage();
   }
@@ -32,11 +38,19 @@ public class ProfileBean {
   }
 
   public String getFullName() {
-    return user().getFullName();
+    return fullName;
+  }
+
+  public void setFullName(String fullName) {
+    this.fullName = fullName;
   }
 
   public String getEmail() {
-    return user().getEMailAddress();
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
   }
 
   public String getRoles() {
@@ -87,20 +101,24 @@ public class ProfileBean {
     if (Locale.ROOT.equals(locale) || locale == null) {
       return "";
     }
-    return locale.getDisplayName(getCurrentContentLocale()) + " (" + locale.toString() + ")";
+    return locale.getDisplayLanguage(getCurrentContentLocale()) + " (" + locale.toString() + ")";
   }
 
   public String getContentLanguageSource() {
-    return "Current language is " + getCurrentContentLocale().toString() + " (from " + session().getContentLocaleInfo().source() + ")";
+    return "Current language is <b>" + getCurrentContentLocale().toString() + "</b> (from " + session().getContentLocaleInfo().source() + ")";
   }
 
   public String getFormattingLanguageSource() {
-    return "Current formatting language is " + getCurrentFormattingLocale().toString() + " (from " + session().getFormattingLocaleInfo().source() + ")";
+    return "Current formatting language is <b>" + getCurrentFormattingLocale().toString() + "</b> (from " + session().getFormattingLocaleInfo().source() + ")";
   }
 
   public void save() {
+    user().setFullName(fullName);
+    user().setEMailAddress(email);
     user().setLanguage(contentLocale);
     user().setFormattingLanguage(formattingLocale);
+    var msg = new FacesMessage("Profile saved");
+    FacesContext.getCurrentInstance().addMessage("info", msg);
   }
 
   private List<Locale> locales(Function<LanguageRepository, List<Locale>> loader) {
