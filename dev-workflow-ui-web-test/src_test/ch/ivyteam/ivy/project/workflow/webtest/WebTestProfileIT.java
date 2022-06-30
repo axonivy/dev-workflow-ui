@@ -4,7 +4,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginF
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Selenide.$;
 
 import org.junit.jupiter.api.Test;
@@ -44,7 +44,7 @@ class WebTestProfileIT {
     $("#profileForm\\:saveBtn").click();
     Selenide.refresh();
 
-    contentLanguage.selectedItemShould(text("Deutsch (de)"));
-    formattingLanguage.selectedItemShould(text("Deutsch (Schweiz) (de_CH)"));
+    contentLanguage.selectedItemShould(value("de"));
+    formattingLanguage.selectedItemShould(value("de_CH"));
   }
 }

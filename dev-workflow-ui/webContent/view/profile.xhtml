@@ -37,6 +37,7 @@
             <h:panelGroup>
               <p:selectOneMenu id="contentLanguage"
                 value="#{profileBean.contentLanguage}"
+                editable="true"
                 converter="localeConverter">
                 <f:selectItems value="#{profileBean.contentLanguages}"
                   var="locale" itemLabel="#{profileBean.toDisplayName(locale)}" />
@@ -51,6 +52,7 @@
             <h:panelGroup>
               <p:selectOneMenu filter="true" filterMatchMode="contains"
                 id="formattingLanguage"
+                editable="true"
                 value="#{profileBean.formattingLanguage}"
                 converter="localeConverter">
                 <f:selectItems value="#{profileBean.formattingLanguages}"
