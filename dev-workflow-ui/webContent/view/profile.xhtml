@@ -19,19 +19,15 @@
         </div>
         <h:form id="profileForm">
           <p:growl id="growl" showDetail="true" />
-          <p:panelGrid columns="4" layout="flex"
-            columnClasses="p-col-6 p-md-2, p-col-6 p-md-4, p-col-6 p-md-2, p-col-6 p-md-4">
+          <p:panelGrid columns="2" layout="flex" columnClasses="p-col-3,p-col-9">
             <h:outputLabel for="userName">User Name</h:outputLabel>
             <h:outputText id="userName" value="#{profileBean.userName}"></h:outputText>
 
             <h:outputLabel for="fullName">Full name</h:outputLabel>
-            <h:outputText id="fullName" value="#{profileBean.fullName}"></h:outputText>
+            <p:inputText id="fullName" value="#{profileBean.fullName}"></p:inputText>
 
             <h:outputLabel for="email">Email</h:outputLabel>
-            <h:outputText id="email" value="#{profileBean.email}"></h:outputText>
-
-            <h:outputLabel for="roles">Roles</h:outputLabel>
-            <h:outputText id="roles" value="#{profileBean.roles}"></h:outputText>
+            <p:inputText id="email" value="#{profileBean.email}"></p:inputText>
 
             <h:outputLabel for="contentLanguage" >Language</h:outputLabel>
             <h:panelGroup>
@@ -42,10 +38,11 @@
                 <f:selectItems value="#{profileBean.contentLanguages}"
                   var="locale" itemLabel="#{profileBean.toDisplayName(locale)}" />
               </p:selectOneMenu>
-              <br />
+              <small>
               <h:outputText title="Content locale of the current session."
-                style="font-size:10px;"
+                escape="false"
                 value="#{profileBean.contentLanguageSource}"></h:outputText>
+               </small>
             </h:panelGroup>
 
             <h:outputLabel for="formattingLanguage">Formatting Language</h:outputLabel>
@@ -58,14 +55,18 @@
                 <f:selectItems value="#{profileBean.formattingLanguages}"
                   var="locale" itemLabel="#{profileBean.toDisplayName(locale)}" />
               </p:selectOneMenu>
-              <br />
+              <small>
               <h:outputText title="Formatting locale of the current session."
-                style="font-size:10px;"
+                escape="false"
                 value="#{profileBean.formattingLanguageSource}"></h:outputText>
+              </small>
             </h:panelGroup>
+
+            <h:outputLabel for="roles">Roles</h:outputLabel>
+            <h:outputText id="roles" value="#{profileBean.roles}"></h:outputText>
           </p:panelGrid>
           <p:commandButton id="saveBtn" value="Save"
-            icon="si si-recycling-trash-bin-2"
+            icon="si si-floppy-disk"
             style="max-width:200px;margin-top:20px;"
             actionListener="#{profileBean.save}" update="@form" />
         </h:form>
