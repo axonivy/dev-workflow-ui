@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Condition.exactValue;
 import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Selenide.$;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
@@ -18,51 +19,79 @@ import com.codeborne.selenide.Selenide;
 @IvyWebTest
 class WebTestProfileIT {
 
-  @Test
-  void profile() {
+  @BeforeEach
+  void beforeEach() {
     loginFromTable("testuser");
     openView("profile.xhtml");
+  }
 
+  @Test
+  void userName() {
     $("#profileForm\\:userName").shouldBe(exactText("testuser"));
+  }
 
-    var fullName = $("#profileForm\\:fullName");
-    fullName.shouldBe(exactValue("testuser"));
+  @Test
+  void roles() {
+    $("#profileForm\\:roles").shouldBe(exactText("Everybody, testrole1, testrole2, testrole3"));
+  }
 
+  @Test
+  void email() {
     var email = $("#profileForm\\:email");
     email.shouldBe(empty);
-    $("#profileForm\\:roles").shouldBe(exactText("Everybody, testrole1, testrole2, testrole3"));
+    email.sendKeys("any@email.com");
+    save();
 
-    var contentLanguage = PrimeUi.selectOne(By.id("profileForm:contentLanguage"));
-    var formattingLanguage = PrimeUi.selectOne(By.id("profileForm:formattingLanguage"));
+    email.shouldBe(exactValue("any@email.com"));
+    email.clear();
+    save();
 
+    email.shouldBe(empty);
+  }
+
+  @Test
+  void fullName() {
+    var fullName = $("#profileForm\\:fullName");
+    fullName.shouldBe(exactValue("testuser"));
     fullName.clear();
     fullName.sendKeys("fullname for test");
-
-    email.clear();
-    email.sendKeys("any@email.com");
-    contentLanguage.selectItemByLabel("");
-    formattingLanguage.selectItemByLabel("");
-
-    $("#profileForm\\:saveBtn").click();
-    Selenide.refresh();
+    save();
 
     fullName.shouldBe(exactValue("fullname for test"));
-    email.shouldBe(exactValue("any@email.com"));
-    contentLanguage.selectedItemShould(empty);
-    contentLanguage.selectItemByValue("de");
-
     fullName.clear();
     fullName.sendKeys("testuser");
-    email.clear();
-    formattingLanguage.selectedItemShould(empty);
-    formattingLanguage.selectItemByValue("de_CH");
-
-    $("#profileForm\\:saveBtn").click();
-    Selenide.refresh();
+    save();
 
     fullName.shouldBe(exactValue("testuser"));
-    email.shouldBe(empty);
+  }
+
+  @Test
+  void contentLanguage() {
+    var contentLanguage = PrimeUi.selectOne(By.id("profileForm:contentLanguage"));
+    contentLanguage.selectItemByLabel("");
+    save();
+
+    contentLanguage.selectedItemShould(empty);
+    contentLanguage.selectItemByValue("de");
+    save();
+
     contentLanguage.selectedItemShould(value("de"));
+  }
+
+  @Test
+  void formattingLanguage() {
+    var formattingLanguage = PrimeUi.selectOne(By.id("profileForm:formattingLanguage"));
+    formattingLanguage.selectItemByLabel("");
+    save();
+
+    formattingLanguage.selectedItemShould(empty);
+    formattingLanguage.selectItemByValue("de_CH");
+    save();
     formattingLanguage.selectedItemShould(value("de_CH"));
+  }
+
+  private void save() {
+    $("#profileForm\\:saveBtn").click();
+    Selenide.refresh();
   }
 }
