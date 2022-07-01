@@ -4,6 +4,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginF
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.exactValue;
 import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -21,9 +22,12 @@ class WebTestProfileIT {
   void profile() {
     loginFromTable("testuser");
     openView("profile.xhtml");
+
     $("#profileForm\\:userName").shouldBe(exactText("testuser"));
+
     var fullName = $("#profileForm\\:fullName");
-    fullName.shouldBe(exactText("testuser"));
+    fullName.shouldBe(exactValue("testuser"));
+
     var email = $("#profileForm\\:email");
     email.shouldBe(empty);
     $("#profileForm\\:roles").shouldBe(exactText("Everybody, testrole1, testrole2, testrole3"));
@@ -31,28 +35,28 @@ class WebTestProfileIT {
     var contentLanguage = PrimeUi.selectOne(By.id("profileForm:contentLanguage"));
     var formattingLanguage = PrimeUi.selectOne(By.id("profileForm:formattingLanguage"));
 
-    fullName.setValue("fullname for test");
-    email.setValue("any@email.com");
+    fullName.sendKeys("fullname for test");
+    email.sendKeys("any@email.com");
     contentLanguage.selectItemByLabel("");
     formattingLanguage.selectItemByLabel("");
 
     $("#profileForm\\:saveBtn").click();
     Selenide.refresh();
 
-    fullName.shouldBe(exactText("fullname for test"));
-    email.shouldBe(exactText("any@email.com"));
+    fullName.shouldBe(exactValue("fullname for test"));
+    email.shouldBe(exactValue("any@email.com"));
     contentLanguage.selectedItemShould(empty);
     contentLanguage.selectItemByValue("de");
 
-    fullName.setValue("testuser");
-    email.setValue("");
+    fullName.sendKeys("testuser");
+    email.sendKeys("");
     formattingLanguage.selectedItemShould(empty);
     formattingLanguage.selectItemByValue("de_CH");
 
     $("#profileForm\\:saveBtn").click();
     Selenide.refresh();
 
-    fullName.shouldBe(exactText("testuser"));
+    fullName.shouldBe(exactValue("testuser"));
     email.shouldBe(empty);
     contentLanguage.selectedItemShould(value("de"));
     formattingLanguage.selectedItemShould(value("de_CH"));
