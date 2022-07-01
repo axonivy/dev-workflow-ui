@@ -19,7 +19,7 @@
         </div>
         <h:form id="profileForm">
           <p:growl id="growl" showDetail="true" />
-          <p:panelGrid columns="2" layout="flex" columnClasses="p-col-4,p-col-8">
+          <p:panelGrid columns="2" layout="flex" columnClasses="p-col-3,p-col-9">
             <h:outputLabel for="userName">User Name</h:outputLabel>
             <h:outputText id="userName" value="#{profileBean.userName}"></h:outputText>
 
@@ -38,11 +38,11 @@
                 <f:selectItems value="#{profileBean.contentLanguages}"
                   var="locale" itemLabel="#{profileBean.toDisplayName(locale)}" />
               </p:selectOneMenu>
-              <br />
+              <small>
               <h:outputText title="Content locale of the current session."
-                style="font-size:11px;"
                 escape="false"
                 value="#{profileBean.contentLanguageSource}"></h:outputText>
+               </small>
             </h:panelGroup>
 
             <h:outputLabel for="formattingLanguage">Formatting Language</h:outputLabel>
@@ -55,11 +55,11 @@
                 <f:selectItems value="#{profileBean.formattingLanguages}"
                   var="locale" itemLabel="#{profileBean.toDisplayName(locale)}" />
               </p:selectOneMenu>
-              <br />
+              <small>
               <h:outputText title="Formatting locale of the current session."
-                style="font-size:11px;"
                 escape="false"
                 value="#{profileBean.formattingLanguageSource}"></h:outputText>
+              </small>
             </h:panelGroup>
 
             <h:outputLabel for="roles">Roles</h:outputLabel>
