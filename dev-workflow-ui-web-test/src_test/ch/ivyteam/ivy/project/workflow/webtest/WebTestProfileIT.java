@@ -35,7 +35,10 @@ class WebTestProfileIT {
     var contentLanguage = PrimeUi.selectOne(By.id("profileForm:contentLanguage"));
     var formattingLanguage = PrimeUi.selectOne(By.id("profileForm:formattingLanguage"));
 
+    fullName.clear();
     fullName.sendKeys("fullname for test");
+
+    email.clear();
     email.sendKeys("any@email.com");
     contentLanguage.selectItemByLabel("");
     formattingLanguage.selectItemByLabel("");
@@ -48,8 +51,9 @@ class WebTestProfileIT {
     contentLanguage.selectedItemShould(empty);
     contentLanguage.selectItemByValue("de");
 
+    fullName.clear();
     fullName.sendKeys("testuser");
-    email.sendKeys("");
+    email.clear();
     formattingLanguage.selectedItemShould(empty);
     formattingLanguage.selectItemByValue("de_CH");
 
