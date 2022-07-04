@@ -9,7 +9,7 @@
 <cc:implementation>
   <p:dataTable id="customFieldsTable" var="field" value="#{cc.attrs.customFields}">
     <p:column headerText="Name">
-      <h:outputText value="#{field.name}"/>
+      <h:outputText value="#{field.label}" title="#{field.description}"/>
     </p:column>
     <p:column headerText="Value">
       <h:outputText value="#{field.value}"/>
