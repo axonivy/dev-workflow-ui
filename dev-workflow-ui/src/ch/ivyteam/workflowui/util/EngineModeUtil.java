@@ -7,4 +7,8 @@ public class EngineModeUtil {
   public static boolean isDemoOrDesigner() {
     return EngineMode.is(EngineMode.DEMO) || EngineMode.is(EngineMode.DESIGNER_EMBEDDED);
   }
+
+  public static boolean isDesigner() {
+    return EngineMode.is(EngineMode.DESIGNER_EMBEDDED);
+  }
 }
