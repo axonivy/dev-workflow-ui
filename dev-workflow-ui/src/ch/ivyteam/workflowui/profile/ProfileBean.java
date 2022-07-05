@@ -123,7 +123,7 @@ public class ProfileBean {
 
   private List<Locale> locales(Function<LanguageRepository, List<Locale>> loader) {
     var locales = loader.apply(LanguageManager.instance().languages(session().getSecurityContext())).stream()
-            .sorted(Comparator.comparing(loc -> loc.getDisplayName(getCurrentContentLocale())))
+            .sorted(Comparator.comparing(this::toDisplayName))
             .collect(Collectors.toList());
     var l = new ArrayList<Locale>();
     l.add(Locale.ROOT);
