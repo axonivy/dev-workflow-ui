@@ -18,6 +18,7 @@ public class CustomFieldModel {
 
   public static List<CustomFieldModel> create(ICase selectedCase) {
     return selectedCase.customFields().all().stream()
+            .filter(CustomFieldModel::designerOrNotHidden)
             .map(CustomFieldModel::new).collect(Collectors.toList());
   }
 
