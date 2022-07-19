@@ -1,13 +1,9 @@
 package ch.ivyteam.workflowuitestdata;
 
-import java.awt.Container;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-
 import ch.ivyteam.ivy.persistence.PersistencyException;
-import ch.ivyteam.ivy.process.extension.IIvyScriptEditor;
-import ch.ivyteam.ivy.process.extension.IProcessExtensionConfigurationEditorEnvironment;
-import ch.ivyteam.ivy.process.extension.impl.AbstractProcessExtensionConfigurationEditor;
+import ch.ivyteam.ivy.process.extension.ui.ExtensionUiBuilder;
+import ch.ivyteam.ivy.process.extension.ui.IUiFieldEditor;
+import ch.ivyteam.ivy.process.extension.ui.UiEditorExtension;
 import ch.ivyteam.ivy.process.intermediateevent.AbstractProcessIntermediateEventBean;
 
 public class TestIntermediateClass extends AbstractProcessIntermediateEventBean
@@ -56,42 +52,27 @@ public class TestIntermediateClass extends AbstractProcessIntermediateEventBean
     }
   }
 
-  public static class Editor extends AbstractProcessExtensionConfigurationEditor
-  {
+  public static class Editor extends UiEditorExtension {
 
-    private IIvyScriptEditor demoIvyScriptField;
+    private IUiFieldEditor scriptField;
 
     @Override
-    protected void createEditorPanelContent(Container editorPanel,
-        IProcessExtensionConfigurationEditorEnvironment editorEnvironment)
-    {
-
-      // ===> Add here your code to create new ui widgets and to add them to the
-      // editor panel here <===
-      // You can use the editorEnvironment to create TextField that are ivyScript
-      // aware.
-
-      demoIvyScriptField = editorEnvironment.createIvyScriptEditor();
-      editorPanel.add(demoIvyScriptField.getComponent(), new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0,
-          GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+    public void initUiFields(ExtensionUiBuilder ui) {
+      scriptField = ui.scriptField().create();
     }
 
     @Override
-    protected void loadUiDataFromConfiguration()
-    {
-
+    protected void loadUiDataFromConfiguration() {
       // ===> Add here your code to load data from the configuration to the ui widgets
       // <===
       // You can use the getBeanConfiguration() or getBeanConfigurationProperty()
       // methods to load the configuration
 
-      demoIvyScriptField.setText(getBeanConfigurationProperty("demo"));
+      scriptField.setText(getBeanConfigurationProperty("demo"));
     }
 
     @Override
-    protected boolean saveUiDataToConfiguration()
-    {
-
+    protected boolean saveUiDataToConfiguration() {
       // Clear the bean configuration and all its properties to flush outdated
       // configurations.
       clearBeanConfiguration();
@@ -101,7 +82,7 @@ public class TestIntermediateClass extends AbstractProcessIntermediateEventBean
       // You can use the setBeanConfiguration() or setBeanConfigurationProperty()
       // methods to save the configuration
 
-      setBeanConfigurationProperty("demo", demoIvyScriptField.getText());
+      setBeanConfigurationProperty("demo", scriptField.getText());
       return true;
     }
   }
