@@ -1,14 +1,23 @@
 package ch.ivyteam.workflowui.login;
 
+import java.io.IOException;
+import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.event.SelectEvent;
 
+import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.security.IUser;
+import ch.ivyteam.ivy.security.identity.IdentityProvider;
+import ch.ivyteam.ivy.security.identity.auth.oauth2.OAuth2Authenticator;
+import ch.ivyteam.ivy.security.restricted.ISecurityContextInternal;
 import ch.ivyteam.workflowui.login.LoginTableIvyDevWfBean.User;
 import ch.ivyteam.workflowui.util.UserUtil;
 
@@ -94,5 +103,26 @@ public class LoginIvyDevWfBean {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public List<OAuthProvider> getOAuthProviders() {
+    var securityContext = (ISecurityContextInternal) ISecurityContext.current();
+    return securityContext.identityProviders().stream()
+            .filter(p -> p.authenticator(null) instanceof OAuth2Authenticator)
+            .map(this::toOAuthPovider)
+            .collect(Collectors.toList());
+  }
+
+  private OAuthProvider toOAuthPovider(IdentityProvider provider) {
+    var link = ISecurityContext.current().contextPath() + "/oauth2/" + provider.id() + "/init";
+    return new OAuthProvider(provider.name(), loadResource(provider.logo()), link);
+  }
+
+  private String loadResource(URI uri) {
+    try {
+      return IOUtils.toString(uri, StandardCharsets.UTF_8);
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
+    }
   }
 }
