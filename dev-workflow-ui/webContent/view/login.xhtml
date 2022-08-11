@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
   <f:attribute name="primefaces.THEME" value="freya-ivy-#{ivyFreyaTheme.mode}" />
@@ -31,6 +31,22 @@
 
         <p:commandButton update="@form" id="login" actionListener="#{loginIvyDevWfBean.customLogin}" value="Sign In" icon="si si-login-3" />
         <p:messages globalOnly="true" id="loginMessage" />
+
+        <section class="oauth-providers">
+          <ul style="list-style-type: none; padding-left: 0px">
+            <c:forEach var="authProvider" items="#{loginIvyDevWfBean.getOAuthProviders()}">
+              <li>
+                <h:outputLink value="${authProvider.link}">
+                  <h:outputText value="${authProvider.image}" escape="false" />
+                    <span style="position: relative; bottom: 5px;">
+                      Log in with <h:outputText value="${authProvider.name}" />
+                    </span>
+                </h:outputLink>
+              </li>
+            </c:forEach>
+          </ul>
+        </section>
+
       </div>
       <div class="login-footer">
         <h4>Developer Workflow UI</h4>
