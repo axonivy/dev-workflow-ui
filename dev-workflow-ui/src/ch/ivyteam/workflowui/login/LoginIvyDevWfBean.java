@@ -17,6 +17,7 @@ import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.ivy.security.identity.IdentityProvider;
 import ch.ivyteam.ivy.security.identity.auth.oauth2.OAuth2Authenticator;
+import ch.ivyteam.ivy.security.identity.auth.oauth2.OAuth2Url;
 import ch.ivyteam.ivy.security.restricted.ISecurityContextInternal;
 import ch.ivyteam.workflowui.login.LoginTableIvyDevWfBean.User;
 import ch.ivyteam.workflowui.util.UserUtil;
@@ -108,14 +109,14 @@ public class LoginIvyDevWfBean {
   public List<OAuthProvider> getOAuthProviders() {
     var securityContext = (ISecurityContextInternal) ISecurityContext.current();
     return securityContext.identityProviders().stream()
-            .filter(p -> p.authenticator(null) instanceof OAuth2Authenticator)
+            .filter(p -> p.authenticator() instanceof OAuth2Authenticator)
             .map(this::toOAuthPovider)
             .collect(Collectors.toList());
   }
 
   private OAuthProvider toOAuthPovider(IdentityProvider provider) {
-    var link = ISecurityContext.current().contextPath() + "/oauth2/" + provider.id() + "/init";
-    return new OAuthProvider(provider.name(), loadResource(provider.logo()), link);
+    var initUri = OAuth2Url.initUri(ISecurityContext.current(), provider);
+    return new OAuthProvider(provider.displayName(), loadResource(provider.logo()), initUri);
   }
 
   private String loadResource(URI uri) {
