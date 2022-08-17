@@ -1,0 +1,50 @@
+version: 2
+updates:
+  - package-ecosystem: maven
+    directory: /
+    schedule:
+      interval: daily
+  - package-ecosystem: maven
+    directory: dev-workflow-ui-test-data
+    schedule:
+      interval: daily
+  - package-ecosystem: maven
+    directory: dev-workflow-ui-test
+    schedule:
+      interval: daily
+  - package-ecosystem: maven
+    directory: dev-workflow-ui-web-test
+    schedule:
+      interval: daily
+  - package-ecosystem: maven
+    directory: dev-workflow-ui
+    schedule:
+      interval: daily
+  - package-ecosystem: maven
+    directory: maven/config
+    schedule:
+      interval: daily
+  - package-ecosystem: maven
+    directory: maven/config/iar
+    schedule:
+      interval: daily
+  - package-ecosystem: maven
+    directory: maven/config/test
+    schedule:
+      interval: daily      
+  - package-ecosystem: maven
+    directory: maven/deploy
+    schedule:
+      interval: daily
+  - package-ecosystem: maven
+    directory: maven/dev-workflow-ui-jar
+    schedule:
+      interval: daily    
+  - package-ecosystem: maven
+    directory: maven/dev-workflow-ui-screenshots
+    schedule:
+      interval: daily
+  - package-ecosystem: maven
+    directory: maven/image-validation
+    schedule:
+      interval: daily
