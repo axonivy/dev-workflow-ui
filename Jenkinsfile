@@ -54,9 +54,6 @@ pipeline {
                       "-Dengine.page.url=${params.engineSource} " +
                       "-Dtest.engine.url=http://${ivyName}:8080 " +
                       "-Dselenide.remote=http://${seleniumName}:4444/wd/hub "
-
-                checkVersions recordIssue: false
-                checkVersions cmd: '-f maven/config/pom.xml'
               }
             }
             recordIssues tools: [mavenConsole()], unstableTotalAll: 1, filters: [
