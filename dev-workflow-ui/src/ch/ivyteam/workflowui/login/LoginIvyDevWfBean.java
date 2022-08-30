@@ -15,9 +15,9 @@ import org.primefaces.event.SelectEvent;
 
 import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.security.IUser;
-import ch.ivyteam.ivy.security.identity.IdentityProvider;
-import ch.ivyteam.ivy.security.identity.auth.oauth2.OAuth2Authenticator;
-import ch.ivyteam.ivy.security.identity.auth.oauth2.OAuth2Url;
+import ch.ivyteam.ivy.security.identity.spi.IdentityProvider;
+import ch.ivyteam.ivy.security.identity.spi.auth.oauth2.OAuth2Authenticator;
+import ch.ivyteam.ivy.security.identity.core.auth.oauth2.OAuth2Url;
 import ch.ivyteam.ivy.security.restricted.ISecurityContextInternal;
 import ch.ivyteam.workflowui.login.LoginTableIvyDevWfBean.User;
 import ch.ivyteam.workflowui.util.UserUtil;
