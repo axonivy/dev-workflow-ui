@@ -1,5 +1,5 @@
 {
-  "format" : "9.4.11",
+  "format" : "9.4.20",
   "id" : "175461E47A870BF8",
   "data" : "workflow.uite.Data",
   "elements" : [ {
@@ -14,7 +14,7 @@
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 },
-        "labelOffset" : { "x" : -55, "y" : 23 }
+        "labelOffset" : { "x" : 9, "y" : 43 }
       },
       "connect" : { "id" : "f3", "to" : "f2" }
     }, {

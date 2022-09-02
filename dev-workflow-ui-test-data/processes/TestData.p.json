@@ -1,5 +1,5 @@
 {
-  "format" : "9.4.11",
+  "format" : "9.4.20",
   "id" : "1750C5211D94569D",
   "data" : "workflow.uite.Data",
   "elements" : [ {
@@ -63,7 +63,7 @@
       },
       "visual" : {
         "at" : { "x" : 224, "y" : 64 },
-        "labelOffset" : { "x" : -27, "y" : 16 }
+        "labelOffset" : { "x" : 6, "y" : 36 }
       },
       "connect" : { "id" : "f4", "to" : "f1" }
     }, {
@@ -90,7 +90,7 @@
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 160 },
-        "labelOffset" : { "x" : -63, "y" : 16 },
+        "labelOffset" : { "x" : 1, "y" : 36 },
         "description" : "Test dialog for testing Developer Workflow UI"
       },
       "connect" : { "id" : "f8", "to" : "f7" }
@@ -134,7 +134,7 @@
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 256 },
-        "labelOffset" : { "x" : -72, "y" : 18 }
+        "labelOffset" : { "x" : 2, "y" : 38 }
       },
       "connect" : { "id" : "f13", "to" : "f12" }
     }, {
@@ -187,7 +187,7 @@
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 352 },
-        "labelOffset" : { "x" : -59, "y" : 18 }
+        "labelOffset" : { "x" : 5, "y" : 38 }
       },
       "connect" : { "id" : "f17", "to" : "f11", "via" : [ { "x" : 352, "y" : 352 } ] }
     }, {
@@ -214,7 +214,7 @@
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 448 },
-        "labelOffset" : { "x" : -91, "y" : 20 }
+        "labelOffset" : { "x" : 11, "y" : 40 }
       },
       "connect" : { "id" : "f21", "to" : "f19" }
     }, {
@@ -227,7 +227,7 @@
       },
       "visual" : {
         "at" : { "x" : 224, "y" : 448 },
-        "labelOffset" : { "x" : 0, "y" : 16 },
+        "labelOffset" : { "x" : 72, "y" : 36 },
         "description" : "intermediate event description"
       },
       "connect" : { "id" : "f22", "to" : "f20" }
@@ -264,7 +264,7 @@
       },
       "visual" : {
         "at" : { "x" : 424, "y" : 64 },
-        "labelOffset" : { "x" : -63, "y" : 17 }
+        "labelOffset" : { "x" : 1, "y" : 37 }
       },
       "connect" : { "id" : "f27", "to" : "f25" }
     }, {
@@ -285,7 +285,7 @@
       },
       "visual" : {
         "at" : { "x" : 544, "y" : 64 },
-        "labelOffset" : { "x" : -50, "y" : 17 }
+        "labelOffset" : { "x" : 14, "y" : 37 }
       },
       "connect" : { "id" : "f26", "to" : "f23" }
     }, {
@@ -305,7 +305,7 @@
       },
       "visual" : {
         "at" : { "x" : 424, "y" : 256 },
-        "labelOffset" : { "x" : -58, "y" : 21 }
+        "labelOffset" : { "x" : 7, "y" : 41 }
       },
       "connect" : { "id" : "f32", "to" : "f31" }
     }, {
@@ -343,7 +343,7 @@
       },
       "visual" : {
         "at" : { "x" : 424, "y" : 352 },
-        "labelOffset" : { "x" : -25, "y" : 17 }
+        "labelOffset" : { "x" : 29, "y" : 37 }
       },
       "connect" : { "id" : "f37", "to" : "f34" }
     }, {
@@ -406,7 +406,7 @@
       },
       "visual" : {
         "at" : { "x" : 424, "y" : 160 },
-        "labelOffset" : { "x" : -50, "y" : 21 },
+        "labelOffset" : { "x" : 14, "y" : 41 },
         "description" : "Test dialog for testing Developer Workflow UI"
       },
       "connect" : { "id" : "f43", "to" : "f42" }
@@ -447,7 +447,7 @@
       },
       "visual" : {
         "at" : { "x" : 896, "y" : 64 },
-        "labelOffset" : { "x" : -27, "y" : 16 }
+        "labelOffset" : { "x" : 17, "y" : 36 }
       },
       "connect" : { "id" : "f48", "to" : "f46" }
     }, {
@@ -477,7 +477,7 @@
       },
       "visual" : {
         "at" : { "x" : 768, "y" : 64 },
-        "labelOffset" : { "x" : -25, "y" : 17 }
+        "labelOffset" : { "x" : 31, "y" : 37 }
       },
       "connect" : { "id" : "f49", "to" : "f45" }
     }, {
@@ -507,7 +507,7 @@
       },
       "visual" : {
         "at" : { "x" : 768, "y" : 160 },
-        "labelOffset" : { "x" : -25, "y" : 17 }
+        "labelOffset" : { "x" : 17, "y" : 37 }
       },
       "connect" : { "id" : "f54", "to" : "f52" }
     }, {
@@ -547,7 +547,7 @@
       },
       "visual" : {
         "at" : { "x" : 896, "y" : 160 },
-        "labelOffset" : { "x" : -27, "y" : 16 }
+        "labelOffset" : { "x" : 6, "y" : 36 }
       },
       "connect" : { "id" : "f53", "to" : "f50" }
     } ]
