@@ -1,5 +1,5 @@
 {
-  "format" : "9.4.11",
+  "format" : "9.4.20",
   "id" : "17D95C54B57821A9",
   "data" : "ch.ivyteam.ivy.project.workflow.Data",
   "elements" : [ {
@@ -16,7 +16,7 @@
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 },
-        "labelOffset" : { "x" : -74, "y" : 17 }
+        "labelOffset" : { "x" : 9, "y" : 37 }
       },
       "connect" : { "id" : "f8", "to" : "f7" }
     }, {
@@ -39,8 +39,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 480, "y" : 64 },
-        "labelOffset" : { "x" : -34, "y" : -8 }
+        "at" : { "x" : 480, "y" : 64 }
       },
       "connect" : { "id" : "f2", "to" : "f1" }
     }, {
@@ -75,8 +74,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 224, "y" : 64 },
-        "labelOffset" : { "x" : -34, "y" : -8 }
+        "at" : { "x" : 224, "y" : 64 }
       },
       "connect" : { "id" : "f6", "to" : "f5" }
     } ]
