@@ -46,7 +46,7 @@ pipeline {
           def ivyName = "ivy-" + random
           sh "docker network create ${networkName}"
           try {
-            docker.image("selenium/standalone-firefox:3").withRun("-e START_XVFB=false --shm-size=2g --name ${seleniumName} --network ${networkName}") {
+            docker.image("selenium/standalone-firefox:4").withRun("-e START_XVFB=false --shm-size=2g --name ${seleniumName} --network ${networkName}") {
               docker.build('maven').inside("--name ${ivyName} --network ${networkName}") {
                 maven cmd: 'clean verify ' +
                       '-Dmaven.test.failure.ignore=true ' +
