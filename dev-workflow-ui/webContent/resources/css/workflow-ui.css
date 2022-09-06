@@ -89,12 +89,18 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight {
   display: flex;
   align-items: center;
 }
+.start-element {
+  border-radius: 8px;
+}
 .start-element .start-link {
   width: 100%;
   padding: 0.5rem;
 }
 .start-element:hover {
   background-color: var(--primary-lighter-color);
+}
+.start-description {
+  color: var(--text-color-secondary);
 }
 .main-starts-container .ui-panel-content.ui-widget-content {
   padding: 0px;
