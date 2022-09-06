@@ -42,7 +42,7 @@
 
                     <div class="p-ml-auto">
                       <p:link id="copyStartLinkBtn" href="#" onclick="copyToClipboard('#{start.link}')">
-                        <i class="si si-copy-paste" />
+                        <i class="si si-hyperlink-3" />
                       </p:link>
                       <p:tooltip for="copyStartLinkBtn" value="Copy to clipboard" position="top" />
 
@@ -100,7 +100,7 @@
                   <jc:datetime id="expiryTime" datetime="#{task.expiryTimestamp}" />
                 </p:column>
                 <p:column styleClass="table-btn-1">
-                  <p:linkButton icon="si si-navigation-menu-horizontal" styleClass="detail-btn ui-button-outlined ui-button-secondary rounded-button"
+                  <p:linkButton icon="si si-expand-6" styleClass="detail-btn ui-button-outlined ui-button-secondary rounded-button"
                     href="taskDetails.xhtml?task=#{task.id}" />
                 </p:column>
               </p:dataTable>
