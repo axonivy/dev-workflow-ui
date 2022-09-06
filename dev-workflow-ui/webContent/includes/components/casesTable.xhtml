@@ -46,8 +46,9 @@
     </p:column>
 
     <p:column styleClass="table-btn-1">
-      <p:linkButton icon="si si-expand-6" styleClass="detail-btn ui-button-outlined ui-button-secondary rounded-button"
-        href="caseDetails.xhtml?case=#{case.id}" />
+      <p:link href="caseDetails.xhtml?case=#{case.id}" >
+        <i class="si si-information-circle detail-btn"/>
+      </p:link>
     </p:column>
   </p:dataTable>
 </ui:composition>
