@@ -130,7 +130,6 @@ pipeline {
       when {
         allOf {
           branch 'master'
-          expression { return currentBuild.currentResult == 'SUCCESS' || params.deployScreenshots || manualDeploy }
         }
       }
       steps {
