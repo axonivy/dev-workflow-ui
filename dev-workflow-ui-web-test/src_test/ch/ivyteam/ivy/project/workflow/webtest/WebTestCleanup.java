@@ -73,7 +73,7 @@ public class WebTestCleanup {
     startTestProcess("1750C5211D94569D/TestData.ivp");
     openView("cases.xhtml");
     Table casesTable = PrimeUi.table(By.id("casesForm:cases"));
-    casesTable.row(0).shouldBe(text("Created case of TestData"));
+    casesTable.row(0).shouldHave(text("Created case of TestData"));
 
     openView("cleanup.xhtml");
     $(By.id("clanupForm:growl_container")).shouldNotBe(visible);
@@ -86,7 +86,7 @@ public class WebTestCleanup {
     $(By.id("clanupForm:growl_container")).shouldNotBe(visible);
 
     openView("cases.xhtml");
-    casesTable.row(0).shouldBe(text("Created case of TestData"));
+    casesTable.row(0).shouldHave(text("Created case of TestData"));
     openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).sendKeys("workflow-ui-test-data");
     $("#startsForm\\:projectStarts\\:0\\:caseMapsTitle").shouldBe(visible);
@@ -98,7 +98,7 @@ public class WebTestCleanup {
     $(By.id("clanupForm:growl_container")).shouldBe(visible);
 
     openView("cases.xhtml");
-    casesTable.row(0).shouldBe(text("No Cases found"));
+    casesTable.row(0).shouldHave(text("No Cases found"));
     openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).sendKeys("workflow-ui-test-data");
     $("#startsForm\\:projectStarts\\:0\\:caseMapsTitle").shouldBe(visible);

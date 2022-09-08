@@ -67,7 +67,7 @@ public class WebTestSignalsIT {
 
     openView("signals.xhtml");
     Table boundaryTable = PrimeUi.table(By.id("boundarySignalsTable"));
-    boundaryTable.valueAtShouldBe(0, 0, text("No records found."));
+    boundaryTable.contains("No records found.");
 
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
     openView("signals.xhtml");
@@ -85,12 +85,12 @@ public class WebTestSignalsIT {
 
     openView("signals.xhtml");
     Table boundaryTable = PrimeUi.table(By.id("boundarySignalsTable"));
-    boundaryTable.valueAtShouldBe(0, 0, text("No records found."));
+    boundaryTable.contains("No records found.");
 
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
     openView("signals.xhtml");
 
     $(By.id("boundarySignalsTable:0:sendSignalIcon")).shouldBe(visible).click();
-    boundaryTable.valueAtShouldBe(0, 0, text("No records found."));
+    boundaryTable.contains("No records found.");
   }
 }

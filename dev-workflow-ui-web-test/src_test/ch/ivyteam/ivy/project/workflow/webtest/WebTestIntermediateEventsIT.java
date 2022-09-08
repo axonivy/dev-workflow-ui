@@ -48,8 +48,8 @@ public class WebTestIntermediateEventsIT {
   public void checkIntermediateElementDetails() {
     openView("intermediateEvents.xhtml");
     $(byText("TestIntermediateEvent")).click();
-    $(By.id("name")).shouldBe(text("TestIntermediateEvent"));
-    $(By.id("description")).shouldBe(text("intermediate event description"));
+    $(By.id("name")).shouldHave(text("TestIntermediateEvent"));
+    $(By.id("description")).shouldHave(text("intermediate event description"));
   }
 
   @Test

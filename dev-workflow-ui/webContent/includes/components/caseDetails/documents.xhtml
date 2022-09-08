@@ -4,14 +4,16 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
 
   <ul class="custom-list">
-    <ui:repeat var="document" value="#{casesDetailsIvyDevWfBean.documents}">
-      <li class="document-entry" style="list-style-type: none;">
-        <span class="p-mr-1 si si-#{document.icon}"/>
-        <h:commandLink value="#{document.name}">
-          <p:fileDownload value="#{document.streamedContent}"></p:fileDownload>
-        </h:commandLink>
-      </li>
-    </ui:repeat>
+    <h:form id="documentsDownloadForm">
+      <ui:repeat var="document" value="#{casesDetailsIvyDevWfBean.documents}">
+        <li class="document-entry" style="list-style-type: none;">
+          <span class="p-mr-1 si si-#{document.icon}"/>
+          <h:commandLink value="#{document.name}">
+            <p:fileDownload value="#{document.streamedContent}"></p:fileDownload>
+          </h:commandLink>
+        </li>
+      </ui:repeat>
+    </h:form>
   </ul>
   <c:if test="#{empty casesDetailsIvyDevWfBean.documents}">
     <h:outputText value="No Documents found" />

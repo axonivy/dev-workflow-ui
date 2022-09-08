@@ -44,8 +44,8 @@ public class WebTestCaseMapIT {
     openView("cases.xhtml");
     $(".detail-btn").shouldBe(visible).click();
 
-    $(By.id("form:creatorUser:userName")).shouldBe(exactText("DeveloperTest"));
-    $(By.id("form:caseState")).shouldBe(exactText("CREATED"));
+    $(By.id("creatorUser:userName")).shouldBe(exactText("DeveloperTest"));
+    $(By.id("caseState")).shouldBe(exactText("CREATED"));
 
     $(".case-map-column").shouldHave(text("stage1"));
     $(".process-flow").shouldBe(visible);
@@ -58,8 +58,8 @@ public class WebTestCaseMapIT {
 
     $(".current-hierarchy-case").find("a").shouldNotHave(text("Created case of TestData"));
 
-    $(By.id("form:sidestepsBtn")).shouldBe(visible).click();
-    $(By.id("form:sidestepMenu")).shouldBe(visible).find(By.className("ui-menuitem-link")).click();
+    $(By.id("sidestepsBtn")).shouldBe(visible).click();
+    $(By.id("sidestepMenu")).shouldBe(visible).find(By.className("ui-menuitem-link")).click();
 
     $$(".case-link").find(text("Created case of TestData")).shouldBe(visible);
   }
@@ -85,8 +85,8 @@ public class WebTestCaseMapIT {
     $(By.className("detail-btn")).shouldBe(visible).click();
     $(By.className("current-hierarchy-case")).find("a").shouldNotHave(text("Created case of TestData"));
     $(By.className("casemap-card")).shouldBe(visible);
-    $(By.id("form:openCaseMapUiViewerBtn")).shouldBe(visible).click();
-    $(By.id("form:processViewer:processViewerDialog")).shouldBe(visible);
+    $(By.id("openCaseMapUiViewerBtn")).shouldBe(visible).click();
+    $(By.id("processViewer:processViewerDialog")).shouldBe(visible);
     $(By.id("viewerFrame")).shouldBe(visible);
     Selenide.switchTo().frame("viewerFrame");
     $(By.className("fa-apple")).shouldBe(visible);

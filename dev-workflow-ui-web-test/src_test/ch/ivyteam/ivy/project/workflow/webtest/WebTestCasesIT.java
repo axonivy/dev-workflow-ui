@@ -37,7 +37,7 @@ public class WebTestCasesIT {
     startTestProcess("1750C5211D94569D/TestData.ivp");
     openView("cases.xhtml");
     Table table = PrimeUi.table(By.id("casesForm:cases"));
-    table.row(0).shouldBe(text("Created case of TestData"));
+    table.row(0).shouldHave(text("Created case of TestData"));
 
     table.valueAt(0, 1).contains("running");
   }

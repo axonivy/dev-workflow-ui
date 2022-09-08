@@ -7,6 +7,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
@@ -16,7 +17,6 @@ import java.nio.file.Files;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.codeborne.selenide.Configuration;
@@ -46,9 +46,11 @@ public class WebTestDownloadCaseDocumentsIT {
   public void downloadDocument() throws IOException {
     openView("cases.xhtml");
     $(byText("Created case of TestData")).shouldBe(visible).click();
-    $(By.id("form:caseName")).shouldBe(text("Created case of TestData"));
+    $("#caseName").shouldBe(visible).shouldHave(text("Created case of TestData"));
     $(".documents-card").shouldHave(text("test.txt"));
-    File download = $(".document-entry", 0).find("a").shouldBe(visible).download();
+    var downloadDocumentElement = $$(".document-entry").find(text("test.txt"))
+            .find("a").shouldBe(visible);
+    File download = downloadDocumentElement.scrollIntoView(false).download();
     assertThat(download).hasName("test.txt");
     assertThat(Files.readString(download.toPath())).isEqualTo("this is test document");
   }
