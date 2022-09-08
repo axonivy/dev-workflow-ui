@@ -11,7 +11,6 @@
 
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <h:form id="form">
         <div class="layout-dashboard">
           <div class="p-grid">
             <div class="p-col-12 p-lg-8">
@@ -24,6 +23,7 @@
                   <p:commandButton icon="si si-delete-1" styleClass="ui-button-danger rounded-button"
                     disabled="#{not casesDetailsIvyDevWfBean.canBeDestoryed()}" id="caseDestroyBtn"
                     actionListener="#{casesDetailsIvyDevWfBean.selectedCase.destroy}" update="@this, caseDetails, caseHierarchy" />
+                  <p:tooltip for="caseDestroyBtn" value="Destroy case" position="top"/>
                 </div>
                 <ui:include src="/includes/components/caseDetails/description.xhtml" />
               </div>
@@ -70,6 +70,7 @@
 
             <div class="p-col-12 p-lg-8">
               <div class="card">
+              <h:form id="tasksForm">
                 <div class="card-header">
                   <div class="card-title p-d-flex p-ai-center">
                     <i class="p-pr-3 si si-layout-bullets"></i>
@@ -78,11 +79,12 @@
                   <h:panelGroup id="switchContainer" styleClass="p-d-inline-flex p-ai-center">
                     <h:outputText value="Show system tasks" class="p-mr-2" />
                     <p:toggleSwitch id="showSystemTasksSwitch" value="#{casesDetailsIvyDevWfBean.showSystemTasks}">
-                      <p:ajax update="form:tasks" />
+                      <p:ajax update="tasksForm:tasks" />
                     </p:toggleSwitch>
                   </h:panelGroup>
                 </div>
                 <ui:include src="/includes/components/caseDetails/taskList.xhtml" />
+                </h:form>
               </div>
             </div>
 
@@ -137,7 +139,6 @@
         </div>
 
         <jc:processViewer id="processViewer" title="#{casesDetailsIvyDevWfBean.viewerDialogTitle}" link="#{casesDetailsIvyDevWfBean.viewerLink}" />
-      </h:form>
     </ui:define>
   </ui:composition>
 </h:body>

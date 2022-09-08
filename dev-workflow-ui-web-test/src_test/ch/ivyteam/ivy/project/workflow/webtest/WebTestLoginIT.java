@@ -37,7 +37,7 @@ public class WebTestLoginIT {
     $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menu"));
     assertCurrentUrlContains("home.xhtml");
     logout();
-    $("#sessionUserName").shouldBe(text("Unknown User"));
+    $("#sessionUserName").shouldHave(text("Unknown User"));
   }
 
   @Test
@@ -96,7 +96,7 @@ public class WebTestLoginIT {
     loginFromTable("DifferentLogin");
     assertCurrentUrlContains("login.xhtml?originalUrl=loginTable.xhtml");
     WorkflowUiUtil.customLogin("DifferentLogin", "DifferentPassword");
-    $("#sessionUserName").shouldBe(text("DifferentLogin"));
+    $("#sessionUserName").shouldHave(text("DifferentLogin"));
   }
 
   @Test

@@ -6,11 +6,12 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openVi
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThanOrEqual;
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.time.Duration;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -36,7 +37,8 @@ public class WebTestGLSPProcessViewerIT {
 
     $(By.id("viewerFrame")).shouldBe(visible);
     Selenide.switchTo().frame("viewerFrame");
-    $(By.id("sprotty_1750C5211D94569D-f0")).shouldBe(visible, text("TestData"));
+    $("#sprotty_ivy-viewport-bar").shouldBe(visible, Duration.ofSeconds(15));
+    $("#sprotty_1750C5211D94569D-f0").shouldBe(visible);
     $$(By.className("start:requestStart")).shouldBe(sizeGreaterThanOrEqual(1));
     $$(By.className("sprotty-edge")).shouldBe(sizeGreaterThanOrEqual(1));
     $$(By.className("end:taskEnd")).shouldBe(sizeGreaterThanOrEqual(1));

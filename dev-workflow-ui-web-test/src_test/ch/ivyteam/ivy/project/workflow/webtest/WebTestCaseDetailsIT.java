@@ -37,22 +37,22 @@ public class WebTestCaseDetailsIT {
     loginDeveloper();
     openView("cases.xhtml");
     $(byText("Created case of TestData")).shouldBe(visible).click();
-    $(By.id("form:caseName")).shouldBe(text("Created case of TestData"));
+    $(By.id("caseName")).shouldBe(visible).shouldHave(text("Created case of TestData"));
   }
 
   @Test
   public void caseDetails() {
-    $(By.id("form:creatorUser:userName")).shouldBe(exactText("DeveloperTest"));
-    $(By.id("form:category")).shouldHave(exactText("TestData"));
-    $(By.id("form:caseState")).shouldBe(exactText("RUNNING"));
+    $(By.id("creatorUser:userName")).shouldBe(exactText("DeveloperTest"));
+    $(By.id("category")).shouldHave(exactText("TestData"));
+    $(By.id("caseState")).shouldBe(exactText("RUNNING"));
 
-    $(By.id("form:caseDestroyBtn")).should(visible).click();
-    $(By.id("form:caseState")).shouldBe(exactText("DESTROYED"));
+    $(By.id("caseDestroyBtn")).should(visible).click();
+    $(By.id("caseState")).shouldBe(exactText("DESTROYED"));
   }
 
   @Test
   public void taskList() throws Exception {
-    Table tasksTable = PrimeUi.table(By.id("form:tasks"));
+    Table tasksTable = PrimeUi.table(By.id("tasksForm:tasks"));
     tasksTable.valueAt(0, 0).contains("Test Task");
   }
 
@@ -62,10 +62,10 @@ public class WebTestCaseDetailsIT {
     openView("cases.xhtml");
     $(".detail-btn").shouldBe(visible).click();
 
-    Table tasksTable = PrimeUi.table(By.id("form:tasks"));
+    Table tasksTable = PrimeUi.table(By.id("tasksForm:tasks"));
     tasksTable.containsNot("System");
 
-    $(By.id("form:showSystemTasksSwitch")).shouldBe(visible).click();
+    $(By.id("tasksForm:showSystemTasksSwitch")).shouldBe(visible).click();
 
     tasksTable.contains("System");
   }
@@ -77,20 +77,20 @@ public class WebTestCaseDetailsIT {
 
   @Test
   public void customFields() throws Exception {
-    Table fieldsTable = PrimeUi.table(By.id("form:customFields:customFieldsTable"));
+    Table fieldsTable = PrimeUi.table(By.id("customFields:customFieldsTable"));
     fieldsTable.valueAt(1, 0).contains("field 2");
   }
 
   @Test
   public void workflowEvents() {
-    var caseId = $(By.id("form:caseId")).getText();
-    $(By.id("form:workflowEvents:eventsTable")).shouldBe(visible);
+    var caseId = $(By.id("caseId")).getText();
+    $(By.id("workflowEvents:eventsTable")).shouldBe(visible);
     loginFromTable("testuser");
     openView("cases.xhtml");
     $(By.className("detail-btn")).shouldBe(visible).click();
-    $(By.id("form:caseId")).shouldBe(exactText(caseId));
-    $(By.id("form:workflowEvents:eventsTable")).shouldNotBe(visible);
-    $(By.id("form:workflowEvents:noPermissionMessage")).shouldBe(visible).shouldHave(text("No permissions"));
+    $(By.id("caseId")).shouldBe(visible).shouldHave(exactText(caseId));
+    $(By.id("workflowEvents:eventsTable")).shouldNotBe(visible);
+    $(By.id("workflowEvents:noPermissionMessage")).shouldBe(visible).shouldHave(text("No permissions"));
   }
 
   @Test
@@ -98,15 +98,15 @@ public class WebTestCaseDetailsIT {
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
     openView("cases.xhtml");
     $(By.id("casesForm:cases:0:caseName")).shouldBe(visible).click();
-    $(By.id("form:caseState")).shouldBe(exactText("RUNNING"));
-    $(By.id("form:caseDestroyBtn")).shouldBe(visible).shouldNotHave(cssClass("ui-state-disabled"));
+    $(By.id("caseState")).shouldBe(visible).shouldHave(exactText("RUNNING"));
+    $(By.id("caseDestroyBtn")).shouldBe(visible).shouldNotHave(cssClass("ui-state-disabled"));
     $(".current-hierarchy-case").findAll(".case-link").shouldBe(size(1));
     $(".current-hierarchy-case").findAll(".case-state-in-progress").shouldBe(size(1));
 
-    $(By.id("form:caseDestroyBtn")).click();
+    $(By.id("caseDestroyBtn")).click();
     $(".current-hierarchy-case").findAll(".case-link").shouldBe(size(1));
     $(".current-hierarchy-case").findAll(".case-state-zombie-destroyed").shouldBe(size(1));
-    $(By.id("form:caseDestroyBtn")).shouldHave(cssClass("ui-state-disabled"));
+    $(By.id("caseDestroyBtn")).shouldHave(cssClass("ui-state-disabled"));
   }
 
   @Test
