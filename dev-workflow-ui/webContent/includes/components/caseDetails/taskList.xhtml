@@ -36,8 +36,9 @@
     </p:column>
 
     <p:column styleClass="table-btn-1">
-      <p:linkButton icon="si si-navigation-menu-horizontal" styleClass="detail-btn ui-button-outlined ui-button-secondary rounded-button"
-        href="taskDetails.xhtml?task=#{task.id}" />
+      <p:link href="taskDetails.xhtml?task=#{task.id}" >
+        <i class="si si-information-circle detail-btn"/>
+      </p:link>
     </p:column>
   </p:dataTable>
 
