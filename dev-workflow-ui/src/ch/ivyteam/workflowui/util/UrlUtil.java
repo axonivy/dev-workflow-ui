@@ -6,8 +6,6 @@ import java.nio.charset.StandardCharsets;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.StringUtils;
-
 import ch.ivyteam.ivy.model.value.WebLink;
 
 public class UrlUtil {
@@ -17,15 +15,8 @@ public class UrlUtil {
   }
 
   public static String evalOriginalPage() {
-    var page = StringUtils.substringAfterLast(getHttpServletRequest().getRequestURI(), "/");
-    var parameter = getHttpServletRequest().getQueryString();
-    if (page.equals("frame.xhtml")) {
-      page = "allTasks.xhtml";
-    }
-    if (!StringUtils.isBlank(parameter)) {
-      page += "?" + parameter;
-    }
-    return page;
+    return evalOriginalUrl()
+    		.replace("/frame.xhtml", "/allTasks.xhtml");
   }
 
   public static HttpServletRequest getHttpServletRequest() {
@@ -50,5 +41,4 @@ public class UrlUtil {
     String startLinkEncoded = URLEncoder.encode(startLink.getRelative(), StandardCharsets.UTF_8);
     return "frame.xhtml?originalUrl=" + originalPageEncoded + "&taskUrl=" + startLinkEncoded;
   }
-
 }
