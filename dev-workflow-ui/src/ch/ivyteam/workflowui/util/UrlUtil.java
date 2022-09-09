@@ -16,7 +16,7 @@ public class UrlUtil {
 
   public static String evalOriginalPage() {
     return evalOriginalUrl()
-    		.replace("/frame.xhtml", "/allTasks.xhtml");
+             .replace("/frame.xhtml", "/allTasks.xhtml");
   }
 
   public static HttpServletRequest getHttpServletRequest() {
