@@ -19,8 +19,12 @@
     <module>dev-workflow-ui-test</module>
     <module>dev-workflow-ui-test-data</module>
     <module>dev-workflow-ui-web-test</module>
+    <module>maven/config</module>
+    <module>maven/config/iar</module>
+    <module>maven/config/test</module>
     <module>maven/deploy</module>
     <module>maven/dev-workflow-ui-screenshots</module>
+    <module>maven/image-validation</module>
   </modules>
 
   <build>
