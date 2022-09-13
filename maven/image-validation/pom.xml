@@ -9,6 +9,7 @@
   </parent>
 
   <artifactId>dev-workflow-ui-image-validation</artifactId>
+  <packaging>pom</packaging>
 
   <properties>
     <test.target.dir>${project.basedir}/../../dev-workflow-ui-web-test/target/</test.target.dir>
