@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ch.ivyteam.workflow</groupId>
   <artifactId>dev-workflow-ui-config</artifactId>
-  <version>9.4.0-SNAPSHOT</version>
+  <version>10.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <properties>
@@ -101,6 +101,9 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-deploy-plugin</artifactId>
         <version>3.0.0</version>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
       </plugin>
       </plugins>
     </pluginManagement>
