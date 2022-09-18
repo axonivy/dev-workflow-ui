@@ -4,20 +4,5 @@ updates:
     directory: /
     schedule:
       interval: daily
-  - package-ecosystem: maven
-    directory: maven/config
-    schedule:
-      interval: daily
-  - package-ecosystem: maven
-    directory: maven/config/iar
-    schedule:
-      interval: daily
-  - package-ecosystem: maven
-    directory: maven/config/test
-    schedule:
-      interval: daily
-  - package-ecosystem: maven
-    directory: maven/image-validation
-    schedule:
-      interval: daily
- 
+    assignees:
+      - jackra1n
