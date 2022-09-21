@@ -143,7 +143,7 @@ public class CasesDetailsIvyDevWfBean {
   }
 
   public boolean isCaseMap() {
-    return startable.getType().equals("casemap");
+    return startable != null && startable.getType().equals("casemap");
   }
 
   public String getViewerLink() {
