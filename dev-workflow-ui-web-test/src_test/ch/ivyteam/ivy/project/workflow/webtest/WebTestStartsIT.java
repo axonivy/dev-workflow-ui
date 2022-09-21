@@ -103,12 +103,12 @@ public class WebTestStartsIT {
 
     openView("tasks.xhtml");
     $(By.id("tasksForm:tasks")).find("TestTask");
-    $(By.id("menuform:sr_tasks")).shouldHave(cssClass("active-menu"));
+    $(By.id("menuform:sr_tasks")).shouldHave(cssClass("active-menuitem"));
     assertCurrentUrlContains("tasks.xhtml");
 
     openView("home.xhtml");
     $(By.id("lastStarts")).find(byText("TestData/TestData.ivp")).click();
-    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menu"));
+    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menuitem"));
     assertCurrentUrlContains("home.xhtml");
 
     openView("allTasks.xhtml");
@@ -141,7 +141,7 @@ public class WebTestStartsIT {
     Selenide.switchTo().frame("iFrame");
     $(By.id("form:proceed")).shouldBe(enabled).click();
     Selenide.switchTo().defaultContent();
-    $(By.id("menuform:sr_starts")).shouldHave(cssClass("active-menu"));
+    $(By.id("menuform:sr_starts")).shouldHave(cssClass("active-menuitem"));
   }
 
   @Test

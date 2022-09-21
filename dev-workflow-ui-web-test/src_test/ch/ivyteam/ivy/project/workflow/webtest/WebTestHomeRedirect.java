@@ -15,9 +15,9 @@ public class WebTestHomeRedirect {
   @Test
   public void homepageRedirect() {
     openView("home.xhtml");
-    $(By.id("menuform:sr_starts")).shouldHave(cssClass("active-menu"));
+    $(By.id("menuform:sr_starts")).shouldHave(cssClass("active-menuitem"));
     openView("home.xhtml");
-    $(By.id("menuform:sr_starts")).shouldNotHave(cssClass("active-menu"));
-    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menu"));
+    $(By.id("menuform:sr_starts")).shouldNotHave(cssClass("active-menuitem"));
+    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menuitem"));
   }
 }

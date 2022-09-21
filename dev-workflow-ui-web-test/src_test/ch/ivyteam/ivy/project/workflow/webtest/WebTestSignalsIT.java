@@ -24,7 +24,7 @@ public class WebTestSignalsIT {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     loginFromTable("testuser");
     openView("signals.xhtml");
-    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menu"));
+    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menuitem"));
 
     loginDeveloper();
     openView("signals.xhtml");
