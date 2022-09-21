@@ -36,7 +36,7 @@ public class WebTestIntermediateEventsIT {
     openView("home.xhtml");
     loginFromTable("testuser");
     openView("intermediateEvents.xhtml");
-    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menu"));
+    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menuitem"));
 
     loginDeveloper();
     openView("intermediateEvents.xhtml");
