@@ -1,7 +1,9 @@
 package ch.ivyteam.workflowui.util;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import ch.ivyteam.ivy.application.IProcessModel;
 import ch.ivyteam.ivy.application.app.IApplicationRepository;
@@ -28,15 +30,15 @@ public class ProcessModelsUtil {
       .collect(Collectors.toList());
   }
 
-  public static List<IWorkflowProcessModelVersion> getReleasedWorkflowPMVs() {
+  public static Stream<IWorkflowProcessModelVersion> getReleasedWorkflowPMVs() {
     return getProcessModels().stream()
       .map(IProcessModel::getReleasedProcessModelVersion)
-      .map(IWorkflowProcessModelVersion::of)
-      .collect(Collectors.toList());
+      .filter(Objects::nonNull)
+      .map(IWorkflowProcessModelVersion::of);
   }
 
   public static List<StartableModel> getDeployedStartables() {
-    return getReleasedWorkflowPMVs().stream()
+    return getReleasedWorkflowPMVs()
       .flatMap(pmv -> pmv.getStartables(ISession.current()).stream()
       .map(s -> createCaseMapOrProcessStartable(s)))
       .collect(Collectors.toList());

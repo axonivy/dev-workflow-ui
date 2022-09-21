@@ -44,7 +44,7 @@ public class StartsDataModel {
   }
 
   private void reloadPmvs() {
-    pmvs = ProcessModelsUtil.getReleasedWorkflowPMVs().stream()
+    pmvs = ProcessModelsUtil.getReleasedWorkflowPMVs()
             .map(pmv -> CustomPMV.create(pmv, filter))
             .filter(Optional::isPresent)
             .map(Optional::get)
