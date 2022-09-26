@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.model.value.WebLink;
 import ch.ivyteam.ivy.process.model.value.PID;
+import ch.ivyteam.ivy.process.viewer.api.ProcessViewer;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.ivy.workflow.ICase;
@@ -16,7 +17,6 @@ import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.ivy.workflow.businesscase.IBusinessCase;
-import ch.ivyteam.ivy.workflow.start.ProcessViewerUrl;
 import ch.ivyteam.ivy.workflow.task.IActivator;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
@@ -215,6 +215,6 @@ public class TaskModel {
   }
 
   private String buildViewerLink(ITask task) {
-    return ProcessViewerUrl.of(task).toWebLink().getRelativeEncoded();
+    return ProcessViewer.of(task).url().toWebLink().getRelativeEncoded();
   }
 }

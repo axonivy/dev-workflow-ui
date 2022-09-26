@@ -1,5 +1,6 @@
 package ch.ivyteam.workflowui.cases;
 
+import static ch.ivyteam.ivy.process.viewer.api.ProcessViewerUrlBuilder.Mode.PREVIEW;
 import static ch.ivyteam.ivy.workflow.CaseState.CREATED;
 import static ch.ivyteam.ivy.workflow.CaseState.RUNNING;
 
@@ -12,12 +13,11 @@ import javax.faces.bean.ViewScoped;
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.model.menu.MenuModel;
 
+import ch.ivyteam.ivy.process.viewer.api.ProcessViewer;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.query.CaseQuery;
 import ch.ivyteam.ivy.workflow.start.IWebStartable;
-import ch.ivyteam.ivy.workflow.start.ProcessViewerUrl;
-import ch.ivyteam.ivy.workflow.start.ProcessViewerUrl.ProcessViewerMode;
 import ch.ivyteam.workflowui.casemap.CaseMapModel;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
@@ -71,7 +71,7 @@ public class CasesDetailsIvyDevWfBean {
   }
 
   private String generateProcessPreviewLink() {
-    return ProcessViewerUrl.of(selectedCase).mode(ProcessViewerMode.PREVIEW).zoom(75).toWebLink().toString();
+    return ProcessViewer.of(selectedCase).url().mode(PREVIEW).zoom(75).toWebLink().toString();
   }
 
   public ICase getCaseById(long id) {
