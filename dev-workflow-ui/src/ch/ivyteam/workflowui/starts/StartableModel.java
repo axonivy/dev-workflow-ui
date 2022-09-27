@@ -17,12 +17,12 @@ public class StartableModel {
   private final WebLink link;
   private final Category category;
   private final String icon;
-  private boolean embedInFrame;
+  private final boolean embedInFrame;
   private final WebLink viewerLink;
-
+  private final boolean viewerAllowed;
 
   public StartableModel(String displayName, String description, WebLink link, Category category,
-          String icon, boolean embedInFrame, WebLink viewerLink) {
+          String icon, boolean embedInFrame, WebLink viewerLink, boolean viewerAllowed) {
     this.displayName = displayName;
     this.description = description;
     this.link = link;
@@ -30,7 +30,7 @@ public class StartableModel {
     this.icon = icon;
     this.embedInFrame = embedInFrame;
     this.viewerLink = viewerLink;
-
+    this.viewerAllowed = viewerAllowed;
   }
 
   public StartableModel(IWebStartable startable) {
@@ -40,7 +40,8 @@ public class StartableModel {
       startable.getCategory(),
       getIcon(startable.customFields()),
       evaluateEmbedInFrame(startable.customFields().value(CustomFieldsHelper.EMBED_IN_FRAME)),
-      ViewerUtil.getViewerLink(startable)
+      ViewerUtil.getViewerLink(startable),
+      ViewerUtil.isViewerAllowed(startable)
     );
   }
 
@@ -80,6 +81,10 @@ public class StartableModel {
 
   public WebLink getViewerLink() {
     return viewerLink;
+  }
+
+  public boolean isViewerAllowed() {
+    return viewerAllowed;
   }
 
   public boolean isProcessStart() {

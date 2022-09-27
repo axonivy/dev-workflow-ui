@@ -1,0 +1,51 @@
+{
+  "format" : "9.4.20",
+  "id" : "1836AC85C69B7BED",
+  "data" : "ch.ivyteam.ivy.project.workflow.Data",
+  "config" : {
+    "permissions" : {
+      "view" : {
+        "allowed" : false
+      }
+    }
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "RequestStart",
+      "name" : "start.ivp",
+      "config" : {
+        "callSignature" : "start",
+        "case" : {
+          "name" : "Test View Permission Case"
+        },
+        "outLink" : "start.ivp"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 }
+      },
+      "connect" : { "id" : "f3", "to" : "f5", "var" : "in1" }
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 288, "y" : 64 }
+      }
+    }, {
+      "id" : "f5",
+      "type" : "TaskSwitchGateway",
+      "config" : {
+        "outLinks" : [ "TaskA.ivp" ],
+        "tasks" : {
+          "TaskA" : {
+            "name" : "Test View Permission Task"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 192, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f1", "condition" : "ivp==\"TaskA.ivp\"" }
+      ]
+    } ]
+}
