@@ -46,6 +46,7 @@ public class CasesDetailsIvyDevWfBean {
   private IWebStartable startable;
   private String viewerLink;
   private String processPreviewLink;
+  private boolean viewerAllowed;
 
   public String getSelectedCaseId() {
     return selectedCaseId;
@@ -67,6 +68,7 @@ public class CasesDetailsIvyDevWfBean {
     workflowEvents = WorkflowEventModel.toList(selectedCase.getWorkflowEvents());
     startable = selectedCase.getBusinessCase().getStartedFrom();
     viewerLink = ViewerUtil.getViewerLink(selectedCase);
+    viewerAllowed = ViewerUtil.isViewerAllowed(selectedCase);
     processPreviewLink = generateProcessPreviewLink();
   }
 
@@ -147,7 +149,11 @@ public class CasesDetailsIvyDevWfBean {
   }
 
   public String getViewerLink() {
-    return this.viewerLink;
+    return viewerLink;
+  }
+
+  public boolean isViewerAllowed() {
+    return viewerAllowed;
   }
 
   public String getViewerDialogTitle() {

@@ -46,6 +46,7 @@ public class TaskModel {
   private final String pmv;
   private final PID currentElement;
   private final String viewerLink;
+  private final boolean viewerAllowed;
 
   private final WebLink startLink;
   private final List<WorkflowEventModel> workflowEvents;
@@ -81,6 +82,7 @@ public class TaskModel {
     this.pmv = task.getProcessModelVersion().getVersionName();
     this.currentElement = getCurrentElementId(task);
     this.viewerLink = buildViewerLink(task);
+    this.viewerAllowed = isViewerAllowed(task);
   }
 
   public long getId() {
@@ -147,6 +149,10 @@ public class TaskModel {
     return viewerLink;
   }
 
+  public boolean isViewerAllowed() {
+    return viewerAllowed;
+  }
+
   public WebLink getStartLink() {
     return startLink;
   }
@@ -197,8 +203,7 @@ public class TaskModel {
     return customFields;
   }
 
-  public CustomFieldModel getCustomField(String customFieldName)
-  {
+  public CustomFieldModel getCustomField(String customFieldName) {
     return new CustomFieldsHelper(this).find(customFieldName);
   }
 
@@ -210,11 +215,15 @@ public class TaskModel {
     return delayTimestamp;
   }
 
-  private PID getCurrentElementId(ITask task) {
+  private static PID getCurrentElementId(ITask task) {
     return task.getStart().getProcessElementId();
   }
 
-  private String buildViewerLink(ITask task) {
+  private static String buildViewerLink(ITask task) {
     return ProcessViewer.of(task).url().toWebLink().getRelativeEncoded();
+  }
+
+  private static boolean isViewerAllowed(ITask task) {
+    return ProcessViewer.of(task).isViewAllowed();
   }
 }

@@ -22,6 +22,14 @@ public class ViewerUtil {
     return ProcessViewer.of(caze).url().toWebLink().toString();
   }
 
+  public static boolean isViewerAllowed(ICase caze) {
+    var businessCase = caze.getBusinessCase();
+    if (hasCaseMap(businessCase)) {
+      return true;
+    }
+    return ProcessViewer.of(caze).isViewAllowed();
+  }
+
   /**
    * @throws IllegalArgumentException
    */
@@ -33,6 +41,13 @@ public class ViewerUtil {
       return CaseMapViewer.of(caseMapStartable).url().toWebLink();
     }
     throw new IllegalArgumentException("The provided IWebStartable does not support the generation of a viewer link.");
+  }
+
+  public static boolean isViewerAllowed(IWebStartable startable) {
+    if (startable instanceof IProcessWebStartable processStartable) {
+      return ProcessViewer.of(processStartable).isViewAllowed();
+    }
+    return UserUtil.isLoggedIn();
   }
 
   public static String getViewerDialogTitle(ICase caze) {
@@ -58,4 +73,5 @@ public class ViewerUtil {
   private static boolean hasCaseMap(IBusinessCase businessCase) {
     return ICaseMapService.current().find().byBusinessCase(businessCase) != null;
   }
+
 }

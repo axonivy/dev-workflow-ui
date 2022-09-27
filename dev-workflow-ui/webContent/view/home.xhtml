@@ -52,7 +52,8 @@
                       <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="top" rendered="#{start.embedInFrame}" />
 
                       <p:commandLink id="openProcessViewer" oncomplete="PF('process-viewer-dlg').show()" styleClass="p-ml-1"
-                        update="processViewer:processViewerDialog" actionListener="#{homepageIvyDevWfBean.setViewerStart(start.viewerLink)}">
+                        update="processViewer:processViewerDialog" actionListener="#{homepageIvyDevWfBean.setViewerStart(start.viewerLink)}"
+                        rendered="#{start.viewerAllowed}">
                         <i class="si si-hierarchy-6 si-rotate-270" />
                       </p:commandLink>
                       <p:tooltip for="openProcessViewer" position="top"
