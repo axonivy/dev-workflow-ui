@@ -1,14 +1,22 @@
 # Developer Workflow UI
 
-This is a the new user interface for the Axon Ivy Designer that was made with JSF and Primefaces 11.
+This is a the new workflow user interface to develop, simulate and execute Axon Ivy Processes.
 
-The new intuitive UI is more user friendly and provides a better overview of the different elements of the Designer. The different components are are grouped in different containers or pages and you will be able to find links or buttons to navigate to related component.
+## Features
+
+* **Homepage** with your task list and last started processes
+* **Start page** with grouped process starts, icons, process viewer and "copy process path" button
+* **Signals page** with dropdown and autocomplete
+* **Task Details** and **Case Details** pages with grouped information into multiple components for better readability
+* **Case Details** page with case hierarchy, process or case map viewer
+* **Profile page** where you can change formatting language and more
+
 
 ## Getting Started
 
 ### Prerequisites
 
-To run this project you will need to install the following tools:
+To work on this project you will need to install the following tools:
 
 - [JDK 17](https://adoptium.net/)
 - [Maven](https://maven.apache.org/download.cgi)
