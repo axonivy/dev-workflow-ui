@@ -1,9 +1,11 @@
 {
-  "format" : "9.4.20",
+  "format" : "9.4.21",
   "id" : "17B167C2EEBFD5CF",
-  "data" : "ch.ivyteam.ivy.project.workflow.Data",
   "kind" : "WEB_SERVICE",
-  "wsTypeName" : "ch.ivyteam.ivy.project.workflow.TestService",
+  "config" : {
+    "data" : "ch.ivyteam.ivy.project.workflow.Data",
+    "wsTypeName" : "ch.ivyteam.ivy.project.workflow.TestService"
+  },
   "elements" : [ {
       "id" : "f0",
       "type" : "WebserviceStart",

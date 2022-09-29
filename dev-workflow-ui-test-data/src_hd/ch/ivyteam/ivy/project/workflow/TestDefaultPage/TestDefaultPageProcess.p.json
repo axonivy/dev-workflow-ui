@@ -1,8 +1,10 @@
 {
-  "format" : "9.4.20",
+  "format" : "9.4.21",
   "id" : "17B2FEA4C9D947ED",
-  "data" : "ch.ivyteam.ivy.project.workflow.TestDefaultPage.TestDefaultPageData",
   "kind" : "HTML_DIALOG",
+  "config" : {
+    "data" : "ch.ivyteam.ivy.project.workflow.TestDefaultPage.TestDefaultPageData"
+  },
   "elements" : [ {
       "id" : "f0",
       "type" : "HtmlDialogStart",
