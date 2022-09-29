@@ -67,6 +67,9 @@ public class ViewerUtil {
   private static StartableModel caseToStartable(ICase caze) {
     var businessCase = caze.getBusinessCase();
     IWebStartable startable = businessCase.getStartedFrom();
+    if (startable == null) {
+      return null;
+    }
     return hasCaseMap(businessCase) ? new CaseMapStartableModel(startable) : new StartableModel(startable);
   }
 
