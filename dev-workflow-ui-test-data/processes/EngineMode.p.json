@@ -1,7 +1,9 @@
 {
-  "format" : "9.4.20",
+  "format" : "9.4.21",
   "id" : "1783B19164F69B78",
-  "data" : "ch.ivyteam.ivy.project.workflow.Data",
+  "config" : {
+    "data" : "ch.ivyteam.ivy.project.workflow.Data"
+  },
   "elements" : [ {
       "id" : "f10",
       "type" : "RequestStart",
