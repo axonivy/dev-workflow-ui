@@ -61,6 +61,24 @@ public class WebTestSignalsIT {
   }
 
   @Test
+  public void caseProcessViewerCanOpen() {
+    openView("signals.xhtml");
+    $(By.id("signalForm:signalCodeInput")).findElement(By.tagName("button")).click();
+
+    $(By.id("signalForm:signalCodeInput_input")).sendKeys("test:signal:complete");
+    $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
+
+    Table signalsTable = PrimeUi.table(By.id("firedSignalsTable"));
+    signalsTable.valueAtShouldBe(0, 1, text("test:signal:complete"));
+    signalsTable.valueAtShouldBe(0, 5, text("test:signal:complete"));
+
+    $(By.className("case-link")).shouldBe(visible).click();
+    $(By.id("processViewer:processViewerDialog")).shouldNotBe(visible);
+    $(By.id("openProcessViewerBtn")).shouldBe(visible).click();
+    $(By.id("processViewer:processViewerDialog")).shouldBe(visible);
+  }
+
+  @Test
   public void testBoundarySignals() {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     loginDeveloper();
