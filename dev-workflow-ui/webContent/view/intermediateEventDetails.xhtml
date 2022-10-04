@@ -24,13 +24,13 @@
               </div>
               <p:panelGrid id="intermediateElement" columns="2" layout="flex"
                 columnClasses="p-col-12 p-md-3, p-col-12 p-md-9">
-                <h:outputText value="Element Process ID" />
+                <h:outputText value="Element Process ID" styleClass="details-description-label" />
                 <h:outputText value="#{intermediateElement.processElementId}" id="id" />
 
-                <h:outputText value="Element Name" />
+                <h:outputText value="Element Name" styleClass="details-description-label" />
                 <h:outputText value="#{intermediateElement.name}" id="name" />
 
-                <h:outputText value="Description" />
+                <h:outputText value="Description" styleClass="details-description-label" />
                 <h:outputText value="#{intermediateElement.description}" id="description" />
               </p:panelGrid>
             </div>
