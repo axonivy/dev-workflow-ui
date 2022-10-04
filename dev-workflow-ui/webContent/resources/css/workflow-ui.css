@@ -38,6 +38,9 @@ body .ui-staticmessage {
 a > i.detail-btn {
   font-size: 16pt;
 }
+.details-description-label {
+  opacity: 0.65;
+}
 
 /* Tables */
 .table-header-none thead {
