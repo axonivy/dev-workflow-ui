@@ -1,9 +1,15 @@
 package ch.ivyteam.workflowui.util;
 
+import java.util.Optional;
+
+import javax.faces.context.FacesContext;
+
 import ch.ivyteam.ivy.casemap.runtime.ICaseMapService;
 import ch.ivyteam.ivy.casemap.viewer.api.CaseMapViewer;
+import ch.ivyteam.ivy.jsf.primefaces.theme.IvyFreyaTheme;
 import ch.ivyteam.ivy.model.value.WebLink;
 import ch.ivyteam.ivy.process.viewer.api.ProcessViewer;
+import ch.ivyteam.ivy.process.viewer.api.ProcessViewerUrlBuilder.ThemeMode;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.businesscase.IBusinessCase;
 import ch.ivyteam.ivy.workflow.start.ICaseMapWebStartable;
@@ -35,12 +41,23 @@ public class ViewerUtil {
    */
   public static WebLink getViewerLink(IWebStartable startable) {
     if (startable instanceof IProcessWebStartable processStartable) {
-      return ProcessViewer.of(processStartable).url().toWebLink();
+      return ProcessViewer.of(processStartable).url().themeMode(readThemeMode()).toWebLink();
     }
     if (startable instanceof ICaseMapWebStartable caseMapStartable) {
       return CaseMapViewer.of(caseMapStartable).url().toWebLink();
     }
     throw new IllegalArgumentException("The provided IWebStartable does not support the generation of a viewer link.");
+  }
+
+  private static ThemeMode readThemeMode() {
+    var context = FacesContext.getCurrentInstance();
+    if (context == null) {
+      return ThemeMode.LIGHT;
+    }
+    return Optional.ofNullable(context.getApplication().evaluateExpressionGet(context, "#{ivyFreyaTheme}", IvyFreyaTheme.class))
+            .map(IvyFreyaTheme::getMode)
+            .map(theme -> ThemeMode.of(theme))
+            .orElse(ThemeMode.LIGHT);
   }
 
   public static boolean isViewerAllowed(IWebStartable startable) {
