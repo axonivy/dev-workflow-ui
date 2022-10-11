@@ -28,7 +28,7 @@ public class CustomPMV {
     Predicate<WebServiceProcess> filterPredicateWSP = wsp -> true;
 
     if (!StringUtils.containsIgnoreCase(pmv.getName(), filter)) {
-      filterPredicate = startable -> StringUtils.containsIgnoreCase(startable.getLink().getRelative(), filter)
+      filterPredicate = startable -> StringUtils.containsIgnoreCase(startable.getLink().get(), filter)
               || StringUtils.containsIgnoreCase(startable.getDisplayName(), filter);
       filterPredicateWSP = wsp -> StringUtils.containsIgnoreCase(wsp.getName(), filter)
               || StringUtils.containsIgnoreCase(wsp.getLink(), filter);

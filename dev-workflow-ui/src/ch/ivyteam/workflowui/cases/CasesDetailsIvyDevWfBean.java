@@ -73,7 +73,7 @@ public class CasesDetailsIvyDevWfBean {
   }
 
   private String generateProcessPreviewLink() {
-    return ProcessViewer.of(selectedCase).url().mode(PREVIEW).zoom(75).toWebLink().toString();
+    return ProcessViewer.of(selectedCase).url().mode(PREVIEW).zoom(75).toWebLink().get();
   }
 
   public ICase getCaseById(long id) {

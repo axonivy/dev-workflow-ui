@@ -220,7 +220,7 @@ public class TaskModel {
   }
 
   private static String buildViewerLink(ITask task) {
-    return ProcessViewer.of(task).url().toWebLink().getRelativeEncoded();
+    return ProcessViewer.of(task).url().toWebLink().get();
   }
 
   private static boolean isViewerAllowed(ITask task) {

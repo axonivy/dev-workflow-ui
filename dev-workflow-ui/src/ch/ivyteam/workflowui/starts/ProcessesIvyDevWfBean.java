@@ -54,7 +54,7 @@ public class ProcessesIvyDevWfBean {
   }
 
   private Optional<String> findViewerTitle(Stream<? extends StartableModel> starts, String link) {
-    return starts.filter(start -> start.getViewerLink().toString().equals(link))
+    return starts.filter(start -> start.getViewerLink().get().equals(link))
             .findFirst()
             .map(start -> ViewerUtil.getViewerDialogTitle(start));
   }
