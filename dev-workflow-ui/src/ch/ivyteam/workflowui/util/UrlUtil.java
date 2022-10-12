@@ -47,7 +47,7 @@ public class UrlUtil {
 
   public static String generateFrameUrl(WebLink startLink, String redirectUrl) {
     var originalPageEncoded = URLEncoder.encode(redirectUrl, StandardCharsets.UTF_8);
-    String startLinkEncoded = URLEncoder.encode(startLink.getRelative(), StandardCharsets.UTF_8);
+    String startLinkEncoded = URLEncoder.encode(startLink.get(), StandardCharsets.UTF_8);
     return "frame.xhtml?originalUrl=" + originalPageEncoded + "&taskUrl=" + startLinkEncoded;
   }
 

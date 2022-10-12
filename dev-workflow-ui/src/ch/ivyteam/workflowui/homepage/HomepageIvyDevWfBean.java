@@ -55,7 +55,7 @@ public class HomepageIvyDevWfBean {
 
   public void setViewerStart(String link) {
     viewerTitle = lastStarts.stream()
-            .filter(start -> start.getViewerLink().toString().equals(link))
+            .filter(start -> start.getViewerLink().get().equals(link))
             .findFirst()
             .map(start -> ViewerUtil.getViewerDialogTitle(start))
             .orElse("");

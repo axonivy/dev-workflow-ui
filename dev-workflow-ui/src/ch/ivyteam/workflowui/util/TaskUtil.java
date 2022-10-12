@@ -96,7 +96,7 @@ public class TaskUtil {
     if (shouldOpenInFrame(task)) {
       return UrlUtil.generateStartFrameUrl(task.getStartLink());
     }
-    return task.getStartLink().getAbsolute();
+    return task.getStartLink().get();
   }
 
   private static boolean shouldOpenInFrame(TaskModel task) {

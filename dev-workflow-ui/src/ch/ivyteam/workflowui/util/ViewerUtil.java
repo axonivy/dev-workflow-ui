@@ -23,9 +23,9 @@ public class ViewerUtil {
   public static String getViewerLink(ICase caze) {
     var businessCase = caze.getBusinessCase();
     if (hasCaseMap(businessCase)) {
-      return CaseMapViewer.of(businessCase).url().toWebLink().toString();
+      return CaseMapViewer.of(businessCase).url().toWebLink().get();
     }
-    return ProcessViewer.of(caze).url().toWebLink().toString();
+    return ProcessViewer.of(caze).url().toWebLink().get();
   }
 
   public static boolean isViewerAllowed(ICase caze) {
