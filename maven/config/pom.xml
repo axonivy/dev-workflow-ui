@@ -10,7 +10,6 @@
     <flatten.plugin.version>1.3.0</flatten.plugin.version>
     <project.build.plugin.version>10.0.1-SNAPSHOT</project.build.plugin.version>
     <web.tester.version>10.0.1-SNAPSHOT</web.tester.version>
-    <buildPlugin.ivyVersion>[9.2.0,]</buildPlugin.ivyVersion>
     <engineHomeDirectory>${basedir}/../maven/config/target/ivyEngine/</engineHomeDirectory>
   </properties>
 
