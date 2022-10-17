@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
@@ -25,6 +26,7 @@ public class WebTestGLSPProcessViewerIT {
 
   @BeforeAll
   public static void setup() {
+    Configuration.proxyEnabled = false;
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
   }
 
