@@ -7,7 +7,6 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
@@ -39,6 +38,8 @@ public class WebTestDownloadCaseDocumentsIT {
 
   @AfterAll
   static void cleanup() {
+    Configuration.proxyEnabled = false;
+    Configuration.fileDownload = FileDownloadMode.HTTPGET;
     Selenide.closeWebDriver();
   }
 
@@ -48,9 +49,10 @@ public class WebTestDownloadCaseDocumentsIT {
     $(byText("Created case of TestData")).shouldBe(visible).click();
     $("#caseName").shouldBe(visible).shouldHave(text("Created case of TestData"));
     $(".documents-card").shouldHave(text("test.txt"));
-    var downloadDocumentElement = $$(".document-entry").find(text("test.txt"))
-            .find("a").shouldBe(visible);
-    File download = downloadDocumentElement.scrollIntoView(false).download();
+    var downloadDocumentElement = $(byText("test.txt")).shouldBe(visible);
+    var scrolledDocumentElement = downloadDocumentElement.scrollIntoView("{behavior:\"smooth\",block:\"center\"}");
+    Selenide.sleep(500);
+    File download = scrolledDocumentElement.download();
     assertThat(download).hasName("test.txt");
     assertThat(Files.readString(download.toPath())).isEqualTo("this is test document");
   }

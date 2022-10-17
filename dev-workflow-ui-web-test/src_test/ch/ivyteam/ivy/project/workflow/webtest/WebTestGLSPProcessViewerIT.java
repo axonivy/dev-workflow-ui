@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
@@ -25,6 +26,7 @@ public class WebTestGLSPProcessViewerIT {
 
   @BeforeAll
   public static void setup() {
+    Configuration.proxyEnabled = false;
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
   }
 
@@ -37,7 +39,7 @@ public class WebTestGLSPProcessViewerIT {
 
     $(By.id("viewerFrame")).shouldBe(visible);
     Selenide.switchTo().frame("viewerFrame");
-    $("#sprotty_ivy-viewport-bar").shouldBe(visible, Duration.ofSeconds(15));
+    $("#sprotty_ivy-viewport-bar").shouldBe(visible, Duration.ofSeconds(60));
     $("#sprotty_1750C5211D94569D-f0").shouldBe(visible);
     $$(By.className("start:requestStart")).shouldBe(sizeGreaterThanOrEqual(1));
     $$(By.className("sprotty-edge")).shouldBe(sizeGreaterThanOrEqual(1));
