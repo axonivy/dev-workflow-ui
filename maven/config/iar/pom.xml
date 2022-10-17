@@ -23,7 +23,6 @@
         <artifactId>project-build-plugin</artifactId>
         <extensions>true</extensions>
         <configuration>
-          <ivyVersion>${buildPlugin.ivyVersion}</ivyVersion>
           <engineListPageUrl>${engine.page.url}</engineListPageUrl>
           <skipScriptValidation>false</skipScriptValidation>
           <compilerOptions>
