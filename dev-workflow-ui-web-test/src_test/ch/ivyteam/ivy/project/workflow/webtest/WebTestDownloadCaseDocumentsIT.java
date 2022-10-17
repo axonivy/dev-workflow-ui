@@ -38,6 +38,8 @@ public class WebTestDownloadCaseDocumentsIT {
 
   @AfterAll
   static void cleanup() {
+    Configuration.proxyEnabled = false;
+    Configuration.fileDownload = FileDownloadMode.HTTPGET;
     Selenide.closeWebDriver();
   }
 
