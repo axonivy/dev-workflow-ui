@@ -38,6 +38,8 @@ public class WebTestDownloadCaseDocumentsIT {
 
   @AfterAll
   static void cleanup() {
+    Configuration.proxyEnabled = false;
+    Configuration.fileDownload = FileDownloadMode.HTTPGET;
     Selenide.closeWebDriver();
   }
 
@@ -48,7 +50,9 @@ public class WebTestDownloadCaseDocumentsIT {
     $("#caseName").shouldBe(visible).shouldHave(text("Created case of TestData"));
     $(".documents-card").shouldHave(text("test.txt"));
     var downloadDocumentElement = $(byText("test.txt")).shouldBe(visible);
-    File download = downloadDocumentElement.scrollIntoView(false).download();
+    var scrolledDocumentElement = downloadDocumentElement.scrollIntoView("{behavior:\"smooth\",block:\"center\"}");
+    Selenide.sleep(500);
+    File download = scrolledDocumentElement.download();
     assertThat(download).hasName("test.txt");
     assertThat(Files.readString(download.toPath())).isEqualTo("this is test document");
   }
