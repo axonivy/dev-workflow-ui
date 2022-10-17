@@ -9,7 +9,6 @@ pipeline {
 
   triggers {
     cron 'H 6 * * *'
-    bitbucketPush()
   }
 
   parameters {
