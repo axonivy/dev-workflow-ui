@@ -101,7 +101,7 @@ pipeline {
 
     stage('verify-manually') {
       when {
-        branch 'master'
+        expression { isReleaseOrMasterBranch() }
         not {
           triggeredBy 'TimerTrigger'
         }
@@ -127,9 +127,7 @@ pipeline {
         }
       }
       when {
-        allOf {
-          branch 'master'
-        }
+        expression { isReleaseOrMasterBranch() }
       }
       steps {
         script {
@@ -138,4 +136,8 @@ pipeline {
       }
     }
   }
+}
+
+def isReleaseOrMasterBranch() {
+  return env.BRANCH_NAME == 'master' || env.BRANCH_NAME.startsWith('release/')
 }
