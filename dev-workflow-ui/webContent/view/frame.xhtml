@@ -44,8 +44,16 @@
             if (newHref !== lastDispatched) {
               callback(newHref, iframe);
               lastDispatched = newHref;
+              updateHistory(newHref);
             }
           };
+
+          var updateHistory = function(newHref) {
+            var newHrefUrl = new URL(newHref);
+            var historyUrl = new URL(window.location);
+            historyUrl.searchParams.set('taskUrl', newHrefUrl.pathname + newHrefUrl.search);
+            history.replaceState({}, "", historyUrl);
+          }
 
           var unloadHandler = function() {
             // Timeout needed because the URL changes immediately after
