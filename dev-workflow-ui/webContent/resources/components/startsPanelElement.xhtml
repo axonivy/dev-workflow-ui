@@ -8,13 +8,17 @@
 </cc:interface>
 
 <cc:implementation>
-  <h:panelGroup id="startElement" styleClass="p-d-flex p-ai-center start-element" rendered="#{cc.attrs.pmv.active}">
-    <p:commandLink actionListener="#{cc.attrs.start.execute}" styleClass="straight-text-icon start-link">
-      <span>
-        <i id="startableIcon" class="#{cc.attrs.start.icon} p-mr-1"></i>
-        <span>#{cc.attrs.start.displayName}</span>
-      </span>
-      <span class="start-description">#{cc.attrs.start.description}</span>
+  <h:panelGroup id="startElement" styleClass="p-d-flex p-ai-center start-element"
+    layout="block" rendered="#{cc.attrs.pmv.active}">
+    <p:commandLink actionListener="#{cc.attrs.start.execute}" styleClass="p-d-flex p-ai-center start-link">
+      <i class="#{cc.attrs.start.icon} startable-icon p-mr-1"/>
+      <div class="overflow-hidden-ellipsis">
+        <div>#{cc.attrs.start.displayName}</div>
+        <div class="start-description overflow-hidden-ellipsis">
+          <h:outputText id="startDescription" value="#{cc.attrs.start.description}"/>
+          <p:tooltip for="startDescription" position="bottom" value="#{cc.attrs.start.description}"/>
+        </div>
+      </div>
     </p:commandLink>
     <p:link id="copyStartLinkBtn" href="#" onclick="copyToClipboard('#{cc.attrs.start.link}')">
       <i class="si si-hyperlink-3" />

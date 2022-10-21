@@ -33,14 +33,14 @@
                 rendered="#{not empty homepageIvyDevWfBean.lastStarts}">
                 <p:ajax event="rowSelect" listener="#{homepageIvyDevWfBean.executeLastStart}" />
                 <p:column styleClass="last-start-element">
-                  <div class="p-d-flex straight-text-icon">
-                    <p:commandLink id="last-start-link" actionListener="#{start.execute}" styleClass="straight-text-icon">
+                  <div class="p-d-flex p-jc-between">
+                    <p:commandLink id="last-start-link" actionListener="#{start.execute}" styleClass="hidden-text-ellipsis">
                       <i class="#{start.icon} p-mr-1" />
                       <h:outputText value="#{start.displayName}" />
                     </p:commandLink>
                     <p:tooltip for="last-start-link" value="#{start.displayName}" position="top" />
 
-                    <div class="p-ml-auto">
+                    <div class="p-d-flex">
                       <p:link id="copyStartLinkBtn" href="#" onclick="copyToClipboard('#{start.link}')">
                         <i class="si si-hyperlink-3" />
                       </p:link>

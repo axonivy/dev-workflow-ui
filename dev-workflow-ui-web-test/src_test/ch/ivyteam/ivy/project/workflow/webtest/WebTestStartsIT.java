@@ -148,8 +148,8 @@ public class WebTestStartsIT {
   public void testStartableIcons() {
     openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).setValue("makeAdminUser.ivp");
-    $(By.id("startableIcon")).shouldBe(visible).shouldHave(cssClass("si-controls-play"));
+    $(By.className("startable-icon")).shouldBe(visible).shouldHave(cssClass("si-controls-play"));
     $(By.id("startsForm:globalFilter")).setValue("HomePageTestData.ivp");
-    $(By.id("startableIcon")).shouldBe(visible).shouldHave(cssClass("si-house-1"));
+    $(By.className("startable-icon")).shouldBe(visible).shouldHave(cssClass("si-house-1"));
   }
 }
