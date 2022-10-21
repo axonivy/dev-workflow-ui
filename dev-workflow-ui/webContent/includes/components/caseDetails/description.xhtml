@@ -4,8 +4,10 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
-  <p:panelGrid columns="4" layout="flex" id="caseDetails"
-    columnClasses="details-description-label p-col-6 p-md-2, p-col-6 p-md-4, details-description-label p-col-6 p-md-2, p-col-6 p-md-4">
+  <p:panelGrid id="caseDetails" columns="4" layout="flex" contentStyleClass="p-ai-center"
+    columnClasses="details-description-label p-col-6 p-md-2, p-col-6 p-md-4,
+     details-description-label p-col-6 p-md-2, p-col-6 p-md-4">
+
     <h:outputText value="Case ID" />
     <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.getId()}" id="caseId"/>
 
