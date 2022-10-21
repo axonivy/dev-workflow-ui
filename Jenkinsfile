@@ -132,7 +132,7 @@ pipeline {
       steps {
         script {
           maven cmd: "deploy -Dmaven.test.skip=true " +
-                  "-Divy.engine.version='[10.0.0, 10.1.0]'" +
+                  "-Divy.engine.version='[10.0.0, 10.1.0]' " +
                   "-DdeployToUrl='https://10.demo.ivyteam.io:8443/'"
         }
       }
