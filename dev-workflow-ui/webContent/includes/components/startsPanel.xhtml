@@ -51,11 +51,9 @@
         </h:panelGroup>
         <p:repeat value="#{pmv.webServiceProcesses}" var="webServiceProcess">
           <h:panelGroup id="startElementWebServiceProcess" styleClass="p-d-flex start-element" rendered="#{pmv.active}">
-            <p:link href="#{webServiceProcess.link}" target="_blank" styleClass="start-link">
-              <span class="straight-text-icon">
-                <i class="si si-network-arrow p-mr-1"></i>
-                <span>#{webServiceProcess.name}</span>
-              </span>
+            <p:link href="#{webServiceProcess.link}" target="_blank" styleClass="start-link p-d-flex p-ai-center">
+              <i class="si si-network-arrow p-mr-1 startable-icon"/>
+              <span>#{webServiceProcess.name}</span>
             </p:link>
           </h:panelGroup>
         </p:repeat>
@@ -63,7 +61,7 @@
       </p:tab>
     </p:accordionPanel>
 
-    <p:outputPanel styleClass="main-starts-container-empty" id="noStartsPanel" rendered="#{processesIvyDevWfBean.PMVs.size() == 0}">
+    <p:outputPanel styleClass="main-starts-container-empty" id="noStartsPanel" rendered="#{empty processesIvyDevWfBean.PMVs}">
       <i class="si si-alert-circle custom-icon"/>
       <h:outputText value="No projects available" id="noProjectsText"/>
     </p:outputPanel>

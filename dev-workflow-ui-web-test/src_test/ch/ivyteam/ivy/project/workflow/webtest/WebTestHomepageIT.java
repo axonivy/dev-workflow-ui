@@ -70,7 +70,7 @@ public class WebTestHomepageIT {
 
     PrimeUi.table(By.id("lastStarts")).contains("test _ case _ map");
 
-    $$(".last-start-element .straight-text-icon").find(text("test _ case _ map"))
+    $$(".last-start-element .hidden-text-ellipsis").find(text("test _ case _ map"))
             .parent().findAll("a").last().click();
     $(By.id("processViewer:processViewerDialog")).shouldBe(visible);
     $(By.id("viewerFrame")).shouldBe(visible);
