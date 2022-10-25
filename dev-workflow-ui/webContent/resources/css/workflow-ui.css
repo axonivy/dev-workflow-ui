@@ -106,7 +106,7 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight {
 .start-element:hover {
   background-color: var(--primary-lighter-color);
 }
-.si.startable-icon {
+.start-link .startable-icon {
   font-size: 1.25em;
   padding: 4px;
 }
