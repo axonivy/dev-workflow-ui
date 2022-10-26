@@ -27,7 +27,7 @@
         <p:remoteCommand name="useTaskInIFrame" actionListener="#{frameIvyDevWfBean.useTaskInIFrame()}" update="@form" />
       </h:form>
       <div class="card p-mb-0">
-        <iframe id="iFrame" src="#{frameIvyDevWfBean.taskUrl}" style="height: calc(100vh - 250px); width: 100%; border: 0;"></iframe>
+        <iframe id="iFrame" src="#{frameIvyDevWfBean.taskUrl}" style="height: calc(100vh - 250px); width: 100%; border: 0; visibility: hidden;"></iframe>
       </div>
       <script>
         function iframeURLChange(iframe, callback) {
@@ -59,7 +59,6 @@
             // Timeout needed because the URL changes immediately after
             // the `unload` event is dispatched.
             setTimeout(dispatchChange, 0);
-            iframe.style.visibility = 'hidden';
           };
 
           function attachUnload() {
