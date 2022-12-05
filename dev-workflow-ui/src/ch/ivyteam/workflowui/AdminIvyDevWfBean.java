@@ -59,6 +59,7 @@ public class AdminIvyDevWfBean {
             IPermission.USER_READ_OWN_SUBSTITUTIONS);
   }
 
+  @SuppressWarnings("removal")
   public Boolean hasSessionReadAllPermission() {
     return hasPermission(
             IPermission.SESSION_READ_ALL,
