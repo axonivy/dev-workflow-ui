@@ -63,7 +63,7 @@ public class TaskModel {
     this.priority = task.getPriority();
     this.priorityIcon = TaskUtil.getPriorityIcon(task);
     this.state = task.getState();
-    this.stateIcon = TaskUtil.getStateIcon(task);
+    this.stateIcon = TaskUtil.getStateIcon(task.getState());
     this.businessCase = task.getCase().getBusinessCase();
     this.technicalCase = task.getCase();
     this.workerUser = task.getWorkerUser();

@@ -83,7 +83,7 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight {
 .task-state-reserved, .task-state-system {
   color: var(--text-color);
 }
-.task-state-zombie-destroyed, .task-state-failed, .case-state-zombie-destroyed {
+.task-state-destroyed, .task-state-failed, .case-state-destroyed {
   color: #d23636;
 }
 .task-state-waiting, .task-state-in-progress, .case-state-in-progress {

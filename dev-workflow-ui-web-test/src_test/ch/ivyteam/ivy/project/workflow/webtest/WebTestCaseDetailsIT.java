@@ -105,7 +105,7 @@ public class WebTestCaseDetailsIT {
 
     $(By.id("caseDestroyBtn")).click();
     $(".current-hierarchy-case").findAll(".case-link").shouldBe(size(1));
-    $(".current-hierarchy-case").findAll(".case-state-zombie-destroyed").shouldBe(size(1));
+    $(".current-hierarchy-case").findAll(".case-state-destroyed").shouldBe(size(1));
     $(By.id("caseDestroyBtn")).shouldHave(cssClass("ui-state-disabled"));
   }
 
