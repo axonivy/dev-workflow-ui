@@ -8,6 +8,7 @@ import org.primefaces.event.SelectEvent;
 
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
+import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.workflowui.starts.CustomFieldsHelper;
 import ch.ivyteam.workflowui.tasks.TaskModel;
 
@@ -24,45 +25,28 @@ public class TaskUtil {
     return tasks.stream().map(TaskModel::new).collect(Collectors.toList());
   }
 
-  public static String getStateIcon(ITask task) {
-    switch (task.getState()) {
-      case DELAYED:
-        return "alarm-bell-timer task-state-delayed";
-      case DONE:
-        return "check-circle-1 task-state-done";
-      case FAILED:
-      case JOIN_FAILED:
-        return "mood-warning task-state-failed";
-      case PARKED:
-        return "touch-finger_1 task-state-reserved";
-      case CREATED:
-      case RESUMED:
-        return "hourglass task-state-in-progress";
-      case SUSPENDED:
-        return "controls-play task-state-open";
-      case WAITING_FOR_INTERMEDIATE_EVENT:
-        return "synchronize-arrow-clock task-state-waiting";
-      case DESTROYED:
-      case ZOMBIE:
-        return "alert-circle task-state-zombie-destroyed";
-      default:
-        return "synchronize-arrows task-state-system";
-    }
+  public static String getStateIcon(TaskState state) {
+    return switch (state) {
+      case DELAYED -> "alarm-bell-timer task-state-delayed";
+      case DONE -> "check-circle-1 task-state-done";
+      case FAILED, JOIN_FAILED -> "mood-warning task-state-failed";
+      case PARKED -> "touch-finger_1 task-state-reserved";
+      case CREATED, RESUMED -> "hourglass task-state-in-progress";
+      case SUSPENDED -> "controls-play task-state-open";
+      case WAITING_FOR_INTERMEDIATE_EVENT -> "synchronize-arrow-clock task-state-waiting";
+      case DESTROYED -> "alert-circle task-state-destroyed";
+      default -> "synchronize-arrows task-state-system";
+    };
   }
 
   public static String getPriorityIcon(ITask task) {
-    switch (task.getPriority()) {
-      case EXCEPTION:
-        return "alert-circle";
-      case HIGH:
-        return "arrow-up-1";
-      case LOW:
-        return "arrow-down-1";
-      case NORMAL:
-        return "subtract";
-      default:
-        return "subtract";
-    }
+    return switch (task.getPriority()) {
+      case EXCEPTION -> "alert-circle";
+      case HIGH -> "arrow-up-1";
+      case LOW -> "arrow-down-1";
+      case NORMAL -> "subtract";
+      default -> "subtract";
+    };
   }
 
   public static ITask getTaskById(long id) {
