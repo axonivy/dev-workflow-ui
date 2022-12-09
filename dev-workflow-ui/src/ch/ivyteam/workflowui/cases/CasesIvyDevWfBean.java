@@ -32,7 +32,7 @@ public class CasesIvyDevWfBean {
   public String getStateIcon(CaseState caseState) {
     return switch (caseState) {
       case DONE -> "check-circle-1 case-state-done";
-      case CREATED, RUNNING -> "hourglass case-state-in-progress case-state-in-progress";
+      case CREATED, RUNNING -> "hourglass case-state-in-progress";
       case DESTROYED -> "alert-circle case-state-destroyed";
       default -> "synchronize-arrows";
     };
