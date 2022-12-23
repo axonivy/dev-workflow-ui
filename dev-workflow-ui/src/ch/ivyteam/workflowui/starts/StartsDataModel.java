@@ -2,7 +2,6 @@ package ch.ivyteam.workflowui.starts;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import ch.ivyteam.workflowui.util.ProcessModelsUtil;
 
@@ -13,7 +12,11 @@ public class StartsDataModel {
   private String activeIndex;
 
   public StartsDataModel() {
-    reloadPmvs();
+    pmvs = ProcessModelsUtil.getReleasedWorkflowPMVs()
+            .map(pmv -> CustomPMV.create(pmv))
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .toList();
   }
 
   public String getFilter() {
@@ -22,11 +25,16 @@ public class StartsDataModel {
 
   public void setFilter(String filter) {
     this.filter = filter;
-    reloadPmvs();
   }
 
   public List<CustomPMV> getPMVs() {
-    return pmvs;
+    var filteredPmvs = pmvs.stream()
+            .map(cpmv -> cpmv.filter(filter))
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .toList();
+    setActiveIndex(filteredPmvs);
+    return filteredPmvs;
   }
 
   private void setActiveIndex(List<CustomPMV> pmvs) {
@@ -41,14 +49,5 @@ public class StartsDataModel {
 
   public String getActiveIndex() {
     return activeIndex;
-  }
-
-  private void reloadPmvs() {
-    pmvs = ProcessModelsUtil.getReleasedWorkflowPMVs()
-            .map(pmv -> CustomPMV.create(pmv, filter))
-            .filter(Optional::isPresent)
-            .map(Optional::get)
-            .collect(Collectors.toList());
-    setActiveIndex(pmvs);
   }
 }
