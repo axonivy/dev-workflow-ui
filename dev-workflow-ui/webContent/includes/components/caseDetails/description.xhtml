@@ -20,18 +20,24 @@
     <h:outputText value="Creator" />
     <jc:user user="#{casesDetailsIvyDevWfBean.selectedCase.creatorUser}" id="creatorUser" />
 
+    <h:outputText value="State" />
+    <h:outputText>
+      <i class="si si-#{casesIvyDevWfBean.getStateIcon(casesDetailsIvyDevWfBean.selectedCase.state)} p-mr-1"></i>
+      <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.businessState}" id="caseState" />
+    </h:outputText>
+
+    <h:outputText value="Technical state" />
+    <h:outputText>
+      <i class="si si-#{casesIvyDevWfBean.getStateIcon(casesDetailsIvyDevWfBean.selectedCase.getState())} p-mr-1"></i>
+      <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.state}" id="caseTechnicalState" />
+    </h:outputText>
+
     <h:outputText value="Category" />
     <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.category.name}" id="category" />
 
     <h:outputText value="Created" />
     <h:outputText value="#{dateTimeIvyDevWfBean.getDateTime(casesDetailsIvyDevWfBean.selectedCase.getStartTimestamp())}"
       id="createdDate" />
-
-    <h:outputText value="State" />
-    <h:outputText>
-      <i class="si si-#{casesIvyDevWfBean.getStateIcon(casesDetailsIvyDevWfBean.selectedCase.getState())} p-mr-1"></i>
-      <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.getState()}" id="caseState" />
-    </h:outputText>
 
     <h:outputText value="Completed on" />
     <h:outputText value="#{dateTimeIvyDevWfBean.getDetailedDateAndTime(casesDetailsIvyDevWfBean.selectedCase.getEndTimestamp())}"

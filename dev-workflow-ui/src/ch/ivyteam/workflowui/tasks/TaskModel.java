@@ -18,6 +18,7 @@ import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.ivy.workflow.businesscase.IBusinessCase;
 import ch.ivyteam.ivy.workflow.task.IActivator;
+import ch.ivyteam.ivy.workflow.task.TaskBusinessState;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
 import ch.ivyteam.workflowui.customfield.CustomFieldModel;
@@ -30,6 +31,7 @@ public class TaskModel {
   private final String name;
   private final WorkflowPriority priority;
   private final String priorityIcon;
+  private final TaskBusinessState businessState;
   private final TaskState state;
   private final String stateIcon;
   private final IBusinessCase businessCase;
@@ -63,6 +65,7 @@ public class TaskModel {
     this.priority = task.getPriority();
     this.priorityIcon = TaskUtil.getPriorityIcon(task);
     this.state = task.getState();
+    this.businessState = task.getBusinessState();
     this.stateIcon = TaskUtil.getStateIcon(task.getState());
     this.businessCase = task.getCase().getBusinessCase();
     this.technicalCase = task.getCase();
@@ -99,6 +102,10 @@ public class TaskModel {
 
   public TaskState getState() {
     return state;
+  }
+
+  public TaskBusinessState getBusinessState() {
+    return businessState;
   }
 
   public IBusinessCase getBusinessCase() {

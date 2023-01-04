@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.TaskState;
+import ch.ivyteam.ivy.workflow.task.TaskBusinessState;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.TaskUtil;
 
@@ -11,11 +12,13 @@ public class TaskLinkModel {
 
   private final String name;
   private final long id;
+  private final TaskBusinessState businessState;
   private final TaskState state;
 
   public TaskLinkModel(ITask task) {
     this.name = StringUtils.isBlank(task.getName()) ? "[Task: " + task.getId() + "]" : task.getName();
     this.id = task.getId();
+    this.businessState = task.getBusinessState();
     this.state = task.getState();
   }
 
@@ -25,6 +28,10 @@ public class TaskLinkModel {
 
   public long getId() {
     return id;
+  }
+
+  public TaskBusinessState getBusinessState() {
+    return businessState;
   }
 
   public TaskState getState() {

@@ -20,10 +20,19 @@
       <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.priority}" id="taskPriority" />
     </h:outputText>
 
+    <h:outputText value="Category" />
+    <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.category}" id="category" />
+
     <h:outputText value="State" />
     <h:outputText>
       <i class="si si-#{tasksDetailsIvyDevWfBean.selectedTask.stateIcon} p-mr-1" />
-      <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.state}" id="taskState" />
+      <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.businessState}" id="taskState" />
+    </h:outputText>
+
+    <h:outputText value="Technical state" />
+    <h:outputText>
+      <i class="si si-#{tasksDetailsIvyDevWfBean.selectedTask.stateIcon} p-mr-1"></i>
+      <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.state}" id="taskTechnicalState" />
     </h:outputText>
 
     <h:outputText value="Business case" />
@@ -31,9 +40,6 @@
 
     <h:outputText value="Technical case" />
     <jc:caseLink case="#{tasksDetailsIvyDevWfBean.selectedTask.case}" id="technicalCase" />
-
-    <h:outputText value="Category" />
-    <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.category}" id="category" />
 
     <h:outputText value="Working user" />
     <jc:user user="#{tasksDetailsIvyDevWfBean.selectedTask.workerUser}" id="workingUser" />
