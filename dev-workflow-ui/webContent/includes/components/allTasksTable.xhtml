@@ -17,7 +17,7 @@
 
     <p:column filterBy="#{task.state}" styleClass="icon-row" sortBy="#{task.state}">
       <h:outputText id="taskState" styleClass="si si-lg si-#{task.stateIcon}" />
-      <p:tooltip for="taskState" value="State: #{task.state}" position="top" />
+      <p:tooltip for="taskState" value="State: #{task.businessState} (#{task.state})" position="top" />
     </p:column>
 
     <p:column id="priority" filterBy="#{task.priority}" styleClass="icon-row" sortBy="#{task.priority}">

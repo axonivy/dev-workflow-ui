@@ -11,7 +11,7 @@
     <f:param name="case" value="#{cc.attrs.case.id}"/>
     <i class="si si-task-list-approve p-mr-1" />
     <h:outputText id="caseState" styleClass="si si-#{casesIvyDevWfBean.getStateIcon(cc.attrs.case.getState())} p-mr-1"/>
-    <p:tooltip for="caseState" value="State: #{cc.attrs.case.state}" position="top"/>
+    <p:tooltip for="caseState" value="State: #{cc.attrs.case.businessState} (#{cc.attrs.case.state})" position="top"/>
     <h:outputText id="caseLink" value="#{casesIvyDevWfBean.getName(cc.attrs.case)}" />
     <p:tooltip for="caseLink" value="ID: #{cc.attrs.case.id}" position="top"/>
   </h:link>

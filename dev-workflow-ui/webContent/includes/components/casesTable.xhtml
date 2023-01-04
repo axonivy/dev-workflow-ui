@@ -22,7 +22,7 @@
 
     <p:column filterBy="#{case.state}" styleClass="icon-row" sortBy="#{case.state}">
       <h:outputText id="caseState" styleClass="si si-lg si-#{casesIvyDevWfBean.getStateIcon(case.state)}" />
-      <p:tooltip for="caseState" value="State: #{case.state}" position="top" />
+      <p:tooltip for="caseState" value="State: #{case.businessState} (#{case.state})" position="top" />
     </p:column>
 
     <p:column headerText="Name" filterBy="#{case.getName(case)}" sortBy="#{case.name}">

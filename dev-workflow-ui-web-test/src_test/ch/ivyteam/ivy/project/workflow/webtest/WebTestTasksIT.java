@@ -70,7 +70,8 @@ public class WebTestTasksIT {
 
     $(".case-link").shouldHave(text("Created case of TestData"));
     $(By.id("taskResponsible:userName")).shouldBe(exactText("Everybody"));
-    $(By.id("taskState")).shouldBe(exactText("SUSPENDED"));
+    $(By.id("taskState")).shouldBe(exactText("OPEN"));
+    $(By.id("taskTechnicalState")).shouldBe(exactText("SUSPENDED"));
     $(By.id("category")).shouldHave(exactText("TaskWithACategory"));
     $(By.id("pmv")).shouldBe(exactText("dev-workflow-ui-test-data$1"));
     $(By.className("si-hierarchy-6")).shouldBe(visible);
@@ -78,7 +79,8 @@ public class WebTestTasksIT {
     $(By.id("workflowEvents:eventsTable:0:eventType")).shouldBe(exactText("EVENT_CREATE_TASK_BY_JOINED_TASKS"));
     $(By.id("actionMenuForm:taskActionsBtn")).click();
     $(By.id("actionMenuForm:taskParkBtn")).should(visible).click();
-    $(By.id("taskState")).shouldBe(exactText("PARKED"));
+    $(By.id("taskState")).shouldBe(exactText("OPEN"));
+    $(By.id("taskTechnicalState")).shouldBe(exactText("PARKED"));
     $(By.id("workingUser:userName")).shouldBe(exactText($("#sessionUserName").getText()));
     $(By.id("workflowEvents:eventsTable:0:eventType")).shouldBe(exactText("EVENT_PARK_TASK"));
   }
@@ -90,14 +92,16 @@ public class WebTestTasksIT {
     $(".detail-btn").shouldBe(visible).click();
     $(".case-link").shouldHave(text("Created case of TestData"));
 
-    $("#taskState").shouldBe(exactText("SUSPENDED"));
+    $(By.id("taskState")).shouldBe(exactText("OPEN"));
+    $(By.id("taskTechnicalState")).shouldBe(exactText("SUSPENDED"));
     $("#actionMenuForm\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"))
             .shouldBe(enabled).click();
     openView("allTasks.xhtml");
     $(".detail-btn").shouldBe(visible).click();
     $("#taskName").shouldBe(exactText("Created task of TestData"));
 
-    $("#taskState").shouldBe(exactText("DONE"));
+    $(By.id("taskState")).shouldBe(exactText("DONE"));
+    $(By.id("taskTechnicalState")).shouldBe(exactText("DONE"));
     $("#actionMenuForm\\:taskStartBtn").shouldHave(cssClass("ui-state-disabled"));
   }
 
@@ -109,13 +113,15 @@ public class WebTestTasksIT {
     $(".detail-btn").shouldBe(visible).click();
     $(".case-link").shouldHave(text("Created case of TestData"));
 
-    $("#taskState").shouldBe(exactText("SUSPENDED"));
+    $(By.id("taskState")).shouldBe(exactText("OPEN"));
+    $(By.id("taskTechnicalState")).shouldBe(exactText("SUSPENDED"));
     $("#actionMenuForm\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"));
 
     $("#actionMenuForm\\:taskActionsBtn").click();
     $("#actionMenuForm\\:taskParkBtn").should(visible).click();
 
-    $("#taskState").shouldBe(exactText("PARKED"));
+    $(By.id("taskState")).shouldBe(exactText("OPEN"));
+    $(By.id("taskTechnicalState")).shouldBe(exactText("PARKED"));
     $("#workingUser\\:userName").shouldBe(exactText($("#sessionUserName").getText()));
     $("#actionMenuForm\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"));
   }
@@ -198,12 +204,14 @@ public class WebTestTasksIT {
     $(By.className("detail-btn")).shouldBe(visible).click();
 
     $(By.id("taskState")).shouldBe(exactText("DELAYED"));
+    $(By.id("taskTechnicalState")).shouldBe(exactText("DELAYED"));
     $(By.id("delayDate")).shouldNotBe(exactText("N/A"));
 
     $(By.id("actionMenuForm:taskActionsBtn")).click();
     $(By.id("actionMenuForm:taskClearDelayBtn")).should(visible).click();
 
-    $(By.id("taskState")).shouldBe(exactText("SUSPENDED"));
+    $(By.id("taskState")).shouldBe(exactText("OPEN"));
+    $(By.id("taskTechnicalState")).shouldBe(exactText("SUSPENDED"));
     $(By.id("delayDate")).shouldBe(exactText("N/A"));
   }
 
