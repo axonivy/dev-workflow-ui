@@ -5,8 +5,8 @@ import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.SelectEvent;
 
-import ch.ivyteam.ivy.workflow.CaseState;
 import ch.ivyteam.ivy.workflow.ICase;
+import ch.ivyteam.ivy.workflow.caze.CaseBusinessState;
 import ch.ivyteam.workflowui.util.CaseUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 
@@ -29,10 +29,10 @@ public class CasesIvyDevWfBean {
     return CaseUtil.getPrettyName(icase);
   }
 
-  public String getStateIcon(CaseState caseState) {
+  public String getStateIcon(CaseBusinessState caseState) {
     return switch (caseState) {
+      case OPEN -> "hourglass case-state-in-progress";
       case DONE -> "check-circle-1 case-state-done";
-      case CREATED, RUNNING -> "hourglass case-state-in-progress";
       case DESTROYED -> "alert-circle case-state-destroyed";
       default -> "synchronize-arrows";
     };

@@ -8,7 +8,7 @@ import org.primefaces.event.SelectEvent;
 
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
-import ch.ivyteam.ivy.workflow.TaskState;
+import ch.ivyteam.ivy.workflow.task.TaskBusinessState;
 import ch.ivyteam.workflowui.starts.CustomFieldsHelper;
 import ch.ivyteam.workflowui.tasks.TaskModel;
 
@@ -25,16 +25,14 @@ public class TaskUtil {
     return tasks.stream().map(TaskModel::new).collect(Collectors.toList());
   }
 
-  public static String getStateIcon(TaskState state) {
+  public static String getStateIcon(TaskBusinessState state) {
     return switch (state) {
-      case DELAYED -> "alarm-bell-timer task-state-delayed";
+      case OPEN -> "controls-play task-state-open";
+      case IN_PROGRESS -> "hourglass task-state-in-progress";
       case DONE -> "check-circle-1 task-state-done";
-      case FAILED, JOIN_FAILED -> "mood-warning task-state-failed";
-      case PARKED -> "touch-finger_1 task-state-reserved";
-      case CREATED, RESUMED -> "hourglass task-state-in-progress";
-      case SUSPENDED -> "controls-play task-state-open";
-      case WAITING_FOR_INTERMEDIATE_EVENT -> "synchronize-arrow-clock task-state-waiting";
       case DESTROYED -> "alert-circle task-state-destroyed";
+      case DELAYED -> "alarm-bell-timer task-state-delayed";
+      case ERROR -> "mood-warning task-state-failed";
       default -> "synchronize-arrows task-state-system";
     };
   }

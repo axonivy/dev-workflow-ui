@@ -44,12 +44,10 @@ public class WebTestCaseDetailsIT {
   public void caseDetails() {
     $(By.id("creatorUser:userName")).shouldBe(exactText("DeveloperTest"));
     $(By.id("category")).shouldHave(exactText("TestData"));
-    $(By.id("caseState")).shouldBe(exactText("OPEN"));
-    $(By.id("caseTechnicalState")).shouldBe(exactText("RUNNING"));
+    $(By.id("caseState")).shouldBe(exactText("OPEN (RUNNING)"));
 
     $(By.id("caseDestroyBtn")).should(visible).click();
-    $(By.id("caseState")).shouldBe(exactText("DESTROYED"));
-    $(By.id("caseTechnicalState")).shouldBe(exactText("DESTROYED"));
+    $(By.id("caseState")).shouldBe(exactText("DESTROYED (DESTROYED)"));
   }
 
   @Test
@@ -100,8 +98,7 @@ public class WebTestCaseDetailsIT {
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
     openView("cases.xhtml");
     $(By.id("casesForm:cases:0:caseName")).shouldBe(visible).click();
-    $(By.id("caseState")).shouldBe(visible).shouldHave(exactText("OPEN"));
-    $(By.id("caseTechnicalState")).shouldBe(visible).shouldHave(exactText("RUNNING"));
+    $(By.id("caseState")).shouldBe(visible).shouldHave(exactText("OPEN (RUNNING)"));
     $(By.id("caseDestroyBtn")).shouldBe(visible).shouldNotHave(cssClass("ui-state-disabled"));
     $(".current-hierarchy-case").findAll(".case-link").shouldBe(size(1));
     $(".current-hierarchy-case").findAll(".case-state-in-progress").shouldBe(size(1));
