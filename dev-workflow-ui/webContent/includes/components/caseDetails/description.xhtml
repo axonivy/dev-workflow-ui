@@ -22,14 +22,8 @@
 
     <h:outputText value="State" />
     <h:outputText>
-      <i class="si si-#{casesIvyDevWfBean.getStateIcon(casesDetailsIvyDevWfBean.selectedCase.state)} p-mr-1"></i>
-      <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.businessState}" id="caseState" />
-    </h:outputText>
-
-    <h:outputText value="Technical state" />
-    <h:outputText>
-      <i class="si si-#{casesIvyDevWfBean.getStateIcon(casesDetailsIvyDevWfBean.selectedCase.getState())} p-mr-1"></i>
-      <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.state}" id="caseTechnicalState" />
+      <i class="si si-#{casesIvyDevWfBean.getStateIcon(casesDetailsIvyDevWfBean.selectedCase.businessState)} p-mr-1"></i>
+      <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.businessState} (#{casesDetailsIvyDevWfBean.selectedCase.state})" id="caseState" />
     </h:outputText>
 
     <h:outputText value="Category" />

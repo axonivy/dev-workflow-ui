@@ -43,6 +43,6 @@ public class TaskLinkModel {
   }
 
   public String getStateIcon() {
-    return TaskUtil.getStateIcon(state);
+    return TaskUtil.getStateIcon(businessState);
   }
 }
