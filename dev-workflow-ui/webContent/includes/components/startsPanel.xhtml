@@ -21,7 +21,8 @@
         <f:facet name="title">
           <h:outputText id="pmvState" styleClass="p-mr-1 si si-#{pmv.stateIcon}" />
           <p:tooltip for="pmvState" value="#{pmv.state} - #{pmv.versionName}" position="top" />
-          <h:outputText styleClass="starts-project-name" value="#{pmv.projectName}" />
+          <h:outputText id="projectName" value="#{pmv.projectName}" />
+          <p:tooltip for="projectName" value="Application: #{pmv.PMV.application.name}" position="top" />
         </f:facet>
 
         <h:panelGroup id="caseMapsTitle" styleClass="p-mt-2" layout="block" rendered="#{!empty pmv.caseMapStarts}">
