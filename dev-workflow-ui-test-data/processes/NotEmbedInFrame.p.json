@@ -1,5 +1,5 @@
 {
-  "format" : "11.1.2",
+  "format" : "11.1.6",
   "id" : "17D95C54B57821A9",
   "config" : {
     "data" : "ch.ivyteam.ivy.project.workflow.Data"
@@ -32,12 +32,7 @@
       "type" : "DialogCall",
       "name" : "TestDialog1",
       "config" : {
-        "dialog" : "ch.ivyteam.ivy.project.workflow.TestDialog1:start(ch.ivyteam.ivy.project.workflow.Data)",
-        "call" : {
-          "params" : [
-            { "name" : "data", "type" : "ch.ivyteam.ivy.project.workflow.Data" }
-          ]
-        }
+        "dialog" : "ch.ivyteam.ivy.project.workflow.TestDialog1:start(ch.ivyteam.ivy.project.workflow.Data)"
       },
       "visual" : {
         "at" : { "x" : 480, "y" : 64 }
@@ -66,12 +61,7 @@
       "type" : "DialogCall",
       "name" : "TestDialog1",
       "config" : {
-        "dialog" : "ch.ivyteam.ivy.project.workflow.TestDialog1:start(ch.ivyteam.ivy.project.workflow.Data)",
-        "call" : {
-          "params" : [
-            { "name" : "data", "type" : "ch.ivyteam.ivy.project.workflow.Data" }
-          ]
-        }
+        "dialog" : "ch.ivyteam.ivy.project.workflow.TestDialog1:start(ch.ivyteam.ivy.project.workflow.Data)"
       },
       "visual" : {
         "at" : { "x" : 224, "y" : 64 }

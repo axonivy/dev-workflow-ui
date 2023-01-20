@@ -1,5 +1,5 @@
 {
-  "format" : "11.1.2",
+  "format" : "11.1.6",
   "id" : "175461E47A870BF8",
   "config" : {
     "data" : "workflow.uite.Data"
@@ -29,13 +29,13 @@
       "id" : "f2",
       "type" : "Script",
       "config" : {
-        "security" : "system",
         "output" : {
           "code" : [
             "import ch.ivyteam.workflowuitestdata.TestUtil;",
             "TestUtil.makeAdmin();"
           ]
-        }
+        },
+        "sudo" : true
       },
       "visual" : {
         "at" : { "x" : 224, "y" : 64 }
