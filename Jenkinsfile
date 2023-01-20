@@ -45,7 +45,7 @@ pipeline {
           def ivyName = "ivy-" + random
           sh "docker network create ${networkName}"
           try {
-            docker.image("selenium/standalone-firefox:4").withRun("-e START_XVFB=false --shm-size=2g --name ${seleniumName} --network ${networkName}") {
+            docker.image("selenium/standalone-chrome:4").withRun("-e START_XVFB=false --shm-size=2g --name ${seleniumName} --network ${networkName}") {
               docker.build('maven').inside("--name ${ivyName} --network ${networkName}") {
                 maven cmd: 'clean verify ' +
                       "-Divy.engine.version='[10.0.0,]' " +
@@ -53,7 +53,9 @@ pipeline {
                       "-DdeployApplicationName=dev-workflow-ui-${deployApplicationName} " +
                       "-Dengine.page.url=${params.engineSource} " +
                       "-Dtest.engine.url=http://${ivyName}:8080 " +
-                      "-Dselenide.remote=http://${seleniumName}:4444/wd/hub "
+                      "-Dselenide.remote=http://${seleniumName}:4444/wd/hub " +
+                      "-Dselenide.browser=chrome " +
+                      "-Divy.selenide.browser=chrome"
               }
             }
             recordIssues tools: [mavenConsole()], unstableTotalAll: 1, filters: [
