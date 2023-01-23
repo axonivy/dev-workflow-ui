@@ -66,6 +66,7 @@ pipeline {
             archiveArtifacts '**/target/*.iar'
             archiveArtifacts '**/target/dev-workflow-ui*.jar'
             archiveArtifacts '**/target/ivyEngine/logs/*'
+            archiveArtifacts artifacts: '**/webdriver*.log', allowEmptyArchive: true
             archiveArtifacts artifacts: '**/target/selenide/reports/**/*', allowEmptyArchive: true
             currentBuild.description = "<a href='${BUILD_URL}artifact/dev-workflow-ui-web-test/target/screenshotsCompare.html'>&raquo; Screenshots</a><br>" +
                                       "<a href='https://nightly.demo.ivyteam.io/dev-workflow-ui-${deployApplicationName}/faces/view/dev-workflow-ui/home.xhtml'>&raquo; Demo</a>"

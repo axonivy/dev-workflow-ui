@@ -193,22 +193,6 @@
                 -Dtest.integrated.workflow=dev-workflow-ui</argLine>
             </configuration>
           </execution>
-          <execution>
-            <id>cleanup-test</id>
-            <phase>integration-test</phase>
-            <goals>
-              <goal>test</goal>
-            </goals>
-            <configuration>
-              <includes>
-                <include>**/WebTestCleanup.java</include>
-              </includes>
-              <argLine>
-                -Dtest.engine.url=${test.engine.url}
-                -Dtest.engine.app=${test.application}
-                -Dtest.integrated.workflow=dev-workflow-ui</argLine>
-            </configuration>
-          </execution>
         </executions>
       </plugin>
     </plugins>
