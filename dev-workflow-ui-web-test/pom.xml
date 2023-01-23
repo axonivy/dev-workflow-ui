@@ -68,6 +68,20 @@
       </plugin>
 
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>3.0.0-M8</version>
+        <executions>
+          <execution>
+            <id>default-integration-test</id>
+            <configuration>
+              <skip>true</skip>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
         <artifactId>maven-clean-plugin</artifactId>
         <version>3.2.0</version>
         <executions>

@@ -34,7 +34,9 @@ public class WebTestDownloadCaseDocumentsIT {
     Configuration.timeout = 10000;
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     loginDeveloper();
+    Selenide.sleep(50);
     startTestProcess("1750C5211D94569D/TestData.ivp");
+    Selenide.sleep(50);
   }
 
   @AfterAll
@@ -47,6 +49,7 @@ public class WebTestDownloadCaseDocumentsIT {
   @Test
   public void downloadDocument() throws IOException {
     openView("cases.xhtml");
+    Selenide.sleep(50);
     $(byText("Created case of TestData")).shouldBe(visible).click();
     $("#caseName").shouldBe(visible).shouldHave(text("Created case of TestData"));
     $(".documents-card").shouldHave(text("test.txt"));

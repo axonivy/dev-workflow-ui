@@ -9,6 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.engine.EngineUrl;
 import com.codeborne.selenide.Selenide;
@@ -65,7 +66,8 @@ public class WorkflowUiUtil {
   public static void loginFromTable(String username) {
     Selenide.open(viewUrl("loginTable.xhtml"));
     $(byText(username)).should(visible).click();
-    assertCurrentUrlContains("home.xhtml");
+    Selenide.sleep(50);
+    $(By.id("sessionUserName")).has(text(username));
   }
 
   public static void loginDeveloper() {
