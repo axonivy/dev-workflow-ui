@@ -184,7 +184,7 @@
             </goals>
             <configuration>
               <includes>
-                <include>**/WebTest*IT.java</include>
+                <include>**/WebTestDownload*IT.java</include>
               </includes>
               <reportNameSuffix>Integrated</reportNameSuffix>
               <argLine>
