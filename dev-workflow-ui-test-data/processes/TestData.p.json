@@ -1,5 +1,5 @@
 {
-  "format" : "11.1.6",
+  "format" : "11.1.10",
   "id" : "1750C5211D94569D",
   "config" : {
     "data" : "workflow.uite.Data"
@@ -14,9 +14,9 @@
         "case" : {
           "name" : "First case of TestData",
           "customFields" : [
-            { "name" : "field 2", "type" : "String", "value" : "\"value\"" },
-            { "name" : "test 3 ", "type" : "String", "value" : "\"test string\"" },
-            { "name" : "test field 1", "type" : "String", "value" : "\"test value\"" }
+            { "name" : "field 2", "type" : "STRING", "value" : "\"value\"" },
+            { "name" : "test 3 ", "type" : "STRING", "value" : "\"test string\"" },
+            { "name" : "test field 1", "type" : "STRING", "value" : "\"test value\"" }
           ]
         },
         "outLink" : "TestData.ivp",
@@ -50,8 +50,8 @@
             "timeout" : "new Duration(0, 0, 3, 0, 0, 0)"
           },
           "customFields" : [
-            { "name" : "field 2", "type" : "String", "value" : "\"test task string\"" },
-            { "name" : "test field 1", "type" : "String", "value" : "\"task test value\"" }
+            { "name" : "field 2", "type" : "STRING", "value" : "\"test task string\"" },
+            { "name" : "test field 1", "type" : "STRING", "value" : "\"task test value\"" }
           ],
           "code" : [
             "import ch.ivyteam.ivy.workflow.document.Path;",
@@ -90,7 +90,8 @@
         "startDescription" : "Dialog 1 for testing Developer Workflow-UI",
         "task" : {
           "name" : "Test Developer Workflow-UI Dialog 1"
-        }
+        },
+        "description" : "Test dialog for testing Developer Workflow UI"
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 160 },
@@ -147,11 +148,11 @@
       "name" : "TestDialog",
       "config" : {
         "dialog" : "ch.ivyteam.ivy.project.workflow.TestDialog1:start(ch.ivyteam.ivy.project.workflow.Data)",
-        "case" : {
-          "name" : "case created in UserTask during startBoundarySignal process"
-        },
         "task" : {
           "name" : "task created in UserTask during startBoundarySignal process"
+        },
+        "case" : {
+          "name" : "case created in UserTask during startBoundarySignal process"
         }
       },
       "visual" : {
@@ -215,6 +216,7 @@
       "name" : "TestIntermediateEvent",
       "config" : {
         "eventBeanClass" : "ch.ivyteam.workflowuitestdata.TestIntermediateClass",
+        "description" : "intermediate event description",
         "eventIdConfig" : "in.eventID.toString()"
       },
       "visual" : {
@@ -362,12 +364,12 @@
       "name" : "TestDialog2",
       "config" : {
         "dialog" : "ch.ivyteam.ivy.project.workflow.TestDialog2:start()",
-        "case" : {
-          "name" : "Case created in UserTask during doubleDialog process"
-        },
         "task" : {
           "name" : "User task created during doubleDialog process",
           "skipTasklist" : true
+        },
+        "case" : {
+          "name" : "Case created in UserTask during doubleDialog process"
         }
       },
       "visual" : {
@@ -388,7 +390,8 @@
         "startDescription" : "Dialog 2 for testing Developer Workflow-UI",
         "task" : {
           "name" : "Test Developer Workflow-UI Dialog 2"
-        }
+        },
+        "description" : "Test dialog for testing Developer Workflow UI"
       },
       "visual" : {
         "at" : { "x" : 424, "y" : 160 },
@@ -522,8 +525,8 @@
             }
           },
           "customFields" : [
-            { "name" : "field 2", "type" : "String", "value" : "\"test task string\"" },
-            { "name" : "test field 1", "type" : "String", "value" : "\"task test value\"" }
+            { "name" : "field 2", "type" : "STRING", "value" : "\"test task string\"" },
+            { "name" : "test field 1", "type" : "STRING", "value" : "\"task test value\"" }
           ],
           "code" : [
             "import ch.ivyteam.ivy.workflow.document.Path;",
