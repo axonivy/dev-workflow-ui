@@ -1,5 +1,5 @@
 {
-  "format" : "11.1.6",
+  "format" : "11.1.10",
   "id" : "17D95C54B57821A9",
   "config" : {
     "data" : "ch.ivyteam.ivy.project.workflow.Data"
@@ -48,7 +48,7 @@
         "task" : {
           "name" : "notEmbedTask",
           "customFields" : [
-            { "name" : "embedInFrame", "type" : "String", "value" : "\"false\"" }
+            { "name" : "embedInFrame", "type" : "STRING", "value" : "\"false\"" }
           ]
         }
       },
