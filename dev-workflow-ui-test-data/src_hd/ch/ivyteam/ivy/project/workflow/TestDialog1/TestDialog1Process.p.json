@@ -1,5 +1,5 @@
 {
-  "format" : "11.1.11",
+  "format" : "11.1.14",
   "id" : "1766582B372C9AEB",
   "kind" : "HTML_DIALOG",
   "config" : {
@@ -10,24 +10,29 @@
       "type" : "HtmlDialogStart",
       "name" : "start(Data)",
       "config" : {
-        "callSignature" : "start",
-        "result" : {
-          "params" : [
-            { "name" : "data", "type" : "ch.ivyteam.ivy.project.workflow.Data" }
-          ],
-          "map" : {
-            "result.data" : "in.data"
-          }
-        },
+        "signature" : "start",
         "input" : {
           "params" : [
-            { "name" : "data", "type" : "ch.ivyteam.ivy.project.workflow.Data" }
+            { "name" : "data", "type" : "ch.ivyteam.ivy.project.workflow.Data", "desc" : "" }
           ],
           "map" : {
             "out.data" : "param.data"
           }
         },
-        "guid" : "1766582B3C412DD8"
+        "result" : {
+          "params" : [
+            { "name" : "data", "type" : "ch.ivyteam.ivy.project.workflow.Data", "desc" : "" }
+          ],
+          "map" : {
+            "result.data" : "in.data"
+          }
+        },
+        "guid" : "1766582B3C412DD8",
+        "output" : {
+          "map" : {
+            "out.data" : "param.data"
+          }
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 }

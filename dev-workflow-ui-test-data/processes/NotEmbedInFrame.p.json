@@ -1,5 +1,5 @@
 {
-  "format" : "11.1.11",
+  "format" : "11.1.14",
   "id" : "17D95C54B57821A9",
   "config" : {
     "data" : "ch.ivyteam.ivy.project.workflow.Data"
@@ -46,14 +46,14 @@
       "id" : "f5",
       "type" : "TaskSwitchEvent",
       "config" : {
-        "case" : {
-          "name" : "notEmbedCase"
-        },
         "task" : {
           "name" : "notEmbedTask",
           "customFields" : [
             { "name" : "embedInFrame", "type" : "STRING", "value" : "\"false\"" }
           ]
+        },
+        "case" : {
+          "name" : "notEmbedCase"
         }
       },
       "visual" : {
