@@ -17,10 +17,6 @@
       <outputDirectory></outputDirectory>
     </fileSet>
     <fileSet>
-      <directory>../../dev-workflow-ui/webContent/includes/template</directory>
-      <outputDirectory>./META-INF/includes/template</outputDirectory>
-    </fileSet>
-    <fileSet>
       <directory>../../dev-workflow-ui/webContent/view</directory>
       <outputDirectory>./META-INF/resources</outputDirectory>
     </fileSet>
@@ -31,10 +27,6 @@
     <fileSet>
       <directory>../../dev-workflow-ui/webContent/includes</directory>
       <outputDirectory>./META-INF/resources/includes</outputDirectory>
-    </fileSet>
-    <fileSet>
-      <directory>../../dev-workflow-ui/webContent/resources/components</directory>
-      <outputDirectory>./META-INF/resources/components</outputDirectory>
     </fileSet>
   </fileSets>
   <files>
