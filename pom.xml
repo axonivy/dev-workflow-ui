@@ -15,7 +15,6 @@
 
   <modules>
     <module>dev-workflow-ui</module>
-    <module>maven/dev-workflow-ui-jar</module>
     <module>dev-workflow-ui-test</module>
     <module>dev-workflow-ui-test-data</module>
     <module>dev-workflow-ui-web-test</module>

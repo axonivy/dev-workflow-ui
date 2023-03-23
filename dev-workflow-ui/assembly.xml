@@ -10,30 +10,30 @@
 
   <fileSets>
     <fileSet>
-      <directory>../../dev-workflow-ui/target/classes</directory>
+      <directory>target/classes</directory>
       <excludes>
         <exclude>META-INF/</exclude>
       </excludes>
       <outputDirectory></outputDirectory>
     </fileSet>
     <fileSet>
-      <directory>../../dev-workflow-ui/webContent/includes/template</directory>
+      <directory>webContent/includes/template</directory>
       <outputDirectory>./META-INF/includes/template</outputDirectory>
     </fileSet>
     <fileSet>
-      <directory>../../dev-workflow-ui/webContent/view</directory>
+      <directory>webContent/view</directory>
       <outputDirectory>./META-INF/resources</outputDirectory>
     </fileSet>
     <fileSet>
-      <directory>../../dev-workflow-ui/webContent/resources</directory>
+      <directory>webContent/resources</directory>
       <outputDirectory>./META-INF/resources/resources</outputDirectory>
     </fileSet>
     <fileSet>
-      <directory>../../dev-workflow-ui/webContent/includes</directory>
+      <directory>webContent/includes</directory>
       <outputDirectory>./META-INF/resources/includes</outputDirectory>
     </fileSet>
     <fileSet>
-      <directory>../../dev-workflow-ui/webContent/resources/components</directory>
+      <directory>webContent/resources/components</directory>
       <outputDirectory>./META-INF/resources/components</outputDirectory>
     </fileSet>
   </fileSets>
