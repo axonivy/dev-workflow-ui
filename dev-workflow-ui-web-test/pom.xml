@@ -83,7 +83,7 @@
                 <fileset>
                   <directory>${basedir}/../maven/config/target/ivyEngine/webapps/workflow/</directory>
                   <includes>
-                    <include>dev-workflow-ui-jar-*.jar</include>
+                    <include>dev-workflow-ui-*.jar</include>
                   </includes>
                 </fileset>
               </filesets>
@@ -106,7 +106,7 @@
               <outputDirectory>${basedir}/../maven/config/target/ivyEngine/webapps/workflow/</outputDirectory>
               <resources>
                 <resource>
-                  <directory>${basedir}/../maven/dev-workflow-ui-jar/target/</directory>
+                  <directory>${basedir}/../dev-workflow-ui/target/</directory>
                   <includes>
                     <include>*.jar</include>
                   </includes>

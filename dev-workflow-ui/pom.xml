@@ -12,4 +12,28 @@
   <artifactId>dev-workflow-ui</artifactId>
   <version>11.1.0-SNAPSHOT</version>
   <packaging>iar</packaging>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.5.0</version>
+        <executions>
+          <execution>
+            <id>jar</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <appendAssemblyId>false</appendAssemblyId>
+              <descriptors>
+                <descriptor>assembly.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
