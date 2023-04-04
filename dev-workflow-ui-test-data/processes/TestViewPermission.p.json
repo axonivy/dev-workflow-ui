@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/process/11.1.15/schema.json",
+  "$schema" : "https://json-schema.axonivy.com/process/11.1.19/schema.json",
   "id" : "1836AC85C69B7BED",
   "config" : {
     "data" : "ch.ivyteam.ivy.project.workflow.Data",
@@ -14,11 +14,10 @@
       "type" : "RequestStart",
       "name" : "start.ivp",
       "config" : {
-        "callSignature" : "start",
+        "signature" : "start",
         "case" : {
           "name" : "Test View Permission Case"
-        },
-        "outLink" : "start.ivp"
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 }

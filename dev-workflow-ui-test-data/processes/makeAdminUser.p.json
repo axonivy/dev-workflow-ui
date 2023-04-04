@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/process/11.1.15/schema.json",
+  "$schema" : "https://json-schema.axonivy.com/process/11.1.19/schema.json",
   "id" : "175461E47A870BF8",
   "config" : {
     "data" : "workflow.uite.Data"
@@ -9,10 +9,11 @@
       "type" : "RequestStart",
       "name" : "makeAdminUser.ivp",
       "config" : {
-        "callSignature" : "makeAdminUser",
-        "startCategory" : "actions",
-        "outLink" : "makeAdminUser.ivp",
-        "startDescription" : "Creates admin user (DeveloperTest)"
+        "signature" : "makeAdminUser",
+        "request" : {
+          "description" : "Creates admin user (DeveloperTest)",
+          "category" : "actions"
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 },

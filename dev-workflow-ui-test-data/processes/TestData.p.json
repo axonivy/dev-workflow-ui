@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/process/11.1.15/schema.json",
+  "$schema" : "https://json-schema.axonivy.com/process/11.1.19/schema.json",
   "id" : "1750C5211D94569D",
   "config" : {
     "data" : "workflow.uite.Data"
@@ -9,23 +9,24 @@
       "type" : "RequestStart",
       "name" : "TestData",
       "config" : {
-        "callSignature" : "TestData",
-        "startCategory" : "TestData",
+        "signature" : "TestData",
+        "request" : {
+          "description" : "Process which generates some test task and case data",
+          "category" : "TestData",
+          "customFields" : [
+            { "name" : "cssIcon", "value" : "si si-add" }
+          ]
+        },
+        "task" : {
+          "name" : "First task of TestData"
+        },
         "case" : {
           "name" : "First case of TestData",
           "customFields" : [
-            { "name" : "field 2", "type" : "String", "value" : "\"value\"" },
-            { "name" : "test 3 ", "type" : "String", "value" : "\"test string\"" },
-            { "name" : "test field 1", "type" : "String", "value" : "\"test value\"" }
+            { "name" : "field 2", "type" : "STRING", "value" : "\"value\"" },
+            { "name" : "test 3 ", "type" : "STRING", "value" : "\"test string\"" },
+            { "name" : "test field 1", "type" : "STRING", "value" : "\"test value\"" }
           ]
-        },
-        "outLink" : "TestData.ivp",
-        "startDescription" : "Process which generates some test task and case data",
-        "startCustomFields" : [
-          { "name" : "cssIcon", "value" : "si si-add" }
-        ],
-        "task" : {
-          "name" : "First task of TestData"
         }
       },
       "visual" : {
@@ -85,15 +86,16 @@
       "type" : "RequestStart",
       "name" : "startTestDialog1.ivp",
       "config" : {
-        "callSignature" : "startTestDialog1",
-        "startCategory" : "exampleDialogs",
-        "case" : {
-          "name" : "Test Developer Workflow-UI Dialog Case 1"
+        "signature" : "startTestDialog1",
+        "request" : {
+          "description" : "Dialog 1 for testing Developer Workflow-UI",
+          "category" : "exampleDialogs"
         },
-        "outLink" : "startTestDialog1.ivp",
-        "startDescription" : "Dialog 1 for testing Developer Workflow-UI",
         "task" : {
           "name" : "Test Developer Workflow-UI Dialog 1"
+        },
+        "case" : {
+          "name" : "Test Developer Workflow-UI Dialog Case 1"
         }
       },
       "visual" : {
@@ -128,14 +130,15 @@
       "type" : "RequestStart",
       "name" : "startBoundarySignal.ivp",
       "config" : {
-        "callSignature" : "startBoundarySignal",
-        "case" : {
-          "name" : "First case of startBoundarySignal"
+        "signature" : "startBoundarySignal",
+        "request" : {
+          "description" : "Creates a waiting boundary signal"
         },
-        "outLink" : "startBoundarySignal.ivp",
-        "startDescription" : "Creates a waiting boundary signal",
         "task" : {
           "name" : "First task of startBoundarySignal"
+        },
+        "case" : {
+          "name" : "First case of startBoundarySignal"
         }
       },
       "visual" : {
@@ -201,21 +204,23 @@
       "type" : "RequestStart",
       "name" : "testIntermediateEventProcess.ivp",
       "config" : {
-        "callSignature" : "testIntermediateEventProcess",
-        "case" : {
-          "name" : "testIntermediateEventProcess case"
-        },
-        "outLink" : "testIntermediateEventProcess.ivp",
-        "startDescription" : "Creates test intermediate event process",
-        "task" : {
-          "name" : "testIntermediateEventProcess task"
-        },
+        "signature" : "testIntermediateEventProcess",
         "input" : {
+          "map" : { },
           "code" : [
             "import java.util.Random;",
             "Random random = new Random();",
             "out.eventID = random.nextInt();"
           ]
+        },
+        "request" : {
+          "description" : "Creates test intermediate event process"
+        },
+        "task" : {
+          "name" : "testIntermediateEventProcess task"
+        },
+        "case" : {
+          "name" : "testIntermediateEventProcess case"
         }
       },
       "visual" : {
@@ -258,18 +263,19 @@
       "type" : "RequestStart",
       "name" : "HomePageTestData",
       "config" : {
-        "callSignature" : "HomePageTestData",
-        "startCategory" : "TestData",
-        "case" : {
-          "name" : "First case of HomePageTestData"
+        "signature" : "HomePageTestData",
+        "request" : {
+          "description" : "Different process which generates test data. Mostly used for CI tests",
+          "category" : "TestData",
+          "customFields" : [
+            { "name" : "cssIcon", "value" : "si si-house-1" }
+          ]
         },
-        "outLink" : "HomePageTestData.ivp",
-        "startDescription" : "Different process which generates test data. Mostly used for CI tests",
-        "startCustomFields" : [
-          { "name" : "cssIcon", "value" : "si si-house-1" }
-        ],
         "task" : {
           "name" : "First task of HomePageTestData"
+        },
+        "case" : {
+          "name" : "First case of HomePageTestData"
         }
       },
       "visual" : {
@@ -309,14 +315,15 @@
       "type" : "RequestStart",
       "name" : "testDefaultPages.ivp",
       "config" : {
-        "callSignature" : "testDefaultPages",
-        "case" : {
-          "name" : "First case of testDefaultPages"
+        "signature" : "testDefaultPages",
+        "request" : {
+          "description" : "Dialog with buttons that redirect to Default Pages using ivy.html"
         },
-        "outLink" : "testDefaultPages.ivp",
-        "startDescription" : "Dialog with buttons that redirect to Default Pages using ivy.html",
         "task" : {
           "name" : "First task of testDefaultPages"
+        },
+        "case" : {
+          "name" : "First case of testDefaultPages"
         }
       },
       "visual" : {
@@ -350,14 +357,15 @@
       "type" : "RequestStart",
       "name" : "doubleDialog.ivp",
       "config" : {
-        "callSignature" : "doubleDialog",
-        "case" : {
-          "name" : "First case of doubleDialog"
+        "signature" : "doubleDialog",
+        "request" : {
+          "description" : "Process with 2 dialogs. Used for testing frame header bar"
         },
-        "outLink" : "doubleDialog.ivp",
-        "startDescription" : "Process with 2 dialogs. Used for testing frame header bar",
         "task" : {
           "name" : "First task of doubleDialog"
+        },
+        "case" : {
+          "name" : "First case of doubleDialog"
         }
       },
       "visual" : {
@@ -411,15 +419,16 @@
       "type" : "RequestStart",
       "name" : "startTestDialog2.ivp",
       "config" : {
-        "callSignature" : "startTestDialog2",
-        "startCategory" : "exampleDialogs",
-        "case" : {
-          "name" : "Test Developer Workflow-UI Dialog Case 2"
+        "signature" : "startTestDialog2",
+        "request" : {
+          "description" : "Dialog 2 for testing Developer Workflow-UI",
+          "category" : "exampleDialogs"
         },
-        "outLink" : "startTestDialog2.ivp",
-        "startDescription" : "Dialog 2 for testing Developer Workflow-UI",
         "task" : {
           "name" : "Test Developer Workflow-UI Dialog 2"
+        },
+        "case" : {
+          "name" : "Test Developer Workflow-UI Dialog Case 2"
         }
       },
       "visual" : {
@@ -486,18 +495,19 @@
       "type" : "RequestStart",
       "name" : "DelayedTestTask",
       "config" : {
-        "callSignature" : "DelayedTestTask",
-        "startCategory" : "TestData",
-        "case" : {
-          "name" : "First case of DelayTestData"
+        "signature" : "DelayedTestTask",
+        "request" : {
+          "description" : "Process which generates some test task and case data",
+          "category" : "TestData",
+          "customFields" : [
+            { "name" : "cssIcon", "value" : "si si-time-clock-circle" }
+          ]
         },
-        "outLink" : "DelayedTestTask.ivp",
-        "startDescription" : "Process which generates some test task and case data",
-        "startCustomFields" : [
-          { "name" : "cssIcon", "value" : "si si-time-clock-circle" }
-        ],
         "task" : {
           "name" : "First task of DelayedTest"
+        },
+        "case" : {
+          "name" : "First case of DelayTestData"
         }
       },
       "visual" : {
@@ -518,18 +528,19 @@
       "type" : "RequestStart",
       "name" : "customUser",
       "config" : {
-        "callSignature" : "customUser",
-        "startCategory" : "TestData",
-        "case" : {
-          "name" : "First case CustomUser"
+        "signature" : "customUser",
+        "request" : {
+          "description" : "Process which generates some test task and case data",
+          "category" : "TestData",
+          "customFields" : [
+            { "name" : "cssIcon", "value" : "si si-single-neutral-circle" }
+          ]
         },
-        "outLink" : "customUser.ivp",
-        "startDescription" : "Process which generates some test task and case data",
-        "startCustomFields" : [
-          { "name" : "cssIcon", "value" : "si si-single-neutral-circle" }
-        ],
         "task" : {
           "name" : "First task CustomUser"
+        },
+        "case" : {
+          "name" : "First case CustomUser"
         }
       },
       "visual" : {

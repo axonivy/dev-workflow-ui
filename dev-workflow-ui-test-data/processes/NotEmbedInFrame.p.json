@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/process/11.1.15/schema.json",
+  "$schema" : "https://json-schema.axonivy.com/process/11.1.19/schema.json",
   "id" : "17D95C54B57821A9",
   "config" : {
     "data" : "ch.ivyteam.ivy.project.workflow.Data"
@@ -9,12 +9,13 @@
       "type" : "RequestStart",
       "name" : "notEmbedInFrameStart.ivp",
       "config" : {
-        "callSignature" : "start",
-        "startCustomFields" : [
-          { "name" : "embedInFrame", "value" : "false" }
-        ],
-        "outLink" : "start.ivp",
-        "startName" : "Do not embed in Frame"
+        "signature" : "start",
+        "request" : {
+          "name" : "Do not embed in Frame",
+          "customFields" : [
+            { "name" : "embedInFrame", "value" : "false" }
+          ]
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 },

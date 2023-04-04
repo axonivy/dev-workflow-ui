@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/process/11.1.15/schema.json",
+  "$schema" : "https://json-schema.axonivy.com/process/11.1.19/schema.json",
   "id" : "1783B19164F69B78",
   "config" : {
     "data" : "ch.ivyteam.ivy.project.workflow.Data"
@@ -9,10 +9,11 @@
       "type" : "RequestStart",
       "name" : "designerEmbedded",
       "config" : {
-        "callSignature" : "designerEmbedded",
-        "startCategory" : "actions",
-        "outLink" : "designerEmbedded.ivp",
-        "startDescription" : "Sets designer mode to Embedded. Used for CI testing. Might break the designer if executed"
+        "signature" : "designerEmbedded",
+        "request" : {
+          "description" : "Sets designer mode to Embedded. Used for CI testing. Might break the designer if executed",
+          "category" : "actions"
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 },
@@ -76,10 +77,11 @@
       "type" : "RequestStart",
       "name" : "designerStandard",
       "config" : {
-        "callSignature" : "designerStandard",
-        "startCategory" : "actions",
-        "outLink" : "designerStandard.ivp",
-        "startDescription" : "Sets designer mode to Standard. Used for CI testing. Might break the designer if executed"
+        "signature" : "designerStandard",
+        "request" : {
+          "description" : "Sets designer mode to Standard. Used for CI testing. Might break the designer if executed",
+          "category" : "actions"
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 160 },
