@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/process/11.1.15/schema.json",
+  "$schema" : "https://json-schema.axonivy.com/process/11.1.19/schema.json",
   "id" : "17425834F1CBA722",
   "config" : {
     "data" : "ch.ivyteam.ivy.project.workflow.ui.Data"
@@ -9,11 +9,12 @@
       "type" : "RequestStart",
       "name" : "DefaultApplicationHomePage",
       "config" : {
-        "callSignature" : "DefaultApplicationHomePage",
-        "outLink" : "DefaultApplicationHomePage.ivp",
-        "startCustomFields" : [
-          { "name" : "embedInFrame", "value" : "false" }
-        ]
+        "signature" : "DefaultApplicationHomePage",
+        "request" : {
+          "customFields" : [
+            { "name" : "embedInFrame", "value" : "false" }
+          ]
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 128 },
@@ -36,11 +37,12 @@
       "type" : "RequestStart",
       "name" : "DefaultProcessStartListPage",
       "config" : {
-        "callSignature" : "DefaultProcessStartListPage",
-        "outLink" : "DefaultProcessStartListPage.ivp",
-        "startCustomFields" : [
-          { "name" : "embedInFrame", "value" : "false" }
-        ]
+        "signature" : "DefaultProcessStartListPage",
+        "request" : {
+          "customFields" : [
+            { "name" : "embedInFrame", "value" : "false" }
+          ]
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 320 },
@@ -54,11 +56,12 @@
       "type" : "RequestStart",
       "name" : "DefaultTaskListPage",
       "config" : {
-        "callSignature" : "DefaultTaskListPage",
-        "outLink" : "DefaultTaskListPage.ivp",
-        "startCustomFields" : [
-          { "name" : "embedInFrame", "value" : "false" }
-        ]
+        "signature" : "DefaultTaskListPage",
+        "request" : {
+          "customFields" : [
+            { "name" : "embedInFrame", "value" : "false" }
+          ]
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 192 },
@@ -72,14 +75,16 @@
       "type" : "RequestStart",
       "name" : "DefaultEndPage",
       "config" : {
-        "callSignature" : "DefaultEndPage",
-        "outLink" : "DefaultEndPage.ivp",
-        "startCustomFields" : [
-          { "name" : "embedInFrame", "value" : "false" }
-        ],
+        "signature" : "DefaultEndPage",
         "input" : {
           "params" : [
-            { "name" : "endedTaskId", "type" : "Number" }
+            { "name" : "endedTaskId", "type" : "Number", "desc" : "" }
+          ],
+          "map" : { }
+        },
+        "request" : {
+          "customFields" : [
+            { "name" : "embedInFrame", "value" : "false" }
           ]
         }
       },
@@ -95,14 +100,16 @@
       "type" : "RequestStart",
       "name" : "DefaultLoginPage",
       "config" : {
-        "callSignature" : "DefaultLoginPage",
-        "outLink" : "DefaultLoginPage.ivp",
-        "startCustomFields" : [
-          { "name" : "embedInFrame", "value" : "false" }
-        ],
+        "signature" : "DefaultLoginPage",
         "input" : {
           "params" : [
-            { "name" : "originalUrl", "type" : "String" }
+            { "name" : "originalUrl", "type" : "String", "desc" : "" }
+          ],
+          "map" : { }
+        },
+        "request" : {
+          "customFields" : [
+            { "name" : "embedInFrame", "value" : "false" }
           ]
         }
       },
@@ -145,13 +152,13 @@
       "type" : "RequestStart",
       "name" : "DefaultFramePage.ivp",
       "config" : {
-        "callSignature" : "DefaultFramePage",
-        "outLink" : "DefaultFramePage.ivp",
+        "signature" : "DefaultFramePage",
         "input" : {
           "params" : [
-            { "name" : "relativeUrl", "type" : "String" },
-            { "name" : "runningTaskId", "type" : "Number" }
+            { "name" : "relativeUrl", "type" : "String", "desc" : "" },
+            { "name" : "runningTaskId", "type" : "Number", "desc" : "" }
           ],
+          "map" : { },
           "code" : [
             "import ch.ivyteam.ivy.application.IApplication;",
             "",
