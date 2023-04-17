@@ -13,8 +13,13 @@ public class UserComponentModel {
   }
 
   public UserComponentModel(IActivator user) {
-    this.name = user.name();
-    this.cssIcon = getCssIcon(user.get());
+    var securityMember = user.get();
+    if (securityMember != null) {
+      this.name = securityMember.getDisplayName();
+    } else {
+      this.name = user.name();
+    }
+    this.cssIcon = getCssIcon(securityMember);
   }
 
   private static String getCssIcon(ISecurityMember user) {
