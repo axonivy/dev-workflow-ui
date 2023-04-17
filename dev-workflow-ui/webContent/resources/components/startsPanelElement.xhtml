@@ -20,19 +20,19 @@
         </div>
       </div>
     </p:commandLink>
-    <p:link id="copyStartLinkBtn" href="#" onclick="copyToClipboard('#{cc.attrs.start.link}')">
+    <p:link id="copyStartLinkBtn" href="#" onclick="copyToClipboard('#{cc.attrs.start.link}')" styleClass="p-mr-2">
       <i class="si si-hyperlink-3" />
     </p:link>
     <p:tooltip for="copyStartLinkBtn" value="Copy to clipboard" position="left" />
 
-    <p:link id="openStartFullscreenBtn" href="#{cc.attrs.start.link}" styleClass="p-ml-2"
+    <p:link id="openStartFullscreenBtn" href="#{cc.attrs.start.link}" styleClass="p-mr-2"
       rendered="#{cc.attrs.start.embedInFrame}">
       <i class="si si-expand-6" />
     </p:link>
     <p:tooltip for="openStartFullscreenBtn" position="left"
       value="Open start on a fullscreen page. Add 'embedInFrame' request custom field to set this as default." />
 
-    <p:commandLink id="openProcessViewer" oncomplete="PF('process-viewer-dlg').show()" styleClass="p-ml-2 p-mr-2"
+    <p:commandLink id="openProcessViewer" oncomplete="PF('process-viewer-dlg').show()" styleClass="p-mr-2"
       rendered="#{cc.attrs.start.viewerAllowed}" update="startsForm:processViewer:processViewerDialog"
       actionListener="#{processesIvyDevWfBean.setViewerStart(cc.attrs.start.viewerLink)}">
       <i class="si si-hierarchy-6 si-rotate-270" />

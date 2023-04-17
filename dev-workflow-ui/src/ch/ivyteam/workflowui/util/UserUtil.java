@@ -7,10 +7,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.faces.context.FacesContext;
-
-import org.apache.commons.lang3.StringUtils;
-
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.security.IPermission;
 import ch.ivyteam.ivy.security.IRole;
@@ -47,22 +43,8 @@ public class UserUtil {
     }
   }
 
-  public static boolean checkIfPersonalTasks() {
-    return checkCurrentPage("tasks");
-  }
-
-  public static boolean checkIfHomepage() {
-    return checkCurrentPage("home");
-  }
-
   public static boolean isLoggedIn() {
     return ISession.current().getSessionUser() != null;
-  }
-
-  private static boolean checkCurrentPage(String page) {
-    String currentUrl = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-    String currentPage = StringUtils.substringAfterLast(currentUrl, "/");
-    return currentPage.equals(page + ".xhtml");
   }
 
   public static boolean isAdmin() {
