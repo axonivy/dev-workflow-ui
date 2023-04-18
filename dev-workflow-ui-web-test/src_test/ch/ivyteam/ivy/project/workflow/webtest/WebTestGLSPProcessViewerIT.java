@@ -6,6 +6,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openVi
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThanOrEqual;
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -63,7 +64,6 @@ public class WebTestGLSPProcessViewerIT {
   public void testNoViewerForUnknownUser() {
     openView("starts.xhtml");
     logout();
-    $(By.id("startsForm:globalFilter")).sendKeys("testdata/testdata.ivp");
-    $(By.className("si-hierarchy-6")).shouldNotBe(visible);
+    $(".start-element .si-hierarchy-6").shouldNot(exist);
   }
 }

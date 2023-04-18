@@ -1,8 +1,5 @@
 package ch.ivyteam.workflowui.tasks;
 
-import static ch.ivyteam.workflowui.util.UserUtil.checkIfHomepage;
-import static ch.ivyteam.workflowui.util.UserUtil.checkIfPersonalTasks;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +21,15 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
   private static final long serialVersionUID = -5287014754211109062L;
   private String filter;
   private boolean showAllTasks = UserUtil.isAdmin();
+  private final boolean isPersonal;
+
+  public TasksDataModel() {
+    this(false);
+  }
+
+  public TasksDataModel(boolean isPersonal) {
+    this.isPersonal = isPersonal;
+  }
 
   public String getFilter() {
     return filter;
@@ -78,14 +84,14 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
   }
 
   private void checkIfPersonalTasksOrHomepage(TaskQuery taskQuery) {
-    if (checkIfPersonalTasks() || checkIfHomepage()) {
-      taskQuery.where().currentUserCanWorkOn();
+    if (isPersonal) {
+      taskQuery.where().and(TaskQuery.create().where().currentUserCanWorkOn());
     }
   }
 
   private void checkIfAdmin(TaskQuery taskQuery) {
     if (!showAllTasks) {
-      taskQuery.where().currentUserIsInvolved();
+      taskQuery.where().and(TaskQuery.create().where().currentUserIsInvolved());
     }
   }
 
@@ -97,10 +103,10 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
       var taskPriority = Arrays.asList(WorkflowPriority.values()).stream()
               .filter(priority -> StringUtils.startsWithIgnoreCase(priority.toString(), filter))
               .findFirst().orElse(null);
-      query.where().name().isLikeIgnoreCase("%" + filter + "%")
+      query.where().and(TaskQuery.create().where().name().isLikeIgnoreCase("%" + filter + "%")
               .or().activatorName().isLikeIgnoreCase(filter + "%")
               .or().state().isEqual(taskState)
-              .or().priority().isEqual(taskPriority);
+              .or().priority().isEqual(taskPriority));
     }
   }
 

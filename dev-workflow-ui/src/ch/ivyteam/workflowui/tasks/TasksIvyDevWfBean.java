@@ -22,20 +22,12 @@ public class TasksIvyDevWfBean {
     return tasksDataModel;
   }
 
-  public void executeTaskRow(SelectEvent<?> event) {
-    TaskUtil.executeTaskRow(event);
-  }
-
   public void displayTaskRow(SelectEvent<?> event) {
     TaskUtil.displayTaskRow(event);
   }
 
   public void redirectToTaskDetails(long taskId) {
     TaskUtil.redirectToTaskDetails(taskId);
-  }
-
-  public void executeTask(long taskId) {
-   TaskUtil.executeTask(taskId);
   }
 
   public TaskLinkModel toTaskLinkModel(ITask task) {

@@ -77,10 +77,10 @@
                   <h6 class="p-m-0">My tasks</h6>
                 </div>
               </div>
-              <p:dataTable id="activeTasks" var="task" value="#{homepageIvyDevWfBean.tasksDataModel}" lazy="true"
+              <p:dataTable id="activeTasks" var="task" value="#{personalTasksIvyDevWfBean.tasksDataModel}" lazy="true"
                 rows="10" paginator="true" paginatorAlwaysVisible="false" rendered="#{homepageIvyDevWfBean.tasksSize gt 0}"
                 paginatorPosition="bottom" selectionMode="single">
-                <p:ajax event="rowSelect" listener="#{tasksIvyDevWfBean.executeTaskRow}" />
+                <p:ajax event="rowSelect" listener="#{personalTasksIvyDevWfBean.executeTaskRow}" />
                 <p:column styleClass="icon-row" responsivePriority="2">
                   <i class="si si-lg si-task-list-edit" />
                 </p:column>
@@ -89,7 +89,7 @@
                   <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
                 </p:column>
                 <p:column headerText="Name" sortBy="#{task.name}">
-                  <p:commandLink id="startTaskLink" actionListener="#{tasksIvyDevWfBean.executeTask(task.id)}">
+                  <p:commandLink id="startTaskLink" actionListener="#{personalTasksIvyDevWfBean.executeTask(task.id)}">
                     <h:outputText id="taskName" value="#{task.name}" />
                     <p:tooltip for="taskName" value="Task ID: #{task.id}" position="top" />
                   </p:commandLink>
