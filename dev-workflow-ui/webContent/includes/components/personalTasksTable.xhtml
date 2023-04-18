@@ -4,14 +4,14 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
-  <p:dataTable id="tasks" var="task" value="#{tasksIvyDevWfBean.tasksDataModel}" widgetVar="tasksTable" styleClass="ui-fluid"
+  <p:dataTable id="tasks" var="task" value="#{personalTasksIvyDevWfBean.tasksDataModel}" widgetVar="tasksTable" styleClass="ui-fluid"
     emptyMessage="No Tasks found with given criteria" lazy="true" paginatorPosition="bottom" rows="10" paginator="true" paginatorAlwaysVisible="false"
     selectionMode="single">
-    <p:ajax event="rowSelect" listener="#{tasksIvyDevWfBean.executeTaskRow}" />
+    <p:ajax event="rowSelect" listener="#{personalTasksIvyDevWfBean.executeTaskRow}" />
     <f:facet name="header">
       <div class="ui-input-icon-left filter-container">
         <i class="pi pi-search"/>
-        <p:inputText id="globalFilter" onkeyup="PF('tasksTable').filter()" placeholder="Search" value="#{tasksIvyDevWfBean.tasksDataModel.filter}" />
+        <p:inputText id="globalFilter" onkeyup="PF('tasksTable').filter()" placeholder="Search" value="#{personalTasksIvyDevWfBean.tasksDataModel.filter}" />
       </div>
     </f:facet>
 
@@ -26,7 +26,7 @@
     </p:column>
 
     <p:column headerText="Name" filterBy="#{task.name}" sortBy="#{task.name}">
-      <h:commandLink action="#{tasksIvyDevWfBean.executeTask(task.id)}">
+      <h:commandLink action="#{personalTasksIvyDevWfBean.executeTask(task.id)}">
         <h:outputText id="taskName" value="#{task.name}" />
         <p:tooltip for="taskName" value="Task ID: #{task.id}" position="top" />
       </h:commandLink>
