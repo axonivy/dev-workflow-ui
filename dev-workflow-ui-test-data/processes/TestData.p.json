@@ -552,5 +552,36 @@
         "labelOffset" : { "x" : 6, "y" : 36 }
       },
       "connect" : { "id" : "f53", "to" : "f50" }
+    }, {
+      "id" : "f55",
+      "type" : "RequestStart",
+      "name" : "cleanupSession.ivp",
+      "config" : {
+        "callSignature" : "cleanupSession",
+        "outLink" : "cleanupSession.ivp"
+      },
+      "visual" : {
+        "at" : { "x" : 424, "y" : 448 }
+      },
+      "connect" : { "id" : "f57", "to" : "f56" }
+    }, {
+      "id" : "f56",
+      "type" : "Script",
+      "name" : "cleanup session",
+      "config" : {
+        "output" : {
+          "code" : "ivy.session.removeAttribute(\"redirectedToStarts\");"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 544, "y" : 448 }
+      },
+      "connect" : { "id" : "f59", "to" : "f58" }
+    }, {
+      "id" : "f58",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 672, "y" : 448 }
+      }
     } ]
 }

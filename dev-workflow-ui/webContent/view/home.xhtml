@@ -77,7 +77,7 @@
                   <h6 class="p-m-0">My tasks</h6>
                 </div>
               </div>
-              <p:dataTable id="activeTasks" var="task" value="#{homepageIvyDevWfBean.tasksDataModel}" lazy="true"
+              <p:dataTable id="activeTasks" var="task" value="#{personalTasksIvyDevWfBean.tasksDataModel}" lazy="true"
                 rows="10" paginator="true" paginatorAlwaysVisible="false" rendered="#{homepageIvyDevWfBean.tasksSize gt 0}"
                 paginatorPosition="bottom" selectionMode="single">
                 <p:ajax event="rowSelect" listener="#{personalTasksIvyDevWfBean.executeTaskRow}" />
