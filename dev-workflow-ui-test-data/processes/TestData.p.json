@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/process/11.1.22/schema.json",
+  "$schema" : "https://json-schema.axonivy.com/process/11.1.26/process.json",
   "id" : "1750C5211D94569D",
   "config" : {
     "data" : "workflow.uite.Data"
@@ -235,8 +235,8 @@
       "type" : "WaitEvent",
       "name" : "TestIntermediateEvent",
       "config" : {
-        "eventBeanClass" : "ch.ivyteam.workflowuitestdata.TestIntermediateClass",
-        "eventIdConfig" : "in.eventID.toString()"
+        "javaClass" : "ch.ivyteam.workflowuitestdata.TestIntermediateClass",
+        "eventId" : "in.eventID.toString()"
       },
       "visual" : {
         "at" : { "x" : 224, "y" : 448 },
