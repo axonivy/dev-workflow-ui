@@ -34,18 +34,16 @@ public class WebTestCaseMapIT {
   void beforeEach() {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     loginDeveloper();
-    startTestCaseMap("0cf1f054-a4ad-4b2b-bcf1-c9c34ec0a2ab.icm");
-    $(By.id("form:proceed")).shouldBe(visible).click();
+    startTestCaseMap();
   }
 
   @Test
   public void caseDetails() {
-    startTestCaseMap("0cf1f054-a4ad-4b2b-bcf1-c9c34ec0a2ab.icm");
     openView("cases.xhtml");
     $(".detail-btn").shouldBe(visible).click();
 
     $(By.id("creatorUser:userName")).shouldBe(exactText("DeveloperTest"));
-    $(By.id("caseState")).shouldBe(exactText("OPEN (CREATED)"));
+    $(By.id("caseState")).shouldBe(exactText("OPEN (RUNNING)"));
 
     $(".case-map-column").shouldHave(text("stage1"));
     $(".process-flow").shouldBe(visible);

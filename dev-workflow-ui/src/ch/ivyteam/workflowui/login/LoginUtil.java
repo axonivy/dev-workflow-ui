@@ -1,5 +1,8 @@
 package ch.ivyteam.workflowui.login;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -40,12 +43,12 @@ public class LoginUtil {
   }
 
   public static void redirectToLoginForm() {
-    String origin = UrlUtil.evalOriginalPage();
+    String origin = URLEncoder.encode(UrlUtil.evalOriginalPage(), StandardCharsets.UTF_8);
     RedirectUtil.redirect("login.xhtml?originalUrl=" + origin);
   }
 
   public static void redirectToLoginTable() {
-    String origin = UrlUtil.evalOriginalPage();
+    String origin = URLEncoder.encode(UrlUtil.evalOriginalPage(), StandardCharsets.UTF_8);
     RedirectUtil.redirect("loginTable.xhtml?originalUrl=" + origin);
   }
 }
