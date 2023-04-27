@@ -2,6 +2,7 @@ package ch.ivyteam.workflowui.login;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,11 +16,12 @@ import org.primefaces.event.SelectEvent;
 
 import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.security.IUser;
+import ch.ivyteam.ivy.security.identity.core.auth.oauth2.OAuth2Url;
 import ch.ivyteam.ivy.security.identity.spi.IdentityProvider;
 import ch.ivyteam.ivy.security.identity.spi.auth.oauth2.OAuth2Authenticator;
-import ch.ivyteam.ivy.security.identity.core.auth.oauth2.OAuth2Url;
 import ch.ivyteam.ivy.security.restricted.ISecurityContextInternal;
 import ch.ivyteam.workflowui.login.LoginTableIvyDevWfBean.User;
+import ch.ivyteam.workflowui.util.UrlUtil;
 import ch.ivyteam.workflowui.util.UserUtil;
 
 @ManagedBean
@@ -42,6 +44,10 @@ public class LoginIvyDevWfBean {
 
   public void setOriginalUrl(String originalUrl) {
     this.originalUrl = originalUrl;
+  }
+
+  public String getOriginalPage() {
+    return URLEncoder.encode(UrlUtil.evalOriginalPage(), StandardCharsets.UTF_8);
   }
 
   private void login(User user) {
@@ -68,14 +74,6 @@ public class LoginIvyDevWfBean {
 
   public void redirectIfNotAdmin() {
     UserUtil.redirectIfNotAdmin();
-  }
-
-  public void redirectToLoginForm() {
-    LoginUtil.redirectToLoginForm();
-  }
-
-  public void redirectToLoginTable() {
-    LoginUtil.redirectToLoginTable();
   }
 
   public String getRoles(IUser user) {
