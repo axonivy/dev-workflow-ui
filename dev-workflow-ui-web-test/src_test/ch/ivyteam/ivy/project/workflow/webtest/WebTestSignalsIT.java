@@ -4,11 +4,13 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginD
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,7 +38,7 @@ public class WebTestSignalsIT {
   @Test
   public void testSignalAdminOnly() {
     loginFromTable("testuser");
-    openView("signals.xhtml");
+    open(viewUrl("signals.xhtml"));
     $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menuitem"));
 
     loginDeveloper();
