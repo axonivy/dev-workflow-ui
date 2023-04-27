@@ -15,6 +15,7 @@
 
   <properties>
     <test.application>devworkflowuiwebtest</test.application>
+    <workflow.jar.dir>${basedir}/../maven/config/target/ivyEngine/webapps/dev-workflow-ui/</workflow.jar.dir>
   </properties>
 
   <dependencies>
@@ -81,7 +82,7 @@
              <excludeDefaultDirectories>true</excludeDefaultDirectories>
              <filesets>
                 <fileset>
-                  <directory>${basedir}/../maven/config/target/ivyEngine/webapps/workflow/</directory>
+                  <directory>${workflow.jar.dir}</directory>
                   <includes>
                     <include>dev-workflow-ui-*.jar</include>
                   </includes>
@@ -103,7 +104,7 @@
               <goal>copy-resources</goal>
             </goals>
             <configuration>
-              <outputDirectory>${basedir}/../maven/config/target/ivyEngine/webapps/dev-workflow-ui/</outputDirectory>
+              <outputDirectory>${workflow.jar.dir}</outputDirectory>
               <resources>
                 <resource>
                   <directory>${basedir}/../dev-workflow-ui/target/</directory>
