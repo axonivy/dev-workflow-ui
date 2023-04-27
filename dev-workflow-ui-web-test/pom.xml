@@ -103,7 +103,7 @@
               <goal>copy-resources</goal>
             </goals>
             <configuration>
-              <outputDirectory>${basedir}/../maven/config/target/ivyEngine/webapps/workflow/</outputDirectory>
+              <outputDirectory>${basedir}/../maven/config/target/ivyEngine/webapps/dev-workflow-ui/</outputDirectory>
               <resources>
                 <resource>
                   <directory>${basedir}/../dev-workflow-ui/target/</directory>

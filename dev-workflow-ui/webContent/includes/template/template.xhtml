@@ -56,16 +56,16 @@
                   </p:link>
                 </li>
                 <li>
-                  <p:commandLink id="loginTableBtn" actionListener="#{loginIvyDevWfBean.redirectToLoginTable}" rendered="#{engineModeIvyDevWfBean.demoOrDesigner}">
+                  <p:link id="loginTableBtn" href="loginTable.xhtml?originalUrl=#{loginIvyDevWfBean.originalPage}" rendered="#{engineModeIvyDevWfBean.demoOrDesigner}">
                     <i class="si si-lg si-multiple-neutral-1"></i>
                     <span>Switch user</span>
-                  </p:commandLink>
+                  </p:link>
                 </li>
                 <li>
-                  <p:commandLink id="loginFormBtn" actionListener="#{loginIvyDevWfBean.redirectToLoginForm}">
+                  <p:link id="loginFormBtn" href="login.xhtml?originalUrl=#{loginIvyDevWfBean.originalPage}">
                     <i class="si si-lg si-login-3"></i>
                     <span>Login</span>
-                  </p:commandLink>
+                  </p:link>
                 </li>
                 <li>
                   <p:commandLink id="sessionLogoutBtn" actionListener="#{loginIvyDevWfBean.logout}"

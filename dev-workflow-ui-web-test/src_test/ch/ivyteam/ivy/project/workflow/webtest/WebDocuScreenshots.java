@@ -77,7 +77,7 @@ public class WebDocuScreenshots {
     takeScreenshot("workflow-ui-signals", new Dimension(SCREENSHOT_WIDTH, 800));
     $(By.id("boundarySignalsTable:0:sendSignalIcon")).shouldBe(visible).click();
 
-    WorkflowUiUtil.startTestCaseMap("0cf1f054-a4ad-4b2b-bcf1-c9c34ec0a2ab.icm");
+    WorkflowUiUtil.startTestCaseMap();
     openView("cases.xhtml");
     $(".detail-btn").shouldBe(visible).click();
     takeScreenshot("workflow-ui-caseMap", new Dimension(SCREENSHOT_WIDTH, 800));
