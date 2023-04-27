@@ -14,6 +14,7 @@ pipeline {
   parameters {
     string(name: 'engineSource', defaultValue: 'https://product.ivyteam.io', description: 'Engine page url')
     booleanParam(name: 'deployScreenshots', defaultValue: false, description: 'Deploy new screenshots')
+    string(name: 'deployToEngine', defaultValue: '', description: 'Deploy to engine (e.g: "dev", "nightly", "sprint", "10", "nightly-10")')
   }
 
   environment {
@@ -37,6 +38,8 @@ pipeline {
     stage('build') {
       steps {
         script {
+          def deployToEngine = params.deployToEngine
+          def skipDeployToEngine = deployToEngine.isEmpty()
           def deployApplicationName = env.BRANCH_NAME.replaceAll("%2F","_").replaceAll("/","_").replaceAll("\\.","_")
 
           def random = (new Random()).nextInt(10000000)
@@ -49,7 +52,9 @@ pipeline {
               docker.build('maven').inside("--name ${ivyName} --network ${networkName}") {
                 maven cmd: 'clean verify ' +
                       "-Divy.engine.version='[10.0.0,]' " +
-                      '-Dmaven.test.failure.ignore=true ' +
+                      "-Dmaven.test.failure.ignore=true " +
+                      "-DskipDeployToEngine=${skipDeployToEngine} " +
+                      "-DdeployToEngine=${deployToEngine} " +
                       "-DdeployApplicationName=dev-workflow-ui-${deployApplicationName} " +
                       "-Dengine.page.url=${params.engineSource} " +
                       "-Dtest.engine.url=http://${ivyName}:8080 " +

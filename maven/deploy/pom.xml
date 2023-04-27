@@ -15,6 +15,8 @@
   </parent>
 
   <properties>
+    <skipDeployToEngine>true</skipDeployToEngine>
+    <deployToEngine>nightly</deployToEngine>
     <deployApplicationName>dev-workflow-ui-${user.name}</deployApplicationName>
   </properties>
 
@@ -49,9 +51,10 @@
               <goal>deploy-to-engine</goal>
             </goals>
             <configuration>
+              <skipDeploy>${skipDeployToEngine}</skipDeploy>
               <deployMethod>HTTP</deployMethod>
               <deployServerId>axonivy.engine</deployServerId>
-              <deployEngineUrl>https://nightly.demo.ivyteam.io</deployEngineUrl>
+              <deployEngineUrl>https://${deployToEngine}.demo.ivyteam.io</deployEngineUrl>
               <deployFile>${project.build.directory}/${project.artifactId}-${project.version}.zip</deployFile>
               <deployToEngineApplication>${deployApplicationName}</deployToEngineApplication>
               <deployTestUsers>true</deployTestUsers>
