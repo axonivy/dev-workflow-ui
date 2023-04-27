@@ -1,18 +1,21 @@
 package ch.ivyteam.ivy.project.workflow.webtest.util;
 
+import static com.axonivy.ivy.webtest.engine.EngineUrl.createCaseMapUrl;
+import static com.axonivy.ivy.webtest.engine.EngineUrl.createProcessUrl;
 import static com.axonivy.ivy.webtest.engine.EngineUrl.createStaticViewUrl;
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.webdriver;
+import static com.codeborne.selenide.WebDriverConditions.urlContaining;
 
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-
-import com.axonivy.ivy.webtest.engine.EngineUrl;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.WebDriverConditions;
+import org.openqa.selenium.By;
 
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.workflowui.util.UserUtil;
@@ -23,25 +26,22 @@ public class WorkflowUiUtil {
   }
 
   public static void startTestProcess(String pathToIvp) {
-    var url = EngineUrl.createProcessUrl("/dev-workflow-ui-test-data/" + pathToIvp);
-    System.out.println(url);
-    Selenide.open(url);
-    assertCurrentUrlContains("starts.xhtml");
+    open(createProcessUrl("/dev-workflow-ui-test-data/" + pathToIvp));
+    assertCurrentUrlContains("end.xhtml");
   }
 
-  public static void startTestCaseMap(String path) {
-    var url = EngineUrl.createCaseMapUrl("/dev-workflow-ui-test-data/" + path);
-    System.out.println(url);
-    Selenide.open(url);
-    assertCurrentUrlContains("starts.xhtml");
+  public static void startTestCaseMap() {
+    open(createCaseMapUrl("/dev-workflow-ui-test-data/0cf1f054-a4ad-4b2b-bcf1-c9c34ec0a2ab.icm"));
+    $(By.id("form:proceed")).shouldBe(visible).click();
+    assertCurrentUrlContains("end.xhtml");
   }
 
   public static void openView(String page) {
-    Selenide.open(viewUrl(page));
+    open(viewUrl(page));
     assertCurrentUrlContains(page);
   }
 
-  private static String viewUrl(String page) {
+  public static String viewUrl(String page) {
     var securityContext = System.getProperty("test.integrated.workflow");
     if (StringUtils.isNotEmpty(securityContext)) {
       var engineUri = System.getProperty("test.engine.url");
@@ -55,7 +55,7 @@ public class WorkflowUiUtil {
   }
 
   public static void assertCurrentUrlContains(String contains) {
-    WebDriverConditions.currentFrameUrlContaining(contains);
+    webdriver().shouldHave(urlContaining(contains));
   }
 
   public static List<IUser> getUsers() {
@@ -63,9 +63,9 @@ public class WorkflowUiUtil {
   }
 
   public static void loginFromTable(String username) {
-    Selenide.open(viewUrl("loginTable.xhtml"));
-    $(byText(username)).should(visible).click();
-    assertCurrentUrlContains("home.xhtml");
+    open(viewUrl("loginTable.xhtml"));
+    $(By.id("loginTable")).find(byText(username)).should(visible).click();
+    $(By.id("loginTable")).shouldNot(exist);
   }
 
   public static void loginDeveloper() {
@@ -73,13 +73,12 @@ public class WorkflowUiUtil {
   }
 
   public static void customLogin(String username, String password) {
-    Selenide.open(viewUrl("login.xhtml"));
+    open(viewUrl("login.xhtml"));
     $("#loginForm\\:userName").clear();
     $("#loginForm\\:userName").sendKeys(username);
     $("#loginForm\\:password").clear();
     $("#loginForm\\:password").sendKeys(password);
     $("#loginForm\\:login").shouldBe(visible).click();
-    assertCurrentUrlContains("home.xhtml");
   }
 
   public static void logout() {
