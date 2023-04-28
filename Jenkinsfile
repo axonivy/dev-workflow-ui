@@ -14,6 +14,7 @@ pipeline {
   parameters {
     string(name: 'engineSource', defaultValue: 'https://product.ivyteam.io', description: 'Engine page url')
     booleanParam(name: 'deployScreenshots', defaultValue: false, description: 'Deploy new screenshots')
+    string(name: 'deployToEngineUrl', defaultValue: 'https://nightly.demo.ivyteam.io', description: 'Deploy to engine (e.g. see: https://demo.ivyteam.io)')
   }
 
   environment {
@@ -37,8 +38,6 @@ pipeline {
     stage('build') {
       steps {
         script {
-          def deployApplicationName = env.BRANCH_NAME.replaceAll("%2F","_").replaceAll("/","_").replaceAll("\\.","_")
-
           def random = (new Random()).nextInt(10000000)
           def networkName = "build-" + random
           def seleniumName = "selenium-" + random
@@ -49,8 +48,7 @@ pipeline {
               docker.build('maven').inside("--name ${ivyName} --network ${networkName}") {
                 maven cmd: 'clean verify ' +
                       "-Divy.engine.version='[10.0.0,]' " +
-                      '-Dmaven.test.failure.ignore=true ' +
-                      "-DdeployApplicationName=dev-workflow-ui-${deployApplicationName} " +
+                      "-Dmaven.test.failure.ignore=true " +
                       "-Dengine.page.url=${params.engineSource} " +
                       "-Dtest.engine.url=http://${ivyName}:8080 " +
                       "-Dselenide.remote=http://${seleniumName}:4444/wd/hub "
@@ -65,8 +63,7 @@ pipeline {
             archiveArtifacts '**/target/dev-workflow-ui*.jar'
             archiveArtifacts '**/target/ivyEngine/logs/*'
             archiveArtifacts artifacts: '**/target/selenide/reports/**/*', allowEmptyArchive: true
-            currentBuild.description = "<a href='${BUILD_URL}artifact/dev-workflow-ui-web-test/target/screenshotsCompare.html'>&raquo; Screenshots</a><br>" +
-                                      "<a href='https://nightly.demo.ivyteam.io/dev-workflow-ui-${deployApplicationName}/faces/view/dev-workflow-ui/home.xhtml'>&raquo; Demo</a>"
+            currentBuild.description = "<a href='${BUILD_URL}artifact/dev-workflow-ui-web-test/target/screenshotsCompare.html'>&raquo; Screenshots</a><br>"
           } finally {
             sh "docker network rm ${networkName}"
           }
@@ -74,7 +71,7 @@ pipeline {
       }
     }
 
-    stage('verify') {
+    stage('verify screenshots') {
       agent {
         dockerfile {
           reuseNode true
@@ -99,7 +96,7 @@ pipeline {
       }
     }
 
-    stage('verify-manually') {
+    stage('verify screenshots manually') {
       when {
         expression { isReleaseOrMasterBranch() }
         not {
@@ -120,7 +117,7 @@ pipeline {
       }
     }
 
-    stage('deploy') {
+    stage('deploy maven') {
       agent {
         dockerfile {
           reuseNode true
@@ -132,6 +129,32 @@ pipeline {
       steps {
         script {
           maven cmd: 'deploy -Dmaven.test.skip=true'
+        }
+      }
+    }
+
+    stage('deploy to engine') {
+      agent {
+        dockerfile {
+          reuseNode true
+        }
+      }
+      when {
+        expression { !params.deployToEngineUrl.isEmpty()}
+      }
+      steps {
+        script {
+          def deployToEngineUrl = params.deployToEngineUrl
+          def deployApplicationName = ("dev-workflow-ui_" + env.BRANCH_NAME.replaceAll("%2F","_").replaceAll("/","_").replaceAll("\\.","_")).take(40)
+
+          catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+            maven cmd: 'deploy ' +
+                    "-DskipDeployToEngine=false " +
+                    "-DdeployToEngineUrl=${deployToEngineUrl} " +
+                    "-DdeployApplicationName=${deployApplicationName} " +
+                    "-Dmaven.test.skip=true -Dmaven.deploy.skip=true "
+            currentBuild.description += "<a href='${deployToEngineUrl}/${deployApplicationName}/faces/view/dev-workflow-ui/home.xhtml'>&raquo; Demo</a>"
+          }
         }
       }
     }
