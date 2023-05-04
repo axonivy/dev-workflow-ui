@@ -48,6 +48,7 @@
           <artifactId>project-build-plugin</artifactId>
           <version>${project.build.plugin.version}</version>
           <configuration>
+            <ivyVersion>[11.1.0,11.2.0)</ivyVersion>
             <engineDirectory>${engineHomeDirectory}</engineDirectory>
             <testEngine>COPY_FROM_TEMPLATE</testEngine>
           </configuration>
