@@ -9,15 +9,21 @@ import javax.faces.context.FacesContext;
 import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.security.ISession;
+import ch.ivyteam.licence.RuntimeLicenceException;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.UrlUtil;
 
 public class LoginUtil {
 
   public static void login(String username, String password, String originalUrl) {
-    if (!checkLoginAndRedirect(username, password, originalUrl)) {
+    try {
+      if (!checkLoginAndRedirect(username, password, originalUrl)) {
+        FacesContext.getCurrentInstance().addMessage(null,
+            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login failed", "Login failed"));
+      }
+    } catch (RuntimeLicenceException ex) {
       FacesContext.getCurrentInstance().addMessage(null,
-              new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login failed", "Login failed"));
+          new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), ex.getMessage()));
     }
   }
 
