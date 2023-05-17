@@ -11,6 +11,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +24,7 @@ import com.axonivy.ivy.webtest.primeui.widget.Table;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
-public class WebTestCaseDetailsIT {
+class WebTestCaseDetailsIT {
 
   @BeforeAll
   static void setup() {
@@ -41,7 +42,7 @@ public class WebTestCaseDetailsIT {
   }
 
   @Test
-  public void caseDetails() {
+  void caseDetails() {
     $(By.id("creatorUser:userName")).shouldBe(exactText("DeveloperTest"));
     $(By.id("category")).shouldHave(exactText("TestData"));
     $(By.id("caseState")).shouldBe(exactText("OPEN (RUNNING)"));
@@ -51,13 +52,19 @@ public class WebTestCaseDetailsIT {
   }
 
   @Test
-  public void taskList() throws Exception {
+  void caseNotFound() {
+    openView("caseDetails.xhtml?case=NON-EXISTING-CASE");
+    assertThat(Selenide.webdriver().driver().getWebDriver().getPageSource()).contains("Not Found");
+  }
+
+  @Test
+  void taskList() {
     Table tasksTable = PrimeUi.table(By.id("tasksForm:tasks"));
     tasksTable.valueAt(0, 0).contains("Test Task");
   }
 
   @Test
-  public void checkTaskTableSystemTask() {
+  void checkTaskTableSystemTask() {
     startTestProcess("1750C5211D94569D/testIntermediateEventProcess.ivp");
     openView("cases.xhtml");
     $(".detail-btn").shouldBe(visible).click();
@@ -71,18 +78,18 @@ public class WebTestCaseDetailsIT {
   }
 
   @Test
-  public void caseList() throws Exception {
+  void caseList() {
     $(".current-hierarchy-case").find("a").shouldHave(text("Created case of TestData"));
   }
 
   @Test
-  public void customFields() throws Exception {
+  void customFields() {
     Table fieldsTable = PrimeUi.table(By.id("customFields:customFieldsTable"));
     fieldsTable.valueAt(1, 0).contains("field 2");
   }
 
   @Test
-  public void workflowEvents() {
+  void workflowEvents() {
     var caseId = $(By.id("caseId")).getText();
     $(By.id("workflowEvents:eventsTable")).shouldBe(visible);
     loginFromTable("testuser");
@@ -94,7 +101,7 @@ public class WebTestCaseDetailsIT {
   }
 
   @Test
-  public void destoryCase() {
+  void destoryCase() {
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
     openView("cases.xhtml");
     $(By.id("casesForm:cases:0:caseName")).shouldBe(visible).click();
@@ -110,10 +117,9 @@ public class WebTestCaseDetailsIT {
   }
 
   @Test
-  public void processViewer() {
+  void processViewer() {
     $(By.id("processViewerFrame")).shouldBe(visible);
     Selenide.switchTo().frame("processViewerFrame");
     $(By.id("sprotty_1750C5211D94569D-f0")).is(visible);
   }
-
 }

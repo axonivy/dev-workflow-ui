@@ -26,9 +26,9 @@
     </p:column>
 
     <p:column headerText="Name" filterBy="#{task.name}" sortBy="#{task.name}">
-      <h:commandLink action="#{tasksIvyDevWfBean.redirectToTaskDetails(task.id)}">
+      <h:commandLink action="#{tasksIvyDevWfBean.redirectToTaskDetails(task)}">
         <h:outputText id="taskName" value="#{task.name}" />
-        <p:tooltip for="taskName" value="Task ID: #{task.id}" position="top" />
+        <p:tooltip for="taskName" value="Task: #{task.uuid}" position="top" />
       </h:commandLink>
     </p:column>
 
@@ -45,7 +45,7 @@
     </p:column>
 
     <p:column styleClass="table-btn-1" responsivePriority="2">
-      <p:link href="taskDetails.xhtml?task=#{task.id}" >
+      <p:link href="#{task.detailUrl}" >
         <i class="si si-information-circle detail-btn"/>
       </p:link>
     </p:column>

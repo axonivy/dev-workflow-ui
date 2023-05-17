@@ -32,18 +32,16 @@ public class CasesDataModel extends LazyDataModel<ICase> {
   }
 
   @Override
-  public String getRowKey(ICase icase) {
-    return Long.toString(icase.getId());
+  public String getRowKey(ICase caze) {
+    return caze.uuid();
   }
 
   @Override
   public ICase getRowData(String rowKey) {
-    for (ICase icase : getCaseList()) {
-      if (icase.getId() == Long.valueOf(rowKey)) {
-        return icase;
-      }
-    }
-    return null;
+    return getCaseList().stream()
+            .filter(caze -> caze.uuid().equals(rowKey))
+            .findAny()
+            .orElse(null);
   }
 
   private List<ICase> getCaseList() {

@@ -23,8 +23,8 @@ public class IntermediateEventsIvyDevWfBean {
   public void onRowSelect(SelectEvent<?> event) {
     Object object = event.getObject();
     if (UserUtil.isAdmin()) {
-      if (object instanceof IntermediateEventElementModel) {
-        ((IntermediateEventElementModel) object).redirectToElement();
+      if (object instanceof IntermediateEventElementModel model) {
+        model.redirectToElement();
       }
     } else {
       FacesContext.getCurrentInstance().addMessage(null,

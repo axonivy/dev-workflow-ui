@@ -26,8 +26,8 @@ public class TasksIvyDevWfBean {
     TaskUtil.displayTaskRow(event);
   }
 
-  public void redirectToTaskDetails(long taskId) {
-    TaskUtil.redirectToTaskDetails(taskId);
+  public void redirectToTaskDetails(TaskModel model) {
+    TaskUtil.redirectToTaskDetails(model);
   }
 
   public TaskLinkModel toTaskLinkModel(ITask task) {

@@ -26,6 +26,7 @@ import ch.ivyteam.workflowui.document.DocumentModel;
 import ch.ivyteam.workflowui.tasks.TaskModel;
 import ch.ivyteam.workflowui.tasks.WorkflowEventModel;
 import ch.ivyteam.workflowui.util.CaseUtil;
+import ch.ivyteam.workflowui.util.ResponseHelper;
 import ch.ivyteam.workflowui.util.TaskUtil;
 import ch.ivyteam.workflowui.util.ViewerUtil;
 
@@ -58,7 +59,11 @@ public class CasesDetailsIvyDevWfBean {
 
   public void setSelectedCaseId(String selectedCaseId) {
     this.selectedCaseId = selectedCaseId;
-    this.selectedCase = getCaseById(Long.parseLong(selectedCaseId));
+    this.selectedCase = getCaseById(selectedCaseId);
+    if (selectedCase == null) {
+      ResponseHelper.notFound("Case " + selectedCaseId + " does not exist");
+      return;
+    }
     customFields = CustomFieldModel.create(selectedCase);
     documents = DocumentModel.create(selectedCase);
     caseMapModel = CaseMapModel.create(selectedCase);
@@ -76,8 +81,8 @@ public class CasesDetailsIvyDevWfBean {
     return ProcessViewer.of(selectedCase).url().mode(PREVIEW).zoom(75).toWebLink().get();
   }
 
-  public ICase getCaseById(long id) {
-    return IWorkflowContext.current().findCase(id);
+  public ICase getCaseById(String uuid) {
+    return IWorkflowContext.current().findCase(uuid);
   }
 
   public String getCreatorUser() {
@@ -131,8 +136,7 @@ public class CasesDetailsIvyDevWfBean {
     tasks = TaskUtil.toTaskModelList(CaseUtil.filterTasksOfCase(selectedCase.tasks().all(), showSystemTasks));
   }
 
-  public List<SidestepModel> getSidesteps()
-  {
+  public List<SidestepModel> getSidesteps() {
     return sidesteps;
   }
 
@@ -163,5 +167,4 @@ public class CasesDetailsIvyDevWfBean {
   public String getProcessPreviewLink() {
     return processPreviewLink;
   }
-
 }

@@ -13,6 +13,7 @@ import ch.ivyteam.ivy.workflow.ITask;
 
 @SuppressWarnings("restriction")
 public class CaseUtil {
+
   public static List<ITask> filterTasksOfCase(List<ITask> tasks, boolean showSystemTasks) {
     if (!showSystemTasks) {
       tasks = new ArrayList<>(tasks);
@@ -21,11 +22,11 @@ public class CaseUtil {
     return tasks;
   }
 
-  public static String getPrettyName(ICase icase) {
-    if (StringUtils.isBlank(icase.getName())) {
-      return "[Case: " + icase.getId() + "]";
+  public static String getPrettyName(ICase caze) {
+    if (StringUtils.isBlank(caze.getName())) {
+      return "[Case: " + caze.uuid() + "]";
     }
-    return icase.getName();
+    return caze.getName();
   }
 
   public static ICaseMap getCaseMap(ICase caze) {

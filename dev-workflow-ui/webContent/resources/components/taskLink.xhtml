@@ -9,12 +9,12 @@
 <cc:implementation>
   <ui:param name="task" value="#{tasksIvyDevWfBean.toTaskLinkModel(cc.attrs.task)}"/>
   <h:link outcome="taskDetails" styleClass="p-d-flex p-ai-center">
-    <f:param name="task" value="#{task.id}"/>
+    <f:param name="task" value="#{task.uuid}"/>
     <i class="si si-task-list-edit p-mr-1" />
     <h:outputText id="taskState" styleClass="si si-#{task.stateIcon} p-mr-1" />
     <p:tooltip for="taskState" value="State: #{task.businessState} (#{task.state})" position="top"/>
     <h:outputText id="taskLink" value="#{task.name}" />
-    <p:tooltip for="taskLink" value="ID: #{task.id}" position="top"/>
+    <p:tooltip for="taskLink" value="Task: #{task.uuid}" position="top"/>
   </h:link>
 </cc:implementation>
 </html>
