@@ -10,6 +10,7 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,12 +20,13 @@ import org.openqa.selenium.By;
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.axonivy.ivy.webtest.primeui.widget.Table;
+import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
-public class WebTestTasksIT {
+class WebTestTasksIT {
 
   @BeforeAll
-  public static void prepare() {
+  static void prepare() {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
   }
 
@@ -36,7 +38,7 @@ public class WebTestTasksIT {
   }
 
   @Test
-  public void allTasksOnlyAdmin() {
+  void allTasksOnlyAdmin() {
     startTestProcess("1750C5211D94569D/HomePageTestData.ivp");
     openView("allTasks.xhtml");
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
@@ -55,7 +57,7 @@ public class WebTestTasksIT {
   }
 
   @Test
-  public void testTasksTable() throws Exception {
+  void tasksTable() {
     startTestProcess("1750C5211D94569D/TestData.ivp");
     openView("allTasks.xhtml");
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
@@ -64,7 +66,7 @@ public class WebTestTasksIT {
   }
 
   @Test
-  public void checkTaskDetails() {
+  void checkTaskDetails() {
     openView("allTasks.xhtml");
     $(".detail-btn").shouldBe(visible).click();
 
@@ -84,7 +86,13 @@ public class WebTestTasksIT {
   }
 
   @Test
-  public void testStartTask() {
+  void taskNotFound() {
+    openView("taskDetails.xhtml?task=NON-EXISTING-TASK");
+    assertThat(Selenide.webdriver().driver().getWebDriver().getPageSource()).contains("Not Found");
+  }
+
+  @Test
+  void startTask() {
     openView("allTasks.xhtml");
 
     $(".detail-btn").shouldBe(visible).click();
@@ -102,7 +110,7 @@ public class WebTestTasksIT {
   }
 
   @Test
-  public void testStartParkedTask() {
+  void startParkedTask() {
     startTestProcess("1750C5211D94569D/TestData.ivp");
     openView("allTasks.xhtml");
 
@@ -121,7 +129,7 @@ public class WebTestTasksIT {
   }
 
   @Test
-  public void workflowEventsPermission() {
+  void workflowEventsPermission() {
     openView("allTasks.xhtml");
     $(By.className("detail-btn")).shouldBe(visible).click();
     $(By.className("case-link")).shouldHave(text("Created case of TestData"));
@@ -137,7 +145,7 @@ public class WebTestTasksIT {
   }
 
   @Test
-  public void taskCustomFields() {
+  void taskCustomFields() {
     openView("allTasks.xhtml");
     $(By.className("detail-btn")).shouldBe(visible).click();
     $(By.className("case-link")).shouldHave(text("Created case of TestData"));
@@ -147,7 +155,7 @@ public class WebTestTasksIT {
   }
 
   @Test
-  public void checkDelayedTask() {
+  void checkDelayedTask() {
     startTestProcess("1750C5211D94569D/DelayedTestTask.ivp");
     openView("allTasks.xhtml");
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
@@ -160,7 +168,7 @@ public class WebTestTasksIT {
   }
 
   @Test
-  public void checkCustomResponsibleUser() {
+  void checkCustomResponsibleUser() {
     startTestProcess("1750C5211D94569D/customUser.ivp");
     openView("allTasks.xhtml");
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
@@ -171,7 +179,7 @@ public class WebTestTasksIT {
   }
 
   @Test
-  public void delegateTask() {
+  void delegateTask() {
     startTestProcess("1750C5211D94569D/TestData.ivp");
     openView("allTasks.xhtml");
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
@@ -190,7 +198,7 @@ public class WebTestTasksIT {
   }
 
   @Test
-  public void clearDelayOnTask() {
+  void clearDelayOnTask() {
     startTestProcess("1750C5211D94569D/DelayedTestTask.ivp");
     openView("allTasks.xhtml");
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
@@ -208,7 +216,7 @@ public class WebTestTasksIT {
   }
 
   @Test
-  public void customFieldEmbedInFrame() {
+  void customFieldEmbedInFrame() {
     openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).sendKeys("embed in frame");
     $(By.className("start-link")).shouldBe(visible, text("Do not embed in Frame")).click();

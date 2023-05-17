@@ -10,24 +10,24 @@ import ch.ivyteam.workflowui.util.TaskUtil;
 
 public class TaskLinkModel {
 
+  private final String uuid;
   private final String name;
-  private final long id;
   private final TaskBusinessState businessState;
   private final TaskState state;
 
   public TaskLinkModel(ITask task) {
-    this.name = StringUtils.isBlank(task.getName()) ? "[Task: " + task.getId() + "]" : task.getName();
-    this.id = task.getId();
+    this.name = StringUtils.isBlank(task.getName()) ? "[Task: " + task.uuid() + "]" : task.getName();
+    this.uuid = task.uuid();
     this.businessState = task.getBusinessState();
     this.state = task.getState();
   }
 
-  public String getName() {
-    return name;
+  public String getUuid() {
+    return uuid;
   }
 
-  public long getId() {
-    return id;
+  public String getName() {
+    return name;
   }
 
   public TaskBusinessState getBusinessState() {
@@ -39,7 +39,7 @@ public class TaskLinkModel {
   }
 
   public void redirectToTask() {
-    RedirectUtil.redirect("taskDetails.xhtml?task=" + this.id);
+    RedirectUtil.redirect(TaskModel.toDetailUrl(uuid));
   }
 
   public String getStateIcon() {

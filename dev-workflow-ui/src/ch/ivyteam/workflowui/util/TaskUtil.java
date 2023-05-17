@@ -16,7 +16,7 @@ public class TaskUtil {
 
   public static String getName(ITask task) {
     if (StringUtils.isBlank(task.getName())) {
-      return "[Task: " + task.getId() + "]";
+      return "[Task: " + task.uuid() + "]";
     }
     return task.getName();
   }
@@ -47,30 +47,30 @@ public class TaskUtil {
     };
   }
 
-  public static ITask getTaskById(long id) {
-    return IWorkflowContext.current().findTask(id);
+  public static ITask getTaskById(String uuid) {
+    return IWorkflowContext.current().findTask(uuid);
   }
 
   public static void displayTaskRow(SelectEvent<?> event) {
-    Object object = event.getObject();
-    if (object instanceof TaskModel) {
-      redirectToTaskDetails(((TaskModel) object).getId());
+    var object = event.getObject();
+    if (object instanceof TaskModel model) {
+      redirectToTaskDetails(model);
     }
   }
 
   public static void executeTaskRow(SelectEvent<?> event) {
-    Object object = event.getObject();
-    if (object instanceof TaskModel) {
-      executeTask(((TaskModel) object).getId());
+    var object = event.getObject();
+    if (object instanceof TaskModel model) {
+      executeTask(model);
     }
   }
 
-  public static void redirectToTaskDetails(long id) {
-    RedirectUtil.redirect("taskDetails.xhtml?task=" + id);
+  public static void redirectToTaskDetails(TaskModel model) {
+    RedirectUtil.redirect(model.getDetailUrl());
   }
 
-  public static void executeTask(long id) {
-    ITask task = IWorkflowContext.current().findTask(id);
+  public static void executeTask(TaskModel model) {
+    var task = IWorkflowContext.current().findTask(model.getUuid());
     RedirectUtil.redirect(createTaskUrl(new TaskModel(task)));
   }
 

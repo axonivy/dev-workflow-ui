@@ -8,12 +8,12 @@
 
 <cc:implementation>
   <h:link styleClass="case-link p-d-flex p-ai-center" outcome="caseDetails">
-    <f:param name="case" value="#{cc.attrs.case.id}"/>
+    <f:param name="case" value="#{cc.attrs.case.uuid()}"/>
     <i class="si si-task-list-approve p-mr-1" />
     <h:outputText id="caseState" styleClass="si si-#{casesIvyDevWfBean.getStateIcon(cc.attrs.case.getBusinessState())} p-mr-1"/>
     <p:tooltip for="caseState" value="State: #{cc.attrs.case.businessState} (#{cc.attrs.case.state})" position="top"/>
     <h:outputText id="caseLink" value="#{casesIvyDevWfBean.getName(cc.attrs.case)}" />
-    <p:tooltip for="caseLink" value="ID: #{cc.attrs.case.id}" position="top"/>
+    <p:tooltip for="caseLink" value="Case #{cc.attrs.case.uuid()}" position="top"/>
   </h:link>
 </cc:implementation>
 </html>

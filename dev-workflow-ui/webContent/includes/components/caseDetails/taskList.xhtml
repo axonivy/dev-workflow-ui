@@ -20,7 +20,7 @@
 
     <p:column headerText="Name" filterBy="#{task.name}">
       <h:outputText id="taskName" value="#{task.name}"/>
-      <p:tooltip for="taskName" value="Task ID: #{task.id}" position="top" />
+      <p:tooltip for="taskName" value="Task: #{task.uuid}" position="top" />
     </p:column>
 
     <p:column headerText="Responsible" responsivePriority="2">
@@ -36,7 +36,7 @@
     </p:column>
 
     <p:column styleClass="table-btn-1">
-      <p:link href="taskDetails.xhtml?task=#{task.id}" >
+      <p:link href="#{task.detailUrl}" >
         <i class="si si-information-circle detail-btn"/>
       </p:link>
     </p:column>

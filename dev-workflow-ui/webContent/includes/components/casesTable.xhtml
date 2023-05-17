@@ -17,7 +17,7 @@
 
     <p:column styleClass="icon-row" responsivePriority="2">
       <h:outputText id="caseIcon" styleClass="si si-lg si-task-list-approve" />
-      <p:tooltip for="caseIcon" value="ID: #{case.id}" position="top" />
+      <p:tooltip for="caseIcon" value="Case: #{case.uuid()}" position="top" />
     </p:column>
 
     <p:column filterBy="#{case.state}" styleClass="icon-row" sortBy="#{case.state}">
@@ -27,9 +27,9 @@
 
     <p:column headerText="Name" filterBy="#{case.getName(case)}" sortBy="#{case.name}">
       <h:link outcome="caseDetails">
-        <f:param name="case" value="#{case.id}" />
+        <f:param name="case" value="#{case.uuid()}" />
         <h:outputText id="caseName" value="#{casesIvyDevWfBean.getName(case)}" />
-        <p:tooltip for="caseName" value="Case ID: #{case.id}" position="top" />
+        <p:tooltip for="caseName" value="Case: #{case.uuid()}" position="top" />
       </h:link>
     </p:column>
 
@@ -46,7 +46,7 @@
     </p:column>
 
     <p:column styleClass="table-btn-1">
-      <p:link href="caseDetails.xhtml?case=#{case.id}" >
+      <p:link href="caseDetails.xhtml?case=#{case.uuid()}" >
         <i class="si si-information-circle detail-btn"/>
       </p:link>
     </p:column>

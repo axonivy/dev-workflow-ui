@@ -27,7 +27,7 @@ import ch.ivyteam.workflowui.util.TaskUtil;
 
 public class TaskModel {
 
-  private final long id;
+  private final String uuid;
   private final String name;
   private final WorkflowPriority priority;
   private final String priorityIcon;
@@ -60,7 +60,7 @@ public class TaskModel {
   }
 
   public TaskModel(ITask task) {
-    this.id = task.getId();
+    this.uuid = task.uuid();
     this.name = TaskUtil.getName(task);
     this.priority = task.getPriority();
     this.priorityIcon = TaskUtil.getPriorityIcon(task);
@@ -88,8 +88,8 @@ public class TaskModel {
     this.viewerAllowed = isViewerAllowed(task);
   }
 
-  public long getId() {
-    return id;
+  public String getUuid() {
+    return uuid;
   }
 
   public String getName() {
@@ -181,7 +181,7 @@ public class TaskModel {
     if (sessionUser == null) {
       return false;
     }
-    return IWorkflowContext.current().findTask(id)
+    return IWorkflowContext.current().findTask(uuid)
             .canUserResumeTask(sessionUser.getUserToken()).wasSuccessful();
   }
 
@@ -232,5 +232,13 @@ public class TaskModel {
 
   private static boolean isViewerAllowed(ITask task) {
     return ProcessViewer.of(task).isViewAllowed();
+  }
+
+  public String getDetailUrl() {
+    return toDetailUrl(uuid);
+  }
+
+  public static String toDetailUrl(String uuid) {
+    return "taskDetails.xhtml?task=" + uuid;
   }
 }

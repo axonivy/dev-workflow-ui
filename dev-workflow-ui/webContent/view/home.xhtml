@@ -89,9 +89,9 @@
                   <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
                 </p:column>
                 <p:column headerText="Name" sortBy="#{task.name}">
-                  <p:commandLink id="startTaskLink" actionListener="#{personalTasksIvyDevWfBean.executeTask(task.id)}">
+                  <p:commandLink id="startTaskLink" actionListener="#{personalTasksIvyDevWfBean.executeTask(task)}">
                     <h:outputText id="taskName" value="#{task.name}" />
-                    <p:tooltip for="taskName" value="Task ID: #{task.id}" position="top" />
+                    <p:tooltip for="taskName" value="Task: #{task.uuid}" position="top" />
                   </p:commandLink>
                 </p:column>
                 <p:column headerText="Start" sortBy="#{task.startTimestamp}" sortOrder="descending">
@@ -101,7 +101,7 @@
                   <jc:datetime id="expiryTime" datetime="#{task.expiryTimestamp}" />
                 </p:column>
                 <p:column styleClass="table-btn-1">
-                  <p:link href="taskDetails.xhtml?task=#{task.id}" >
+                  <p:link href="#{task.detailUrl}" >
                     <i class="si si-information-circle detail-btn"/>
                   </p:link>
                 </p:column>

@@ -10,6 +10,7 @@ import ch.ivyteam.workflowui.util.TaskUtil;
 @ManagedBean
 @ViewScoped
 public class PersonalTasksIvyDevWfBean {
+
   private TasksDataModel tasksDataModel;
 
   public PersonalTasksIvyDevWfBean() {
@@ -25,7 +26,7 @@ public class PersonalTasksIvyDevWfBean {
     TaskUtil.executeTaskRow(event);
   }
 
-  public void executeTask(long taskId) {
-   TaskUtil.executeTask(taskId);
+  public void executeTask(TaskModel model) {
+    TaskUtil.executeTask(model);
   }
 }

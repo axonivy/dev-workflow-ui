@@ -17,6 +17,7 @@ import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.IWorkflowSession;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
+import ch.ivyteam.workflowui.util.ResponseHelper;
 import ch.ivyteam.workflowui.util.RoleUtil;
 import ch.ivyteam.workflowui.util.TaskUtil;
 import ch.ivyteam.workflowui.util.UserUtil;
@@ -41,11 +42,12 @@ public class TasksDetailsIvyDevWfBean {
 
   public void setSelectedTaskId(String selectedTaskId) {
     this.selectedTaskId = selectedTaskId;
-    this.selectedTask = new TaskModel(getTaskById(Long.parseLong(selectedTaskId)));
-  }
-
-  public ITask getTaskById(long id) {
-    return TaskUtil.getTaskById(id);
+    var task = TaskUtil.getTaskById(selectedTaskId);
+    if (task == null) {
+      ResponseHelper.notFound("Task " + task + " does not exist");
+      return;
+    }
+    this.selectedTask = new TaskModel(task);
   }
 
   public String getExecuteTaskLink() {
@@ -55,34 +57,39 @@ public class TasksDetailsIvyDevWfBean {
   public MenuModel getSidestepsMenuModel() {
     return SidestepUtil.createMenuModel(selectedTask.getSidesteps());
   }
+
   public void reset() {
-    var itask = IWorkflowContext.current().findTask(selectedTask.getId());
+    var itask = loadTask();
     itask.reset();
     selectedTask = new TaskModel(itask);
   }
 
   public void park() {
-    var itask = IWorkflowContext.current().findTask(selectedTask.getId());
+    var itask = loadTask();
     IWorkflowSession.current().parkTask(itask);
     selectedTask = new TaskModel(itask);
   }
 
   public void destroy() {
-    var itask = IWorkflowContext.current().findTask(selectedTask.getId());
+    var itask = loadTask();
     itask.destroy();
     selectedTask = new TaskModel(itask);
   }
 
   public void expireTask() {
-    var itask = IWorkflowContext.current().findTask(selectedTask.getId());
+    var itask = loadTask();
     itask.setExpiryTimestamp(new Date());
     selectedTask = new TaskModel(itask);
   }
 
   public void clearDelay() {
-    var itask = IWorkflowContext.current().findTask(selectedTask.getId());
+    var itask = loadTask();
     itask.setDelayTimestamp(null);
     selectedTask = new TaskModel(itask);
+  }
+
+  private ITask loadTask() {
+    return IWorkflowContext.current().findTask(selectedTask.getUuid());
   }
 
   public String getDelegateMember() {
@@ -110,7 +117,7 @@ public class TasksDetailsIvyDevWfBean {
   }
 
   public void delegateTask() {
-    var itask = IWorkflowContext.current().findTask(selectedTask.getId());
+    var itask = loadTask();
     var member = Ivy.security().members().find(delegateMember);
     if (member != null) {
       itask.setActivator(member);
@@ -136,7 +143,7 @@ public class TasksDetailsIvyDevWfBean {
     if (user == null) {
       return false;
     }
-    var task = IWorkflowContext.current().findTask(Long.parseLong(selectedTaskId));
+    var task = loadTask();
     if (task == null) {
       return false;
     }
@@ -158,5 +165,4 @@ public class TasksDetailsIvyDevWfBean {
   public void setViewerLink() {
     this.viewerLink = selectedTask.getViewerLink();
   }
-
 }

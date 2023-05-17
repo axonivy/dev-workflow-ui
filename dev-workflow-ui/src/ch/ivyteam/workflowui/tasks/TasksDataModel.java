@@ -18,6 +18,7 @@ import ch.ivyteam.workflowui.util.TaskUtil;
 import ch.ivyteam.workflowui.util.UserUtil;
 
 public class TasksDataModel extends LazyDataModel<TaskModel> {
+
   private static final long serialVersionUID = -5287014754211109062L;
   private String filter;
   private boolean showAllTasks = UserUtil.isAdmin();
@@ -41,17 +42,15 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
 
   @Override
   public String getRowKey(TaskModel task) {
-    return Long.toString(task.getId());
+    return task.getUuid();
   }
 
   @Override
   public TaskModel getRowData(String rowKey) {
-    for (TaskModel task : getTaskList()) {
-      if (task.getId() == Long.valueOf(rowKey)) {
-        return task;
-      }
-    }
-    return null;
+    return getTaskList().stream()
+            .filter(task -> task.getUuid().equals(rowKey))
+            .findAny()
+            .orElse(null);
   }
 
   private List<TaskModel> getTaskList() {
