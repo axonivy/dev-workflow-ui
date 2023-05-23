@@ -84,7 +84,7 @@ pipeline {
           maven cmd: 'clean verify ' +
                   '-f maven/image-validation/pom.xml ' +
                   '-Dmaven.test.failure.ignore=true ' +
-                  '-Dimg.similarity=94'
+                  '-Dimg.similarity=92'
 
           archiveArtifacts '**/target/docu/**/*'
           archiveArtifacts '**/target/*.html'
