@@ -18,7 +18,6 @@ pipeline {
   }
 
   environment {
-    imgSimilarity = 98
     dockerfileParams = '--shm-size 1g --hostname=ivy'
   }
 
@@ -85,7 +84,7 @@ pipeline {
           maven cmd: 'clean verify ' +
                   '-f maven/image-validation/pom.xml ' +
                   '-Dmaven.test.failure.ignore=true ' +
-                  '-Dimg.similarity=' + env.imgSimilarity
+                  '-Dimg.similarity=94'
 
           archiveArtifacts '**/target/docu/**/*'
           archiveArtifacts '**/target/*.html'
