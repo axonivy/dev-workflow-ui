@@ -27,6 +27,7 @@ import ch.ivyteam.workflowui.util.TaskUtil;
 
 public class TaskModel {
 
+  private final long id;
   private final String uuid;
   private final String name;
   private final WorkflowPriority priority;
@@ -60,6 +61,7 @@ public class TaskModel {
   }
 
   public TaskModel(ITask task) {
+    this.id = task.getId();
     this.uuid = task.uuid();
     this.name = TaskUtil.getName(task);
     this.priority = task.getPriority();
@@ -86,6 +88,10 @@ public class TaskModel {
     this.currentElement = getCurrentElementId(task);
     this.viewerLink = buildViewerLink(task);
     this.viewerAllowed = isViewerAllowed(task);
+  }
+
+  public long getId() {
+    return id;
   }
 
   public String getUuid() {
