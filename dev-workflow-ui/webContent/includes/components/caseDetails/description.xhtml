@@ -9,7 +9,7 @@
      details-description-label p-col-6 p-md-2, p-col-6 p-md-4">
 
     <h:outputText value="Case ID" />
-    <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.uuid()}" id="caseId" title="ID: #{casesDetailsIvyDevWfBean.selectedCase.getId()}" />
+    <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.uuid()}" id="caseId"/>
 
     <h:outputText value="Case name" />
     <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.getName()}" id="caseName" />
@@ -40,6 +40,7 @@
     <h:outputText value="Description" />
     <h:outputText value="#{casesDetailsIvyDevWfBean.description}" id="caseDescription" />
   </p:panelGrid>
+  <p:tooltip for="caseId" value="ID: #{casesDetailsIvyDevWfBean.selectedCase.getId()}" />
   <p:tooltip for="createdDate" value="#{dateTimeIvyDevWfBean.getPrettyTime(casesDetailsIvyDevWfBean.selectedCase.getStartTimestamp())}"
     position="top" />
 

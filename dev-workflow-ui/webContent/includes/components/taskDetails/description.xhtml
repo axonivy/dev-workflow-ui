@@ -9,7 +9,7 @@
      details-description-label p-d-flex p-ai-center p-col-6 p-md-2, p-d-flex p-ai-center p-col-6 p-md-4">
 
     <h:outputText value="Task ID" />
-    <h:outputText id="taskId" value="#{tasksDetailsIvyDevWfBean.selectedTask.uuid}" title="ID: #{tasksDetailsIvyDevWfBean.selectedTask.id}" />
+    <h:outputText id="taskId" value="#{tasksDetailsIvyDevWfBean.selectedTask.uuid}" />
 
     <h:outputText value="Task name" />
     <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.name}" id="taskName" />
@@ -72,5 +72,6 @@
       #{tasksDetailsIvyDevWfBean.selectedTask.currentElement}
     </p:commandLink>
   </p:panelGrid>
+  <p:tooltip for="taskId" value="ID: #{tasksDetailsIvyDevWfBean.selectedTask.getId()}" position="top"/>
 
 </ui:composition>
