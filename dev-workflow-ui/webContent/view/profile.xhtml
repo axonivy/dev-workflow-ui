@@ -31,34 +31,27 @@
 
             <h:outputLabel for="contentLanguage" styleClass="details-description-label">Language</h:outputLabel>
             <h:panelGroup>
-              <p:selectOneMenu id="contentLanguage"
-                value="#{profileBean.contentLanguage}"
-                editable="true"
+              <p:selectOneMenu id="contentLanguage" value="#{profileBean.contentLanguage}" editable="true"
                 converter="localeConverter">
-                <f:selectItems value="#{profileBean.contentLanguages}"
-                  var="locale" itemLabel="#{profileBean.toDisplayName(locale)}" />
+                <f:selectItems value="#{profileBean.contentLanguages}" var="locale"
+                  itemLabel="#{profileBean.toDisplayName(locale)}" />
               </p:selectOneMenu>
               <small>
-              <h:outputText title="Content locale of the current session."
-                escape="false"
-                value="#{profileBean.contentLanguageSource}"></h:outputText>
-               </small>
+                <h:outputText id="contentLanguageDisplay" value="#{profileBean.contentLanguageSource}" escape="false"/>
+                <p:tooltip for="contentLanguageDisplay" value="Content locale of the current session." position="bottom"/>
+              </small>
             </h:panelGroup>
 
             <h:outputLabel for="formattingLanguage" styleClass="details-description-label">Formatting Language</h:outputLabel>
             <h:panelGroup>
-              <p:selectOneMenu filter="true" filterMatchMode="contains"
-                id="formattingLanguage"
-                editable="true"
-                value="#{profileBean.formattingLanguage}"
-                converter="localeConverter">
-                <f:selectItems value="#{profileBean.formattingLanguages}"
-                  var="locale" itemLabel="#{profileBean.toDisplayName(locale)}" />
+              <p:selectOneMenu filter="true" filterMatchMode="contains" id="formattingLanguage" editable="true"
+                value="#{profileBean.formattingLanguage}" converter="localeConverter">
+                <f:selectItems value="#{profileBean.formattingLanguages}" var="locale"
+                  itemLabel="#{profileBean.toDisplayName(locale)}" />
               </p:selectOneMenu>
               <small>
-              <h:outputText title="Formatting locale of the current session."
-                escape="false"
-                value="#{profileBean.formattingLanguageSource}"></h:outputText>
+                <h:outputText id="formattingLanguageDisplay" value="#{profileBean.formattingLanguageSource}" escape="false" />
+                <p:tooltip for="formattingLanguageDisplay" value="Formatting locale of the current session." position="bottom"/>
               </small>
             </h:panelGroup>
 
