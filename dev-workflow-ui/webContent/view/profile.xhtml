@@ -19,7 +19,7 @@
         </div>
         <h:form id="profileForm">
           <p:growl id="growl" showDetail="true" />
-          <p:panelGrid columns="2" layout="flex" columnClasses="p-col-12 p-md-3, p-col-12 p-md-9">
+          <p:panelGrid columns="1" layout="flex" styleClass="profile-card">
             <h:outputLabel for="userName" styleClass="details-description-label">User Name</h:outputLabel>
             <h:outputText id="userName" value="#{profileBean.userName}"></h:outputText>
 
