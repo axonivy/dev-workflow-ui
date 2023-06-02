@@ -236,3 +236,12 @@ body .custom-accordion.ui-accordion .ui-accordion-header:first-child {
   align-items: center;
   flex-direction: column;
 }
+
+/* Profile */
+.profile-card .ui-panelgrid-content > div:nth-child(odd) {
+  font-weight: bold;
+}
+.profile-card .ui-panelgrid-content > div:nth-child(even) {
+  padding-top: 0;
+  padding-bottom: 0.75em;
+}
