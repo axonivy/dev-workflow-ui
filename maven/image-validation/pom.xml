@@ -66,6 +66,7 @@
                 </includes>
                 <excludes>
                   <exclude>**/workflow-ui-caseDetails.png</exclude>
+                  <exclude>**/workflow-ui-caseMap.png</exclude>
                 </excludes>
               </newImagesFs>
               <refImages>${project.build.directory}</refImages>
