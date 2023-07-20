@@ -32,6 +32,10 @@
 
         <div class="layout-topbar-right">
           <ul class="layout-topbar-actions">
+            <li class="topbar-item">
+              <ui:include src="./notifications.xhtml" />
+            </li>
+
             <li class="themeswitch-item">
               <p:commandLink id="themeSwitcher" onclick="PrimeFaces.FreyaConfigurator.changeLayout('ivy', '#{ivyFreyaTheme.mode == 'light' ? 'dark' : 'light'}');"
                 style="text-decoration: none;">
@@ -39,6 +43,7 @@
                 <p:ajax onstart="PrimeFaces.FreyaConfigurator.beforeResourceChange();" listener="#{ivyFreyaTheme.toggleTheme}" update="themeSwitcher" />
               </p:commandLink>
             </li>
+
             <li class="topbar-item user-profile">
               <a href="#">
                 <span class="profile-image-wrapper">
