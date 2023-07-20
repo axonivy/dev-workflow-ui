@@ -147,7 +147,7 @@ pipeline {
           def deployApplicationName = ("dev-workflow-ui_" + env.BRANCH_NAME.replaceAll("%2F","_").replaceAll("/","_").replaceAll("\\.","_")).take(40)
 
           catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-            maven cmd: 'deploy ' +
+            maven cmd: 'install -P deploy-to-engine ' +
                     "-DskipDeployToEngine=false " +
                     "-DdeployToEngineUrl=${deployToEngineUrl} " +
                     "-DdeployApplicationName=${deployApplicationName} " +
