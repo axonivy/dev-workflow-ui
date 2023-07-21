@@ -7,7 +7,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import ch.ivyteam.ivy.notification.web.WebNotifications;
-import ch.ivyteam.ivy.security.ISession;
 
 @ViewScoped
 @ManagedBean
@@ -19,7 +18,7 @@ public class NotificationBean {
   private long countUnread;
 
   public NotificationBean() {
-    this.webNotifications = WebNotifications.of(ISession.current().getSessionUser());
+    this.webNotifications = WebNotifications.current();
     this.countAll = webNotifications.countAll();
     this.countUnread = webNotifications.countUnread();
   }
