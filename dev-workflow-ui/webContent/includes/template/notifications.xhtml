@@ -34,7 +34,7 @@
 
     <h:panelGroup rendered="#{notificationBean.hasNotifications()}">
       <h:form>
-        <p:dataScroller lazy="true" value="#{notificationBean.dataModel}" var="notification" chunkSize="20" scrollHeight="600" mode="inline">
+        <p:dataScroller lazy="true" styleClass="notification-scroll" value="#{notificationBean.dataModel}" var="notification" chunkSize="20" scrollHeight="600" mode="inline">
           <div class="#{notification.style} notification-container">
             <div class="p-d-flex p-jc-between">
               <h:outputText value="#{notification.message}" class=""></h:outputText>
