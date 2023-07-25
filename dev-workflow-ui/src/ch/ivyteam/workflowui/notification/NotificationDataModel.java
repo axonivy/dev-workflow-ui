@@ -12,6 +12,8 @@ import ch.ivyteam.ivy.notification.web.WebNotifications;
 
 public class NotificationDataModel extends LazyDataModel<NotificationDto> {
 
+  private static final long serialVersionUID = 1;
+
   private final WebNotifications webNotifications;
 
   public NotificationDataModel(WebNotifications webNotifications) {
