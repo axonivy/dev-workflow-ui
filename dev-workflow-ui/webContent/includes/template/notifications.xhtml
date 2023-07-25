@@ -28,16 +28,16 @@
       </div>
     </div>
 
-    <h:panelGroup rendered="#{!notificationBean.hasNotifications()}">
+    <h:panelGroup id="no-notifications" rendered="#{!notificationBean.hasNotifications()}">
       <div class="p-text-center" style="padding:20px;">No Notifications </div>
     </h:panelGroup>
 
     <h:panelGroup rendered="#{notificationBean.hasNotifications()}">
-      <h:form>
-        <p:dataScroller lazy="true" styleClass="notification-scroll" value="#{notificationBean.dataModel}" var="notification" chunkSize="20" scrollHeight="600" mode="inline">
+      <h:form id="notificationForm">
+        <p:dataScroller id="notifications" lazy="true" styleClass="notification-scroll" value="#{notificationBean.dataModel}" var="notification" chunkSize="20" mode="inline">
           <div class="#{notification.style} notification-container">
             <div class="p-d-flex p-jc-between">
-              <h:outputText value="#{notification.message}" class=""></h:outputText>
+              <h:outputText id="notificationMessage" value="#{notification.message}" />
 
               <div class="p-d-flex">
                 <p:commandLink id="notificationMarkAsRead" process="@this" rendered="#{!notification.read}" actionListener="#{notificationBean.markAsRead(notification)}" update="notifications unreadNotifications">
