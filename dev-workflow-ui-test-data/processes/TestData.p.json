@@ -631,5 +631,39 @@
       "visual" : {
         "at" : { "x" : 672, "y" : 448 }
       }
+    }, {
+      "id" : "f60",
+      "type" : "RequestStart",
+      "name" : "createNotification",
+      "config" : {
+        "signature" : "createNotification"
+      },
+      "visual" : {
+        "at" : { "x" : 88, "y" : 544 }
+      },
+      "connect" : [
+        { "id" : "f63", "to" : "f62" }
+      ]
+    }, {
+      "id" : "f61",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 328, "y" : 544 }
+      }
+    }, {
+      "id" : "f62",
+      "type" : "UserTask",
+      "name" : "create Notification",
+      "config" : {
+        "task" : {
+          "name" : "New Invoice for Alban Bislimi"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 232, "y" : 544 }
+      },
+      "connect" : [
+        { "id" : "f64", "to" : "f61" }
+      ]
     } ]
 }

@@ -269,6 +269,7 @@ body .custom-accordion.ui-accordion .ui-accordion-header:first-child {
 body .notification-scroll>.ui-datascroller-content  {
   border: 0px;
   padding: 2px;
+  max-height: 600px;
 }
 body .notification-scroll>.ui-datascroller-content::-webkit-scrollbar {
   display: none;
