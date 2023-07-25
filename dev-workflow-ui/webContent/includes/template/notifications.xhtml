@@ -33,15 +33,14 @@
     </h:panelGroup>
 
     <h:panelGroup rendered="#{notificationBean.hasNotifications()}">
-      <div class="notification-scroll">
-
-        <p:repeat value="#{notificationBean.notifications}" var="notification">
+      <h:form>
+        <p:dataScroller lazy="true" styleClass="notification-scroll" value="#{notificationBean.dataModel}" var="notification" chunkSize="20" scrollHeight="600" mode="inline">
           <div class="#{notification.style} notification-container">
             <div class="p-d-flex p-jc-between">
               <h:outputText value="#{notification.message}" class=""></h:outputText>
 
               <div class="p-d-flex">
-                <p:commandLink id="notificationMarkAsRead" rendered="#{!notification.read}" actionListener="#{notificationBean.markAsRead(notification)}" update="notifications unreadNotifications">
+                <p:commandLink id="notificationMarkAsRead" process="@this" rendered="#{!notification.read}" actionListener="#{notificationBean.markAsRead(notification)}" update="notifications unreadNotifications">
                   <i class="notification-button si si-check-circle-1 p-mr-1 " />
                 </p:commandLink>
                 <p:tooltip for="notificationMarkAsRead" value="Mark as read" />
@@ -54,8 +53,8 @@
               </h:outputText>
             </div>
           </div>
-        </p:repeat>
-      </div>
+        </p:dataScroller>
+      </h:form>
     </h:panelGroup>
   </h:panelGroup>
 </p:overlayPanel>

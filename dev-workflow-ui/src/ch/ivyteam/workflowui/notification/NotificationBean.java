@@ -1,8 +1,5 @@
 package ch.ivyteam.workflowui.notification;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -13,6 +10,7 @@ import ch.ivyteam.ivy.notification.web.WebNotifications;
 public class NotificationBean {
 
   private final WebNotifications webNotifications;
+  private final NotificationDataModel dataModel;
 
   private long countAll;
   private long countUnread;
@@ -21,12 +19,11 @@ public class NotificationBean {
     this.webNotifications = WebNotifications.current();
     this.countAll = webNotifications.countAll();
     this.countUnread = webNotifications.countUnread();
+    this.dataModel = new NotificationDataModel(webNotifications);
   }
 
-  public List<NotificationDto> getNotifications() {
-    return webNotifications.read(0, 100).stream()
-            .map(NotificationDto::new)
-            .collect(Collectors.toList());
+  public NotificationDataModel getDataModel() {
+    return dataModel;
   }
 
   public void deleteAll() {

@@ -266,11 +266,11 @@ body .custom-accordion.ui-accordion .ui-accordion-header:first-child {
   padding-right:0px;
   margin-bottom:0.15em;
 }
-.notification-scroll {
-  overflow:scroll;
-  max-height:600px;
+body .notification-scroll>.ui-datascroller-content  {
+  border: 0px;
+  padding: 2px;
 }
-.notification-scroll::-webkit-scrollbar {
+body .notification-scroll>.ui-datascroller-content::-webkit-scrollbar {
   display: none;
 }
 
