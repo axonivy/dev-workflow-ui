@@ -655,6 +655,7 @@
       "type" : "UserTask",
       "name" : "create Notification",
       "config" : {
+        "dialog" : "ch.ivyteam.ivy.project.workflow.DummyHtmlDialog:start()",
         "task" : {
           "name" : "New Invoice for Alban Bislimi"
         }
