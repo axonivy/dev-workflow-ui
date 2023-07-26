@@ -26,8 +26,8 @@ public class NotificationBean {
     return dataModel;
   }
 
-  public void deleteAll() {
-    webNotifications.deleteAll();
+  public void hideAll() {
+    webNotifications.hideAll();
     countAll = 0;
     countUnread = 0;
   }

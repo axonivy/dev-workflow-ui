@@ -21,10 +21,10 @@
         </p:commandLink>
         <p:tooltip for="notificationMarkAllAsRead" value="Mark all notifications as read" />
 
-        <p:commandLink id="notificationDeleteAll" rendered="#{notificationBean.hasNotifications()}" actionListener="#{notificationBean.deleteAll()}" update="notifications unreadNotifications">
+        <p:commandLink id="notificationHideAll" rendered="#{notificationBean.hasNotifications()}" actionListener="#{notificationBean.hideAll()}" update="notifications unreadNotifications">
           <i class="notification-button si si-bin-1" />
         </p:commandLink>
-        <p:tooltip for="notificationDeleteAll" value="Delete all notifications" />
+        <p:tooltip for="notificationHideAll" value="Delete all notifications" />
       </div>
     </div>
 
