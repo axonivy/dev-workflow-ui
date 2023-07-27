@@ -54,7 +54,7 @@ class WebTestNotification {
   }
 
   @Test
-  void deleteAll() {
+  void hideAll() {
     startTestProcess("1750C5211D94569D/createNotification.ivp");
     startTestProcess("1750C5211D94569D/createNotification.ivp");
 
@@ -63,8 +63,8 @@ class WebTestNotification {
     $(By.id("notificationForm:notifications:0:notificationMarkAsRead")).should(visible);
     $(By.id("notificationForm:notifications:1:notificationMarkAsRead")).should(visible);
 
-    $(By.id("notificationDeleteAll")).should(visible).click();
-    $(By.id("notificationDeleteAll")).should(not(visible));
+    $(By.id("notificationHideAll")).should(visible).click();
+    $(By.id("notificationHideAll")).should(not(visible));
     $(By.id("notificationForm:notifications:0:notificationMarkAsRead")).should(not(visible));
     $(By.id("notificationForm:notifications:1:notificationMarkAsRead")).should(not(visible));
     $(By.id("no-notifications")).should(visible);
