@@ -27,6 +27,6 @@ public class SidebarIvyDevWfBean {
   }
 
   public String getCockpitPath() {
-	return EngineCockpitUrlPath.toPath();
+    return EngineCockpitUrlPath.toPath();
   }
 }
