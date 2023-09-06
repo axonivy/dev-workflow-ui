@@ -8,6 +8,8 @@ import javax.faces.context.FacesContext;
 
 import org.apache.commons.lang3.StringUtils;
 
+import ch.ivyteam.ivy.security.context.EngineCockpitUrlPath;
+
 @ManagedBean
 @RequestScoped
 public class SidebarIvyDevWfBean {
@@ -22,5 +24,9 @@ public class SidebarIvyDevWfBean {
 
   public boolean isActive(String... pages) {
     return Stream.of(pages).anyMatch(page -> activePage.equals(page));
+  }
+
+  public String getCockpitPath() {
+	return EngineCockpitUrlPath.toPath();
   }
 }
