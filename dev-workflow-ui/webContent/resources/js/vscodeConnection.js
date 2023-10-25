@@ -1,3 +1,3 @@
 window.addEventListener("load", (event) => {
-  window.postMessage({ type: 'frame-onload', url: window.location.href }, '*');
+  window.parent.postMessage({ type: 'frame-onload', url: window.location.href }, '*');
 });
