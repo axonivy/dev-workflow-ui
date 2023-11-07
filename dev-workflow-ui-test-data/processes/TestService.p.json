@@ -1,9 +1,10 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/process/11.2.1/process.json",
+  "$schema" : "https://json-schema.axonivy.com/process/11.2.2/process.json",
   "id" : "17B167C2EEBFD5CF",
   "kind" : "WEB_SERVICE",
   "config" : {
     "data" : "ch.ivyteam.ivy.project.workflow.Data",
+    "wsAuth" : "NONE",
     "wsTypeName" : "ch.ivyteam.ivy.project.workflow.TestService"
   },
   "elements" : [ {
