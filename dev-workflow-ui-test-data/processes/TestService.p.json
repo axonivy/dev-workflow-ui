@@ -4,7 +4,6 @@
   "kind" : "WEB_SERVICE",
   "config" : {
     "data" : "ch.ivyteam.ivy.project.workflow.Data",
-    "wsAuth" : "NONE",
     "wsTypeName" : "ch.ivyteam.ivy.project.workflow.TestService"
   },
   "elements" : [ {
