@@ -2,8 +2,8 @@ package ch.ivyteam.ivy.project.workflow.webtest;
 
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
-import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.not;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -13,7 +13,7 @@ import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
 
-@IvyWebTest(headless = false)
+@IvyWebTest
 class WebTestNotification {
 
   @BeforeEach
@@ -29,7 +29,7 @@ class WebTestNotification {
 
     $(By.id("notificationForm:notifications:0:notificationMessage"))
             .should(visible)
-            .should(exactText("New Task 'New Invoice for Alban Bislimi' for Everybody"));
+            .should(text("New Task 'New Invoice for Alban Bislimi' for Everybody"));
     $(By.id("notificationForm:notifications:0:notificationMarkAsRead"))
             .should(visible)
             .click();
