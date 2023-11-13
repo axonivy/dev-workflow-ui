@@ -13,6 +13,8 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Map;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -53,7 +55,7 @@ class WebTestCaseDetailsIT {
 
   @Test
   void caseNotFound() {
-    openView("caseDetails.xhtml?case=NON-EXISTING-CASE");
+    openView("caseDetails.xhtml", Map.of("case", "NON-EXISTING-CASE"));
     assertThat(Selenide.webdriver().driver().getWebDriver().getPageSource()).contains("Not Found");
   }
 
