@@ -76,7 +76,11 @@ public class WebTestStartsIT {
 
   @Test
   public void testExecuteDefaultFramePage() {
-    Selenide.open(EngineUrl.createProcessUrl("/dev-workflow-ui-test-data/1750C5211D94569D/startTestDialog1.ivp?embedInFrame"));
+    var url = EngineUrl.create()
+            .process("/dev-workflow-ui-test-data/1750C5211D94569D/startTestDialog1.ivp")
+            .queryParam("embedInFrame", "")
+            .toUrl();
+    Selenide.open(url);
     if ($(By.id("iFrame")).is(visible)) {
       Selenide.switchTo().frame("iFrame");
     }

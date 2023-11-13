@@ -12,6 +12,8 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Map;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -87,7 +89,7 @@ class WebTestTasksIT {
 
   @Test
   void taskNotFound() {
-    openView("taskDetails.xhtml?task=NON-EXISTING-TASK");
+    openView("taskDetails.xhtml", Map.of("task", "NON-EXISTING-TASK"));
     assertThat(Selenide.webdriver().driver().getWebDriver().getPageSource()).contains("Not Found");
   }
 

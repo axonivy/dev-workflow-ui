@@ -2,7 +2,6 @@ package ch.ivyteam.ivy.project.workflow.webtest.util;
 
 import static com.axonivy.ivy.webtest.engine.EngineUrl.createCaseMapUrl;
 import static com.axonivy.ivy.webtest.engine.EngineUrl.createProcessUrl;
-import static com.axonivy.ivy.webtest.engine.EngineUrl.createStaticViewUrl;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -13,9 +12,12 @@ import static com.codeborne.selenide.Selenide.webdriver;
 import static com.codeborne.selenide.WebDriverConditions.urlContaining;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+
+import com.axonivy.ivy.webtest.engine.EngineUrl;
 
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.workflowui.util.UserUtil;
@@ -37,19 +39,37 @@ public class WorkflowUiUtil {
   }
 
   public static void openView(String page) {
-    open(viewUrl(page));
+    openView(page, Map.of());
+  }
+
+  public static void openView(String page, Map<String, String> queryParams) {
+    open(viewUrl(page, queryParams));
     assertCurrentUrlContains(page);
   }
 
   public static String viewUrl(String page) {
+    return viewUrl(page, Map.of());
+  }
+
+  public static String viewUrl(String page, Map<String, String> queryParams) {
     var securityContext = System.getProperty("test.integrated.workflow");
     if (StringUtils.isNotEmpty(securityContext)) {
       var engineUri = System.getProperty("test.engine.url");
       var url = engineUri + "/" + securityContext + "/faces/" + page;
+      if (!queryParams.isEmpty()) {
+        url += "?";
+      }
+      for (var param : queryParams.entrySet()) {
+        url += param.getKey() + "=" + param.getValue() + "&";
+      }
       System.out.println("Engine URL integrated:" + url);
       return url;
     }
-    String url = createStaticViewUrl(pmvName() + "/" + page);
+    var builder = EngineUrl.create().staticView(pmvName() + "/" + page);
+    for (var param : queryParams.entrySet()) {
+      builder.queryParam(param.getKey(), param.getValue());
+    }
+    var url = builder.toUrl();
     System.out.println("Engine URL:" + url);
     return url;
   }
