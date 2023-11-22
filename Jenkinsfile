@@ -46,7 +46,7 @@ pipeline {
             docker.image("selenium/standalone-firefox:4").withRun("-e START_XVFB=false --shm-size=2g --name ${seleniumName} --network ${networkName}") {
               docker.build('maven').inside("--name ${ivyName} --network ${networkName}") {
                 maven cmd: 'clean verify ' +
-                      "-Divy.engine.version='[10.0.0,]' " +
+                      "-Divy.engine.version.latest.minor=true " +
                       "-Dmaven.test.failure.ignore=true " +
                       "-Dengine.page.url=${params.engineSource} " +
                       "-Dtest.engine.url=http://${ivyName}:8080 " +
