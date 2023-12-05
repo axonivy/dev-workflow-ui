@@ -1,5 +1,3 @@
-def manualDeploy
-
 pipeline {
   agent any
 
@@ -13,7 +11,6 @@ pipeline {
 
   parameters {
     string(name: 'engineSource', defaultValue: 'https://product.ivyteam.io', description: 'Engine page url')
-    booleanParam(name: 'deployScreenshots', defaultValue: false, description: 'Deploy new screenshots')
     string(name: 'deployToEngineUrl', defaultValue: 'https://nightly.demo.ivyteam.io', description: 'Deploy to engine (e.g. see: https://demo.ivyteam.io)')
   }
 
@@ -45,10 +42,12 @@ pipeline {
           try {
             docker.image("selenium/standalone-firefox:4").withRun("-e START_XVFB=false --shm-size=2g --name ${seleniumName} --network ${networkName}") {
               docker.build('maven').inside("--name ${ivyName} --network ${networkName}") {
-                maven cmd: 'clean verify ' +
+                def phase = isReleaseOrMasterBranch() ? 'deploy' : 'verify';
+                maven cmd: "clean ${phase} " +
                       "-Divy.engine.version.latest.minor=true " +
                       "-Dmaven.test.failure.ignore=true " +
                       "-Dengine.page.url=${params.engineSource} " +
+                      "-Dref.screenshot.build='${getScreenshotRefBranch()}' " + 
                       "-Dtest.engine.url=http://${ivyName}:8080 " +
                       "-Dselenide.remote=http://${seleniumName}:4444/wd/hub "
               }
@@ -61,73 +60,15 @@ pipeline {
             archiveArtifacts '**/target/*.iar'
             archiveArtifacts '**/target/dev-workflow-ui*.jar'
             archiveArtifacts '**/target/ivyEngine/logs/*'
+            archiveArtifacts '**/target/docu/**/*'
+            archiveArtifacts '**/target/*.html'
             archiveArtifacts artifacts: '**/target/selenide/reports/**/*', allowEmptyArchive: true
             currentBuild.description = "<a href='${BUILD_URL}artifact/dev-workflow-ui-web-test/target/screenshotsCompare.html'>&raquo; Screenshots</a><br>"
+            recordIssues filters: [includeType('screenshot-html-plugin:compare-images')], tools: [mavenConsole(name: 'Image', id: 'image-warnings')], unstableNewAll: 1,
+            qualityGates: [[threshold: 1, type: 'TOTAL', unstable: true]]
           } finally {
             sh "docker network rm ${networkName}"
           }
-        }
-      }
-    }
-
-    stage('verify screenshots') {
-      agent {
-        dockerfile {
-          reuseNode true
-        }
-      }
-      when {
-        expression { return !params.deployScreenshots }
-      }
-      steps {
-        script {
-          maven cmd: 'clean verify ' +
-                  '-f maven/image-validation/pom.xml ' +
-                  '-Dmaven.test.failure.ignore=true ' +
-                  '-Dimg.similarity=92'
-
-          archiveArtifacts '**/target/docu/**/*'
-          archiveArtifacts '**/target/*.html'
-          testFailsCount = (env.BRANCH_NAME == 'master') ? 1 : 2
-          recordIssues filters: [includeType('screenshot-html-plugin:compare-images')], tools: [mavenConsole(name: 'Image', id: 'image-warnings')], unstableNewAll: testFailsCount,
-          qualityGates: [[threshold: testFailsCount, type: 'TOTAL', unstable: true]]
-        }
-      }
-    }
-
-    stage('verify screenshots manually') {
-      when {
-        expression { isReleaseOrMasterBranch() }
-        not {
-          triggeredBy 'TimerTrigger'
-        }
-      }
-      steps {
-        script{
-          if (currentBuild.currentResult == 'FAILURE') {
-            timeout(time: 10, unit: 'MINUTES')
-            {
-              manualDeploy = input(
-                message: 'Screenshot comparison failed. Please check them manually.', parameters: [
-                [$class: 'BooleanParameterDefinition', defaultValue: false, description: '', name: 'Deploy screenshots?']])
-            }
-          }
-        }
-      }
-    }
-
-    stage('deploy maven') {
-      agent {
-        dockerfile {
-          reuseNode true
-        }
-      }
-      when {
-        expression { isReleaseOrMasterBranch() }
-      }
-      steps {
-        script {
-          maven cmd: 'deploy -Divy.engine.version.latest.minor=true -Dmaven.test.skip=true'
         }
       }
     }
@@ -149,6 +90,7 @@ pipeline {
           catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
             maven cmd: 'install -P deploy-to-engine ' +
                     "-DskipDeployToEngine=false " +
+                    "-Divy.engine.version.latest.minor=true " +
                     "-DdeployToEngineUrl=${deployToEngineUrl} " +
                     "-DdeployApplicationName=${deployApplicationName} " +
                     "-Dmaven.test.skip=true -Dmaven.deploy.skip=true "
@@ -162,4 +104,11 @@ pipeline {
 
 def isReleaseOrMasterBranch() {
   return env.BRANCH_NAME == 'master' || env.BRANCH_NAME.startsWith('release/')
+}
+
+def getScreenshotRefBranch() {
+  if (isReleaseOrMasterBranch() && currentBuild.previousSuccessfulBuild != null) {
+    return env.BRANCH_NAME.replace('/', '%252F')
+  }
+  return 'master'
 }

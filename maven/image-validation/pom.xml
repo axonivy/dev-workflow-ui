@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -15,38 +17,39 @@
     <test.target.dir>${project.basedir}/../../dev-workflow-ui-web-test/target/</test.target.dir>
     <screenshotArtifactId>dev-workflow-ui-screenshots</screenshotArtifactId>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <ref.screenshot.build>master</ref.screenshot.build>
+    <img.similarity>92</img.similarity>
   </properties>
-
-  <dependencies>
-    <dependency>
-      <groupId>ch.ivyteam.workflow</groupId>
-      <artifactId>${screenshotArtifactId}</artifactId>
-      <version>11.2.1-SNAPSHOT</version>
-      <type>zip</type>
-    </dependency>
-  </dependencies>
 
   <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <version>3.6.1</version>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>3.1.0</version>
         <executions>
           <execution>
-            <id>unpack-all-screenshots</id>
+            <id>download-latest-screenshots</id>
             <phase>generate-sources</phase>
             <goals>
-              <goal>unpack-dependencies</goal>
+              <goal>run</goal>
             </goals>
-            <configuration>
-              <includeArtifactIds>${screenshotArtifactId}</includeArtifactIds>
-              <outputDirectory>${project.build.directory}</outputDirectory>
-              <overWriteSnapshots>true</overWriteSnapshots>
-            </configuration>
           </execution>
         </executions>
+        <configuration>
+          <target>
+            <get
+              src="https://jenkins.ivyteam.io/job/dev-workflow-ui/job/${ref.screenshot.build}/lastSuccessfulBuild/artifact/dev-workflow-ui-web-test/target/docu/screenshots/*zip*/screenshots.zip"
+              dest="${project.build.directory}" />
+            <unzip dest="${project.build.directory}">
+              <fileset dir="${project.build.directory}">
+                <filename name="screenshots.zip" />
+              </fileset>
+            </unzip>
+          </target>
+        </configuration>
       </plugin>
+
       <plugin>
         <groupId>ch.ivyteam.maven</groupId>
         <artifactId>screenshot-html-plugin</artifactId>
@@ -69,7 +72,7 @@
                   <exclude>**/workflow-ui-caseMap.png</exclude>
                 </excludes>
               </newImagesFs>
-              <refImages>${project.build.directory}</refImages>
+              <refImages>${project.build.directory}/screenshots</refImages>
             </configuration>
           </execution>
           <execution>
@@ -88,24 +91,6 @@
               </images>
               <outputFile>${test.target.dir}screenshotsCompare.html</outputFile>
             </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-deploy-plugin</artifactId>
-        <configuration>
-          <skip>true</skip>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.3.0</version>
-        <executions>
-          <execution>
-            <id>default-jar</id>
-            <phase>none</phase>
           </execution>
         </executions>
       </plugin>
