@@ -127,7 +127,7 @@ pipeline {
       }
       steps {
         script {
-          maven cmd: 'deploy -Dmaven.test.skip=true'
+          maven cmd: 'deploy -Divy.engine.version.latest.minor=true -Dmaven.test.skip=true'
         }
       }
     }
