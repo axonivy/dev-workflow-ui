@@ -90,6 +90,7 @@ pipeline {
           catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
             maven cmd: 'install -P deploy-to-engine ' +
                     "-DskipDeployToEngine=false " +
+                    "-Divy.engine.version.latest.minor=true " +
                     "-DdeployToEngineUrl=${deployToEngineUrl} " +
                     "-DdeployApplicationName=${deployApplicationName} " +
                     "-Dmaven.test.skip=true -Dmaven.deploy.skip=true "
