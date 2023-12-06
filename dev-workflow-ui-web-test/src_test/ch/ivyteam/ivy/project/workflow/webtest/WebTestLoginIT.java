@@ -110,11 +110,11 @@ public class WebTestLoginIT {
     openView("allTasks.xhtml");
     $(".detail-btn").shouldBe(visible).click();
     var taskId = $(By.id("taskId")).shouldBe(visible).text();
-    assertCurrentUrlContains("taskDetails.xhtml?task=" + taskId);
+    assertCurrentUrlContains("task.xhtml?id=" + taskId);
 
     $(".user-profile").shouldBe(visible).click();
     $(By.id("loginTableBtn")).shouldBe(visible).click();
-    assertCurrentUrlContains("loginTable.xhtml?originalUrl=taskDetails.xhtml%3Ftask%3D" + taskId);
+    assertCurrentUrlContains("loginTable.xhtml?originalUrl=task.xhtml%3Fid%3D" + taskId);
   }
 
   @Test

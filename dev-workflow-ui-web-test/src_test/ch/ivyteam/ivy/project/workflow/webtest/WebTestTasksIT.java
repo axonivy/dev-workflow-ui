@@ -89,7 +89,7 @@ class WebTestTasksIT {
 
   @Test
   void taskNotFound() {
-    openView("taskDetails.xhtml", Map.of("task", "NON-EXISTING-TASK"));
+    openView("task.xhtml", Map.of("id", "NON-EXISTING-TASK"));
     assertThat(Selenide.webdriver().driver().getWebDriver().getPageSource()).contains("Not Found");
   }
 
