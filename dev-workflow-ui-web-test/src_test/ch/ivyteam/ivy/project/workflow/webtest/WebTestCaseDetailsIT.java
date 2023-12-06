@@ -55,7 +55,7 @@ class WebTestCaseDetailsIT {
 
   @Test
   void caseNotFound() {
-    openView("caseDetails.xhtml", Map.of("case", "NON-EXISTING-CASE"));
+    openView("case.xhtml", Map.of("id", "NON-EXISTING-CASE"));
     assertThat(Selenide.webdriver().driver().getWebDriver().getPageSource()).contains("Not Found");
   }
 

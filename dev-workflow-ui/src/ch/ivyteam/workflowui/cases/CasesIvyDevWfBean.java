@@ -41,7 +41,7 @@ public class CasesIvyDevWfBean {
   public void redirectToCaseRow(SelectEvent<?> event) {
     var object = event.getObject();
     if (object instanceof ICase caze) {
-      RedirectUtil.redirect("caseDetails.xhtml?case=" + caze.uuid());
+      RedirectUtil.redirect("case.xhtml?id=" + caze.uuid());
     }
   }
 }
