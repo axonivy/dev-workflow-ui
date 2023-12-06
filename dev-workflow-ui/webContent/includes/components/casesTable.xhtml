@@ -26,8 +26,8 @@
     </p:column>
 
     <p:column headerText="Name" filterBy="#{case.getName(case)}" sortBy="#{case.name}">
-      <h:link outcome="caseDetails">
-        <f:param name="case" value="#{case.uuid()}" />
+      <h:link outcome="case">
+        <f:param name="id" value="#{case.uuid()}" />
         <h:outputText id="caseName" value="#{casesIvyDevWfBean.getName(case)}" />
         <p:tooltip for="caseName" value="Case: #{case.uuid()}" position="top" />
       </h:link>
@@ -46,7 +46,7 @@
     </p:column>
 
     <p:column styleClass="table-btn-1">
-      <p:link href="caseDetails.xhtml?case=#{case.uuid()}" >
+      <p:link href="case.xhtml?id=#{case.uuid()}" >
         <i class="si si-information-circle detail-btn"/>
       </p:link>
     </p:column>

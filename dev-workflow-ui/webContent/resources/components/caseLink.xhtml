@@ -7,7 +7,7 @@
 </cc:interface>
 
 <cc:implementation>
-  <h:link styleClass="case-link p-d-flex p-ai-center" outcome="caseDetails">
+  <h:link styleClass="case-link p-d-flex p-ai-center" outcome="case">
     <f:param name="case" value="#{cc.attrs.case.uuid()}"/>
     <i class="si si-task-list-approve p-mr-1" />
     <h:outputText id="caseState" styleClass="si si-#{casesIvyDevWfBean.getStateIcon(cc.attrs.case.getBusinessState())} p-mr-1"/>
