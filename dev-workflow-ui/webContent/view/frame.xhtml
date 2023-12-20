@@ -8,8 +8,8 @@
   </f:metadata>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <h:form id="iFrameForm">
-        <div class="card">
+      <div class="card p-mb-0">
+        <h:form id="iFrameForm">
           <div class="card-header p-pb-0">
             <div class="card-title p-d-flex p-ai-center">
               <i class="p-pr-3 si si-task-list-edit"></i>
@@ -23,11 +23,10 @@
             <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
               model="#{frameIvyDevWfBean.sidestepsMenuModel}" styleClass="menu-no-icons" />
           </div>
-        </div>
-        <p:remoteCommand name="useTaskInIFrame" actionListener="#{frameIvyDevWfBean.useTaskInIFrame()}" update="@form" />
-      </h:form>
-      <div class="card p-mb-0">
-        <iframe id="iFrame" src="#{frameIvyDevWfBean.taskUrl}" style="height: calc(100vh - 250px); width: 100%; border: 0; visibility: hidden;"></iframe>
+          <p:remoteCommand name="useTaskInIFrame" actionListener="#{frameIvyDevWfBean.useTaskInIFrame()}" update="@form" />
+        </h:form>
+        <hr/>
+        <iframe id="iFrame" src="#{frameIvyDevWfBean.taskUrl}" style="height: calc(100vh - 205px); width: 100%; border: 0; visibility: hidden;"></iframe>
       </div>
       <script>
         function iframeURLChange(iframe, callback) {
