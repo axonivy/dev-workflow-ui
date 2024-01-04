@@ -72,6 +72,7 @@
             attachUnload();
             // Just in case the change wasn't dispatched during the unload event...
             dispatchChange();
+            iframe.style.visibility = 'visible';
           });
 
           attachUnload();
@@ -118,9 +119,6 @@
             var newPage = checkAndReturnUrl(newURL, originPage);
             if (newPage) {
               window.location = newPage;
-            }
-            else {
-              iframe.style.visibility = 'visible';
             }
           }
         });
