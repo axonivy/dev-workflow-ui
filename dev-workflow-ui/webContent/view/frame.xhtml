@@ -58,6 +58,7 @@
             // Timeout needed because the URL changes immediately after
             // the `unload` event is dispatched.
             setTimeout(dispatchChange, 0);
+            iframe.style.visibility = 'hidden';
           };
 
           function attachUnload() {
@@ -71,7 +72,6 @@
             attachUnload();
             // Just in case the change wasn't dispatched during the unload event...
             dispatchChange();
-            iframe.style.visibility = 'visible';
           });
 
           attachUnload();
@@ -118,6 +118,9 @@
             var newPage = checkAndReturnUrl(newURL, originPage);
             if (newPage) {
               window.location = newPage;
+            }
+            else {
+              iframe.style.visibility = 'visible';
             }
           }
         });
