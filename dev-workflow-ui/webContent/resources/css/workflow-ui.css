@@ -275,3 +275,8 @@ body .notification-scroll>.ui-datascroller-content::-webkit-scrollbar {
   display: none;
 }
 
+/* Detail Info-Banner */
+.info-banner-wrapper {
+   padding: 0 .5rem 0 .5rem;
+}
+
