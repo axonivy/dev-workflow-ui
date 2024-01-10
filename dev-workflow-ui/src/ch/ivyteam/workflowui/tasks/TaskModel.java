@@ -50,6 +50,7 @@ public class TaskModel {
   private final PID currentElement;
   private final String viewerLink;
   private final boolean viewerAllowed;
+  private final ISession workerSession;
 
   private final WebLink startLink;
   private final List<WorkflowEventModel> workflowEvents;
@@ -88,6 +89,7 @@ public class TaskModel {
     this.currentElement = getCurrentElementId(task);
     this.viewerLink = buildViewerLink(task);
     this.viewerAllowed = isViewerAllowed(task);
+    this.workerSession = task.getWorkerSession();
   }
 
   public long getId() {
@@ -246,5 +248,9 @@ public class TaskModel {
 
   public static String toDetailUrl(String uuid) {
     return "task.xhtml?id=" + uuid;
+  }
+
+  public ISession getWorkerSession() {
+    return this.workerSession;
   }
 }

@@ -14,6 +14,9 @@
       <f:event type="preRenderView" listener="#{tasksDetailsIvyDevWfBean.redirectIfCantResume}" />
 
       <div class="layout-dashboard">
+      <div class="info-banner-wrapper">
+        <p:staticMessage  severity="#{tasksDetailsIvyDevWfBean.getInfoBannerSeverity()}" detail="#{tasksDetailsIvyDevWfBean.getInfoBannerMessage()}" rendered="#{tasksDetailsIvyDevWfBean.showInfoBanner()}"></p:staticMessage>
+      </div>
         <div class="p-grid">
           <div class="p-col-12">
             <div class="card">
