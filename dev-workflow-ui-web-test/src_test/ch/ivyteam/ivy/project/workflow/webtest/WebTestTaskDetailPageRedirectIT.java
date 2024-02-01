@@ -16,7 +16,7 @@ import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
-public class WebTestTaskIT {
+public class WebTestTaskDetailPageRedirectIT {
 
   @BeforeAll
   public static void setup() {
@@ -31,7 +31,7 @@ public class WebTestTaskIT {
   }
 
   @Test
-  public void testDetailPage() {
+  public void testRedirectToDetailPage() {
     Selenide.closeWebDriver();
     loginDeveloper();
     openView("tasks.xhtml");
@@ -39,5 +39,7 @@ public class WebTestTaskIT {
     assertThat(element.getAttribute("class")).contains("task-state-in-progress");
     element.click();
     assertThat($(By.className("layout-dashboard")).getLocation() != null).isTrue();
+    var url = Selenide.webdriver().driver().url();
+    assertThat(url.contains("task.xhtml?id=") && !url.contains("frame.xhtml")).isTrue();
   }
 }
