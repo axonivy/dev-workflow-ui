@@ -79,6 +79,9 @@
         }
 
         function checkAndReturnUrl(newURL, originPage) {
+          if (newURL.includes('task.xhtml')){
+            return newURL.substring(newURL.indexOf('task.xhtml'));
+          }
           if (newURL.includes('?endedTaskId=')) {
             return originPage;
           }
