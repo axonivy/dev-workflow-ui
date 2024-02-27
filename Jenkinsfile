@@ -64,8 +64,7 @@ pipeline {
             archiveArtifacts '**/target/*.html'
             archiveArtifacts artifacts: '**/target/selenide/reports/**/*', allowEmptyArchive: true
             currentBuild.description = "<a href='${BUILD_URL}artifact/dev-workflow-ui-web-test/target/screenshotsCompare.html'>&raquo; Screenshots</a><br>"
-            recordIssues filters: [includeType('screenshot-html-plugin:compare-images')], tools: [mavenConsole(name: 'Image', id: 'image-warnings')], unstableNewAll: 1,
-            qualityGates: [[threshold: 1, type: 'TOTAL', unstable: true]]
+            recordIssues filters: [includeType('screenshot-html-plugin:compare-images')], tools: [mavenConsole(name: 'Image', id: 'image-warnings')], qualityGates: [[threshold: 1, type: 'TOTAL', unstable: true]]
           } finally {
             sh "docker network rm ${networkName}"
           }
