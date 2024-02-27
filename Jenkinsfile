@@ -52,7 +52,7 @@ pipeline {
                       "-Dselenide.remote=http://${seleniumName}:4444/wd/hub "
               }
             }
-            recordIssues tools: [mavenConsole()], unstableTotalAll: 1, filters: [
+            recordIssues tools: [mavenConsole()], qualityGates: [[threshold: 1, type: 'TOTAL']], filters: [
               excludeMessage('The system property test.engine.url is configured twice!*'),
               excludeMessage('Can not load credentials from settings.xml*'),
             ]
