@@ -45,7 +45,7 @@ public class StartsDataModel {
     }
   }
 
-  public void setActiveIndex(@SuppressWarnings("unused") String index) {}
+  public void setActiveIndex(String index) {}
 
   public String getActiveIndex() {
     return activeIndex;
