@@ -24,6 +24,7 @@ import ch.ivyteam.workflowui.login.LoginTableIvyDevWfBean.User;
 import ch.ivyteam.workflowui.util.UrlUtil;
 import ch.ivyteam.workflowui.util.UserUtil;
 
+@SuppressWarnings("restriction")
 @ManagedBean
 @ViewScoped
 public class LoginIvyDevWfBean {
