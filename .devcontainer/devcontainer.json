@@ -1,0 +1,27 @@
+{
+  "name": "Axon Ivy Dev Container",
+  "image": "mcr.microsoft.com/devcontainers/base:bookworm",
+  "forwardPorts": [8080],
+  "containerEnv": {
+    "JAVA_OPTS_IVY_SYSTEM": "-Ddev.mode=true -Divy.engine.testheadless=true"
+  },
+  "postStartCommand": "mkdir -p logs && rm -f logs/eninge-nohup.out && nohup bash -c '/usr/lib/axonivy-engine/bin/AxonIvyEngine &'> logs/engine-nohup.out",
+  "features": {
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "17",
+      "installMaven": "true",
+      "jdkDistro": "tem"
+    },
+    "ghcr.io/axonivy/devcontainer-features/engine:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["axon-ivy.designer-11"],
+      "settings": {
+        "engine.runByExtension": false,
+        "engine.url": "http://localhost:8080/",
+        "engine.directory": "/usr/lib/axonivy-engine"
+      }
+    }
+  }
+}
