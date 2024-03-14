@@ -280,3 +280,19 @@ body .notification-scroll>.ui-datascroller-content::-webkit-scrollbar {
    padding: 0 .5rem 0 .5rem;
 }
 
+.state-active {
+  color: var(--success-color, #2aa483);
+}
+
+.state-inactive {
+  color: var(--error-color, #d23636);
+}
+
+.ui-datatable .table-icon,
+.ui-treetable .table-icon {
+  position: relative;
+  top: 3px;
+  font-size: 1.2em;
+  margin-right: 5px;
+}
+

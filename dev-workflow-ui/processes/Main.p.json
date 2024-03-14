@@ -167,7 +167,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 96, "y" : 384 },
+        "at" : { "x" : 96, "y" : 464 },
         "size" : { "width" : 32, "height" : 32 },
         "labelOffset" : { "x" : 7, "y" : 36 }
       }
@@ -179,6 +179,29 @@
       },
       "visual" : {
         "at" : { "x" : 224, "y" : 64 }
+      }
+    }, {
+      "id" : "f14",
+      "type" : "RequestStart",
+      "name" : "DefaultUserNotificationSettingsPage",
+      "config" : {
+        "signature" : "DefaultUserNotificationSettingsPage"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 392 }
+      },
+      "connect" : [
+        { "id" : "f18", "to" : "f17" }
+      ]
+    }, {
+      "id" : "f17",
+      "type" : "TaskEndPage",
+      "config" : {
+        "page" : "view/profile.xhtml"
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 392 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
       }
     } ]
 }
