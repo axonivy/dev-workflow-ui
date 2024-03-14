@@ -257,7 +257,7 @@ body .custom-accordion.ui-accordion .ui-accordion-header:first-child {
   border-radius:10px;
   background-color:var(--ivy-primary-color);
 }
-.notification-button.si {
+.notification-action.si {
   font-size: 1.2em;
 }
 .notification-container {
@@ -265,6 +265,12 @@ body .custom-accordion.ui-accordion .ui-accordion-header:first-child {
   padding-left:0px;
   padding-right:0px;
   margin-bottom:0.15em;
+}
+.notification-message {
+  color: var(--primary-text-color);
+}
+.notification-action-container {
+  align-items: center;
 }
 body .notification-scroll>.ui-datascroller-content  {
   border: 0px;

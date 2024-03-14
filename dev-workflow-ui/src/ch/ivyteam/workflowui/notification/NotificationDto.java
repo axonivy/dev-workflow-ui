@@ -3,6 +3,7 @@ package ch.ivyteam.workflowui.notification;
 import java.util.Date;
 
 import ch.ivyteam.ivy.notification.web.WebNotification;
+import ch.ivyteam.ivy.notification.web.WebNotificationAction;
 
 public class NotificationDto {
 
@@ -14,6 +15,20 @@ public class NotificationDto {
 
   public String getMessage() {
     return notification.message();
+  }
+
+  public WebNotificationAction getInfoAction() {
+    return notification.actions().stream()
+            .filter(action -> action.type().equals(WebNotificationAction.Type.INFO))
+            .findAny()
+            .orElse(null);
+  }
+
+  public WebNotificationAction getRunAction() {
+    return notification.actions().stream()
+            .filter(action -> action.type().equals(WebNotificationAction.Type.RUN))
+            .findAny()
+            .orElse(null);
   }
 
   public Date getCreatedAt() {
