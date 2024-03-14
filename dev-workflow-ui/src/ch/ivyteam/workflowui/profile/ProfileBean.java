@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import ch.ivyteam.ivy.language.LanguageManager;
@@ -19,18 +20,22 @@ import ch.ivyteam.ivy.security.ISessionInternal;
 import ch.ivyteam.ivy.security.IUser;
 
 @ManagedBean
+@ViewScoped
 public class ProfileBean {
 
   private String fullName;
   private String email;
   private Locale contentLocale;
   private Locale formattingLocale;
+  private NotificationChannelDataModel notificationChannelDataModel;
 
   public ProfileBean() {
     fullName = user().getFullName();
     email = user().getEMailAddress();
     contentLocale = user().getLanguage();
     formattingLocale = user().getFormattingLanguage();
+    notificationChannelDataModel = NotificationChannelDataModel.instance(user());
+    notificationChannelDataModel.onload();
   }
 
   public String getUserName() {
@@ -112,11 +117,16 @@ public class ProfileBean {
     return "Current formatting language is <b>" + getCurrentFormattingLocale().toString() + "</b> (from " + session().getFormattingLocaleInfo().source() + ")";
   }
 
+  public NotificationChannelDataModel getNotificationChannels() {
+    return notificationChannelDataModel;
+  }
+
   public void save() {
     user().setFullName(fullName);
     user().setEMailAddress(email);
     user().setLanguage(contentLocale);
     user().setFormattingLanguage(formattingLocale);
+    notificationChannelDataModel.save();
     var msg = new FacesMessage("Profile saved");
     FacesContext.getCurrentInstance().addMessage("info", msg);
   }
