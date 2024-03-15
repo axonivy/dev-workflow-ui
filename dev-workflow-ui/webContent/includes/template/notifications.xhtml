@@ -52,7 +52,7 @@
                     <p:tooltip for="notificationAction" value="#{action.tooltip()}" />
                   </ui:repeat>
                 </div>
-                
+
                 <h:panelGroup styleClass="p-d-flex notification-mark-as-read" rendered="#{!notification.read}">
                   <p:commandLink id="notificationMarkAsRead" process="@this" actionListener="#{notificationBean.markAsRead(notification)}" update="notifications unreadNotifications">
                     <i class="notification-action si si-check-circle-1 p-mr-1 " />
@@ -61,7 +61,7 @@
                 </h:panelGroup>
               </div>
             </div>
-            
+
             <div>
               <h:outputText value="#{notification.createdAt}" style="font-size: 0.75em;">
                 <f:convertDateTime type="both" dateStyle="medium" timeStyle="short" />
