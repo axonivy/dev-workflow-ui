@@ -3,6 +3,8 @@ package ch.ivyteam.workflowui.notification;
 import java.util.Date;
 
 import ch.ivyteam.ivy.notification.web.WebNotification;
+import ch.ivyteam.ivy.notification.web.impl.BusinessWebNotification;
+import ch.ivyteam.ivy.notification.web.impl.NewTaskWebNotification;
 
 public class NotificationDto {
 
@@ -33,5 +35,31 @@ public class NotificationDto {
 
   public boolean isRead() {
     return notification.isRead();
+  }
+
+  // TODO: improve mapping
+  public String getInfoLink() {
+    return switch (notification.kind()) {
+      case "new-task" -> ((NewTaskWebNotification) notification).task().getDetailLink().getRelativeEncoded();
+      case "business" -> {
+        var caze = ((BusinessWebNotification) notification).caze();
+        yield caze == null ? null : caze.getDetailLink().getRelativeEncoded();
+      }
+      default -> throw new IllegalArgumentException("Unexpected value: " + notification);
+    };
+  }
+  public String getRunLink() {
+    return switch (notification.kind()) {
+      case "new-task" -> ((NewTaskWebNotification) notification).task().getStartLinkEmbedded().getRelativeEncoded();
+      case "business" -> null;
+      default -> throw new IllegalArgumentException("Unexpected value: " + notification);
+    };
+  }
+  public boolean isRunnable() {
+    return switch (notification.kind()) {
+      case "new-task" -> ((NewTaskWebNotification) notification).task().getBusinessState().intValue() == 0;
+      case "business" -> false;
+      default -> throw new IllegalArgumentException("Unexpected value: " + notification);
+    };
   }
 }
