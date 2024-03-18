@@ -53,8 +53,8 @@
                   </ui:repeat>
                 </div>
 
-                <h:panelGroup styleClass="p-d-flex notification-mark-as-read" rendered="#{!notification.read}">
-                  <p:commandLink id="notificationMarkAsRead" process="@this" actionListener="#{notificationBean.markAsRead(notification)}" update="notifications unreadNotifications">
+                <h:panelGroup styleClass="p-d-flex notification-mark-as-read">
+                  <p:commandLink id="notificationMarkAsRead" process="@this" actionListener="#{notificationBean.markAsRead(notification)}" update="notifications unreadNotifications" rendered="#{!notification.read}">
                     <i class="notification-action si si-check-circle-1 p-mr-1 " />
                   </p:commandLink>
                   <p:tooltip for="notificationMarkAsRead" value="Mark as read" />

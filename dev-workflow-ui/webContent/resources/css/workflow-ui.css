@@ -273,6 +273,7 @@ body .custom-accordion.ui-accordion .ui-accordion-header:first-child {
   align-items: center;
 }
 .notification-mark-as-read {
+  width: 1.2em;
   margin-left: 5px;
 }
 body .notification-scroll>.ui-datascroller-content  {
