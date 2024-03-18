@@ -23,7 +23,7 @@ class WebTestNotification {
 
   @Test
   void markAsRead() {
-    startTestProcess("1750C5211D94569D/createNotification.ivp");
+    createNotification();
 
     $(By.id("showNotifications")).should(visible).click();
 
@@ -39,8 +39,8 @@ class WebTestNotification {
 
   @Test
   void markAllAsRead() {
-    startTestProcess("1750C5211D94569D/createNotification.ivp");
-    startTestProcess("1750C5211D94569D/createNotification.ivp");
+    createNotification();
+    createNotification();
 
     $(By.id("showNotifications")).should(visible).click();
 
@@ -55,8 +55,8 @@ class WebTestNotification {
 
   @Test
   void hideAll() {
-    startTestProcess("1750C5211D94569D/createNotification.ivp");
-    startTestProcess("1750C5211D94569D/createNotification.ivp");
+    createNotification();
+    createNotification();
 
     $(By.id("showNotifications")).should(visible).click();
 
@@ -68,5 +68,27 @@ class WebTestNotification {
     $(By.id("notificationForm:notifications:0:notificationMarkAsRead")).should(not(visible));
     $(By.id("notificationForm:notifications:1:notificationMarkAsRead")).should(not(visible));
     $(By.id("no-notifications")).should(visible);
+  }
+
+  @Test
+  void info() {
+    createNotification();
+
+    $(By.id("showNotifications")).should(visible).click();
+    $(By.id("notificationForm:notifications:0:notificationMessage")).should(visible).click();
+    $(By.id("taskDetail")).should(visible);
+  }
+
+  @Test
+  void run() {
+    createNotification();
+
+    $(By.id("showNotifications")).should(visible).click();
+    $(By.id("notificationForm:notifications:0:notificationRunAction")).should(visible).click();
+    $(By.id("iFrameForm:frameTaskName")).should(visible);
+  }
+
+  private void createNotification() {
+    startTestProcess("1750C5211D94569D/createNotification.ivp");
   }
 }
