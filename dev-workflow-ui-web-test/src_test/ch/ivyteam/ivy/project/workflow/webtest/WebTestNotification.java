@@ -84,7 +84,7 @@ class WebTestNotification {
     createNotification();
 
     $(By.id("showNotifications")).should(visible).click();
-    $(By.id("notificationForm:notifications:0:notificationRunAction")).should(visible).click();
+    $(By.id("notificationForm:notifications:0:notificationAction")).should(visible).click();
     $(By.id("iFrameForm:frameTaskName")).should(visible);
   }
 

@@ -1,34 +1,32 @@
 package ch.ivyteam.workflowui.notification;
 
 import java.util.Date;
-import java.util.List;
 
-import ch.ivyteam.ivy.model.value.WebLink;
 import ch.ivyteam.ivy.notification.web.WebNotification;
 import ch.ivyteam.ivy.notification.web.WebNotificationAction;
 
 public class NotificationDto {
 
   private final WebNotification notification;
-  private final WebLink info;
-  private final List<NotificationActionDTO> actions;
+  private final NotificationActionDTO info;
+  private final NotificationActionDTO run;
 
   public NotificationDto(WebNotification notification) {
     this.notification = notification;
-    this.info = info();
-    this.actions = actions();
+    this.info = toNotificationActionDTO(notification.info());
+    this.run = toNotificationActionDTO(notification.run());
   }
 
   public String getMessage() {
     return notification.message();
   }
 
-  public WebLink getInfo() {
+  public NotificationActionDTO getInfoAction() {
     return info;
   }
 
-  public List<NotificationActionDTO> getActions() {
-    return actions;
+  public NotificationActionDTO getRunAction() {
+    return run;
   }
 
   public Date getCreatedAt() {
@@ -50,22 +48,7 @@ public class NotificationDto {
     return notification.isRead();
   }
 
-  private WebLink info() {
-    var infoAction = notification.actions().stream()
-            .filter(action -> action.type().equals(WebNotificationAction.Type.INFO))
-            .findAny()
-            .orElse(null);
-    return infoAction != null ? infoAction.link() : null;
-  }
-
-  private List<NotificationActionDTO> actions() {
-    return notification.actions().stream()
-            .filter(action -> !action.type().equals(WebNotificationAction.Type.INFO))
-            .map(action -> toNotificationActionDTO(action))
-            .toList();
-  }
-
-  private NotificationActionDTO toNotificationActionDTO(WebNotificationAction action) {
-    return new NotificationActionDTO(action.type(), action.link());
+  private static NotificationActionDTO toNotificationActionDTO(WebNotificationAction action) {
+    return new NotificationActionDTO(action.link(), action.title());
   }
 }
