@@ -38,17 +38,17 @@
           <div class="#{notification.style} notification-container">
             <div class="p-d-flex p-jc-between">
               <h:outputText rendered="#{notification.infoAction == null}" value="#{notification.message}"/>
-              <h:outputLink rendered="#{notification.infoAction != null}" id="notificationMessage" value="#{notification.infoAction.link()}" styleClass="notification-message">
+              <h:outputLink rendered="#{notification.infoAction != null}" id="notificationMessage" value="#{notification.infoAction.link}" styleClass="notification-message">
                 <h:outputText value="#{notification.message}"/>
               </h:outputLink>
-              <p:tooltip for="notificationMessage" value="#{notification.infoAction.title()}" />
+              <p:tooltip for="notificationMessage" value="#{notification.infoAction.title}" />
 
               <div class="p-d-flex notification-action-container">
                 <h:panelGroup styleClass="p-d-flex notification-run">
-                  <h:outputLink rendered="#{notification.runAction != null}" id="notificationAction" value="#{notification.runAction.link()}">
+                  <h:outputLink rendered="#{notification.runAction != null}" id="notificationAction" value="#{notification.runAction.link}">
                     <i class="notification-action si #{notification.runAction.icon()} p-mr-1 " />
                   </h:outputLink>
-                  <p:tooltip for="notificationAction" value="#{notification.runAction.title()}" />
+                  <p:tooltip for="notificationAction" value="#{notification.runAction.title}" />
                 </h:panelGroup>
 
                 <h:panelGroup styleClass="p-d-flex notification-mark-as-read">

@@ -13,8 +13,8 @@ public class NotificationDto {
 
   public NotificationDto(WebNotification notification) {
     this.notification = notification;
-    this.info = toNotificationActionDTO(notification.info());
-    this.run = toNotificationActionDTO(notification.run());
+    this.info = toNotificationActionDTO(notification.details());
+    this.run = toNotificationActionDTO(notification.start());
   }
 
   public String getMessage() {
@@ -49,6 +49,6 @@ public class NotificationDto {
   }
 
   private static NotificationActionDTO toNotificationActionDTO(WebNotificationAction action) {
-    return new NotificationActionDTO(action.link(), action.title());
+    return action != null ? new NotificationActionDTO(action.link(), action.title()) : null;
   }
 }
