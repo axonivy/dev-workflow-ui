@@ -4,9 +4,9 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://java.sun.com/jsf/composite/components">
 
-  <p:panelGrid id="taskDetail" columns="4" layout="flex" contentStyleClass="p-ai-center"
-    columnClasses="details-description-label p-d-flex p-ai-center p-col-6 p-md-2, p-d-flex p-ai-center p-col-6 p-md-4,
-     details-description-label p-d-flex p-ai-center p-col-6 p-md-2, p-d-flex p-ai-center p-col-6 p-md-4">
+  <p:panelGrid id="taskDetail" layout="flex" columns="4" contentStyleClass="align-items-center"
+    columnClasses="details-description-label flex align-items-center col-6 md:col-2, flex align-items-center col-6 md:col-4,
+     details-description-label flex align-items-center col-6 md:col-2, flex align-items-center col-6 md:col-4">
 
     <h:outputText value="Task ID" />
     <h:outputText id="taskId" value="#{tasksDetailsIvyDevWfBean.selectedTask.uuid}" />
@@ -16,7 +16,7 @@
 
     <h:outputText value="Priority" />
     <h:outputText>
-      <i class="si si-#{tasksDetailsIvyDevWfBean.selectedTask.priorityIcon} p-mr-1" />
+      <i class="si si-#{tasksDetailsIvyDevWfBean.selectedTask.priorityIcon} mr-1" />
       <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.priority}" id="taskPriority" />
     </h:outputText>
 
@@ -25,7 +25,7 @@
 
     <h:outputText value="State" />
     <h:outputText>
-      <i class="si si-#{tasksDetailsIvyDevWfBean.selectedTask.stateIcon} p-mr-1" />
+      <i class="si si-#{tasksDetailsIvyDevWfBean.selectedTask.stateIcon} mr-1" />
       <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.businessState} (#{tasksDetailsIvyDevWfBean.selectedTask.state})" id="taskState" />
     </h:outputText>
 
@@ -64,11 +64,11 @@
     <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.pmv}" id="pmv" />
 
     <h:outputText value="Current Element" />
-    <p:commandLink id="openProcessViewerBtn" styleClass="p-d-flex p-ai-center"
+    <p:commandLink id="openProcessViewerBtn" styleClass="flex align-items-center"
       actionListener="#{tasksDetailsIvyDevWfBean.setViewerLink()}" oncomplete="PF('process-viewer-dlg').show()"
       update="processViewer:processViewerDialog"
       disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.viewerAllowed}">
-      <i class="si si-hierarchy-6 si-rotate-270 p-mr-1" />
+      <i class="si si-hierarchy-6 si-rotate-270 mr-1" />
       #{tasksDetailsIvyDevWfBean.selectedTask.currentElement}
     </p:commandLink>
   </p:panelGrid>

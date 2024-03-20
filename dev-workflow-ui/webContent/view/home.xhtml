@@ -19,13 +19,13 @@
       </h:panelGroup>
 
       <div class="layout-dashboard">
-        <h:panelGroup styleClass="p-grid" layout="block" rendered="#{loginIvyDevWfBean.loggedIn}">
-          <div class="p-col-12 p-lg-4">
+        <h:panelGroup styleClass="grid" layout="block" rendered="#{loginIvyDevWfBean.loggedIn}">
+          <div class="col-12 lg:col-4">
             <div class="card last-starts-card">
               <div class="card-header">
-                <div class="card-title p-d-flex p-ai-center">
-                  <i class="p-pr-3 si si-navigation-menu"></i>
-                  <h6 class="p-m-0">Last starts</h6>
+                <div class="card-title flex align-items-center">
+                  <i class="pr-3 si si-navigation-menu"></i>
+                  <h6 class="m-0">Last starts</h6>
                 </div>
               </div>
               <p:dataTable id="lastStarts" var="start" value="#{homepageIvyDevWfBean.lastStarts}" selectionMode="single"
@@ -33,25 +33,25 @@
                 rendered="#{not empty homepageIvyDevWfBean.lastStarts}">
                 <p:ajax event="rowSelect" listener="#{homepageIvyDevWfBean.executeLastStart}" />
                 <p:column styleClass="last-start-element">
-                  <div class="p-d-flex p-jc-between">
+                  <div class="flex justify-content-between">
                     <p:commandLink id="last-start-link" actionListener="#{start.execute}" styleClass="hidden-text-ellipsis">
-                      <i class="#{start.icon} p-mr-1" />
+                      <i class="#{start.icon} mr-1" />
                       <h:outputText value="#{start.displayName}" />
                     </p:commandLink>
                     <p:tooltip for="last-start-link" value="#{start.displayName}" position="top" />
 
-                    <div class="p-d-flex">
+                    <div class="flex">
                       <p:link id="copyStartLinkBtn" href="#" onclick="copyToClipboard('#{start.link}')">
                         <i class="si si-hyperlink-3" />
                       </p:link>
                       <p:tooltip for="copyStartLinkBtn" value="Copy to clipboard" position="top" />
 
-                      <p:link id="openStartFullscreenBtn" href="#{start.link}" styleClass="p-ml-1" rendered="#{start.embedInFrame}">
+                      <p:link id="openStartFullscreenBtn" href="#{start.link}" styleClass="ml-1" rendered="#{start.embedInFrame}">
                         <i class="si si-expand-6" />
                       </p:link>
                       <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="top" rendered="#{start.embedInFrame}" />
 
-                      <p:commandLink id="openProcessViewer" oncomplete="PF('process-viewer-dlg').show()" styleClass="p-ml-1"
+                      <p:commandLink id="openProcessViewer" oncomplete="PF('process-viewer-dlg').show()" styleClass="ml-1"
                         update="processViewer:processViewerDialog" actionListener="#{homepageIvyDevWfBean.setViewerStart(start.viewerLink)}"
                         rendered="#{start.viewerAllowed}">
                         <i class="si si-hierarchy-6 si-rotate-270" />
@@ -69,12 +69,12 @@
             </div>
           </div>
 
-          <div class="p-col-12 p-lg-8">
+          <div class="col-12 lg:col-8">
             <div class="card active-tasks-card">
               <div class="card-header">
-                <div class="card-title p-d-flex p-ai-center">
-                  <i class="p-pr-3 si si-layout-bullets"></i>
-                  <h6 class="p-m-0">My tasks</h6>
+                <div class="card-title flex align-items-center">
+                  <i class="pr-3 si si-layout-bullets"></i>
+                  <h6 class="m-0">My tasks</h6>
                 </div>
               </div>
               <p:dataTable id="activeTasks" var="task" value="#{personalTasksIvyDevWfBean.tasksDataModel}" lazy="true"
@@ -113,13 +113,13 @@
           </div>
         </h:panelGroup>
 
-        <h:panelGroup styleClass="p-grid" layout="block" rendered="#{!loginIvyDevWfBean.loggedIn}">
-          <div class="p-col-12">
+        <h:panelGroup styleClass="grid" layout="block" rendered="#{!loginIvyDevWfBean.loggedIn}">
+          <div class="col-12">
             <div class="card starts-card">
               <div class="card-header">
-                <div class="card-title p-d-flex p-ai-center">
-                  <i class="p-pr-3 si si-navigation-menu"></i>
-                  <h6 class="p-m-0">Starts</h6>
+                <div class="card-title flex align-items-center">
+                  <i class="pr-3 si si-navigation-menu"></i>
+                  <h6 class="m-0">Starts</h6>
                 </div>
               </div>
               <ui:include src="/includes/components/startsPanel.xhtml" />
