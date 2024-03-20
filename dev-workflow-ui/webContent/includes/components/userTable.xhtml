@@ -4,9 +4,9 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
   <h:form id="loginTable">
     <div class="card ui-fluid">
-      <div class="p-d-flex p-ai-center p-mb-3">
-        <i class="p-pr-3 si si-login-3 card-title-icon"></i>
-        <h2 class="p-m-0">Login</h2>
+      <div class="flex align-items-center mb-3">
+        <i class="pr-3 si si-login-3 card-title-icon"></i>
+        <h2 class="m-0">Login</h2>
       </div>
       <p>Click user to login</p>
       <p:dataTable id="users" var="user" value="#{loginTableIvyDevWfBean.users}" widgetVar="usersTable"
@@ -22,7 +22,7 @@
 
         <p:column headerText="Username" filterBy="#{user.name}" sortBy="#{user.name}" sortOrder="ascending">
           <h:outputText value="#{user.name}">
-            <i class="si si-single-neutral-actions p-mr-1"></i>
+            <i class="si si-single-neutral-actions mr-1"></i>
           </h:outputText>
         </p:column>
 

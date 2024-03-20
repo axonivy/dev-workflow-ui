@@ -9,12 +9,12 @@
       <p:linkButton href="#{tasksDetailsIvyDevWfBean.executeTaskLink}" value="Start"
         id="taskStartBtn" disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.canBeStarted()}" icon="si si-arrow-right-1" />
 
-      <p:commandButton value="Sidesteps" styleClass="p-ml-1 ui-button-secondary" id="sidestepsBtn"
+      <p:commandButton value="Sidesteps" styleClass="ml-1 ui-button-secondary" id="sidestepsBtn"
         rendered="#{tasksDetailsIvyDevWfBean.selectedTask.renderSidestepBtn()}" icon="si si-arrow-down-1" />
       <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
         model="#{tasksDetailsIvyDevWfBean.sidestepsMenuModel}" styleClass="menu-no-icons" />
 
-      <p:commandButton styleClass="p-ml-1 ui-button-secondary ui-button-outlined rounded-button" id="taskActionsBtn"
+      <p:commandButton styleClass="ml-1 ui-button-secondary ui-button-outlined rounded-button" id="taskActionsBtn"
         disabled="#{tasksDetailsIvyDevWfBean.selectedTask.done}" icon="si si-navigation-menu-horizontal" />
       <p:menu id="actionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom">
         <p:menuitem value="Reset" actionListener="#{tasksDetailsIvyDevWfBean.reset()}" update="taskDetail, workflowEvents:workflowEvents, @form"

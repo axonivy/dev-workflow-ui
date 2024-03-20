@@ -103,7 +103,7 @@ public class WorkflowUiUtil {
 
   public static void logout() {
     if (!$("#sessionUserName").has(text("Unknown User"))) {
-      $(".user-profile").click();
+      $(".user-profile").$("a").shouldBe(visible).click();
       $("#sessionLogoutBtn").shouldBe(visible).click();
     }
   }

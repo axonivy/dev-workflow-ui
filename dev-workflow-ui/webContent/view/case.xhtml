@@ -13,13 +13,13 @@
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
       <div class="layout-dashboard">
-        <div class="p-grid">
-          <div class="p-col-12 p-lg-8">
+        <div class="grid">
+          <div class="col-12 lg:col-8">
             <div class="card">
               <div class="card-header">
-                <div class="card-title p-d-flex p-ai-center">
-                  <i class="p-pr-3 si si-common-file-text"></i>
-                  <h6 class="p-m-0">Description</h6>
+                <div class="card-title flex align-items-center">
+                  <i class="pr-3 si si-common-file-text"></i>
+                  <h6 class="m-0">Description</h6>
                 </div>
                 <p:commandButton icon="si si-delete-1" styleClass="ui-button-danger rounded-button"
                   disabled="#{not casesDetailsIvyDevWfBean.canBeDestoryed()}" id="caseDestroyBtn"
@@ -30,21 +30,21 @@
             </div>
           </div>
 
-          <h:panelGroup styleClass="p-col-12 p-lg-4" layout="block" rendered="#{casesDetailsIvyDevWfBean.caseMap}">
-            <div class="card casemap-card p-d-flex p-flex-column">
+          <h:panelGroup styleClass="col-12 lg:col-4" layout="block" rendered="#{casesDetailsIvyDevWfBean.caseMap}">
+            <div class="card casemap-card flex flex-column">
               <div class="card-header">
-                <div class="card-title p-d-flex p-ai-center">
-                  <i class="p-pr-3 si si-information-circle"></i>
-                  <h6 class="p-m-0">Case Map</h6>
+                <div class="card-title flex align-items-center">
+                  <i class="pr-3 si si-information-circle"></i>
+                  <h6 class="m-0">Case Map</h6>
                 </div>
-                <div class="p-d-flex">
+                <div class="flex">
                   <h:panelGroup layout="block" rendered="#{not empty casesDetailsIvyDevWfBean.sidesteps}">
-                    <p:commandButton value="Sidesteps" icon="si si-arrow-down-1" id="sidestepsBtn" styleClass="p-mr-1"/>
+                    <p:commandButton value="Sidesteps" icon="si si-arrow-down-1" id="sidestepsBtn" styleClass="mr-1"/>
                     <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
                       model="#{casesDetailsIvyDevWfBean.sidestepsMenuModel}" styleClass="menu-no-icons" />
                   </h:panelGroup>
                   <p:link href="#" id="openCaseMapUiViewerBtn" onclick="PF('process-viewer-dlg').show()"
-                    styleClass="p-d-flex p-ai-center">
+                    styleClass="flex align-items-center">
                     <i class="si si-information-circle detail-btn" />
                   </p:link>
                   <p:tooltip for="openCaseMapUiViewerBtn" position="top" value="Open Case Map Viewer" />
@@ -54,36 +54,36 @@
             </div>
           </h:panelGroup>
 
-          <h:panelGroup styleClass="p-col-12 p-lg-4" layout="block" rendered="#{!casesDetailsIvyDevWfBean.caseMap}">
-            <div class="card p-d-flex p-flex-column">
+          <h:panelGroup styleClass="col-12 lg:col-4" layout="block" rendered="#{!casesDetailsIvyDevWfBean.caseMap}">
+            <div class="card flex flex-column">
               <div class="card-header">
-                <div class="card-title p-d-flex p-ai-center">
-                  <i class="p-pr-3 si si-information-circle"></i>
-                  <h6 class="p-m-0">Process Viewer</h6>
+                <div class="card-title flex align-items-center">
+                  <i class="pr-3 si si-information-circle"></i>
+                  <h6 class="m-0">Process Viewer</h6>
                 </div>
                 <p:link rendered="#{casesDetailsIvyDevWfBean.viewerAllowed}" href="#" id="openProcessViewerBtn" onclick="PF('process-viewer-dlg').show()"
-                    styleClass="p-d-flex p-ai-center">
+                    styleClass="flex align-items-center">
                   <i class="si si-information-circle detail-btn" />
                 </p:link>
                 <p:tooltip rendered="#{casesDetailsIvyDevWfBean.viewerAllowed}" for="openProcessViewerBtn" position="top" value="Open Process Viewer" />
               </div>
-              <div class="height-100 p-d-flex p-jc-center p-ai-center">
+              <div class="height-100 flex justify-content-center align-items-center">
                 <div jsf:rendered="#{!casesDetailsIvyDevWfBean.viewerAllowed}">Current Process is hidden</div>
                 <iframe jsf:rendered="#{casesDetailsIvyDevWfBean.viewerAllowed}" id="processViewerFrame" class="process-viewer-preview" src="#{casesDetailsIvyDevWfBean.processPreviewLink}"/>
               </div>
             </div>
           </h:panelGroup>
 
-          <div class="p-col-12 p-lg-8">
+          <div class="col-12 lg:col-8">
             <div class="card">
             <h:form id="tasksForm">
               <div class="card-header">
-                <div class="card-title p-d-flex p-ai-center">
-                  <i class="p-pr-3 si si-layout-bullets"></i>
-                  <h6 class="p-m-0">Task list</h6>
+                <div class="card-title flex align-items-center">
+                  <i class="pr-3 si si-layout-bullets"></i>
+                  <h6 class="m-0">Task list</h6>
                 </div>
-                <h:panelGroup id="switchContainer" styleClass="p-d-inline-flex p-ai-center">
-                  <h:outputText value="Show system tasks" class="p-mr-2" />
+                <h:panelGroup id="switchContainer" styleClass="inline-flex align-items-center">
+                  <h:outputText value="Show system tasks" class="mr-2" />
                   <p:toggleSwitch id="showSystemTasksSwitch" value="#{casesDetailsIvyDevWfBean.showSystemTasks}">
                     <p:ajax update="tasksForm:tasks" />
                   </p:toggleSwitch>
@@ -94,48 +94,48 @@
             </div>
           </div>
 
-          <div class="p-col-12 p-lg-4">
+          <div class="col-12 lg:col-4">
             <div class="card">
               <div class="card-header">
-                <div class="card-title p-d-flex p-ai-center">
-                  <i class="p-pr-3 si si-task-list-approve"></i>
-                  <h6 class="p-m-0">Case hierarchy</h6>
+                <div class="card-title flex align-items-center">
+                  <i class="pr-3 si si-task-list-approve"></i>
+                  <h6 class="m-0">Case hierarchy</h6>
                 </div>
               </div>
               <ui:include src="/includes/components/caseDetails/caseList.xhtml" />
             </div>
           </div>
 
-          <div class="p-col-12 p-lg-8">
+          <div class="col-12 lg:col-8">
             <div class="card">
               <div class="card-header">
-                <div class="card-title p-d-flex p-ai-center">
-                  <i class="p-pr-3 si si-cog"></i>
-                  <h6 class="p-m-0">Custom fields</h6>
+                <div class="card-title flex align-items-center">
+                  <i class="pr-3 si si-cog"></i>
+                  <h6 class="m-0">Custom fields</h6>
                 </div>
               </div>
               <jc:customFields id="customFields" customFields="#{casesDetailsIvyDevWfBean.customFields}" />
             </div>
           </div>
 
-          <div class="p-col-12 p-lg-4">
+          <div class="col-12 lg:col-4">
             <div class="card documents-card">
               <div class="card-header">
-                <div class="card-title p-d-flex p-ai-center">
-                  <i class="p-pr-3 si si-office-file-doc-1"></i>
-                  <h6 class="p-m-0">Documents</h6>
+                <div class="card-title flex align-items-center">
+                  <i class="pr-3 si si-office-file-doc-1"></i>
+                  <h6 class="m-0">Documents</h6>
                 </div>
               </div>
               <ui:include src="/includes/components/caseDetails/documents.xhtml" />
             </div>
           </div>
 
-          <div class="p-col-12">
+          <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <div class="card-title p-d-flex p-ai-center">
-                  <i class="p-pr-3 si si-synchronize-arrow-clock"></i>
-                  <h6 class="p-m-0">Workflow Events</h6>
+                <div class="card-title flex align-items-center">
+                  <i class="pr-3 si si-synchronize-arrow-clock"></i>
+                  <h6 class="m-0">Workflow Events</h6>
                 </div>
               </div>
               <jc:workflowEventsTable id="workflowEvents" workflowEvents="#{casesDetailsIvyDevWfBean.workflowEvents}" />
