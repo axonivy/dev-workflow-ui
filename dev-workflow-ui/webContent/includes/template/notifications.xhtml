@@ -37,21 +37,19 @@
         <p:dataScroller id="notifications" lazy="true" styleClass="notification-scroll" value="#{notificationBean.dataModel}" var="notification" chunkSize="20" mode="inline">
           <div class="#{notification.style} notification-container">
             <div class="p-d-flex p-jc-between">
-              <h:outputText rendered="#{notification.info == null}" value="#{notification.message}" escape="false"/>
-              <h:outputLink rendered="#{notification.info != null}" id="notificationMessage" value="#{notification.info}" styleClass="notification-message">
-                <h:outputText value="#{notification.message}" escape="false"/>
+              <h:outputText rendered="#{notification.infoAction == null}" value="#{notification.message}"/>
+              <h:outputLink rendered="#{notification.infoAction != null}" id="notificationMessage" value="#{notification.infoAction.link}" styleClass="notification-message">
+                <h:outputText value="#{notification.message}"/>
               </h:outputLink>
-              <p:tooltip for="notificationMessage" value="Info" />
+              <p:tooltip for="notificationMessage" value="#{notification.infoAction.title}" />
 
               <div class="p-d-flex notification-action-container">
-                <div class="p-d-flex">
-                  <ui:repeat var="action" value="#{notification.actions}">
-                    <h:outputLink id="notificationAction" value="#{action.link()}">
-                      <i class="notification-action si #{action.icon()} p-mr-1 " />
-                    </h:outputLink>
-                    <p:tooltip for="notificationAction" value="#{action.tooltip()}" />
-                  </ui:repeat>
-                </div>
+                <h:panelGroup styleClass="p-d-flex notification-run">
+                  <h:outputLink rendered="#{notification.runAction != null}" id="notificationAction" value="#{notification.runAction.link}">
+                    <i class="notification-action si #{notification.runAction.icon()} p-mr-1 " />
+                  </h:outputLink>
+                  <p:tooltip for="notificationAction" value="#{notification.runAction.title}" />
+                </h:panelGroup>
 
                 <h:panelGroup styleClass="p-d-flex notification-mark-as-read">
                   <p:commandLink id="notificationMarkAsRead" process="@this" actionListener="#{notificationBean.markAsRead(notification)}" update="notifications unreadNotifications" rendered="#{!notification.read}">

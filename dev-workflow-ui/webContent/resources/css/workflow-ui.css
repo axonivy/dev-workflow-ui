@@ -272,6 +272,9 @@ body .custom-accordion.ui-accordion .ui-accordion-header:first-child {
 .notification-action-container {
   align-items: center;
 }
+.notification-run {
+  width: 1.2em;
+}
 .notification-mark-as-read {
   width: 1.2em;
   margin-left: 5px;

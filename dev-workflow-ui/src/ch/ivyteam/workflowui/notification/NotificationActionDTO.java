@@ -1,14 +1,26 @@
 package ch.ivyteam.workflowui.notification;
 
 import ch.ivyteam.ivy.model.value.WebLink;
-import ch.ivyteam.ivy.notification.web.WebNotificationAction;
 
-public record NotificationActionDTO(WebNotificationAction.Type type, WebLink link) {
-  public String icon() {
-    return "si-controls-play";
+public class NotificationActionDTO {
+
+  private final WebLink link;
+  private final String title;
+
+  public NotificationActionDTO(WebLink link, String title) {
+    this.link = link;
+    this.title = title;
   }
 
-  public String tooltip() {
-    return "Run";
+  public WebLink getLink() {
+    return link;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public String icon() {
+    return "si-controls-play";
   }
 }
