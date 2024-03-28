@@ -19,45 +19,45 @@
      activeIndex="#{processesIvyDevWfBean.startsDataModel.activeIndex}" multiple="true">
       <p:tab id="project" titleStyleClass="start-title">
         <f:facet name="title">
-          <h:outputText id="pmvState" styleClass="p-mr-1 si si-#{pmv.stateIcon}" />
+          <h:outputText id="pmvState" styleClass="mr-1 si si-#{pmv.stateIcon}" />
           <p:tooltip for="pmvState" value="#{pmv.state} - #{pmv.versionName}" position="top" />
           <h:outputText id="projectName" value="#{pmv.projectName}" />
           <p:tooltip for="projectName" value="Application: #{pmv.PMV.application.name}" position="top" />
         </f:facet>
 
-        <h:panelGroup id="caseMapsTitle" styleClass="p-mt-2" layout="block" rendered="#{!empty pmv.caseMapStarts}">
+        <h:panelGroup id="caseMapsTitle" styleClass="mt-2" layout="block" rendered="#{!empty pmv.caseMapStarts}">
           <b><h:outputText value="Case Maps" /></b>
         </h:panelGroup>
-        <p:repeat value="#{pmv.caseMapStarts}" var="casemapStart">
+        <ui:repeat value="#{pmv.caseMapStarts}" var="casemapStart">
           <jc:startsPanelElement pmv="#{pmv}" start="#{casemapStart}"/>
-        </p:repeat>
+        </ui:repeat>
 
-        <h:panelGroup id="processesTitle" styleClass="p-mt-2" layout="block" rendered="#{!empty pmv.categories}">
+        <h:panelGroup id="processesTitle" styleClass="mt-2" layout="block" rendered="#{!empty pmv.categories}">
           <b><h:outputText value="Processes" /></b>
         </h:panelGroup>
-        <p:repeat value="#{pmv.categories}" var="category">
-          <p:outputPanel id="categoryContainer" styleClass="p-mt-2" rendered="#{!empty category.name}">
-            <i class="#{category.cssIcon} p-mr-1"></i>
+        <ui:repeat value="#{pmv.categories}" var="category">
+          <p:outputPanel id="categoryContainer" styleClass="mt-2" rendered="#{!empty category.name}">
+            <i class="#{category.cssIcon} mr-1"></i>
             <h:outputText id="categoryName" value="#{category.name}"/>
             <p:tooltip for="categoryName" value="#{category.tooltip}" position="top" />
           </p:outputPanel>
 
-          <p:repeat value="#{category.starts}" var="start">
+          <ui:repeat value="#{category.starts}" var="start">
             <jc:startsPanelElement pmv="#{pmv}" start="#{start}"/>
-          </p:repeat>
-        </p:repeat>
+          </ui:repeat>
+        </ui:repeat>
 
-        <h:panelGroup id="webServicesTitle" styleClass="p-mt-2" layout="block" rendered="#{!empty pmv.webServiceProcesses}">
+        <h:panelGroup id="webServicesTitle" styleClass="mt-2" layout="block" rendered="#{!empty pmv.webServiceProcesses}">
          <b><h:outputText value="Web Services (WSDL)" /></b>
         </h:panelGroup>
-        <p:repeat value="#{pmv.webServiceProcesses}" var="webServiceProcess">
-          <h:panelGroup id="startElementWebServiceProcess" styleClass="p-d-flex start-element" rendered="#{pmv.active}">
-            <p:link href="#{webServiceProcess.link}" target="_blank" styleClass="start-link p-d-flex p-ai-center">
-              <i class="si si-network-arrow p-mr-1 startable-icon"/>
+        <ui:repeat value="#{pmv.webServiceProcesses}" var="webServiceProcess">
+          <h:panelGroup id="startElementWebServiceProcess" styleClass="flex start-element" rendered="#{pmv.active}">
+            <p:link href="#{webServiceProcess.link}" target="_blank" styleClass="start-link flex align-items-center">
+              <i class="si si-network-arrow mr-1 startable-icon"/>
               <span>#{webServiceProcess.name}</span>
             </p:link>
           </h:panelGroup>
-        </p:repeat>
+        </ui:repeat>
 
       </p:tab>
     </p:accordionPanel>
