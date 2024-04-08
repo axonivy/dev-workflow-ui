@@ -8,17 +8,17 @@
   </f:metadata>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <div class="card p-mb-0">
+      <div class="card mb-0">
         <h:form id="iFrameForm">
-          <div class="card-header p-pb-0">
-            <div class="card-title p-d-flex p-ai-center">
-              <i class="p-pr-3 si si-task-list-edit"></i>
-              <h6 class="p-m-0"><h:outputText id="frameTaskName" value="#{frameIvyDevWfBean.taskName}" /></h6>
+          <div class="card-header pb-0">
+            <div class="card-title flex align-items-center">
+              <i class="pr-3 si si-task-list-edit"></i>
+              <h6 class="m-0"><h:outputText id="frameTaskName" value="#{frameIvyDevWfBean.taskName}" /></h6>
             </div>
             <p:linkButton id="openStartFullscreenBtn" href="#{frameIvyDevWfBean.taskUrl}" icon="si si-expand-6"
-              styleClass="p-ml-auto ui-button-secondary rounded-button"/>
+              styleClass="ml-auto ui-button-secondary rounded-button"/>
             <p:tooltip for="openStartFullscreenBtn" value="Open current process start on a fullscreen page" position="left"/>
-            <p:commandButton value="Sidesteps" styleClass="p-ml-1" id="sidestepsBtn"
+            <p:commandButton value="Sidesteps" styleClass="ml-1" id="sidestepsBtn"
               rendered="#{frameIvyDevWfBean.renderSidestepBtn()}" icon="si si-arrow-down-1" />
             <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
               model="#{frameIvyDevWfBean.sidestepsMenuModel}" styleClass="menu-no-icons" />

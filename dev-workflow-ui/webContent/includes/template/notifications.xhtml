@@ -12,12 +12,12 @@
 
 <p:overlayPanel for="showNotifications" style="width:350px" rendered="#{loginIvyDevWfBean.loggedIn}">
   <h:panelGroup id="notifications">
-    <div class="p-d-flex p-jc-between">
+    <div class="flex justify-content-between">
       <h6>Notifications</h6>
 
-      <div class="p-d-flex">
+      <div class="flex">
         <p:commandLink id="notificationMarkAllAsRead" rendered="#{notificationBean.hasUnreadNotifications()}" actionListener="#{notificationBean.readAll()}" update="notifications unreadNotifications">
-          <i class="notification-button si si-check-double-1 p-mr-1" />
+          <i class="notification-button si si-check-double-1 mr-1" />
         </p:commandLink>
         <p:tooltip for="notificationMarkAllAsRead" value="Mark all notifications as read" />
 
@@ -29,31 +29,31 @@
     </div>
 
     <h:panelGroup id="no-notifications" rendered="#{!notificationBean.hasNotifications()}">
-      <div class="p-text-center" style="padding:20px;">No Notifications </div>
+      <div class="text-center" style="padding:20px;">No Notifications </div>
     </h:panelGroup>
 
     <h:panelGroup rendered="#{notificationBean.hasNotifications()}">
       <h:form id="notificationForm">
         <p:dataScroller id="notifications" lazy="true" styleClass="notification-scroll" value="#{notificationBean.dataModel}" var="notification" chunkSize="20" mode="inline">
           <div class="#{notification.style} notification-container">
-            <div class="p-d-flex p-jc-between">
+            <div class="flex justify-content-between">
               <h:outputText rendered="#{notification.infoAction == null}" value="#{notification.message}"/>
               <h:outputLink rendered="#{notification.infoAction != null}" id="notificationMessage" value="#{notification.infoAction.link}" styleClass="notification-message">
                 <h:outputText value="#{notification.message}"/>
               </h:outputLink>
               <p:tooltip for="notificationMessage" value="#{notification.infoAction.title}" />
 
-              <div class="p-d-flex notification-action-container">
-                <h:panelGroup styleClass="p-d-flex notification-run">
+              <div class="flex notification-action-container">
+                <h:panelGroup styleClass="flex notification-run">
                   <h:outputLink rendered="#{notification.runAction != null}" id="notificationAction" value="#{notification.runAction.link}">
-                    <i class="notification-action si #{notification.runAction.icon()} p-mr-1 " />
+                    <i class="notification-action si #{notification.runAction.icon()} mr-1 " />
                   </h:outputLink>
                   <p:tooltip for="notificationAction" value="#{notification.runAction.title}" />
                 </h:panelGroup>
 
-                <h:panelGroup styleClass="p-d-flex notification-mark-as-read">
+                <h:panelGroup styleClass="flex notification-mark-as-read">
                   <p:commandLink id="notificationMarkAsRead" process="@this" actionListener="#{notificationBean.markAsRead(notification)}" update="notifications unreadNotifications" rendered="#{!notification.read}">
-                    <i class="notification-action si si-check-circle-1 p-mr-1 " />
+                    <i class="notification-action si si-check-circle-1 mr-1 " />
                   </p:commandLink>
                   <p:tooltip for="notificationMarkAsRead" value="Mark as read" />
                 </h:panelGroup>

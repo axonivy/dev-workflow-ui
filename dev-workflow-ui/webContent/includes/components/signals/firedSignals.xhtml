@@ -19,14 +19,14 @@
       <jc:user user="#{signal.sentByUser}"/>
     </p:column>
     <p:column headerText="Destroyed tasks">
-      <p:repeat var="task" value="#{signal.destroyedTasks}" varStatus="status">
+      <ui:repeat var="task" value="#{signal.destroyedTasks}" varStatus="status">
         <jc:taskLink task="#{task}" id="destroyedTask"/>
-      </p:repeat>
+      </ui:repeat>
     </p:column>
     <p:column headerText="Created cases" colspan="2">
-      <p:repeat var="task" value="#{signal.createdTasks}" varStatus="status">
+      <ui:repeat var="task" value="#{signal.createdTasks}" varStatus="status">
         <jc:caseLink case="#{task.case}" id="createdCase"/>
-      </p:repeat>
+      </ui:repeat>
     </p:column>
   </p:dataTable>
 

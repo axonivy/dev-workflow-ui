@@ -47,8 +47,7 @@ public class WebTestProvessViewerPermissionIT {
     table.row(0).shouldHave(text("Test View Permission Task"));
     $(By.className("detail-btn")).shouldBe(visible).click();
     $(By.id("taskName")).shouldHave(text("Test View Permission Task"));
-    // must be a span not an link
-    $("span#openProcessViewerBtn").shouldBe(visible);
+    $("a#openProcessViewerBtn").shouldBe(visible);
   }
 
   @Test

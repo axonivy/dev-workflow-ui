@@ -9,12 +9,12 @@
     <p:outputLabel value="Signal Code" for="@previous" />
   </h:panelGroup>
 
-  <h:panelGroup styleClass="ui-float-label p-mt-2">
+  <h:panelGroup styleClass="ui-float-label mt-2">
     <p:inputText id="signalPayloadInput" value="#{signalsIvyDevWfBean.payload}" styleClass="width-100" />
     <p:outputLabel value="Payload" for="@previous" />
   </h:panelGroup>
 
   <p:commandButton id="signalBtn" update="@form, boundarySignalsTable, firedSignalsTable"
-    styleClass="p-mt-2 send-signal-button" value="Send" actionListener="#{signalsIvyDevWfBean.sendSignal}"
+    styleClass="mt-2 send-signal-button" value="Send" actionListener="#{signalsIvyDevWfBean.sendSignal}"
     disabled="#{!adminIvyDevWfBean.isWorkflowAdmin() or !engineModeIvyDevWfBean.demoOrDesigner}" icon="si si-send-email"/>
 </ui:composition>

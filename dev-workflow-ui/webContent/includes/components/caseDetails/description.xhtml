@@ -4,9 +4,9 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://xmlns.jcp.org/jsf/composite/components">
 
-  <p:panelGrid id="caseDetails" columns="4" layout="flex" contentStyleClass="p-ai-center"
-    columnClasses="details-description-label p-col-6 p-md-2, p-col-6 p-md-4,
-     details-description-label p-col-6 p-md-2, p-col-6 p-md-4">
+  <p:panelGrid id="caseDetails" columns="4" layout="flex" contentStyleClass="align-items-center"
+    columnClasses="details-description-label col-6 md:col-2, col-6 md:col-4,
+     details-description-label col-6 md:col-2, col-6 md:col-4">
 
     <h:outputText value="Case ID" />
     <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.uuid()}" id="caseId"/>
@@ -22,7 +22,7 @@
 
     <h:outputText value="State" />
     <h:outputText>
-      <i class="si si-#{casesIvyDevWfBean.getStateIcon(casesDetailsIvyDevWfBean.selectedCase.businessState)} p-mr-1"></i>
+      <i class="si si-#{casesIvyDevWfBean.getStateIcon(casesDetailsIvyDevWfBean.selectedCase.businessState)} mr-1"></i>
       <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.businessState} (#{casesDetailsIvyDevWfBean.selectedCase.state})" id="caseState" />
     </h:outputText>
 
