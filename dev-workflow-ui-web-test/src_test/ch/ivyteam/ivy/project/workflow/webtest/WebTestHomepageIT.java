@@ -1,6 +1,6 @@
 package ch.ivyteam.ivy.project.workflow.webtest;
 
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.customLogin;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.login;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.logout;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
@@ -24,7 +24,7 @@ public class WebTestHomepageIT {
 
   @Test
   public void homepageContainers() {
-    customLogin("DifferentLogin", "DifferentPassword");
+    login("DifferentLogin", "DifferentPassword");
 
     // start process to create test data
     openView("starts.xhtml");

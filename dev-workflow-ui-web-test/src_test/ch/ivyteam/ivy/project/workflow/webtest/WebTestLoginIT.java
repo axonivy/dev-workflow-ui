@@ -63,15 +63,14 @@ public class WebTestLoginIT {
 
   @Test
   void customLogin() {
-    WorkflowUiUtil.customLogin("DeveloperTest", "DeveloperTest");
-    Selenide.webdriver().shouldNotHave(urlContaining("/login.xhtml"));
+    WorkflowUiUtil.login("DeveloperTest", "DeveloperTest");
   }
 
   @Test
   void customLoginFailMessage() {
     openView("login.xhtml");
     $("#loginForm\\:loginMessage").shouldNotBe(visible);
-    WorkflowUiUtil.customLogin("sadgs", "sdgasgd");
+    WorkflowUiUtil.tryLogin("sadgs", "sdgasgd");
     $("#loginForm\\:loginMessage").shouldBe(visible);
   }
 
@@ -121,8 +120,7 @@ public class WebTestLoginIT {
   void loginTableRedirect() {
     loginFromTable("DifferentLogin");
     assertCurrentUrlContains("login.xhtml?originalUrl=loginTable.xhtml");
-    WorkflowUiUtil.customLogin("DifferentLogin", "DifferentPassword");
-    $("#sessionUserName").shouldHave(text("DifferentLogin"));
+    WorkflowUiUtil.login("DifferentLogin", "DifferentPassword");
   }
 
   @Test

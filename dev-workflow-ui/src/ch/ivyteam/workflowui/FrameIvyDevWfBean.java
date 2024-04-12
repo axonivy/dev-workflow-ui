@@ -42,11 +42,12 @@ public class FrameIvyDevWfBean {
 
   private String checkTaskUrl() {
     var url = UrlUtil.getUrlParameter("taskUrl");
-    if (StringUtils.startsWith(url, "/")) {
+    if (url == null || url.startsWith("/")) {
       return url;
     } else {
+      String info = "taskUrl=" + url + "[url="+UrlUtil.getHttpServletRequest().getRequestURI()+", query="+UrlUtil.getHttpServletRequest().getQueryString()+"]";
       throw BpmError.create("frame:unsupported:url")
-              .withMessage("Only relative urls are supported (security reasons): " + url).build();
+              .withMessage("Only relative urls are supported (security reasons): " + info).build();
     }
   }
 
