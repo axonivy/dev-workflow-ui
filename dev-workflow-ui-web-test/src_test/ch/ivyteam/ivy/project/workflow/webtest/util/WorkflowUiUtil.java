@@ -3,6 +3,7 @@ package ch.ivyteam.ivy.project.workflow.webtest.util;
 import static com.axonivy.ivy.webtest.engine.EngineUrl.createCaseMapUrl;
 import static com.axonivy.ivy.webtest.engine.EngineUrl.createProcessUrl;
 import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
@@ -89,12 +90,18 @@ public class WorkflowUiUtil {
   }
 
   public static void loginDeveloper() {
-    customLogin("DeveloperTest", "DeveloperTest");
+    login("DeveloperTest", "DeveloperTest");
   }
 
-  public static void customLogin(String username, String password) {
+  public static void login(String username, String password) {
+    tryLogin(username, password);
+    webdriver().shouldNotHave(urlContaining("login.xhtml"));
+    $("#sessionUserName").shouldHave(text(username));
+  }
+
+  public static void tryLogin(String username, String password) {
     open(viewUrl("login.xhtml"));
-    $("#loginForm\\:userName").clear();
+    $("#loginForm\\:userName").shouldBe(interactable).clear();
     $("#loginForm\\:userName").sendKeys(username);
     $("#loginForm\\:password").clear();
     $("#loginForm\\:password").sendKeys(password);
