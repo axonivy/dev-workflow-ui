@@ -15,8 +15,8 @@
 
   <dependencies>
     <dependency>
-      <groupId>ch.ivyteam.ivy.public-api</groupId>
-      <artifactId>public-api</artifactId>
+      <groupId>com.axonivy.ivy.api</groupId>
+      <artifactId>ivy-api</artifactId>
       <version>11.3.0-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
@@ -106,8 +106,11 @@
 
   <repositories>
     <repository>
-      <id>nexus.axonivy.com</id>
-      <url>https://nexus.axonivy.com/repository/maven/</url>
+      <id>nexus.axonivy.com-snapshots</id>
+      <url>https://nexus.axonivy.com/repository/maven-snapshots/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
       <snapshots>
         <updatePolicy>always</updatePolicy>
       </snapshots>
