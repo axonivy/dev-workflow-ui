@@ -1,8 +1,8 @@
 package ch.ivyteam.workflowuitestdata;
 
 import ch.ivyteam.ivy.persistence.PersistencyException;
-// import ch.ivyteam.ivy.process.extension.ui.ExtensionUiBuilder;
-// import ch.ivyteam.ivy.process.extension.ui.UiEditorExtension;
+import ch.ivyteam.ivy.process.extension.ui.ExtensionUiBuilder;
+import ch.ivyteam.ivy.process.extension.ui.UiEditorExtension;
 import ch.ivyteam.ivy.process.intermediateevent.AbstractProcessIntermediateEventBean;
 
 public class TestIntermediateClass extends AbstractProcessIntermediateEventBean
@@ -51,12 +51,12 @@ public class TestIntermediateClass extends AbstractProcessIntermediateEventBean
     }
   }
 
-  // public static class Editor extends UiEditorExtension {
+  public static class Editor extends UiEditorExtension {
 
-  //   @Override
-  //   public void initUiFields(ExtensionUiBuilder ui) {
-  //     ui.scriptField("demo").create();
-  //   }
-  // }
+    @Override
+    public void initUiFields(ExtensionUiBuilder ui) {
+      ui.scriptField("demo").create();
+    }
+  }
 
 }
