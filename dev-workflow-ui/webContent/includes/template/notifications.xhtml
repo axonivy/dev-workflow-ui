@@ -37,9 +37,9 @@
         <p:dataScroller id="notifications" lazy="true" styleClass="notification-scroll" value="#{notificationBean.dataModel}" var="notification" chunkSize="20" mode="inline">
           <div class="#{notification.style} notification-container">
             <div class="flex justify-content-between">
-              <h:outputText rendered="#{notification.infoAction == null}" value="#{notification.message}"/>
+              <h:outputText rendered="#{notification.infoAction == null}" value="#{notification.message}" escape="false"/>
               <h:outputLink rendered="#{notification.infoAction != null}" id="notificationMessage" value="#{notification.infoAction.link}" styleClass="notification-message">
-                <h:outputText value="#{notification.message}"/>
+                <h:outputText value="#{notification.message}" escape="false"/>
               </h:outputLink>
               <p:tooltip for="notificationMessage" value="#{notification.infoAction.title}" />
 
