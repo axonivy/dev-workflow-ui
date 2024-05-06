@@ -74,14 +74,13 @@ public class CasesDataModel extends LazyDataModel<ICase> {
     applyFilter(caseQuery);
     checkIfPersonalCases(caseQuery);
 
-    caseQuery.where()
-            .isBusinessCase();
+    caseQuery.where().and(CaseQuery.create().where().isBusinessCase());
     return caseQuery;
   }
 
   private void checkIfPersonalCases(CaseQuery caseQuery) {
     if (!showAllCases) {
-      caseQuery.where().currentUserIsInvolved();
+      caseQuery.where().and(CaseQuery.create().where().currentUserIsInvolved());
     }
   }
 
@@ -93,9 +92,9 @@ public class CasesDataModel extends LazyDataModel<ICase> {
       var casePriority = Arrays.asList(WorkflowPriority.values()).stream()
               .filter(priority -> StringUtils.startsWithIgnoreCase(priority.toString(), filter))
               .findFirst().orElse(null);
-      query.where().name().isLikeIgnoreCase("%" + filter + "%")
+      query.where().and(CaseQuery.create().where().name().isLikeIgnoreCase("%" + filter + "%")
               .or().state().isEqual(caseState)
-              .or().priority().isEqual(casePriority);
+              .or().priority().isEqual(casePriority));
     }
   }
 
