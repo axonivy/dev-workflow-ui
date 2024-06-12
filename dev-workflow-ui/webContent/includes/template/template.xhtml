@@ -37,6 +37,14 @@
               <ui:include src="./notifications.xhtml" />
             </li>
 
+            <p:remoteCommand name="setDarkMode" update="themeSwitcher" action="#{ivyFreyaTheme.setMode('dark')}"
+              onstart="PrimeFaces.FreyaConfigurator.beforeResourceChange(); PrimeFaces.FreyaConfigurator.changeLayout('ivy', 'dark');"/>
+            <p:remoteCommand name="setLightMode" update="themeSwitcher" action="#{ivyFreyaTheme.setMode('light')}"
+              onstart="PrimeFaces.FreyaConfigurator.beforeResourceChange(); PrimeFaces.FreyaConfigurator.changeLayout('ivy', 'light');"/>
+            <script>
+              window.setTheme = (theme) => theme === 'dark' ? setDarkMode() : setLightMode();
+            </script>
+
             <li class="themeswitch-item">
               <p:commandLink id="themeSwitcher" onclick="PrimeFaces.FreyaConfigurator.changeLayout('ivy', '#{ivyFreyaTheme.mode == 'light' ? 'dark' : 'light'}');"
                 style="text-decoration: none;">
