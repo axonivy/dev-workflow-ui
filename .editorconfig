@@ -3,7 +3,7 @@
 # top-most EditorConfig file
 root = true
 
-[*.{java,md,css,xhtml,js}]
+[*.{java,css,xhtml,js}]
 end_of_line = lf
 indent_style = space
 indent_size = 2
