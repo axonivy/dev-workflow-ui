@@ -7,7 +7,6 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
@@ -18,8 +17,9 @@ import com.codeborne.selenide.Selenide;
 @IvyWebTest
 public class WebTestTaskDetailPageRedirectIT {
 
-  @BeforeAll
-  public static void setup() {
+  @Test
+  public void testRedirectToDetailPage() {
+
     loginDeveloper();
     startTestProcess("18D3AB6E2DC7779B/generateUserTask.ivp");
     openView("tasks.xhtml");
@@ -28,18 +28,22 @@ public class WebTestTaskDetailPageRedirectIT {
     var element = $(By.id("tasksForm:tasks:0:taskState"));
     assertThat(element.getAttribute("class")).contains("task-state-open");
     element.click();
-  }
-
-  @Test
-  public void testRedirectToDetailPage() {
+    assertThat(Selenide.webdriver().driver().url()).contains("TaskTestDialog");
     Selenide.closeWebDriver();
-    loginDeveloper();
+
+
     openView("tasks.xhtml");
-    var element = $(By.id("tasksForm:tasks:0:taskState"));
+    element = $(By.id("tasksForm:tasks:0:taskState"));
     assertThat(element.getAttribute("class")).contains("task-state-in-progress");
     element.click();
     assertThat($(By.className("layout-dashboard")).getLocation() != null).isTrue();
     var url = Selenide.webdriver().driver().url();
     assertThat(url.contains("task.xhtml?id=") && !url.contains("frame.xhtml")).isTrue();
   }
+
+
+
 }
+
+
+
