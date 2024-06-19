@@ -26,10 +26,11 @@ class WebTestTaskDetailPageRedirectIT {
     table.row(0).shouldHave(text("TaskDetailTest"));
     var element = $(By.id("tasksForm:tasks:0:taskState"));
     assertThat(element.getAttribute("class")).contains("task-state-open");
+
     element.click();
     assertThat(Selenide.webdriver().driver().url()).contains("TaskTestDialog");
-    Selenide.closeWebDriver();
 
+    Selenide.closeWebDriver();
     openView("tasks.xhtml");
     element = $(By.id("tasksForm:tasks:0:taskState"));
     assertThat(element.getAttribute("class")).contains("task-state-in-progress");
