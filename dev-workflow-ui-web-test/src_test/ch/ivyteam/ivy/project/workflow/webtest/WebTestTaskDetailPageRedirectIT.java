@@ -15,11 +15,10 @@ import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
-public class WebTestTaskDetailPageRedirectIT {
+class WebTestTaskDetailPageRedirectIT {
 
   @Test
-  public void testRedirectToDetailPage() {
-
+  void redirectToDetailPage() {
     loginDeveloper();
     startTestProcess("18D3AB6E2DC7779B/generateUserTask.ivp");
     openView("tasks.xhtml");
@@ -31,19 +30,14 @@ public class WebTestTaskDetailPageRedirectIT {
     assertThat(Selenide.webdriver().driver().url()).contains("TaskTestDialog");
     Selenide.closeWebDriver();
 
-
     openView("tasks.xhtml");
     element = $(By.id("tasksForm:tasks:0:taskState"));
     assertThat(element.getAttribute("class")).contains("task-state-in-progress");
+
     element.click();
     assertThat($(By.className("layout-dashboard")).getLocation() != null).isTrue();
+
     var url = Selenide.webdriver().driver().url();
     assertThat(url.contains("task.xhtml?id=") && !url.contains("frame.xhtml")).isTrue();
   }
-
-
-
 }
-
-
-
