@@ -23,7 +23,7 @@ import com.axonivy.ivy.webtest.IvyWebTest;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
-public class WebTestCaseMapIT {
+class WebTestCaseMapIT {
 
   @BeforeAll
   static void setup() {
@@ -38,7 +38,7 @@ public class WebTestCaseMapIT {
   }
 
   @Test
-  public void caseDetails() {
+  void caseDetails() {
     openView("cases.xhtml");
     $(".detail-btn").shouldBe(visible).click();
 
@@ -50,7 +50,7 @@ public class WebTestCaseMapIT {
   }
 
   @Test
-  public void sidestepsCaseDetails() {
+  void sidestepsCaseDetails() {
     openView("cases.xhtml");
     $(".detail-btn").shouldBe(visible).click();
 
@@ -63,7 +63,7 @@ public class WebTestCaseMapIT {
   }
 
   @Test
-  public void sidestepsTaskDetails() {
+  void sidestepsTaskDetails() {
     openView("allTasks.xhtml");
     $(".detail-btn").shouldBe(visible).click();
 
@@ -78,7 +78,7 @@ public class WebTestCaseMapIT {
   }
 
   @Test
-  public void caseMapUi() {
+  void caseMapUi() {
     openView("cases.xhtml");
     $(By.className("detail-btn")).shouldBe(visible).click();
     $(By.className("current-hierarchy-case")).find("a").shouldNotHave(text("Created case of TestData"));
