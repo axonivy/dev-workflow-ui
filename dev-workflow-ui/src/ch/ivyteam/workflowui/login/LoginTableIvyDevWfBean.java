@@ -14,11 +14,15 @@ import ch.ivyteam.workflowui.util.UserUtil;
 @ManagedBean
 @ViewScoped
 public class LoginTableIvyDevWfBean {
+
   private final List<User> users;
   private final User currentUser;
+  private String globalFilter;
 
   public LoginTableIvyDevWfBean() {
-    users = UserUtil.getUsers().stream().map(LoginTableIvyDevWfBean::toUser).collect(toList());
+    users = UserUtil.getUsers().stream()
+            .map(LoginTableIvyDevWfBean::toUser)
+            .collect(toList());
     currentUser = toUser(ISession.current().getSessionUser());
   }
 
@@ -38,6 +42,14 @@ public class LoginTableIvyDevWfBean {
       return new User(user.getName(), user.getFullName(), roles);
     }
     return null;
+  }
+
+  public void setGlobalFilter(String globalFilter) {
+    this.globalFilter = globalFilter;
+  }
+
+  public String getGlobalFilter() {
+    return globalFilter;
   }
 
   public static class User {

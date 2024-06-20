@@ -16,10 +16,10 @@
         <p:panelGrid id="panelGridTestDialog" columns="2" layout="grid" styleClass="ui-panelgrid-blank"
           columnClasses="ui-g-12 ui-md-3 ui-lg-2, ui-g-12 ui-md-9 ui-lg-4, ui-g-12 ui-md-3 ui-lg-2,	ui-g-12 ui-md-9 ui-lg-4">
           <p:outputLabel value="Test input text" />
-          <p:inputText id="testInput" />
+          <p:inputText id="testInput" value="#{data.testInput}" />
 
           <p:outputLabel value="Test select one menu" />
-          <p:selectOneMenu id="testSelectOneMenu">
+          <p:selectOneMenu id="testSelectOneMenu" value="#{data.testSelectOneMenu}">
             <f:selectItem itemLabel="Select One" itemValue="" />
             <f:selectItem itemLabel="Xbox Series X" itemValue="Xbox Series X" />
             <f:selectItem itemLabel="PS5" itemValue="PS5" />
