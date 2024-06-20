@@ -2,3 +2,7 @@ TestDialog1Data #class
 ch.ivyteam.ivy.project.workflow.TestDialog1 #namespace
 data ch.ivyteam.ivy.project.workflow.Data #field
 data PERSISTENT #fieldModifier
+testSelectOneMenu String #field
+testSelectOneMenu PERSISTENT #fieldModifier
+testInput String #field
+testInput PERSISTENT #fieldModifier
