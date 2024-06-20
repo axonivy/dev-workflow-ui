@@ -101,11 +101,11 @@ public class WorkflowUiUtil {
 
   public static void tryLogin(String username, String password) {
     open(viewUrl("login.xhtml"));
-    $("#loginForm\\:userName").shouldBe(interactable).clear();
-    $("#loginForm\\:userName").sendKeys(username);
-    $("#loginForm\\:password").clear();
-    $("#loginForm\\:password").sendKeys(password);
-    $("#loginForm\\:login").shouldBe(visible).click();
+    $(By.id("loginForm:userName")).shouldBe(interactable).clear();
+    $(By.id("loginForm:userName")).sendKeys(username);
+    $(By.id("loginForm:password")).clear();
+    $(By.id("loginForm:password")).sendKeys(password);
+    $(By.id("loginForm:login")).shouldBe(visible).click();
   }
 
   public static void logout() {
