@@ -96,6 +96,13 @@ public class WorkflowUiUtil {
   public static void login(String username, String password) {
     tryLogin(username, password);
     webdriver().shouldNotHave(urlContaining("login.xhtml"));
+
+    var userName = $("#sessionUserName").getText();
+    if (userName.contains("Unknown")) {
+      tryLogin(username, password);
+      webdriver().shouldNotHave(urlContaining("login.xhtml"));
+    }
+
     $("#sessionUserName").shouldHave(text(username));
   }
 
