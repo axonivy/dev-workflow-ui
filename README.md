@@ -18,7 +18,7 @@ This is a the new workflow user interface to develop, simulate and execute Axon 
 
 To work on this project you will need to install the following tools:
 
-- [JDK 17](https://adoptium.net/)
+- [JDK 21](https://adoptium.net/)
 - [Maven](https://maven.apache.org/download.cgi)
 - Latest LE [Axon Ivy Designer](https://developer.axonivy.com/download/leading-edge)
 
