@@ -4,42 +4,44 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://xmlns.jcp.org/jsf/composite/components">
 
+  <c:set var="task" value="#{tasksDetailsIvyDevWfBean.selectedTask}" />
+
   <p:panelGrid id="taskDetail" layout="flex" columns="4" contentStyleClass="align-items-center"
     columnClasses="details-description-label flex align-items-center col-6 md:col-2, flex align-items-center col-6 md:col-4,
      details-description-label flex align-items-center col-6 md:col-2, flex align-items-center col-6 md:col-4">
 
     <h:outputText value="Task ID" />
-    <h:outputText id="taskId" value="#{tasksDetailsIvyDevWfBean.selectedTask.uuid}" />
+    <h:outputText id="taskId" value="#{task.uuid}" />
 
     <h:outputText value="Task name" />
-    <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.name}" id="taskName" />
+    <h:outputText value="#{task.name}" id="taskName" />
 
     <h:outputText value="Priority" />
     <h:outputText>
-      <i class="si si-#{tasksDetailsIvyDevWfBean.selectedTask.priorityIcon} mr-1" />
-      <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.priority}" id="taskPriority" />
+      <i class="si si-#{task.priorityIcon} mr-1" />
+      <h:outputText value="#{task.priority}" id="taskPriority" />
     </h:outputText>
 
     <h:outputText value="Category" />
-    <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.category}" id="category" />
+    <h:outputText value="#{task.category}" id="category" />
 
     <h:outputText value="State" />
     <h:outputText>
-      <i class="si si-#{tasksDetailsIvyDevWfBean.selectedTask.stateIcon} mr-1" />
-      <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.businessState} (#{tasksDetailsIvyDevWfBean.selectedTask.state})" id="taskState" />
+      <i class="si si-#{task.stateIcon} mr-1" />
+      <h:outputText value="#{task.businessState} (#{task.state})" id="taskState" />
     </h:outputText>
 
     <h:outputText value="Business case" />
-    <jc:caseLink case="#{tasksDetailsIvyDevWfBean.selectedTask.case.getBusinessCase()}" id="businessCase" />
+    <jc:caseLink case="#{task.case.getBusinessCase()}" id="businessCase" />
 
     <h:outputText value="Technical case" />
-    <jc:caseLink case="#{tasksDetailsIvyDevWfBean.selectedTask.case}" id="technicalCase" />
+    <jc:caseLink case="#{task.case}" id="technicalCase" />
 
     <h:outputText value="Working user" />
-    <jc:user user="#{tasksDetailsIvyDevWfBean.selectedTask.workerUser}" id="workingUser" />
+    <jc:user user="#{task.workerUser}" id="workingUser" />
 
     <h:outputText value="Responsible" />
-    <jc:user id="taskResponsible" user="#{tasksDetailsIvyDevWfBean.selectedTask.activator}" />
+    <jc:user id="taskResponsible" user="#{task.activator}" />
 
     <h:outputText value="Created" />
     <h:outputText value="#{dateTimeIvyDevWfBean.getDetailedDateAndTime(tasksDetailsIvyDevWfBean.selectedTask.startTimestamp)}"
@@ -58,20 +60,20 @@
       id="completedDate" />
 
     <h:outputText value="Description" />
-    <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.description}" id="taskDescription" />
+    <h:outputText value="#{task.description}" id="taskDescription" />
 
     <h:outputText value="PMV" />
-    <h:outputText value="#{tasksDetailsIvyDevWfBean.selectedTask.pmv}" id="pmv" />
+    <h:outputText value="#{task.pmv}" id="pmv" />
 
     <h:outputText value="Current Element" />
     <p:commandLink id="openProcessViewerBtn" styleClass="flex align-items-center"
       actionListener="#{tasksDetailsIvyDevWfBean.setViewerLink()}" oncomplete="PF('process-viewer-dlg').show()"
       update="processViewer:processViewerDialog"
-      disabled="#{!tasksDetailsIvyDevWfBean.selectedTask.viewerAllowed}">
+      disabled="#{!task.viewerAllowed}">
       <i class="si si-hierarchy-6 si-rotate-270 mr-1" />
-      #{tasksDetailsIvyDevWfBean.selectedTask.currentElement}
+      #{task.currentElement}
     </p:commandLink>
   </p:panelGrid>
-  <p:tooltip for="taskId" value="ID: #{tasksDetailsIvyDevWfBean.selectedTask.getId()}" position="top"/>
+  <p:tooltip for="taskId" value="ID: #{task.getId()}" position="top"/>
 
 </ui:composition>
