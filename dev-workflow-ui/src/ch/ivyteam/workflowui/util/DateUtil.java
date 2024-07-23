@@ -30,7 +30,7 @@ public class DateUtil {
     return formatDate(date, defaultFormatter);
   }
 
-  public static String getDetailedDateAndTime(Date date) {
+  public static String getDetailed(Date date) {
     return formatDate(date, detailedFormatter);
   }
 
