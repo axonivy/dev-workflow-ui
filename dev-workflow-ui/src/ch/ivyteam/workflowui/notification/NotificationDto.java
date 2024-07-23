@@ -37,7 +37,7 @@ public class NotificationDto {
     if (notification.isRead()) {
       return "";
     }
-    return "p-text-bold";
+    return "font-bold";
   }
 
   public WebNotification getNotification() {
