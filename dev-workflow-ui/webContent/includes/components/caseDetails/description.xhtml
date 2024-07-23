@@ -4,44 +4,46 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://xmlns.jcp.org/jsf/composite/components">
 
+  <c:set var="case" value="#{casesDetailsIvyDevWfBean.selectedCase}" />
+
   <p:panelGrid id="caseDetails" columns="4" layout="flex" contentStyleClass="align-items-center"
     columnClasses="details-description-label col-6 md:col-2, col-6 md:col-4,
      details-description-label col-6 md:col-2, col-6 md:col-4">
 
     <h:outputText value="Case ID" />
-    <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.uuid()}" id="caseId"/>
+    <h:outputText value="#{case.uuid()}" id="caseId"/>
 
     <h:outputText value="Case name" />
-    <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.getName()}" id="caseName" />
+    <h:outputText value="#{case.getName()}" id="caseName" />
 
     <h:outputText value="Case Owner" />
-    <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.ownerName}" id="taskResponsible" />
+    <h:outputText value="#{case.ownerName}" id="taskResponsible" />
 
     <h:outputText value="Creator" />
-    <jc:user user="#{casesDetailsIvyDevWfBean.selectedCase.creatorUser}" id="creatorUser" />
+    <jc:user user="#{case.creatorUser}" id="creatorUser" />
 
     <h:outputText value="State" />
     <h:outputText>
-      <i class="si si-#{casesIvyDevWfBean.getStateIcon(casesDetailsIvyDevWfBean.selectedCase.businessState)} mr-1"></i>
-      <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.businessState} (#{casesDetailsIvyDevWfBean.selectedCase.state})" id="caseState" />
+      <i class="si si-#{casesIvyDevWfBean.getStateIcon(case.businessState)} mr-1"></i>
+      <h:outputText value="#{case.businessState} (#{case.state})" id="caseState" />
     </h:outputText>
 
     <h:outputText value="Category" />
-    <h:outputText value="#{casesDetailsIvyDevWfBean.selectedCase.category.name}" id="category" />
+    <h:outputText value="#{case.category.name}" id="category" />
 
     <h:outputText value="Created" />
-    <h:outputText value="#{dateTimeIvyDevWfBean.getDateTime(casesDetailsIvyDevWfBean.selectedCase.getStartTimestamp())}"
+    <h:outputText value="#{dateTimeIvyDevWfBean.getDefault(case.getStartTimestamp())}"
       id="createdDate" />
 
     <h:outputText value="Completed on" />
-    <h:outputText value="#{dateTimeIvyDevWfBean.getDetailedDateAndTime(casesDetailsIvyDevWfBean.selectedCase.getEndTimestamp())}"
+    <h:outputText value="#{dateTimeIvyDevWfBean.getDetailed(case.getEndTimestamp())}"
       id="expiryDate" />
 
     <h:outputText value="Description" />
     <h:outputText value="#{casesDetailsIvyDevWfBean.description}" id="caseDescription" />
   </p:panelGrid>
-  <p:tooltip for="caseId" value="ID: #{casesDetailsIvyDevWfBean.selectedCase.getId()}" />
-  <p:tooltip for="createdDate" value="#{dateTimeIvyDevWfBean.getPrettyTime(casesDetailsIvyDevWfBean.selectedCase.getStartTimestamp())}"
+  <p:tooltip for="caseId" value="ID: #{case.getId()}" />
+  <p:tooltip for="createdDate" value="#{dateTimeIvyDevWfBean.getPrettyTime(case.getStartTimestamp())}"
     position="top" />
 
 </ui:composition>

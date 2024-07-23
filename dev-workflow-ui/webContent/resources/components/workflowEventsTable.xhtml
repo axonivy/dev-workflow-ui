@@ -15,7 +15,7 @@
       paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
 
       <p:column headerText="Creation Date" sortBy="#{event.eventTimestamp}" sortOrder="descending">
-        <h:outputText value="#{dateTimeIvyDevWfBean.getDateTime(event.eventTimestamp)}" />
+        <h:outputText value="#{dateTimeIvyDevWfBean.getDefault(event.eventTimestamp)}" />
       </p:column>
 
       <p:column headerText="Event type" colspan="2">
