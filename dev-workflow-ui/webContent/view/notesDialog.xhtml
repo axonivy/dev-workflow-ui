@@ -1,0 +1,62 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
+  xmlns:pe="http://primefaces.org/ui/extensions">
+<h:head>
+  <f:attribute name="primefaces.THEME" value="#{ivyFreyaTheme.theme}" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notes</title>
+  <link rel="shortcut icon" href="#{resource['ivy-branding:favicon']}" />
+  <h:outputScript name="js/layout.js" library="#{ivyFreyaTheme.library}" />
+  <h:outputStylesheet name="#{ivyFreyaTheme.layout}" library="#{ivyFreyaTheme.library}" />
+  <h:outputStylesheet name="primeflex-3.min.css" library="primeflex" />
+  <h:outputStylesheet name="custom.css" library="ivy-branding" />
+  <style>
+    body #notesForm\:notesPaginator_head {
+      display: none;
+    }
+
+    body .ui-datatable .ui-datatable-data .notes-paginator-container {
+      border: 0;
+      padding: 0;
+    }
+
+    body .notes-paginator .ui-paginator-bottom {
+      border: 0;
+      padding: 0;
+    }
+
+    .note-container {
+      border-color: var(--surface-d);
+    }
+  </style>
+</h:head>
+<f:metadata>
+  <f:viewParam name="id" value="#{notesBean.id}" />
+</f:metadata>
+<h:body class="body-hd #{ivyFreyaTheme.mode}">
+  <f:event type="preRenderView" listener="#{notesBean.redirectIfCantResume}" />
+  <ui:include src="/ivy-form/layouts/includes/progress-loader.xhtml" />
+  <div id="content" class="container frame">
+    <ui:insert name="content">
+      <h:form id="notesForm" styleClass="notes-form" >
+        <p:dataTable id="notesPaginator" var="note" value="#{notesBean.notes}" rowKey="#{note.id}" rows="5"
+          paginator="true" paginatorPosition="bottom" styleClass="notes-paginator">
+          <p:column id="content" styleClass="notes-paginator-container">
+            <div class="mb-2 p-2 border-solid border-round border-1 note-container">
+              <div class="mb-2">
+                <h:outputText value="#{note.message}" />
+              </div>
+              <div class="text-color-secondary">
+                <h:outputText value="#{note.writterName} • " />
+                <h:outputText value="#{dateTimeIvyDevWfBean.getDateTimeNoYear(note.creationTimestamp)}" />
+              </div>
+            </div>
+          </p:column>
+        </p:dataTable>
+      </h:form>
+    </ui:insert>
+  </div>
+</h:body>
+</html>
