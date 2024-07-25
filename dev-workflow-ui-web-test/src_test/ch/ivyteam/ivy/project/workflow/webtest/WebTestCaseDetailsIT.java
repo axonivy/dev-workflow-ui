@@ -103,6 +103,17 @@ class WebTestCaseDetailsIT {
   }
 
   @Test
+  void notesDialog() {
+    $(By.id("caseNotesBtn")).shouldBe(visible).click();
+    var dialog = $(By.id("caseNotesBtn_dlg"));
+    dialog.shouldBe(visible);
+    var iframe = dialog.find(By.tagName("iframe"));
+    iframe.shouldBe(visible);
+    Selenide.switchTo().frame(iframe);
+    $(By.id("content")).shouldHave(text("this is test note"));
+  }
+
+  @Test
   void destoryCase() {
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
     openView("cases.xhtml");
