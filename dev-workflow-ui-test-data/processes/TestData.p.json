@@ -61,7 +61,21 @@
             "String number = random.nextInt(100000).toString();",
             "",
             "task.getCase().documents().add(new Path(\"Test\" + number + \"/test.txt\")).write().withContentFrom(\"this is test document\");",
-            "task.getCase().documents().add(new Path(\"Test\" + number + \"/documentTest.txt\")).write().withContentFrom(\"document. you can read this correctly\");"
+            "task.getCase().documents().add(new Path(\"Test\" + number + \"/documentTest.txt\")).write().withContentFrom(\"document. you can read this correctly\");",
+            "",
+            "task.createNote(ivy.session, \"this is test note\");",
+            "",
+            "String longNote = \"",
+            " I can't do that as Bruce Wayne... as a man. I'm flesh and blood. I can be ignored, destroyed. But as a symbol, I can be incorruptible, I can be everlasting.",
+            " I seek the means to fight injustice. To turn fear against those who prey on the fearful. This isn't a car. Someone like you. Someone who'll rattle the cages.",
+            " No guns, no killing. I'm not wearing hockey pads. Bruce Wayne, eccentric billionaire.",
+            " I'll be standing where l belong. Between you and the peopIe of Gotham. I'm not wearing hockey pads. I seek the means to fight injustice. To turn fear against those who prey on the fearful.",
+            "\";",
+            "task.createNote(ivy.session, longNote);",
+            "",
+            "for(int i = 0; i < 6; i++) {",
+            "  task.createNote(ivy.session, random.nextInt(100000).toString());",
+            "}"
           ]
         },
         "case" : {

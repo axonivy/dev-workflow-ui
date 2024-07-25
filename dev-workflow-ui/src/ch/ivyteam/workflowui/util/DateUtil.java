@@ -26,12 +26,16 @@ public class DateUtil {
     return dateThen.format(defaultFormatter).toString();
   }
 
-  public static String getDateAndTime(Date date) {
+  public static String getDefault(Date date) {
     return formatDate(date, defaultFormatter);
   }
 
   public static String getDetailed(Date date) {
     return formatDate(date, detailedFormatter);
+  }
+
+  public static String getDateTimeNoYear(Date date) {
+    return formatDate(date, DateTimeFormatter.ofPattern("dd MMM, HH:mm"));
   }
 
   private static String formatDate(Date date, DateTimeFormatter format)

@@ -2,11 +2,15 @@ package ch.ivyteam.workflowui.tasks;
 
 import java.util.Date;
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.PrimeFaces;
+import org.primefaces.model.DialogFrameworkOptions;
 import org.primefaces.model.menu.MenuModel;
 
 import ch.ivyteam.ivy.environment.Ivy;
@@ -134,30 +138,7 @@ public class TasksDetailsIvyDevWfBean {
   }
 
   private boolean canResume() {
-    if (selectedTaskId == null) {
-      return false;
-    }
-    var session = ISession.current();
-    if (session == null) {
-      return false;
-    }
-    var user = session.getSessionUser();
-    if (user == null) {
-      return false;
-    }
-    var task = loadTask();
-    if (task == null) {
-      return false;
-    }
-    if (UserUtil.isAdmin()) {
-      return true;
-    }
-    var isActivator = task.activator().isMember(user.getUserToken());
-    if (task.getWorkerUser() == null) {
-      return isActivator;
-    }
-    var isWorker = task.getWorkerUser().isMember(user.getUserToken(), false);
-    return isActivator || isWorker;
+    return TaskUtil.canResume(selectedTask.getUuid());
   }
 
   private EnumSet<TaskState> activeTaskStates = EnumSet.of(
@@ -202,6 +183,22 @@ public class TasksDetailsIvyDevWfBean {
       case DESTROYED -> "You cannot work on the task because it was destroyed";
       default -> "invalid state";
     };
+  }
+
+  public void openNotesDialog() {
+    var options = DialogFrameworkOptions.builder()
+            .modal(true)
+            .responsive(true)
+            .width("640")
+            .height("340")
+            .contentHeight("100%")
+            .contentWidth("100%")
+            .build();
+
+    Map<String, List<String>> params = new HashMap<>();
+    params.put("id", List.of(selectedTask.getUuid().toString()));
+
+    PrimeFaces.current().dialog().openDynamic("notesDialog", options, params);
   }
 
   private boolean isActivator() {

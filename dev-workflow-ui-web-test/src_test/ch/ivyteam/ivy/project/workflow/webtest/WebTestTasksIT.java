@@ -88,6 +88,27 @@ class WebTestTasksIT {
   }
 
   @Test
+  void notesDialog() {
+    openView("allTasks.xhtml");
+    $(By.className("detail-btn")).shouldBe(visible).click();
+    $(By.id("actionMenuForm:taskNotesBtn")).shouldBe(visible).click();
+    var dialog = $(By.id("actionMenuForm:taskNotesBtn_dlg"));
+    dialog.shouldBe(visible);
+    var iframe = dialog.find(By.tagName("iframe"));
+    iframe.shouldBe(visible);
+    Selenide.switchTo().frame(iframe);
+    $(By.id("content")).shouldHave(text("this is test note"));
+  }
+
+  @Test
+  void notesBtnDisabled() {
+    startTestProcess("1750C5211D94569D/HomePageTestData.ivp");
+    openView("allTasks.xhtml");
+    $(By.className("detail-btn")).shouldBe(visible).click();
+    $(By.id("actionMenuForm:taskNotesBtn")).shouldBe(visible).shouldNotBe(enabled);
+  }
+
+  @Test
   void taskNotFound() {
     openView("task.xhtml", Map.of("id", "NON-EXISTING-TASK"));
     assertThat(Selenide.webdriver().driver().getWebDriver().getPageSource()).contains("Not Found");

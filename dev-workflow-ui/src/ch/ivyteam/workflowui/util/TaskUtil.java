@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.event.SelectEvent;
 
+import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.task.TaskBusinessState;
@@ -88,5 +89,32 @@ public class TaskUtil {
       return caseEmbedField.getOrDefault("true").equals("true");
     }
     return taskEmbedField.getValue().equals("true");
+  }
+
+  public static boolean canResume(String taskId) {
+    if (taskId == null) {
+      return false;
+    }
+    var session = ISession.current();
+    if (session == null) {
+      return false;
+    }
+    var user = session.getSessionUser();
+    if (user == null) {
+      return false;
+    }
+    var task = IWorkflowContext.current().findTask(taskId);
+    if (task == null) {
+      return false;
+    }
+    if (UserUtil.isAdmin()) {
+      return true;
+    }
+    var isActivator = task.activator().isMember(user.getUserToken());
+    if (task.getWorkerUser() == null) {
+      return isActivator;
+    }
+    var isWorker = task.getWorkerUser().isMember(user.getUserToken(), false);
+    return isActivator || isWorker;
   }
 }

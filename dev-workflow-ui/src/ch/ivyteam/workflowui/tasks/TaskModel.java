@@ -12,6 +12,7 @@ import ch.ivyteam.ivy.process.viewer.api.ProcessViewer;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.ivy.workflow.ICase;
+import ch.ivyteam.ivy.workflow.INote;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.TaskState;
@@ -56,6 +57,7 @@ public class TaskModel {
   private final List<WorkflowEventModel> workflowEvents;
   private List<SidestepModel> sidesteps;
   private final List<CustomFieldModel> customFields;
+  private final List<INote> notes;
 
   public TaskModel(long taskId) {
     this(IWorkflowContext.current().findTask(taskId));
@@ -90,6 +92,7 @@ public class TaskModel {
     this.viewerLink = buildViewerLink(task);
     this.viewerAllowed = isViewerAllowed(task);
     this.workerSession = task.getWorkerSession();
+    this.notes = task.getNotes();
   }
 
   public long getId() {
@@ -252,5 +255,9 @@ public class TaskModel {
 
   public ISession getWorkerSession() {
     return this.workerSession;
+  }
+
+  public List<INote> getNotes() {
+    return notes;
   }
 }
