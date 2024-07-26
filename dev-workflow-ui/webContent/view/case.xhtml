@@ -21,10 +21,16 @@
                   <i class="pr-3 si si-common-file-text"></i>
                   <h6 class="m-0">Description</h6>
                 </div>
-                <p:commandButton icon="si si-delete-1" styleClass="ui-button-danger rounded-button"
-                  disabled="#{not casesDetailsIvyDevWfBean.canBeDestoryed()}" id="caseDestroyBtn"
-                  actionListener="#{casesDetailsIvyDevWfBean.selectedCase.destroy}" update="@this, caseDetails, caseHierarchy" />
-                <p:tooltip for="caseDestroyBtn" value="Destroy case" position="top"/>
+                <div>
+                  <p:commandButton id="caseNotesBtn" styleClass="ui-button-secondary ui-button-outlined rounded-button"
+                    disabled="#{0 >= casesDetailsIvyDevWfBean.selectedCase.notes.size()}" icon="si si-notes-quill"
+                    actionListener="#{notesBean.openNotesDialog(casesDetailsIvyDevWfBean.selectedCaseId)}" />
+                  <p:tooltip for="caseNotesBtn" value="Show case notes" position="top"/>
+                  <p:commandButton icon="si si-delete-1" styleClass="ui-button-danger rounded-button ml-1"
+                    disabled="#{not casesDetailsIvyDevWfBean.canBeDestoryed()}" id="caseDestroyBtn"
+                    actionListener="#{casesDetailsIvyDevWfBean.selectedCase.destroy}" update="@this, caseDetails, caseHierarchy" />
+                  <p:tooltip for="caseDestroyBtn" value="Destroy case" position="top"/>
+                </div>
               </div>
               <ui:include src="/includes/components/caseDetails/description.xhtml" />
             </div>

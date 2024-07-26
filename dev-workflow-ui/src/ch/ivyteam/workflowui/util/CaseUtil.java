@@ -10,6 +10,7 @@ import ch.ivyteam.ivy.casemap.runtime.model.ICaseMap;
 import ch.ivyteam.ivy.casemap.runtime.repo.restricted.ICaseMapBusinessCase;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
+import ch.ivyteam.ivy.workflow.IWorkflowContext;
 
 @SuppressWarnings("restriction")
 public class CaseUtil {
@@ -35,5 +36,9 @@ public class CaseUtil {
       return caseMapBusinessCase.getCaseMap();
     }
     return null;
+  }
+
+  public static ICase getCaseById(String uuid) {
+    return IWorkflowContext.current().findCase(uuid);
   }
 }

@@ -15,7 +15,6 @@ import org.primefaces.model.menu.MenuModel;
 
 import ch.ivyteam.ivy.process.viewer.api.ProcessViewer;
 import ch.ivyteam.ivy.workflow.ICase;
-import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.query.CaseQuery;
 import ch.ivyteam.ivy.workflow.start.IWebStartable;
 import ch.ivyteam.workflowui.casemap.CaseMapModel;
@@ -59,7 +58,7 @@ public class CasesDetailsIvyDevWfBean {
 
   public void setSelectedCaseId(String selectedCaseId) {
     this.selectedCaseId = selectedCaseId;
-    this.selectedCase = getCaseById(selectedCaseId);
+    this.selectedCase = CaseUtil.getCaseById(selectedCaseId);
     if (selectedCase == null) {
       ResponseHelper.notFound("Case " + selectedCaseId + " does not exist");
       return;
@@ -79,10 +78,6 @@ public class CasesDetailsIvyDevWfBean {
 
   private String generateProcessPreviewLink() {
     return ProcessViewer.of(selectedCase).url().mode(PREVIEW).zoom(75).toWebLink().get();
-  }
-
-  public ICase getCaseById(String uuid) {
-    return IWorkflowContext.current().findCase(uuid);
   }
 
   public String getCreatorUser() {
