@@ -20,7 +20,7 @@ public class UrlUtil {
     var page = StringUtils.substringAfterLast(getHttpServletRequest().getRequestURI(), "/");
     var parameter = getHttpServletRequest().getQueryString();
     if (page.equals("frame.xhtml")) {
-      page = "allTasks.xhtml";
+      page = "tasks.xhtml";
     }
     if (!StringUtils.isBlank(parameter)) {
       page += "?" + parameter;

@@ -50,9 +50,6 @@ public class WebDocuScreenshots {
     openView("tasks.xhtml");
     takeScreenshot("workflow-ui-tasks", new Dimension(SCREENSHOT_WIDTH, 800));
 
-    openView("allTasks.xhtml");
-    takeScreenshot("workflow-ui-allTasks", new Dimension(SCREENSHOT_WIDTH, 800));
-
     $(".detail-btn").shouldBe(visible).click();
     $("#actionMenuForm\\:taskActionsBtn").click();
     takeScreenshot("workflow-ui-taskDetails", new Dimension(SCREENSHOT_WIDTH, 800));

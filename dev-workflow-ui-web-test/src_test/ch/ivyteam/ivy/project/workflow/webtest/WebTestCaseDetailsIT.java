@@ -96,7 +96,7 @@ class WebTestCaseDetailsIT {
     $(By.id("workflowEvents:eventsTable")).shouldBe(visible);
     loginFromTable("testuser");
     openView("cases.xhtml");
-    $(By.className("detail-btn")).shouldBe(visible).click();
+    $(byText("Created case of TestData")).shouldBe(visible).click();
     $(By.id("caseId")).shouldBe(visible).shouldHave(exactText(caseId));
     $(By.id("workflowEvents:eventsTable")).shouldNotBe(visible);
     $(By.id("workflowEvents:noPermissionMessage")).shouldBe(visible).shouldHave(text("No permissions"));

@@ -13,7 +13,6 @@
           <p:menuitem id="sr_home" value="Home" icon="si si-house-1" url="home.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('home') ? 'active-menuitem' : ''}" />
           <p:menuitem id="sr_starts" value="Starts" icon="si si-navigation-menu" url="starts.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('starts') ? 'active-menuitem' : ''}" />
           <p:menuitem id="sr_tasks" value="Tasks" icon="si si-layout-bullets" url="tasks.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('tasks') ? 'active-menuitem' : ''}" />
-          <p:menuitem id="sr_allTasks" value="All Tasks" icon="si si-task-list-edit" url="allTasks.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('allTasks') ? 'active-menuitem' : ''}" />
           <p:menuitem id="sr_cases" value="Cases" icon="si si-task-list-approve" url="cases.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('cases') ? 'active-menuitem' : ''}" />
           <p:submenu id="sr_actions" label="Developer" icon="si si-tools-wench" rendered="#{adminIvyDevWfBean.isWorkflowAdmin()}" styleClass="#{sidebarIvyDevWfBean.isActive('signals', 'intermediateEvents', 'cleanup', 'api-browser') ? 'active-menuitem' : ''}">
             <p:menuitem id="sr_signals" value="Signals" icon="si si-network-signal" url="signals.xhtml" styleClass="#{sidebarIvyDevWfBean.isActive('signals') ? 'active-submenu' : ''}"/>

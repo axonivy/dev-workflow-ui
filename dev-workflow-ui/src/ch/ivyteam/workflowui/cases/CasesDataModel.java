@@ -21,7 +21,7 @@ public class CasesDataModel extends LazyDataModel<ICase> {
 
   private static final long serialVersionUID = -7707950729638849827L;
   private String filter;
-  private boolean showAllCases = UserUtil.isAdmin();
+  private boolean showAll = UserUtil.isAdmin();
 
   public String getFilter() {
     return filter;
@@ -47,7 +47,7 @@ public class CasesDataModel extends LazyDataModel<ICase> {
   private List<ICase> getCaseList() {
     var caseQuery = CaseQuery.create();
     applyFilter(caseQuery);
-    checkIfPersonalCases(caseQuery);
+    checkIfShowAll(caseQuery);
     return caseQuery.executor().results();
   }
 
@@ -72,14 +72,14 @@ public class CasesDataModel extends LazyDataModel<ICase> {
     var caseQuery = CaseQuery.create();
 
     applyFilter(caseQuery);
-    checkIfPersonalCases(caseQuery);
+    checkIfShowAll(caseQuery);
 
     caseQuery.where().and(CaseQuery.create().where().isBusinessCase());
     return caseQuery;
   }
 
-  private void checkIfPersonalCases(CaseQuery caseQuery) {
-    if (!showAllCases) {
+  private void checkIfShowAll(CaseQuery caseQuery) {
+    if (!showAll) {
       caseQuery.where().and(CaseQuery.create().where().currentUserIsInvolved());
     }
   }
@@ -136,11 +136,11 @@ public class CasesDataModel extends LazyDataModel<ICase> {
     }
   }
 
-  public boolean getShowAllCases() {
-    return showAllCases;
+  public boolean getShowAll() {
+    return showAll;
   }
 
-  public void setShowAllCases(boolean showAllCases) {
-    this.showAllCases = showAllCases;
+  public void setShowAll(boolean showAll) {
+    this.showAll = showAll;
   }
 }

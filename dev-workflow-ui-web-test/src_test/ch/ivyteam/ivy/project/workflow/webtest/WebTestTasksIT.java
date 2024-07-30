@@ -42,7 +42,7 @@ class WebTestTasksIT {
   @Test
   void allTasksOnlyAdmin() {
     startTestProcess("1750C5211D94569D/HomePageTestData.ivp");
-    openView("allTasks.xhtml");
+    openView("tasks.xhtml");
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldHave(text("Created task of HomePageTestData"));
     $(By.className("detail-btn")).shouldBe(visible).click();
@@ -50,7 +50,7 @@ class WebTestTasksIT {
     String taskId = $(By.id("taskId")).text();
     $(By.id("actionMenuForm:taskStartBtn")).shouldBe(enabled).click();
     loginFromTable("testuser");
-    openView("allTasks.xhtml");
+    openView("tasks.xhtml");
     table = PrimeUi.table(By.id("tasksForm:tasks"));
     if (table.row(0).text().equals("Created task of HomePageTestData")) {
       $(By.className("detail-btn")).shouldBe(visible).click();
@@ -61,7 +61,7 @@ class WebTestTasksIT {
   @Test
   void tasksTable() {
     startTestProcess("1750C5211D94569D/TestData.ivp");
-    openView("allTasks.xhtml");
+    openView("tasks.xhtml");
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldHave(text("Created task of TestData"));
     table.valueAt(0, 1).contains("pause");
@@ -69,7 +69,7 @@ class WebTestTasksIT {
 
   @Test
   void checkTaskDetails() {
-    openView("allTasks.xhtml");
+    openView("tasks.xhtml");
     $(".detail-btn").shouldBe(visible).click();
 
     $(".case-link").shouldHave(text("Created case of TestData"));
@@ -89,7 +89,7 @@ class WebTestTasksIT {
 
   @Test
   void notesDialog() {
-    openView("allTasks.xhtml");
+    openView("tasks.xhtml");
     $(By.className("detail-btn")).shouldBe(visible).click();
     $(By.id("actionMenuForm:taskNotesBtn")).shouldBe(visible).click();
     var dialog = $(By.id("actionMenuForm:taskNotesBtn_dlg"));
@@ -103,7 +103,7 @@ class WebTestTasksIT {
   @Test
   void notesBtnDisabled() {
     startTestProcess("1750C5211D94569D/HomePageTestData.ivp");
-    openView("allTasks.xhtml");
+    openView("tasks.xhtml");
     $(By.className("detail-btn")).shouldBe(visible).click();
     $(By.id("actionMenuForm:taskNotesBtn")).shouldBe(visible).shouldNotBe(enabled);
   }
@@ -116,7 +116,7 @@ class WebTestTasksIT {
 
   @Test
   void startTask() {
-    openView("allTasks.xhtml");
+    openView("tasks.xhtml");
 
     $(".detail-btn").shouldBe(visible).click();
     $(".case-link").shouldHave(text("Created case of TestData"));
@@ -124,7 +124,7 @@ class WebTestTasksIT {
     $(By.id("taskState")).shouldBe(exactText("OPEN (SUSPENDED)"));
     $("#actionMenuForm\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"))
             .shouldBe(enabled).click();
-    openView("allTasks.xhtml");
+    openView("tasks.xhtml");
     $(".detail-btn").shouldBe(visible).click();
     $("#taskName").shouldBe(exactText("Created task of TestData"));
 
@@ -135,7 +135,7 @@ class WebTestTasksIT {
   @Test
   void startParkedTask() {
     startTestProcess("1750C5211D94569D/TestData.ivp");
-    openView("allTasks.xhtml");
+    openView("tasks.xhtml");
 
     $(".detail-btn").shouldBe(visible).click();
     $(".case-link").shouldHave(text("Created case of TestData"));
@@ -153,14 +153,14 @@ class WebTestTasksIT {
 
   @Test
   void workflowEventsPermission() {
-    openView("allTasks.xhtml");
+    openView("tasks.xhtml");
     $(By.className("detail-btn")).shouldBe(visible).click();
     $(By.className("case-link")).shouldHave(text("Created case of TestData"));
     var taskId = $(By.id("taskId")).getText();
     $(By.id("workflowEvents:eventsTable")).shouldBe(visible);
 
     loginFromTable("testuser");
-    openView("allTasks.xhtml");
+    openView("tasks.xhtml");
     $(By.className("detail-btn")).shouldBe(visible).click();
     $(By.id("taskId")).shouldBe(exactText(taskId));
     $(By.id("workflowEvents:eventsTable")).shouldNotBe(visible);
@@ -169,7 +169,7 @@ class WebTestTasksIT {
 
   @Test
   void taskCustomFields() {
-    openView("allTasks.xhtml");
+    openView("tasks.xhtml");
     $(By.className("detail-btn")).shouldBe(visible).click();
     $(By.className("case-link")).shouldHave(text("Created case of TestData"));
 
@@ -180,7 +180,7 @@ class WebTestTasksIT {
   @Test
   void checkDelayedTask() {
     startTestProcess("1750C5211D94569D/DelayedTestTask.ivp");
-    openView("allTasks.xhtml");
+    openView("tasks.xhtml");
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldHave(text("Created delayed task"));
     $(By.className("detail-btn")).shouldBe(visible).click();
@@ -193,7 +193,7 @@ class WebTestTasksIT {
   @Test
   void checkCustomResponsibleUser() {
     startTestProcess("1750C5211D94569D/customUser.ivp");
-    openView("allTasks.xhtml");
+    openView("tasks.xhtml");
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldHave(text("Created task of CustomUser"));
     $(By.className("detail-btn")).shouldBe(visible).click();
@@ -204,7 +204,7 @@ class WebTestTasksIT {
   @Test
   void delegateTask() {
     startTestProcess("1750C5211D94569D/TestData.ivp");
-    openView("allTasks.xhtml");
+    openView("tasks.xhtml");
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldHave(text("Created task of TestData"));
     $(By.className("detail-btn")).shouldBe(visible).click();
@@ -223,7 +223,7 @@ class WebTestTasksIT {
   @Test
   void clearDelayOnTask() {
     startTestProcess("1750C5211D94569D/DelayedTestTask.ivp");
-    openView("allTasks.xhtml");
+    openView("tasks.xhtml");
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldHave(text("Created delayed task"));
     $(By.className("detail-btn")).shouldBe(visible).click();
@@ -244,7 +244,7 @@ class WebTestTasksIT {
     $(By.id("startsForm:globalFilter")).sendKeys("embed in frame");
     $(By.className("start-link")).shouldBe(visible, text("Do not embed in Frame")).click();
     $(By.id("form:proceed")).shouldBe(visible).click();
-    openView("allTasks.xhtml");
+    openView("tasks.xhtml");
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldHave(text("notEmbedTask"));
     $(By.className("detail-btn")).shouldBe(visible).click();
