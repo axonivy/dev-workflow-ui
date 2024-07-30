@@ -6,8 +6,21 @@
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
       <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotDevModeOrAdmin}" />
-      <div class="flex align-items-center m-3">
+      <div class="flex m-3 justify-content-between">
+        <div class="flex align-items-center">
         <h4 class="m-0">Statistics</h4>
+        </div>
+        <div class="flex align-items-center">
+          <h:outputText value="Time range:"/>
+          <p:selectOneMenu value="#{statisticsBean.timeDuration}" styleClass="ml-2">
+            <f:selectItem itemLabel="Today" itemValue="today" />
+            <f:selectItem itemLabel="Last 7 days" itemValue="7d" />
+            <f:selectItem itemLabel="Last 30 days" itemValue="30d" />
+            <f:selectItem itemLabel="Last 90 days" itemValue="90d" />
+            <f:selectItem itemLabel="Last 365 days" itemValue="365d" />
+            <f:selectItem itemLabel="All time" itemValue="all" />
+          </p:selectOneMenu>
+        </div>
       </div>
       <div class="flex flex-wrap">
         <ui:include src="/includes/components/statistics/casesAll.xhtml" />
