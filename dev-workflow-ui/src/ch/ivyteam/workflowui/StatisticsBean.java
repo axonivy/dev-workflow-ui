@@ -31,8 +31,26 @@ import ch.ivyteam.ivy.workflow.task.TaskBusinessState;
 @ViewScoped
 public class StatisticsBean {
 
+  private String timeDuration = "all";
+
+  public String getTimeFilter() {
+    return timeDuration;
+  }
+
+  public void setTimeDuration(String timeDuration) {
+    this.timeDuration = timeDuration;
+  }
+
+  private String calculateTimeDurationQuery()
+  {
+    if (timeDuration.equals("all")) {
+      return "";
+    }
+    return ",startTimestamp:>=now-" + timeDuration + "/d";
+  }
+
   public LineChartModel getTasksPerHourChart() {
-    var aggrResult = WorkflowStats.current().task().aggregate("startTimestamp:bucket:hour,endTimestamp:bucket:hour");
+    var aggrResult = WorkflowStats.current().task().aggregate("startTimestamp:bucket:hour,endTimestamp:bucket:hour", "");
     var startCountMap = initializeTimeMap(12, true);
     var endCountMap = initializeTimeMap(12, true);
     for (var agg : aggrResult.aggs()) {
@@ -221,7 +239,7 @@ public class StatisticsBean {
   }
 
   public BarChartModel getTopTaskWorkersModel() {
-    var aggrResult = WorkflowStats.current().task().aggregate("worker.name", "businessState:DONE");
+    var aggrResult = WorkflowStats.current().task().aggregate("worker.name", "businessState:DONE" + calculateTimeDurationQuery());
     return createBarChartModel(aggrResult, "Created", "rgb(0, 148, 210)");
   }
 
