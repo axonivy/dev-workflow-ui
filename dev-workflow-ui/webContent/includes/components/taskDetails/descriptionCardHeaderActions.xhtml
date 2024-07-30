@@ -11,17 +11,19 @@
       <p:linkButton href="#{tasksDetailsIvyDevWfBean.executeTaskLink}" value="Start"
         id="taskStartBtn" disabled="#{!task.canBeStarted()}" icon="si si-arrow-right-1" />
 
-      <p:commandButton id="taskNotesBtn" styleClass="ml-1 ui-button-secondary ui-button-outlined rounded-button"
-        disabled="#{0 >= task.notes.size()}" icon="si si-notes-quill"
-        actionListener="#{notesBean.openNotesDialog(task.Uuid)}" />
+      <p:badge value="#{task.notes.size()}">
+        <p:commandButton id="taskNotesBtn" styleClass="ml-2 ui-button-secondary ui-button-outlined rounded-button"
+          disabled="#{0 >= task.notes.size()}" icon="si si-notes-quill"
+          actionListener="#{notesBean.openNotesDialog(task.Uuid)}" />
+      </p:badge>
       <p:tooltip for="taskNotesBtn" value="Show task notes" />
 
-      <p:commandButton value="Sidesteps" styleClass="ml-1 ui-button-secondary" id="sidestepsBtn"
+      <p:commandButton value="Sidesteps" styleClass="ml-2 ui-button-secondary" id="sidestepsBtn"
         rendered="#{task.renderSidestepBtn()}" icon="si si-arrow-down-1" />
       <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
         model="#{tasksDetailsIvyDevWfBean.sidestepsMenuModel}" styleClass="menu-no-icons" />
 
-      <p:commandButton styleClass="ml-1 ui-button-secondary ui-button-outlined rounded-button" id="taskActionsBtn"
+      <p:commandButton styleClass="ml-2 ui-button-secondary ui-button-outlined rounded-button" id="taskActionsBtn"
         disabled="#{task.done}" icon="si si-navigation-menu-horizontal" />
       <p:menu id="actionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom">
         <p:menuitem value="Reset" actionListener="#{tasksDetailsIvyDevWfBean.reset()}" update="taskDetail, workflowEvents:workflowEvents, @form"
