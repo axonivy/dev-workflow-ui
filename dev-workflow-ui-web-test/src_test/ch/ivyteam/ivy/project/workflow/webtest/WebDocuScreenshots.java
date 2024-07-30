@@ -97,6 +97,9 @@ public class WebDocuScreenshots {
     $(".computed-url").shouldBe(visible);
     takeScreenshot("workflow-ui-swagger-ui", new Dimension(SCREENSHOT_WIDTH, 800));
     Selenide.switchTo().defaultContent();
+
+    openView("statistics.xhtml");
+    takeScreenshot("workflow-ui-statistics", new Dimension(SCREENSHOT_WIDTH, 800));
   }
 
   private void takeScreenshot(String fileName, Dimension size) {

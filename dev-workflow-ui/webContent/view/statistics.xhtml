@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
+  xmlns:pe="http://primefaces.org/ui/extensions">
+<h:body>
+  <ui:composition template="../includes/template/template.xhtml">
+    <ui:define name="content">
+      <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotAdmin}" />
+      <div class="flex align-items-center m-3">
+          <i class="pr-3 si si-network-browser" />
+          <h2 class="m-0">Statistics</h2>
+        </div>
+      <div class="flex flex-wrap">
+        <ui:include src="/includes/components/statistics/casesAll.xhtml" />
+        <ui:include src="/includes/components/statistics/caseStateGraph.xhtml" />
+        <ui:include src="/includes/components/statistics/caseStatisticsChart.xhtml" />
+      </div>
+      <div class="flex flex-wrap">
+        <ui:include src="/includes/components/statistics/tasksAll.xhtml" />
+        <ui:include src="/includes/components/statistics/taskStateGraph.xhtml" />
+        <ui:include src="/includes/components/statistics/taskStatisticsChart.xhtml" />
+      </div>
+      <div class="flex flex-wrap">
+        <ui:include src="/includes/components/statistics/caseTopCreators.xhtml" />
+        <ui:include src="/includes/components/statistics/taskTopWorkers.xhtml" />
+      </div>
+    </ui:define>
+  </ui:composition>
+</h:body>
+</html>
