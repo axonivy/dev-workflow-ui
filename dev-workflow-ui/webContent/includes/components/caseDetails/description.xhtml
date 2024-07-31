@@ -32,18 +32,14 @@
     <h:outputText value="#{case.category.name}" id="category" />
 
     <h:outputText value="Created" />
-    <h:outputText value="#{dateTimeIvyDevWfBean.getDefault(case.getStartTimestamp())}"
-      id="createdDate" />
+    <jc:datetime datetime="#{case.startTimestamp}" id="createdDate" />
 
     <h:outputText value="Completed on" />
-    <h:outputText value="#{dateTimeIvyDevWfBean.getDetailed(case.getEndTimestamp())}"
-      id="expiryDate" />
+    <jc:datetime datetime="#{case.endTimestamp}" id="expiryDate" />
 
     <h:outputText value="Description" />
     <h:outputText value="#{casesDetailsIvyDevWfBean.description}" id="caseDescription" />
   </p:panelGrid>
   <p:tooltip for="caseId" value="ID: #{case.getId()}" />
-  <p:tooltip for="createdDate" value="#{dateTimeIvyDevWfBean.getPrettyTime(case.getStartTimestamp())}"
-    position="top" />
 
 </ui:composition>

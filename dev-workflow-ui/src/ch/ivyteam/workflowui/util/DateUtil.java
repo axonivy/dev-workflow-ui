@@ -11,7 +11,6 @@ import org.ocpsoft.prettytime.PrettyTime;
 public class DateUtil {
   private static final PrettyTime pretty = new PrettyTime();
   private static final DateTimeFormatter defaultFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm");
-  private static final DateTimeFormatter detailedFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm:ss");
 
   public static String getPrettyTime(Date date) {
     if (date == null) {
@@ -28,14 +27,6 @@ public class DateUtil {
 
   public static String getDefault(Date date) {
     return formatDate(date, defaultFormatter);
-  }
-
-  public static String getDetailed(Date date) {
-    return formatDate(date, detailedFormatter);
-  }
-
-  public static String getDateTimeNoYear(Date date) {
-    return formatDate(date, DateTimeFormatter.ofPattern("dd MMM, HH:mm"));
   }
 
   private static String formatDate(Date date, DateTimeFormatter format)

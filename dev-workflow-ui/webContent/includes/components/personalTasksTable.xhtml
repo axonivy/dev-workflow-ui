@@ -33,11 +33,11 @@
     </p:column>
 
     <p:column headerText="Start" sortBy="#{task.startTimestamp}" sortOrder="descending" responsivePriority="2">
-      <jc:datetime id="startTime" datetime="#{task.startTimestamp}"/>
+      <jc:time id="startTime" datetime="#{task.startTimestamp}"/>
     </p:column>
 
     <p:column headerText="Expiry" sortBy="#{task.expiryTimestamp}" responsivePriority="2">
-      <jc:datetime id="expiryTime" datetime="#{task.expiryTimestamp}"/>
+      <jc:time id="expiryTime" datetime="#{task.expiryTimestamp}"/>
     </p:column>
 
     <p:column styleClass="table-btn-1" responsivePriority="2">

@@ -44,20 +44,16 @@
     <jc:user id="taskResponsible" user="#{task.activator}" />
 
     <h:outputText value="Created" />
-    <h:outputText value="#{dateTimeIvyDevWfBean.getDetailed(task.startTimestamp)}"
-      id="createdDate" />
+    <jc:datetime id="createdDate" datetime="#{task.startTimestamp}" />
 
     <h:outputText value="Expiry" />
-    <h:outputText value="#{dateTimeIvyDevWfBean.getDetailed(task.expiryTimestamp)}"
-      id="expiryDate" />
+    <jc:datetime id="expiryDate" datetime="#{task.expiryTimestamp}" />
 
     <h:outputText value="Delay date" />
-    <h:outputText value="#{dateTimeIvyDevWfBean.getDetailed(task.delayTimestamp)}"
-      id="delayDate" />
+    <jc:datetime id="delayDate" datetime="#{task.delayTimestamp}" />
 
     <h:outputText value="Completed on" />
-    <h:outputText value="#{dateTimeIvyDevWfBean.getDetailed(task.endTimestamp)}"
-      id="completedDate" />
+    <jc:datetime id="completedDate" datetime="#{task.endTimestamp}" />
 
     <h:outputText value="Description" />
     <h:outputText value="#{task.description}" id="taskDescription" />

@@ -38,11 +38,11 @@
     </p:column>
 
     <p:column headerText="Start" style="text-align: center;" sortBy="#{case.startTimestamp}" sortOrder="descending">
-      <jc:datetime id="startTime" datetime="#{case.startTimestamp}" />
+      <jc:time id="startTime" datetime="#{case.startTimestamp}" />
     </p:column>
 
     <p:column headerText="End" style="text-align: center;" sortBy="#{case.endTimestamp}" responsivePriority="3">
-      <jc:datetime id="endTime" datetime="#{case.endTimestamp}" />
+      <jc:time id="endTime" datetime="#{case.endTimestamp}" />
     </p:column>
 
     <p:column styleClass="table-btn-1">
