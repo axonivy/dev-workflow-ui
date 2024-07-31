@@ -14,6 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import org.primefaces.model.charts.ChartData;
+import org.primefaces.model.charts.bar.BarChartDataSet;
 import org.primefaces.model.charts.bar.BarChartModel;
 import org.primefaces.model.charts.donut.DonutChartDataSet;
 import org.primefaces.model.charts.donut.DonutChartModel;
@@ -217,12 +218,12 @@ public class StatisticsBean {
 
   public BarChartModel getTopCaseCreatorsModel() {
     var aggrResult = WorkflowStats.current().caze().aggregate("creator.name");
-    return createBarChartModel(aggrResult, "Created", "rgb(255, 159, 64)");
+    return createBarChartModel(aggrResult, "Cases created", "rgb(255, 159, 64)");
   }
 
   public BarChartModel getTopTaskWorkersModel() {
     var aggrResult = WorkflowStats.current().task().aggregate("worker.name", "businessState:DONE");
-    return createBarChartModel(aggrResult, "Created", "rgb(0, 148, 210)");
+    return createBarChartModel(aggrResult, "Tasks finished", "rgb(0, 148, 210)");
   }
 
   private BarChartModel createBarChartModel(AggregationResult agg, String title, String color) {
@@ -235,12 +236,12 @@ public class StatisticsBean {
     for (var aggr : agg.aggs()) {
       if (aggr instanceof Buckets buckets) {
         for (Bucket bucket : buckets.buckets()) {
-          labels.add(bucket.key().toString());
+          labels.add(cleanupUsername(bucket.key().toString()));
           values.add(bucket.count());
         }
       }
     }
-    var dataSet = new org.primefaces.model.charts.bar.BarChartDataSet();
+    var dataSet = new BarChartDataSet();
     dataSet.setData(values);
     dataSet.setLabel(title);
     dataSet.setBorderColor(color);
@@ -252,4 +253,9 @@ public class StatisticsBean {
     barModel.setData(data);
     return barModel;
   }
+
+  private static String cleanupUsername(String username) {
+    return username.startsWith("#") ? username.substring(1) : username;
+  }
+
 }
