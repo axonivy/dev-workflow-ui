@@ -115,7 +115,7 @@ public class WebTestStartsIT {
     $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menuitem"));
     assertCurrentUrlContains("home.xhtml");
 
-    openView("allTasks.xhtml");
+    openView("tasks.xhtml");
     $(".detail-btn").shouldBe(visible).click();
     $(".case-link").shouldHave(text("Created case of TestData"));
     $("#actionMenuForm\\:taskStartBtn").shouldBe(enabled).click();

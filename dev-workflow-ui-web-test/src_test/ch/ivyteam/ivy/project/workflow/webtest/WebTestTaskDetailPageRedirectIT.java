@@ -36,7 +36,7 @@ public class WebTestTaskDetailPageRedirectIT {
     loginDeveloper();
     openView("tasks.xhtml");
     var element = $(By.id("tasksForm:tasks:0:taskState"));
-    assertThat(element.getAttribute("class")).contains("task-state-in-progress");
+    assertThat(element.getAttribute("class")).contains("task-state-open");
     element.click();
     assertThat($(By.className("layout-dashboard")).getLocation() != null).isTrue();
     var url = Selenide.webdriver().driver().url();

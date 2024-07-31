@@ -64,7 +64,7 @@ class WebTestCaseMapIT {
 
   @Test
   void sidestepsTaskDetails() {
-    openView("allTasks.xhtml");
+    openView("tasks.xhtml");
     $(".detail-btn").shouldBe(visible).click();
 
     $(By.id("actionMenuForm:sidestepsBtn")).shouldBe(visible).click();

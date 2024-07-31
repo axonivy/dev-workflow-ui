@@ -14,7 +14,7 @@ public class PersonalTasksIvyDevWfBean {
   private TasksDataModel tasksDataModel;
 
   public PersonalTasksIvyDevWfBean() {
-    tasksDataModel = new TasksDataModel(true);
+    tasksDataModel = new PersonalTasksDataModel();
     tasksDataModel.setFilter("");
   }
 

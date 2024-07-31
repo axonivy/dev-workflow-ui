@@ -4,6 +4,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginD
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -21,25 +22,22 @@ public class WebTestCasesIT {
   @Test
   public void allCasesOnlyAdmin() {
     loginFromTable("testuser");
-
     openView("cases.xhtml");
-    $(By.id("casesForm:allCasesSwitch")).shouldNotBe(visible);
+    $(By.id("casesForm:showAllCasesSwitch")).shouldNotBe(visible);
     loginDeveloper();
     openView("cases.xhtml");
-    $(By.id("casesForm:allCasesSwitch")).shouldBe(visible);
+    $(By.id("casesForm:showAllCasesSwitch")).shouldBe(visible);
+    $(By.id("casesForm:showAllCasesSwitch_input")).shouldBe(enabled);
   }
 
   @Test
   public void testCasesTable() throws Exception {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     loginDeveloper();
-
     startTestProcess("1750C5211D94569D/TestData.ivp");
     openView("cases.xhtml");
     Table table = PrimeUi.table(By.id("casesForm:cases"));
     table.row(0).shouldHave(text("Created case of TestData"));
-
     table.valueAt(0, 1).contains("running");
   }
-
 }

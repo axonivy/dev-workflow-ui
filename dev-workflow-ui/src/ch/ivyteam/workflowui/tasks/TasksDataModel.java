@@ -21,16 +21,7 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
 
   private static final long serialVersionUID = -5287014754211109062L;
   private String filter;
-  private boolean showAllTasks = UserUtil.isAdmin();
-  private final boolean isPersonal;
-
-  public TasksDataModel() {
-    this(false);
-  }
-
-  public TasksDataModel(boolean isPersonal) {
-    this.isPersonal = isPersonal;
-  }
+  private boolean showAll = UserUtil.isAdmin();
 
   public String getFilter() {
     return filter;
@@ -56,7 +47,6 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
   private List<TaskModel> getTaskList() {
     var taskQuery = TaskQuery.create();
     applyFilter(taskQuery);
-    checkIfPersonalTasksOrHomepage(taskQuery);
     return TaskUtil.toTaskModelList(taskQuery.executor().results());
   }
 
@@ -73,23 +63,19 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
 
     applyFilter(taskQuery);
     applyOrdering(taskQuery, sort.toField(), sort.toOrder());
-
-    checkIfPersonalTasksOrHomepage(taskQuery);
-    checkIfAdmin(taskQuery);
+    applyCustomFilter(taskQuery);
+    checkIfShowAll(taskQuery);
 
     List<TaskModel> tasks = TaskUtil.toTaskModelList(taskQuery.executor().resultsPaged().window(first, pageSize));
     setRowCount((int) taskQuery.executor().count());
     return tasks;
   }
 
-  private void checkIfPersonalTasksOrHomepage(TaskQuery taskQuery) {
-    if (isPersonal) {
-      taskQuery.where().and(TaskQuery.create().where().currentUserCanWorkOn());
-    }
-  }
+  @SuppressWarnings("unused")
+  protected void applyCustomFilter(TaskQuery taskQuery) {}
 
-  private void checkIfAdmin(TaskQuery taskQuery) {
-    if (!showAllTasks) {
+  private void checkIfShowAll(TaskQuery taskQuery) {
+    if (!isShowAll()) {
       taskQuery.where().and(TaskQuery.create().where().currentUserIsInvolved());
     }
   }
@@ -148,7 +134,14 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
   public int getSize() {
     var taskQuery = TaskQuery.create();
     applyFilter(taskQuery);
-    checkIfPersonalTasksOrHomepage(taskQuery);
     return (int) taskQuery.executor().count();
+  }
+
+  public boolean isShowAll() {
+    return showAll;
+  }
+
+  public void setShowAll(boolean showAll) {
+    this.showAll = showAll;
   }
 }

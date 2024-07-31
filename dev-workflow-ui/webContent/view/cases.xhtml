@@ -11,13 +11,16 @@
         <div class="flex align-items-center mb-3">
           <i class="pr-3 si si-task-list-approve card-title-icon"></i>
           <h2 class="m-0">Cases</h2>
-          <h:panelGroup styleClass="ml-auto inline-flex align-items-center" layout="block" rendered="#{adminIvyDevWfBean.isWorkflowAdmin()}">
-            <h:outputText value="All Cases" styleClass="mr-2"/>
-            <p:toggleSwitch id="allCasesSwitch" value="#{casesIvyDevWfBean.casesDataModel.showAllCases}">
+          <h:panelGroup id="showAllCasesSwitch_container" styleClass="ml-auto inline-flex align-items-center"
+            layout="block" rendered="#{adminIvyDevWfBean.isWorkflowAdmin()}">
+            <h:outputText value="Show all" styleClass="mr-2"/>
+            <p:toggleSwitch id="showAllCasesSwitch" value="#{casesIvyDevWfBean.casesDataModel.showAll}"
+              disabled="#{!adminIvyDevWfBean.isWorkflowAdmin()}">
               <p:ajax update="casesForm"/>
             </p:toggleSwitch>
-            <p:tooltip for="allCasesSwitch" position="top" value="If disabled shows only cases where user is involved"/>
           </h:panelGroup>
+          <p:tooltip for="showAllCasesSwitch_container" position="top"
+            value="If enabled shows all cases, even the ones the user is not involved in"/>
         </div>
         <ui:include src="/includes/components/casesTable.xhtml" />
       </div>

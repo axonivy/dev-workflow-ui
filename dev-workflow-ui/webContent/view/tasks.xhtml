@@ -11,8 +11,18 @@
         <div class="flex align-items-center mb-3">
           <i class="pr-3 si si-layout-bullets card-title-icon"></i>
           <h2 class="m-0">Tasks</h2>
+          <h:panelGroup id="showAllTasksSwitch_container" styleClass="ml-auto inline-flex align-items-center"
+            layout="block" rendered="#{adminIvyDevWfBean.isWorkflowAdmin()}">
+            <h:outputText value="Show all" styleClass="mr-2"/>
+            <p:toggleSwitch id="showAllTasksSwitch" value="#{tasksIvyDevWfBean.tasksDataModel.showAll}"
+              disabled="#{!adminIvyDevWfBean.isWorkflowAdmin()}">
+              <p:ajax update="tasksForm"/>
+            </p:toggleSwitch>
+          </h:panelGroup>
+          <p:tooltip for="showAllTasksSwitch_container" position="top"
+            value="If enabled shows all tasks, even the ones the user is not involved in"/>
         </div>
-        <ui:include src="/includes/components/personalTasksTable.xhtml" />
+        <ui:include src="/includes/components/tasksTable.xhtml" />
       </div>
     </h:form>
     </ui:define>
