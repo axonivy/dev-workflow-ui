@@ -18,12 +18,4 @@ public class DateTimeIvyDevWfBean {
   public String getDefault(Date date) {
     return DateUtil.getDefault(date);
   }
-
-  public String getDetailed(Date date) {
-    return date == null ? "N/A" : DateUtil.getDetailed(date);
-  }
-
-  public String getDateTimeNoYear(Date date) {
-    return date == null ? "N/A" : DateUtil.getDateTimeNoYear(date);
-  }
 }

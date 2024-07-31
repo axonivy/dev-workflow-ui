@@ -186,7 +186,7 @@ class WebTestTasksIT {
     $(By.className("detail-btn")).shouldBe(visible).click();
     $(By.id("taskName")).shouldBe(exactText("Created delayed task"));
     $(By.id("taskState")).shouldBe(exactText("DELAYED (DELAYED)"));
-    $(By.id("delayDate")).shouldNotBe(exactText("N/A"));
+    $(By.id("delayDate:datetime")).shouldNotBe(exactText(""));
     $(By.id("actionMenuForm:taskStartBtn")).shouldHave(cssClass("ui-state-disabled"));
   }
 
@@ -229,13 +229,13 @@ class WebTestTasksIT {
     $(By.className("detail-btn")).shouldBe(visible).click();
 
     $(By.id("taskState")).shouldBe(exactText("DELAYED (DELAYED)"));
-    $(By.id("delayDate")).shouldNotBe(exactText("N/A"));
+    $(By.id("delayDate:datetime")).shouldNotBe(exactText(""));
 
     $(By.id("actionMenuForm:taskActionsBtn")).click();
     $(By.id("actionMenuForm:taskClearDelayBtn")).should(visible).click();
 
     $(By.id("taskState")).shouldBe(exactText("OPEN (SUSPENDED)"));
-    $(By.id("delayDate")).shouldBe(exactText("N/A"));
+    $(By.id("delayDate:datetime")).shouldBe(exactText(""));
   }
 
   @Test

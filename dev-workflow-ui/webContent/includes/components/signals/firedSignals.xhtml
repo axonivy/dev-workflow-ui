@@ -13,7 +13,7 @@
       <h:outputText value="#{signal.signalCode}" />
     </p:column>
     <p:column headerText="Date" sortBy="#{signal.sentTimestamp}" sortOrder="descending">
-      <jc:datetime id="sentTime" datetime="#{signal.sentTimestamp}"/>
+      <jc:time id="sentTime" datetime="#{signal.sentTimestamp}"/>
     </p:column>
     <p:column headerText="Sent by" sortBy="#{signal.sentByUser}">
       <jc:user user="#{signal.sentByUser}"/>

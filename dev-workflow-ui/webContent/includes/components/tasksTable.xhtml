@@ -37,11 +37,11 @@
     </p:column>
 
     <p:column headerText="Start" style="text-align: center;" sortBy="#{task.startTimestamp}" sortOrder="descending" responsivePriority="2">
-      <jc:datetime id="startTime" datetime="#{task.startTimestamp}"/>
+      <jc:time id="startTime" datetime="#{task.startTimestamp}"/>
     </p:column>
 
     <p:column headerText="End" style="text-align: center;" sortBy="#{task.endTimestamp}" responsivePriority="3">
-      <jc:datetime id="endTime" datetime="#{task.endTimestamp}"/>
+      <jc:time id="endTime" datetime="#{task.endTimestamp}"/>
     </p:column>
 
     <p:column styleClass="table-btn-1" responsivePriority="2">
