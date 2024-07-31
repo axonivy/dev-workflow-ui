@@ -6,7 +6,7 @@
   <ui:composition template="/includes/template/statisticsCardBare.xhtml">
     <ui:define name="content">
       <h4>Top case creators</h4>
-      <p:barChart model="#{statisticsBean.topCaseCreatorsModel}" style="max-height: 20rem; max-width: 36rem;"
+      <p:barChart id="topCaseCreatorsChart" model="#{statisticsBean.topCaseCreatorsModel}" style="max-height: 20rem; max-width: 36rem;"
         rendered="#{statisticsBean.topCaseCreatorsModel != null}" />
       <h:panelGroup layout="block" rendered="#{statisticsBean.topCaseCreatorsModel == null}"
         styleClass="h-full flex flex-column align-items-center justify-content-center"

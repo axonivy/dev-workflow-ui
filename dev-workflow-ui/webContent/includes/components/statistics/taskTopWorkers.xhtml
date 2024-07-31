@@ -6,7 +6,7 @@
   <ui:composition template="/includes/template/statisticsCardBare.xhtml">
     <ui:define name="content">
       <h4>Top task workers</h4>
-      <p:barChart model="#{statisticsBean.topTaskWorkersModel}" style="max-height: 20rem; max-width: 36rem;"
+      <p:barChart id="topTaskWorkersChart" model="#{statisticsBean.topTaskWorkersModel}" style="max-height: 20rem; max-width: 36rem;"
         rendered="#{statisticsBean.topTaskWorkersModel != null}" />
       <h:panelGroup layout="block" rendered="#{statisticsBean.topTaskWorkersModel == null}"
         styleClass="h-full flex flex-column align-items-center justify-content-center"

@@ -6,7 +6,7 @@
   <ui:composition template="/includes/template/statisticsCardBare.xhtml">
     <ui:define name="content">
       <h4>Cases statistics</h4>
-      <p:lineChart model="#{statisticsBean.casesPerDayChart}" style="max-height: 20rem"/>
+      <p:lineChart id="caseStatisticsChart" model="#{statisticsBean.casesPerDayChart}" style="max-height: 20rem"/>
     </ui:define>
   </ui:composition>
 </h:body>
