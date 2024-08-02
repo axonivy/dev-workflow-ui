@@ -15,6 +15,7 @@ import ch.ivyteam.ivy.workflow.CaseState;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.ivy.workflow.query.CaseQuery;
+import ch.ivyteam.workflowui.util.CaseUtil;
 import ch.ivyteam.workflowui.util.UserUtil;
 
 public class CasesDataModel extends LazyDataModel<ICase> {
@@ -38,17 +39,7 @@ public class CasesDataModel extends LazyDataModel<ICase> {
 
   @Override
   public ICase getRowData(String rowKey) {
-    return getCaseList().stream()
-            .filter(caze -> caze.uuid().equals(rowKey))
-            .findAny()
-            .orElse(null);
-  }
-
-  private List<ICase> getCaseList() {
-    var caseQuery = CaseQuery.create();
-    applyFilter(caseQuery);
-    checkIfShowAll(caseQuery);
-    return caseQuery.executor().results();
+    return CaseUtil.getCaseById(rowKey);
   }
 
   @Override

@@ -38,16 +38,7 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
 
   @Override
   public TaskModel getRowData(String rowKey) {
-    return getTaskList().stream()
-            .filter(task -> task.getUuid().equals(rowKey))
-            .findAny()
-            .orElse(null);
-  }
-
-  private List<TaskModel> getTaskList() {
-    var taskQuery = TaskQuery.create();
-    applyFilter(taskQuery);
-    return TaskUtil.toTaskModelList(taskQuery.executor().results());
+    return new TaskModel(TaskUtil.getTaskById(rowKey));
   }
 
   @Override
