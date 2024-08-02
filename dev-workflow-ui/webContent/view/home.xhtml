@@ -34,7 +34,8 @@
                 <p:ajax event="rowSelect" listener="#{homepageIvyDevWfBean.executeLastStart}" />
                 <p:column styleClass="last-start-element">
                   <div class="flex justify-content-between">
-                    <p:commandLink id="last-start-link" actionListener="#{start.execute}" styleClass="hidden-text-ellipsis">
+                    <p:commandLink id="last-start-link" actionListener="#{start.execute}"
+                      styleClass="hidden-text-ellipsis flex">
                       <i class="#{start.icon} mr-1" />
                       <h:outputText value="#{start.displayName}" />
                     </p:commandLink>
@@ -46,13 +47,16 @@
                       </p:link>
                       <p:tooltip for="copyStartLinkBtn" value="Copy to clipboard" position="top" />
 
-                      <p:link id="openStartFullscreenBtn" href="#{start.link}" styleClass="ml-1" rendered="#{start.embedInFrame}">
+                      <p:link id="openStartFullscreenBtn" href="#{start.link}" styleClass="ml-1"
+                        rendered="#{start.embedInFrame}">
                         <i class="si si-expand-6" />
                       </p:link>
-                      <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="top" rendered="#{start.embedInFrame}" />
+                      <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="top"
+                        rendered="#{start.embedInFrame}" />
 
                       <p:commandLink id="openProcessViewer" oncomplete="PF('process-viewer-dlg').show()" styleClass="ml-1"
-                        update="processViewer:processViewerDialog" actionListener="#{homepageIvyDevWfBean.setViewerStart(start.viewerLink)}"
+                        update="processViewer:processViewerDialog"
+                        actionListener="#{homepageIvyDevWfBean.setViewerStart(start.viewerLink)}"
                         rendered="#{start.viewerAllowed}">
                         <i class="si si-hierarchy-6 si-rotate-270" />
                       </p:commandLink>
@@ -78,37 +82,86 @@
                 </div>
               </div>
               <p:dataTable id="activeTasks" var="task" value="#{personalTasksIvyDevWfBean.tasksDataModel}" lazy="true"
-                rows="10" paginator="true" paginatorAlwaysVisible="false" rendered="#{homepageIvyDevWfBean.tasksSize gt 0}"
+                rows="6" paginator="true" paginatorAlwaysVisible="false" rendered="#{homepageIvyDevWfBean.tasksSize gt 0}"
                 paginatorPosition="bottom" selectionMode="single">
                 <p:ajax event="rowSelect" listener="#{personalTasksIvyDevWfBean.executeTaskRow}" />
-                <p:column styleClass="icon-row" responsivePriority="2">
+                <p:column styleClass="icon-row" responsivePriority="4">
                   <i class="si si-lg si-task-list-edit" />
                 </p:column>
                 <p:column styleClass="icon-row" sortBy="#{task.priority}">
                   <h:outputText id="taskPrio" styleClass="si si-lg si-#{task.priorityIcon}" />
                   <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
                 </p:column>
-                <p:column headerText="Name" sortBy="#{task.name}">
+                <p:column headerText="Name" sortBy="#{task.name}" responsivePriority="1" width="140">
                   <p:commandLink id="startTaskLink" actionListener="#{personalTasksIvyDevWfBean.executeTask(task)}">
                     <h:outputText id="taskName" value="#{task.name}" />
                     <p:tooltip for="taskName" value="Task: #{task.uuid}" position="top" />
                   </p:commandLink>
                 </p:column>
-                <p:column headerText="Start" sortBy="#{task.startTimestamp}" sortOrder="descending">
+                <p:column headerText="Start" style="text-align: center;" sortBy="#{task.startTimestamp}"
+                  responsivePriority="3" sortOrder="descending" width="100">
                   <jc:time id="startTime" datetime="#{task.startTimestamp}" />
                 </p:column>
-                <p:column headerText="Expiry" sortBy="#{task.expiryTimestamp}" responsivePriority="2">
+                <p:column headerText="Expiry" style="text-align: center;" sortBy="#{task.expiryTimestamp}"
+                  responsivePriority="2" width="100">
                   <jc:time id="expiryTime" datetime="#{task.expiryTimestamp}" />
                 </p:column>
                 <p:column styleClass="table-btn-1">
-                  <p:link href="#{task.detailUrl}" >
-                    <i class="si si-information-circle detail-btn"/>
+                  <p:link href="#{task.detailUrl}" id="taskDetailsIcon" style="float: inline-end">
+                    <i class="si si-information-circle detail-btn" />
+                    <p:tooltip for="taskDetailsIcon" value="Open task details" position="top" />
                   </p:link>
                 </p:column>
               </p:dataTable>
               <h:panelGrid rendered="#{homepageIvyDevWfBean.tasksSize eq 0}">
                 <h:outputText value="You don't have any active tasks. Go take a coffee break 😊☕" />
               </h:panelGrid>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="card starts-card">
+              <div class="card-header">
+                <div class="card-title flex align-items-center">
+                  <i class="pr-3 si si-task-list-approve card-title-icon"></i>
+                  <h6 class="m-0">Started cases</h6>
+                </div>
+              </div>
+              <p:dataTable id="startedCases" var="case" value="#{homepageIvyDevWfBean.startedCasesDataModel}"
+                widgetVar="casesTable" styleClass="ui-fluid" emptyMessage="No Cases found with given criteria"
+                paginatorPosition="bottom" rows="6" lazy="true" paginator="true" paginatorAlwaysVisible="false"
+                selectionMode="single">
+                <p:ajax event="rowSelect" listener="#{casesIvyDevWfBean.redirectToCaseRow}" />
+                <p:column headerText="Name" filterBy="#{case.getName(case)}" sortBy="#{case.name}">
+                  <h:link outcome="case">
+                    <f:param name="id" value="#{case.uuid()}" />
+                    <h:outputText id="caseName" value="#{casesIvyDevWfBean.getName(case)}" />
+                    <p:tooltip for="caseName" value="Case: #{case.uuid()}" position="top" />
+                  </h:link>
+                </p:column>
+
+                <p:column headerText="Start" style="text-align: center;" sortBy="#{case.startTimestamp}"
+                  responsivePriority="2" sortOrder="descending" width="100">
+                  <jc:time id="startTime" datetime="#{case.startTimestamp}"/>
+                </p:column>
+
+                <p:column headerText="End" style="text-align: center;" sortBy="#{case.endTimestamp}"
+                  responsivePriority="3" width="100">
+                  <jc:time id="endTime" datetime="#{case.endTimestamp}"/>
+                </p:column>
+
+                <p:column width="60">
+                  <p:link id="rerunCaseIcon" href="#{homepageIvyDevWfBean.getCaseRerunLink(case)}"
+                    styleClass="text-color mr-2">
+                    <i class="si si-button-refresh-arrow text-2xl" />
+                    <p:tooltip for="rerunCaseIcon" value="Rerun the process of this case" position="top" />
+                  </p:link>
+                  <p:link id="caseDetailsIcon" href="case.xhtml?id=#{case.uuid()}">
+                    <i class="si si-information-circle detail-btn" />
+                    <p:tooltip for="caseDetailsIcon" value="Open case details" position="top" />
+                  </p:link>
+                </p:column>
+              </p:dataTable>
             </div>
           </div>
         </h:panelGroup>

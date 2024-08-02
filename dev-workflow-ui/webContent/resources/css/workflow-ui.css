@@ -48,6 +48,7 @@ a > i.detail-btn {
 }
 .ui-datatable .icon-row {
   width: 20px;
+  text-align: center;
 }
 .ui-datatable .table-btn-1 {
   width: 40px;

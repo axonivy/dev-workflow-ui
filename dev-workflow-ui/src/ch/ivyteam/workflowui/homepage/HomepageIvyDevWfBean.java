@@ -8,22 +8,27 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.event.SelectEvent;
 
 import ch.ivyteam.ivy.environment.Ivy;
+import ch.ivyteam.ivy.workflow.ICase;
+import ch.ivyteam.workflowui.cases.StartedCasesDataModel;
 import ch.ivyteam.workflowui.starts.StartableModel;
 import ch.ivyteam.workflowui.tasks.TasksDataModel;
 import ch.ivyteam.workflowui.util.LastSessionStarts;
 import ch.ivyteam.workflowui.util.RedirectUtil;
+import ch.ivyteam.workflowui.util.UrlUtil;
 import ch.ivyteam.workflowui.util.ViewerUtil;
 
 @ManagedBean
 @ViewScoped
 public class HomepageIvyDevWfBean {
   private TasksDataModel tasksDataModel;
+  private StartedCasesDataModel startedCasesDataModel;
   private Set<StartableModel> lastStarts;
   private String viewerTitle;
   private String viewerLink;
 
   public HomepageIvyDevWfBean() {
     tasksDataModel = new TasksDataModel();
+    startedCasesDataModel = new StartedCasesDataModel();
     lastStarts = LastSessionStarts.current().getAll();
   }
 
@@ -68,5 +73,14 @@ public class HomepageIvyDevWfBean {
 
   public String getViewerLink() {
     return viewerLink;
+  }
+
+  public StartedCasesDataModel getStartedCasesDataModel() {
+    return startedCasesDataModel;
+  }
+
+  public String getCaseRerunLink(ICase caze) {
+    var startLink = caze.getBusinessCase().getStartedFrom().getLink();
+    return UrlUtil.generateStartFrameUrl(startLink);
   }
 }
