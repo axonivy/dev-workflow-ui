@@ -6,24 +6,24 @@
 
   <p:dataTable id="firedSignalsTable" var="signal" value="#{signalsIvyDevWfBean.signalsModel}"
     rows="10" paginator="true" paginatorAlwaysVisible="false" lazy="true" paginatorPosition="bottom">
-    <p:column styleClass="icon-row">
+    <p:column styleClass="icon-row" responsivePriority="5">
       <i class="si si-lg si-network-signal"/>
     </p:column>
-    <p:column headerText="Code" sortBy="#{signal.signalCode}">
+    <p:column headerText="Code" sortBy="#{signal.signalCode}" width="100">
       <h:outputText value="#{signal.signalCode}" />
     </p:column>
-    <p:column headerText="Date" sortBy="#{signal.sentTimestamp}" sortOrder="descending">
+    <p:column headerText="Date" sortBy="#{signal.sentTimestamp}" sortOrder="descending" width="100">
       <jc:time id="sentTime" datetime="#{signal.sentTimestamp}"/>
     </p:column>
-    <p:column headerText="Sent by" sortBy="#{signal.sentByUser}">
+    <p:column headerText="Sent by" sortBy="#{signal.sentByUser}" width="120" responsivePriority="5">
       <jc:user user="#{signal.sentByUser}"/>
     </p:column>
-    <p:column headerText="Destroyed tasks">
+    <p:column headerText="Destroyed tasks" width="260">
       <ui:repeat var="task" value="#{signal.destroyedTasks}" varStatus="status">
         <jc:taskLink task="#{task}" id="destroyedTask"/>
       </ui:repeat>
     </p:column>
-    <p:column headerText="Created cases" colspan="2">
+    <p:column headerText="Created cases" colspan="2" width="260">
       <ui:repeat var="task" value="#{signal.createdTasks}" varStatus="status">
         <jc:caseLink case="#{task.case}" id="createdCase"/>
       </ui:repeat>

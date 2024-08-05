@@ -4,38 +4,44 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://xmlns.jcp.org/jsf/composite/components">
 
-  <p:dataTable id="tasks" var="task" value="#{casesDetailsIvyDevWfBean.tasks}" rowKey="#{task.name}"
-    widgetVar="tasksTable" emptyMessage="No Tasks found with given criteria" lazy="true"
-    paginatorPosition="bottom" rows="10" rowsPerPageTemplate="10,20,50" paginator="true" paginatorAlwaysVisible="false"
-    paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
-    <p:column filterBy="#{task.state}" styleClass="icon-row">
+  <p:dataTable id="tasks" var="task" value="#{casesDetailsIvyDevWfBean.tasks}" rowKey="#{task.uuid}"
+    widgetVar="tasksTable" emptyMessage="No Tasks found with given criteria" lazy="true" rows="6"
+    paginatorPosition="bottom" paginator="true" paginatorAlwaysVisible="false" selectionMode="single">
+    <p:ajax event="rowSelect" listener="#{tasksIvyDevWfBean.displayTaskRow}" update="@form" />
+
+    <p:column styleClass="icon-row" responsivePriority="4" width="10">
+      <h:outputText id="taskIcon" class="si si-lg si-task-list-edit" />
+      <p:tooltip for="taskIcon" value="Task: #{task.uuid}" position="top" />
+    </p:column>
+
+    <p:column filterBy="#{task.state}" styleClass="icon-row" width="10">
       <h:outputText id="taskState" styleClass="si si-lg si-#{task.stateIcon}" />
       <p:tooltip for="taskState" value="State: #{task.businessState} (#{task.state})" position="top" />
     </p:column>
 
-    <p:column id="priority" filterBy="#{task.priority}" styleClass="icon-row">
+    <p:column id="priority" filterBy="#{task.priority}" styleClass="icon-row"
+      width="10" responsivePriority="3">
       <h:outputText id="taskPrio" styleClass="si si-lg si-#{task.priorityIcon}" />
       <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
     </p:column>
 
     <p:column headerText="Name" filterBy="#{task.name}">
       <h:outputText id="taskName" value="#{task.name}"/>
-      <p:tooltip for="taskName" value="Task: #{task.uuid}" position="top" />
     </p:column>
 
-    <p:column headerText="Responsible" responsivePriority="2">
+    <p:column headerText="Responsible" responsivePriority="4">
       <jc:user user="#{task.activator}" />
     </p:column>
 
-    <p:column headerText="Start">
+    <p:column headerText="Start" width="100">
       <jc:datetime id="startTime" datetime="#{task.startTimestamp}"/>
     </p:column>
 
-    <p:column headerText="End" responsivePriority="3">
+    <p:column headerText="End" responsivePriority="3" width="100">
       <jc:datetime id="endTime" datetime="#{task.endTimestamp}"/>
     </p:column>
 
-    <p:column styleClass="table-btn-1">
+    <p:column styleClass="table-btn-1" width="20">
       <p:link href="#{task.detailUrl}" >
         <i class="si si-information-circle detail-btn"/>
       </p:link>

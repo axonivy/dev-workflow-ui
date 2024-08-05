@@ -48,28 +48,28 @@
                 id="eventsTable" rows="10" paginator="true" paginatorPosition="bottom"
                 paginatorAlwaysVisible="false" lazy="true">
 
-                <p:column headerText="ID" width="70" sortBy="#{event.id}" sortOrder="ascending">
+                <p:column headerText="ID" width="50" sortBy="#{event.id}" sortOrder="ascending" responsivePriority="3">
                   <h:outputText value="#{event.id}" />
                 </p:column>
-                <p:column headerText="State" width="90" sortBy="#{event.state}">
-                  <h:panelGroup id="eventStateIcon">
+                <p:column headerText="State" width="30" sortBy="#{event.state}">
+                  <h:panelGroup id="eventStateIcon" styleClass="flex justify-content-center">
                     <i class="si-lg #{intermediateEventDetailsIvyDevWfBean.getEventStateIconCss(event)}" />
                   </h:panelGroup>
                   <p:tooltip id="eventStateTooltip" for="eventStateIcon" value="#{event.state}" position="top" />
                 </p:column>
-                <p:column headerText="Task" sortBy="#{event.task}">
+                <p:column headerText="Task" sortBy="#{event.task}" width="200">
                   <jc:taskLink task="#{event.task}" id="event-task" />
                 </p:column>
-                <p:column headerText="Event ID" sortBy="#{event.eventIdentifier}">
+                <p:column headerText="Event ID" sortBy="#{event.eventIdentifier}" width="80">
                   <h:outputText value="#{event.eventIdentifier}" />
                 </p:column>
                 <p:column headerText="Event received" sortBy="#{event.eventTimestamp}">
                   <h:outputText value="#{event.eventTimestamp}" />
                 </p:column>
-                <p:column headerText="Timeout" sortBy="#{event.timeoutTimestamp}">
+                <p:column headerText="Timeout" sortBy="#{event.timeoutTimestamp}" responsivePriority="4">
                   <h:outputText value="#{event.timeoutTimestamp}" />
                 </p:column>
-                <p:column headerText="Timeout action" sortBy="#{event.timeoutAction}">
+                <p:column headerText="Timeout action" sortBy="#{event.timeoutAction}" responsivePriority="4">
                   <h:outputText value="#{event.timeoutAction}" />
                 </p:column>
                 <p:column headerText="Result">

@@ -23,10 +23,10 @@
     <jc:user user="#{case.creatorUser}" id="creatorUser" />
 
     <h:outputText value="State" />
-    <h:outputText>
-      <i class="si si-#{casesIvyDevWfBean.getStateIcon(case.businessState)} mr-1"></i>
+    <h:panelGroup layout="block" styleClass="flex align-items-center">
+      <i class="si si-#{casesIvyDevWfBean.getStateIcon(case.businessState)} mr-1" />
       <h:outputText value="#{case.businessState} (#{case.state})" id="caseState" />
-    </h:outputText>
+    </h:panelGroup>
 
     <h:outputText value="Category" />
     <h:outputText value="#{case.category.name}" id="category" />
