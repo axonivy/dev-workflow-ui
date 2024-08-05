@@ -314,3 +314,8 @@ body .notification-scroll>.ui-datascroller-content::-webkit-scrollbar {
   opacity: 0.5;
 }
 
+/* Freya adjustments */
+body .ui-datatable .ui-datatable-data > tr > td {
+  padding: 0.5rem;
+}
+
