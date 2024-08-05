@@ -15,7 +15,7 @@
       </div>
     </f:facet>
 
-    <p:column styleClass="icon-row" responsivePriority="2">
+    <p:column styleClass="icon-row" responsivePriority="2" width="0">
       <h:outputText id="caseIcon" styleClass="si si-lg si-task-list-approve" />
       <p:tooltip for="caseIcon" value="Case: #{case.uuid()}" position="top" />
     </p:column>
@@ -25,27 +25,29 @@
       <p:tooltip for="caseState" value="State: #{case.businessState} (#{case.state})" position="top" />
     </p:column>
 
-    <p:column headerText="Name" filterBy="#{case.getName(case)}" sortBy="#{case.name}">
+    <p:column headerText="Name" filterBy="#{case.getName(case)}" sortBy="#{case.name}" responsivePriority="1">
       <h:link outcome="case">
         <f:param name="id" value="#{case.uuid()}" />
         <h:outputText id="caseName" value="#{casesIvyDevWfBean.getName(case)}" />
-        <p:tooltip for="caseName" value="Case: #{case.uuid()}" position="top" />
       </h:link>
     </p:column>
 
-    <p:column headerText="Creator" filterBy="#{case.creatorUserName}" sortBy="#{case.creatorUserName}" responsivePriority="2">
+    <p:column headerText="Creator" filterBy="#{case.creatorUserName}" sortBy="#{case.creatorUserName}"
+      responsivePriority="3" width="160">
       <jc:user user="#{case.creatorUser}" />
     </p:column>
 
-    <p:column headerText="Start" style="text-align: center;" sortBy="#{case.startTimestamp}" sortOrder="descending">
+    <p:column headerText="Start" style="text-align: center;" sortBy="#{case.startTimestamp}"
+      sortOrder="descending" responsivePriority="3" width="90">
       <jc:time id="startTime" datetime="#{case.startTimestamp}" />
     </p:column>
 
-    <p:column headerText="End" style="text-align: center;" sortBy="#{case.endTimestamp}" responsivePriority="3">
+    <p:column headerText="End" style="text-align: center;" sortBy="#{case.endTimestamp}"
+      responsivePriority="4" width="90">
       <jc:time id="endTime" datetime="#{case.endTimestamp}" />
     </p:column>
 
-    <p:column styleClass="table-btn-1">
+    <p:column styleClass="table-btn-1" width="10">
       <p:link href="case.xhtml?id=#{case.uuid()}" >
         <i class="si si-information-circle detail-btn"/>
       </p:link>

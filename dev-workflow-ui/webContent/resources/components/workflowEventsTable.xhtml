@@ -14,7 +14,7 @@
       paginatorAlwaysVisible="false" paginatorPosition="bottom"
       paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
 
-      <p:column headerText="Creation Date" sortBy="#{event.eventTimestamp}" sortOrder="descending">
+      <p:column headerText="Creation Date" sortBy="#{event.eventTimestamp}" sortOrder="descending" width="120">
         <h:outputText value="#{dateTimeIvyDevWfBean.getDefault(event.eventTimestamp)}" />
       </p:column>
 
@@ -22,11 +22,11 @@
         <h:outputText value="#{event.eventType}" id="eventType" />
       </p:column>
 
-      <p:column headerText="State" sortBy="#{event.taskState}">
+      <p:column headerText="State" sortBy="#{event.taskState}" width="120">
         <h:outputText value="#{event.taskState}" id="eventState" />
       </p:column>
 
-      <p:column headerText="Author" sortBy="#{event.author.displayName}">
+      <p:column headerText="Author" sortBy="#{event.author.displayName}" width="160">
         <jc:user user="#{event.author}" id="eventAuthor" />
       </p:column>
 

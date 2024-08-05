@@ -20,6 +20,7 @@
             <p:menuitem id="sr_cleanup" value="Cleanup" icon="si si-recycling-trash-bin-2" url="cleanup.xhtml" rendered="#{engineModeIvyDevWfBean.demoOrDesigner}" styleClass="#{sidebarIvyDevWfBean.isActive('cleanup') ? 'active-submenu' : ''}"/>
             <p:menuitem id="sr_api-browser" value="API Browser" icon="si si-network-browser" url="api-browser.xhtml" styleClass="#{sidebarIvyDevWfBean.isActive('api-browser') ? 'active-submenu' : ''}"/>
             <p:menuitem id="sr_statistics" value="Statistics" icon="si si-analytics-graph" url="statistics.xhtml" styleClass="#{sidebarIvyDevWfBean.isActive('statistics') ? 'active-submenu' : ''}"/>
+            <p:menuitem id="sr_engine-cockpit" value="Engine Cockpit" icon="si si-cog" url="#{sidebarIvyDevWfBean.cockpitPath}"/>
           </p:submenu>
         </pm:menu>
       </h:form>
