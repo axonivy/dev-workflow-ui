@@ -59,7 +59,7 @@ public class CasesDataModel extends LazyDataModel<ICase> {
     return cases;
   }
 
-  private CaseQuery createCaseQuery() {
+  protected CaseQuery createCaseQuery() {
     var caseQuery = CaseQuery.create();
 
     applyFilter(caseQuery);
