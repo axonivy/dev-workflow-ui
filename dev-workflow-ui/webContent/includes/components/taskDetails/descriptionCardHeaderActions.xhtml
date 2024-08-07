@@ -9,7 +9,7 @@
   <div class="detail-action-container">
     <h:form id="actionMenuForm">
       <p:linkButton href="#{tasksDetailsIvyDevWfBean.executeTaskLink}" value="Start"
-        id="taskStartBtn" disabled="#{!task.canBeStarted()}" icon="si si-arrow-right-1" />
+        id="taskStartBtn" disabled="#{!task.canBeStarted()}" icon="si si-controls-play" />
 
       <p:badge value="#{task.notes.size()}">
         <p:commandButton id="taskNotesBtn" styleClass="ml-2 ui-button-secondary ui-button-outlined rounded-button"

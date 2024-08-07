@@ -22,7 +22,7 @@ class TestLastSessionStarts {
     var starts = new LastSessionStarts(new MapAttributeStore());
 
     assertThat(starts.storedStarts()).isNull();
-    var startable = new StartableModel("myown", null, WebLink.of("test"), null, null, true, null, false);
+    var startable = new StartableModel("myown", null, WebLink.of("test"), null, null, null, null, true, null, false);
 
     starts.add(startable);
     assertThat(starts.storedStarts()).hasSize(1);

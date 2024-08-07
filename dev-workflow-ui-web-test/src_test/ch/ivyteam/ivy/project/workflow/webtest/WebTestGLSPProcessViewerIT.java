@@ -4,7 +4,6 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginD
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.logout;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
-import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThanOrEqual;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.visible;
@@ -36,7 +35,8 @@ public class WebTestGLSPProcessViewerIT {
     loginDeveloper();
     openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).sendKeys("testdata/testdata.ivp");
-    $$(By.className("si-hierarchy-6")).shouldBe(size(1)).get(0).click();
+    $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
+    $(By.id("startsForm:projectStarts:0:openProcessViewer")).shouldBe(visible).click();
 
     $(By.id("viewerFrame")).shouldBe(visible);
     Selenide.switchTo().frame("viewerFrame");
@@ -52,7 +52,8 @@ public class WebTestGLSPProcessViewerIT {
     loginDeveloper();
     openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).sendKeys("test _ case _ map");
-    $(By.className("si-hierarchy-6")).shouldBe(visible).click();
+    $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
+    $(By.id("startsForm:projectStarts:0:openProcessViewer")).shouldBe(visible).click();
     $(By.id("startsForm:processViewer:processViewerDialog")).shouldBe(visible);
     $(By.id("viewerFrame")).shouldBe(visible);
     Selenide.switchTo().frame("viewerFrame");
@@ -62,8 +63,9 @@ public class WebTestGLSPProcessViewerIT {
 
   @Test
   public void testNoViewerForUnknownUser() {
-    openView("starts.xhtml");
     logout();
-    $(".start-element .si-hierarchy-6").shouldNot(exist);
+    openView("starts.xhtml");
+    $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
+    $(By.id("startsForm:projectStarts:0:openProcessViewer")).shouldNot(exist);
   }
 }

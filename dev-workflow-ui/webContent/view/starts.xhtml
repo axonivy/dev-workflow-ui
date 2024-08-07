@@ -9,9 +9,17 @@
       <h:form id="startsForm" onkeypress="if (event.keyCode == 13) { return false; }">
 
         <div class="card">
-          <div class="flex align-items-center mb-3">
-            <i class="pr-3 si si-navigation-menu card-title-icon"></i>
-            <h2 class="m-0">Starts</h2>
+          <div class="flex justify-content-between mb-3">
+            <div class="flex align-items-center">
+              <i class="pr-3 si si-navigation-menu card-title-icon"></i>
+              <h2 class="m-0">Processes</h2>
+            </div>
+            <div class="ui-input-icon-left filter-container">
+              <i class="pi pi-search" />
+              <p:inputText id="globalFilter" placeholder="Search" value="#{processesIvyDevWfBean.startsDataModel.filter}">
+                <p:ajax event="keyup" update="projectStarts"/>
+              </p:inputText>
+            </div>
           </div>
           <ui:include src="/includes/components/startsPanel.xhtml" />
         </div>

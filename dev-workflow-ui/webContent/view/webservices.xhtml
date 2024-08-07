@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
+  xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:body>
+  <ui:composition template="../includes/template/template.xhtml">
+    <ui:define name="content">
+      <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotAdmin}" />
+
+      <h:form id="webServicesForm">
+        <div class="card">
+        <div class="flex justify-content-between mb-3">
+            <div class="flex align-items-center">
+              <i class="pr-3 si si-network-arrow card-title-icon"></i>
+              <h2 class="m-0">Web Service Processes</h2>
+            </div>
+            <div class="ui-input-icon-left filter-container">
+              <i class="pi pi-search" />
+              <p:inputText id="globalFilter" placeholder="Search" value="#{webServicesBean.filter}">
+                <p:ajax event="keyup" update="webServicesTable"/>
+              </p:inputText>
+            </div>
+          </div>
+
+          <p:growl id="growl" showDetail="true" />
+          <p:dataTable id="webServicesTable" var="webservice" rows="5" paginator="true" value="#{webServicesBean.webServices}"
+            paginatorPosition="bottom" paginatorAlwaysVisible="false" selectionMode="single" rowKey="#{webservice.link}">
+            <p:ajax event="rowSelect" listener="#{webServicesBean.executeRow}" />
+
+            <p:column width="10">
+              <i class="si si-lg si-network-arrow" />
+            </p:column>
+            <p:column headerText="Name" sortBy="#{webservice.name}">
+              <h:outputText value="#{webservice.name}" />
+            </p:column>
+            <p:column headerText="Process Name" sortBy="#{webservice.processName}">
+              <h:outputText value="#{webservice.processName}" />
+            </p:column>
+            <p:column headerText="Link" sortBy="#{webservice.link}" responsivePriority="4">
+              <h:outputText value="#{webservice.link}" />
+            </p:column>
+            <p:column width="60">
+              <p:commandButton actionListener="#{webservice.execute}" value="Start" icon="si si-controls-play" />
+            </p:column>
+          </p:dataTable>
+        </div>
+      </h:form>
+    </ui:define>
+  </ui:composition>
+</h:body>
+</html>

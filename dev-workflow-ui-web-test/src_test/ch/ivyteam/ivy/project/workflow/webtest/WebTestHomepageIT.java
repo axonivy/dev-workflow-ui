@@ -56,7 +56,7 @@ public class WebTestHomepageIT {
     // cards should not be visible and starts should appear
     $(".active-tasks-card").shouldNotBe(visible);
     $(".last-starts-card").shouldNotBe(visible);
-    $(".main-starts-container").shouldBe(visible);
+    $(By.id("projectStarts")).shouldBe(visible);
   }
 
   @Test

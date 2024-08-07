@@ -25,7 +25,7 @@
               <div class="card-header">
                 <div class="card-title flex align-items-center">
                   <i class="pr-3 si si-navigation-menu"></i>
-                  <h6 class="m-0">Last starts</h6>
+                  <h6 class="m-0">Started processes</h6>
                 </div>
               </div>
               <p:dataTable id="lastStarts" var="start" value="#{homepageIvyDevWfBean.lastStarts}" selectionMode="single"
@@ -162,11 +162,11 @@
                 </p:column>
 
                 <p:column width="40">
-                  <p:link id="rerunCaseIcon" href="#{homepageIvyDevWfBean.getCaseRerunLink(case)}"
+                  <p:commandLink id="rerunCaseIcon" actionListener="#{homepageIvyDevWfBean.rerunProcess(case)}"
                     styleClass="text-color mr-2">
                     <i class="si si-button-refresh-arrow text-2xl" />
-                    <p:tooltip for="rerunCaseIcon" value="Rerun the process of this case" position="top" />
-                  </p:link>
+                    <p:tooltip for="rerunCaseIcon" value="Run again" position="top" />
+                  </p:commandLink>
                   <p:link id="caseDetailsIcon" href="case.xhtml?id=#{case.uuid()}">
                     <i class="si si-information-circle detail-btn" />
                     <p:tooltip for="caseDetailsIcon" value="Open case details" position="top" />
