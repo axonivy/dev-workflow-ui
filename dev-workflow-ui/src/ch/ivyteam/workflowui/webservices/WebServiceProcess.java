@@ -1,9 +1,10 @@
-package ch.ivyteam.workflowui.starts;
+package ch.ivyteam.workflowui.webservices;
 
 import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.workflow.IWebServiceProcess;
 import ch.ivyteam.ivy.workflow.IWebServiceProcessStartElement;
+import ch.ivyteam.workflowui.util.RedirectUtil;
 
 public class WebServiceProcess {
   private final String link;
@@ -26,6 +27,10 @@ public class WebServiceProcess {
 
   public String getName() {
     return name;
+  }
+
+  public void execute() {
+    RedirectUtil.redirect(link.toString());
   }
 
   private static String toProcessName(IWebServiceProcess ws) {

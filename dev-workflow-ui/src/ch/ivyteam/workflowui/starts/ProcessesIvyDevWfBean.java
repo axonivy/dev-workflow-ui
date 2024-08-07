@@ -1,11 +1,12 @@
 package ch.ivyteam.workflowui.starts;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+
+import org.primefaces.event.SelectEvent;
 
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.ViewerUtil;
@@ -25,31 +26,13 @@ public class ProcessesIvyDevWfBean {
     return startsDataModel;
   }
 
-  public List<CustomPMV> getPMVs() {
-    return startsDataModel.getPMVs();
-  }
-
-  public String getFilter() {
-    return this.startsDataModel.getFilter();
-  }
-
-  public void setFilter(String filter) {
-    this.startsDataModel.setFilter(filter);
-  }
-
   public void redirect() {
     RedirectUtil.redirect("home.xhtml");
   }
 
   public void setViewerStart(String link) {
-    var processStarts = startsDataModel.getPMVs().stream()
-            .flatMap(pmv -> pmv.getCategories().stream())
-            .flatMap(category -> category.getStarts().stream());
-    var caseMapStarts = startsDataModel.getPMVs().stream()
-            .flatMap(pmv -> pmv.getCaseMapStarts().stream());
-    viewerTitle = findViewerTitle(processStarts, link)
-            .orElseGet(() -> findViewerTitle(caseMapStarts, link)
-                    .orElse(""));
+    var processStarts = startsDataModel.getStartables().stream();
+    viewerTitle = findViewerTitle(processStarts, link).orElse("");
     viewerLink = link;
   }
 
@@ -59,6 +42,10 @@ public class ProcessesIvyDevWfBean {
             .map(start -> ViewerUtil.getViewerDialogTitle(start));
   }
 
+  public void startRow(SelectEvent<StartableModel> event) {
+    event.getObject().execute();
+  }
+
   public String getViewerTitle() {
     return viewerTitle;
   }
@@ -66,5 +53,4 @@ public class ProcessesIvyDevWfBean {
   public String getViewerLink() {
     return viewerLink;
   }
-
 }

@@ -4,7 +4,6 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.assert
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
-import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
@@ -52,7 +51,7 @@ public class WebTestStartsIT {
     openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).sendKeys("startTestDialog1");
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui-test-data"));
-    $(By.className("start-link")).shouldBe(visible).shouldHave(text("startTestDialog1.ivp")).click();
+    $(By.id("startsForm:projectStarts:0:processStartBtn")).shouldBe(visible).click();
     $(By.id("iFrame")).shouldBe(visible);
 
     Selenide.switchTo().frame("iFrame");
@@ -69,8 +68,9 @@ public class WebTestStartsIT {
     openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).sendKeys("embed in frame");
     // open in fullscreen link icon shouldn't be visible
-    $(By.className("start-element")).findAll("a").shouldBe(size(3));
-    $(By.className("start-link")).shouldBe(visible, text("Do not embed in Frame")).click();
+    $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
+    $(By.id("startsForm:projectStarts:0:openStartFullscreenBtn")).shouldNotBe(visible);
+    $(By.id("startsForm:projectStarts:0:startName")).shouldBe(visible, text("Do not embed in Frame")).click();
     $(By.id("testDialogTitle")).shouldBe(visible);
   }
 
@@ -91,9 +91,9 @@ public class WebTestStartsIT {
 
   @Test
   public void testWebservicesVisible() {
-    openView("starts.xhtml");
-    $(By.id("startsForm:globalFilter")).sendKeys("testservice");
-    $(By.id("startsForm:projectStarts")).shouldHave(text("TestService"));
+    openView("webservices.xhtml");
+    $(By.id("webServicesForm:globalFilter")).sendKeys("testservice");
+    $(By.id("webServicesForm:webServicesTable")).shouldHave(text("TestService"));
   }
 
   @Test
@@ -127,8 +127,9 @@ public class WebTestStartsIT {
     $(By.id("startsForm:globalFilter")).sendKeys("startTestDialog1");
     $(byText("TestData/startTestDialog2.ivp")).shouldNotBe(visible);
     $(byText("TestData/startTestDialog1.ivp")).shouldBe(visible);
-    $(By.className("si-expand-6")).shouldBe(visible).click();
-    $(By.className("topbar-logo")).shouldNotBe(visible);
+    $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
+    $(By.id("startsForm:projectStarts:0:openStartFullscreenBtn")).shouldBe(visible).click();
+    $(By.id("topbar-logo")).shouldNotBe(visible);
     $(By.id("form:proceed")).shouldBe(visible).click();
     $(By.className("layout-topbar-logo")).shouldBe(visible);
   }
@@ -152,8 +153,8 @@ public class WebTestStartsIT {
   public void testStartableIcons() {
     openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).setValue("makeAdminUser.ivp");
-    $(By.className("startable-icon")).shouldBe(visible).shouldHave(cssClass("si-controls-play"));
+    $(By.id("startsForm:projectStarts:0:processStartIcon")).shouldBe(visible).shouldHave(cssClass("si-controls-play"));
     $(By.id("startsForm:globalFilter")).setValue("HomePageTestData.ivp");
-    $(By.className("startable-icon")).shouldBe(visible).shouldHave(cssClass("si-house-1"));
+    $(By.id("startsForm:projectStarts:0:processStartIcon")).shouldBe(visible).shouldHave(cssClass("si-house-1"));
   }
 }

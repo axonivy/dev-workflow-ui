@@ -32,12 +32,18 @@ public class WebTestCleanup {
   @BeforeAll
   public static void prepare() {
     // check if the engine is running and starts are available
-    openView("starts.xhtml");
-    $(By.id("startsForm:globalFilter")).sendKeys("workflow-ui-test-data");
-    $("#startsForm\\:projectStarts\\:0\\:caseMapsTitle").shouldBe(visible);
-    $("#startsForm\\:projectStarts\\:0\\:processesTitle").shouldBe(visible);
-    $("#startsForm\\:projectStarts\\:0\\:webServicesTitle").shouldBe(visible);
+    checkProcessesExist();
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
+  }
+
+  private static void checkProcessesExist() {
+    openView("starts.xhtml");
+    $(By.id("startsForm:globalFilter")).sendKeys("test");
+    var table = PrimeUi.table(By.id("startsForm:projectStarts"));
+    table.contains("startTestDialog");
+    $(By.id("startsForm:globalFilter")).clear();
+    $(By.id("startsForm:globalFilter")).sendKeys("case");
+    table.contains("test _ case _ map");
   }
 
   @BeforeEach
@@ -89,11 +95,7 @@ public class WebTestCleanup {
 
     openView("cases.xhtml");
     casesTable.row(0).shouldHave(text("Created case of TestData"));
-    openView("starts.xhtml");
-    $(By.id("startsForm:globalFilter")).sendKeys("workflow-ui-test-data");
-    $("#startsForm\\:projectStarts\\:0\\:caseMapsTitle").shouldBe(visible);
-    $("#startsForm\\:projectStarts\\:0\\:processesTitle").shouldBe(visible);
-    $("#startsForm\\:projectStarts\\:0\\:webServicesTitle").shouldBe(visible);
+    checkProcessesExist();
 
     openView("cleanup.xhtml");
     $(By.id("clanupForm:cleanupBtn")).shouldBe(visible).click();
@@ -101,11 +103,7 @@ public class WebTestCleanup {
 
     openView("cases.xhtml");
     casesTable.row(0).shouldHave(text("No Cases found"));
-    openView("starts.xhtml");
-    $(By.id("startsForm:globalFilter")).sendKeys("workflow-ui-test-data");
-    $("#startsForm\\:projectStarts\\:0\\:caseMapsTitle").shouldBe(visible);
-    $("#startsForm\\:projectStarts\\:0\\:processesTitle").shouldBe(visible);
-    $("#startsForm\\:projectStarts\\:0\\:webServicesTitle").shouldBe(visible);
+    checkProcessesExist();
   }
 
 }

@@ -1,72 +1,51 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component"
-  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
-  xmlns:jc="http://xmlns.jcp.org/jsf/composite/components">
+  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
+  xmlns:pe="http://primefaces.org/ui/extensions" xmlns:jc="http://xmlns.jcp.org/jsf/composite/components">
 
-<p:panel styleClass="main-starts-container ui-fluid">
-  <f:facet name="header">
-    <div class="ui-input-icon-left filter-container">
-      <i class="pi pi-search"/>
-      <p:inputText id="globalFilter" placeholder="Search" value="#{processesIvyDevWfBean.filter}">
-        <p:ajax event="keyup" update="accordionContainer" />
-      </p:inputText>
-    </div>
-  </f:facet>
-
-  <h:panelGroup id="accordionContainer">
-    <p:accordionPanel var="pmv" value="#{processesIvyDevWfBean.PMVs}" id="projectStarts" styleClass="custom-accordion"
-     activeIndex="#{processesIvyDevWfBean.startsDataModel.activeIndex}" multiple="true">
-      <p:tab id="project" titleStyleClass="start-title">
-        <f:facet name="title">
-          <h:outputText id="pmvState" styleClass="mr-1 si si-#{pmv.stateIcon}" />
-          <p:tooltip for="pmvState" value="#{pmv.state} - #{pmv.versionName}" position="top" />
-          <h:outputText id="projectName" value="#{pmv.projectName}" />
-          <p:tooltip for="projectName" value="Application: #{pmv.PMV.application.name}" position="top" />
-        </f:facet>
-
-        <h:panelGroup id="caseMapsTitle" styleClass="mt-2" layout="block" rendered="#{!empty pmv.caseMapStarts}">
-          <b><h:outputText value="Case Maps" /></b>
-        </h:panelGroup>
-        <ui:repeat value="#{pmv.caseMapStarts}" var="casemapStart">
-          <jc:startsPanelElement pmv="#{pmv}" start="#{casemapStart}"/>
-        </ui:repeat>
-
-        <h:panelGroup id="processesTitle" styleClass="mt-2" layout="block" rendered="#{!empty pmv.categories}">
-          <b><h:outputText value="Processes" /></b>
-        </h:panelGroup>
-        <ui:repeat value="#{pmv.categories}" var="category">
-          <p:outputPanel id="categoryContainer" styleClass="mt-2" rendered="#{!empty category.name}">
-            <i class="#{category.cssIcon} mr-1"></i>
-            <h:outputText id="categoryName" value="#{category.name}"/>
-            <p:tooltip for="categoryName" value="#{category.tooltip}" position="top" />
-          </p:outputPanel>
-
-          <ui:repeat value="#{category.starts}" var="start">
-            <jc:startsPanelElement pmv="#{pmv}" start="#{start}"/>
-          </ui:repeat>
-        </ui:repeat>
-
-        <h:panelGroup id="webServicesTitle" styleClass="mt-2" layout="block" rendered="#{!empty pmv.webServiceProcesses}">
-         <b><h:outputText value="Web Services (WSDL)" /></b>
-        </h:panelGroup>
-        <ui:repeat value="#{pmv.webServiceProcesses}" var="webServiceProcess">
-          <h:panelGroup id="startElementWebServiceProcess" styleClass="flex start-element" rendered="#{pmv.active}">
-            <p:link href="#{webServiceProcess.link}" target="_blank" styleClass="start-link flex align-items-center">
-              <i class="si si-network-arrow mr-1 startable-icon"/>
-              <span>#{webServiceProcess.name}</span>
-            </p:link>
-          </h:panelGroup>
-        </ui:repeat>
-
-      </p:tab>
-    </p:accordionPanel>
-
-    <p:outputPanel styleClass="main-starts-container-empty" id="noStartsPanel" rendered="#{empty processesIvyDevWfBean.PMVs}">
-      <i class="si si-alert-circle custom-icon"/>
-      <h:outputText value="No projects available" id="noProjectsText"/>
-    </p:outputPanel>
-
-  </h:panelGroup>
-</p:panel>
+  <p:dataTable id="projectStarts" value="#{processesIvyDevWfBean.startsDataModel.startables}" var="start"
+    rows="15" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" rowKey="#{start.link}"
+    selectionMode="single">
+    <p:ajax event="rowSelect" listener="#{processesIvyDevWfBean.startRow}"/>
+    <p:column width="10">
+      <h:outputText id="processStartIcon" class="#{start.icon} si-lg text-primary" />
+    </p:column>
+    <p:column headerText="Process" sortBy="#{start.displayName}">
+      <h:outputText id="startName" value="#{start.displayName}" styleClass="text-primary" />
+      <div class="start-description overflow-hidden-ellipsis text-sm">
+        <h:outputText id="startDescription" value="#{start.description}" />
+        <p:tooltip for="startDescription" position="top" value="#{start.description}" styleClass="text" />
+      </div>
+    </p:column>
+    <p:column headerText="Application" width="120" sortBy="#{start.applicationName}" responsivePriority="4"
+      rendered="#{!processesIvyDevWfBean.startsDataModel.onlySingleApplication}">
+      <h:outputText value="#{start.applicationName}" />
+    </p:column>
+    <p:column headerText="Project" width="120" sortBy="#{start.projectName}" responsivePriority="4"
+      rendered="#{!processesIvyDevWfBean.startsDataModel.onlySingleProject}">
+      <h:outputText value="#{start.projectName}" />
+    </p:column>
+    <p:column headerText="Category" width="120" sortBy="#{start.category.name}" responsivePriority="3">
+      <h:outputText value="#{start.category.name}" />
+    </p:column>
+    <p:column width="60">
+      <p:commandButton actionListener="#{start.execute}" value="Start" id="processStartBtn" icon="si si-controls-play" />
+      <p:tooltip for="processStartBtn" position="top" value="Start '#{start.displayName}'" />
+    </p:column>
+    <p:column width="20">
+      <p:commandButton styleClass="ui-button-secondary ui-button-outlined rounded-button"
+        id="startActionsBtn" icon="si si-navigation-menu-horizontal" />
+      <p:menu id="startsActionsMenu" overlay="true" trigger="startActionsBtn" my="right top" at="right bottom"
+        style="width: 200px">
+        <p:menuitem value="Copy to clipboard" onclick="copyToClipboard('#{start.link}')"
+          id="copyStartLinkBtn" icon="si si-hyperlink-3"  />
+        <p:menuitem value="Open fullscreen" url="#{start.link}" id="openStartFullscreenBtn"
+          rendered="#{start.embedInFrame}" icon="si si-expand-6" />
+        <p:menuitem id="openProcessViewer" value="#{start.isProcessStart() ? 'Open Process Viewer' : 'Open Case Map Viewer'}"
+          oncomplete="PF('process-viewer-dlg').show()" update="startsForm:processViewer:processViewerDialog"
+          rendered="#{start.viewerAllowed}" actionListener="#{processesIvyDevWfBean.setViewerStart(start.viewerLink)}"
+          icon="si si-hierarchy-6 si-rotate-270" />
+      </p:menu>
+    </p:column>
+  </p:dataTable>
 </ui:composition>

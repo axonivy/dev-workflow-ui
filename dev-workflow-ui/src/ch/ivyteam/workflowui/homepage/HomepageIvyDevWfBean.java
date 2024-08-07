@@ -14,7 +14,6 @@ import ch.ivyteam.workflowui.starts.StartableModel;
 import ch.ivyteam.workflowui.tasks.TasksDataModel;
 import ch.ivyteam.workflowui.util.LastSessionStarts;
 import ch.ivyteam.workflowui.util.RedirectUtil;
-import ch.ivyteam.workflowui.util.UrlUtil;
 import ch.ivyteam.workflowui.util.ViewerUtil;
 
 @ManagedBean
@@ -79,8 +78,9 @@ public class HomepageIvyDevWfBean {
     return startedCasesDataModel;
   }
 
-  public String getCaseRerunLink(ICase caze) {
-    var startLink = caze.getBusinessCase().getStartedFrom().getLink();
-    return UrlUtil.generateStartFrameUrl(startLink);
+  public void rerunProcess(ICase caze) {
+    var startable = new StartableModel(caze.getBusinessCase().getStartedFrom());
+    LastSessionStarts.current().add(startable);
+    startable.execute();
   }
 }

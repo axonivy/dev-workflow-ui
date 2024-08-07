@@ -16,17 +16,21 @@ public class StartableModel {
   private final String description;
   private final WebLink link;
   private final Category category;
+  private final String applicationName;
+  private final String projectName;
   private final String icon;
   private final boolean embedInFrame;
   private final WebLink viewerLink;
   private final boolean viewerAllowed;
 
   public StartableModel(String displayName, String description, WebLink link, Category category,
-          String icon, boolean embedInFrame, WebLink viewerLink, boolean viewerAllowed) {
+          String applicationName, String projectName, String icon, boolean embedInFrame, WebLink viewerLink, boolean viewerAllowed) {
     this.displayName = displayName;
     this.description = description;
     this.link = link;
     this.category = category;
+    this.applicationName = applicationName;
+    this.projectName = projectName;
     this.icon = icon;
     this.embedInFrame = embedInFrame;
     this.viewerLink = viewerLink;
@@ -38,6 +42,8 @@ public class StartableModel {
       startable.getDescription(),
       startable.getLink(),
       startable.getCategory(),
+      startable.pmv().getApplication().getName(),
+      startable.pmv().project().name(),
       getIcon(startable.customFields()),
       evaluateEmbedInFrame(startable.customFields().value(CustomFieldsHelper.EMBED_IN_FRAME)),
       ViewerUtil.getViewerLink(startable),
@@ -73,6 +79,14 @@ public class StartableModel {
 
   public Category getCategory() {
     return category;
+  }
+
+  public String getApplicationName() {
+    return applicationName;
+  }
+
+  public String getProjectName() {
+    return projectName;
   }
 
   public boolean isEmbedInFrame() {

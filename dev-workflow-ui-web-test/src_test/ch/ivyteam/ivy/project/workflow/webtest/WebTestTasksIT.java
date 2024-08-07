@@ -242,7 +242,7 @@ class WebTestTasksIT {
   void customFieldEmbedInFrame() {
     openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).sendKeys("embed in frame");
-    $(By.className("start-link")).shouldBe(visible, text("Do not embed in Frame")).click();
+    $(By.id("startsForm:projectStarts:0:startName")).shouldBe(visible, text("Do not embed in Frame")).click();
     $(By.id("form:proceed")).shouldBe(visible).click();
     openView("tasks.xhtml");
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));

@@ -1,5 +1,6 @@
 package ch.ivyteam.workflowui.util;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -39,8 +40,12 @@ public class ProcessModelsUtil {
 
   public static List<StartableModel> getDeployedStartables() {
     return getReleasedWorkflowPMVs()
-      .flatMap(pmv -> pmv.getStartables(ISession.current()).stream()
-      .map(s -> createCaseMapOrProcessStartable(s)))
+      .flatMap(pmv -> pmv.getStartables(ISession.current()).stream())
+      .map(s -> createCaseMapOrProcessStartable(s))
+      .sorted(Comparator.comparing((StartableModel s) -> s.getCategory().getName(),
+          Comparator.nullsLast(Comparator.comparing(String::isEmpty))
+              .thenComparing(String::compareTo))
+          .thenComparing(StartableModel::getDisplayName))
       .collect(Collectors.toList());
   }
 
