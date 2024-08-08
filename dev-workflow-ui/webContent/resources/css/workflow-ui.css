@@ -36,7 +36,7 @@ body .ui-staticmessage {
   height: 100%;
 }
 a > i.detail-btn {
-  font-size: 16pt;
+  font-size: 1.5rem;
 }
 .details-description-label {
   opacity: 0.65;
@@ -286,4 +286,25 @@ body .notification-scroll>.ui-datascroller-content::-webkit-scrollbar {
 body .ui-datatable .ui-datatable-data > tr > td {
   padding: 0.5rem;
 }
+
+body .ui-datatable thead th,
+body .ui-datatable thead th.ui-state-active{
+  padding: 0.75rem;
+  background: #ffffff;
+}
+
+body .ui-datatable thead th .ui-sortable-column-icon.ui-icon-carat-2-n-s {
+  font-size: 0.75rem;
+}
+
+body .ui-datatable .ui-paginator.ui-paginator-bottom {
+  padding: 0.5rem;
+  padding-bottom: 0rem;
+  border: 0;
+}
+
+.ui-column-title:empty + .ui-sortable-column-icon {
+  margin: 0;
+}
+
 

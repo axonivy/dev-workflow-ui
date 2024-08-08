@@ -11,7 +11,7 @@
       <h:form id="menuform">
         <pm:menu widgetVar="sidebar_menu">
           <p:menuitem id="sr_home" value="Home" icon="si si-house-1" url="home.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('home') ? 'active-menuitem' : ''}" />
-          <p:menuitem id="sr_starts" value="Processes" icon="si si-navigation-menu" url="starts.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('starts') ? 'active-menuitem' : ''}" />
+          <p:menuitem id="sr_starts" value="Processes" icon="si si-hierarchy-6 si-rotate-270" url="starts.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('starts') ? 'active-menuitem' : ''}" />
           <p:menuitem id="sr_tasks" value="Tasks" icon="si si-layout-bullets" url="tasks.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('tasks') ? 'active-menuitem' : ''}" />
           <p:menuitem id="sr_cases" value="Cases" icon="si si-task-list-approve" url="cases.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('cases') ? 'active-menuitem' : ''}" />
           <p:submenu id="sr_actions" label="Developer" icon="si si-tools-wench" rendered="#{adminIvyDevWfBean.isWorkflowAdmin()}" styleClass="#{sidebarIvyDevWfBean.isActive('signals', 'intermediateEvents', 'cleanup', 'api-browser') ? 'active-menuitem' : ''}">

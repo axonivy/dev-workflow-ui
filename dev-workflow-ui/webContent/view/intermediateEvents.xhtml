@@ -9,10 +9,7 @@
       <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotAdmin}" />
 
       <div class="card">
-        <div class="flex align-items-center mb-3">
-          <i class="pr-3 si si-analytics-graph card-title-icon"></i>
-          <h2 class="m-0">Intermediate Event Beans</h2>
-        </div>
+        <h4 class="mb-3">Intermediate Event Beans</h4>
 
         <h:form id="intermediateEventBeansForm">
           <p:growl id="growl" showDetail="true"/>
@@ -22,9 +19,6 @@
             rowKey="#{intermediateEvent.processElementId}">
             <p:ajax event="rowSelect" listener="#{intermediateEventsIvyDevWfBean.onRowSelect}" update="@form" />
 
-            <p:column width="40">
-              <i class="si si-lg si-analytics-graph" />
-            </p:column>
             <p:column headerText="Name" sortBy="#{intermediateEvent.name}">
               <h:outputText value="#{intermediateEvent.name}" />
             </p:column>

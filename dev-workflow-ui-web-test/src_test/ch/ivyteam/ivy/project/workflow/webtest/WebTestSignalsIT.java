@@ -53,7 +53,7 @@ public class WebTestSignalsIT {
     $(By.id("signalForm:growl_container")).shouldBe(visible);
 
     Table signalsTable = PrimeUi.table(By.id("firedSignalsTable"));
-    signalsTable.valueAtShouldBe(0, 1, text("Web Test Signal"));
+    signalsTable.valueAtShouldBe(0, 0, text("Web Test Signal"));
   }
 
   @Test
@@ -66,7 +66,7 @@ public class WebTestSignalsIT {
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
 
     Table signalsTable = PrimeUi.table(By.id("firedSignalsTable"));
-    signalsTable.valueAtShouldBe(0, 1, text("test:signal:complete"));
+    signalsTable.valueAtShouldBe(0, 0, text("test:signal:complete"));
   }
 
   @Test
@@ -78,8 +78,8 @@ public class WebTestSignalsIT {
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
 
     Table signalsTable = PrimeUi.table(By.id("firedSignalsTable"));
-    signalsTable.valueAtShouldBe(0, 1, text("test:signal:complete"));
-    signalsTable.valueAtShouldBe(0, 5, text("test:signal:complete"));
+    signalsTable.valueAtShouldBe(0, 0, text("test:signal:complete"));
+    signalsTable.valueAtShouldBe(0, 4, text("test:signal:complete"));
 
     $(By.className("case-link")).shouldBe(visible).click();
     $(By.id("processViewer:processViewerDialog")).shouldNotBe(visible);
@@ -94,7 +94,7 @@ public class WebTestSignalsIT {
 
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
     openView("signals.xhtml");
-    boundaryTable.valueAtShouldBe(0, 1, text("test:data:signal"));
+    boundaryTable.valueAtShouldBe(0, 0, text("test:data:signal"));
 
     $(By.id("signalForm:signalCodeInput_input")).setValue("test:data:signal");
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();

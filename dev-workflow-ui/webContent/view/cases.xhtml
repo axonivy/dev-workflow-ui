@@ -14,10 +14,7 @@
             <p:ajax event="rowSelect" listener="#{casesIvyDevWfBean.redirectToCaseRow}" />
             <f:facet name="header">
               <div class="flex justify-content-between mb-3 pretty-search">
-                <div class="flex align-items-center">
-                  <i class="pr-3 si si-task-list-approve card-title-icon" />
-                  <h2 class="m-0">Cases</h2>
-                </div>
+                <h4 class="m-0">Cases</h4>
                 <h:panelGroup id="showAllCasesSwitch_container" styleClass="ml-auto inline-flex align-items-center"
                   layout="block" rendered="#{adminIvyDevWfBean.isWorkflowAdmin()}">
                   <h:outputText value="Show all" styleClass="mr-2" />
@@ -35,11 +32,6 @@
                 </div>
               </div>
             </f:facet>
-
-            <p:column styleClass="icon-row" responsivePriority="2" width="0">
-              <h:outputText id="caseIcon" styleClass="si si-lg si-task-list-approve" />
-              <p:tooltip for="caseIcon" value="Case: #{case.uuid()}" position="top" />
-            </p:column>
 
             <p:column filterBy="#{case.state}" styleClass="icon-row" sortBy="#{case.state}">
               <h:outputText id="caseState"
@@ -59,13 +51,12 @@
               <jc:user user="#{case.creatorUser}" />
             </p:column>
 
-            <p:column headerText="Start" style="text-align: center;" sortBy="#{case.startTimestamp}"
-              sortOrder="descending" responsivePriority="3" width="90">
+            <p:column headerText="Start" sortBy="#{case.startTimestamp}" sortOrder="descending" responsivePriority="3"
+              width="90">
               <jc:time id="startTime" datetime="#{case.startTimestamp}" />
             </p:column>
 
-            <p:column headerText="End" style="text-align: center;" sortBy="#{case.endTimestamp}" responsivePriority="4"
-              width="90">
+            <p:column headerText="End" sortBy="#{case.endTimestamp}" responsivePriority="4" width="90">
               <jc:time id="endTime" datetime="#{case.endTimestamp}" />
             </p:column>
 

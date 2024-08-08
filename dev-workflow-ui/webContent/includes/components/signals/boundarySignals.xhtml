@@ -6,9 +6,6 @@
 
   <p:dataTable id="boundarySignalsTable" var="receiver" value="#{signalsIvyDevWfBean.boundarySignalModel}" lazy="true"
     rows="5" paginator="true" paginatorPosition="bottom" paginatorAlwaysVisible="false">
-    <p:column styleClass="icon-row">
-      <i class="si si-lg si-network-signal"/>
-    </p:column>
     <p:column headerText="Signal pattern" sortBy="#{receiver.signalPattern}" sortOrder="ascending">
       <h:outputText value="#{receiver.signalPattern}" />
     </p:column>

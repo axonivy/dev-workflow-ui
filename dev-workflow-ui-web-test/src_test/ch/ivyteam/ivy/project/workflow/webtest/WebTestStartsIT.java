@@ -111,7 +111,7 @@ public class WebTestStartsIT {
     assertCurrentUrlContains("tasks.xhtml");
 
     openView("home.xhtml");
-    $(By.id("lastStarts")).find(byText("TestData/TestData.ivp")).click();
+    $(By.id("startedProcesses")).find(byText("TestData/TestData.ivp")).click();
     $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menuitem"));
     assertCurrentUrlContains("home.xhtml");
 

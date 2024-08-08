@@ -18,10 +18,7 @@
             <p:ajax event="rowSelect" listener="#{webServicesBean.executeRow}" />
             <f:facet name="header">
               <div class="flex justify-content-between mb-3 pretty-search">
-                <div class="flex align-items-center">
-                  <i class="pr-3 si si-network-arrow card-title-icon"></i>
-                  <h2 class="m-0">Web Service Processes</h2>
-                </div>
+                <h4 class="m-0">Web Service Processes</h4>
                 <div class="ui-input-icon-left filter-container">
                   <i class="pi pi-search" />
                   <p:inputText id="globalFilter" placeholder="Search" value="#{webServicesBean.filter}"

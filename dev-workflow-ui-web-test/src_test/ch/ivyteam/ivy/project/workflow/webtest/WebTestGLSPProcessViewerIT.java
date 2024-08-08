@@ -53,6 +53,7 @@ public class WebTestGLSPProcessViewerIT {
     openView("starts.xhtml");
     $(By.id("startsForm:projectStarts:globalFilter")).setValue("test _ case _ map");
     $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
+    $(By.id("startsForm:projectStarts:0:startsActionsMenu")).shouldBe(visible);
     $(By.id("startsForm:projectStarts:0:openProcessViewer")).shouldBe(visible).click();
     $(By.id("startsForm:processViewer:processViewerDialog")).shouldBe(visible);
     $(By.id("viewerFrame")).shouldBe(visible);

@@ -14,10 +14,7 @@
             <p:ajax event="rowSelect" listener="#{tasksIvyDevWfBean.displayTaskRow}" />
             <f:facet name="header">
               <div class="flex justify-content-between mb-3 pretty-search">
-                <div class="flex align-items-center">
-                  <i class="pr-3 si si-layout-bullets card-title-icon" />
-                  <h2 class="m-0">Tasks</h2>
-                </div>
+                <h4 class="m-0">Tasks</h4>
                 <h:panelGroup id="showAllTasksSwitch_container" styleClass="ml-auto inline-flex align-items-center"
                   layout="block" rendered="#{adminIvyDevWfBean.isWorkflowAdmin()}">
                   <h:outputText value="Show all" styleClass="mr-2" />
@@ -36,18 +33,13 @@
               </div>
             </f:facet>
 
-            <p:column styleClass="icon-row" responsivePriority="4" width="0">
-              <h:outputText id="taskIcon" class="si si-lg si-task-list-edit" />
-              <p:tooltip for="taskIcon" value="Task: #{task.uuid}" position="top" />
-            </p:column>
-
             <p:column filterBy="#{task.state}" styleClass="icon-row" sortBy="#{task.state}">
               <h:outputText id="taskState" styleClass="si si-lg si-#{task.stateIcon}" />
               <p:tooltip for="taskState" value="State: #{task.businessState} (#{task.state})" position="top" />
             </p:column>
 
             <p:column id="priority" filterBy="#{task.priority}" styleClass="icon-row" sortBy="#{task.priority}">
-              <h:outputText id="taskPrio" styleClass="si si-lg si-#{task.priorityIcon}" />
+              <h:outputText id="taskPrio" styleClass="si text-800 si-#{task.priorityIcon}" />
               <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
             </p:column>
 
@@ -62,13 +54,12 @@
               <jc:user user="#{task.activator}" />
             </p:column>
 
-            <p:column headerText="Start" style="text-align: center;" sortBy="#{task.startTimestamp}"
-              sortOrder="descending" responsivePriority="3" width="100">
+            <p:column headerText="Start" sortBy="#{task.startTimestamp}" sortOrder="descending" responsivePriority="3"
+              width="100">
               <jc:time id="startTime" datetime="#{task.startTimestamp}" />
             </p:column>
 
-            <p:column headerText="End" style="text-align: center;" sortBy="#{task.endTimestamp}" responsivePriority="4"
-              width="100">
+            <p:column headerText="End" sortBy="#{task.endTimestamp}" responsivePriority="4" width="100">
               <jc:time id="endTime" datetime="#{task.endTimestamp}" />
             </p:column>
 

@@ -6,11 +6,9 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginF
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static com.codeborne.selenide.Condition.readonly;
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
@@ -33,13 +31,11 @@ public class WebTestHomepageIT {
     $(byText("test _ case _ map")).shouldBe(visible).click();
     $(By.id("iFrame")).shouldBe(visible);
     openView("home.xhtml");
-    $(".last-starts-card").shouldBe(visible);
+    $(".startedProcessesCard").shouldBe(visible);
 
     // check if the data is in the containers
-    PrimeUi.table(By.id("activeTasks"))
-            .contains("Test Developer Workflow-UI Dialog 1");
-    PrimeUi.table(By.id("lastStarts"))
-            .contains("test _ case _ map");
+    PrimeUi.table(By.id("activeTasks")).contains("Test Developer Workflow-UI Dialog 1");
+    PrimeUi.table(By.id("startedProcesses")).contains("test _ case _ map");
   }
 
   @Test
@@ -48,7 +44,7 @@ public class WebTestHomepageIT {
 
     // cards should be visible when logged in
     $(".active-tasks-card").shouldBe(visible);
-    $(".last-starts-card").shouldBe(visible);
+    $(".startedProcessesCard").shouldBe(visible);
   }
 
   @Test
@@ -60,12 +56,12 @@ public class WebTestHomepageIT {
     $(byText("test _ case _ map")).shouldBe(visible).click();
     $(By.id("iFrame")).shouldBe(visible);
     openView("home.xhtml");
-    $(".last-starts-card").shouldBe(visible);
+    $(".startedProcessesCard").shouldBe(visible);
 
-    PrimeUi.table(By.id("lastStarts")).contains("test _ case _ map");
+    PrimeUi.table(By.id("startedProcesses")).contains("test _ case _ map");
 
-    $$(".last-start-element .hidden-text-ellipsis").find(text("test _ case _ map"))
-            .parent().findAll("a").last().click();
+    $(By.id("startedProcesses:0:startedProcessMenuLink")).shouldBe(visible).click();
+    $(By.id("startedProcesses:0:openProcessViewer")).shouldBe(visible).click();
     $(By.id("processViewer:processViewerDialog")).shouldBe(visible);
     $(By.id("viewerFrame")).shouldBe(visible);
     Selenide.switchTo().frame("viewerFrame");

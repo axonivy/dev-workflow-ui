@@ -17,10 +17,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <div class="card-title flex align-items-center">
-                  <i class="pr-3 si si-common-file-text"></i>
-                  <h6 class="m-0">Description</h6>
-                </div>
+                <h4 class="m-0">Description</h4>
               </div>
               <p:panelGrid id="intermediateElement" columns="2" layout="flex"
                 columnClasses="col-12 md:col-3, col-12 md:col-9">
@@ -39,10 +36,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <div class="card-title flex align-items-center">
-                  <i class="pr-3 si si-analytics-graph"></i>
-                  <h6 class="m-0">Events</h6>
-                </div>
+                <h4 class="m-0">Events</h4>
               </div>
               <p:dataTable var="event" value="#{intermediateEventDetailsIvyDevWfBean.selectedIntermediateElement.eventModel}"
                 id="eventsTable" rows="10" paginator="true" paginatorPosition="bottom"
@@ -51,7 +45,7 @@
                 <p:column headerText="ID" width="50" sortBy="#{event.id}" sortOrder="ascending" responsivePriority="3">
                   <h:outputText value="#{event.id}" />
                 </p:column>
-                <p:column headerText="State" width="30" sortBy="#{event.state}">
+                <p:column headerText="State" width="60" sortBy="#{event.state}">
                   <h:panelGroup id="eventStateIcon" styleClass="flex justify-content-center">
                     <i class="si-lg #{intermediateEventDetailsIvyDevWfBean.getEventStateIconCss(event)}" />
                   </h:panelGroup>
