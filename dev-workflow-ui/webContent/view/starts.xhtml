@@ -14,10 +14,7 @@
             selectionMode="single" widgetVar="projectStartsTable">
             <f:facet name="header">
               <div class="flex justify-content-between mb-3 pretty-search">
-                <div class="flex align-items-center">
-                  <i class="pr-3 si si-navigation-menu card-title-icon"></i>
-                  <h2 class="m-0">Processes</h2>
-                </div>
+                <h4 class="m-0">Processes</h4>
                 <div class="ui-input-icon-left filter-container">
                   <i class="pi pi-search" />
                   <p:inputText id="globalFilter" placeholder="Search"
@@ -28,7 +25,7 @@
 
             <p:ajax event="rowSelect" listener="#{processesIvyDevWfBean.startRow}" />
             <p:column width="10">
-              <h:outputText id="processStartIcon" class="#{start.icon} si-lg text-primary" />
+              <h:outputText id="processStartIcon" class="#{start.icon} si-lg text-primary vertical-align-middle" />
             </p:column>
             <p:column headerText="Process" sortBy="#{start.displayName}" filterBy="#{start.displayName}">
               <h:outputText id="startName" value="#{start.displayName}" styleClass="text-primary" />
@@ -49,14 +46,15 @@
               filterBy="#{start.category.name}">
               <h:outputText value="#{start.category.name}" />
             </p:column>
-            <p:column width="60">
+            <p:column width="80" styleClass="text-center">
               <p:commandButton actionListener="#{start.execute}" value="Start" id="processStartBtn"
                 icon="si si-controls-play" />
               <p:tooltip for="processStartBtn" position="top" value="Start '#{start.displayName}'" />
             </p:column>
-            <p:column width="20">
-              <p:commandButton styleClass="ui-button-secondary ui-button-outlined rounded-button" id="startActionsBtn"
-                icon="si si-navigation-menu-horizontal" />
+            <p:column width="30" styleClass="text-center">
+              <p:commandLink id="startActionsBtn" styleClass="text-color">
+                <i class="si si-lg si-navigation-menu-horizontal" />
+              </p:commandLink>
               <p:menu id="startsActionsMenu" overlay="true" trigger="startActionsBtn" my="right top" at="right bottom"
                 style="width: 200px">
                 <p:menuitem value="Copy to clipboard" onclick="copyToClipboard('#{start.link}')" id="copyStartLinkBtn"

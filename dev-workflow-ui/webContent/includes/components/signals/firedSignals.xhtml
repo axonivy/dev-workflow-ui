@@ -6,9 +6,6 @@
 
   <p:dataTable id="firedSignalsTable" var="signal" value="#{signalsIvyDevWfBean.signalsModel}"
     rows="10" paginator="true" paginatorAlwaysVisible="false" lazy="true" paginatorPosition="bottom">
-    <p:column styleClass="icon-row" responsivePriority="5">
-      <i class="si si-lg si-network-signal"/>
-    </p:column>
     <p:column headerText="Code" sortBy="#{signal.signalCode}" width="100">
       <h:outputText value="#{signal.signalCode}" />
     </p:column>
