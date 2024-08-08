@@ -23,15 +23,17 @@
                 </div>
                 <div>
                   <p:badge value="#{casesDetailsIvyDevWfBean.selectedCase.notes.size()}">
-                    <p:commandButton id="caseNotesBtn" styleClass="ui-button-secondary ui-button-outlined rounded-button"
+                    <p:commandButton id="caseNotesBtn"
+                      styleClass="ui-button-secondary ui-button-outlined rounded-button"
                       disabled="#{0 >= casesDetailsIvyDevWfBean.selectedCase.notes.size()}" icon="si si-notes-quill"
                       actionListener="#{notesBean.openNotesDialog(casesDetailsIvyDevWfBean.selectedCaseId)}" />
                   </p:badge>
-                  <p:tooltip for="caseNotesBtn" value="Show case notes" position="top"/>
+                  <p:tooltip for="caseNotesBtn" value="Show case notes" position="top" />
                   <p:commandButton icon="si si-delete-1" styleClass="ui-button-danger rounded-button ml-2"
                     disabled="#{not casesDetailsIvyDevWfBean.canBeDestoryed()}" id="caseDestroyBtn"
-                    actionListener="#{casesDetailsIvyDevWfBean.selectedCase.destroy}" update="@this, caseDetails, caseHierarchy" />
-                  <p:tooltip for="caseDestroyBtn" value="Destroy case" position="top"/>
+                    actionListener="#{casesDetailsIvyDevWfBean.selectedCase.destroy}"
+                    update="@this, caseDetails, caseHierarchy" />
+                  <p:tooltip for="caseDestroyBtn" value="Destroy case" position="top" />
                 </div>
               </div>
               <ui:include src="/includes/components/caseDetails/description.xhtml" />
@@ -47,7 +49,7 @@
                 </div>
                 <div class="flex">
                   <h:panelGroup layout="block" rendered="#{not empty casesDetailsIvyDevWfBean.sidesteps}">
-                    <p:commandButton value="Sidesteps" icon="si si-arrow-down-1" id="sidestepsBtn" styleClass="mr-1"/>
+                    <p:commandButton value="Sidesteps" icon="si si-arrow-down-1" id="sidestepsBtn" styleClass="mr-1" />
                     <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
                       model="#{casesDetailsIvyDevWfBean.sidestepsMenuModel}" styleClass="menu-no-icons" />
                   </h:panelGroup>
@@ -69,35 +71,37 @@
                   <i class="pr-3 si si-information-circle"></i>
                   <h6 class="m-0">Process Viewer</h6>
                 </div>
-                <p:link rendered="#{casesDetailsIvyDevWfBean.viewerAllowed}" href="#" id="openProcessViewerBtn" onclick="PF('process-viewer-dlg').show()"
-                    styleClass="flex align-items-center">
+                <p:link rendered="#{casesDetailsIvyDevWfBean.viewerAllowed}" href="#" id="openProcessViewerBtn"
+                  onclick="PF('process-viewer-dlg').show()" styleClass="flex align-items-center">
                   <i class="si si-information-circle detail-btn" />
                 </p:link>
-                <p:tooltip rendered="#{casesDetailsIvyDevWfBean.viewerAllowed}" for="openProcessViewerBtn" position="top" value="Open Process Viewer" />
+                <p:tooltip rendered="#{casesDetailsIvyDevWfBean.viewerAllowed}" for="openProcessViewerBtn"
+                  position="top" value="Open Process Viewer" />
               </div>
               <div class="height-100 flex justify-content-center align-items-center">
                 <div jsf:rendered="#{!casesDetailsIvyDevWfBean.viewerAllowed}">Current Process is hidden</div>
-                <iframe jsf:rendered="#{casesDetailsIvyDevWfBean.viewerAllowed}" id="processViewerFrame" class="process-viewer-preview" src="#{casesDetailsIvyDevWfBean.processPreviewLink}"/>
+                <iframe jsf:rendered="#{casesDetailsIvyDevWfBean.viewerAllowed}" id="processViewerFrame"
+                  class="process-viewer-preview" src="#{casesDetailsIvyDevWfBean.processPreviewLink}" />
               </div>
             </div>
           </h:panelGroup>
 
           <div class="col-12 lg:col-8">
             <div class="card">
-            <h:form id="tasksForm">
-              <div class="card-header">
-                <div class="card-title flex align-items-center">
-                  <i class="pr-3 si si-layout-bullets"></i>
-                  <h6 class="m-0">Task list</h6>
+              <h:form id="tasksForm">
+                <div class="card-header">
+                  <div class="card-title flex align-items-center">
+                    <i class="pr-3 si si-layout-bullets"></i>
+                    <h6 class="m-0">Task list</h6>
+                  </div>
+                  <h:panelGroup id="switchContainer" styleClass="inline-flex align-items-center">
+                    <h:outputText value="Show system tasks" class="mr-2" />
+                    <p:toggleSwitch id="showSystemTasksSwitch" value="#{casesDetailsIvyDevWfBean.showSystemTasks}">
+                      <p:ajax update="tasksForm:tasks" />
+                    </p:toggleSwitch>
+                  </h:panelGroup>
                 </div>
-                <h:panelGroup id="switchContainer" styleClass="inline-flex align-items-center">
-                  <h:outputText value="Show system tasks" class="mr-2" />
-                  <p:toggleSwitch id="showSystemTasksSwitch" value="#{casesDetailsIvyDevWfBean.showSystemTasks}">
-                    <p:ajax update="tasksForm:tasks" />
-                  </p:toggleSwitch>
-                </h:panelGroup>
-              </div>
-              <ui:include src="/includes/components/caseDetails/taskList.xhtml" />
+                <ui:include src="/includes/components/caseDetails/taskList.xhtml" />
               </h:form>
             </div>
           </div>
@@ -152,7 +156,8 @@
         </div>
       </div>
 
-      <jc:processViewer id="processViewer" title="#{casesDetailsIvyDevWfBean.viewerDialogTitle}" link="#{casesDetailsIvyDevWfBean.viewerLink}" />
+      <jc:processViewer id="processViewer" title="#{casesDetailsIvyDevWfBean.viewerDialogTitle}"
+        link="#{casesDetailsIvyDevWfBean.viewerLink}" />
     </ui:define>
   </ui:composition>
 </h:body>

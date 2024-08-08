@@ -3,7 +3,6 @@ package ch.ivyteam.ivy.project.workflow.webtest;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.login;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.logout;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static com.codeborne.selenide.Condition.readonly;
@@ -50,13 +49,6 @@ public class WebTestHomepageIT {
     // cards should be visible when logged in
     $(".active-tasks-card").shouldBe(visible);
     $(".last-starts-card").shouldBe(visible);
-
-    logout();
-
-    // cards should not be visible and starts should appear
-    $(".active-tasks-card").shouldNotBe(visible);
-    $(".last-starts-card").shouldNotBe(visible);
-    $(By.id("projectStarts")).shouldBe(visible);
   }
 
   @Test

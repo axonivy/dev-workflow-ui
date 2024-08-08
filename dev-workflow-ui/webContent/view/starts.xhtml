@@ -9,10 +9,73 @@
       <h:form id="startsForm" onkeypress="if (event.keyCode == 13) { return false; }">
 
         <div class="card">
-          <ui:include src="/includes/components/startsPanel.xhtml" />
+          <p:dataTable id="projectStarts" value="#{processesIvyDevWfBean.startsDataModel.startables}" var="start"
+            rows="15" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" rowKey="#{start.link}"
+            selectionMode="single" widgetVar="projectStartsTable">
+            <f:facet name="header">
+              <div class="flex justify-content-between mb-3 pretty-search">
+                <div class="flex align-items-center">
+                  <i class="pr-3 si si-navigation-menu card-title-icon"></i>
+                  <h2 class="m-0">Processes</h2>
+                </div>
+                <div class="ui-input-icon-left filter-container">
+                  <i class="pi pi-search" />
+                  <p:inputText id="globalFilter" placeholder="Search"
+                    value="#{processesIvyDevWfBean.startsDataModel.filter}" onkeyup="PF('projectStartsTable').filter()" />
+                </div>
+              </div>
+            </f:facet>
+
+            <p:ajax event="rowSelect" listener="#{processesIvyDevWfBean.startRow}" />
+            <p:column width="10">
+              <h:outputText id="processStartIcon" class="#{start.icon} si-lg text-primary" />
+            </p:column>
+            <p:column headerText="Process" sortBy="#{start.displayName}" filterBy="#{start.displayName}">
+              <h:outputText id="startName" value="#{start.displayName}" styleClass="text-primary" />
+              <div class="start-description overflow-hidden-ellipsis text-sm">
+                <h:outputText id="startDescription" value="#{start.description}" />
+                <p:tooltip for="startDescription" position="top" value="#{start.description}" styleClass="text" />
+              </div>
+            </p:column>
+            <p:column headerText="Application" width="120" sortBy="#{start.applicationName}" responsivePriority="4"
+              rendered="#{!processesIvyDevWfBean.startsDataModel.onlySingleApplication}">
+              <h:outputText value="#{start.applicationName}" />
+            </p:column>
+            <p:column headerText="Project" width="120" sortBy="#{start.projectName}" responsivePriority="4"
+              rendered="#{!processesIvyDevWfBean.startsDataModel.onlySingleProject}">
+              <h:outputText value="#{start.projectName}" />
+            </p:column>
+            <p:column headerText="Category" width="120" sortBy="#{start.category.name}" responsivePriority="3"
+              filterBy="#{start.category.name}">
+              <h:outputText value="#{start.category.name}" />
+            </p:column>
+            <p:column width="60">
+              <p:commandButton actionListener="#{start.execute}" value="Start" id="processStartBtn"
+                icon="si si-controls-play" />
+              <p:tooltip for="processStartBtn" position="top" value="Start '#{start.displayName}'" />
+            </p:column>
+            <p:column width="20">
+              <p:commandButton styleClass="ui-button-secondary ui-button-outlined rounded-button" id="startActionsBtn"
+                icon="si si-navigation-menu-horizontal" />
+              <p:menu id="startsActionsMenu" overlay="true" trigger="startActionsBtn" my="right top" at="right bottom"
+                style="width: 200px">
+                <p:menuitem value="Copy to clipboard" onclick="copyToClipboard('#{start.link}')" id="copyStartLinkBtn"
+                  icon="si si-hyperlink-3" />
+                <p:menuitem value="Open fullscreen" url="#{start.link}" id="openStartFullscreenBtn"
+                  rendered="#{start.embedInFrame}" icon="si si-expand-6" />
+                <p:menuitem id="openProcessViewer"
+                  value="#{start.isProcessStart() ? 'Open Process Viewer' : 'Open Case Map Viewer'}"
+                  oncomplete="PF('process-viewer-dlg').show()" update="startsForm:processViewer:processViewerDialog"
+                  rendered="#{start.viewerAllowed}"
+                  actionListener="#{processesIvyDevWfBean.setViewerStart(start.viewerLink)}"
+                  icon="si si-hierarchy-6 si-rotate-270" />
+              </p:menu>
+            </p:column>
+          </p:dataTable>
         </div>
 
-        <jc:processViewer id="processViewer" title="#{processesIvyDevWfBean.viewerTitle}" link="#{processesIvyDevWfBean.viewerLink}" />
+        <jc:processViewer id="processViewer" title="#{processesIvyDevWfBean.viewerTitle}"
+          link="#{processesIvyDevWfBean.viewerLink}" />
       </h:form>
     </ui:define>
   </ui:composition>
