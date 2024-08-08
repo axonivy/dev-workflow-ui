@@ -10,9 +10,47 @@
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
       <h:panelGroup layout="block" styleClass="static-message" rendered="#{!loginIvyDevWfBean.loggedIn}">
-        <p:staticMessage severity="warn" summary="Warning" detail="You need to login to access that page" id="loginMessage" />
+        <p:staticMessage severity="warn" summary="Warning" detail="You need to login to access that page"
+          id="loginMessage" />
       </h:panelGroup>
-      <ui:include src="/includes/components/userTable.xhtml"/>
+      <h:form id="loginTable">
+        <div class="card ui-fluid">
+          <p:dataTable id="users" var="user" value="#{loginTableIvyDevWfBean.users}" widgetVar="usersTable"
+            emptyMessage="No users found with given criteria" selection="#{loginTableIvyDevWfBean.currentUser}"
+            selectionMode="single" rowKey="#{user.fullname}">
+            <p:ajax event="rowSelect" listener="#{loginIvyDevWfBean.loginFromTable}" />
+            <f:facet name="header">
+              <div class="flex justify-content-between pretty-search">
+                <div class="flex align-items-center">
+                  <i class="pr-3 si si-login-3 card-title-icon"></i>
+                  <h2 class="m-0">Login</h2>
+                </div>
+                <div class="ui-input-icon-left filter-container">
+                  <i class="pi pi-search" />
+                  <p:inputText id="globalFilter" placeholder="Search" value="#{loginTableIvyDevWfBean.globalFilter}"
+                    onkeyup="PF('usersTable').filter()" />
+                </div>
+              </div>
+              <p>Click user to login</p>
+            </f:facet>
+
+            <p:column headerText="Username" filterBy="#{user.name}" sortBy="#{user.name}" sortOrder="ascending">
+              <h:outputText value="#{user.name}">
+                <i class="si si-single-neutral-actions mr-1"></i>
+              </h:outputText>
+            </p:column>
+
+            <p:column headerText="Fullname" filterBy="#{user.fullname}" sortBy="#{user.fullname}">
+              <h:outputText value="#{user.fullname}" />
+            </p:column>
+
+            <p:column headerText="Roles" filterBy="#{user.roles}" sortBy="#{user.roles}" filterStyle="display: none"
+              colspan="2">
+              <h:outputText value="#{user.roles}" />
+            </p:column>
+          </p:dataTable>
+        </div>
+      </h:form>
     </ui:define>
   </ui:composition>
 </h:body>

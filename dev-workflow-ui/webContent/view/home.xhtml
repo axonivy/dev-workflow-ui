@@ -7,6 +7,7 @@
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
       <f:event type="preRenderView" listener="#{homepageIvyDevWfBean.redirectIfNoTasksOrLastStarts}" />
+      <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotLoggedIn}" />
 
       <h:panelGroup layout="block" rendered="#{!loginIvyDevWfBean.loggedIn}"
         styleClass="ui-message ui-staticmessage ui-message-warn">
@@ -54,8 +55,8 @@
                       <p:tooltip for="openStartFullscreenBtn" value="Open start on a fullscreen page" position="top"
                         rendered="#{start.embedInFrame}" />
 
-                      <p:commandLink id="openProcessViewer" oncomplete="PF('process-viewer-dlg').show()" styleClass="ml-1"
-                        update="processViewer:processViewerDialog"
+                      <p:commandLink id="openProcessViewer" oncomplete="PF('process-viewer-dlg').show()"
+                        styleClass="ml-1" update="processViewer:processViewerDialog"
                         actionListener="#{homepageIvyDevWfBean.setViewerStart(start.viewerLink)}"
                         rendered="#{start.viewerAllowed}">
                         <i class="si si-hierarchy-6 si-rotate-270" />
@@ -82,8 +83,8 @@
                 </div>
               </div>
               <p:dataTable id="activeTasks" var="task" value="#{personalTasksIvyDevWfBean.tasksDataModel}" lazy="true"
-                rows="6" paginator="true" paginatorAlwaysVisible="false" rendered="#{homepageIvyDevWfBean.tasksSize gt 0}"
-                paginatorPosition="bottom" selectionMode="single">
+                rows="6" paginator="true" paginatorAlwaysVisible="false"
+                rendered="#{homepageIvyDevWfBean.tasksSize gt 0}" paginatorPosition="bottom" selectionMode="single">
                 <p:ajax event="rowSelect" listener="#{personalTasksIvyDevWfBean.executeTaskRow}" />
                 <p:column styleClass="icon-row" responsivePriority="4" width="0">
                   <h:outputText id="taskIcon" class="si si-lg si-task-list-edit" />
@@ -107,7 +108,7 @@
                   <jc:time id="expiryTime" datetime="#{task.expiryTimestamp}" />
                 </p:column>
                 <p:column styleClass="table-btn-1" width="5">
-                  <p:link href="#{task.detailUrl}" id="taskDetailsIcon" >
+                  <p:link href="#{task.detailUrl}" id="taskDetailsIcon">
                     <i class="si si-information-circle detail-btn" />
                     <p:tooltip for="taskDetailsIcon" value="Open task details" position="top" />
                   </p:link>
@@ -153,12 +154,12 @@
 
                 <p:column headerText="Start" style="text-align: center;" sortBy="#{case.startTimestamp}"
                   responsivePriority="2" sortOrder="descending" width="100">
-                  <jc:time id="startTime" datetime="#{case.startTimestamp}"/>
+                  <jc:time id="startTime" datetime="#{case.startTimestamp}" />
                 </p:column>
 
                 <p:column headerText="End" style="text-align: center;" sortBy="#{case.endTimestamp}"
                   responsivePriority="3" width="100">
-                  <jc:time id="endTime" datetime="#{case.endTimestamp}"/>
+                  <jc:time id="endTime" datetime="#{case.endTimestamp}" />
                 </p:column>
 
                 <p:column width="40">
@@ -176,23 +177,10 @@
             </div>
           </div>
         </h:panelGroup>
-
-        <h:panelGroup styleClass="grid" layout="block" rendered="#{!loginIvyDevWfBean.loggedIn}">
-          <div class="col-12">
-            <div class="card starts-card">
-              <div class="card-header">
-                <div class="card-title flex align-items-center">
-                  <i class="pr-3 si si-navigation-menu"></i>
-                  <h6 class="m-0">Starts</h6>
-                </div>
-              </div>
-              <ui:include src="/includes/components/startsPanel.xhtml" />
-            </div>
-          </div>
-        </h:panelGroup>
       </div>
 
-      <jc:processViewer id="processViewer" title="#{homepageIvyDevWfBean.viewerTitle}" link="#{homepageIvyDevWfBean.viewerLink}" />
+      <jc:processViewer id="processViewer" title="#{homepageIvyDevWfBean.viewerTitle}"
+        link="#{homepageIvyDevWfBean.viewerLink}" />
     </ui:define>
   </ui:composition>
 </h:body>
