@@ -68,6 +68,13 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight {
   color: var(--text-color);
 }
 
+body .ui-datatable .ui-datatable-header:has(.pretty-search) {
+  background: none;
+  border: none;
+  padding: 0;
+  font-weight: 400;
+}
+
 /* Dialog */
 .ui-dialog .ui-dialog-content .dialog-button-container .ui-button {
   float: right;

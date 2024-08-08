@@ -15,7 +15,6 @@ import ch.ivyteam.workflowui.util.ProcessModelsUtil;
 public class WebServicesBean {
 
   private List<WebServiceProcess> webServices;
-  private List<WebServiceProcess> filteredWebServices;
   private String filter;
 
   public WebServicesBean() {
@@ -26,9 +25,6 @@ public class WebServicesBean {
   }
 
   public List<WebServiceProcess> getWebServices() {
-    if (filter != null && !filter.isEmpty()) {
-      return filteredWebServices;
-    }
     return webServices;
   }
 
@@ -38,10 +34,6 @@ public class WebServicesBean {
 
   public void setFilter(String filter) {
     this.filter = filter;
-    filteredWebServices = webServices.stream()
-            .filter(ws -> ws.getName().toLowerCase().contains(filter)
-                    || ws.getProcessName().toLowerCase().contains(filter))
-            .collect(Collectors.toList());
   }
 
   public void executeRow(SelectEvent<WebServiceProcess> event) {

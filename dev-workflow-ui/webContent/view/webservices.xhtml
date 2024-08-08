@@ -9,32 +9,34 @@
       <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotAdmin}" />
 
       <h:form id="webServicesForm">
+        <p:growl id="growl" showDetail="true" />
         <div class="card">
-        <div class="flex justify-content-between mb-3">
-            <div class="flex align-items-center">
-              <i class="pr-3 si si-network-arrow card-title-icon"></i>
-              <h2 class="m-0">Web Service Processes</h2>
-            </div>
-            <div class="ui-input-icon-left filter-container">
-              <i class="pi pi-search" />
-              <p:inputText id="globalFilter" placeholder="Search" value="#{webServicesBean.filter}">
-                <p:ajax event="keyup" update="webServicesTable"/>
-              </p:inputText>
-            </div>
-          </div>
 
-          <p:growl id="growl" showDetail="true" />
-          <p:dataTable id="webServicesTable" var="webservice" rows="5" paginator="true" value="#{webServicesBean.webServices}"
-            paginatorPosition="bottom" paginatorAlwaysVisible="false" selectionMode="single" rowKey="#{webservice.link}">
+          <p:dataTable id="webServices" var="webservice" rows="5" paginator="true"
+            value="#{webServicesBean.webServices}" paginatorPosition="bottom" paginatorAlwaysVisible="false"
+            selectionMode="single" rowKey="#{webservice.link}" widgetVar="webServicesTable">
             <p:ajax event="rowSelect" listener="#{webServicesBean.executeRow}" />
+            <f:facet name="header">
+              <div class="flex justify-content-between mb-3 pretty-search">
+                <div class="flex align-items-center">
+                  <i class="pr-3 si si-network-arrow card-title-icon"></i>
+                  <h2 class="m-0">Web Service Processes</h2>
+                </div>
+                <div class="ui-input-icon-left filter-container">
+                  <i class="pi pi-search" />
+                  <p:inputText id="globalFilter" placeholder="Search" value="#{webServicesBean.filter}"
+                    onkeyup="PF('webServicesTable').filter()"/>
+                </div>
+              </div>
+            </f:facet>
 
             <p:column width="10">
               <i class="si si-lg si-network-arrow" />
             </p:column>
-            <p:column headerText="Name" sortBy="#{webservice.name}">
+            <p:column headerText="Name" sortBy="#{webservice.name}" filterBy="#{webservice.name}">
               <h:outputText value="#{webservice.name}" />
             </p:column>
-            <p:column headerText="Process Name" sortBy="#{webservice.processName}">
+            <p:column headerText="Process Name" sortBy="#{webservice.processName}" filterBy="#{webservice.processName}">
               <h:outputText value="#{webservice.processName}" />
             </p:column>
             <p:column headerText="Link" sortBy="#{webservice.link}" responsivePriority="4">

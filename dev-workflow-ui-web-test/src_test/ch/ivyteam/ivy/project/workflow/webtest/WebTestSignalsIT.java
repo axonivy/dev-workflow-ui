@@ -48,7 +48,7 @@ public class WebTestSignalsIT {
 
   @Test
   public void testSendSignals() {
-    $(By.id("signalForm:signalCodeInput_input")).sendKeys("Web Test Signal");
+    $(By.id("signalForm:signalCodeInput_input")).setValue("Web Test Signal");
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
     $(By.id("signalForm:growl_container")).shouldBe(visible);
 
@@ -60,7 +60,7 @@ public class WebTestSignalsIT {
   public void testSignalAutocomplete() {
     $(By.id("signalForm:signalCodeInput")).findElement(By.tagName("button")).click();
 
-    $(By.id("signalForm:signalCodeInput_input")).sendKeys("signal");
+    $(By.id("signalForm:signalCodeInput_input")).setValue("signal");
     $(By.id("signalForm:signalCodeInput_panel")).shouldNotHave(text("airport"));
     $(By.id("signalForm:signalCodeInput_panel")).findElement(By.className("ui-autocomplete-item")).click();
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
@@ -74,7 +74,7 @@ public class WebTestSignalsIT {
     $(By.id("signalForm")).shouldBe(visible);
     $(By.id("signalForm:signalCodeInput")).findElement(By.tagName("button")).click();
 
-    $(By.id("signalForm:signalCodeInput_input")).sendKeys("test:signal:complete");
+    $(By.id("signalForm:signalCodeInput_input")).setValue("test:signal:complete");
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
 
     Table signalsTable = PrimeUi.table(By.id("firedSignalsTable"));
@@ -96,7 +96,7 @@ public class WebTestSignalsIT {
     openView("signals.xhtml");
     boundaryTable.valueAtShouldBe(0, 1, text("test:data:signal"));
 
-    $(By.id("signalForm:signalCodeInput_input")).sendKeys("test:data:signal");
+    $(By.id("signalForm:signalCodeInput_input")).setValue("test:data:signal");
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
     boundaryTable.valueAtShouldBe(0, 0, text("No records found."));
   }

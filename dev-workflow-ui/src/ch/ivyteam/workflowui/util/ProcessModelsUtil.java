@@ -40,13 +40,14 @@ public class ProcessModelsUtil {
 
   public static List<StartableModel> getDeployedStartables() {
     return getReleasedWorkflowPMVs()
-      .flatMap(pmv -> pmv.getStartables(ISession.current()).stream())
-      .map(s -> createCaseMapOrProcessStartable(s))
-      .sorted(Comparator.comparing((StartableModel s) -> s.getCategory().getName(),
-          Comparator.nullsLast(Comparator.comparing(String::isEmpty))
-              .thenComparing(String::compareTo))
-          .thenComparing(StartableModel::getDisplayName))
-      .collect(Collectors.toList());
+            .flatMap(pmv -> pmv.getStartables(ISession.current()).stream())
+            .map(s -> createCaseMapOrProcessStartable(s))
+            .sorted(Comparator.comparing((StartableModel s) -> s.getProjectName())
+                    .thenComparing(s -> s.getCategory().getName(),
+                            Comparator.nullsLast(Comparator.comparing(String::isEmpty))
+                                    .thenComparing(String::compareTo))
+                    .thenComparing(StartableModel::getDisplayName))
+            .collect(Collectors.toList());
   }
 
   private static StartableModel createCaseMapOrProcessStartable(IWebStartable startable) {
