@@ -4,14 +4,31 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://xmlns.jcp.org/jsf/composite/components">
 
-  <p:dataTable id="cases" var="case" value="#{casesIvyDevWfBean.casesDataModel}" widgetVar="casesTable" styleClass="ui-fluid"
-    emptyMessage="No Cases found with given criteria" paginatorPosition="bottom" rows="10" lazy="true" paginator="true"
-    paginatorAlwaysVisible="false" selectionMode="single">
+  <p:dataTable id="cases" var="case" value="#{casesIvyDevWfBean.casesDataModel}" widgetVar="casesTable"
+    styleClass="ui-fluid" emptyMessage="No Cases found with given criteria" paginatorPosition="bottom" rows="10"
+    lazy="true" paginator="true" paginatorAlwaysVisible="false" selectionMode="single">
     <p:ajax event="rowSelect" listener="#{casesIvyDevWfBean.redirectToCaseRow}" />
     <f:facet name="header">
-      <div class="ui-input-icon-left filter-container">
-        <i class="pi pi-search"/>
-        <p:inputText id="globalFilter" onkeyup="PF('casesTable').filter()" placeholder="Search" value="#{casesIvyDevWfBean.casesDataModel.filter}" />
+      <div class="flex justify-content-between mb-3 pretty-search">
+        <div class="flex align-items-center">
+          <i class="pr-3 si si-task-list-approve card-title-icon" />
+          <h2 class="m-0">Cases</h2>
+        </div>
+        <h:panelGroup id="showAllCasesSwitch_container" styleClass="ml-auto inline-flex align-items-center"
+          layout="block" rendered="#{adminIvyDevWfBean.isWorkflowAdmin()}">
+          <h:outputText value="Show all" styleClass="mr-2" />
+          <p:toggleSwitch id="showAllCasesSwitch" value="#{casesIvyDevWfBean.casesDataModel.showAll}"
+            disabled="#{!adminIvyDevWfBean.isWorkflowAdmin()}">
+            <p:ajax update="cases" />
+          </p:toggleSwitch>
+        </h:panelGroup>
+        <p:tooltip for="showAllCasesSwitch_container" position="top"
+          value="If enabled shows all cases, even the ones the user is not involved in" />
+        <div class="ui-input-icon-left filter-container ml-3">
+          <i class="pi pi-search" />
+          <p:inputText id="globalFilter" value="#{casesIvyDevWfBean.casesDataModel.filter}"
+            onkeyup="PF('casesTable').filter()" placeholder="Search" />
+        </div>
       </div>
     </f:facet>
 
@@ -37,19 +54,19 @@
       <jc:user user="#{case.creatorUser}" />
     </p:column>
 
-    <p:column headerText="Start" style="text-align: center;" sortBy="#{case.startTimestamp}"
-      sortOrder="descending" responsivePriority="3" width="90">
+    <p:column headerText="Start" style="text-align: center;" sortBy="#{case.startTimestamp}" sortOrder="descending"
+      responsivePriority="3" width="90">
       <jc:time id="startTime" datetime="#{case.startTimestamp}" />
     </p:column>
 
-    <p:column headerText="End" style="text-align: center;" sortBy="#{case.endTimestamp}"
-      responsivePriority="4" width="90">
+    <p:column headerText="End" style="text-align: center;" sortBy="#{case.endTimestamp}" responsivePriority="4"
+      width="90">
       <jc:time id="endTime" datetime="#{case.endTimestamp}" />
     </p:column>
 
     <p:column styleClass="table-btn-1" width="10">
-      <p:link href="case.xhtml?id=#{case.uuid()}" >
-        <i class="si si-information-circle detail-btn"/>
+      <p:link href="case.xhtml?id=#{case.uuid()}">
+        <i class="si si-information-circle detail-btn" />
       </p:link>
     </p:column>
   </p:dataTable>

@@ -30,7 +30,7 @@ public class WebTestHomepageIT {
 
     // start process to create test data
     openView("starts.xhtml");
-    $(By.id("startsForm:globalFilter")).setValue("case");
+    $(By.id("startsForm:projectStarts:globalFilter")).setValue("case");
     $(byText("test _ case _ map")).shouldBe(visible).click();
     $(By.id("iFrame")).shouldBe(visible);
     openView("home.xhtml");
@@ -64,7 +64,7 @@ public class WebTestHomepageIT {
     loginDeveloper();
 
     openView("starts.xhtml");
-    $(By.id("startsForm:globalFilter")).setValue("case");
+    $(By.id("startsForm:projectStarts:globalFilter")).setValue("case");
     $(byText("test _ case _ map")).shouldBe(visible).click();
     $(By.id("iFrame")).shouldBe(visible);
     openView("home.xhtml");

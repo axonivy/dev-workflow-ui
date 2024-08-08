@@ -34,7 +34,7 @@ public class WebTestGLSPProcessViewerIT {
   public void testOpenViewer() {
     loginDeveloper();
     openView("starts.xhtml");
-    $(By.id("startsForm:globalFilter")).sendKeys("testdata/testdata.ivp");
+    $(By.id("startsForm:projectStarts:globalFilter")).setValue("testdata/testdata.ivp");
     $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
     $(By.id("startsForm:projectStarts:0:openProcessViewer")).shouldBe(visible).click();
 
@@ -51,7 +51,7 @@ public class WebTestGLSPProcessViewerIT {
   public void testCaseMapUiViewer() {
     loginDeveloper();
     openView("starts.xhtml");
-    $(By.id("startsForm:globalFilter")).sendKeys("test _ case _ map");
+    $(By.id("startsForm:projectStarts:globalFilter")).setValue("test _ case _ map");
     $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
     $(By.id("startsForm:projectStarts:0:openProcessViewer")).shouldBe(visible).click();
     $(By.id("startsForm:processViewer:processViewerDialog")).shouldBe(visible);

@@ -58,13 +58,11 @@ class WebTestProfileIT {
   void fullName() {
     var fullName = $("#profileForm\\:fullName");
     fullName.shouldBe(exactValue("testuser"));
-    fullName.clear();
-    fullName.sendKeys("fullname for test");
+    fullName.setValue("fullname for test");
     save();
 
     fullName.shouldBe(exactValue("fullname for test"));
-    fullName.clear();
-    fullName.sendKeys("testuser");
+    fullName.setValue("testuser");
     save();
 
     fullName.shouldBe(exactValue("testuser"));

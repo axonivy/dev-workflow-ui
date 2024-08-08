@@ -58,11 +58,10 @@ public class WebTestProcessViewerPermissionIT {
   @Test
   public void starts() {
     openView("starts.xhtml");
-    $(By.id("startsForm:globalFilter")).sendKeys("/testdata.ivp");
+    $(By.id("startsForm:projectStarts:globalFilter")).setValue("/testdata.ivp");
     $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
     $(By.id("startsForm:projectStarts:0:openProcessViewer")).shouldBe(visible);
-    $(By.id("startsForm:globalFilter")).clear();
-    $(By.id("startsForm:globalFilter")).sendKeys("TestViewPermission");
+    $(By.id("startsForm:projectStarts:globalFilter")).setValue("TestViewPermission");
     $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
     $(By.id("startsForm:projectStarts:0:openProcessViewer")).shouldNotBe(visible);
   }

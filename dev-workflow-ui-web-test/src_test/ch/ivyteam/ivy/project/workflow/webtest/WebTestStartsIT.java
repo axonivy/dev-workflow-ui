@@ -41,7 +41,7 @@ public class WebTestStartsIT {
     openView("starts.xhtml");
     $(By.id("startsForm:projectStarts")).shouldBe(visible);
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui"));
-    $(By.id("startsForm:globalFilter")).sendKeys("makeAdmin");
+    $(By.id("startsForm:projectStarts:globalFilter")).setValue("makeAdmin");
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui-test-data"));
     $(By.id("startsForm:projectStarts")).shouldNotHave(exactText("workflow-ui"));
   }
@@ -49,14 +49,14 @@ public class WebTestStartsIT {
   @Test
   public void testExecuteStart() {
     openView("starts.xhtml");
-    $(By.id("startsForm:globalFilter")).sendKeys("startTestDialog1");
+    $(By.id("startsForm:projectStarts:globalFilter")).setValue("startTestDialog1");
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui-test-data"));
     $(By.id("startsForm:projectStarts:0:processStartBtn")).shouldBe(visible).click();
     $(By.id("iFrame")).shouldBe(visible);
 
     Selenide.switchTo().frame("iFrame");
     $(By.id("testDialogTitle")).shouldBe(visible);
-    $(By.id("form:testInput")).sendKeys("test input");
+    $(By.id("form:testInput")).setValue("test input");
     $(By.id("form:testSelectOneMenu")).shouldBe(visible).click();
     $(By.id("form:testSelectOneMenu_2")).shouldBe(visible).click();
     $(By.id("form:proceed")).shouldBe(visible).click();
@@ -66,7 +66,7 @@ public class WebTestStartsIT {
   @Test
   public void startNotEmbedInFrame() {
     openView("starts.xhtml");
-    $(By.id("startsForm:globalFilter")).sendKeys("embed in frame");
+    $(By.id("startsForm:projectStarts:globalFilter")).setValue("embed in frame");
     // open in fullscreen link icon shouldn't be visible
     $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
     $(By.id("startsForm:projectStarts:0:openStartFullscreenBtn")).shouldNotBe(visible);
@@ -84,7 +84,7 @@ public class WebTestStartsIT {
     if ($(By.id("iFrame")).is(visible)) {
       Selenide.switchTo().frame("iFrame");
     }
-    $(By.id("form:testInput")).sendKeys("test input");
+    $(By.id("form:testInput")).setValue("test input");
     $(By.id("form:testSelectOneMenu")).shouldBe(visible).click();
     $(By.id("form:testSelectOneMenu_1")).shouldBe(visible).click();
   }
@@ -92,8 +92,8 @@ public class WebTestStartsIT {
   @Test
   public void testWebservicesVisible() {
     openView("webservices.xhtml");
-    $(By.id("webServicesForm:globalFilter")).sendKeys("testservice");
-    $(By.id("webServicesForm:webServicesTable")).shouldHave(text("TestService"));
+    $(By.id("webServicesForm:webServices:globalFilter")).setValue("testservice");
+    $(By.id("webServicesForm:webServices")).shouldHave(text("TestService"));
   }
 
   @Test
@@ -101,7 +101,7 @@ public class WebTestStartsIT {
     openView("starts.xhtml");
     $(By.id("startsForm:projectStarts")).shouldBe(visible);
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui"));
-    $(By.id("startsForm:globalFilter")).sendKeys("testData");
+    $(By.id("startsForm:projectStarts:globalFilter")).setValue("testData");
     $(By.id("startsForm:projectStarts")).shouldHave(text("workflow-ui-test-data"));
     $(byText("TestData/TestData.ivp")).shouldBe(visible).click();
 
@@ -124,7 +124,7 @@ public class WebTestStartsIT {
   @Test
   public void testExecuteOnFullscreenPage() {
     openView("starts.xhtml");
-    $(By.id("startsForm:globalFilter")).sendKeys("startTestDialog1");
+    $(By.id("startsForm:projectStarts:globalFilter")).setValue("startTestDialog1");
     $(byText("TestData/startTestDialog2.ivp")).shouldNotBe(visible);
     $(byText("TestData/startTestDialog1.ivp")).shouldBe(visible);
     $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
@@ -137,7 +137,7 @@ public class WebTestStartsIT {
   @Test
   public void testFrameHeaderBarSidestep() {
     openView("starts.xhtml");
-    $(By.id("startsForm:globalFilter")).sendKeys("test _ case _ map");
+    $(By.id("startsForm:projectStarts:globalFilter")).setValue("test _ case _ map");
     $(byText("test _ case _ map")).shouldBe(visible).click();
     $(By.id("iFrameForm:frameTaskName")).shouldHave(text("Test Developer Workflow-UI Dialog 1"));
     $(By.id("iFrameForm:sidestepsBtn")).shouldBe(visible).click();
@@ -152,9 +152,9 @@ public class WebTestStartsIT {
   @Test
   public void testStartableIcons() {
     openView("starts.xhtml");
-    $(By.id("startsForm:globalFilter")).setValue("makeAdminUser.ivp");
+    $(By.id("startsForm:projectStarts:globalFilter")).setValue("makeAdminUser.ivp");
     $(By.id("startsForm:projectStarts:0:processStartIcon")).shouldBe(visible).shouldHave(cssClass("si-controls-play"));
-    $(By.id("startsForm:globalFilter")).setValue("HomePageTestData.ivp");
+    $(By.id("startsForm:projectStarts:globalFilter")).setValue("HomePageTestData.ivp");
     $(By.id("startsForm:projectStarts:0:processStartIcon")).shouldBe(visible).shouldHave(cssClass("si-house-1"));
   }
 }

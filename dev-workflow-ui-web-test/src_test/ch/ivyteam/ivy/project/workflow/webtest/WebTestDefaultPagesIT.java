@@ -23,7 +23,7 @@ public class WebTestDefaultPagesIT {
   void beforeEach() {
     loginDeveloper();
     openView("starts.xhtml");
-    $(By.id("startsForm:globalFilter")).sendKeys("testDefaultPages");
+    $(By.id("startsForm:projectStarts:globalFilter")).setValue("testDefaultPages");
     $(By.id("startsForm:projectStarts")).shouldHave(text("dev-workflow-ui-test-data"));
     $(byText("TestData/testDefaultPages.ivp")).shouldBe(visible).click();
     $(By.id("iFrame")).shouldBe(visible);
