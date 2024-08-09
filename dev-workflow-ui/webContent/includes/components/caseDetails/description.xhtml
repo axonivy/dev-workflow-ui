@@ -23,9 +23,7 @@
     <jc:user user="#{case.creatorUser}" id="creatorUser" />
 
     <h:outputText value="State" />
-    <h:panelGroup layout="block" styleClass="flex align-items-center">
-      <jc:stateBadge state="#{stateBadgeBean.toBadgeModel(case.businessState)}" />
-    </h:panelGroup>
+    <jc:stateBadge state="#{case.businessState}" />
 
     <h:outputText value="Category" />
     <h:outputText value="#{case.category.name}" id="category" />

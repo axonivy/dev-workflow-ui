@@ -46,10 +46,6 @@ a > i.detail-btn {
 .table-header-none thead {
   display: none;
 }
-.ui-datatable .icon-row {
-  width: 20px;
-  text-align: center;
-}
 .ui-datatable .table-btn-1 {
   width: 40px;
   text-align: center;
@@ -89,7 +85,8 @@ body .ui-datatable .ui-datatable-header:has(.pretty-search) {
   font-size: 12px;
   letter-spacing: 0.3px;
 }
-.state-destroyed {
+.state-destroyed,
+.state-error {
   background: #FCE8E8;
   color: #8C0D11;
 }
@@ -101,7 +98,7 @@ body .ui-datatable .ui-datatable-header:has(.pretty-search) {
   background: #FFF1E6;
   color: #9C4600;
 }
-.state-closed {
+.state-delayed {
   background: #F3F3F3;
   color: #1B1B1B;
 }
@@ -292,6 +289,10 @@ body .notification-scroll>.ui-datascroller-content::-webkit-scrollbar {
 /* Freya adjustments */
 body .ui-datatable .ui-datatable-data > tr > td {
   padding: 0.5rem;
+}
+body .ui-datatable .ui-datatable-data > tr > td:has(> .state-badge:only-child),
+body .ui-datatable .ui-datatable-data > tr > td.center-table-cell {
+  text-align: center;
 }
 
 body .ui-datatable thead th,

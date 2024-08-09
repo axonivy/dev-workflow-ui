@@ -75,7 +75,7 @@
                 rows="6" paginator="true" paginatorAlwaysVisible="false"
                 rendered="#{homepageIvyDevWfBean.tasksSize gt 0}" paginatorPosition="bottom" selectionMode="single">
                 <p:ajax event="rowSelect" listener="#{personalTasksIvyDevWfBean.executeTaskRow}" />
-                <p:column headerText="Prio" styleClass="icon-row" sortBy="#{task.priority}" width="30">
+                <p:column headerText="Prio" styleClass="center-table-cell" sortBy="#{task.priority}" width="30">
                   <h:outputText id="taskPrio" styleClass="si text-800 si-#{task.priorityIcon}" />
                   <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
                 </p:column>
@@ -116,9 +116,9 @@
                 rows="6" lazy="true" paginator="true" paginatorAlwaysVisible="false" selectionMode="single">
                 <p:ajax event="rowSelect" listener="#{casesIvyDevWfBean.redirectToCaseRow}" />
 
-                <p:column headerText="State" filterBy="#{case.businessState}" sortBy="#{case.businessState}" width="60">
+                <p:column headerText="State" filterBy="#{case.businessState}" sortBy="#{case.businessState}"
+                  width="60">
                   <jc:stateBadge id="caseState" state="#{case.businessState}"/>
-                  <p:tooltip for="caseState" value="State: #{case.businessState} (#{case.state})" position="top" />
                 </p:column>
 
                 <p:column headerText="Name" filterBy="#{case.getName(case)}" sortBy="#{case.name}">

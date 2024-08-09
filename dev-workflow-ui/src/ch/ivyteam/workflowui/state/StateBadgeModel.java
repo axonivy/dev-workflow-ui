@@ -1,9 +1,9 @@
 package ch.ivyteam.workflowui.state;
 
 public class StateBadgeModel {
-  private final String cssClass;
-  private final String name;
 
+  private final String name;
+  private final String cssClass;
 
   public StateBadgeModel(String state) {
     this.name = state.toLowerCase();

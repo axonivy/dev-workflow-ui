@@ -3,12 +3,12 @@
   xmlns:cc="http://xmlns.jcp.org/jsf/composite" xmlns:ic="http://ivyteam.ch/jsf/component"
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
 <cc:interface>
-  <cc:attribute name="state" />
+  <cc:attribute name="state"/>
 </cc:interface>
 
 <cc:implementation>
   <ui:param name="state" value="#{stateBadgeBean.toStateBadgeModel(cc.attrs.state.toString())}" />
-  <h:panelGroup styleClass="state-badge #{state.cssClass}">
+  <h:panelGroup id="stateBadge" styleClass="state-badge #{state.cssClass}">
     <h:outputText id="stateName" value="#{state.name}" />
   </h:panelGroup>
 </cc:implementation>

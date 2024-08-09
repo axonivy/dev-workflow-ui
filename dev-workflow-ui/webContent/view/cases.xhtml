@@ -33,9 +33,8 @@
               </div>
             </f:facet>
 
-            <p:column filterBy="#{case.state}" styleClass="icon-row" sortBy="#{case.state}">
-              <jc:stateBadge id="caseState" state="#{stateBadgeBean.toBadgeModel(case.businessState)}" />
-              <p:tooltip for="caseState" value="State: #{case.businessState} (#{case.state})" position="top" />
+            <p:column headerText="State" filterBy="#{case.businessState}" sortBy="#{case.businessState}" width="70">
+              <jc:stateBadge id="caseState" state="#{case.businessState}" />
             </p:column>
 
             <p:column headerText="Name" filterBy="#{case.getName(case)}" sortBy="#{case.name}" responsivePriority="1">

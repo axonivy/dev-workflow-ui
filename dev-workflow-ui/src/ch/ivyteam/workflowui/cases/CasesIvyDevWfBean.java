@@ -6,7 +6,6 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.event.SelectEvent;
 
 import ch.ivyteam.ivy.workflow.ICase;
-import ch.ivyteam.ivy.workflow.caze.CaseBusinessState;
 import ch.ivyteam.workflowui.util.CaseUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 
