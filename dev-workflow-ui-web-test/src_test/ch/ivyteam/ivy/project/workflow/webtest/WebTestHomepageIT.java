@@ -30,6 +30,15 @@ public class WebTestHomepageIT {
     $(By.id("startsForm:projectStarts:globalFilter")).setValue("case");
     $(byText("test _ case _ map")).shouldBe(visible).click();
     $(By.id("iFrame")).shouldBe(visible);
+    openView("starts.xhtml");
+    $(By.id("startsForm:projectStarts:globalFilter")).setValue("testdialog1");
+    $(byText("TestData/startTestDialog1.ivp")).shouldBe(visible).click();
+    $(By.id("iFrame")).shouldBe(visible);
+    Selenide.switchTo().frame("iFrame");
+    $(By.id("form:proceed")).shouldBe(visible).click();
+    Selenide.switchTo().defaultContent();
+    $(By.id("startsForm:projectStarts")).shouldBe(visible);
+
     openView("home.xhtml");
     $(".startedProcessesCard").shouldBe(visible);
 
@@ -60,9 +69,11 @@ public class WebTestHomepageIT {
 
     PrimeUi.table(By.id("startedProcesses")).contains("test _ case _ map");
 
-    $(By.id("startedProcesses:0:startedProcessMenuLink")).shouldBe(visible).click();
+    var caseMapeStartEntry = $("[data-rk='test _ case _ map']").shouldBe(visible);
+    caseMapeStartEntry.$("a[id='startedProcesses:0:startedProcessMenuLink']").shouldBe(visible).click();
     $(By.id("startedProcesses:0:openProcessViewer")).shouldBe(visible).click();
     $(By.id("processViewer:processViewerDialog")).shouldBe(visible);
+
     $(By.id("viewerFrame")).shouldBe(visible);
     Selenide.switchTo().frame("viewerFrame");
     $(By.id("name-id")).shouldBe(readonly);
