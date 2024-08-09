@@ -7,13 +7,13 @@ import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.SelectEvent;
 
-import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.workflowui.cases.StartedCasesDataModel;
 import ch.ivyteam.workflowui.starts.StartableModel;
+import ch.ivyteam.workflowui.tasks.PersonalTasksDataModel;
 import ch.ivyteam.workflowui.tasks.TasksDataModel;
 import ch.ivyteam.workflowui.util.LastSessionStarts;
-import ch.ivyteam.workflowui.util.RedirectUtil;
+import ch.ivyteam.workflowui.util.TaskUtil;
 import ch.ivyteam.workflowui.util.ViewerUtil;
 
 @ManagedBean
@@ -26,13 +26,17 @@ public class HomepageIvyDevWfBean {
   private String viewerLink;
 
   public HomepageIvyDevWfBean() {
-    tasksDataModel = new TasksDataModel();
+    tasksDataModel = new PersonalTasksDataModel();
     startedCasesDataModel = new StartedCasesDataModel();
     lastStarts = LastSessionStarts.current().getAll();
   }
 
   public TasksDataModel getTasksDataModel() {
     return tasksDataModel;
+  }
+
+  public void executeTaskRow(SelectEvent<?> event) {
+    TaskUtil.executeTaskRow(event);
   }
 
   public Set<StartableModel> getLastStarts() {
