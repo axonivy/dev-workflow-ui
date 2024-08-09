@@ -10,7 +10,7 @@
     <p:ajax event="rowSelect" listener="#{tasksIvyDevWfBean.displayTaskRow}" update="@form" />
 
     <p:column headerText="State" filterBy="#{task.businessState}" width="70">
-      <jc:stateBadge state="#{task.businessState}"/>
+      <jc:stateBadge id="taskState" state="#{task.businessState}"/>
     </p:column>
 
     <p:column headerText="Prio" id="priority" filterBy="#{task.priority}"

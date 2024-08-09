@@ -23,7 +23,7 @@
     <jc:user user="#{case.creatorUser}" id="creatorUser" />
 
     <h:outputText value="State" />
-    <jc:stateBadge state="#{case.businessState}" />
+    <jc:stateBadge id="caseState" state="#{case.businessState}" />
 
     <h:outputText value="Category" />
     <h:outputText value="#{case.category.name}" id="category" />

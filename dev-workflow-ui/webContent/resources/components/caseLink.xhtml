@@ -10,9 +10,14 @@
 <cc:implementation>
   <h:link styleClass="case-link flex align-items-center" outcome="case">
     <f:param name="id" value="#{cc.attrs.case.uuid()}"/>
-    <jc:stateBadge id="caseState" state="#{cc.attrs.case.businessState}" />
+    <i class="si si-task-list-approve" />
     <h:outputText id="caseLink" value="#{casesIvyDevWfBean.getName(cc.attrs.case)}" styleClass="ml-2"/>
-    <p:tooltip for="caseLink" value="Case #{cc.attrs.case.uuid()}" position="top"/>
+    <p:tooltip for="caseLink" position="top">
+      <h:panelGroup layout="block" styleClass="py-2">
+        <h:outputText value="ID: #{cc.attrs.case.uuid()}"/><br/>
+        State: <jc:stateBadge id="caseState" state="#{cc.attrs.case.businessState}"/>
+      </h:panelGroup>
+    </p:tooltip>
   </h:link>
 </cc:implementation>
 </html>
