@@ -26,18 +26,6 @@ public class TaskUtil {
     return tasks.stream().map(TaskModel::new).collect(Collectors.toList());
   }
 
-  public static String getStateIcon(TaskBusinessState state) {
-    return switch (state) {
-      case OPEN -> "controls-play task-state-open";
-      case IN_PROGRESS -> "hourglass task-state-in-progress";
-      case DONE -> "check-circle-1 task-state-done";
-      case DESTROYED -> "alert-circle task-state-destroyed";
-      case DELAYED -> "alarm-bell-timer task-state-delayed";
-      case ERROR -> "mood-warning task-state-failed";
-      default -> "synchronize-arrows task-state-system";
-    };
-  }
-
   public static String getPriorityIcon(ITask task) {
     return switch (task.getPriority()) {
       case EXCEPTION -> "alert-circle";

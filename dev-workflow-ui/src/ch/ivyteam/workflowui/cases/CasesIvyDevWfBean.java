@@ -29,15 +29,6 @@ public class CasesIvyDevWfBean {
     return CaseUtil.getPrettyName(icase);
   }
 
-  public String getStateIcon(CaseBusinessState caseState) {
-    return switch (caseState) {
-      case OPEN -> "hourglass case-state-in-progress";
-      case DONE -> "check-circle-1 case-state-done";
-      case DESTROYED -> "alert-circle case-state-destroyed";
-      default -> "synchronize-arrows";
-    };
-  }
-
   public void redirectToCaseRow(SelectEvent<?> event) {
     var object = event.getObject();
     if (object instanceof ICase caze) {

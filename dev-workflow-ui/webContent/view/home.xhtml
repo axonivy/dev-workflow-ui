@@ -116,9 +116,8 @@
                 rows="6" lazy="true" paginator="true" paginatorAlwaysVisible="false" selectionMode="single">
                 <p:ajax event="rowSelect" listener="#{casesIvyDevWfBean.redirectToCaseRow}" />
 
-                <p:column filterBy="#{case.state}" styleClass="icon-row" sortBy="#{case.state}">
-                  <h:outputText id="caseState" styleClass="si si-#{casesIvyDevWfBean.getStateIcon(case.businessState)}"
-                    style="font-size: 1.4rem" />
+                <p:column headerText="State" filterBy="#{case.businessState}" sortBy="#{case.businessState}" width="60">
+                  <jc:stateBadge id="caseState" state="#{case.businessState}"/>
                   <p:tooltip for="caseState" value="State: #{case.businessState} (#{case.state})" position="top" />
                 </p:column>
 

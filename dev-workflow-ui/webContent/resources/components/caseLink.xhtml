@@ -9,8 +9,7 @@
 <cc:implementation>
   <h:link styleClass="case-link flex align-items-center" outcome="case">
     <f:param name="id" value="#{cc.attrs.case.uuid()}"/>
-    <i class="si si-task-list-approve mr-1" />
-    <h:outputText id="caseState" styleClass="si si-#{casesIvyDevWfBean.getStateIcon(cc.attrs.case.getBusinessState())} mr-1"/>
+    <jc:stateBadge id="caseState" state="#{stateBadgeBean.toBadgeModel(cc.attrs.case.businessState)}" />
     <p:tooltip for="caseState" value="State: #{cc.attrs.case.businessState} (#{cc.attrs.case.state})" position="top"/>
     <h:outputText id="caseLink" value="#{casesIvyDevWfBean.getName(cc.attrs.case)}" />
     <p:tooltip for="caseLink" value="Case #{cc.attrs.case.uuid()}" position="top"/>

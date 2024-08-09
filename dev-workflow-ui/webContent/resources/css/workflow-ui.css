@@ -81,22 +81,35 @@ body .ui-datatable .ui-datatable-header:has(.pretty-search) {
   margin-left: 0.5rem;
 }
 
-/* States */
-.task-state-open {
-  color: var(--primary-color);
+/* State Badge */
+.state-badge {
+  border-radius: 4px;
+  padding: 0.25em 0.5rem;
+  text-transform: capitalize;
+  font-size: 12px;
+  letter-spacing: 0.3px;
 }
-.task-state-done, .case-state-done {
-  color: #2aa483;
+.state-destroyed {
+  background: #FCE8E8;
+  color: #8C0D11;
 }
-.task-state-reserved, .task-state-system {
-  color: var(--text-color);
+.state-done {
+  background: #EDF9F0;
+  color: #2B7841;
 }
-.task-state-destroyed, .task-state-failed, .case-state-destroyed {
-  color: #d23636;
+.state-in_progress {
+  background: #FFF1E6;
+  color: #9C4600;
 }
-.task-state-waiting, .task-state-in-progress, .case-state-in-progress {
-  color: #ffce29;
+.state-closed {
+  background: #F3F3F3;
+  color: #1B1B1B;
 }
+.state-open {
+  background: #E6F1F5;
+  color: #00445C;
+}
+
 body .custom-accordion.ui-accordion .ui-accordion-header,
 body .custom-accordion.ui-accordion .ui-accordion-content {
   border: 0px;
@@ -193,12 +206,6 @@ body .custom-accordion.ui-accordion .ui-accordion-header:first-child {
   height: 20px;
   width: 20px;
   border-radius: 50%;
-}
-.case-state-finished {
-  color: var(--success-color);
-}
-.case-state-running {
-  color: var(--primary-color);
 }
 .case-map-column {
   display: flex;

@@ -35,7 +35,6 @@ public class TaskModel {
   private final String priorityIcon;
   private final TaskBusinessState businessState;
   private final TaskState state;
-  private final String stateIcon;
   private final IBusinessCase businessCase;
   private final ICase technicalCase;
   private final IUser workerUser;
@@ -71,7 +70,6 @@ public class TaskModel {
     this.priorityIcon = TaskUtil.getPriorityIcon(task);
     this.state = task.getState();
     this.businessState = task.getBusinessState();
-    this.stateIcon = TaskUtil.getStateIcon(task.getBusinessState());
     this.businessCase = task.getCase().getBusinessCase();
     this.technicalCase = task.getCase();
     this.workerUser = task.getWorkerUser();
@@ -177,10 +175,6 @@ public class TaskModel {
 
   public List<SidestepModel> getSidesteps() {
     return sidesteps;
-  }
-
-  public String getStateIcon() {
-    return stateIcon;
   }
 
   public String getPriorityIcon() {

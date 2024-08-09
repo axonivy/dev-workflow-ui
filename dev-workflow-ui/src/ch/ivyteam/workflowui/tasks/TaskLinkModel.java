@@ -41,8 +41,4 @@ public class TaskLinkModel {
   public void redirectToTask() {
     RedirectUtil.redirect(TaskModel.toDetailUrl(uuid));
   }
-
-  public String getStateIcon() {
-    return TaskUtil.getStateIcon(businessState);
-  }
 }

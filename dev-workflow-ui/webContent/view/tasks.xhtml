@@ -33,8 +33,8 @@
               </div>
             </f:facet>
 
-            <p:column filterBy="#{task.state}" styleClass="icon-row" sortBy="#{task.state}">
-              <h:outputText id="taskState" styleClass="si si-lg si-#{task.stateIcon}" />
+            <p:column headerText="State" filterBy="#{task.businessState}" sortBy="#{task.businessState}" width="70">
+              <jc:stateBadge id="taskState" state="#{task.businessState}"/>
               <p:tooltip for="taskState" value="State: #{task.businessState} (#{task.state})" position="top" />
             </p:column>
 
