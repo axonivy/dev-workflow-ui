@@ -15,6 +15,7 @@ import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.ivy.workflow.query.TaskQuery;
+import ch.ivyteam.workflowui.util.EngineModeUtil;
 import ch.ivyteam.workflowui.util.TaskUtil;
 import ch.ivyteam.workflowui.util.UserUtil;
 
@@ -78,7 +79,9 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
   private void checkIfShowAll(TaskQuery taskQuery) {
     if (!isShowAll()) {
       taskQuery.where().and(TaskQuery.create().where().currentUserIsInvolved());
-      taskQuery.where().and().not(TaskQuery.create().where().activatorId().isEqual(ISecurityContext.current().users().system().getSecurityMemberId()));
+      if (EngineModeUtil.isDesigner() && UserUtil.isAdmin()) {
+        taskQuery.where().and().not(TaskQuery.create().where().activatorId().isEqual(ISecurityContext.current().users().system().getSecurityMemberId()));
+      }
     }
   }
 

@@ -12,6 +12,7 @@ import static com.codeborne.selenide.Selenide.$;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.codeborne.selenide.Selenide;
@@ -24,6 +25,7 @@ public class WebTestDefaultPagesIT {
     loginDeveloper();
     openView("starts.xhtml");
     $(By.id("startsForm:projectStarts:globalFilter")).setValue("testDefaultPages");
+    $(By.id("startsForm:projectStarts:globalFilter")).sendKeys(Keys.ENTER);
     $(By.id("startsForm:projectStarts")).shouldHave(text("dev-workflow-ui-test-data"));
     $(byText("TestData/testDefaultPages.ivp")).shouldBe(visible).click();
     $(By.id("iFrame")).shouldBe(visible);
