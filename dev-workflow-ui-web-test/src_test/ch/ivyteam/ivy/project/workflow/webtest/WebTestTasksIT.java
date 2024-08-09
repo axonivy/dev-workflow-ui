@@ -4,6 +4,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginD
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
+import static com.codeborne.selenide.Condition.checked;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
@@ -65,6 +66,19 @@ class WebTestTasksIT {
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldHave(text("Created task of TestData"));
     table.valueAt(0, 1).contains("pause");
+  }
+
+  @Test
+  void systemTasks() {
+    startTestProcess("1750C5211D94569D/testIntermediateEventProcess.ivp");
+    openView("tasks.xhtml");
+    Table table = PrimeUi.table(By.id("tasksForm:tasks"));
+    table.contains("System user");
+
+    $(By.id("tasksForm:tasks:showAllTasksSwitch_input")).shouldBe(checked);
+    $(By.id("tasksForm:tasks:showAllTasksSwitch")).click();
+    $(By.id("tasksForm:tasks:showAllTasksSwitch_input")).shouldNotBe(checked);
+    table.containsNot("System user");
   }
 
   @Test

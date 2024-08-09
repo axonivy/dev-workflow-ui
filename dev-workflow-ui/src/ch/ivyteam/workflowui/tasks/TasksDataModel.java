@@ -11,6 +11,7 @@ import org.primefaces.model.SortMeta;
 import org.primefaces.model.SortOrder;
 
 import ch.ivyteam.ivy.jsf.primefaces.sort.SortMetaConverter;
+import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.ivy.workflow.query.TaskQuery;
@@ -68,6 +69,7 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
   private void checkIfShowAll(TaskQuery taskQuery) {
     if (!isShowAll()) {
       taskQuery.where().and(TaskQuery.create().where().currentUserIsInvolved());
+      taskQuery.where().and().not(TaskQuery.create().where().activatorId().isEqual(ISecurityContext.current().users().system().getSecurityMemberId()));
     }
   }
 
