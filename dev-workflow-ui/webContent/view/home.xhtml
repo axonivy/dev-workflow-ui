@@ -60,20 +60,17 @@
               <div class="card-header">
                 <h4 class="m-0">Open Tasks</h4>
               </div>
-              <p:dataTable id="activeTasks" var="task" value="#{personalTasksIvyDevWfBean.tasksDataModel}" lazy="true"
+              <p:dataTable id="activeTasks" var="task" value="#{homepageIvyDevWfBean.tasksDataModel}" lazy="true"
                 rows="6" paginator="true" paginatorAlwaysVisible="false"
-                rendered="#{personalTasksIvyDevWfBean.tasksDataModel.size gt 0}" paginatorPosition="bottom" selectionMode="single">
-                <p:ajax event="rowSelect" listener="#{personalTasksIvyDevWfBean.executeTaskRow}" />
+                rendered="#{homepageIvyDevWfBean.tasksDataModel.size gt 0}" paginatorPosition="bottom" selectionMode="single">
+                <p:ajax event="rowSelect" listener="#{homepageIvyDevWfBean.executeTaskRow}" />
                 <p:column headerText="Prio" styleClass="icon-row" sortBy="#{task.priority}" width="30">
                   <h:outputText id="taskPrio" styleClass="si text-800 si-#{task.priorityIcon}" />
                   <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
                 </p:column>
                 <p:column headerText="Name" sortBy="#{task.name}" responsivePriority="1" width="140">
-                  <p:commandLink id="startTaskLink" actionListener="#{personalTasksIvyDevWfBean.executeTask(task)}"
-                    styleClass="white-space-nowrap">
-                    <h:outputText id="taskName" value="#{task.name}" />
-                    <p:tooltip for="taskName" value="#{task.name}" position="top" />
-                  </p:commandLink>
+                  <h:outputText id="taskName" value="#{task.name}" styleClass="text-primary white-space-nowrap"/>
+                  <p:tooltip for="taskName" value="#{task.name}" position="top" />
                 </p:column>
                 <p:column headerText="Start" sortBy="#{task.startTimestamp}" responsivePriority="3"
                   sortOrder="descending" width="80">
@@ -89,7 +86,7 @@
                   </p:link>
                 </p:column>
               </p:dataTable>
-              <h:panelGrid rendered="#{personalTasksIvyDevWfBean.tasksDataModel.size eq 0}">
+              <h:panelGrid rendered="#{homepageIvyDevWfBean.tasksDataModel.size eq 0}">
                 <h:outputText value="You don't have any active tasks. Go take a coffee break 😊☕" />
               </h:panelGrid>
             </div>
