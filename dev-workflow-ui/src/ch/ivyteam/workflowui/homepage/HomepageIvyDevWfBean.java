@@ -50,13 +50,6 @@ public class HomepageIvyDevWfBean {
     }
   }
 
-  public void redirectIfNoTasksOrLastStarts() {
-    if (lastStarts.isEmpty() && tasksDataModel.getSize() < 1 && Ivy.session().getAttribute("redirectedToStarts") == null) {
-      RedirectUtil.redirect("starts.xhtml");
-      Ivy.session().setAttribute("redirectedToStarts", true);
-    }
-  }
-
   public void setViewerStart(String link) {
     viewerTitle = lastStarts.stream()
             .filter(start -> start.getViewerLink().get().equals(link))

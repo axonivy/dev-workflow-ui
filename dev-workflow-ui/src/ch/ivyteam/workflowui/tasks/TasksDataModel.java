@@ -51,16 +51,25 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
   public List<TaskModel> load(int first, int pageSize, Map<String, SortMeta> sortBy,
           Map<String, FilterMeta> filterBy) {
     var sort = new SortMetaConverter(sortBy);
-    var taskQuery = TaskQuery.create();
+    var taskQuery = createBaseQuery();
 
     applyFilter(taskQuery);
     applyOrdering(taskQuery, sort.toField(), sort.toOrder());
-    applyCustomFilter(taskQuery);
-    checkIfShowAll(taskQuery);
 
     List<TaskModel> tasks = TaskUtil.toTaskModelList(taskQuery.executor().resultsPaged().window(first, pageSize));
     setRowCount((int) taskQuery.executor().count());
     return tasks;
+  }
+
+  private TaskQuery createBaseQuery() {
+    var taskQuery = TaskQuery.create();
+    applyCustomFilter(taskQuery);
+    checkIfShowAll(taskQuery);
+    return taskQuery;
+  }
+
+  public int getSize() {
+    return (int) createBaseQuery().executor().count();
   }
 
   @SuppressWarnings("unused")
@@ -122,12 +131,6 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
     if (SortOrder.DESCENDING.equals(sortOrder)) {
       query.descending();
     }
-  }
-
-  public int getSize() {
-    var taskQuery = TaskQuery.create();
-    applyFilter(taskQuery);
-    return (int) taskQuery.executor().count();
   }
 
   public boolean isShowAll() {
