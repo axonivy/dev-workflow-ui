@@ -6,6 +6,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginF
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static com.codeborne.selenide.Condition.readonly;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
@@ -27,8 +28,9 @@ public class WebTestHomepageIT {
 
     // start process to create test data
     openView("starts.xhtml");
-    $(By.id("startsForm:projectStarts:globalFilter")).setValue("case");
-    $(byText("test _ case _ map")).shouldBe(visible).click();
+    $(By.id("startsForm:projectStarts:globalFilter")).setValue("test _ case _ map");
+    $(By.id("startsForm:projectStarts:0:processStartBtn")).shouldBe(visible).click();
+    $(By.id("iFrameForm:frameTaskName")).shouldBe(text("Test Developer Workflow-UI Dialog 1"));
     $(By.id("iFrame")).shouldBe(visible);
     openView("home.xhtml");
     $(".startedProcessesCard").shouldBe(visible);

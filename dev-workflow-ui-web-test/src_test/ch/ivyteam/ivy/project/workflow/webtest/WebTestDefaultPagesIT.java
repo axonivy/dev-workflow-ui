@@ -12,6 +12,7 @@ import static com.codeborne.selenide.Selenide.$;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.codeborne.selenide.Selenide;
@@ -24,6 +25,7 @@ public class WebTestDefaultPagesIT {
     loginDeveloper();
     openView("starts.xhtml");
     $(By.id("startsForm:projectStarts:globalFilter")).setValue("testDefaultPages");
+    $(By.id("startsForm:projectStarts:globalFilter")).sendKeys(Keys.ENTER);
     $(By.id("startsForm:projectStarts")).shouldHave(text("dev-workflow-ui-test-data"));
     $(byText("TestData/testDefaultPages.ivp")).shouldBe(visible).click();
     $(By.id("iFrame")).shouldBe(visible);
@@ -37,7 +39,7 @@ public class WebTestDefaultPagesIT {
   public void testRedirectDefaultHome() {
     $(By.id("homeBtn")).shouldBe(visible).click();
     Selenide.switchTo().defaultContent();
-    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menuitem"));
+    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-nav-page"));
     assertCurrentUrlContains("home.xhtml");
   }
 
@@ -45,7 +47,7 @@ public class WebTestDefaultPagesIT {
   public void testRedirectDefaultProcessStarts() {
     $(By.id("startsBtn")).shouldBe(visible).click();
     Selenide.switchTo().defaultContent();
-    $(By.id("menuform:sr_starts")).shouldHave(cssClass("active-menuitem"));
+    $(By.id("menuform:sr_starts")).shouldHave(cssClass("active-nav-page"));
     assertCurrentUrlContains("starts.xhtml");
   }
 
@@ -53,7 +55,7 @@ public class WebTestDefaultPagesIT {
   public void testRedirectDefaultTaskList() {
     $(By.id("tasksBtn")).shouldBe(visible).click();
     Selenide.switchTo().defaultContent();
-    $(By.id("menuform:sr_tasks")).shouldHave(cssClass("active-menuitem"));
+    $(By.id("menuform:sr_tasks")).shouldHave(cssClass("active-nav-page"));
     assertCurrentUrlContains("tasks.xhtml");
   }
 

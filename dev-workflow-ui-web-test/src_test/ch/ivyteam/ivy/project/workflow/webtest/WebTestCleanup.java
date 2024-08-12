@@ -67,7 +67,7 @@ public class WebTestCleanup {
 
     loginFromTable("testuser");
     open(viewUrl("cleanup.xhtml"));
-    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menuitem"));
+    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-nav-page"));
 
     loginDeveloper();
     openView("cleanup.xhtml");

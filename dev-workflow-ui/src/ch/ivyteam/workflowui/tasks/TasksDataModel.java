@@ -78,7 +78,9 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
   private void checkIfShowAll(TaskQuery taskQuery) {
     if (!isShowAll()) {
       taskQuery.where().and(TaskQuery.create().where().currentUserIsInvolved());
-      taskQuery.where().and().not(TaskQuery.create().where().activatorId().isEqual(ISecurityContext.current().users().system().getSecurityMemberId()));
+      if (UserUtil.isAdmin()) {
+        taskQuery.where().and().not(TaskQuery.create().where().activatorId().isEqual(ISecurityContext.current().users().system().getSecurityMemberId()));
+      }
     }
   }
 
