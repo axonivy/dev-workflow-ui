@@ -39,7 +39,7 @@ public class WebTestSignalsIT {
   public void testSignalAdminOnly() {
     loginFromTable("testuser");
     open(viewUrl("signals.xhtml"));
-    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menuitem"));
+    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-nav-page"));
 
     loginDeveloper();
     openView("signals.xhtml");

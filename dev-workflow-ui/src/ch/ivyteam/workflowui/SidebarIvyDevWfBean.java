@@ -15,6 +15,14 @@ import ch.ivyteam.ivy.security.context.EngineCockpitUrlPath;
 public class SidebarIvyDevWfBean {
 
   private final String activePage;
+  private final String[] developerPages = {
+          "signals",
+          "intermediateEvents",
+          "cleanup",
+          "api-browser",
+          "statistics",
+          "webservices"
+  };
 
   public SidebarIvyDevWfBean() {
     String currentUrl = FacesContext.getCurrentInstance().getViewRoot().getViewId();
@@ -28,5 +36,12 @@ public class SidebarIvyDevWfBean {
 
   public String getCockpitPath() {
     return EngineCockpitUrlPath.toPath();
+  }
+
+  public String isDeveloperPageActive() {
+    if (isActive(developerPages)) {
+      return "active-nav-page";
+    }
+    return "";
   }
 }

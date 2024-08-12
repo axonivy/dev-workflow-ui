@@ -45,7 +45,7 @@ public class WebTestLoginIT {
     logout();
     openView("home.xhtml");
     loginFromTable("testuser");
-    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menuitem"));
+    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-nav-page"));
     assertCurrentUrlContains("home.xhtml");
     logout();
     $("#sessionUserName").shouldHave(text("Unknown User"));

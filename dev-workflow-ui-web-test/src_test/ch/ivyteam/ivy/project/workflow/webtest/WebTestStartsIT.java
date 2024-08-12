@@ -107,12 +107,12 @@ public class WebTestStartsIT {
 
     openView("tasks.xhtml");
     $(By.id("tasksForm:tasks")).find("TestTask");
-    $(By.id("menuform:sr_tasks")).shouldHave(cssClass("active-menuitem"));
+    $(By.id("menuform:sr_tasks")).shouldHave(cssClass("active-nav-page"));
     assertCurrentUrlContains("tasks.xhtml");
 
     openView("home.xhtml");
     $(By.id("startedProcesses")).find(byText("TestData/TestData.ivp")).click();
-    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menuitem"));
+    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-nav-page"));
     assertCurrentUrlContains("home.xhtml");
 
     openView("tasks.xhtml");
@@ -138,7 +138,7 @@ public class WebTestStartsIT {
   public void testFrameHeaderBarSidestep() {
     openView("starts.xhtml");
     $(By.id("startsForm:projectStarts:globalFilter")).setValue("test _ case _ map");
-    $(byText("test _ case _ map")).shouldBe(visible).click();
+    $(By.id("startsForm:projectStarts:0:processStartBtn")).shouldBe(visible).click();
     $(By.id("iFrameForm:frameTaskName")).shouldHave(text("Test Developer Workflow-UI Dialog 1"));
     $(By.id("iFrameForm:sidestepsBtn")).shouldBe(visible).click();
     $(By.id("iFrameForm:sidestepMenu")).shouldBe(visible).find(By.className("ui-menuitem-link")).click();
@@ -146,7 +146,7 @@ public class WebTestStartsIT {
     Selenide.switchTo().frame("iFrame");
     $(By.id("form:proceed")).shouldBe(enabled).click();
     Selenide.switchTo().defaultContent();
-    $(By.id("menuform:sr_starts")).shouldHave(cssClass("active-menuitem"));
+    $(By.id("menuform:sr_starts")).shouldHave(cssClass("active-nav-page"));
   }
 
   @Test

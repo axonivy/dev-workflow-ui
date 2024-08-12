@@ -39,7 +39,7 @@ public class WebTestDefaultPagesIT {
   public void testRedirectDefaultHome() {
     $(By.id("homeBtn")).shouldBe(visible).click();
     Selenide.switchTo().defaultContent();
-    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-menuitem"));
+    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-nav-page"));
     assertCurrentUrlContains("home.xhtml");
   }
 
@@ -47,7 +47,7 @@ public class WebTestDefaultPagesIT {
   public void testRedirectDefaultProcessStarts() {
     $(By.id("startsBtn")).shouldBe(visible).click();
     Selenide.switchTo().defaultContent();
-    $(By.id("menuform:sr_starts")).shouldHave(cssClass("active-menuitem"));
+    $(By.id("menuform:sr_starts")).shouldHave(cssClass("active-nav-page"));
     assertCurrentUrlContains("starts.xhtml");
   }
 
@@ -55,7 +55,7 @@ public class WebTestDefaultPagesIT {
   public void testRedirectDefaultTaskList() {
     $(By.id("tasksBtn")).shouldBe(visible).click();
     Selenide.switchTo().defaultContent();
-    $(By.id("menuform:sr_tasks")).shouldHave(cssClass("active-menuitem"));
+    $(By.id("menuform:sr_tasks")).shouldHave(cssClass("active-nav-page"));
     assertCurrentUrlContains("tasks.xhtml");
   }
 

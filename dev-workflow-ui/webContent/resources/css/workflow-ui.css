@@ -41,6 +41,11 @@ a > i.detail-btn {
 .details-description-label {
   opacity: 0.65;
 }
+.layout-horizontal .menu-wrapper .layout-menu-container .layout-menu > li.active-nav-page > a,
+.layout-horizontal .menu-wrapper .layout-menu-container .layout-menu > li > ul li > a.active-nav-submenu {
+  background-color: var(--primary-lighter-color);
+  color: var(--primary-color);
+}
 
 /* Tables */
 .table-header-none thead {
