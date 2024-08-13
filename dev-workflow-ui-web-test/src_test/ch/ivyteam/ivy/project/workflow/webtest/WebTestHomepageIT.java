@@ -63,8 +63,12 @@ public class WebTestHomepageIT {
     PrimeUi.table(By.id("startedProcesses")).contains("test _ case _ map");
 
     var caseMapeStartEntry = $("[data-rk='test _ case _ map']").shouldBe(visible);
-    caseMapeStartEntry.$("a[id='startedProcesses:0:startedProcessMenuLink']").shouldBe(visible).click();
-    $(By.id("startedProcesses:0:openProcessViewer")).shouldBe(visible).click();
+    var menuLink = caseMapeStartEntry.$("a[id*='startedProcessMenuLink']").shouldBe(visible);
+    menuLink.click();
+    var menuLinkId = menuLink.attr("id");
+    var processViewerId = menuLinkId.replace("startedProcessMenuLink", "openProcessViewer");
+    var escapedProcessViewerId = processViewerId.replace(":", "\\:");
+    $("#" + escapedProcessViewerId).shouldBe(visible).click();
     $(By.id("processViewer:processViewerDialog")).shouldBe(visible);
 
     $(By.id("viewerFrame")).shouldBe(visible);

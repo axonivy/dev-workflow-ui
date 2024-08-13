@@ -329,6 +329,15 @@ body .ui-datatable .ui-paginator.ui-paginator-bottom {
   border: 0;
 }
 
+.layout-wrapper.layout-designer.layout-horizontal .menu-wrapper .layout-menu-container .layout-menu > li a > span {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.layout-wrapper.layout-designer.layout-horizontal .menu-wrapper .layout-menu-container .layout-menu > li > a > i {
+  font-size: 18px;
+}
+
 .ui-column-title:empty + .ui-sortable-column-icon {
   margin: 0;
 }
