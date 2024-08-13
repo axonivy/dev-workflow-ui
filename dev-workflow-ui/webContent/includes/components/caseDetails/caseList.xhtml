@@ -12,7 +12,7 @@
     <h:panelGroup layout="block">
       <ul class="subcases-list">
         <ui:repeat var="case" value="#{casesDetailsIvyDevWfBean.caseList}">
-          <li style="list-style-type: none;" class="#{casesDetailsIvyDevWfBean.isCurrentHierarchyCase(case)}">
+          <li style="list-style-type: none;" class="#{casesDetailsIvyDevWfBean.isCurrentHierarchyCase(case)} mb-1">
             <jc:caseLink case="#{case}" id="subcase"/>
           </li>
         </ui:repeat>

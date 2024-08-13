@@ -88,15 +88,20 @@ class WebTestTasksIT {
 
     $(".case-link").shouldHave(text("Created case of TestData"));
     $(By.id("taskResponsible:userName")).shouldBe(exactText("Everybody"));
-    $(By.id("taskState")).shouldBe(exactText("OPEN (SUSPENDED)"));
+    $(By.id("taskState:stateBadge")).hover();
+    $(By.id("taskState:tooltip")).$(".ui-tooltip-text").shouldHave(text("SUSPENDED"));
     $(By.id("category")).shouldHave(exactText("TaskWithACategory"));
     $(By.id("pmv")).shouldBe(exactText("dev-workflow-ui-test-data$1"));
     $(By.className("si-hierarchy-6")).shouldBe(visible);
 
     $(By.id("workflowEvents:eventsTable:0:eventType")).shouldBe(exactText("EVENT_CREATE_TASK_BY_JOINED_TASKS"));
     $(By.id("actionMenuForm:taskActionsBtn")).click();
-    $(By.id("actionMenuForm:taskParkBtn")).should(visible).click();
-    $(By.id("taskState")).shouldBe(exactText("OPEN (PARKED)"));
+    $(By.id("actionMenuForm:taskParkBtn")).shouldBe(visible).click();
+    $(By.id("actionMenuForm:actionsMenu")).shouldNotBe(visible);
+
+    $(By.tagName("body")).hover();
+    $(By.id("taskState:stateBadge")).hover();
+    $(By.id("taskState:tooltip")).$(".ui-tooltip-text").shouldHave(text("PARKED"));
     $(By.id("workingUser:userName")).shouldBe(exactText($("#sessionUserName").getText()));
     $(By.id("workflowEvents:eventsTable:0:eventType")).shouldBe(exactText("EVENT_PARK_TASK"));
   }
@@ -135,14 +140,17 @@ class WebTestTasksIT {
     $(".detail-btn").shouldBe(visible).click();
     $(".case-link").shouldHave(text("Created case of TestData"));
 
-    $(By.id("taskState")).shouldBe(exactText("OPEN (SUSPENDED)"));
+    $(By.id("taskState:stateBadge")).hover();
+    $(By.id("taskState:tooltip")).$(".ui-tooltip-text").shouldHave(text("SUSPENDED"));
     $("#actionMenuForm\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"))
             .shouldBe(enabled).click();
     openView("tasks.xhtml");
     $(".detail-btn").shouldBe(visible).click();
     $("#taskName").shouldBe(exactText("Created task of TestData"));
 
-    $(By.id("taskState")).shouldBe(exactText("DONE (DONE)"));
+    $(By.tagName("body")).hover();
+    $(By.id("taskState:stateBadge")).hover();
+    $(By.id("taskState:tooltip")).$(".ui-tooltip-text").shouldHave(text("DONE"));
     $("#actionMenuForm\\:taskStartBtn").shouldHave(cssClass("ui-state-disabled"));
   }
 
@@ -154,13 +162,16 @@ class WebTestTasksIT {
     $(".detail-btn").shouldBe(visible).click();
     $(".case-link").shouldHave(text("Created case of TestData"));
 
-    $(By.id("taskState")).shouldBe(exactText("OPEN (SUSPENDED)"));
+    $(By.id("taskState:stateBadge")).hover();
+    $(By.id("taskState:tooltip")).$(".ui-tooltip-text").shouldHave(text("SUSPENDED"));
     $("#actionMenuForm\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"));
 
     $("#actionMenuForm\\:taskActionsBtn").click();
     $("#actionMenuForm\\:taskParkBtn").should(visible).click();
 
-    $(By.id("taskState")).shouldBe(exactText("OPEN (PARKED)"));
+    $(By.tagName("body")).hover();
+    $(By.id("taskState:stateBadge")).hover();
+    $(By.id("taskState:tooltip")).$(".ui-tooltip-text").shouldHave(text("PARKED"));
     $("#workingUser\\:userName").shouldBe(exactText($("#sessionUserName").getText()));
     $("#actionMenuForm\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"));
   }
@@ -199,7 +210,8 @@ class WebTestTasksIT {
     table.row(0).shouldHave(text("Created delayed task"));
     $(By.className("detail-btn")).shouldBe(visible).click();
     $(By.id("taskName")).shouldBe(exactText("Created delayed task"));
-    $(By.id("taskState")).shouldBe(exactText("DELAYED (DELAYED)"));
+    $(By.id("taskState:stateBadge")).hover();
+    $(By.id("taskState:tooltip")).$(".ui-tooltip-text").shouldHave(text("DELAYED"));
     $(By.id("delayDate:datetime")).shouldNotBe(exactText(""));
     $(By.id("actionMenuForm:taskStartBtn")).shouldHave(cssClass("ui-state-disabled"));
   }
@@ -242,20 +254,22 @@ class WebTestTasksIT {
     table.row(0).shouldHave(text("Created delayed task"));
     $(By.className("detail-btn")).shouldBe(visible).click();
 
-    $(By.id("taskState")).shouldBe(exactText("DELAYED (DELAYED)"));
+    $(By.id("taskState:stateBadge")).hover();
+    $(By.id("taskState:tooltip")).$(".ui-tooltip-text").shouldHave(text("DELAYED"));
     $(By.id("delayDate:datetime")).shouldNotBe(exactText(""));
 
     $(By.id("actionMenuForm:taskActionsBtn")).click();
     $(By.id("actionMenuForm:taskClearDelayBtn")).should(visible).click();
 
-    $(By.id("taskState")).shouldBe(exactText("OPEN (SUSPENDED)"));
+    $(By.id("taskState:stateBadge")).hover();
+    $(By.id("taskState:tooltip")).$(".ui-tooltip-text").shouldHave(text("SUSPENDED"));
     $(By.id("delayDate:datetime")).shouldBe(exactText(""));
   }
 
   @Test
   void customFieldEmbedInFrame() {
     openView("starts.xhtml");
-    $(By.id("startsForm:projectStarts:globalFilter")).setValue("embed in frame");
+    $(By.id("startsForm:projectStarts:globalFilter")).setValue("embed in frame").pressEnter();
     $(By.id("startsForm:projectStarts:0:startName")).shouldBe(visible, text("Do not embed in Frame")).click();
     $(By.id("form:proceed")).shouldBe(visible).click();
     openView("tasks.xhtml");

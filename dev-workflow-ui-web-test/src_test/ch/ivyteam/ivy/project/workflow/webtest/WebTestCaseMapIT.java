@@ -43,7 +43,8 @@ class WebTestCaseMapIT {
     $(".detail-btn").shouldBe(visible).click();
 
     $(By.id("creatorUser:userName")).shouldBe(exactText("DeveloperTest"));
-    $(By.id("caseState")).shouldBe(exactText("OPEN (RUNNING)"));
+    $(By.id("caseState:stateBadge")).hover();
+    $(By.id("caseState:tooltip")).$(".ui-tooltip-text").shouldHave(text("RUNNING"));
 
     $(".case-map-column").shouldHave(text("stage1"));
     $(".process-flow").shouldBe(visible);

@@ -30,7 +30,7 @@
 
                     <div class="flex">
                       <p:commandLink id="startedProcessMenuLink">
-                        <i class="si si-navigation-menu-horizontal" />
+                        <i class="si si-navigation-menu-horizontal-filled" />
                       </p:commandLink>
                       <p:menu id="startsActionsMenu" overlay="true" trigger="startedProcessMenuLink" my="right top"
                         at="right bottom" style="width: 200px">
@@ -64,7 +64,7 @@
                 rows="6" paginator="true" paginatorAlwaysVisible="false"
                 rendered="#{homepageIvyDevWfBean.tasksDataModel.size gt 0}" paginatorPosition="bottom" selectionMode="single">
                 <p:ajax event="rowSelect" listener="#{homepageIvyDevWfBean.executeTaskRow}" />
-                <p:column headerText="Prio" styleClass="icon-row" sortBy="#{task.priority}" width="30">
+                <p:column headerText="Prio" sortBy="#{task.priority}" styleClass="center-table-cell" width="30">
                   <h:outputText id="taskPrio" styleClass="si text-800 si-#{task.priorityIcon}" />
                   <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
                 </p:column>
@@ -72,15 +72,11 @@
                   <h:outputText id="taskName" value="#{task.name}" styleClass="text-primary white-space-nowrap"/>
                   <p:tooltip for="taskName" value="#{task.name}" position="top" />
                 </p:column>
-                <p:column headerText="Start" sortBy="#{task.startTimestamp}" responsivePriority="3"
-                  sortOrder="descending" width="80">
-                  <jc:time id="startTime" datetime="#{task.startTimestamp}" />
-                </p:column>
-                <p:column headerText="Expiry" sortBy="#{task.expiryTimestamp}" responsivePriority="2" width="80">
+                <p:column headerText="Expiry" sortBy="#{task.expiryTimestamp}" responsivePriority="2" width="40">
                   <jc:time id="expiryTime" datetime="#{task.expiryTimestamp}" />
                 </p:column>
                 <p:column styleClass="table-btn-1" width="5">
-                  <p:link href="#{task.detailUrl}" id="taskDetailsIcon">
+                  <p:link href="#{task.detailUrl}" id="taskDetailsIcon" styleClass="flex">
                     <i class="si si-information-circle detail-btn" />
                     <p:tooltip for="taskDetailsIcon" value="Open task details" position="top" />
                   </p:link>
@@ -102,10 +98,9 @@
                 rows="6" lazy="true" paginator="true" paginatorAlwaysVisible="false" selectionMode="single">
                 <p:ajax event="rowSelect" listener="#{casesIvyDevWfBean.redirectToCaseRow}" />
 
-                <p:column filterBy="#{case.state}" styleClass="icon-row" sortBy="#{case.state}">
-                  <h:outputText id="caseState" styleClass="si si-#{casesIvyDevWfBean.getStateIcon(case.businessState)}"
-                    style="font-size: 1.4rem" />
-                  <p:tooltip for="caseState" value="State: #{case.businessState} (#{case.state})" position="top" />
+                <p:column headerText="State" filterBy="#{case.businessState}" sortBy="#{case.businessState}"
+                  width="60">
+                  <jc:stateBadge id="caseState" data="#{case}"/>
                 </p:column>
 
                 <p:column headerText="Name" filterBy="#{case.getName(case)}" sortBy="#{case.name}">
@@ -124,19 +119,17 @@
                   <jc:time id="endTime" datetime="#{case.endTimestamp}" />
                 </p:column>
 
-                <p:column width="10">
-                  <p:commandLink id="rerunCaseIcon" actionListener="#{homepageIvyDevWfBean.rerunProcess(case)}"
-                    styleClass="text-color mr-2">
-                    <i class="si si-button-refresh-arrow text-2xl" />
-                    <p:tooltip for="rerunCaseIcon" value="Run again" position="top" />
+                <p:column width="30" styleClass="text-center">
+                  <p:commandLink id="caseActionsBtn" styleClass="text-color flex justify-content-center">
+                    <i class="si si-navigation-menu-horizontal-filled" />
                   </p:commandLink>
-                </p:column>
-
-                <p:column width="10">
-                  <p:link id="caseDetailsIcon" href="case.xhtml?id=#{case.uuid()}">
-                    <i class="si si-information-circle detail-btn" />
-                    <p:tooltip for="caseDetailsIcon" value="Open case details" position="top" />
-                  </p:link>
+                  <p:menu id="caseActionsMenu" overlay="true" trigger="caseActionsBtn" my="right top"
+                    at="right bottom" style="width: 200px">
+                    <p:menuitem value="Rerun process" actionListener="#{homepageIvyDevWfBean.rerunProcess(case)}"
+                      id="rerunCaseProcessBtn" icon="si si-button-refresh-arrow" />
+                    <p:menuitem id="openCaseDetailsBtn" value="Open case details"
+                      url="#{case.detailLink}" icon="si si-information-circle" />
+                  </p:menu>
                 </p:column>
               </p:dataTable>
             </div>

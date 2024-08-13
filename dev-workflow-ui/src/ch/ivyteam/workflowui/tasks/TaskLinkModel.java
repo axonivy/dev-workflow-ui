@@ -6,7 +6,6 @@ import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.task.TaskBusinessState;
 import ch.ivyteam.workflowui.util.RedirectUtil;
-import ch.ivyteam.workflowui.util.TaskUtil;
 
 public class TaskLinkModel {
 
@@ -40,9 +39,5 @@ public class TaskLinkModel {
 
   public void redirectToTask() {
     RedirectUtil.redirect(TaskModel.toDetailUrl(uuid));
-  }
-
-  public String getStateIcon() {
-    return TaskUtil.getStateIcon(businessState);
   }
 }

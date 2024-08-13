@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
   xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
   xmlns:cc="http://xmlns.jcp.org/jsf/composite" xmlns:ic="http://ivyteam.ch/jsf/component"
-  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
+  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
+  xmlns:jc="http://xmlns.jcp.org/jsf/composite/components">
 <cc:interface>
   <cc:attribute name="task" />
 </cc:interface>
@@ -10,11 +11,14 @@
   <ui:param name="task" value="#{tasksIvyDevWfBean.toTaskLinkModel(cc.attrs.task)}"/>
   <h:link outcome="task" styleClass="flex align-items-center">
     <f:param name="id" value="#{task.uuid}"/>
-    <i class="si si-task-list-edit mr-1" />
-    <h:outputText id="taskState" styleClass="si si-#{task.stateIcon} mr-1" />
-    <p:tooltip for="taskState" value="State: #{task.businessState} (#{task.state})" position="top"/>
-    <h:outputText id="taskLink" value="#{task.name}" />
-    <p:tooltip for="taskLink" value="Task: #{task.uuid}" position="top"/>
+    <i class="si si-task-list-edit ml-2" />
+    <h:outputText id="taskLink" value="#{task.name}" styleClass="ml-2"/>
+    <p:tooltip for="taskLink" position="top">
+      <h:panelGroup layout="block" styleClass="py-2">
+        <h:outputText value="ID: #{task.uuid}"/><br/>
+        State: <jc:stateBadge id="taskState" data="#{cc.attrs.task}"/>
+      </h:panelGroup>
+    </p:tooltip>
   </h:link>
 </cc:implementation>
 </html>

@@ -25,9 +25,9 @@ public class WebTestTaskDetailPageRedirectIT {
     openView("tasks.xhtml");
     var table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldHave(text("TaskDetailTest"));
-    var element = $(By.id("tasksForm:tasks:0:taskState"));
-    assertThat(element.getAttribute("class")).contains("task-state-open");
-    element.click();
+    var stateElement = $(By.id("tasksForm:tasks:0:taskState:stateBadge"));
+    stateElement.shouldHave(text("open"));
+    stateElement.click();
   }
 
   @Test
@@ -35,9 +35,9 @@ public class WebTestTaskDetailPageRedirectIT {
     Selenide.closeWebDriver();
     loginDeveloper();
     openView("tasks.xhtml");
-    var element = $(By.id("tasksForm:tasks:0:taskState"));
-    assertThat(element.getAttribute("class")).contains("task-state-open");
-    element.click();
+    var stateElement = $(By.id("tasksForm:tasks:0:taskState:stateBadge"));
+    assertThat(stateElement.getAttribute("class")).contains("state-open");
+    stateElement.click();
     assertThat($(By.className("layout-dashboard")).getLocation() != null).isTrue();
     var url = Selenide.webdriver().driver().url();
     assertThat(url.contains("task.xhtml?id=") && !url.contains("frame.xhtml")).isTrue();

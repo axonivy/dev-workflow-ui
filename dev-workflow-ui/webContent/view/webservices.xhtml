@@ -39,8 +39,8 @@
             <p:column headerText="Link" sortBy="#{webservice.link}" responsivePriority="4">
               <h:outputText value="#{webservice.link}" />
             </p:column>
-            <p:column width="60">
-              <p:commandButton actionListener="#{webservice.execute}" value="Start" icon="si si-controls-play" />
+            <p:column width="80">
+              <p:linkButton href="#{webservice.link}" value="WSDL" icon="si si-expand-6" />
             </p:column>
           </p:dataTable>
         </div>
