@@ -9,13 +9,12 @@
     paginatorPosition="bottom" paginator="true" paginatorAlwaysVisible="false" selectionMode="single">
     <p:ajax event="rowSelect" listener="#{tasksIvyDevWfBean.displayTaskRow}" update="@form" />
 
-    <p:column filterBy="#{task.state}" styleClass="icon-row" width="10">
-      <h:outputText id="taskState" styleClass="si si-lg si-#{task.stateIcon}" />
-      <p:tooltip for="taskState" value="State: #{task.businessState} (#{task.state})" position="top" />
+    <p:column headerText="State" filterBy="#{task.businessState}" width="75">
+      <jc:stateBadge id="taskState" data="#{task}"/>
     </p:column>
 
-    <p:column id="priority" filterBy="#{task.priority}" styleClass="icon-row"
-      width="10" responsivePriority="3">
+    <p:column headerText="Prio" id="priority" filterBy="#{task.priority}"
+      width="30" responsivePriority="3" styleClass="center-table-cell">
       <h:outputText id="taskPrio" styleClass="si text-800 si-#{task.priorityIcon}" />
       <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
     </p:column>

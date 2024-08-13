@@ -47,10 +47,14 @@ class WebTestCaseDetailsIT {
   void caseDetails() {
     $(By.id("creatorUser:userName")).shouldBe(exactText("DeveloperTest"));
     $(By.id("category")).shouldHave(exactText("TestData"));
-    $(By.id("caseState")).shouldBe(exactText("OPEN (RUNNING)"));
+
+    $(By.id("caseState:stateBadge")).hover();
+    $(By.id("caseState:tooltip")).$(".ui-tooltip-text").shouldHave(text("RUNNING"));
 
     $(By.id("caseDestroyBtn")).should(visible).click();
-    $(By.id("caseState")).shouldBe(exactText("DESTROYED (DESTROYED)"));
+    $(By.tagName("body")).hover();
+    $(By.id("caseState:stateBadge")).hover();
+    $(By.id("caseState:tooltip")).$(".ui-tooltip-text").shouldHave(text("DESTROYED"));
   }
 
   @Test
@@ -118,14 +122,16 @@ class WebTestCaseDetailsIT {
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
     openView("cases.xhtml");
     $(By.id("casesForm:cases:0:caseName")).shouldBe(visible).click();
-    $(By.id("caseState")).shouldBe(visible).shouldHave(exactText("OPEN (RUNNING)"));
+    $(By.id("caseState:stateBadge")).hover();
+    $(By.id("caseState:tooltip")).$(".ui-tooltip-text").shouldHave(text("RUNNING"));
     $(By.id("caseDestroyBtn")).shouldBe(visible).shouldNotHave(cssClass("ui-state-disabled"));
-    $(".current-hierarchy-case").findAll(".case-link").shouldBe(size(1));
-    $(".current-hierarchy-case").findAll(".case-state-in-progress").shouldBe(size(1));
+    $(".current-hierarchy-case").findAll(By.id("businessCase:caseLink")).shouldBe(size(1)).get(0).hover();
+    $(By.id("businessCase:caseState:stateName")).shouldHave(text("open"));
 
     $(By.id("caseDestroyBtn")).click();
-    $(".current-hierarchy-case").findAll(".case-link").shouldBe(size(1));
-    $(".current-hierarchy-case").findAll(".case-state-destroyed").shouldBe(size(1));
+    $(By.tagName("body")).hover();
+    $(".current-hierarchy-case").findAll(By.id("businessCase:caseLink")).shouldBe(size(1)).get(0).hover();
+    $(By.id("businessCase:caseState:stateName")).shouldHave(text("destroyed"));
     $(By.id("caseDestroyBtn")).shouldHave(cssClass("ui-state-disabled"));
   }
 

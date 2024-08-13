@@ -28,7 +28,7 @@ public class WebTestHomepageIT {
 
     // start process to create test data
     openView("starts.xhtml");
-    $(By.id("startsForm:projectStarts:globalFilter")).setValue("test _ case _ map");
+    $(By.id("startsForm:projectStarts:globalFilter")).setValue("test _ case _ map").pressEnter();
     $(By.id("startsForm:projectStarts:0:processStartBtn")).shouldBe(visible).click();
     $(By.id("iFrameForm:frameTaskName")).shouldBe(text("Test Developer Workflow-UI Dialog 1"));
     $(By.id("iFrame")).shouldBe(visible);
@@ -86,7 +86,8 @@ public class WebTestHomepageIT {
     startedCasesTable.valueAt(0, 1).contains("Created case of CustomUser");
     startedCasesTable.valueAt(0, 0).contains("rerunCaseIcon");
 
-    $(By.id("startedCases:0:rerunCaseIcon")).click();
+    $(By.id("startedCases:0:caseActionsBtn")).shouldBe(visible).click();
+    $(By.id("startedCases:0:rerunCaseProcessBtn")).shouldBe(visible).click();
     startedCasesTable = PrimeUi.table(By.id("startedCases"));
     startedCasesTable.valueAt(1, 1).contains("Created case of CustomUser");
     startedCasesTable.valueAt(0, 1).contains("Created case of CustomUser");

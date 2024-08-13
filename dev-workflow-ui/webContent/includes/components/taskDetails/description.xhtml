@@ -26,10 +26,7 @@
     <h:outputText value="#{task.category}" id="category" />
 
     <h:outputText value="State" />
-    <h:outputText>
-      <i class="si si-#{task.stateIcon} mr-1" />
-      <h:outputText value="#{task.businessState} (#{task.state})" id="taskState" />
-    </h:outputText>
+    <jc:stateBadge id="taskState" data="#{task}"/>
 
     <h:outputText value="Business case" />
     <jc:caseLink case="#{task.case.getBusinessCase()}" id="businessCase" />

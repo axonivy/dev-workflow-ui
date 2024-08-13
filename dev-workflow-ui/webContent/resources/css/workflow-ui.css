@@ -51,10 +51,6 @@ a > i.detail-btn {
 .table-header-none thead {
   display: none;
 }
-.ui-datatable .icon-row {
-  width: 20px;
-  text-align: center;
-}
 .ui-datatable .table-btn-1 {
   width: 40px;
   text-align: center;
@@ -86,22 +82,36 @@ body .ui-datatable .ui-datatable-header:has(.pretty-search) {
   margin-left: 0.5rem;
 }
 
-/* States */
-.task-state-open {
-  color: var(--primary-color);
+/* State Badge */
+.state-badge {
+  border-radius: 4px;
+  padding: 0.25em 0.5rem;
+  text-transform: capitalize;
+  font-size: 12px;
+  letter-spacing: 0.3px;
 }
-.task-state-done, .case-state-done {
-  color: #2aa483;
+.state-destroyed,
+.state-error {
+  background: #FCE8E8;
+  color: #8C0D11;
 }
-.task-state-reserved, .task-state-system {
-  color: var(--text-color);
+.state-done {
+  background: #EDF9F0;
+  color: #2B7841;
 }
-.task-state-destroyed, .task-state-failed, .case-state-destroyed {
-  color: #d23636;
+.state-in_progress {
+  background: #FFF1E6;
+  color: #9C4600;
 }
-.task-state-waiting, .task-state-in-progress, .case-state-in-progress {
-  color: #ffce29;
+.state-delayed {
+  background: #F3F3F3;
+  color: #1B1B1B;
 }
+.state-open {
+  background: #E6F1F5;
+  color: #00445C;
+}
+
 body .custom-accordion.ui-accordion .ui-accordion-header,
 body .custom-accordion.ui-accordion .ui-accordion-content {
   border: 0px;
@@ -199,16 +209,20 @@ body .custom-accordion.ui-accordion .ui-accordion-header:first-child {
   width: 20px;
   border-radius: 50%;
 }
-.case-state-finished {
-  color: var(--success-color);
-}
-.case-state-running {
-  color: var(--primary-color);
-}
 .case-map-column {
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+
+/* Case */
+.current-hierarchy-case .case-link-name {
+  font-weight: bold;
+  max-width: fit-content;
+}
+.subcases-list {
+  margin-top: 0.25rem;
+  padding-inline-start: 20px;
 }
 
 /* Profile */
@@ -288,14 +302,21 @@ body .notification-scroll>.ui-datascroller-content::-webkit-scrollbar {
 }
 
 /* Freya adjustments */
+body .ui-button.ui-button-text-icon-left .ui-button-text {
+  padding: .3rem 1rem .3rem 2rem;
+}
 body .ui-datatable .ui-datatable-data > tr > td {
   padding: 0.5rem;
+}
+body .ui-datatable .ui-datatable-data > tr > td:has(> .state-badge:only-child),
+body .ui-datatable .ui-datatable-data > tr > td.center-table-cell {
+  text-align: center;
 }
 
 body .ui-datatable thead th,
 body .ui-datatable thead th.ui-state-active{
   padding: 0.75rem;
-  background: #ffffff;
+  background: var(--surface-a);
 }
 
 body .ui-datatable thead th .ui-sortable-column-icon.ui-icon-carat-2-n-s {

@@ -6,7 +6,6 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.event.SelectEvent;
 
 import ch.ivyteam.ivy.workflow.ICase;
-import ch.ivyteam.ivy.workflow.caze.CaseBusinessState;
 import ch.ivyteam.workflowui.util.CaseUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 
@@ -29,16 +28,7 @@ public class CasesIvyDevWfBean {
     return CaseUtil.getPrettyName(icase);
   }
 
-  public String getStateIcon(CaseBusinessState caseState) {
-    return switch (caseState) {
-      case OPEN -> "hourglass case-state-in-progress";
-      case DONE -> "check-circle-1 case-state-done";
-      case DESTROYED -> "alert-circle case-state-destroyed";
-      default -> "synchronize-arrows";
-    };
-  }
-
-  public void redirectToCaseRow(SelectEvent<?> event) {
+  public void rerunCaseRow(SelectEvent<?> event) {
     var object = event.getObject();
     if (object instanceof ICase caze) {
       RedirectUtil.redirect("case.xhtml?id=" + caze.uuid());

@@ -9,7 +9,6 @@ import org.primefaces.event.SelectEvent;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
-import ch.ivyteam.ivy.workflow.task.TaskBusinessState;
 import ch.ivyteam.workflowui.starts.CustomFieldsHelper;
 import ch.ivyteam.workflowui.tasks.TaskModel;
 
@@ -24,18 +23,6 @@ public class TaskUtil {
 
   public static List<TaskModel> toTaskModelList(List<ITask> tasks) {
     return tasks.stream().map(TaskModel::new).collect(Collectors.toList());
-  }
-
-  public static String getStateIcon(TaskBusinessState state) {
-    return switch (state) {
-      case OPEN -> "controls-play task-state-open";
-      case IN_PROGRESS -> "hourglass task-state-in-progress";
-      case DONE -> "check-circle-1 task-state-done";
-      case DESTROYED -> "alert-circle task-state-destroyed";
-      case DELAYED -> "alarm-bell-timer task-state-delayed";
-      case ERROR -> "mood-warning task-state-failed";
-      default -> "synchronize-arrows task-state-system";
-    };
   }
 
   public static String getPriorityIcon(ITask task) {
