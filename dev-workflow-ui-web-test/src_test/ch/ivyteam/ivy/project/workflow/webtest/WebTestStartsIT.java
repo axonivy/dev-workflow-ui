@@ -60,7 +60,7 @@ public class WebTestStartsIT {
     $(By.id("form:testSelectOneMenu")).shouldBe(visible).click();
     $(By.id("form:testSelectOneMenu_2")).shouldBe(visible).click();
     $(By.id("form:proceed")).shouldBe(visible).click();
-    assertCurrentUrlContains("starts.xhtml");
+    assertCurrentUrlContains("home.xhtml");
   }
 
   @Test
@@ -146,7 +146,7 @@ public class WebTestStartsIT {
     Selenide.switchTo().frame("iFrame");
     $(By.id("form:proceed")).shouldBe(enabled).click();
     Selenide.switchTo().defaultContent();
-    $(By.id("menuform:sr_starts")).shouldHave(cssClass("active-nav-page"));
+    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-nav-page"));
   }
 
   @Test

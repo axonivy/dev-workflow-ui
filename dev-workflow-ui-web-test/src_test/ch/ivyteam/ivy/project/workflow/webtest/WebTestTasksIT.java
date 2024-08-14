@@ -1,5 +1,6 @@
 package ch.ivyteam.ivy.project.workflow.webtest;
 
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.assertCurrentUrlContains;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
@@ -142,16 +143,14 @@ class WebTestTasksIT {
 
     $(By.id("taskState:stateBadge")).hover();
     $(By.id("taskState:tooltip")).$(".ui-tooltip-text").shouldHave(text("SUSPENDED"));
-    $("#actionMenuForm\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"))
+    $(By.id("actionMenuForm:taskStartBtn")).shouldNotHave(cssClass("ui-state-disabled"))
             .shouldBe(enabled).click();
-    openView("tasks.xhtml");
-    $(".detail-btn").shouldBe(visible).click();
-    $("#taskName").shouldBe(exactText("Created task of TestData"));
+    assertCurrentUrlContains("/task.xhtml?id=");
 
     $(By.tagName("body")).hover();
     $(By.id("taskState:stateBadge")).hover();
     $(By.id("taskState:tooltip")).$(".ui-tooltip-text").shouldHave(text("DONE"));
-    $("#actionMenuForm\\:taskStartBtn").shouldHave(cssClass("ui-state-disabled"));
+    $(By.id("actionMenuForm:taskStartBtn")).shouldHave(cssClass("ui-state-disabled"));
   }
 
   @Test
