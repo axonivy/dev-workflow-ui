@@ -66,7 +66,7 @@ public class WebTestStartsIT {
   @Test
   public void startNotEmbedInFrame() {
     openView("starts.xhtml");
-    $(By.id("startsForm:projectStarts:globalFilter")).setValue("embed in frame");
+    $(By.id("startsForm:projectStarts:globalFilter")).setValue("embed in frame").pressEnter();
     // open in fullscreen link icon shouldn't be visible
     $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
     $(By.id("startsForm:projectStarts:0:openStartFullscreenBtn")).shouldNotBe(visible);

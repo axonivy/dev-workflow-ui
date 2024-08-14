@@ -11,6 +11,7 @@ import ch.ivyteam.ivy.casemap.runtime.repo.restricted.ICaseMapBusinessCase;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
+import ch.ivyteam.workflowui.starts.StartableModel;
 
 @SuppressWarnings("restriction")
 public class CaseUtil {
@@ -40,5 +41,11 @@ public class CaseUtil {
 
   public static ICase getCaseById(String uuid) {
     return IWorkflowContext.current().findCase(uuid);
+  }
+
+  public static void rerunCaseProcess(ICase caze) {
+    var startable = new StartableModel(caze.getBusinessCase().getStartedFrom());
+    LastSessionStarts.current().add(startable);
+    startable.execute();
   }
 }
