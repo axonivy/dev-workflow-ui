@@ -64,7 +64,7 @@
                 rows="6" paginator="true" paginatorAlwaysVisible="false"
                 rendered="#{homepageIvyDevWfBean.tasksDataModel.size gt 0}" paginatorPosition="bottom" selectionMode="single">
                 <p:ajax event="rowSelect" listener="#{homepageIvyDevWfBean.executeTaskRow}" />
-                <p:column headerText="Prio" sortBy="#{task.priority}" styleClass="center-table-cell" width="30">
+                <p:column headerText="Prio" sortBy="#{task.priority}" styleClass="center-table-cell" width="10">
                   <h:outputText id="taskPrio" styleClass="si text-800 si-#{task.priorityIcon}" />
                   <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
                 </p:column>
