@@ -4,6 +4,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.assert
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
@@ -11,6 +12,9 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
+
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -61,6 +65,25 @@ public class WebTestStartsIT {
     $(By.id("form:testSelectOneMenu_2")).shouldBe(visible).click();
     $(By.id("form:proceed")).shouldBe(visible).click();
     assertCurrentUrlContains("home.xhtml");
+  }
+
+  @Test
+  void startProcessByUrlParameter() {
+    var startableId = EngineUrl.applicationName() + "/dev-workflow-ui-test-data/TestData/startTestDialog1.ivp";
+    open(viewUrl("start.xhtml", Map.of("id", startableId)));
+    assertCurrentUrlContains("frame.xhtml?");
+    Selenide.switchTo().frame("iFrame");
+    $(By.id("testDialogTitle")).shouldBe(visible);
+    $(By.id("form:testSelectOneMenu")).shouldBe(visible).click();
+    $(By.id("form:proceed")).shouldBe(visible).click();
+    assertCurrentUrlContains("home.xhtml");
+  }
+
+  @Test
+  void startProcessByWrongUrlParameterId() {
+    var wrongStartId = "this_is_something_that_does_not_exist31576%2F1337.ivp";
+    open(viewUrl("start.xhtml", Map.of("id", wrongStartId)));
+    assertCurrentUrlContains("start.xhtml?id=" + wrongStartId);
   }
 
   @Test
