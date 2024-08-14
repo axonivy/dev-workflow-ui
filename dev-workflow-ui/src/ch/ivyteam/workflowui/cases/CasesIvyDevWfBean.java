@@ -28,7 +28,11 @@ public class CasesIvyDevWfBean {
     return CaseUtil.getPrettyName(icase);
   }
 
-  public void rerunCaseRow(SelectEvent<?> event) {
+  public void rerunProcess(ICase caze) {
+    CaseUtil.rerunCaseProcess(caze);
+  }
+
+  public void redirectToCaseRow(SelectEvent<ICase> event) {
     var object = event.getObject();
     if (object instanceof ICase caze) {
       RedirectUtil.redirect("case.xhtml?id=" + caze.uuid());

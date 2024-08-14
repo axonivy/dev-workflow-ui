@@ -7,7 +7,6 @@ import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.SelectEvent;
 
-import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.workflowui.cases.StartedCasesDataModel;
 import ch.ivyteam.workflowui.starts.StartableModel;
 import ch.ivyteam.workflowui.tasks.PersonalTasksDataModel;
@@ -73,11 +72,5 @@ public class HomepageIvyDevWfBean {
 
   public StartedCasesDataModel getStartedCasesDataModel() {
     return startedCasesDataModel;
-  }
-
-  public void rerunProcess(ICase caze) {
-    var startable = new StartableModel(caze.getBusinessCase().getStartedFrom());
-    LastSessionStarts.current().add(startable);
-    startable.execute();
   }
 }
