@@ -12,7 +12,7 @@
         <p:growl id="growl" showDetail="true" />
         <div class="card">
 
-          <p:dataTable id="webServices" var="webservice" rows="5" paginator="true"
+          <p:dataTable id="webServices" var="webservice" rows="12" paginator="true"
             value="#{webServicesBean.webServices}" paginatorPosition="bottom" paginatorAlwaysVisible="false"
             selectionMode="single" rowKey="#{webservice.link}" widgetVar="webServicesTable">
             <p:ajax event="rowSelect" listener="#{webServicesBean.executeRow}" />
