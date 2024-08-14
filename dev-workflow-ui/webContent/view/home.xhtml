@@ -11,7 +11,7 @@
       <div class="layout-dashboard">
         <h:panelGroup styleClass="grid" layout="block" rendered="#{loginIvyDevWfBean.loggedIn}">
           <div class="col-12 lg:col-5">
-            <div class="card startedProcessesCard">
+            <div class="card flex flex-column startedProcessesCard">
               <div class="card-header">
                 <h4 class="m-0">Started Processes</h4>
               </div>
@@ -29,7 +29,7 @@
                     <p:tooltip for="startedProcessLink" value="#{start.displayName}" position="top" />
 
                     <div class="flex">
-                      <p:commandLink id="startedProcessMenuLink">
+                      <p:commandLink id="startedProcessMenuLink" styleClass="text-color flex justify-content-center">
                         <i class="si si-navigation-menu-horizontal-filled" />
                       </p:commandLink>
                       <p:menu id="startsActionsMenu" overlay="true" trigger="startedProcessMenuLink" my="right top"
@@ -48,10 +48,15 @@
                   </div>
                 </p:column>
               </p:dataTable>
-              <h:panelGrid rendered="#{empty homepageIvyDevWfBean.lastStarts}">
-                <h:outputText>You haven't started any processes yet</h:outputText>
-                <p:button value="Go to starts page" outcome="starts.xhtml" icon="si si-navigation-menu" />
-              </h:panelGrid>
+              <h:panelGroup rendered="#{empty homepageIvyDevWfBean.lastStarts}" layout="block"
+                styleClass="flex flex-column h-full">
+                <div>
+                  You haven't started any processes yet, <p:link value="go to process list" outcome="starts.xhtml"/> to start a process
+                </div>
+                <div class="flex justify-content-center align-items-center h-full" style="min-height: 8rem;">
+                  <i class="si si-hierarchy-6 si-rotate-270 text-7xl" />
+                </div>
+              </h:panelGroup>
             </div>
           </div>
 
