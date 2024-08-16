@@ -46,16 +46,16 @@ public class StatisticsBean {
     this.timeDuration = timeDuration;
   }
 
-  private String calculateTimeDurationQuery()
-  {
+  private String calculateTimeDurationQuery() {
     if (timeDuration.equals("all")) {
       return null;
     }
-    return "startTimestamp:>=now-" + timeDuration + "/d";
+    return "startTimestamp:>=now-" + timeDuration;
   }
 
   public LineChartModel getTasksPerHourChart() {
-    var aggrResult = WorkflowStats.current().task().aggregate("startTimestamp:bucket:hour,endTimestamp:bucket:hour", calculateTimeDurationQuery() );
+    var aggrResult = WorkflowStats.current().task()
+            .aggregate("startTimestamp:bucket:hour,endTimestamp:bucket:hour", calculateTimeDurationQuery());
     var startCountMap = initializeTimeMap(12, true);
     var endCountMap = initializeTimeMap(12, true);
     for (var agg : aggrResult.aggs()) {
@@ -69,12 +69,12 @@ public class StatisticsBean {
     return createStartAndFinishLineChart(startCountMap, endCountMap);
   }
 
-  private LineChartModel createStartAndFinishLineChart(Map<String, Long> startCountMap, Map<String, Long> endCountMap, String... colors) {
+  private LineChartModel createStartAndFinishLineChart(Map<String, Long> startCountMap,
+          Map<String, Long> endCountMap, String... colors) {
     var color = colors.length > 0 ? colors[0] : "rgb(54, 162, 235)";
     var startDataSet = createLineChartDataSet(new ArrayList<>(startCountMap.values()), "Started", color);
     color = colors.length > 1 ? colors[1] : "rgb(255, 99, 132)";
     var endDataSet = createLineChartDataSet(new ArrayList<>(endCountMap.values()), "Finished", color);
-
     var data = new ChartData();
     data.addChartDataSet(startDataSet);
     data.addChartDataSet(endDataSet);
@@ -102,7 +102,8 @@ public class StatisticsBean {
     }
   }
 
-  private void updateCountMap(Bucket bucket, Map<String, Long> timeCountMap, DateTimeFormatter labelFormatter) {
+  private void updateCountMap(Bucket bucket, Map<String, Long> timeCountMap,
+          DateTimeFormatter labelFormatter) {
     var inputFormatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy");
     try {
       var dateTime = LocalDateTime.parse(bucket.key().toString(), inputFormatter);
@@ -115,7 +116,8 @@ public class StatisticsBean {
   }
 
   public LineChartModel getCasesPerDayChart() {
-    var casesStartedAggr = WorkflowStats.current().caze().aggregate("startTimestamp:bucket:day,endTimestamp:bucket:day");
+    var casesStartedAggr = WorkflowStats.current().caze()
+            .aggregate("startTimestamp:bucket:day,endTimestamp:bucket:day", calculateTimeDurationQuery());
     var startCountMap = initializeTimeMap(7, false);
     var endCountMap = initializeTimeMap(7, false);
     for (var agg : casesStartedAggr.aggs()) {
@@ -168,12 +170,12 @@ public class StatisticsBean {
   }
 
   public long getAllTasks() {
-    var allTasks = WorkflowStats.current().task().aggregate("businessState");
+    var allTasks = WorkflowStats.current().task().aggregate("businessState", calculateTimeDurationQuery());
     return getCountFromAggregation(allTasks);
   }
 
   public long getAllCases() {
-    var allCases = WorkflowStats.current().caze().aggregate("businessState");
+    var allCases = WorkflowStats.current().caze().aggregate("businessState", calculateTimeDurationQuery());
     return getCountFromAggregation(allCases);
   }
 
@@ -195,7 +197,7 @@ public class StatisticsBean {
             TaskBusinessState.DELAYED.toString(), "rgb(200, 200, 200)",
             TaskBusinessState.DESTROYED.toString(), "rgb(130, 130, 130)",
             TaskBusinessState.ERROR.toString(), "rgb(255, 99, 132)");
-    var aggrResult = WorkflowStats.current().task().aggregate("businessState");
+    var aggrResult = WorkflowStats.current().task().aggregate("businessState", calculateTimeDurationQuery());
     return createDonutChartModel(aggrResult, labelToColor);
   }
 
@@ -204,11 +206,12 @@ public class StatisticsBean {
             CaseBusinessState.OPEN.toString(), "rgb(0, 148, 210)",
             CaseBusinessState.DONE.toString(), "rgb(54, 199, 38)",
             CaseBusinessState.DESTROYED.toString(), "rgb(130, 130, 130)");
-    var aggResult = WorkflowStats.current().caze().aggregate("businessState");
+    var aggResult = WorkflowStats.current().caze().aggregate("businessState", calculateTimeDurationQuery());
     return createDonutChartModel(aggResult, labelToColor);
   }
 
-  private DonutChartModel createDonutChartModel(AggregationResult aggrResult, Map<String, String> labelToColor) {
+  private DonutChartModel createDonutChartModel(AggregationResult aggrResult,
+          Map<String, String> labelToColor) {
     var donutModel = new DonutChartModel();
     if (aggrResult.aggs().isEmpty()) {
       return null;
@@ -239,12 +242,13 @@ public class StatisticsBean {
   }
 
   public BarChartModel getTopCaseCreatorsModel() {
-    var aggrResult = WorkflowStats.current().caze().aggregate("creator.name");
+    var aggrResult = WorkflowStats.current().caze().aggregate("creator.name", calculateTimeDurationQuery());
     return createBarChartModel(aggrResult, "Cases created", "rgb(255, 159, 64)");
   }
 
   public BarChartModel getTopTaskWorkersModel() {
-    var aggrResult = WorkflowStats.current().task().aggregate("worker.name", "businessState:DONE" + calculateTimeDurationQuery());
+    var aggrResult = WorkflowStats.current().task().aggregate("worker.name",
+            "businessState:DONE" + calculateTimeDurationQuery());
     return createBarChartModel(aggrResult, "Created", "rgb(0, 148, 210)");
   }
 
@@ -279,5 +283,4 @@ public class StatisticsBean {
   private static String cleanupUsername(String username) {
     return username.startsWith("#") ? username.substring(1) : username;
   }
-
 }
