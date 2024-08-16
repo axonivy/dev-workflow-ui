@@ -1,5 +1,6 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
-  xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
   xmlns:pe="http://primefaces.org/ui/extensions">
 
 <h:body>
@@ -11,13 +12,19 @@
         <h4 class="m-0">Cleanup</h4>
         <h:form id="clanupForm">
           <p:growl id="growl" showDetail="true" />
-          <p>When you click through different processes you create different types of data like cases, tasks etc. Here you can clean that data to reset your designer.</p>
+          <p>When you click through different processes you create different types of data like cases, tasks etc.
+            Here you can clean that data to reset your designer.</p>
           <p:panelGrid columns="1" layout="flex">
-            <p:selectBooleanCheckbox id="casesAndTasksCheckbox" value="#{cleanupIvyDevWfBean.casesTasksAndDependent}" itemLabel="All Cases, Tasks and dependent objects" />
-            <p:selectBooleanCheckbox id="businessDataCheckbox" value="#{cleanupIvyDevWfBean.businessDataAndSearchIndex}" itemLabel="All Business Data and the search index" />
-            <p:selectBooleanCheckbox id="identityProviderTokenCheckbox" value="#{cleanupIvyDevWfBean.identityProviderTokens}" itemLabel="All identity provider tokens" />
+            <p:selectBooleanCheckbox id="casesAndTasksCheckbox" value="#{cleanupIvyDevWfBean.casesTasksAndDependent}"
+              itemLabel="All Cases, Tasks and dependent objects" />
+            <p:selectBooleanCheckbox id="businessDataCheckbox" value="#{cleanupIvyDevWfBean.businessDataAndSearchIndex}"
+              itemLabel="All Business Data and the search index" />
+            <p:selectBooleanCheckbox id="identityProviderTokenCheckbox"
+              value="#{cleanupIvyDevWfBean.identityProviderTokens}" itemLabel="All identity provider tokens" />
             <p:selectBooleanCheckbox id="dataCaches" value="#{cleanupIvyDevWfBean.dataCaches}" itemLabel="Data caches" />
-            <p:commandButton id="cleanupBtn" value="Cleanup" icon="si si-recycling-trash-bin-2 " actionListener="#{cleanupIvyDevWfBean.cleanup}" update="growl" disabled="#{!adminIvyDevWfBean.isWorkflowAdmin() or !engineModeIvyDevWfBean.demoOrDesigner}"/>
+            <p:commandButton id="cleanupBtn" value="Cleanup" icon="si si-recycling-trash-bin-2 "
+              actionListener="#{cleanupIvyDevWfBean.cleanup}" update="growl"
+              disabled="#{!permissionsBean.devModeAndAdmin}" />
           </p:panelGrid>
         </h:form>
       </div>

@@ -16,5 +16,5 @@
 
   <p:commandButton id="signalBtn" update="@form, boundarySignalsTable, firedSignalsTable"
     styleClass="mt-2 send-signal-button" value="Send" actionListener="#{signalsIvyDevWfBean.sendSignal}"
-    disabled="#{!adminIvyDevWfBean.isWorkflowAdmin() or !engineModeIvyDevWfBean.demoOrDesigner}" icon="si si-send-email"/>
+    disabled="#{!permissionsBean.demoDevModeOrAdmin}" icon="si si-send-email"/>
 </ui:composition>

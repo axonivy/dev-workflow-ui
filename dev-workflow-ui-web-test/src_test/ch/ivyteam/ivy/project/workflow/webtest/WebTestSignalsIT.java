@@ -1,16 +1,12 @@
 package ch.ivyteam.ivy.project.workflow.webtest;
 
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
-import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,17 +29,6 @@ public class WebTestSignalsIT {
   void beforeEach() {
     loginDeveloper();
     openView("signals.xhtml");
-  }
-
-  @Test
-  public void testSignalAdminOnly() {
-    loginFromTable("testuser");
-    open(viewUrl("signals.xhtml"));
-    $(By.id("menuform:sr_home")).shouldHave(cssClass("active-nav-page"));
-
-    loginDeveloper();
-    openView("signals.xhtml");
-    $(By.id("signalForm:signalBtn")).shouldBe(enabled);
   }
 
   @Test

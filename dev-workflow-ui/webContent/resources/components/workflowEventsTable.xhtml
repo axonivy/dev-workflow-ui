@@ -8,7 +8,7 @@
 </cc:interface>
 
 <cc:implementation>
-  <h:panelGroup id="workflowEvents" rendered="#{adminIvyDevWfBean.hasWorkflowEventReadPermission()}">
+  <h:panelGroup id="workflowEvents" rendered="#{permissionsBean.hasWorkflowEventReadPermission()}">
     <p:dataTable id="eventsTable" var="event" value="#{cc.attrs.workflowEvents}" widgetVar="eventsTable"
       emptyMessage="No Events found with given criteria" reflow="true" rows="5" paginator="true"
       paginatorAlwaysVisible="false" paginatorPosition="bottom"
@@ -36,7 +36,7 @@
     </p:dataTable>
   </h:panelGroup>
 
-  <p:staticMessage id="noPermissionMessage" severity="warn" rendered="#{!adminIvyDevWfBean.hasWorkflowEventReadPermission()}"
+  <p:staticMessage id="noPermissionMessage" severity="warn" rendered="#{!permissionsBean.hasWorkflowEventReadPermission()}"
    summary="No permissions" detail="You need Workflow Events read permission in order to see them."/>
 
 </cc:implementation>

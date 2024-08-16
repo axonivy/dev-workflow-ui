@@ -42,9 +42,6 @@
               onstart="PrimeFaces.FreyaConfigurator.beforeResourceChange(); PrimeFaces.FreyaConfigurator.changeLayout('ivy', 'dark');"/>
             <p:remoteCommand name="setLightMode" update="themeSwitcher" action="#{ivyFreyaTheme.setMode('light')}"
               onstart="PrimeFaces.FreyaConfigurator.beforeResourceChange(); PrimeFaces.FreyaConfigurator.changeLayout('ivy', 'light');"/>
-            <script>
-              window.setTheme = (theme) => theme === 'dark' ? setDarkMode() : setLightMode();
-            </script>
 
             <li class="themeswitch-item">
               <p:commandLink id="themeSwitcher" onclick="PrimeFaces.FreyaConfigurator.changeLayout('ivy', '#{ivyFreyaTheme.mode == 'light' ? 'dark' : 'light'}');"
@@ -70,7 +67,7 @@
                     <span>Profile</span>
                   </p:link>
                 </li>
-                <li jsf:rendered="#{engineModeIvyDevWfBean.demoOrDesigner}">
+                <li jsf:rendered="#{permissionsBean.demoOrDevMode}">
                   <p:link id="loginTableBtn" href="loginTable.xhtml?originalUrl=#{loginIvyDevWfBean.originalPage}">
                     <i class="si si-lg si-multiple-neutral-1"></i>
                     <span>Switch user</span>
@@ -103,6 +100,10 @@
 
   <ui:include src="progress-loader.xhtml" />
   <ui:include src="exception.xhtml" />
+
+  <script>
+    window.setTheme = (theme) => theme === 'dark' ? setDarkMode() : setLightMode();
+  </script>
 
   <h:outputStylesheet name="css/layout-ivy-#{ivyFreyaTheme.mode}.css" library="freya-layout" />
   <h:outputStylesheet name="primeflex-3.min.css" library="primeflex" />

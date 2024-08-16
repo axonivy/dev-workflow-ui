@@ -9,7 +9,7 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 
-import ch.ivyteam.workflowui.util.UserUtil;
+import ch.ivyteam.workflowui.util.PermissionsUtil;
 
 @ManagedBean
 @ViewScoped
@@ -22,7 +22,7 @@ public class IntermediateEventsIvyDevWfBean {
 
   public void onRowSelect(SelectEvent<?> event) {
     Object object = event.getObject();
-    if (UserUtil.isAdmin()) {
+    if (PermissionsUtil.isAdmin()) {
       if (object instanceof IntermediateEventElementModel model) {
         model.redirectToElement();
       }

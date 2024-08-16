@@ -12,7 +12,6 @@ import static com.codeborne.selenide.Selenide.$;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.codeborne.selenide.Selenide;

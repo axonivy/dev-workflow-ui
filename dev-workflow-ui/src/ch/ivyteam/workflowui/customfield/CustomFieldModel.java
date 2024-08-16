@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.custom.field.ICustomField;
-import ch.ivyteam.workflowui.util.EngineModeUtil;
+import ch.ivyteam.workflowui.util.PermissionsUtil;
 
 public class CustomFieldModel {
 
@@ -57,7 +57,6 @@ public class CustomFieldModel {
   }
 
   private static boolean designerOrNotHidden(ICustomField<?> customField) {
-    return EngineModeUtil.isDesigner() ||
-        ! customField.meta().isHidden();
+    return PermissionsUtil.isDemoOrDevMode() || ! customField.meta().isHidden();
   }
 }

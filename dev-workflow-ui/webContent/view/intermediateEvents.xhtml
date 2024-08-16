@@ -6,7 +6,7 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotAdmin}" />
+      <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotDevModeOrAdmin}" />
 
       <div class="card">
         <h4 class="mb-3">Intermediate Event Beans</h4>
@@ -14,7 +14,7 @@
         <h:form id="intermediateEventBeansForm">
           <p:growl id="growl" showDetail="true"/>
           <p:dataTable id="intermediateEventsTable" var="intermediateEvent"
-            value="#{intermediateEventsIvyDevWfBean.intermediateEvents}" rows="5" paginator="true"
+            value="#{intermediateEventsIvyDevWfBean.intermediateEvents}" rows="12" paginator="true"
             paginatorPosition="bottom" paginatorAlwaysVisible="false" selectionMode="single"
             rowKey="#{intermediateEvent.processElementId}">
             <p:ajax event="rowSelect" listener="#{intermediateEventsIvyDevWfBean.onRowSelect}" update="@form" />
