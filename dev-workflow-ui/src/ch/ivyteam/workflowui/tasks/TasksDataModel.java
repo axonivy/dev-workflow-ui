@@ -15,14 +15,14 @@ import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.ivy.workflow.query.TaskQuery;
+import ch.ivyteam.workflowui.util.PermissionsUtil;
 import ch.ivyteam.workflowui.util.TaskUtil;
-import ch.ivyteam.workflowui.util.UserUtil;
 
 public class TasksDataModel extends LazyDataModel<TaskModel> {
 
   private static final long serialVersionUID = -5287014754211109062L;
   private String filter;
-  private boolean showAll = UserUtil.isAdmin();
+  private boolean showAll = PermissionsUtil.isAdmin();
 
   public String getFilter() {
     return filter;
@@ -78,7 +78,7 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
   private void checkIfShowAll(TaskQuery taskQuery) {
     if (!isShowAll()) {
       taskQuery.where().and(TaskQuery.create().where().currentUserIsInvolved());
-      if (UserUtil.isAdmin()) {
+      if (PermissionsUtil.isAdmin()) {
         taskQuery.where().and().not(TaskQuery.create().where().activatorId().isEqual(ISecurityContext.current().users().system().getSecurityMemberId()));
       }
     }

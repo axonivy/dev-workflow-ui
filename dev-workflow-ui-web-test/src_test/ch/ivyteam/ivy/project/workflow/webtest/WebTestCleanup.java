@@ -52,26 +52,29 @@ public class WebTestCleanup {
 
   @Test
   @Order(1)
-  public void testNoCleanupEngine() {
+  public void noCleanupIfNotDevMode() {
     openView("cleanup.xhtml");
-    $(By.id("clanupForm:cleanupBtn")).shouldBe(enabled);
+    $(By.id("clanupForm:cleanupBtn")).shouldBe(disabled);
     startTestProcess("1783B19164F69B78/designerStandard.ivp");
     openView("cleanup.xhtml");
-    $(By.id("clanupForm:cleanupBtn")).shouldNotBe(enabled);
+    $(By.id("clanupForm:cleanupBtn")).shouldBe(disabled);
   }
 
   @Test
   @Order(2)
-  public void testCleanupUsers() {
+  public void cleanupUserPermissions() {
     startTestProcess("1783B19164F69B78/designerEmbedded.ivp");
-
     loginFromTable("testuser");
+    $(By.id("menuform:sr_actions")).shouldBe(visible).click();
+    $(By.id("menuform:sr_cleanup")).shouldNotBe(visible);
     open(viewUrl("cleanup.xhtml"));
     $(By.id("menuform:sr_home")).shouldHave(cssClass("active-nav-page"));
 
     loginDeveloper();
+    $(By.id("menuform:sr_actions")).shouldBe(visible).click();
+    $(By.id("menuform:sr_cleanup")).shouldBe(visible);
     openView("cleanup.xhtml");
-    $(By.id("clanupForm:cleanupBtn")).shouldNotBe(disabled);
+    $(By.id("clanupForm:cleanupBtn")).shouldBe(enabled);
   }
 
   @Test

@@ -16,13 +16,13 @@ import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.ivy.workflow.query.CaseQuery;
 import ch.ivyteam.workflowui.util.CaseUtil;
-import ch.ivyteam.workflowui.util.UserUtil;
+import ch.ivyteam.workflowui.util.PermissionsUtil;
 
 public class CasesDataModel extends LazyDataModel<ICase> {
 
   private static final long serialVersionUID = -7707950729638849827L;
   private String filter;
-  private boolean showAll = UserUtil.isAdmin();
+  private boolean showAll = PermissionsUtil.isAdmin();
 
   public String getFilter() {
     return filter;

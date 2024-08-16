@@ -5,7 +5,7 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotAdmin}" />
+      <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotDevModeOrAdmin}" />
       <div class="flex align-items-center m-3">
         <h4 class="m-0">Statistics</h4>
       </div>

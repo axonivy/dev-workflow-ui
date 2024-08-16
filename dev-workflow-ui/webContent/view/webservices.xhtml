@@ -6,7 +6,7 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotAdmin}" />
+      <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotDevModeOrAdmin}" />
 
       <h:form id="webServicesForm">
         <p:growl id="growl" showDetail="true" />

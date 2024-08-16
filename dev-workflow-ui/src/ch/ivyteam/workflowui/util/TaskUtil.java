@@ -93,7 +93,7 @@ public class TaskUtil {
     if (task == null) {
       return false;
     }
-    if (UserUtil.isAdmin()) {
+    if (PermissionsUtil.isAdmin()) {
       return true;
     }
     var isActivator = task.activator().isMember(user.getUserToken());

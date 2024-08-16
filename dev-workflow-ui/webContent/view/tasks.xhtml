@@ -16,10 +16,10 @@
               <div class="flex justify-content-between mb-3 pretty-search">
                 <h4 class="m-0">Tasks</h4>
                 <h:panelGroup id="showAllTasksSwitch_container" styleClass="ml-auto inline-flex align-items-center"
-                  layout="block" rendered="#{adminIvyDevWfBean.isWorkflowAdmin()}">
+                  layout="block" rendered="#{permissionsBean.admin}">
                   <h:outputText value="Show all" styleClass="mr-2" />
                   <p:toggleSwitch id="showAllTasksSwitch" value="#{tasksIvyDevWfBean.tasksDataModel.showAll}"
-                    disabled="#{!adminIvyDevWfBean.isWorkflowAdmin()}">
+                    disabled="#{!permissionsBean.admin}">
                     <p:ajax update="tasksForm" />
                   </p:toggleSwitch>
                 </h:panelGroup>

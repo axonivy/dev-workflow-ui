@@ -12,16 +12,12 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.webdriver;
 import static com.codeborne.selenide.WebDriverConditions.urlContaining;
 
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.engine.EngineUrl;
-
-import ch.ivyteam.ivy.security.IUser;
-import ch.ivyteam.workflowui.util.UserUtil;
 
 public class WorkflowUiUtil {
   public static String pmvName() {
@@ -77,10 +73,6 @@ public class WorkflowUiUtil {
 
   public static void assertCurrentUrlContains(String contains) {
     webdriver().shouldHave(urlContaining(contains));
-  }
-
-  public static List<IUser> getUsers() {
-    return UserUtil.getUsers();
   }
 
   public static void loginFromTable(String username) {

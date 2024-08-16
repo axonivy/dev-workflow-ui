@@ -2,15 +2,12 @@ package ch.ivyteam.workflowui.util;
 
 import static java.util.stream.Collectors.toList;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import ch.ivyteam.ivy.environment.Ivy;
-import ch.ivyteam.ivy.security.IPermission;
 import ch.ivyteam.ivy.security.IRole;
-import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.workflowui.login.LoginUtil;
@@ -29,7 +26,7 @@ public class UserUtil {
 
   public static void redirectIfNotLoggedIn() {
     if (!isLoggedIn()) {
-      if (EngineModeUtil.isDemoOrDesigner()) {
+      if (PermissionsUtil.isDemoOrDevMode()) {
         LoginUtil.redirectToLoginTable();
       } else {
         LoginUtil.redirectToLoginForm();
@@ -38,22 +35,12 @@ public class UserUtil {
   }
 
   public static void redirectIfNotAdmin() {
-    if (!isAdmin()) {
+    if (!PermissionsUtil.isAdmin()) {
       RedirectUtil.redirect();
     }
   }
 
   public static boolean isLoggedIn() {
     return ISession.current().getSessionUser() != null;
-  }
-
-  public static boolean isAdmin() {
-    return hasPermission(IPermission.TASK_READ_ALL) & hasPermission(IPermission.CASE_READ_ALL);
-  }
-
-  private static boolean hasPermission(IPermission... permissions) {
-    var securityDescriptor = ISecurityContext.current().securityDescriptor();
-    return Arrays.stream(permissions).anyMatch(
-            p -> ISession.current().hasPermission(securityDescriptor, p));
   }
 }
