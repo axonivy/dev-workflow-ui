@@ -50,14 +50,14 @@ public class WebDocuScreenshots {
     openView("tasks.xhtml");
     takeScreenshot("workflow-ui-tasks", new Dimension(SCREENSHOT_WIDTH, 800));
 
-    $(".detail-btn").shouldBe(visible).click();
+    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
     $("#actionMenuForm\\:taskActionsBtn").click();
     takeScreenshot("workflow-ui-taskDetails", new Dimension(SCREENSHOT_WIDTH, 800));
 
     openView("cases.xhtml");
     takeScreenshot("workflow-ui-cases", new Dimension(SCREENSHOT_WIDTH, 800));
 
-    $(".detail-btn").shouldBe(visible).click();
+    $(By.id("casesForm:cases:0:caseName")).shouldBe(visible).click();
     takeScreenshot("workflow-ui-caseDetails", new Dimension(SCREENSHOT_WIDTH, 800));
 
     openView("starts.xhtml");
@@ -76,7 +76,7 @@ public class WebDocuScreenshots {
 
     WorkflowUiUtil.startTestCaseMap();
     openView("cases.xhtml");
-    $(".detail-btn").shouldBe(visible).click();
+    $(By.id("casesForm:cases:0:caseName")).shouldBe(visible).click();
     takeScreenshot("workflow-ui-caseMap", new Dimension(SCREENSHOT_WIDTH, 800));
 
     startTestProcess("1750C5211D94569D/testIntermediateEventProcess.ivp");

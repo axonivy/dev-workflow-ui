@@ -35,10 +35,17 @@
       <jc:datetime id="endTime" datetime="#{task.endTimestamp}"/>
     </p:column>
 
-    <p:column styleClass="table-btn-1" width="20">
-      <p:link href="#{task.detailUrl}" >
-        <i class="si si-information-circle detail-btn"/>
-      </p:link>
+    <p:column width="30">
+      <p:commandLink id="taskActionsBtn" styleClass="text-color flex justify-content-center">
+        <i class="more-options-menu si si-navigation-menu-horizontal-filled" />
+      </p:commandLink>
+      <p:menu id="taskActionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom"
+        style="width: 200px">
+        <p:menuitem value="Start task" actionListener="#{homepageIvyDevWfBean.executeTask(task)}" id="startTaskBtn"
+          icon="si si-controls-play" />
+        <p:menuitem id="openTaskDetailsBtn" value="Open task details" url="#{task.detailUrl}"
+          icon="si si-information-circle" />
+      </p:menu>
     </p:column>
   </p:dataTable>
 

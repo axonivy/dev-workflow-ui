@@ -29,7 +29,7 @@ public class WebTestHomepageIT {
     // start process to create test data
     openView("starts.xhtml");
     $(By.id("startsForm:projectStarts:globalFilter")).setValue("test _ case _ map").pressEnter();
-    $(By.id("startsForm:projectStarts:0:processStartBtn")).shouldBe(visible).click();
+    $(By.id("startsForm:projectStarts:0:startName")).shouldBe(visible).click();
     $(By.id("iFrameForm:frameTaskName")).shouldBe(text("Test Developer Workflow-UI Dialog 1"));
     $(By.id("iFrame")).shouldBe(visible);
     openView("home.xhtml");

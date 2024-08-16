@@ -44,9 +44,7 @@
             </p:column>
 
             <p:column headerText="Name" filterBy="#{task.name}" sortBy="#{task.name}" responsivePriority="1">
-              <h:commandLink action="#{tasksIvyDevWfBean.redirectToTaskDetails(task)}">
-                <h:outputText id="taskName" value="#{task.name}" />
-              </h:commandLink>
+              <h:outputText id="taskName" value="#{task.name}" />
             </p:column>
 
             <p:column headerText="Responsible" filterBy="#{task.activator}" sortBy="#{task.activatorName}" width="160"
@@ -63,10 +61,17 @@
               <jc:time id="endTime" datetime="#{task.endTimestamp}" />
             </p:column>
 
-            <p:column styleClass="table-btn-1" responsivePriority="2" width="10">
-              <p:link href="#{task.detailUrl}" styleClass="flex">
-                <i class="si si-information-circle detail-btn" />
-              </p:link>
+            <p:column responsivePriority="2" width="30">
+              <p:commandLink id="taskActionsBtn" styleClass="text-color flex justify-content-center">
+                <i class="more-options-menu si si-navigation-menu-horizontal-filled" />
+              </p:commandLink>
+              <p:menu id="taskActionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom"
+                style="width: 200px">
+                <p:menuitem id="openTaskDetailsBtn" value="Open task details" url="#{task.detailUrl}"
+                  icon="si si-information-circle" />
+                <p:menuitem value="Start task" actionListener="#{homepageIvyDevWfBean.executeTask(task)}"
+                  id="startTaskBtn" icon="si si-controls-play" disabled="#{!task.canBeStarted()}"/>
+              </p:menu>
             </p:column>
           </p:dataTable>
         </div>

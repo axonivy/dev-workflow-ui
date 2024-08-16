@@ -58,8 +58,7 @@ public class TaskUtil {
   }
 
   public static void executeTask(TaskModel model) {
-    var task = IWorkflowContext.current().findTask(model.getUuid());
-    RedirectUtil.redirect(createTaskUrl(new TaskModel(task)));
+    RedirectUtil.redirect(createTaskUrl(model));
   }
 
   public static String createTaskUrl(TaskModel task) {

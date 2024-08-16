@@ -10,6 +10,7 @@ import org.primefaces.event.SelectEvent;
 import ch.ivyteam.workflowui.cases.StartedCasesDataModel;
 import ch.ivyteam.workflowui.starts.StartableModel;
 import ch.ivyteam.workflowui.tasks.PersonalTasksDataModel;
+import ch.ivyteam.workflowui.tasks.TaskModel;
 import ch.ivyteam.workflowui.tasks.TasksDataModel;
 import ch.ivyteam.workflowui.util.LastSessionStarts;
 import ch.ivyteam.workflowui.util.TaskUtil;
@@ -32,6 +33,10 @@ public class HomepageIvyDevWfBean {
 
   public TasksDataModel getTasksDataModel() {
     return tasksDataModel;
+  }
+
+  public void executeTask(TaskModel task) {
+    TaskUtil.executeTask(task);
   }
 
   public void executeTaskRow(SelectEvent<?> event) {

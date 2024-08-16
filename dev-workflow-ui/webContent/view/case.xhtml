@@ -22,9 +22,11 @@
                   <h6 class="m-0">Description</h6>
                 </div>
                 <div>
+                  <p:commandButton icon="si si-button-refresh-arrow" styleClass="ui-button-secondary rounded-button"
+                    id="caseRerunBtn" actionListener="#{casesDetailsIvyDevWfBean.rerunCase}" />
                   <p:badge value="#{casesDetailsIvyDevWfBean.selectedCase.notes.size()}">
                     <p:commandButton id="caseNotesBtn"
-                      styleClass="ui-button-secondary ui-button-outlined rounded-button"
+                      styleClass="ui-button-secondary ui-button-outlined rounded-button ml-2"
                       disabled="#{0 >= casesDetailsIvyDevWfBean.selectedCase.notes.size()}" icon="si si-notes-quill"
                       actionListener="#{notesBean.openNotesDialog(casesDetailsIvyDevWfBean.selectedCaseId)}" />
                   </p:badge>

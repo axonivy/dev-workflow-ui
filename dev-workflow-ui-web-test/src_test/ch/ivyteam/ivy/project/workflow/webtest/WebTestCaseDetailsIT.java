@@ -73,7 +73,7 @@ class WebTestCaseDetailsIT {
   void checkTaskTableSystemTask() {
     startTestProcess("1750C5211D94569D/testIntermediateEventProcess.ivp");
     openView("cases.xhtml");
-    $(".detail-btn").shouldBe(visible).click();
+    $(By.id("casesForm:cases:0:caseName")).shouldBe(visible).click();
 
     Table tasksTable = PrimeUi.table(By.id("tasksForm:tasks"));
     tasksTable.containsNot("System");

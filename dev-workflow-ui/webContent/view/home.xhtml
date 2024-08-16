@@ -21,19 +21,20 @@
                 <p:ajax event="rowSelect" listener="#{homepageIvyDevWfBean.executeLastStart}" />
                 <p:column styleClass="startedProcessElement">
                   <div class="flex justify-content-between align-items-center">
-                    <p:commandLink id="startedProcessLink" actionListener="#{start.execute}"
-                      styleClass="flex align-items-center">
+                    <h:panelGroup id="startedProcess" styleClass="flex align-items-center">
                       <i class="#{start.icon} mr-3" />
                       <h:outputText value="#{start.displayName}" />
-                    </p:commandLink>
-                    <p:tooltip for="startedProcessLink" value="#{start.displayName}" position="top" />
+                    </h:panelGroup>
+                    <p:tooltip for="startedProcess" value="#{start.displayName}" position="top" />
 
                     <div class="flex">
                       <p:commandLink id="startedProcessMenuLink" styleClass="text-color flex justify-content-center">
-                        <i class="si si-navigation-menu-horizontal-filled" />
+                        <i class="more-options-menu si si-navigation-menu-horizontal-filled" />
                       </p:commandLink>
                       <p:menu id="startsActionsMenu" overlay="true" trigger="startedProcessMenuLink" my="right top"
                         at="right bottom" style="width: 200px">
+                        <p:menuitem value="Start process" action="#{start.execute}" id="startProcessBtn"
+                          icon="si si-controls-play" />
                         <p:menuitem value="Copy to clipboard" onclick="copyToClipboard('#{start.link}')"
                           id="copyStartLinkBtn" icon="si si-hyperlink-3" />
                         <p:menuitem value="Open fullscreen" url="#{start.link}" id="openStartFullscreenBtn"
@@ -74,17 +75,23 @@
                   <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
                 </p:column>
                 <p:column headerText="Name" sortBy="#{task.name}" responsivePriority="1" width="140">
-                  <h:outputText id="taskName" value="#{task.name}" styleClass="text-primary white-space-nowrap"/>
+                  <h:outputText id="taskName" value="#{task.name}" styleClass="white-space-nowrap"/>
                   <p:tooltip for="taskName" value="#{task.name}" position="top" />
                 </p:column>
                 <p:column headerText="Expiry" sortBy="#{task.expiryTimestamp}" responsivePriority="2" width="40">
                   <jc:time id="expiryTime" datetime="#{task.expiryTimestamp}" />
                 </p:column>
-                <p:column styleClass="table-btn-1" width="5">
-                  <p:link href="#{task.detailUrl}" id="taskDetailsIcon" styleClass="flex">
-                    <i class="si si-information-circle detail-btn" />
-                    <p:tooltip for="taskDetailsIcon" value="Open task details" position="top" />
-                  </p:link>
+                <p:column width="5">
+                  <p:commandLink id="taskActionsBtn" styleClass="text-color flex justify-content-center">
+                    <i class="more-options-menu si si-navigation-menu-horizontal-filled" />
+                  </p:commandLink>
+                  <p:menu id="taskActionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom"
+                    style="width: 200px">
+                    <p:menuitem value="Start task" actionListener="#{homepageIvyDevWfBean.executeTask(task)}"
+                      id="startTaskBtn" icon="si si-controls-play" />
+                    <p:menuitem id="openTaskDetailsBtn" value="Open task details" url="#{task.detailUrl}"
+                      icon="si si-information-circle" />
+                  </p:menu>
                 </p:column>
               </p:dataTable>
               <h:panelGrid rendered="#{homepageIvyDevWfBean.tasksDataModel.size eq 0}">
@@ -109,10 +116,7 @@
                 </p:column>
 
                 <p:column headerText="Name" filterBy="#{case.getName(case)}" sortBy="#{case.name}">
-                  <h:link outcome="case">
-                    <f:param name="id" value="#{case.uuid()}" />
-                    <h:outputText id="caseName" value="#{casesIvyDevWfBean.getName(case)}" />
-                  </h:link>
+                  <h:outputText id="caseName" value="#{casesIvyDevWfBean.getName(case)}" />
                 </p:column>
 
                 <p:column headerText="Start" sortBy="#{case.startTimestamp}" responsivePriority="2"
@@ -126,14 +130,14 @@
 
                 <p:column width="30" styleClass="text-center">
                   <p:commandLink id="caseActionsBtn" styleClass="text-color flex justify-content-center">
-                    <i class="si si-navigation-menu-horizontal-filled" />
+                    <i class="more-options-menu si si-navigation-menu-horizontal-filled" />
                   </p:commandLink>
                   <p:menu id="caseActionsMenu" overlay="true" trigger="caseActionsBtn" my="right top"
                     at="right bottom" style="width: 200px">
-                    <p:menuitem value="Rerun process" actionListener="#{casesIvyDevWfBean.rerunProcess(case)}"
-                      id="rerunCaseProcessBtn" icon="si si-button-refresh-arrow" />
                     <p:menuitem id="openCaseDetailsBtn" value="Open case details"
                       url="#{case.detailLink}" icon="si si-information-circle" />
+                    <p:menuitem value="Rerun process" actionListener="#{casesIvyDevWfBean.rerunProcess(case)}"
+                      id="rerunCaseProcessBtn" icon="si si-button-refresh-arrow" />
                   </p:menu>
                 </p:column>
               </p:dataTable>

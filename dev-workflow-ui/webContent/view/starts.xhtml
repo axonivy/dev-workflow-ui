@@ -25,10 +25,10 @@
 
             <p:ajax event="rowSelect" listener="#{processesIvyDevWfBean.startRow}" />
             <p:column width="10">
-              <h:outputText id="processStartIcon" class="#{start.icon} si-lg text-primary vertical-align-middle" />
+              <h:outputText id="processStartIcon" class="#{start.icon} si-lg vertical-align-middle" />
             </p:column>
             <p:column headerText="Process" sortBy="#{start.displayName}" filterBy="#{start.displayName}">
-              <h:outputText id="startName" value="#{start.displayName}" styleClass="text-primary" />
+              <h:outputText id="startName" value="#{start.displayName}" styleClass="text-primary"/>
               <div class="start-description overflow-hidden-ellipsis text-sm">
                 <h:outputText id="startDescription" value="#{start.description}" />
                 <p:tooltip for="startDescription" position="top" value="#{start.description}" styleClass="text" />
@@ -46,17 +46,14 @@
               filterBy="#{start.category.name}">
               <h:outputText value="#{start.category.name}" />
             </p:column>
-            <p:column width="80" styleClass="text-center">
-              <p:commandButton actionListener="#{start.execute}" value="Start" id="processStartBtn"
-                icon="si si-controls-play" />
-              <p:tooltip for="processStartBtn" position="top" value="Start '#{start.displayName}'" />
-            </p:column>
             <p:column width="30" styleClass="text-center">
               <p:commandLink id="startActionsBtn" styleClass="text-color flex justify-content-center">
-                <i class="si si-lg si-navigation-menu-horizontal-filled" />
+                <i class="more-options-menu si si-navigation-menu-horizontal-filled" />
               </p:commandLink>
               <p:menu id="startsActionsMenu" overlay="true" trigger="startActionsBtn" my="right top" at="right bottom"
                 style="width: 200px">
+                <p:menuitem value="Start process" action="#{start.execute}" id="startProcessBtn"
+                  icon="si si-controls-play" />
                 <p:menuitem value="Copy to clipboard" onclick="copyToClipboard('#{start.link}')" id="copyStartLinkBtn"
                   icon="si si-hyperlink-3" />
                 <p:menuitem value="Open fullscreen" url="#{start.link}" id="openStartFullscreenBtn"

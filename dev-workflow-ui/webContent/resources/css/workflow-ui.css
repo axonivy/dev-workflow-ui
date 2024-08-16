@@ -51,10 +51,6 @@ a > i.detail-btn {
 .table-header-none thead {
   display: none;
 }
-.ui-datatable .table-btn-1 {
-  width: 40px;
-  text-align: center;
-}
 .ui-datatable .ui-column-filter {
   display: none;
 }
@@ -68,12 +64,14 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight {
   background: var(--surface-c);
   color: var(--text-color);
 }
-
 body .ui-datatable .ui-datatable-header:has(.pretty-search) {
   background: none;
   border: none;
   padding: 0;
   font-weight: 400;
+}
+.more-options-menu {
+  padding: 0.25rem 0.5rem;
 }
 
 /* Dialog */
