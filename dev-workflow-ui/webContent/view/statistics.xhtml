@@ -8,10 +8,10 @@
       <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotDevModeOrAdmin}" />
       <div class="flex m-3 justify-content-between">
         <div class="flex align-items-center">
-        <h4 class="m-0">Statistics</h4>
+          <h4 class="m-0">Statistics</h4>
         </div>
         <div class="flex align-items-center">
-          <h:outputText value="Time range:"/>
+          <h:outputText value="Time range:" />
           <p:selectOneMenu value="#{statisticsBean.timeDuration}" styleClass="ml-2">
             <f:selectItem itemLabel="Today" itemValue="today" />
             <f:selectItem itemLabel="Last 7 days" itemValue="7d" />

@@ -38,6 +38,10 @@ public class StatisticsBean {
     return timeDuration;
   }
 
+  public String getTimeDuration() {
+    return timeDuration;
+  }
+
   public void setTimeDuration(String timeDuration) {
     this.timeDuration = timeDuration;
   }
@@ -45,13 +49,13 @@ public class StatisticsBean {
   private String calculateTimeDurationQuery()
   {
     if (timeDuration.equals("all")) {
-      return "";
+      return null;
     }
-    return ",startTimestamp:>=now-" + timeDuration + "/d";
+    return "startTimestamp:>=now-" + timeDuration + "/d";
   }
 
   public LineChartModel getTasksPerHourChart() {
-    var aggrResult = WorkflowStats.current().task().aggregate("startTimestamp:bucket:hour,endTimestamp:bucket:hour", "");
+    var aggrResult = WorkflowStats.current().task().aggregate("startTimestamp:bucket:hour,endTimestamp:bucket:hour", calculateTimeDurationQuery() );
     var startCountMap = initializeTimeMap(12, true);
     var endCountMap = initializeTimeMap(12, true);
     for (var agg : aggrResult.aggs()) {
