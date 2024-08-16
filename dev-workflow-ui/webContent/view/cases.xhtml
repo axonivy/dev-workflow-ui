@@ -33,15 +33,12 @@
               </div>
             </f:facet>
 
-            <p:column headerText="State" filterBy="#{case.businessState}" sortBy="#{case.businessState}" width="70">
+            <p:column headerText="State" filterBy="#{case.businessState}" sortBy="#{case.businessState}" width="75">
               <jc:stateBadge id="caseState" data="#{case}" />
             </p:column>
 
             <p:column headerText="Name" filterBy="#{case.getName(case)}" sortBy="#{case.name}" responsivePriority="1">
-              <h:link outcome="case">
-                <f:param name="id" value="#{case.uuid()}" />
-                <h:outputText id="caseName" value="#{casesIvyDevWfBean.getName(case)}" />
-              </h:link>
+              <h:outputText id="caseName" value="#{casesIvyDevWfBean.getName(case)}" />
             </p:column>
 
             <p:column headerText="Creator" filterBy="#{case.creatorUserName}" sortBy="#{case.creatorUserName}"
@@ -58,10 +55,17 @@
               <jc:time id="endTime" datetime="#{case.endTimestamp}" />
             </p:column>
 
-            <p:column styleClass="table-btn-1" width="10">
-              <p:link href="case.xhtml?id=#{case.uuid()}" styleClass="flex">
-                <i class="si si-information-circle detail-btn" />
-              </p:link>
+            <p:column width="30">
+              <p:commandLink id="caseActionsBtn" styleClass="text-color flex justify-content-center">
+                <i class="more-options-menu si si-navigation-menu-horizontal-filled" />
+              </p:commandLink>
+              <p:menu id="caseActionsMenu" overlay="true" trigger="caseActionsBtn" my="right top" at="right bottom"
+                style="width: 200px">
+                <p:menuitem id="openCaseDetailsBtn" value="Open case details" url="#{case.detailLink}"
+                  icon="si si-information-circle" />
+                <p:menuitem value="Rerun process" actionListener="#{casesIvyDevWfBean.rerunProcess(case)}"
+                  id="rerunCaseProcessBtn" icon="si si-button-refresh-arrow" />
+              </p:menu>
             </p:column>
           </p:dataTable>
         </div>

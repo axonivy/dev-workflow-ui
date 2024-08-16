@@ -42,7 +42,7 @@ public class WebTestProcessViewerPermissionIT {
     openView("tasks.xhtml");
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldHave(text("Test View Permission Task"));
-    $(By.className("detail-btn")).shouldBe(visible).click();
+    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
     $(By.id("taskName")).shouldHave(text("Test View Permission Task"));
     $("a#openProcessViewerBtn").shouldBe(visible);
   }
@@ -50,7 +50,7 @@ public class WebTestProcessViewerPermissionIT {
   @Test
   public void caseDetail() {
     openView("cases.xhtml");
-    $(".detail-btn").shouldBe(visible).click();
+    $(By.id("casesForm:cases:0:caseName")).shouldBe(visible).click();
     $(By.id("caseName")).shouldBe(visible).shouldHave(text("Test View Permission Case"));
     $(byText("Current Process is hidden")).shouldBe(visible);
   }

@@ -107,7 +107,7 @@ public class WebTestLoginIT {
     loginFromTable("testuser");
     startTestProcess("1750C5211D94569D/TestData.ivp");
     openView("tasks.xhtml");
-    $(".detail-btn").shouldBe(visible).click();
+    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
     var taskId = $(By.id("taskId")).shouldBe(visible).text();
     assertCurrentUrlContains("task.xhtml?id=" + taskId);
 
