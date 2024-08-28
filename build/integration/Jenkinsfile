@@ -1,0 +1,27 @@
+pipeline {
+  agent any
+
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '30'))
+  }
+
+  triggers {
+    cron 'H 6 * * *'
+  }
+
+  parameters {
+    string(name: 'engineSource', defaultValue: 'https://product.ivyteam.io', description: 'Engine page url')
+  }
+
+  stages {
+    stage('Integration') {
+      steps {
+        script {
+          def common = load 'build/build.groovy'
+          def mvnArgs = "-Dmaven.test.failure.ignore=true -Pintegration "
+          common.buildIntegration(mvnArgs);
+        }
+      }
+    }
+  }
+}
