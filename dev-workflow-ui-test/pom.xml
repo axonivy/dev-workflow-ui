@@ -14,6 +14,10 @@
   <artifactId>dev-workflow-ui-test</artifactId>
   <packaging>iar</packaging>
 
+  <properties>
+    <skip.unit.tests>false</skip.unit.tests>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>ch.ivyteam.workflow</groupId>
@@ -44,6 +48,14 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven.surefire.version}</version>
+        <configuration>
+          <skip>${skip.unit.tests}</skip>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-deploy-plugin</artifactId>
         <configuration>
           <skip>true</skip>
@@ -51,4 +63,19 @@
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>screenshots</id>
+      <properties>
+        <skip.unit.tests>true</skip.unit.tests>
+      </properties>
+    </profile>
+    <profile>
+      <id>integration</id>
+      <properties>
+        <skip.unit.tests>true</skip.unit.tests>
+      </properties>
+    </profile>
+  </profiles>
 </project>

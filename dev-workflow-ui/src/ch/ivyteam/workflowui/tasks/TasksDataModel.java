@@ -20,7 +20,7 @@ import ch.ivyteam.workflowui.util.TaskUtil;
 
 public class TasksDataModel extends LazyDataModel<TaskModel> {
 
-  private static final long serialVersionUID = -5287014754211109062L;
+  private static final long serialVersionUID = 1L;
   private String filter;
   private boolean showAll = PermissionsUtil.isAdmin();
 

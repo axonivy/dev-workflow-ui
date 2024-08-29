@@ -11,10 +11,11 @@
     <project.build.plugin.version>11.4.0-SNAPSHOT</project.build.plugin.version>
     <web.tester.version>11.4.0-SNAPSHOT</web.tester.version>
     <engineHomeDirectory>${basedir}/../maven/config/target/ivyEngine/</engineHomeDirectory>
+    <maven.surefire.version>3.2.2</maven.surefire.version>
   </properties>
 
   <build>
-    <plugins>     
+    <plugins>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>flatten-maven-plugin</artifactId>

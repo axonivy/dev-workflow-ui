@@ -21,79 +21,84 @@
     <img.similarity>92</img.similarity>
   </properties>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>3.1.0</version>
-        <executions>
-          <execution>
-            <id>download-latest-screenshots</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <target>
-            <get
-              src="https://jenkins.ivyteam.io/job/dev-workflow-ui/job/${ref.screenshot.build}/lastSuccessfulBuild/artifact/dev-workflow-ui-web-test/target/docu/screenshots/*zip*/screenshots.zip"
-              dest="${project.build.directory}" />
-            <unzip dest="${project.build.directory}">
-              <fileset dir="${project.build.directory}">
-                <filename name="screenshots.zip" />
-              </fileset>
-            </unzip>
-          </target>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>ch.ivyteam.maven</groupId>
-        <artifactId>screenshot-html-plugin</artifactId>
-        <version>11.0.0</version>
-        <executions>
-          <execution>
-            <id>validate-images</id>
-            <phase>test</phase>
-            <goals>
-              <goal>compare-images</goal>
-            </goals>
+  <profiles>
+    <profile>
+      <id>screenshots</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+              <execution>
+                <id>download-latest-screenshots</id>
+                <phase>generate-sources</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
             <configuration>
-              <newImagesFs>
-                <directory>${test.target.dir}docu/screenshots</directory>
-                <includes>
-                  <include>**/*.png</include>
-                </includes>
-                <excludes>
-                  <exclude>**/workflow-ui-caseDetails.png</exclude>
-                  <exclude>**/workflow-ui-caseMap.png</exclude>
-                </excludes>
-              </newImagesFs>
-              <refImages>${project.build.directory}/screenshots</refImages>
+              <target>
+                <get
+                  src="https://jenkins.ivyteam.io/job/dev-workflow-ui_screenshots/job/${ref.screenshot.build}/lastSuccessfulBuild/artifact/dev-workflow-ui-web-test/target/docu/screenshots/*zip*/screenshots.zip"
+                  dest="${project.build.directory}" />
+                <unzip dest="${project.build.directory}">
+                  <fileset dir="${project.build.directory}">
+                    <filename name="screenshots.zip" />
+                  </fileset>
+                </unzip>
+              </target>
             </configuration>
-          </execution>
-          <execution>
-            <id>generate-html</id>
-            <phase>generate-resources</phase>
-            <goals>
-              <goal>generate-html</goal>
-            </goals>
-            <configuration>
-              <artifactTargetPath>/artifact/dev-workflow-ui-web-test/target/</artifactTargetPath>
-              <images>
-                <directory>${test.target.dir}docu</directory>
-                <includes>
-                  <include>**/*.png</include>
-                </includes>
-              </images>
-              <outputFile>${test.target.dir}screenshotsCompare.html</outputFile>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+          </plugin>
+    
+          <plugin>
+            <groupId>ch.ivyteam.maven</groupId>
+            <artifactId>screenshot-html-plugin</artifactId>
+            <version>11.0.0</version>
+            <executions>
+              <execution>
+                <id>validate-images</id>
+                <phase>test</phase>
+                <goals>
+                  <goal>compare-images</goal>
+                </goals>
+                <configuration>
+                  <newImagesFs>
+                    <directory>${test.target.dir}docu/screenshots</directory>
+                    <includes>
+                      <include>**/*.png</include>
+                    </includes>
+                    <excludes>
+                      <exclude>**/workflow-ui-caseDetails.png</exclude>
+                      <exclude>**/workflow-ui-caseMap.png</exclude>
+                    </excludes>
+                  </newImagesFs>
+                  <refImages>${project.build.directory}/screenshots</refImages>
+                </configuration>
+              </execution>
+              <execution>
+                <id>generate-html</id>
+                <phase>generate-resources</phase>
+                <goals>
+                  <goal>generate-html</goal>
+                </goals>
+                <configuration>
+                  <artifactTargetPath>/artifact/dev-workflow-ui-web-test/target/</artifactTargetPath>
+                  <images>
+                    <directory>${test.target.dir}docu</directory>
+                    <includes>
+                      <include>**/*.png</include>
+                    </includes>
+                  </images>
+                  <outputFile>${test.target.dir}screenshotsCompare.html</outputFile>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

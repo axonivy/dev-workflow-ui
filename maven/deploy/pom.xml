@@ -14,36 +14,26 @@
     <relativePath>../config</relativePath>
   </parent>
 
-  <properties>
-    <skipDeployToEngine>true</skipDeployToEngine>
-    <deployToEngineUrl>http://localhost</deployToEngineUrl>
-    <deployApplicationName>dev-workflow-ui-${user.name}</deployApplicationName>
-  </properties>
-
   <profiles>
     <profile>
-      <id>deploy-to-engine</id>
+      <id>create-deploy-zip</id>
       <build>
-        <plugins> 
+        <plugins>
           <plugin>
-            <groupId>com.axonivy.ivy.ci</groupId>
-            <artifactId>project-build-plugin</artifactId>
-            <extensions>true</extensions>
+            <artifactId>maven-assembly-plugin</artifactId>
             <executions>
               <execution>
-                <id>test.app.deploy</id>
-                <phase>install</phase>
+                <id>create-deploy-zip</id>
+                <phase>package</phase>
                 <goals>
-                  <goal>deploy-to-engine</goal>
+                  <goal>single</goal>
                 </goals>
                 <configuration>
-                  <skipDeploy>${skipDeployToEngine}</skipDeploy>
-                  <deployMethod>HTTP</deployMethod>
-                  <deployServerId>axonivy.engine</deployServerId>
-                  <deployEngineUrl>${deployToEngineUrl}</deployEngineUrl>
-                  <deployFile>${project.build.directory}/${project.artifactId}-${project.version}.zip</deployFile>
-                  <deployToEngineApplication>${deployApplicationName}</deployToEngineApplication>
-                  <deployTestUsers>true</deployTestUsers>
+                  <finalName>dev-workflow-ui-deploy</finalName>
+                  <appendAssemblyId>false</appendAssemblyId>
+                  <descriptors>
+                    <descriptor>zip.xml</descriptor>
+                  </descriptors>
                 </configuration>
               </execution>
             </executions>
@@ -52,49 +42,4 @@
       </build>
     </profile>
   </profiles>
-
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-            <configuration>
-              <appendAssemblyId>false</appendAssemblyId>
-              <descriptors>
-                <descriptor>zip.xml</descriptor>
-              </descriptors>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>com.axonivy.ivy.ci</groupId>
-        <artifactId>project-build-plugin</artifactId>
-        <extensions>true</extensions>
-        <executions>
-          <execution>
-            <id>test.app.deploy</id>
-            <phase>site-deploy</phase>
-            <goals>
-              <goal>deploy-to-engine</goal>
-            </goals>
-            <configuration>
-              <skipDeploy>${skipDeployToEngine}</skipDeploy>
-              <deployMethod>HTTP</deployMethod>
-              <deployServerId>axonivy.engine</deployServerId>
-              <deployEngineUrl>${deployToEngineUrl}</deployEngineUrl>
-              <deployFile>${project.build.directory}/${project.artifactId}-${project.version}.zip</deployFile>
-              <deployToEngineApplication>${deployApplicationName}</deployToEngineApplication>
-              <deployTestUsers>true</deployTestUsers>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
 </project>
