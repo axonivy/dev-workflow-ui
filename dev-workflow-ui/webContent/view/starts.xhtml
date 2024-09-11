@@ -11,7 +11,7 @@
         <div class="card">
           <p:dataTable id="projectStarts" value="#{processesIvyDevWfBean.startsDataModel.startables}" var="start"
             rows="15" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" rowKey="#{start.link}"
-            selectionMode="single" widgetVar="projectStartsTable">
+            selectionMode="single" widgetVar="projectStartsTable" styleClass="starts-table" resizableColumns="true">
             <f:facet name="header">
               <div class="flex justify-content-between mb-3 pretty-search">
                 <h4 class="m-0">Processes</h4>
@@ -24,32 +24,37 @@
             </f:facet>
 
             <p:ajax event="rowSelect" listener="#{processesIvyDevWfBean.startRow}" />
-            <p:column width="10">
+            <p:column width="20px" resizable="false">
               <h:outputText id="processStartIcon" class="#{start.icon} si-lg vertical-align-middle" />
             </p:column>
             <p:column headerText="Process" sortBy="#{start.displayName}" filterBy="#{start.displayName}">
-              <h:outputText id="startName" value="#{start.displayName}" styleClass="text-primary"/>
+              <h:outputText id="startName" value="#{start.displayName}" styleClass="text-primary-color"/>
               <div class="start-description overflow-hidden-ellipsis text-sm">
                 <h:outputText id="startDescription" value="#{start.description}" />
                 <p:tooltip for="startDescription" position="top" value="#{start.description}" styleClass="text" />
               </div>
             </p:column>
-            <p:column headerText="Application" width="120" sortBy="#{start.applicationName}" responsivePriority="4"
+            <p:column headerText="Application" width="120px" sortBy="#{start.applicationName}" responsivePriority="4"
               rendered="#{!processesIvyDevWfBean.startsDataModel.onlySingleApplication}">
               <h:outputText value="#{start.applicationName}" />
             </p:column>
-            <p:column headerText="Project" width="120" sortBy="#{start.projectName}" responsivePriority="4"
+            <p:column headerText="Project" width="120px" sortBy="#{start.projectName}" responsivePriority="4"
               rendered="#{!processesIvyDevWfBean.startsDataModel.onlySingleProject}">
-              <h:outputText value="#{start.projectName}" />
+              <div class="overflow-hidden-ellipsis">
+                <h:outputText id="project" value="#{start.projectName}" />
+                <p:tooltip for="project" position="top" value="#{start.projectName}" styleClass="text" />
+              </div>
             </p:column>
-            <p:column headerText="Category" width="120" sortBy="#{start.category.name}" responsivePriority="3"
+            <p:column headerText="Category" width="120px" sortBy="#{start.category.name}" responsivePriority="3"
               filterBy="#{start.category.name}">
-              <h:outputText value="#{start.category.name}" />
+              <div class="overflow-hidden-ellipsis">
+                <h:outputText id="category" value="#{start.category.name}" />
+                <p:tooltip for="category" position="top" value="#{start.category.name}" styleClass="text" />
+              </div>
             </p:column>
-            <p:column width="30" styleClass="text-center">
-              <p:commandLink id="startActionsBtn" styleClass="text-color flex justify-content-center">
-                <i class="more-options-menu si si-navigation-menu-horizontal-filled" />
-              </p:commandLink>
+            <p:column width="30px" resizable="false">
+              <p:commandButton id="startActionsBtn" icon="si si-navigation-menu-horizontal-filled"
+                styleClass="ui-button-flat text-color action-button" />
               <p:menu id="startsActionsMenu" overlay="true" trigger="startActionsBtn" my="right top" at="right bottom"
                 style="width: 200px">
                 <p:menuitem value="Start process" action="#{start.execute}" id="startProcessBtn"

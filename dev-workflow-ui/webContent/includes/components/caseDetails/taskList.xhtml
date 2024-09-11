@@ -9,12 +9,12 @@
     paginatorPosition="bottom" paginator="true" paginatorAlwaysVisible="false" selectionMode="single">
     <p:ajax event="rowSelect" listener="#{tasksIvyDevWfBean.displayTaskRow}" update="@form" />
 
-    <p:column headerText="State" filterBy="#{task.businessState}" width="75">
+    <p:column headerText="State" filterBy="#{task.businessState}" width="90px" styleClass="center-table-cell">
       <jc:stateBadge id="taskState" data="#{task}"/>
     </p:column>
 
     <p:column headerText="Prio" id="priority" filterBy="#{task.priority}"
-      width="30" responsivePriority="3" styleClass="center-table-cell">
+      width="20px" responsivePriority="3" styleClass="center-table-cell">
       <h:outputText id="taskPrio" styleClass="si text-800 si-#{task.priorityIcon}" />
       <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
     </p:column>
@@ -35,10 +35,9 @@
       <jc:datetime id="endTime" datetime="#{task.endTimestamp}"/>
     </p:column>
 
-    <p:column width="30">
-      <p:commandLink id="taskActionsBtn" styleClass="text-color flex justify-content-center">
-        <i class="more-options-menu si si-navigation-menu-horizontal-filled" />
-      </p:commandLink>
+    <p:column width="30px">
+      <p:commandButton id="taskActionsBtn" icon="si si-navigation-menu-horizontal-filled"
+        styleClass="ui-button-flat text-color action-button" />
       <p:menu id="taskActionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom"
         style="width: 200px">
         <p:menuitem value="Start task" actionListener="#{homepageIvyDevWfBean.executeTask(task)}" id="startTaskBtn"

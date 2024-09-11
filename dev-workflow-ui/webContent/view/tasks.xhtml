@@ -10,7 +10,7 @@
         <div class="card">
           <p:dataTable id="tasks" var="task" value="#{tasksIvyDevWfBean.tasksDataModel}" widgetVar="tasksTable"
             styleClass="ui-fluid" emptyMessage="No Tasks found with given criteria" paginatorPosition="bottom" rows="10"
-            lazy="true" paginator="true" paginatorAlwaysVisible="false" selectionMode="single">
+            lazy="true" paginator="true" paginatorAlwaysVisible="false" selectionMode="single" resizableColumns="true">
             <p:ajax event="rowSelect" listener="#{tasksIvyDevWfBean.displayTaskRow}" />
             <f:facet name="header">
               <div class="flex justify-content-between mb-3 pretty-search">
@@ -33,12 +33,12 @@
               </div>
             </f:facet>
 
-            <p:column headerText="State" filterBy="#{task.businessState}" sortBy="#{task.businessState}" width="75">
+            <p:column headerText="State" filterBy="#{task.businessState}" sortBy="#{task.businessState}" width="90px" styleClass="center-table-cell" resizable="false">
               <jc:stateBadge id="taskState" data="#{task}"/>
             </p:column>
 
             <p:column headerText="Prio" id="priority" filterBy="#{task.priority}" styleClass="center-table-cell"
-              sortBy="#{task.priority}" width="45">
+              sortBy="#{task.priority}" width="45px" resizable="false">
               <h:outputText id="taskPrio" styleClass="si text-800 si-#{task.priorityIcon}" />
               <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
             </p:column>
@@ -47,24 +47,23 @@
               <h:outputText id="taskName" value="#{task.name}" />
             </p:column>
 
-            <p:column headerText="Responsible" filterBy="#{task.activator}" sortBy="#{task.activatorName}" width="160"
+            <p:column headerText="Responsible" filterBy="#{task.activator}" sortBy="#{task.activatorName}" width="160px"
               responsivePriority="3">
               <jc:user user="#{task.activator}" />
             </p:column>
 
             <p:column headerText="Start" sortBy="#{task.startTimestamp}" sortOrder="descending" responsivePriority="3"
-              width="100">
+              width="100px">
               <jc:time id="startTime" datetime="#{task.startTimestamp}" />
             </p:column>
 
-            <p:column headerText="End" sortBy="#{task.endTimestamp}" responsivePriority="4" width="100">
+            <p:column headerText="End" sortBy="#{task.endTimestamp}" responsivePriority="4" width="100px">
               <jc:time id="endTime" datetime="#{task.endTimestamp}" />
             </p:column>
 
-            <p:column responsivePriority="2" width="30">
-              <p:commandLink id="taskActionsBtn" styleClass="text-color flex justify-content-center">
-                <i class="more-options-menu si si-navigation-menu-horizontal-filled" />
-              </p:commandLink>
+            <p:column responsivePriority="2" width="30px" resizable="false">
+              <p:commandButton id="taskActionsBtn" icon="si si-navigation-menu-horizontal-filled"
+                styleClass="ui-button-flat text-color action-button" />
               <p:menu id="taskActionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom"
                 style="width: 200px">
                 <p:menuitem id="openTaskDetailsBtn" value="Open task details" url="#{task.detailUrl}"
