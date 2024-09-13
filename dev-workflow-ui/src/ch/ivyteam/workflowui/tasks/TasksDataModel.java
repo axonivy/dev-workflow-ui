@@ -93,7 +93,8 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
               .filter(priority -> StringUtils.startsWithIgnoreCase(priority.toString(), filter))
               .findFirst().orElse(null);
       query.where().and(TaskQuery.create().where().name().isLikeIgnoreCase("%" + filter + "%")
-              .or().activatorName().isLikeIgnoreCase(filter + "%")
+              .or().activatorName().isLikeIgnoreCase("%" + filter + "%")
+              .or().activatorDisplayName().isLikeIgnoreCase("%" + filter + "%")
               .or().businessState().isEqual(taskState)
               .or().priority().isEqual(taskPriority));
     }

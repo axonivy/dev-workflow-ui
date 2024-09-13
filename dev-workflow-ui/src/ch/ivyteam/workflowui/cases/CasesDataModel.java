@@ -85,7 +85,8 @@ public class CasesDataModel extends LazyDataModel<ICase> {
               .findFirst().orElse(null);
       query.where().and(CaseQuery.create().where().name().isLikeIgnoreCase("%" + filter + "%")
               .or().businessState().isEqual(caseState)
-              .or().priority().isEqual(casePriority));
+              .or().priority().isEqual(casePriority)
+              .or().creatorUserDisplayName().isLikeIgnoreCase("%" + filter + "%"));
     }
   }
 
