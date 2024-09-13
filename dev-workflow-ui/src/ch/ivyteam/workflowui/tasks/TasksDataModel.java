@@ -103,8 +103,8 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
     if (StringUtils.isEmpty(sortField)) {
       applySorting(query.orderBy().startTimestamp(), SortOrder.DESCENDING);
     }
-    if ("state".equals(sortField)) {
-      applySorting(query.orderBy().state(), sortOrder);
+    if ("businessState".equals(sortField)) {
+      applySorting(query.orderBy().businessState(), sortOrder);
     }
     if ("priority".equals(sortField)) {
       applySorting(query.orderBy().priority(), sortOrder);
