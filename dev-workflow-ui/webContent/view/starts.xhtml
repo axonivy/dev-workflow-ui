@@ -35,11 +35,11 @@
               </div>
             </p:column>
             <p:column headerText="Application" width="120px" sortBy="#{start.applicationName}" responsivePriority="4"
-              rendered="#{!processesIvyDevWfBean.startsDataModel.onlySingleApplication}">
+              rendered="#{!processesIvyDevWfBean.startsDataModel.onlySingleApplication}" filterBy="#{start.applicationName}">
               <h:outputText value="#{start.applicationName}" />
             </p:column>
             <p:column headerText="Project" width="120px" sortBy="#{start.projectName}" responsivePriority="4"
-              rendered="#{!processesIvyDevWfBean.startsDataModel.onlySingleProject}">
+              rendered="#{!processesIvyDevWfBean.startsDataModel.onlySingleProject}" filterBy="#{start.projectName}">
               <div class="overflow-hidden-ellipsis">
                 <h:outputText id="project" value="#{start.projectName}" />
                 <p:tooltip for="project" position="top" value="#{start.projectName}" styleClass="text" />

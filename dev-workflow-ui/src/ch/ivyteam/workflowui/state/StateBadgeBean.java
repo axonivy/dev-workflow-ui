@@ -10,12 +10,12 @@ import ch.ivyteam.workflowui.tasks.TaskModel;
 public class StateBadgeBean {
 
   public StateBadgeModel toStateBadgeModel(Object data) {
-    if (data instanceof ICase) {
-        return new StateBadgeModel((ICase) data);
-    } else if (data instanceof TaskModel) {
-        return new StateBadgeModel((TaskModel) data);
-    } else if (data instanceof ITask) {
-      return new StateBadgeModel((ITask) data);
+    if (data instanceof ICase caze) {
+        return new StateBadgeModel(caze);
+    } else if (data instanceof TaskModel taskModel) {
+        return new StateBadgeModel(taskModel);
+    } else if (data instanceof ITask task) {
+      return new StateBadgeModel(task);
     }
     throw new IllegalArgumentException("Unsupported data type");
   }
