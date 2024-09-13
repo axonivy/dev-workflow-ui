@@ -63,7 +63,7 @@ public class WebTestHomepageIT {
     PrimeUi.table(By.id("startedProcesses")).contains("test _ case _ map");
 
     var caseMapeStartEntry = $("[data-rk='test _ case _ map']").shouldBe(visible);
-    var menuLink = caseMapeStartEntry.$("a[id*='startedProcessMenuLink']").shouldBe(visible);
+    var menuLink = caseMapeStartEntry.$("button[id*='startedProcessMenuLink']").shouldBe(visible);
     menuLink.click();
     var menuLinkId = menuLink.attr("id");
     var processViewerId = menuLinkId.replace("startedProcessMenuLink", "openProcessViewer");
