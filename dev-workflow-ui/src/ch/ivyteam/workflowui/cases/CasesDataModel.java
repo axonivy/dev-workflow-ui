@@ -101,8 +101,8 @@ public class CasesDataModel extends LazyDataModel<ICase> {
   }
 
   private static void applyOrdering(CaseQuery query, SortMeta sort) {
-    if ("state".equals(sort.getField())) {
-      applySorting(query.orderBy().state(), sort.getOrder());
+    if ("businessState".equals(sort.getField())) {
+      applySorting(query.orderBy().businessState(), sort.getOrder());
     }
     if ("name".equals(sort.getField())) {
       applySorting(query.orderBy().name(), sort.getOrder());
