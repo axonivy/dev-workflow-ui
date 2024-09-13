@@ -12,9 +12,9 @@ import org.primefaces.model.SortOrder;
 
 import ch.ivyteam.ivy.jsf.primefaces.sort.SortMetaConverter;
 import ch.ivyteam.ivy.security.ISecurityContext;
-import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.ivy.workflow.query.TaskQuery;
+import ch.ivyteam.ivy.workflow.task.TaskBusinessState;
 import ch.ivyteam.workflowui.util.PermissionsUtil;
 import ch.ivyteam.workflowui.util.TaskUtil;
 
@@ -86,15 +86,16 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
 
   private void applyFilter(TaskQuery query) {
     if (StringUtils.isNotEmpty(filter)) {
-      var taskState = Arrays.asList(TaskState.values()).stream()
+      var taskState = Arrays.asList(TaskBusinessState.values()).stream()
               .filter(state -> StringUtils.startsWithIgnoreCase(state.toString(), filter))
               .findFirst().orElse(null);
       var taskPriority = Arrays.asList(WorkflowPriority.values()).stream()
               .filter(priority -> StringUtils.startsWithIgnoreCase(priority.toString(), filter))
               .findFirst().orElse(null);
       query.where().and(TaskQuery.create().where().name().isLikeIgnoreCase("%" + filter + "%")
-              .or().activatorName().isLikeIgnoreCase(filter + "%")
-              .or().state().isEqual(taskState)
+              .or().activatorName().isLikeIgnoreCase("%" + filter + "%")
+              .or().activatorDisplayName().isLikeIgnoreCase("%" + filter + "%")
+              .or().businessState().isEqual(taskState)
               .or().priority().isEqual(taskPriority));
     }
   }

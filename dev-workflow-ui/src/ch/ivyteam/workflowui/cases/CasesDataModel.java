@@ -11,9 +11,9 @@ import org.primefaces.model.SortMeta;
 import org.primefaces.model.SortOrder;
 
 import ch.ivyteam.ivy.jsf.primefaces.sort.SortMetaConverter;
-import ch.ivyteam.ivy.workflow.CaseState;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
+import ch.ivyteam.ivy.workflow.caze.CaseBusinessState;
 import ch.ivyteam.ivy.workflow.query.CaseQuery;
 import ch.ivyteam.workflowui.util.CaseUtil;
 import ch.ivyteam.workflowui.util.PermissionsUtil;
@@ -77,15 +77,16 @@ public class CasesDataModel extends LazyDataModel<ICase> {
 
   private void applyFilter(CaseQuery query) {
     if (StringUtils.isNotEmpty(filter)) {
-      var caseState = Arrays.asList(CaseState.values()).stream()
+      var caseState = Arrays.asList(CaseBusinessState.values()).stream()
               .filter(state -> StringUtils.startsWithIgnoreCase(state.toString(), filter))
               .findFirst().orElse(null);
       var casePriority = Arrays.asList(WorkflowPriority.values()).stream()
               .filter(priority -> StringUtils.startsWithIgnoreCase(priority.toString(), filter))
               .findFirst().orElse(null);
       query.where().and(CaseQuery.create().where().name().isLikeIgnoreCase("%" + filter + "%")
-              .or().state().isEqual(caseState)
-              .or().priority().isEqual(casePriority));
+              .or().businessState().isEqual(caseState)
+              .or().priority().isEqual(casePriority)
+              .or().creatorUserDisplayName().isLikeIgnoreCase("%" + filter + "%"));
     }
   }
 
