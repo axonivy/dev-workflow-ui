@@ -19,33 +19,31 @@
                 rowKey="#{start.displayName}" rows="10" styleClass="table-header-none"
                 rendered="#{not empty homepageIvyDevWfBean.lastStarts}">
                 <p:ajax event="rowSelect" listener="#{homepageIvyDevWfBean.executeLastStart}" />
-                <p:column styleClass="startedProcessElement">
-                  <div class="flex justify-content-between align-items-center">
-                    <h:panelGroup id="startedProcess" styleClass="flex align-items-center">
-                      <i class="#{start.icon} mr-3" />
-                      <h:outputText value="#{start.displayName}" />
-                    </h:panelGroup>
-                    <p:tooltip for="startedProcess" value="#{start.displayName}" position="top" />
+                <p:column styleClass="startedProcessElement flex justify-content-between align-items-center">
+                  <h:panelGroup id="startedProcess" styleClass="flex align-items-center">
+                    <i class="#{start.icon} mr-3" />
+                    <h:outputText value="#{start.displayName}" />
+                  </h:panelGroup>
+                  <p:tooltip for="startedProcess" value="#{start.displayName}" position="top" />
 
-                    <div class="flex">
-                      <p:commandButton id="startedProcessMenuLink" icon="si si-navigation-menu-horizontal-filled"
-                        styleClass="ui-button-flat text-color action-button" />
-                      <p:menu id="startsActionsMenu" overlay="true" trigger="startedProcessMenuLink" my="right top"
-                        at="right bottom" style="width: 200px">
-                        <p:menuitem value="Start process" action="#{start.execute}" id="startProcessBtn"
-                          icon="si si-controls-play" />
-                        <p:menuitem value="Copy to clipboard" onclick="copyToClipboard('#{start.link}')"
-                          id="copyStartLinkBtn" icon="si si-hyperlink-3" />
-                        <p:menuitem value="Open fullscreen" url="#{start.link}" id="openStartFullscreenBtn"
-                          rendered="#{start.embedInFrame}" icon="si si-expand-6" />
-                        <p:menuitem id="openProcessViewer"
-                          value="#{start.isProcessStart() ? 'Open Process Viewer' : 'Open Case Map Viewer'}"
-                          oncomplete="PF('process-viewer-dlg').show()" update="processViewer:processViewerDialog"
-                          actionListener="#{homepageIvyDevWfBean.setViewerStart(start.viewerLink)}"
-                          rendered="#{start.viewerAllowed}" icon="si si-hierarchy-6 si-rotate-270" />
-                      </p:menu>
-                    </div>
-                  </div>
+                  <h:panelGroup>
+                    <p:commandButton id="startedProcessMenuLink" icon="si si-navigation-menu-horizontal-filled"
+                      styleClass="ui-button-flat text-color action-button" />
+                    <p:menu id="startsActionsMenu" overlay="true" trigger="startedProcessMenuLink" my="right top"
+                      at="right bottom" style="width: 200px">
+                      <p:menuitem value="Start process" action="#{start.execute}" id="startProcessBtn"
+                        icon="si si-controls-play" />
+                      <p:menuitem value="Copy to clipboard" onclick="copyToClipboard('#{start.link}')"
+                        id="copyStartLinkBtn" icon="si si-hyperlink-3" />
+                      <p:menuitem value="Open fullscreen" url="#{start.link}" id="openStartFullscreenBtn"
+                        rendered="#{start.embedInFrame}" icon="si si-expand-6" />
+                      <p:menuitem id="openProcessViewer"
+                        value="#{start.isProcessStart() ? 'Open Process Viewer' : 'Open Case Map Viewer'}"
+                        oncomplete="PF('process-viewer-dlg').show()" update="processViewer:processViewerDialog"
+                        actionListener="#{homepageIvyDevWfBean.setViewerStart(start.viewerLink)}"
+                        rendered="#{start.viewerAllowed}" icon="si si-hierarchy-6 si-rotate-270" />
+                    </p:menu>
+                  </h:panelGroup>
                 </p:column>
               </p:dataTable>
               <h:panelGroup rendered="#{empty homepageIvyDevWfBean.lastStarts}" layout="block"
