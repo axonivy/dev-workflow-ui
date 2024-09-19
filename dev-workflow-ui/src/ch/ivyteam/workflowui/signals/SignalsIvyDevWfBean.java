@@ -49,7 +49,7 @@ public class SignalsIvyDevWfBean {
     if (StringUtils.isBlank(payload)) {
       signals.send(signalCode);
     } else {
-      signals.send(signalCode, payload);
+      signals.create().data(payload).send(signalCode);
     }
     showMessage("Signal " + code + " sent");
     this.code = "";
