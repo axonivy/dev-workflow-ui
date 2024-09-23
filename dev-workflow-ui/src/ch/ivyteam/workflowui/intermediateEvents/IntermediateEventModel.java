@@ -1,7 +1,9 @@
 package ch.ivyteam.workflowui.intermediateEvents;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
@@ -9,13 +11,11 @@ import org.primefaces.model.SortMeta;
 import org.primefaces.model.SortOrder;
 
 import ch.ivyteam.ivy.jsf.primefaces.sort.SortMetaConverter;
-import ch.ivyteam.ivy.persistence.OrderDirection;
 import ch.ivyteam.ivy.workflow.IIntermediateEvent;
 import ch.ivyteam.ivy.workflow.IIntermediateEventElement;
-import ch.ivyteam.ivy.workflow.IntermediateEventProperty;
-import ch.ivyteam.ivy.workflow.PropertyOrder;
 
 public class IntermediateEventModel extends LazyDataModel<IIntermediateEvent> {
+
   private static final long serialVersionUID = -7194541143134204696L;
   private IIntermediateEventElement ie;
 
@@ -29,51 +29,49 @@ public class IntermediateEventModel extends LazyDataModel<IIntermediateEvent> {
   }
 
   @Override
-  public List<IIntermediateEvent> load(int first, int pageSize, Map<String, SortMeta> sortBy,
-          Map<String, FilterMeta> filterBy) {
+  public List<IIntermediateEvent> load(int first, int pageSize, Map<String, SortMeta> sortBy,  Map<String, FilterMeta> filterBy) {
     var sort = new SortMetaConverter(sortBy);
-    var propertyOrder = PropertyOrder.create(getProperty(sort.toField()), getOrder(sort.toOrder()));
-    var signalQuery = ie.findIntermediateEvents(null, propertyOrder, 0, -1, true);
-    setRowCount(signalQuery.getResultCount());
-    return signalQuery.getResultList();
+    var events = ie.getIntermediateEvents();
+    setRowCount(events.size());
+    var comp = sort(sort.toField(), sort.toOrder());
+    return events.stream()
+            .sorted(comp)
+            .collect(Collectors.toList());
   }
 
   public int getSize() {
-    return ie.findIntermediateEvents(null, null, 0, -1, true).getResultCount();
+    return ie.getIntermediateEvents().size();
   }
 
-  private static IntermediateEventProperty getProperty(String sortField) {
+  private static Comparator<IIntermediateEvent> sort(String sortField, SortOrder order) {
+    var comp = Comparator.comparing(IIntermediateEvent::getId);
     if ("id".equals(sortField)) {
-      return IntermediateEventProperty.ID;
+      comp = Comparator.comparing(IIntermediateEvent::getId);
     }
     if ("state".equals(sortField)) {
-      return IntermediateEventProperty.STATE;
+      comp = Comparator.comparing(IIntermediateEvent::getState);
     }
     if ("eventTask".equals(sortField)) {
-      return IntermediateEventProperty.TASK_ID;
+      comp = Comparator.comparing(i -> i.getTaskStart().getId());
     }
     if ("eventTask".equals(sortField)) {
-      return IntermediateEventProperty.TASK_ID;
+      comp = Comparator.comparing(i -> i.getTaskStart().getId());
     }
     if ("eventIdentifier".equals(sortField)) {
-      return IntermediateEventProperty.EVENT_ID;
+      comp = Comparator.comparing(IIntermediateEvent::getEventIdentifier);
     }
     if ("timeoutTimestamp".equals(sortField)) {
-      return IntermediateEventProperty.TIMEOUT_TIMESTAMP;
+      comp = Comparator.comparing(IIntermediateEvent::getTimeoutTimestamp);
     }
-    if ("timeoutACtion".equals(sortField)) {
-      return IntermediateEventProperty.TIMEOUT_ACTION;
+    if ("timeoutAction".equals(sortField)) {
+      comp = Comparator.comparing(IIntermediateEvent::getTimeoutAction);
     }
     if ("task".equals(sortField)) {
-      return IntermediateEventProperty.TASK_ID;
+      comp = Comparator.comparing(i -> i.getTaskStart().getId());
     }
-    return IntermediateEventProperty.ID;
-  }
-
-  private OrderDirection getOrder(SortOrder sortOrder) {
-    if (SortOrder.ASCENDING.equals(sortOrder)) {
-      return OrderDirection.ASCENDING;
+    if (order == SortOrder.DESCENDING) {
+      comp = comp.reversed();
     }
-    return OrderDirection.DESCENDING;
+    return comp;
   }
 }
