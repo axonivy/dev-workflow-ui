@@ -72,12 +72,24 @@ public class WebTestStartsIT {
     var app = EngineUrl.applicationName();
     var pmv = "dev-workflow-ui-test-data$1";
     var startableId = EngineUrl.applicationName() + "/dev-workflow-ui-test-data/TestData/startTestDialog1.ivp";
-    System.out.println(viewUrl("start.xhtml", Map.of("app", app, "pmv", pmv, "id", startableId)));
     open(viewUrl("start.xhtml", Map.of("app", app, "pmv", pmv, "id", startableId)));
     assertCurrentUrlContains("frame.xhtml?");
     Selenide.switchTo().frame("iFrame");
     $(By.id("testDialogTitle")).shouldBe(visible);
     $(By.id("form:testSelectOneMenu")).shouldBe(visible).click();
+    $(By.id("form:proceed")).shouldBe(visible).click();
+    assertCurrentUrlContains("home.xhtml");
+  }
+
+  @Test
+  void checkIsNonVisibleStartEventStartable() {
+    var app = EngineUrl.applicationName();
+    var pmv = "dev-workflow-ui-test-data$1";
+    var startableId = EngineUrl.applicationName() + "/dev-workflow-ui-test-data/TestData/nonVisibleStartTestDialog3.ivp";
+    open(viewUrl("start.xhtml", Map.of("app", app, "pmv", pmv, "id", startableId)));
+    assertCurrentUrlContains("frame.xhtml?");
+    Selenide.switchTo().frame("iFrame");
+    $(By.id("testDialogTitle")).shouldBe(visible);
     $(By.id("form:proceed")).shouldBe(visible).click();
     assertCurrentUrlContains("home.xhtml");
   }
