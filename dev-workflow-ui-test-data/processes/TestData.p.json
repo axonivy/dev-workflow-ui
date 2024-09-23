@@ -524,7 +524,7 @@
       "id" : "f50",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 1024, "y" : 160 }
+        "at" : { "x" : 1016, "y" : 256 }
       }
     }, {
       "id" : "f51",
@@ -547,7 +547,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 768, "y" : 160 },
+        "at" : { "x" : 760, "y" : 256 },
         "labelOffset" : { "x" : 17, "y" : 37 }
       },
       "connect" : [
@@ -594,7 +594,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 896, "y" : 160 },
+        "at" : { "x" : 888, "y" : 256 },
         "labelOffset" : { "x" : 6, "y" : 36 }
       },
       "connect" : [
@@ -669,5 +669,50 @@
       "connect" : [
         { "id" : "f64", "to" : "f61" }
       ]
+    }, {
+      "id" : "f65",
+      "type" : "RequestStart",
+      "name" : "nonVisibleStartTestDialog3.ivp",
+      "config" : {
+        "signature" : "nonVisibleStartTestDialog3",
+        "request" : {
+          "description" : "Dialog 1 for testing Developer Workflow-UI",
+          "category" : "exampleDialogs",
+          "isVisibleOnStartList" : false
+        },
+        "task" : {
+          "name" : "Test Developer Workflow-UI Dialog 1"
+        },
+        "case" : {
+          "name" : "Test Developer Workflow-UI Dialog Case 1"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 760, "y" : 160 },
+        "labelOffset" : { "x" : 1, "y" : 36 },
+        "description" : "Test dialog for testing Developer Workflow UI"
+      },
+      "connect" : [
+        { "id" : "f69", "to" : "f66" }
+      ]
+    }, {
+      "id" : "f66",
+      "type" : "DialogCall",
+      "name" : "TestDialog",
+      "config" : {
+        "dialog" : "ch.ivyteam.ivy.project.workflow.TestDialog1:start(ch.ivyteam.ivy.project.workflow.Data)"
+      },
+      "visual" : {
+        "at" : { "x" : 888, "y" : 160 }
+      },
+      "connect" : [
+        { "id" : "f68", "to" : "f67" }
+      ]
+    }, {
+      "id" : "f67",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 1016, "y" : 160 }
+      }
     } ]
 }

@@ -20,7 +20,7 @@ public class ProcessByUrlBean {
     if (!releasedPmv.isPresent()) {
       return;
     }
-    IWorkflowProcessModelVersion.of(releasedPmv.get()).getStartables(ISession.current()).stream()
+    IWorkflowProcessModelVersion.of(releasedPmv.get()).getAllStartables(ISession.current())
             .filter(s -> s.getId().equals(startableId))
             .findFirst()
             .map(ProcessByUrlBean::createCaseMapOrProcessStartable)
