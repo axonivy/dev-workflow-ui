@@ -33,7 +33,12 @@ public class IntermediateEventModel extends LazyDataModel<IIntermediateEvent> {
     var sort = new SortMetaConverter(sortBy);
     var events = ie.getIntermediateEvents();
     setRowCount(events.size());
-    var comp = sort(sort.toField(), sort.toOrder());
+
+    var comp = comparator(sort.toField());
+    if (sort.toOrder() == SortOrder.DESCENDING) {
+      comp = comp.reversed();
+    }
+
     return events.stream()
             .sorted(comp)
             .collect(Collectors.toList());
@@ -43,35 +48,14 @@ public class IntermediateEventModel extends LazyDataModel<IIntermediateEvent> {
     return ie.getIntermediateEvents().size();
   }
 
-  private static Comparator<IIntermediateEvent> sort(String sortField, SortOrder order) {
-    var comp = Comparator.comparing(IIntermediateEvent::getId);
-    if ("id".equals(sortField)) {
-      comp = Comparator.comparing(IIntermediateEvent::getId);
-    }
-    if ("state".equals(sortField)) {
-      comp = Comparator.comparing(IIntermediateEvent::getState);
-    }
-    if ("eventTask".equals(sortField)) {
-      comp = Comparator.comparing(i -> i.getTaskStart().getId());
-    }
-    if ("eventTask".equals(sortField)) {
-      comp = Comparator.comparing(i -> i.getTaskStart().getId());
-    }
-    if ("eventIdentifier".equals(sortField)) {
-      comp = Comparator.comparing(IIntermediateEvent::getEventIdentifier);
-    }
-    if ("timeoutTimestamp".equals(sortField)) {
-      comp = Comparator.comparing(IIntermediateEvent::getTimeoutTimestamp);
-    }
-    if ("timeoutAction".equals(sortField)) {
-      comp = Comparator.comparing(IIntermediateEvent::getTimeoutAction);
-    }
-    if ("task".equals(sortField)) {
-      comp = Comparator.comparing(i -> i.getTaskStart().getId());
-    }
-    if (order == SortOrder.DESCENDING) {
-      comp = comp.reversed();
-    }
-    return comp;
+  private static Comparator<IIntermediateEvent> comparator(String sortField) {
+    return switch (sortField) {
+      case "state" -> Comparator.comparing(IIntermediateEvent::getState);
+      case "eventTask", "task" -> Comparator.comparing(i -> i.getTaskStart().getId());
+      case "eventIdentifier" -> Comparator.comparing(IIntermediateEvent::getEventIdentifier);
+      case "timeoutTimestamp" -> Comparator.comparing(IIntermediateEvent::getTimeoutTimestamp);
+      case "timeoutAction" -> Comparator.comparing(IIntermediateEvent::getTimeoutAction);
+      default -> Comparator.comparing(IIntermediateEvent::getId);
+    };
   }
 }
