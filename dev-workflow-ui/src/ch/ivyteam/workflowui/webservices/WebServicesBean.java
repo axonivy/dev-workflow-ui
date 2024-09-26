@@ -17,6 +17,7 @@ public class WebServicesBean {
   private List<WebServiceProcess> webServices;
   private String filter;
 
+  @SuppressWarnings("removal")
   public WebServicesBean() {
     webServices = ProcessModelsUtil.getReleasedWorkflowPMVs().
             flatMap(pmv -> pmv.getWebServiceProcesses().stream())

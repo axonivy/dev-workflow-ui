@@ -14,6 +14,7 @@ import ch.ivyteam.workflowui.util.PermissionsUtil;
 @ManagedBean
 @ViewScoped
 public class IntermediateEventsIvyDevWfBean {
+
   private List<IntermediateEventElementModel> intermediateEvents;
 
   public IntermediateEventsIvyDevWfBean() {
@@ -21,7 +22,7 @@ public class IntermediateEventsIvyDevWfBean {
   }
 
   public void onRowSelect(SelectEvent<?> event) {
-    Object object = event.getObject();
+    var object = event.getObject();
     if (PermissionsUtil.isAdmin()) {
       if (object instanceof IntermediateEventElementModel model) {
         model.redirectToElement();
