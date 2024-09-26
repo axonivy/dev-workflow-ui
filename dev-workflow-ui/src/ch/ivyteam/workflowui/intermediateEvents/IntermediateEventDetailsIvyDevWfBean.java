@@ -8,6 +8,7 @@ import ch.ivyteam.ivy.workflow.IIntermediateEvent;
 @ManagedBean
 @ViewScoped
 public class IntermediateEventDetailsIvyDevWfBean {
+
   private String processId;
   private IntermediateEventElementModel selectedIntermediateElement;
 
@@ -29,20 +30,13 @@ public class IntermediateEventDetailsIvyDevWfBean {
   }
 
   public String getEventStateIconCss(IIntermediateEvent event) {
-    switch (event.getState()) {
-      case CANCELED:
-        return "si si-mood-warning";
-      case PENDING:
-      case WAITING:
-        return "si si-hourglass";
-      case PROCESSED:
-        return "si si-check-1";
-      case TIMEOUTED:
-        return "si si-alarm-bell";
-      case TIMEOUTED_AND_PROCESSED:
-        return "si si-alarm-bell-timer";
-      default:
-        return "si si-question-circle";
-    }
+    return switch (event.getState()) {
+      case CANCELED -> "si si-mood-warning";
+      case PENDING, WAITING -> "si si-hourglass";
+      case PROCESSED -> "si si-check-1";
+      case TIMEOUTED -> "si si-alarm-bell";
+      case TIMEOUTED_AND_PROCESSED -> "si si-alarm-bell-timer";
+      default -> "si si-question-circle";
+    };
   }
 }
