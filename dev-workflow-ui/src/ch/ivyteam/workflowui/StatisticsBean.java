@@ -21,9 +21,9 @@ import org.primefaces.model.charts.donut.DonutChartModel;
 import org.primefaces.model.charts.line.LineChartDataSet;
 import org.primefaces.model.charts.line.LineChartModel;
 
-import ch.ivyteam.ivy.elasticsearch.client.agg.AggregationResult;
-import ch.ivyteam.ivy.elasticsearch.client.agg.Bucket;
-import ch.ivyteam.ivy.elasticsearch.client.agg.Buckets;
+import ch.ivyteam.ivy.searchengine.client.agg.AggregationResult;
+import ch.ivyteam.ivy.searchengine.client.agg.Bucket;
+import ch.ivyteam.ivy.searchengine.client.agg.Buckets;
 import ch.ivyteam.ivy.workflow.caze.CaseBusinessState;
 import ch.ivyteam.ivy.workflow.stats.WorkflowStats;
 import ch.ivyteam.ivy.workflow.task.TaskBusinessState;
