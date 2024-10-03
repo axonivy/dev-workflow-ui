@@ -19,7 +19,7 @@ public class ProcessModelsUtil {
 
   private static List<IProcessModel> getProcessModels() {
     var securityContext = ISecurityContext.current();
-    return IApplicationRepository.instance().allOf(securityContext).stream()
+    return IApplicationRepository.of(securityContext).all().stream()
       .flatMap(a -> a.getProcessModels().stream())
       .collect(Collectors.toList());
   }
