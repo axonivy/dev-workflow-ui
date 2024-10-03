@@ -32,7 +32,7 @@ pipeline {
         script {
           def common = load 'build/build.groovy'
           common.build();
-          archiveArtifacts '**/target/*.iar, **/target/*.jar'
+          archiveArtifacts '**/target/dev-workflow-ui-*.iar, **/target/dev-workflow-ui-*.jar'
         }
       }
     }
