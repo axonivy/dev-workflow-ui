@@ -47,13 +47,11 @@
                 </p:column>
               </p:dataTable>
               <h:panelGroup rendered="#{empty homepageIvyDevWfBean.lastStarts}" layout="block"
-                styleClass="flex flex-column h-full">
-                <div>
-                  You haven't started any processes yet, <p:link value="go to process list" outcome="starts.xhtml"/> to start a process
-                </div>
-                <div class="flex justify-content-center align-items-center h-full" style="min-height: 8rem;">
-                  <i class="si si-hierarchy-6 si-rotate-270 text-7xl" />
-                </div>
+                styleClass="flex flex-column justify-content-center align-items-center gap-4">
+                <i class="si si-hierarchy-6 si-rotate-270 text-4xl" />
+                <span style="text-align: center; text-wrap: balance;">
+                  You haven't started any processes yet,<br /><p:link value="go to process list" outcome="starts.xhtml"/> to start a process
+                </span>
               </h:panelGroup>
             </div>
           </div>
@@ -90,9 +88,11 @@
                   </p:menu>
                 </p:column>
               </p:dataTable>
-              <h:panelGrid rendered="#{homepageIvyDevWfBean.tasksDataModel.size eq 0}">
-                <h:outputText value="You don't have any active tasks. Go take a coffee break 😊☕" />
-              </h:panelGrid>
+              <h:panelGroup rendered="#{homepageIvyDevWfBean.tasksDataModel.size eq 0}" layout="block"
+                styleClass="flex flex-column justify-content-center align-items-center gap-4">
+                <i class="si si-list-bullets text-4xl" />
+                <span style="text-align: center; text-wrap: balance;">You don't have any active tasks.<br />Go take a coffee break</span>
+              </h:panelGroup>
             </div>
           </div>
 
