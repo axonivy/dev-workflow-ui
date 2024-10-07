@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/process/11.3.0/process.json",
+  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
   "id" : "18D3AB6E2DC7779B",
   "config" : {
     "data" : "ch.ivyteam.ivy.project.workflow.GenerateTaskData"
