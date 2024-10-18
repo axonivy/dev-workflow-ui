@@ -41,16 +41,16 @@
   <div id="content" class="container frame">
     <ui:insert name="content">
       <h:form id="notesForm" styleClass="notes-form" >
-        <p:dataTable id="notesPaginator" var="note" value="#{notesBean.notes}" rowKey="#{note.id}" rows="5"
+        <p:dataTable id="notesPaginator" var="note" value="#{notesBean.notes}" rowKey="#{note.id()}" rows="5"
           paginator="true" paginatorPosition="bottom" styleClass="notes-paginator">
           <p:column id="content" styleClass="notes-paginator-container">
             <div class="mb-2 p-2 border-solid border-round border-1 note-container">
               <div class="mb-2">
-                <h:outputText value="#{note.message}" />
+                <h:outputText value="#{note.content()}" />
               </div>
               <div class="text-color-secondary">
-                <h:outputText value="#{note.writterName} • " />
-                <jc:time datetime="#{note.creationTimestamp}" />
+                <h:outputText value="#{note.authorName()} • " />
+                <jc:time datetime="#{note.createdAt()}" />
               </div>
             </div>
           </p:column>

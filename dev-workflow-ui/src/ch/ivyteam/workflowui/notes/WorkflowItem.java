@@ -2,11 +2,10 @@ package ch.ivyteam.workflowui.notes;
 
 import java.util.List;
 
-import ch.ivyteam.ivy.workflow.INote;
+import ch.ivyteam.ivy.workflow.note.Note;
 
 public interface WorkflowItem {
 
-  List<INote> getNotes();
-
+  List<Note> getNotes();
   boolean canResume();
 }
