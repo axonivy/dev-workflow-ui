@@ -3,8 +3,8 @@ package ch.ivyteam.workflowui.notes;
 import java.util.List;
 
 import ch.ivyteam.ivy.workflow.ICase;
-import ch.ivyteam.ivy.workflow.INote;
 import ch.ivyteam.ivy.workflow.ITask;
+import ch.ivyteam.ivy.workflow.note.Note;
 import ch.ivyteam.workflowui.util.TaskUtil;
 
 public class WorkflowCase implements WorkflowItem {
@@ -16,8 +16,8 @@ public class WorkflowCase implements WorkflowItem {
   }
 
   @Override
-  public List<INote> getNotes() {
-    return caze.getNotes();
+  public List<Note> getNotes() {
+    return caze.notes().all();
   }
 
   @Override

@@ -10,7 +10,7 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.PrimeFaces;
 import org.primefaces.model.DialogFrameworkOptions;
 
-import ch.ivyteam.ivy.workflow.INote;
+import ch.ivyteam.ivy.workflow.note.Note;
 import ch.ivyteam.workflowui.util.CaseUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.TaskUtil;
@@ -41,7 +41,7 @@ public class NotesBean {
     }
   }
 
-  public List<INote> getNotes() {
+  public List<Note> getNotes() {
     if (workflowItem != null) {
       return workflowItem.getNotes();
     }

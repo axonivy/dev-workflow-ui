@@ -2,8 +2,8 @@ package ch.ivyteam.workflowui.notes;
 
 import java.util.List;
 
-import ch.ivyteam.ivy.workflow.INote;
 import ch.ivyteam.ivy.workflow.ITask;
+import ch.ivyteam.ivy.workflow.note.Note;
 import ch.ivyteam.workflowui.util.TaskUtil;
 
 public class WorkflowTask implements WorkflowItem {
@@ -15,8 +15,8 @@ public class WorkflowTask implements WorkflowItem {
   }
 
   @Override
-  public List<INote> getNotes() {
-    return task.getNotes();
+  public List<Note> getNotes() {
+    return task.notes().all();
   }
 
   @Override
