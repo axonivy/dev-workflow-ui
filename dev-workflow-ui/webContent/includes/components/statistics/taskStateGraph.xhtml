@@ -7,7 +7,7 @@
     <ui:define name="content">
       <h4>Tasks by state</h4>
       <p:donutChart model="#{statisticsBean.taskByStateGraph}" rendered="#{statisticsBean.taskByStateGraph != null}"
-        style="max-height: 200px; max-width: 340px;" />
+        style="align-self: center; height: 18rem; width: 18rem;" />
       <h:panelGroup layout="block" rendered="#{statisticsBean.taskByStateGraph == null}"
         styleClass="h-full flex flex-column align-items-center justify-content-center">
         <i class="pi pi-chart-pie text-7xl mb-4" />
