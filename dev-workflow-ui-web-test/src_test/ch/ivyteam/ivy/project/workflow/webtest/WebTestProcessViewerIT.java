@@ -6,6 +6,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openVi
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThanOrEqual;
 import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -18,23 +19,26 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
+import com.axonivy.ivy.webtest.primeui.widget.Table;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
-public class WebTestGLSPProcessViewerIT {
+class WebTestProcessViewerIT {
 
   @BeforeAll
-  public static void setup() {
+  static void setup() {
     Configuration.proxyEnabled = false;
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
   }
 
   @Test
-  public void testOpenViewer() {
+  void testOpenViewer() {
     loginDeveloper();
     openView("starts.xhtml");
-    $(By.id("startsForm:projectStarts:globalFilter")).setValue("testdata/testdata.ivp");
+    var table = new Table(By.id("startsForm:projectStarts"));
+    table.searchGlobal("testdata/testdata.ivp");
+    table.row(0).shouldHave(text("testdata.ivp"));
     $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
     $(By.id("startsForm:projectStarts:0:openProcessViewer")).shouldBe(visible).click();
 
@@ -48,10 +52,12 @@ public class WebTestGLSPProcessViewerIT {
   }
 
   @Test
-  public void testCaseMapUiViewer() {
+  void testCaseMapUiViewer() {
     loginDeveloper();
     openView("starts.xhtml");
-    $(By.id("startsForm:projectStarts:globalFilter")).setValue("test _ case _ map");
+    var table = new Table(By.id("startsForm:projectStarts"));
+    table.searchGlobal("test _ case _ map");
+    table.row(0).shouldHave(text("test _ case _ map"));
     $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
     $(By.id("startsForm:projectStarts:0:startsActionsMenu")).shouldBe(visible);
     $(By.id("startsForm:projectStarts:0:openProcessViewer")).shouldBe(visible).click();
@@ -63,7 +69,7 @@ public class WebTestGLSPProcessViewerIT {
   }
 
   @Test
-  public void testNoViewerForUnknownUser() {
+  void testNoViewerForUnknownUser() {
     logout();
     openView("starts.xhtml");
     $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
