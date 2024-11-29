@@ -8,7 +8,6 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startT
 import static com.codeborne.selenide.Condition.readonly;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,16 +19,17 @@ import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
-public class WebTestHomepageIT {
+class WebTestHomepageIT {
 
   @Test
-  public void homepageContainers() {
+  void homepageContainers() {
     login("DifferentLogin", "DifferentPassword");
 
     // start process to create test data
     openView("starts.xhtml");
-    $(By.id("startsForm:projectStarts:globalFilter")).setValue("test _ case _ map").pressEnter();
-    $(By.id("startsForm:projectStarts:0:startName")).shouldBe(visible).click();
+    var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
+    starts.searchGlobal("test _ case _ map");
+    starts.row(0).shouldHave(text("test _ case _ map")).find(".start-name").click();
     $(By.id("iFrameForm:frameTaskName")).shouldBe(text("Test Developer Workflow-UI Dialog 1"));
     $(By.id("iFrame")).shouldBe(visible);
     openView("home.xhtml");
@@ -41,21 +41,20 @@ public class WebTestHomepageIT {
   }
 
   @Test
-  public void noCardsIfNotLoggedIn() {
+  void cardsIfLoggedIn() {
     loginDeveloper();
-
-    // cards should be visible when logged in
     $(".active-tasks-card").shouldBe(visible);
     $(".startedProcessesCard").shouldBe(visible);
   }
 
   @Test
-  public void testHomePageViewer() {
+  void testHomePageViewer() {
     loginDeveloper();
-
     openView("starts.xhtml");
-    $(By.id("startsForm:projectStarts:globalFilter")).setValue("case");
-    $(byText("test _ case _ map")).shouldBe(visible).click();
+
+    var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
+    starts.searchGlobal("test _ case _ map");
+    starts.row(0).shouldHave(text("test _ case _ map")).find(".start-name").click();
     $(By.id("iFrame")).shouldBe(visible);
     openView("home.xhtml");
     $(".startedProcessesCard").shouldBe(visible);
