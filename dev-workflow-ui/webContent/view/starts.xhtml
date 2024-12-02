@@ -28,7 +28,7 @@
               <h:outputText id="processStartIcon" class="#{start.icon} si-lg vertical-align-middle" />
             </p:column>
             <p:column headerText="Process" sortBy="#{start.displayName}" filterBy="#{start.displayName}">
-              <h:outputText id="startName" value="#{start.displayName}" styleClass="text-primary-color"/>
+              <h:outputText id="startName" value="#{start.displayName}" styleClass="start-name text-primary-color"/>
               <div class="start-description overflow-hidden-ellipsis text-sm">
                 <h:outputText id="startDescription" value="#{start.description}" />
                 <p:tooltip for="startDescription" position="top" value="#{start.description}" styleClass="text" />
