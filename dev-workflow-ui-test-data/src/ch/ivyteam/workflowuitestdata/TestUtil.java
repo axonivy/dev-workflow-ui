@@ -8,6 +8,7 @@ import java.util.Random;
 
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.security.ISecurityContext;
+import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.ivy.security.exec.Sudo;
 import ch.ivyteam.ivy.workflow.ITask;
 
@@ -32,8 +33,9 @@ public class TestUtil {
   public static void generateTaskAndCaseNotes(ITask task) {
     var random = new Random();
     var caze = task.getCase();
-    task.createNote(Ivy.session(), "this is test note");
-    caze.createNote(Ivy.session(), "this is test note");
+    var user = notesUser();
+    task.notes().add().author(user).content("this is a test note").execute();
+    caze.notes().add().author(user).content("this is a test note").execute();
 
     String longNote = """
              I can't do that as Bruce Wayne... as a man. I'm flesh and blood. I can be ignored, destroyed. But as a symbol, I can be incorruptible, I can be everlasting.
@@ -41,14 +43,22 @@ public class TestUtil {
              No guns, no killing. I'm not wearing hockey pads. Bruce Wayne, eccentric billionaire.
              I'll be standing where l belong. Between you and the peopIe of Gotham. I'm not wearing hockey pads. I seek the means to fight injustice. To turn fear against those who prey on the fearful.
             """;
-    task.createNote(Ivy.session(), longNote);
+    task.notes().add().author(user).content(longNote).execute();
 
     String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     for (int i = 0; i < 6; i++) {
       int number = random.nextInt(100000);
-      task.createNote(Ivy.session(), String.valueOf(number));
+      task.notes().add().author(user).content(String.valueOf(number)).execute();
       String character = String.valueOf(alphabet.charAt(number % alphabet.length()));
-      caze.createNote(Ivy.session(), character);
+      caze.notes().add().author(user).content(character).execute();
     }
+  }
+
+  private static IUser notesUser() {
+    var session = Ivy.session();
+    if (session != null) {
+      return session.getSessionUser();
+    }
+    return Ivy.security().users().system();
   }
 }
