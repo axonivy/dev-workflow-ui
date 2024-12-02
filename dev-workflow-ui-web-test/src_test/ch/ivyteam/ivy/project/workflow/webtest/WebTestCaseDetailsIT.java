@@ -114,7 +114,7 @@ class WebTestCaseDetailsIT {
     var iframe = dialog.find(By.tagName("iframe"));
     iframe.shouldBe(visible);
     Selenide.switchTo().frame(iframe);
-    $(By.id("content")).shouldHave(text("this is test note"));
+    $(By.id("content")).shouldHave(text("this is a test note"));
   }
 
   @Test
