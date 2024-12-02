@@ -184,9 +184,7 @@ class WebTestTasksIT {
     $(By.id("workflowEvents:eventsTable")).shouldBe(visible);
 
     loginFromTable("testuser");
-    openView("tasks.xhtml");
-    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
-    $(By.id("taskId")).shouldBe(exactText(taskId));
+    openView("task.xhtml", Map.of("id", taskId));
     $(By.id("workflowEvents:eventsTable")).shouldNotBe(visible);
     $(By.id("workflowEvents:noPermissionMessage")).shouldBe(visible).shouldHave(text("No permissions"));
   }
