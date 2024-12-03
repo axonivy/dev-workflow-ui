@@ -6,7 +6,6 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openVi
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
+import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
@@ -23,14 +23,13 @@ public class WebTestDefaultPagesIT {
   void beforeEach() {
     loginDeveloper();
     openView("starts.xhtml");
-    $(By.id("startsForm:projectStarts:globalFilter")).setValue("testDefaultPages").pressEnter();
-    $(By.id("startsForm:projectStarts")).shouldHave(text("dev-workflow-ui-test-data"));
-    $(byText("TestData/testDefaultPages.ivp")).shouldBe(visible).click();
+    var table = PrimeUi.table(By.id("startsForm:projectStarts"));
+    table.searchGlobal("testDefaultPages");
+    table.contains("dev-workflow-ui-test-data");
+    table.row(0).shouldHave(text("TestData/testDefaultPages.ivp")).find(".start-name").click();
     $(By.id("iFrame")).shouldBe(visible);
-    if ($(By.id("iFrame")).is(visible)) {
-      Selenide.switchTo().frame("iFrame");
-      $(By.id("defaultPagesTitle")).shouldBe(visible);
-    }
+    Selenide.switchTo().frame("iFrame");
+    $(By.id("defaultPagesTitle")).shouldBe(visible);
   }
 
   @Test
