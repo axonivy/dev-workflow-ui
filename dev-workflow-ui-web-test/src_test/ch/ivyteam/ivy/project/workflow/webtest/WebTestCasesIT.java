@@ -9,6 +9,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
@@ -18,6 +19,11 @@ import com.axonivy.ivy.webtest.primeui.widget.Table;
 
 @IvyWebTest
 public class WebTestCasesIT {
+
+  @BeforeAll
+  static void setup() {
+    startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
+  }
 
   @Test
   public void allCasesOnlyAdmin() {
@@ -32,7 +38,6 @@ public class WebTestCasesIT {
 
   @Test
   public void testCasesTable() throws Exception {
-    startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
     loginDeveloper();
     startTestProcess("1750C5211D94569D/TestData.ivp");
     openView("cases.xhtml");
