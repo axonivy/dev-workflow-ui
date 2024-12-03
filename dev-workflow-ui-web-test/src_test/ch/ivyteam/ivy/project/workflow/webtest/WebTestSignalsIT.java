@@ -18,7 +18,7 @@ import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.axonivy.ivy.webtest.primeui.widget.Table;
 
 @IvyWebTest
-public class WebTestSignalsIT {
+class WebTestSignalsIT {
 
   @BeforeAll
   static void setup() {
@@ -32,7 +32,7 @@ public class WebTestSignalsIT {
   }
 
   @Test
-  public void testSendSignals() {
+  void sendSignals() {
     $(By.id("signalForm:signalCodeInput_input")).setValue("Web Test Signal");
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
     $(By.id("signalForm:growl_container")).shouldBe(visible);
@@ -42,7 +42,7 @@ public class WebTestSignalsIT {
   }
 
   @Test
-  public void testSignalAutocomplete() {
+  void signalAutocomplete() {
     $(By.id("signalForm:signalCodeInput")).findElement(By.tagName("button")).click();
 
     $(By.id("signalForm:signalCodeInput_input")).setValue("signal");
@@ -55,7 +55,7 @@ public class WebTestSignalsIT {
   }
 
   @Test
-  public void caseProcessViewerCanOpen() {
+  void caseProcessViewerCanOpen() {
     $(By.id("signalForm")).shouldBe(visible);
     $(By.id("signalForm:signalCodeInput")).findElement(By.tagName("button")).click();
 
@@ -73,7 +73,7 @@ public class WebTestSignalsIT {
   }
 
   @Test
-  public void testBoundarySignals() {
+  void boundarySignals() {
     Table boundaryTable = PrimeUi.table(By.id("boundarySignalsTable"));
     boundaryTable.contains("No records found.");
 
@@ -87,7 +87,7 @@ public class WebTestSignalsIT {
   }
 
   @Test
-  public void testBoundarySignalsOnClick() {
+  void boundarySignalsOnClick() {
     Table boundaryTable = PrimeUi.table(By.id("boundarySignalsTable"));
     boundaryTable.contains("No records found.");
 

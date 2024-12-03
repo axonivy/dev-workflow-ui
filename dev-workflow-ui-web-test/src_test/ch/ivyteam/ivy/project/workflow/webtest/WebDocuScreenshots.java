@@ -21,7 +21,7 @@ import com.codeborne.selenide.WebDriverRunner;
 import ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil;
 
 @IvyWebTest
-public class WebDocuScreenshots {
+class WebDocuScreenshots {
   private static final int SCREENSHOT_WIDTH = 1500;
 
   @BeforeEach
@@ -33,7 +33,7 @@ public class WebDocuScreenshots {
   }
 
   @Test
-  public void screenshotMainPages() {
+  void screenshotMainPages() {
     openView("home.xhtml");
     loginDeveloper();
     startTestProcess("1750C5211D94569D/TestData.ivp");

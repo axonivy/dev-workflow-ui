@@ -15,10 +15,10 @@ import org.openqa.selenium.By;
 import com.axonivy.ivy.webtest.IvyWebTest;
 
 @IvyWebTest
-public class WebTestHomeRedirect {
+class WebTestHomeRedirect {
 
   @Test
-  public void homepageRedirect() {
+  void homepageRedirect() {
     loginFromTable("testuser");
     startTestProcess("1750C5211D94569D/cleanupSession.ivp");
 

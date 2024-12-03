@@ -13,10 +13,10 @@ import com.axonivy.ivy.webtest.IvyWebTest;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
-public class WebTestSwaggerIT {
+class WebTestSwaggerIT {
 
   @Test
-  public void testSwaggerWorking() {
+  void swaggerWorking() {
     loginDeveloper();
     $(By.id("menuform:sr_actions")).shouldBe(visible);
     openView("api-browser.xhtml");

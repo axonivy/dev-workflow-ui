@@ -17,7 +17,7 @@ import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
-public class WebTestDefaultPagesIT {
+class WebTestDefaultPagesIT {
 
   @BeforeEach
   void beforeEach() {
@@ -33,7 +33,7 @@ public class WebTestDefaultPagesIT {
   }
 
   @Test
-  public void testRedirectDefaultHome() {
+  void redirectDefaultHome() {
     $(By.id("homeBtn")).shouldBe(visible).click();
     Selenide.switchTo().defaultContent();
     $(By.id("menuform:sr_home")).shouldHave(cssClass("active-nav-page"));
@@ -41,7 +41,7 @@ public class WebTestDefaultPagesIT {
   }
 
   @Test
-  public void testRedirectDefaultProcessStarts() {
+  void redirectDefaultProcessStarts() {
     $(By.id("startsBtn")).shouldBe(visible).click();
     Selenide.switchTo().defaultContent();
     $(By.id("menuform:sr_starts")).shouldHave(cssClass("active-nav-page"));
@@ -49,7 +49,7 @@ public class WebTestDefaultPagesIT {
   }
 
   @Test
-  public void testRedirectDefaultTaskList() {
+  void redirectDefaultTaskList() {
     $(By.id("tasksBtn")).shouldBe(visible).click();
     Selenide.switchTo().defaultContent();
     $(By.id("menuform:sr_tasks")).shouldHave(cssClass("active-nav-page"));
@@ -57,7 +57,7 @@ public class WebTestDefaultPagesIT {
   }
 
   @Test
-  public void testRedirectDefaultLoginPage() {
+  void redirectDefaultLoginPage() {
     $(By.id("loginBtn")).shouldBe(visible).click();
     Selenide.switchTo().defaultContent();
     $(By.id("loginForm")).shouldBe(visible);
