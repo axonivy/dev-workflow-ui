@@ -19,10 +19,10 @@ import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.axonivy.ivy.webtest.primeui.widget.Table;
 
 @IvyWebTest
-public class WebTestProcessViewerPermissionIT {
+class WebTestProcessViewerPermissionIT {
 
   @BeforeAll
-  public static void prepare() {
+  static void prepare() {
     startTestProcess("1836AC85C69B7BED/start.ivp");
   }
 
@@ -32,15 +32,15 @@ public class WebTestProcessViewerPermissionIT {
   }
 
   @AfterAll
-  public static void finishTask() {
+  static void finishTask() {
     openView("tasks.xhtml");
     $(byText("Test View Permission Task")).click();
   }
 
   @Test
-  public void taskDetail() {
+  void detail() {
     openView("tasks.xhtml");
-    Table table = PrimeUi.table(By.id("tasksForm:tasks"));
+    var table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldHave(text("Test View Permission Task"));
     $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
     $(By.id("taskName")).shouldHave(text("Test View Permission Task"));
@@ -48,7 +48,7 @@ public class WebTestProcessViewerPermissionIT {
   }
 
   @Test
-  public void caseDetail() {
+  void caseDetail() {
     openView("cases.xhtml");
     $(By.id("casesForm:cases:0:caseName")).shouldBe(visible).click();
     $(By.id("caseName")).shouldBe(visible).shouldHave(text("Test View Permission Case"));
@@ -56,7 +56,7 @@ public class WebTestProcessViewerPermissionIT {
   }
 
   @Test
-  public void starts() {
+  void starts() {
     openView("starts.xhtml");
     var table = new Table(By.id("startsForm:projectStarts"));
     table.searchGlobal("/testdata.ivp");

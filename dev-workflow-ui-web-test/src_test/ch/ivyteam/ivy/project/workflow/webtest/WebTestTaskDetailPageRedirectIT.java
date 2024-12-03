@@ -16,10 +16,10 @@ import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
-public class WebTestTaskDetailPageRedirectIT {
+class WebTestTaskDetailPageRedirectIT {
 
   @BeforeAll
-  public static void setup() {
+  static void setup() {
     loginDeveloper();
     startTestProcess("18D3AB6E2DC7779B/generateUserTask.ivp");
     openView("tasks.xhtml");
@@ -31,7 +31,7 @@ public class WebTestTaskDetailPageRedirectIT {
   }
 
   @Test
-  public void testRedirectToDetailPage() {
+  void redirectToDetailPage() {
     Selenide.closeWebDriver();
     loginDeveloper();
     openView("tasks.xhtml");

@@ -18,7 +18,7 @@ import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.axonivy.ivy.webtest.primeui.widget.Table;
 
 @IvyWebTest
-public class WebTestCasesIT {
+class WebTestCasesIT {
 
   @BeforeAll
   static void setup() {
@@ -26,7 +26,7 @@ public class WebTestCasesIT {
   }
 
   @Test
-  public void allCasesOnlyAdmin() {
+  void allCasesOnlyAdmin() {
     loginFromTable("testuser");
     openView("cases.xhtml");
     $(By.id("casesForm:cases:showAllCasesSwitch")).shouldNotBe(visible);
@@ -37,7 +37,7 @@ public class WebTestCasesIT {
   }
 
   @Test
-  public void testCasesTable() throws Exception {
+  void casesTable() throws Exception {
     loginDeveloper();
     startTestProcess("1750C5211D94569D/TestData.ivp");
     openView("cases.xhtml");

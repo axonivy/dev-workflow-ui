@@ -48,7 +48,7 @@ class WebTestHomepageIT {
   }
 
   @Test
-  void testHomePageViewer() {
+  void homepageViewer() {
     loginDeveloper();
     openView("starts.xhtml");
 

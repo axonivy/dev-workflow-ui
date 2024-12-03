@@ -26,21 +26,21 @@ import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.codeborne.selenide.Selenide;
 
 @IvyWebTest
-public class WebTestStartsIT {
+class WebTestStartsIT {
 
   @BeforeAll
-  public static void prepare() {
+  static void prepare() {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
   }
 
   @BeforeEach
-  public void loginAdmin() {
+  void loginAdmin() {
     Selenide.switchTo().defaultContent();
     loginDeveloper();
   }
 
   @Test
-  public void testFilter() {
+  void filter() {
     startTestProcess("1750C5211D94569D/TestData.ivp");
     openView("starts.xhtml");
     var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
@@ -49,7 +49,7 @@ public class WebTestStartsIT {
   }
 
   @Test
-  public void testExecuteStart() {
+  void executeStart() {
     openView("starts.xhtml");
     var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
     starts.searchGlobal("startTestDialog1");
@@ -101,7 +101,7 @@ public class WebTestStartsIT {
   }
 
   @Test
-  public void startNotEmbedInFrame() {
+  void startNotEmbedInFrame() {
     openView("starts.xhtml");
     var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
     starts.searchGlobal("embed in frame");
@@ -115,7 +115,7 @@ public class WebTestStartsIT {
   }
 
   @Test
-  public void testExecuteDefaultFramePage() {
+  void executeDefaultFramePage() {
     var url = EngineUrl.create()
             .process("/dev-workflow-ui-test-data/1750C5211D94569D/startTestDialog1.ivp")
             .queryParam("embedInFrame", "")
@@ -130,7 +130,7 @@ public class WebTestStartsIT {
   }
 
   @Test
-  public void testWebservicesVisible() {
+  void webservicesVisible() {
     openView("webservices.xhtml");
     var table = PrimeUi.table(By.id("webServicesForm:webServices"));
     table.searchGlobal("testservice");
@@ -138,7 +138,7 @@ public class WebTestStartsIT {
   }
 
   @Test
-  public void testRedirectWhenFinished() {
+  void redirectWhenFinished() {
     openView("starts.xhtml");
     var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
     starts.searchGlobal("TestData/TestData.ivp");
@@ -162,7 +162,7 @@ public class WebTestStartsIT {
   }
 
   @Test
-  public void testExecuteOnFullscreenPage() {
+  void executeOnFullscreenPage() {
     openView("starts.xhtml");
     var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
     starts.searchGlobal("startTestDialog1");
@@ -175,7 +175,7 @@ public class WebTestStartsIT {
   }
 
   @Test
-  public void testFrameHeaderBarSidestep() {
+  void frameHeaderBarSidestep() {
     openView("starts.xhtml");
     var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
     starts.searchGlobal("test _ case _ map");
@@ -191,7 +191,7 @@ public class WebTestStartsIT {
   }
 
   @Test
-  public void testStartableIcons() {
+  void startableIcons() {
     openView("starts.xhtml");
     var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
     starts.searchGlobal("makeAdminUser.ivp");

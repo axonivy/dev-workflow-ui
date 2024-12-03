@@ -27,10 +27,10 @@ import com.axonivy.ivy.webtest.primeui.widget.Table;
 
 @IvyWebTest
 @TestMethodOrder(OrderAnnotation.class)
-public class WebTestCleanup {
+class WebTestCleanup {
 
   @BeforeAll
-  public static void prepare() {
+  static void prepare() {
     // check if the engine is running and starts are available
     checkProcessesExist();
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
@@ -46,13 +46,13 @@ public class WebTestCleanup {
   }
 
   @BeforeEach
-  public void loginAdmin() {
+  void loginAdmin() {
     loginDeveloper();
   }
 
   @Test
   @Order(1)
-  public void noCleanupIfNotDevMode() {
+  void noCleanupIfNotDevMode() {
     openView("cleanup.xhtml");
     $(By.id("clanupForm:cleanupBtn")).shouldBe(disabled);
     startTestProcess("1783B19164F69B78/designerStandard.ivp");
@@ -62,7 +62,7 @@ public class WebTestCleanup {
 
   @Test
   @Order(2)
-  public void cleanupUserPermissions() {
+  void cleanupUserPermissions() {
     startTestProcess("1783B19164F69B78/designerEmbedded.ivp");
     loginFromTable("testuser");
     $(By.id("menuform:sr_actions")).shouldBe(visible).click();
@@ -79,7 +79,7 @@ public class WebTestCleanup {
 
   @Test
   @Order(3)
-  public void testClean() {
+  void clean() {
     startTestProcess("1750C5211D94569D/TestData.ivp");
     openView("cases.xhtml");
     Table casesTable = PrimeUi.table(By.id("casesForm:cases"));

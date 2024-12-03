@@ -25,7 +25,7 @@ import com.codeborne.selenide.Selenide;
 import ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil;
 
 @IvyWebTest
-public class WebTestLoginIT {
+class WebTestLoginIT {
 
   @BeforeEach
   void init() {

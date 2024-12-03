@@ -15,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.time.Duration;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
@@ -32,10 +33,14 @@ class WebTestProcessViewerIT {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
   }
 
-  @Test
-  void testOpenViewer() {
+  @BeforeEach
+  void init() {
     loginDeveloper();
     openView("starts.xhtml");
+  }
+
+  @Test
+  void openViewer() {
     var table = new Table(By.id("startsForm:projectStarts"));
     table.searchGlobal("testdata/testdata.ivp");
     table.row(0).shouldHave(text("testdata.ivp"));
@@ -52,9 +57,7 @@ class WebTestProcessViewerIT {
   }
 
   @Test
-  void testCaseMapUiViewer() {
-    loginDeveloper();
-    openView("starts.xhtml");
+  void caseMapUiViewer() {
     var table = new Table(By.id("startsForm:projectStarts"));
     table.searchGlobal("test _ case _ map");
     table.row(0).shouldHave(text("test _ case _ map"));
@@ -69,7 +72,7 @@ class WebTestProcessViewerIT {
   }
 
   @Test
-  void testNoViewerForUnknownUser() {
+  void noViewerForUnknownUser() {
     logout();
     openView("starts.xhtml");
     $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
