@@ -5,7 +5,6 @@ import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -17,7 +16,6 @@ import org.primefaces.event.SelectEvent;
 import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.ivy.security.identity.core.auth.oauth2.OAuth2Url;
-import ch.ivyteam.ivy.security.identity.spi.IdentityProvider;
 import ch.ivyteam.ivy.security.identity.spi.auth.oauth2.OAuth2Authenticator;
 import ch.ivyteam.ivy.security.restricted.ISecurityContextInternal;
 import ch.ivyteam.workflowui.login.LoginTableIvyDevWfBean.User;
@@ -29,9 +27,20 @@ import ch.ivyteam.workflowui.util.UserUtil;
 @ManagedBean
 @ViewScoped
 public class LoginIvyDevWfBean {
+
   private String username;
   private String password;
   private String originalUrl;
+  private OAuthProvider oauthProvider;
+
+  public LoginIvyDevWfBean() {
+    var ctx = ISecurityContext.current();
+    var provider = ((ISecurityContextInternal) ctx).identityProvider();
+    if (provider.authenticator() instanceof OAuth2Authenticator) {
+      var initUri = OAuth2Url.initUri(ctx, provider);
+      oauthProvider = new OAuthProvider(provider.displayName(), loadResource(provider.logo()), initUri);
+    }
+  }
 
   public void loginFromTable(SelectEvent<?> event) {
     Object object = event.getObject();
@@ -112,17 +121,8 @@ public class LoginIvyDevWfBean {
     this.password = password;
   }
 
-  public List<OAuthProvider> getOAuthProviders() {
-    var securityContext = (ISecurityContextInternal) ISecurityContext.current();
-    return securityContext.identityProviders().stream()
-            .filter(p -> p.authenticator() instanceof OAuth2Authenticator)
-            .map(this::toOAuthPovider)
-            .collect(Collectors.toList());
-  }
-
-  private OAuthProvider toOAuthPovider(IdentityProvider provider) {
-    var initUri = OAuth2Url.initUri(ISecurityContext.current(), provider);
-    return new OAuthProvider(provider.displayName(), loadResource(provider.logo()), initUri);
+  public OAuthProvider getOAuthProvider() {
+    return oauthProvider;
   }
 
   private String loadResource(URI uri) {
