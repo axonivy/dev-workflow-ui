@@ -69,10 +69,16 @@
           }
 
           iframe.addEventListener("load", function() {
-            attachUnload();
-            // Just in case the change wasn't dispatched during the unload event...
-            dispatchChange();
-            iframe.style.visibility = 'visible';
+            try{
+              const content = iframe.contentWindow.content;
+              attachUnload();
+              // Just in case the change wasn't dispatched during the unload event...
+              dispatchChange();
+              iframe.style.visibility = 'visible';
+            }catch(e) {
+              window.location = iframe.src;
+            }
+
           });
 
           attachUnload();
