@@ -69,10 +69,17 @@
           }
 
           iframe.addEventListener("load", function() {
-            attachUnload();
-            // Just in case the change wasn't dispatched during the unload event...
-            dispatchChange();
-            iframe.style.visibility = 'visible';
+            try{
+              // Try to access loaded iframe content
+              const content = iframe.contentWindow.content;
+              attachUnload();
+              // Just in case the change wasn't dispatched during the unload event...
+              dispatchChange();
+              iframe.style.visibility = 'visible';
+            }catch(e) {
+              // Open iframe content in current window if it could not be loaded
+              window.location = iframe.src;
+            }
           });
 
           attachUnload();
