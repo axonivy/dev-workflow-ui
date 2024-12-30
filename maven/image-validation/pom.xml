@@ -43,7 +43,8 @@
               <target>
                 <get
                   src="https://jenkins.ivyteam.io/job/dev-workflow-ui_screenshots/job/${ref.screenshot.build}/lastSuccessfulBuild/artifact/dev-workflow-ui-web-test/target/docu/screenshots/*zip*/screenshots.zip"
-                  dest="${project.build.directory}" />
+                  dest="${project.build.directory}"
+                  ignoreerrors="true" />
                 <unzip dest="${project.build.directory}">
                   <fileset dir="${project.build.directory}">
                     <filename name="screenshots.zip" />
