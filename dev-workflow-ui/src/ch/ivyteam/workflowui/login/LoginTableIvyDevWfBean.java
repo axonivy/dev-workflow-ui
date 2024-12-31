@@ -21,8 +21,8 @@ public class LoginTableIvyDevWfBean {
 
   public LoginTableIvyDevWfBean() {
     users = UserUtil.getUsers().stream()
-            .map(LoginTableIvyDevWfBean::toUser)
-            .collect(toList());
+        .map(LoginTableIvyDevWfBean::toUser)
+        .collect(toList());
     currentUser = toUser(ISession.current().getSessionUser());
   }
 

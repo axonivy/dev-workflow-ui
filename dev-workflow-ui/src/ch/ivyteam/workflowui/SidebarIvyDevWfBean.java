@@ -16,12 +16,12 @@ public class SidebarIvyDevWfBean {
 
   private final String activePage;
   private final String[] developerPages = {
-          "signals",
-          "intermediateEvents",
-          "cleanup",
-          "api-browser",
-          "statistics",
-          "webservices"
+      "signals",
+      "intermediateEvents",
+      "cleanup",
+      "api-browser",
+      "statistics",
+      "webservices"
   };
 
   public SidebarIvyDevWfBean() {

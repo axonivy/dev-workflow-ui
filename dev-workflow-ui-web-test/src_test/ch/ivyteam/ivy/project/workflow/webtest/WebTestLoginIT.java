@@ -128,11 +128,11 @@ class WebTestLoginIT {
     loginFromTable("testuser");
     openView("loginTable.xhtml");
     $("#loginTable\\:users_data > .ui-state-highlight")
-            .shouldBe(visible);
+        .shouldBe(visible);
     logout();
     openView("loginTable.xhtml");
     $("#loginTable\\:users_data > .ui-state-highlight")
-            .shouldNotBe(visible);
+        .shouldNotBe(visible);
   }
 
 }

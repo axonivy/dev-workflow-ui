@@ -44,19 +44,17 @@ public class CasesDataModel extends LazyDataModel<ICase> {
 
   @Override
   public int count(Map<String, FilterMeta> filterBy) {
-    return (int)createCaseQuery().executor().count();
+    return (int) createCaseQuery().executor().count();
   }
 
   @Override
-  public List<ICase> load(int first, int pageSize, Map<String, SortMeta> sortBy,
-          Map<String, FilterMeta> filterBy) {
+  public List<ICase> load(int first, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy) {
     var caseQuery = createCaseQuery();
     applyOrdering(caseQuery, sortBy);
-    List<ICase> cases = caseQuery
-            .executor()
-            .resultsPaged()
-            .window(first, pageSize);
-    return cases;
+    return caseQuery
+        .executor()
+        .resultsPaged()
+        .window(first, pageSize);
   }
 
   protected CaseQuery createCaseQuery() {
@@ -78,15 +76,15 @@ public class CasesDataModel extends LazyDataModel<ICase> {
   private void applyFilter(CaseQuery query) {
     if (StringUtils.isNotEmpty(filter)) {
       var caseState = Arrays.asList(CaseBusinessState.values()).stream()
-              .filter(state -> StringUtils.startsWithIgnoreCase(state.toString(), filter))
-              .findFirst().orElse(null);
+          .filter(state -> StringUtils.startsWithIgnoreCase(state.toString(), filter))
+          .findFirst().orElse(null);
       var casePriority = Arrays.asList(WorkflowPriority.values()).stream()
-              .filter(priority -> StringUtils.startsWithIgnoreCase(priority.toString(), filter))
-              .findFirst().orElse(null);
+          .filter(priority -> StringUtils.startsWithIgnoreCase(priority.toString(), filter))
+          .findFirst().orElse(null);
       query.where().and(CaseQuery.create().where().name().isLikeIgnoreCase("%" + filter + "%")
-              .or().businessState().isEqual(caseState)
-              .or().priority().isEqual(casePriority)
-              .or().creatorUserDisplayName().isLikeIgnoreCase("%" + filter + "%"));
+          .or().businessState().isEqual(caseState)
+          .or().priority().isEqual(casePriority)
+          .or().creatorUserDisplayName().isLikeIgnoreCase("%" + filter + "%"));
     }
   }
 

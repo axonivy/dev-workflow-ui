@@ -5,17 +5,14 @@ import ch.ivyteam.ivy.process.extension.ui.ExtensionUiBuilder;
 import ch.ivyteam.ivy.process.extension.ui.UiEditorExtension;
 import ch.ivyteam.ivy.process.intermediateevent.AbstractProcessIntermediateEventBean;
 
-public class TestIntermediateClass extends AbstractProcessIntermediateEventBean
-{
+public class TestIntermediateClass extends AbstractProcessIntermediateEventBean {
 
-  public TestIntermediateClass()
-  {
+  public TestIntermediateClass() {
     super("TestIntermediateClass", "Description of TestIntermediateClass", String.class);
   }
 
   @Override
-  public void poll()
-  {
+  public void poll() {
     boolean eventOccured = false;
     String additionalInformation = "";
     String resultObject = "";
@@ -35,14 +32,11 @@ public class TestIntermediateClass extends AbstractProcessIntermediateEventBean
     // that should trigger the continue of waiting processes <===
     // Parse the event identifier and the result object out of the event data
 
-    if (eventOccured)
-    {
-      try
-      {
+    if (eventOccured) {
+      try {
         getEventBeanRuntime().fireProcessIntermediateEventEx(eventIdentifier, resultObject,
             additionalInformation);
-      } catch (PersistencyException ex)
-      {
+      } catch (PersistencyException ex) {
 
         // ===> Add here your exception handling code if the event cannot be processed
         // <===

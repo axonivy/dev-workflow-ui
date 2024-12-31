@@ -55,9 +55,9 @@ public class ViewerUtil {
       return ThemeMode.LIGHT;
     }
     return Optional.ofNullable(context.getApplication().evaluateExpressionGet(context, "#{ivyFreyaTheme}", IvyFreyaTheme.class))
-            .map(IvyFreyaTheme::getMode)
-            .map(theme -> ThemeMode.of(theme))
-            .orElse(ThemeMode.LIGHT);
+        .map(IvyFreyaTheme::getMode)
+        .map(ThemeMode::of)
+        .orElse(ThemeMode.LIGHT);
   }
 
   public static boolean isViewerAllowed(IWebStartable startable) {

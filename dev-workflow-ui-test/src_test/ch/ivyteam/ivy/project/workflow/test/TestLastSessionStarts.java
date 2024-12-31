@@ -31,7 +31,7 @@ class TestLastSessionStarts {
     assertThat(starts.storedStarts()).as("shouldn't add duplicates").hasSize(1);
   }
 
-  private static class MapAttributeStore implements IAttributeStore<Set<StartableModel>>  {
+  private static class MapAttributeStore implements IAttributeStore<Set<StartableModel>> {
 
     private final Map<String, Set<StartableModel>> starts = new HashMap<>();
 

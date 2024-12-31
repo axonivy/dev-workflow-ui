@@ -56,13 +56,13 @@ public class NotesBean {
 
   public void openNotesDialog(String elementId) {
     var options = DialogFrameworkOptions.builder()
-            .modal(true)
-            .responsive(true)
-            .width("640")
-            .height("340")
-            .contentHeight("100%")
-            .contentWidth("100%")
-            .build();
+        .modal(true)
+        .responsive(true)
+        .width("640")
+        .height("340")
+        .contentHeight("100%")
+        .contentWidth("100%")
+        .build();
     Map<String, List<String>> params = new HashMap<>();
     params.put("id", List.of(elementId));
     PrimeFaces.current().dialog().openDynamic("notesDialog", options, params);

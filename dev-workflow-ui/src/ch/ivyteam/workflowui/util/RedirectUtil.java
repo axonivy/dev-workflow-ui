@@ -15,7 +15,7 @@ public class RedirectUtil {
     handler.redirect(url);
   }
 
-  public static interface RedirectHandler {
+  public interface RedirectHandler {
     void redirect(String url);
   }
 

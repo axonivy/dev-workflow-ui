@@ -25,7 +25,7 @@ public class BoundarySignalModel extends LazyDataModel<ITaskBoundarySignalEventR
 
   @Override
   public List<ITaskBoundarySignalEventReceiver> load(int first, int pageSize, Map<String, SortMeta> sortBy,
-          Map<String, FilterMeta> filterBy) {
+      Map<String, FilterMeta> filterBy) {
     var sort = new SortMetaConverter(sortBy);
     var taskBoundaryQuery = IWorkflowContext.current().signals().receivers().createTaskBoundaryQuery();
     applyOrdering(taskBoundaryQuery, sort.toField(), sort.toOrder());
@@ -35,7 +35,7 @@ public class BoundarySignalModel extends LazyDataModel<ITaskBoundarySignalEventR
   }
 
   private static void applyOrdering(TaskBoundarySignalEventReceiverQuery query, String sortField,
-          SortOrder sortOrder) {
+      SortOrder sortOrder) {
     if (StringUtils.isEmpty(sortField)) {
       return;
     }
@@ -48,7 +48,7 @@ public class BoundarySignalModel extends LazyDataModel<ITaskBoundarySignalEventR
   }
 
   private static void applySorting(TaskBoundarySignalEventReceiverQuery.OrderByColumnQuery query,
-          SortOrder sortOrder) {
+      SortOrder sortOrder) {
     if (SortOrder.ASCENDING.equals(sortOrder)) {
       query.ascending();
     }

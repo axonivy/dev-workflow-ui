@@ -137,24 +137,23 @@ public class TasksDetailsIvyDevWfBean {
     return TaskUtil.canResume(selectedTask.getUuid());
   }
 
-  private EnumSet<TaskState> activeTaskStates = EnumSet.of(
-          TaskState.DONE,
-          TaskState.READY_FOR_JOIN,
-          TaskState.JOINING,
-          TaskState.JOIN_FAILED,
-          TaskState.CREATED,
-          TaskState.RESUMED,
-          TaskState.PARKED,
-          TaskState.DESTROYED);
+  private final EnumSet<TaskState> activeTaskStates = EnumSet.of(
+      TaskState.DONE,
+      TaskState.READY_FOR_JOIN,
+      TaskState.JOINING,
+      TaskState.JOIN_FAILED,
+      TaskState.CREATED,
+      TaskState.RESUMED,
+      TaskState.PARKED,
+      TaskState.DESTROYED);
 
   public boolean showInfoBanner() {
-    boolean showBanner = isActivator() && activeTaskStates.contains(selectedTask.getState());
-    return showBanner;
+    return isActivator() && activeTaskStates.contains(selectedTask.getState());
   }
 
   public String getInfoBannerSeverity() {
     boolean validState = selectedTask.getState() == TaskState.RESUMED
-            || selectedTask.getState() == TaskState.CREATED;
+        || selectedTask.getState() == TaskState.CREATED;
     boolean notCurrentSession = selectedTask.getWorkerSession() != ISession.current();
     return validState && notCurrentSession && isActivator() && currentIsWorkerUser() ? "warn" : "info";
   }
@@ -173,7 +172,7 @@ public class TasksDetailsIvyDevWfBean {
           yield "You already have completed the task";
         } else {
           yield "Task has already been completed by user '%s'"
-                  .formatted(selectedTask.getWorkerUser().getName());
+              .formatted(selectedTask.getWorkerUser().getName());
         }
       }
       case DESTROYED -> "You cannot work on the task because it was destroyed";

@@ -18,14 +18,14 @@ public class CustomFieldModel {
 
   public static List<CustomFieldModel> create(ICase selectedCase) {
     return selectedCase.customFields().all().stream()
-            .filter(CustomFieldModel::designerOrNotHidden)
-            .map(CustomFieldModel::new).collect(Collectors.toList());
+        .filter(CustomFieldModel::designerOrNotHidden)
+        .map(CustomFieldModel::new).collect(Collectors.toList());
   }
 
   public static List<CustomFieldModel> create(ITask task) {
     return task.customFields().all().stream()
-            .filter(CustomFieldModel::designerOrNotHidden)
-            .map(CustomFieldModel::new).collect(Collectors.toList());
+        .filter(CustomFieldModel::designerOrNotHidden)
+        .map(CustomFieldModel::new).collect(Collectors.toList());
   }
 
   public CustomFieldModel(ICustomField<?> field) {
@@ -57,6 +57,6 @@ public class CustomFieldModel {
   }
 
   private static boolean designerOrNotHidden(ICustomField<?> customField) {
-    return PermissionsUtil.isDemoOrDevMode() || ! customField.meta().isHidden();
+    return PermissionsUtil.isDemoOrDevMode() || !customField.meta().isHidden();
   }
 }

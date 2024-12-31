@@ -17,7 +17,7 @@ import ch.ivyteam.ivy.workflow.IIntermediateEventElement;
 public class IntermediateEventModel extends LazyDataModel<IIntermediateEvent> {
 
   private static final long serialVersionUID = -7194541143134204696L;
-  private IIntermediateEventElement ie;
+  private final IIntermediateEventElement ie;
 
   public IntermediateEventModel(IIntermediateEventElement ie) {
     this.ie = ie;
@@ -29,7 +29,7 @@ public class IntermediateEventModel extends LazyDataModel<IIntermediateEvent> {
   }
 
   @Override
-  public List<IIntermediateEvent> load(int first, int pageSize, Map<String, SortMeta> sortBy,  Map<String, FilterMeta> filterBy) {
+  public List<IIntermediateEvent> load(int first, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy) {
     var sort = new SortMetaConverter(sortBy);
     var events = ie.getIntermediateEvents();
     setRowCount(events.size());
@@ -40,8 +40,8 @@ public class IntermediateEventModel extends LazyDataModel<IIntermediateEvent> {
     }
 
     return events.stream()
-            .sorted(comp)
-            .collect(Collectors.toList());
+        .sorted(comp)
+        .collect(Collectors.toList());
   }
 
   public int getSize() {

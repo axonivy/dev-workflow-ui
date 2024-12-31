@@ -20,38 +20,38 @@ public class ProcessModelsUtil {
   private static List<IProcessModel> getProcessModels() {
     var securityContext = ISecurityContext.current();
     return IApplicationRepository.of(securityContext).all().stream()
-      .flatMap(a -> a.getProcessModels().stream())
-      .collect(Collectors.toList());
+        .flatMap(a -> a.getProcessModels().stream())
+        .collect(Collectors.toList());
   }
 
   public static List<IWorkflowProcessModelVersion> getWorkflowPMVs() {
     return getProcessModels().stream()
-      .flatMap(pm -> pm.getProcessModelVersions().stream())
-      .map(IWorkflowProcessModelVersion::of)
-      .collect(Collectors.toList());
+        .flatMap(pm -> pm.getProcessModelVersions().stream())
+        .map(IWorkflowProcessModelVersion::of)
+        .collect(Collectors.toList());
   }
 
   public static Stream<IWorkflowProcessModelVersion> getReleasedWorkflowPMVs() {
     return getProcessModels().stream()
-      .map(IProcessModel::getReleasedProcessModelVersion)
-      .filter(Objects::nonNull)
-      .map(IWorkflowProcessModelVersion::of);
+        .map(IProcessModel::getReleasedProcessModelVersion)
+        .filter(Objects::nonNull)
+        .map(IWorkflowProcessModelVersion::of);
   }
 
   public static List<StartableModel> getDeployedStartables() {
     return getReleasedWorkflowPMVs()
-            .flatMap(pmv -> pmv.getStartables(ISession.current()).stream())
-            .map(s -> createCaseMapOrProcessStartable(s))
-            .sorted(Comparator.comparing((StartableModel s) -> s.getProjectName())
-                    .thenComparing(s -> s.getCategory().getName(),
-                            Comparator.nullsLast(Comparator.comparing(String::isEmpty))
-                                    .thenComparing(String::compareTo))
-                    .thenComparing(StartableModel::getDisplayName))
-            .collect(Collectors.toList());
+        .flatMap(pmv -> pmv.getStartables(ISession.current()).stream())
+        .map(ProcessModelsUtil::createCaseMapOrProcessStartable)
+        .sorted(Comparator.comparing((StartableModel s) -> s.getProjectName())
+            .thenComparing(s -> s.getCategory().getName(),
+                Comparator.nullsLast(Comparator.comparing(String::isEmpty))
+                    .thenComparing(String::compareTo))
+            .thenComparing(StartableModel::getDisplayName))
+        .collect(Collectors.toList());
   }
 
   private static StartableModel createCaseMapOrProcessStartable(IWebStartable startable) {
-    if (startable.getType().equals("casemap")) {
+    if ("casemap".equals(startable.getType())) {
       return new CaseMapStartableModel(startable);
     }
     return new StartableModel(startable);
