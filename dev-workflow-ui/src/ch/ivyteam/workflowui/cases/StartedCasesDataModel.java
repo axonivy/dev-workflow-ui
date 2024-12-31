@@ -9,6 +9,6 @@ public class StartedCasesDataModel extends CasesDataModel {
   @Override
   protected CaseQuery createCaseQuery() {
     return CaseQuery.create().where().isBusinessCase()
-            .and(CaseQuery.create().where().currentUserHasStarted().or().currentUserIsOwner());
+        .and(CaseQuery.create().where().currentUserHasStarted().or().currentUserIsOwner());
   }
 }

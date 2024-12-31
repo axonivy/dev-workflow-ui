@@ -157,31 +157,31 @@ public class StatisticsBean {
 
   private long getCountFromAggregation(AggregationResult aggrResult) {
     return aggrResult.aggs().stream()
-            .filter(aggregation -> aggregation instanceof Buckets)
-            .map(aggregation -> (Buckets) aggregation)
-            .flatMap(buckets -> buckets.buckets().stream())
-            .map(Bucket::count)
-            .findFirst()
-            .orElse(0l);
+        .filter(Buckets.class::isInstance)
+        .map(aggregation -> (Buckets) aggregation)
+        .flatMap(buckets -> buckets.buckets().stream())
+        .map(Bucket::count)
+        .findFirst()
+        .orElse(0l);
   }
 
   public DonutChartModel getTaskByStateGraph() {
     Map<String, String> labelToColor = Map.of(
-            TaskBusinessState.OPEN.toString(), "rgb(0, 148, 210)",
-            TaskBusinessState.IN_PROGRESS.toString(), "rgb(255, 206, 86)",
-            TaskBusinessState.DONE.toString(), "rgb(54, 199, 38)",
-            TaskBusinessState.DELAYED.toString(), "rgb(200, 200, 200)",
-            TaskBusinessState.DESTROYED.toString(), "rgb(130, 130, 130)",
-            TaskBusinessState.ERROR.toString(), "rgb(255, 99, 132)");
+        TaskBusinessState.OPEN.toString(), "rgb(0, 148, 210)",
+        TaskBusinessState.IN_PROGRESS.toString(), "rgb(255, 206, 86)",
+        TaskBusinessState.DONE.toString(), "rgb(54, 199, 38)",
+        TaskBusinessState.DELAYED.toString(), "rgb(200, 200, 200)",
+        TaskBusinessState.DESTROYED.toString(), "rgb(130, 130, 130)",
+        TaskBusinessState.ERROR.toString(), "rgb(255, 99, 132)");
     var aggrResult = WorkflowStats.current().task().aggregate("businessState");
     return createDonutChartModel(aggrResult, labelToColor);
   }
 
   public DonutChartModel getCaseByStateGraph() {
     Map<String, String> labelToColor = Map.of(
-            CaseBusinessState.OPEN.toString(), "rgb(0, 148, 210)",
-            CaseBusinessState.DONE.toString(), "rgb(54, 199, 38)",
-            CaseBusinessState.DESTROYED.toString(), "rgb(130, 130, 130)");
+        CaseBusinessState.OPEN.toString(), "rgb(0, 148, 210)",
+        CaseBusinessState.DONE.toString(), "rgb(54, 199, 38)",
+        CaseBusinessState.DESTROYED.toString(), "rgb(130, 130, 130)");
     var aggResult = WorkflowStats.current().caze().aggregate("businessState");
     return createDonutChartModel(aggResult, labelToColor);
   }

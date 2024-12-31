@@ -13,22 +13,21 @@ public class ProcessByUrlBean {
   private String pmv;
   private String startableId;
 
-
   public void executeStart() {
     var releasedPmv = IApplicationRepository.instance().findByName(app)
-            .map(a -> a.findProcessModelVersion(pmv));
+        .map(a -> a.findProcessModelVersion(pmv));
     if (!releasedPmv.isPresent()) {
       return;
     }
     IWorkflowProcessModelVersion.of(releasedPmv.get()).getAllStartables(ISession.current())
-            .filter(s -> s.getId().equals(startableId))
-            .findFirst()
-            .map(ProcessByUrlBean::createCaseMapOrProcessStartable)
-            .ifPresent(StartableModel::execute);
+        .filter(s -> s.getId().equals(startableId))
+        .findFirst()
+        .map(ProcessByUrlBean::createCaseMapOrProcessStartable)
+        .ifPresent(StartableModel::execute);
   }
 
   private static StartableModel createCaseMapOrProcessStartable(IWebStartable startable) {
-    if (startable.getType().equals("casemap")) {
+    if ("casemap".equals(startable.getType())) {
       return new CaseMapStartableModel(startable);
     }
     return new StartableModel(startable);
@@ -61,6 +60,5 @@ public class ProcessByUrlBean {
   public void setPmv(String pmv) {
     this.pmv = pmv;
   }
-
 
 }

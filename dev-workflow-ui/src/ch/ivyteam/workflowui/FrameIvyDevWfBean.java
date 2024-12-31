@@ -19,7 +19,7 @@ import ch.ivyteam.workflowui.util.UrlUtil;
 @ManagedBean
 public class FrameIvyDevWfBean {
   private String taskName;
-  private String taskUrl;
+  private final String taskUrl;
   private List<SidestepModel> sidesteps;
   private String originalUrl;
   private MenuModel sidestepMenuModel;
@@ -45,9 +45,9 @@ public class FrameIvyDevWfBean {
     if (url == null || url.startsWith("/")) {
       return url;
     } else {
-      String info = "taskUrl=" + url + "[url="+UrlUtil.getHttpServletRequest().getRequestURI()+", query="+UrlUtil.getHttpServletRequest().getQueryString()+"]";
+      String info = "taskUrl=" + url + "[url=" + UrlUtil.getHttpServletRequest().getRequestURI() + ", query=" + UrlUtil.getHttpServletRequest().getQueryString() + "]";
       throw BpmError.create("frame:unsupported:url")
-              .withMessage("Only relative urls are supported (security reasons): " + info).build();
+          .withMessage("Only relative urls are supported (security reasons): " + info).build();
     }
   }
 

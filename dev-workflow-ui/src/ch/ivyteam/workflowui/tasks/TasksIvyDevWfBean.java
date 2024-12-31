@@ -11,7 +11,7 @@ import ch.ivyteam.workflowui.util.TaskUtil;
 @ManagedBean
 @ViewScoped
 public class TasksIvyDevWfBean {
-  private TasksDataModel tasksDataModel;
+  private final TasksDataModel tasksDataModel;
 
   public TasksIvyDevWfBean() {
     tasksDataModel = new TasksDataModel();

@@ -27,7 +27,7 @@ public class ProfileBean {
   private String email;
   private Locale contentLocale;
   private Locale formattingLocale;
-  private NotificationChannelDataModel notificationChannelDataModel;
+  private final NotificationChannelDataModel notificationChannelDataModel;
 
   public ProfileBean() {
     fullName = user().getFullName();
@@ -133,8 +133,8 @@ public class ProfileBean {
 
   private List<Locale> locales(Function<LanguageRepository, List<Locale>> loader) {
     var locales = loader.apply(LanguageManager.instance().languages(session().getSecurityContext())).stream()
-            .sorted(Comparator.comparing(this::toDisplayName, String.CASE_INSENSITIVE_ORDER))
-            .collect(Collectors.toList());
+        .sorted(Comparator.comparing(this::toDisplayName, String.CASE_INSENSITIVE_ORDER))
+        .collect(Collectors.toList());
     var l = new ArrayList<Locale>();
     l.add(Locale.ROOT);
     l.addAll(locales);

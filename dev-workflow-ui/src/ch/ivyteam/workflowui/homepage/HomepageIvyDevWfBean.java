@@ -19,9 +19,9 @@ import ch.ivyteam.workflowui.util.ViewerUtil;
 @ManagedBean
 @ViewScoped
 public class HomepageIvyDevWfBean {
-  private TasksDataModel tasksDataModel;
-  private StartedCasesDataModel startedCasesDataModel;
-  private Set<StartableModel> lastStarts;
+  private final TasksDataModel tasksDataModel;
+  private final StartedCasesDataModel startedCasesDataModel;
+  private final Set<StartableModel> lastStarts;
   private String viewerTitle;
   private String viewerLink;
 
@@ -60,10 +60,10 @@ public class HomepageIvyDevWfBean {
 
   public void setViewerStart(String link) {
     viewerTitle = lastStarts.stream()
-            .filter(start -> start.getViewerLink().get().equals(link))
-            .findFirst()
-            .map(start -> ViewerUtil.getViewerDialogTitle(start))
-            .orElse("");
+        .filter(start -> start.getViewerLink().get().equals(link))
+        .findFirst()
+        .map(ViewerUtil::getViewerDialogTitle)
+        .orElse("");
     viewerLink = link;
   }
 

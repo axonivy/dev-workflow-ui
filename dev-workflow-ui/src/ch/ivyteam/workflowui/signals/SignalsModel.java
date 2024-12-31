@@ -24,8 +24,7 @@ public class SignalsModel extends LazyDataModel<ISignalEvent> {
   }
 
   @Override
-  public List<ISignalEvent> load(int first, int pageSize, Map<String, SortMeta> sortBy,
-          Map<String, FilterMeta> filterBy) {
+  public List<ISignalEvent> load(int first, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy) {
     var sort = new SortMetaConverter(sortBy);
     var signalQuery = IWorkflowContext.current().signals().history().createSignalEventQuery();
     applyOrdering(signalQuery, sort.toField(), sort.toOrder());

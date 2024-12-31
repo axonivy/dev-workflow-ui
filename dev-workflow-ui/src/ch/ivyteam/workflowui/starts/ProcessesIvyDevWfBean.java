@@ -14,7 +14,7 @@ import ch.ivyteam.workflowui.util.ViewerUtil;
 @ManagedBean
 @ViewScoped
 public class ProcessesIvyDevWfBean {
-  private StartsDataModel startsDataModel;
+  private final StartsDataModel startsDataModel;
   private String viewerLink;
   private String viewerTitle;
 
@@ -38,8 +38,8 @@ public class ProcessesIvyDevWfBean {
 
   private Optional<String> findViewerTitle(Stream<? extends StartableModel> starts, String link) {
     return starts.filter(start -> start.getViewerLink().get().equals(link))
-            .findFirst()
-            .map(start -> ViewerUtil.getViewerDialogTitle(start));
+        .findFirst()
+        .map(ViewerUtil::getViewerDialogTitle);
   }
 
   public void startRow(SelectEvent<StartableModel> event) {

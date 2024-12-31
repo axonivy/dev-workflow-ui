@@ -13,20 +13,20 @@ public class IntermediateEventElementModel {
   private final String processElementId;
   private final String name;
   private final String description;
-  private IntermediateEventModel eventModel;
+  private final IntermediateEventModel eventModel;
 
   @SuppressWarnings("removal")
   public static List<IntermediateEventElementModel> create() {
     return getPMVs().stream().flatMap(pmv -> pmv.getIntermediateEventElements().stream())
-            .map(IntermediateEventElementModel::new)
-            .collect(Collectors.toList());
+        .map(IntermediateEventElementModel::new)
+        .collect(Collectors.toList());
   }
 
   public static IntermediateEventElementModel byProcessElementId(String processElementId) {
     return IntermediateEventElementModel.create().stream()
-            .filter(ie -> ie.getProcessElementId().equals(processElementId))
-            .findFirst()
-            .orElse(null);
+        .filter(ie -> ie.getProcessElementId().equals(processElementId))
+        .findFirst()
+        .orElse(null);
   }
 
   private static List<IWorkflowProcessModelVersion> getPMVs() {

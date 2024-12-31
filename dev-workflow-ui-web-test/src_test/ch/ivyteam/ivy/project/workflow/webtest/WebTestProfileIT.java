@@ -99,8 +99,8 @@ class WebTestProfileIT {
     var webNewTaskIcon = $(By.className("subscription-icon"));
     var webNewTaskCheckbox = $(By.id("profileForm:notificationChannelsTable:0:channels:0:subscriptionCheckbox")).lastChild().lastChild();
 
-    table.valueAtShouldBe(0,0, text("New task assigned"));
-    table.valueAtShouldBe(1,0, text("Business Information"));
+    table.valueAtShouldBe(0, 0, text("New task assigned"));
+    table.valueAtShouldBe(1, 0, text("Business Information"));
     tableHeader("profileForm:notificationChannelsTable", 0).shouldHave(text("Event"));
     tableHeader("profileForm:notificationChannelsTable", 1).shouldHave(text("Web"));
 
@@ -136,8 +136,7 @@ class WebTestProfileIT {
     Selenide.refresh();
   }
 
-  private void shouldHaveSubscribedByDefaultState(SelenideElement webNewTaskIcon,
-          SelenideElement webNewTaskCheckbox) {
+  private void shouldHaveSubscribedByDefaultState(SelenideElement webNewTaskIcon, SelenideElement webNewTaskCheckbox) {
     iconShouldHaveState(webNewTaskIcon, true, true, "Subscribed by default");
     checkboxShouldHaveState(webNewTaskCheckbox, 0);
   }
@@ -147,14 +146,13 @@ class WebTestProfileIT {
     checkboxShouldHaveState(webNewTaskCheckbox, 1);
   }
 
-  private void shouldHaveNotSubscribedState(SelenideElement webNewTaskIcon,
-          SelenideElement webNewTaskCheckbox) {
+  private void shouldHaveNotSubscribedState(SelenideElement webNewTaskIcon, SelenideElement webNewTaskCheckbox) {
     iconShouldHaveState(webNewTaskIcon, false, false, "Not subscribed");
     checkboxShouldHaveState(webNewTaskCheckbox, 2);
   }
 
   private void iconShouldHaveState(SelenideElement webNewTaskIcon, boolean iconSubscribedState,
-          boolean iconByDefaultState, String iconTitle) {
+      boolean iconByDefaultState, String iconTitle) {
     iconShouldHaveSubscribedState(webNewTaskIcon, iconSubscribedState);
     iconShouldHaveByDefaultState(webNewTaskIcon, iconByDefaultState);
     iconShouldHaveTitle(webNewTaskIcon, iconTitle);

@@ -48,8 +48,7 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
   }
 
   @Override
-  public List<TaskModel> load(int first, int pageSize, Map<String, SortMeta> sortBy,
-          Map<String, FilterMeta> filterBy) {
+  public List<TaskModel> load(int first, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy) {
     var sort = new SortMetaConverter(sortBy);
     var taskQuery = createBaseQuery();
 
@@ -87,16 +86,16 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
   private void applyFilter(TaskQuery query) {
     if (StringUtils.isNotEmpty(filter)) {
       var taskState = Arrays.asList(TaskBusinessState.values()).stream()
-              .filter(state -> StringUtils.startsWithIgnoreCase(state.toString(), filter))
-              .findFirst().orElse(null);
+          .filter(state -> StringUtils.startsWithIgnoreCase(state.toString(), filter))
+          .findFirst().orElse(null);
       var taskPriority = Arrays.asList(WorkflowPriority.values()).stream()
-              .filter(priority -> StringUtils.startsWithIgnoreCase(priority.toString(), filter))
-              .findFirst().orElse(null);
+          .filter(priority -> StringUtils.startsWithIgnoreCase(priority.toString(), filter))
+          .findFirst().orElse(null);
       query.where().and(TaskQuery.create().where().name().isLikeIgnoreCase("%" + filter + "%")
-              .or().activatorName().isLikeIgnoreCase("%" + filter + "%")
-              .or().activatorDisplayName().isLikeIgnoreCase("%" + filter + "%")
-              .or().businessState().isEqual(taskState)
-              .or().priority().isEqual(taskPriority));
+          .or().activatorName().isLikeIgnoreCase("%" + filter + "%")
+          .or().activatorDisplayName().isLikeIgnoreCase("%" + filter + "%")
+          .or().businessState().isEqual(taskState)
+          .or().priority().isEqual(taskPriority));
     }
   }
 

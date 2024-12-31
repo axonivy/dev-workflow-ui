@@ -38,11 +38,11 @@ public class TestUtil {
     caze.notes().add().author(user).content("this is a test note").execute();
 
     String longNote = """
-             I can't do that as Bruce Wayne... as a man. I'm flesh and blood. I can be ignored, destroyed. But as a symbol, I can be incorruptible, I can be everlasting.
-             I seek the means to fight injustice. To turn fear against those who prey on the fearful. This isn't a car. Someone like you. Someone who'll rattle the cages.
-             No guns, no killing. I'm not wearing hockey pads. Bruce Wayne, eccentric billionaire.
-             I'll be standing where l belong. Between you and the peopIe of Gotham. I'm not wearing hockey pads. I seek the means to fight injustice. To turn fear against those who prey on the fearful.
-            """;
+       I can't do that as Bruce Wayne... as a man. I'm flesh and blood. I can be ignored, destroyed. But as a symbol, I can be incorruptible, I can be everlasting.
+       I seek the means to fight injustice. To turn fear against those who prey on the fearful. This isn't a car. Someone like you. Someone who'll rattle the cages.
+       No guns, no killing. I'm not wearing hockey pads. Bruce Wayne, eccentric billionaire.
+       I'll be standing where l belong. Between you and the peopIe of Gotham. I'm not wearing hockey pads. I seek the means to fight injustice. To turn fear against those who prey on the fearful.
+      """;
     task.notes().add().author(user).content(longNote).execute();
 
     String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

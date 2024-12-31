@@ -30,7 +30,7 @@ public class TestLogin {
   public void getUserRoles_commaSeparated() {
     login();
     assertThat(getRoles(ISession.current().getSessionUser()))
-            .isEqualTo("Everybody, testRoleJunit");
+        .isEqualTo("Everybody, testRoleJunit");
   }
 
   private static void login() {

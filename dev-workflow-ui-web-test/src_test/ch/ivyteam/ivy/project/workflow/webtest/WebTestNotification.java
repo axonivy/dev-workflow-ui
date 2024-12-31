@@ -28,13 +28,13 @@ class WebTestNotification {
     $(By.id("showNotifications")).should(visible).click();
 
     $(By.id("notificationForm:notifications:0:notificationMessage"))
-            .should(visible)
-            .should(text("New Task 'New Invoice for Alban Bislimi' for Everybody"));
+        .should(visible)
+        .should(text("New Task 'New Invoice for Alban Bislimi' for Everybody"));
     $(By.id("notificationForm:notifications:0:notificationMarkAsRead"))
-            .should(visible)
-            .click();
+        .should(visible)
+        .click();
     $(By.id("notificationForm:notifications:0:notificationMarkAsRead"))
-      .should(not(visible));
+        .should(not(visible));
   }
 
   @Test
