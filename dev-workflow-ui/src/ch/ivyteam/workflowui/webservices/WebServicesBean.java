@@ -14,15 +14,14 @@ import ch.ivyteam.workflowui.util.ProcessModelsUtil;
 @ViewScoped
 public class WebServicesBean {
 
-  private List<WebServiceProcess> webServices;
+  private final List<WebServiceProcess> webServices;
   private String filter;
 
   @SuppressWarnings("removal")
   public WebServicesBean() {
-    webServices = ProcessModelsUtil.getReleasedWorkflowPMVs().
-            flatMap(pmv -> pmv.getWebServiceProcesses().stream())
-            .map(WebServiceProcess::new)
-            .collect(Collectors.toList());
+    webServices = ProcessModelsUtil.getReleasedWorkflowPMVs().flatMap(pmv -> pmv.getWebServiceProcesses().stream())
+        .map(WebServiceProcess::new)
+        .collect(Collectors.toList());
   }
 
   public List<WebServiceProcess> getWebServices() {

@@ -72,9 +72,9 @@ public class TaskUtil {
     var taskEmbedField = new CustomFieldsHelper(task).getEmbedInFrame();
     var caseEmbedField = task.getBusinessCase().customFields().stringField(CustomFieldsHelper.EMBED_IN_FRAME);
     if (taskEmbedField == null) {
-      return caseEmbedField.getOrDefault("true").equals("true");
+      return "true".equals(caseEmbedField.getOrDefault("true"));
     }
-    return taskEmbedField.getValue().equals("true");
+    return "true".equals(taskEmbedField.getValue());
   }
 
   public static boolean canResume(String taskId) {

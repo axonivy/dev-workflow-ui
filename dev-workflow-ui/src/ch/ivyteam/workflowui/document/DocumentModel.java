@@ -24,8 +24,8 @@ public class DocumentModel {
 
   public static List<DocumentModel> create(ICase selectedCase) {
     return selectedCase.documents().getAll().stream()
-            .map(DocumentModel::new)
-            .collect(Collectors.toList());
+        .map(DocumentModel::new)
+        .collect(Collectors.toList());
   }
 
   public DocumentModel(IDocument doc) {

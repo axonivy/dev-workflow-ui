@@ -72,7 +72,7 @@ public class CleanupIvyDevWfBean {
 
   private void showMessage(String msg) {
     FacesContext.getCurrentInstance().addMessage(null,
-            new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", msg));
+        new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", msg));
   }
 
 }

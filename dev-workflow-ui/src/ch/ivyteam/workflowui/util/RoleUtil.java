@@ -7,7 +7,7 @@ import ch.ivyteam.ivy.security.IRole;
 
 public class RoleUtil {
 
-    public static List<IRole> getRoles() {
-      return Ivy.security().roles().all();
-    }
+  public static List<IRole> getRoles() {
+    return Ivy.security().roles().all();
+  }
 }

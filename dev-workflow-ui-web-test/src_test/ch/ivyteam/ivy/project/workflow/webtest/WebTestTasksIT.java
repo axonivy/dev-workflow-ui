@@ -54,7 +54,7 @@ class WebTestTasksIT {
     loginFromTable("testuser");
     openView("tasks.xhtml");
     table = PrimeUi.table(By.id("tasksForm:tasks"));
-    if (table.row(0).text().equals("Created task of HomePageTestData")) {
+    if ("Created task of HomePageTestData".equals(table.row(0).text())) {
       $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
       $(By.id("taskId")).shouldNotBe(text(taskId));
     }
@@ -144,7 +144,7 @@ class WebTestTasksIT {
     $(By.id("taskState:stateBadge")).hover();
     $(By.id("taskState:tooltip")).$(".ui-tooltip-text").shouldHave(text("SUSPENDED"));
     $(By.id("actionMenuForm:taskStartBtn")).shouldNotHave(cssClass("ui-state-disabled"))
-            .shouldBe(enabled).click();
+        .shouldBe(enabled).click();
     assertCurrentUrlContains("/task.xhtml?id=");
 
     $(By.tagName("body")).hover();

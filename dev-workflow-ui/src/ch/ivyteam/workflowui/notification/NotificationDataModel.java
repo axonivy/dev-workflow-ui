@@ -28,7 +28,7 @@ public class NotificationDataModel extends LazyDataModel<NotificationDto> {
   @Override
   public List<NotificationDto> load(int first, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy) {
     return webNotifications.read(first, pageSize).stream()
-            .map(NotificationDto::new)
-            .collect(Collectors.toList());
+        .map(NotificationDto::new)
+        .collect(Collectors.toList());
   }
 }

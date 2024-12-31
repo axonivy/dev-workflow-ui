@@ -9,11 +9,10 @@ import ch.ivyteam.ivy.workflow.task.IActivator;
 public class UserComponentIvyDevWfBean {
 
   public UserComponentModel toComponentModel(Object user) {
-    if (user instanceof IActivator) {
-      return new UserComponentModel((IActivator)user);
-    }
-    else if (user instanceof ISecurityMember) {
-      return new UserComponentModel((ISecurityMember)user);
+    if (user instanceof IActivator activator) {
+      return new UserComponentModel(activator);
+    } else if (user instanceof ISecurityMember securityMember) {
+      return new UserComponentModel(securityMember);
     }
     return null;
   }

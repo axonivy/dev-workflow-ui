@@ -15,7 +15,7 @@ import ch.ivyteam.workflowui.util.PermissionsUtil;
 @ViewScoped
 public class IntermediateEventsIvyDevWfBean {
 
-  private List<IntermediateEventElementModel> intermediateEvents;
+  private final List<IntermediateEventElementModel> intermediateEvents;
 
   public IntermediateEventsIvyDevWfBean() {
     intermediateEvents = IntermediateEventElementModel.create();
@@ -29,8 +29,8 @@ public class IntermediateEventsIvyDevWfBean {
       }
     } else {
       FacesContext.getCurrentInstance().addMessage(null,
-              new FacesMessage(FacesMessage.SEVERITY_INFO, "Access denied",
-                      "You need to be an admin user to access this function"));
+          new FacesMessage(FacesMessage.SEVERITY_INFO, "Access denied",
+              "You need to be an admin user to access this function"));
     }
   }
 

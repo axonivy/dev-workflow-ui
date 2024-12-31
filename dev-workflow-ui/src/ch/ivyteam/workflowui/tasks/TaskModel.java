@@ -54,7 +54,7 @@ public class TaskModel {
 
   private final WebLink startLink;
   private final List<WorkflowEventModel> workflowEvents;
-  private List<SidestepModel> sidesteps;
+  private final List<SidestepModel> sidesteps;
   private final List<CustomFieldModel> customFields;
   private final List<Note> notes;
 
@@ -187,12 +187,12 @@ public class TaskModel {
       return false;
     }
     return IWorkflowContext.current().findTask(uuid)
-            .canUserResumeTask(sessionUser.getUserToken()).wasSuccessful();
+        .canUserResumeTask(sessionUser.getUserToken()).wasSuccessful();
   }
 
   public boolean canReset() {
     return EnumSet.of(TaskState.CREATED, TaskState.RESUMED, TaskState.PARKED, TaskState.READY_FOR_JOIN,
-            TaskState.FAILED).contains(state);
+        TaskState.FAILED).contains(state);
   }
 
   public boolean canPark() {

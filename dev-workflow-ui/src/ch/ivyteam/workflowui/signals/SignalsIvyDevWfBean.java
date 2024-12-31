@@ -21,8 +21,8 @@ import ch.ivyteam.ivy.workflow.signal.IStartSignalEventElement;
 public class SignalsIvyDevWfBean {
   private String code;
   private String payload;
-  private SignalsModel signalsModel;
-  private BoundarySignalModel boundarySignalModel;
+  private final SignalsModel signalsModel;
+  private final BoundarySignalModel boundarySignalModel;
 
   public SignalsIvyDevWfBean() {
     signalsModel = new SignalsModel();
@@ -57,15 +57,15 @@ public class SignalsIvyDevWfBean {
 
   private void showMessage(String msg) {
     FacesContext.getCurrentInstance().addMessage(null,
-            new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", msg));
+        new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", msg));
   }
 
   public List<String> signalsComplete(String query) {
     return IWorkflowContext.current().signals().receivers().all().stream()
-            .map(IStartSignalEventElement::getName).map(String::trim)
-            .filter(StringUtils::isNotBlank)
-            .filter(s -> s.toLowerCase().contains(query.toLowerCase()))
-            .distinct().collect(Collectors.toList());
+        .map(IStartSignalEventElement::getName).map(String::trim)
+        .filter(StringUtils::isNotBlank)
+        .filter(s -> s.toLowerCase().contains(query.toLowerCase()))
+        .distinct().collect(Collectors.toList());
   }
 
   public String getCode() {

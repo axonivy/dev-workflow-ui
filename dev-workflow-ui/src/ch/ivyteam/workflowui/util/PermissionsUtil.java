@@ -33,7 +33,7 @@ public class PermissionsUtil {
     var session = IWorkflowSession.current();
     var securityDescriptor = ISecurityContext.current().securityDescriptor();
     return Arrays
-            .stream(permissions)
-            .anyMatch(p -> session.hasPermission(securityDescriptor, p));
+        .stream(permissions)
+        .anyMatch(p -> session.hasPermission(securityDescriptor, p));
   }
 }

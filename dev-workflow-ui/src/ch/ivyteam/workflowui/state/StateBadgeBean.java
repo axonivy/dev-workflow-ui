@@ -11,9 +11,9 @@ public class StateBadgeBean {
 
   public StateBadgeModel toStateBadgeModel(Object data) {
     if (data instanceof ICase caze) {
-        return new StateBadgeModel(caze);
+      return new StateBadgeModel(caze);
     } else if (data instanceof TaskModel taskModel) {
-        return new StateBadgeModel(taskModel);
+      return new StateBadgeModel(taskModel);
     } else if (data instanceof ITask task) {
       return new StateBadgeModel(task);
     }

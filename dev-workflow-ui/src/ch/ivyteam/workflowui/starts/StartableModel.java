@@ -24,7 +24,7 @@ public class StartableModel {
   private final boolean viewerAllowed;
 
   public StartableModel(String displayName, String description, WebLink link, Category category,
-          String applicationName, String projectName, String icon, boolean embedInFrame, WebLink viewerLink, boolean viewerAllowed) {
+      String applicationName, String projectName, String icon, boolean embedInFrame, WebLink viewerLink, boolean viewerAllowed) {
     this.displayName = displayName;
     this.description = description;
     this.link = link;
@@ -39,16 +39,15 @@ public class StartableModel {
 
   public StartableModel(IWebStartable startable) {
     this(startable.getDisplayName(),
-      startable.getDescription(),
-      startable.getLink(),
-      startable.getCategory(),
-      startable.pmv().getApplication().getName(),
-      startable.pmv().project().name(),
-      getIcon(startable.customFields()),
-      evaluateEmbedInFrame(startable.customFields().value(CustomFieldsHelper.EMBED_IN_FRAME)),
-      ViewerUtil.getViewerLink(startable),
-      ViewerUtil.isViewerAllowed(startable)
-    );
+        startable.getDescription(),
+        startable.getLink(),
+        startable.getCategory(),
+        startable.pmv().getApplication().getName(),
+        startable.pmv().project().name(),
+        getIcon(startable.customFields()),
+        evaluateEmbedInFrame(startable.customFields().value(CustomFieldsHelper.EMBED_IN_FRAME)),
+        ViewerUtil.getViewerLink(startable),
+        ViewerUtil.isViewerAllowed(startable));
   }
 
   private static String getIcon(IStartCustomFields customFields) {
@@ -58,7 +57,6 @@ public class StartableModel {
     }
     return customIcon;
   }
-
 
   public static boolean evaluateEmbedInFrame(String value) {
     // default is true
