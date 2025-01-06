@@ -5,7 +5,7 @@
   xmlns:jc="http://xmlns.jcp.org/jsf/composite/components">
 
   <c:set var="casedm" value="#{userIvyDevWfBean.userCasesDataModel}" />
-  
+
       <h:form id="casesForm">
          <p:dataTable id="cases" var="case" value="#{casedm}" widgetVar="casesTable"
             styleClass="ui-fluid" emptyMessage="No Cases found with given criteria" paginatorPosition="bottom" rows="10"
@@ -15,7 +15,7 @@
               <jc:stateBadge id="caseState" data="#{case}" />
             </p:column>
             <p:column headerText="Name" filterBy="#{case.getName(case)}" sortBy="#{case.name}" responsivePriority="1">
-              <h:outputText id="caseName" value="#{case.name}" /> 
+              <h:outputText id="caseName" value="#{case.name}" />
             </p:column>
             <p:column headerText="Creator" filterBy="#{case.creatorUserName}" sortBy="#{case.creatorUserName}"
               responsivePriority="3" width="160">
@@ -35,8 +35,8 @@
                 style="width: 200px">
                 <p:menuitem id="openCaseDetailsBtn" value="Open case details" url="#{case.detailLink}"
                   icon="si si-information-circle" />
-                <p:menuitem id="openUserDetailsBtn" value="Open user details" url="#{userIvyDevWfBean.getUserLink(case.creatorUser.name)}" 
-                  icon="pi pi-user" />                   
+                <p:menuitem id="openUserDetailsBtn" value="Open user details" url="#{userIvyDevWfBean.getUserLink(case.creatorUser.name)}"
+                  icon="pi pi-user" />
                 <p:menuitem value="Rerun process" actionListener="#{casesIvyDevWfBean.rerunProcess(case)}"
                   id="rerunCaseProcessBtn" icon="si si-button-refresh-arrow" />
               </p:menu>

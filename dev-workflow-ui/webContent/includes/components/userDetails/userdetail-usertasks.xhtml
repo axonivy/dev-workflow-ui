@@ -5,7 +5,7 @@
   xmlns:jc="http://xmlns.jcp.org/jsf/composite/components">
 
   <c:set var="taskdm" value="#{userIvyDevWfBean.tasksDataModel}" />
-  
+
       <h:form id="tasksForm">
           <p:dataTable id="tasks" var="task" value="#{taskdm}" widgetVar="tasksTable"
             styleClass="ui-fluid" emptyMessage="No Tasks found with given criteria" paginatorPosition="bottom" rows="10"
