@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import ch.ivyteam.ivy.workflow.IIntermediateEventElement;
 import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
-import ch.ivyteam.ivy.workflow.internal.pmv.WorkflowProcessModelVersion;
 import ch.ivyteam.workflowui.util.ProcessModelsUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 
@@ -16,9 +15,9 @@ public class IntermediateEventElementModel {
   private final String description;
   private final IntermediateEventModel eventModel;
 
-  @SuppressWarnings("restriction")
+  @SuppressWarnings("removal")
   public static List<IntermediateEventElementModel> create() {
-    return getPMVs().stream().flatMap(pmv -> ((WorkflowProcessModelVersion) pmv).getIntermediateEventElements().stream())
+    return getPMVs().stream().flatMap(pmv -> pmv.getIntermediateEventElements().stream())
         .map(IntermediateEventElementModel::new)
         .collect(Collectors.toList());
   }
