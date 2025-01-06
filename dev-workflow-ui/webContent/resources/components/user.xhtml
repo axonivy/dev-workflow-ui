@@ -6,10 +6,6 @@
   <cc:attribute name="user" />
 </cc:interface>
 
-<f:metadata>
-  <f:viewParam name="isAdmin" value="#{permissionsBean.admin}" />
-</f:metadata>
-
 <cc:implementation>
   <ui:param name="userModel" value="#{userComponentIvyDevWfBean.toComponentModel(cc.attrs.user)}" />
   <h:panelGroup styleClass="flex align-items-center">
@@ -18,7 +14,7 @@
     </h:panelGroup>
     <h:outputText id="userName" value="#{userModel.name}" />
     <p:spacer width="5" />
-    <h:panelGroup rendered="#{not empty userModel.securityMemberId and !isAdmin}">
+    <h:panelGroup rendered="#{not empty userModel.securityMemberId and permissionsBean.admin}">
       <a href="#{userIvyDevWfBean.createUserLink(userModel.securityMemberId)}" >
         <i class="fa fa-link" />
       </a>
