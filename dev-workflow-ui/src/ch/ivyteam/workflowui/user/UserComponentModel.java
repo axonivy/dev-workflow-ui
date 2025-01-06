@@ -7,10 +7,12 @@ public class UserComponentModel {
 
   private final String name;
   private final String cssIcon;
+  private final String securityMemberId;
 
   public UserComponentModel(ISecurityMember activator) {
     this.name = activator.getDisplayName();
     this.cssIcon = getCssIcon(activator);
+    this.securityMemberId = getSecurityMemberId(activator);
   }
 
   public UserComponentModel(IActivator activator) {
@@ -20,6 +22,7 @@ public class UserComponentModel {
     } else {
       this.name = securityMember.getDisplayName();
     }
+    this.securityMemberId = getSecurityMemberId(securityMember);
     this.cssIcon = getCssIcon(securityMember);
   }
 
@@ -37,7 +40,29 @@ public class UserComponentModel {
     return name;
   }
 
+  public String getSecurityMemberId(ISecurityMember activator) {
+    if (activator == null) {
+      return null;
+    }
+    if (activator.isUser()) {
+      return activator.getSecurityMemberId();
+    }
+    return null;
+  }
+
   public String getCssIcon() {
     return cssIcon;
+  }
+
+  public String getSecurityMemberId() {
+    return securityMemberId;
+  }
+
+  public String getDetailLink() {
+    return "";
+  }
+
+  public boolean showDetailLink() {
+    return true;
   }
 }

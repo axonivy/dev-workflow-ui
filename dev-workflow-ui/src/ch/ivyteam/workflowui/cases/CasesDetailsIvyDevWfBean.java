@@ -47,6 +47,7 @@ public class CasesDetailsIvyDevWfBean {
   private String viewerLink;
   private String processPreviewLink;
   private boolean viewerAllowed;
+  private String name;
 
   public String getSelectedCaseId() {
     return selectedCaseId;
@@ -55,7 +56,16 @@ public class CasesDetailsIvyDevWfBean {
   public ICase getSelectedCase() {
     return selectedCase;
   }
-
+  
+  public String getName() {
+	 return name;
+	  
+  }
+  
+  public void setName(String name) {
+	  this.name = name;
+  }
+  
   public void setSelectedCaseId(String selectedCaseId) {
     this.selectedCaseId = selectedCaseId;
     this.selectedCase = CaseUtil.getCaseById(selectedCaseId);
