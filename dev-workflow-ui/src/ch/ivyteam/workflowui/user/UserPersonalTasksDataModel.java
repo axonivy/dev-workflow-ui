@@ -6,6 +6,7 @@ import ch.ivyteam.workflowui.tasks.TasksDataModel;
 
 public class UserPersonalTasksDataModel extends TasksDataModel {
 
+  private static final long serialVersionUID = 1L;
   private ISecurityMember securityMember;
 
   public void setSecurityMember(ISecurityMember securityMember) {

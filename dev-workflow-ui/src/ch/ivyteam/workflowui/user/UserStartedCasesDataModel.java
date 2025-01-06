@@ -6,6 +6,7 @@ import ch.ivyteam.workflowui.cases.CasesDataModel;
 
 public class UserStartedCasesDataModel extends CasesDataModel {
 
+  private static final long serialVersionUID = 1L;
   private ISecurityMember securityMember;
 
   public void setSecurityMember(ISecurityMember securityMember) {

@@ -56,16 +56,16 @@ public class CasesDetailsIvyDevWfBean {
   public ICase getSelectedCase() {
     return selectedCase;
   }
-  
+
   public String getName() {
-	 return name;
-	  
+    return name;
+
   }
-  
+
   public void setName(String name) {
-	  this.name = name;
+    this.name = name;
   }
-  
+
   public void setSelectedCaseId(String selectedCaseId) {
     this.selectedCaseId = selectedCaseId;
     this.selectedCase = CaseUtil.getCaseById(selectedCaseId);
@@ -96,7 +96,7 @@ public class CasesDetailsIvyDevWfBean {
 
   public String getDescription() {
     return StringUtils.isEmpty(selectedCase.getDescription()) ? "No description"
-            : selectedCase.getDescription();
+        : selectedCase.getDescription();
   }
 
   public CaseMapModel getCaseMap() {
@@ -113,8 +113,8 @@ public class CasesDetailsIvyDevWfBean {
 
   public List<ICase> getCaseList() {
     return CaseQuery.subCases().where().businessCaseId()
-            .isEqual(selectedCase.getBusinessCase().getId())
-            .executor().results();
+        .isEqual(selectedCase.getBusinessCase().getId())
+        .executor().results();
   }
 
   public String isCurrentHierarchyCase(ICase caze) {
@@ -154,7 +154,7 @@ public class CasesDetailsIvyDevWfBean {
   }
 
   public boolean isCaseMap() {
-    return startable != null && startable.getType().equals("casemap");
+    return startable != null && "casemap".equals(startable.getType());
   }
 
   public String getViewerLink() {

@@ -11,29 +11,23 @@
             styleClass="ui-fluid" emptyMessage="No Cases found with given criteria" paginatorPosition="bottom" rows="10"
             lazy="true" paginator="true" paginatorAlwaysVisible="false" selectionMode="single" resizableColumns="true">
             <p:ajax event="rowSelect" listener="#{casesIvyDevWfBean.redirectToCaseRow}" />
-
             <p:column headerText="State" filterBy="#{case.businessState}" sortBy="#{case.businessState}" width="90px" resizable="false">
               <jc:stateBadge id="caseState" data="#{case}" />
             </p:column>
-
             <p:column headerText="Name" filterBy="#{case.getName(case)}" sortBy="#{case.name}" responsivePriority="1">
               <h:outputText id="caseName" value="#{case.name}" /> 
             </p:column>
-
             <p:column headerText="Creator" filterBy="#{case.creatorUserName}" sortBy="#{case.creatorUserName}"
               responsivePriority="3" width="160">
               <jc:user user="#{case.creatorUser}" />
             </p:column>
-
             <p:column headerText="Start" sortBy="#{case.startTimestamp}" sortOrder="descending" responsivePriority="3"
               width="90">
               <jc:time id="startTime" datetime="#{case.startTimestamp}" />
             </p:column>
-
             <p:column headerText="End" sortBy="#{case.endTimestamp}" responsivePriority="4" width="90">
               <jc:time id="endTime" datetime="#{case.endTimestamp}" />
             </p:column>
-
             <p:column width="30px" resizable="false">
               <p:commandButton id="caseActionsBtn" icon="si si-navigation-menu-horizontal-filled"
                 styleClass="ui-button-flat text-color action-button" />
