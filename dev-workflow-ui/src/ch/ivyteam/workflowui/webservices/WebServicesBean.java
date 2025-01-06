@@ -8,6 +8,7 @@ import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.SelectEvent;
 
+import ch.ivyteam.ivy.workflow.internal.pmv.WorkflowProcessModelVersion;
 import ch.ivyteam.workflowui.util.ProcessModelsUtil;
 
 @ManagedBean
@@ -17,9 +18,9 @@ public class WebServicesBean {
   private final List<WebServiceProcess> webServices;
   private String filter;
 
-  @SuppressWarnings("removal")
+  @SuppressWarnings("restriction")
   public WebServicesBean() {
-    webServices = ProcessModelsUtil.getReleasedWorkflowPMVs().flatMap(pmv -> pmv.getWebServiceProcesses().stream())
+    webServices = ProcessModelsUtil.getReleasedWorkflowPMVs().flatMap(pmv -> ((WorkflowProcessModelVersion) pmv).getWebServiceProcesses().stream())
         .map(WebServiceProcess::new)
         .collect(Collectors.toList());
   }
