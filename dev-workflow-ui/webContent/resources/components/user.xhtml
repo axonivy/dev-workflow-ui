@@ -14,7 +14,7 @@
     </h:panelGroup>
 
     <h:panelGroup rendered="#{userModel.hasUserDetailLink}">
-      <p:link value="#{userModel.name}" href="#{userDetailBean.createUserLink(userModel.securityMemberId)}"/>
+      <p:link id="userNameLink" value="#{userModel.name}" href="#{userDetailBean.createUserLink(userModel.securityMemberId)}"/>
     </h:panelGroup>
 
     <h:panelGroup rendered="#{!userModel.hasUserDetailLink}">
