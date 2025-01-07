@@ -11,20 +11,16 @@
       styleClass="grey-label-panel ui-fluid">
       <h:outputText value="Name" />
       <h:outputText id="name" value="#{user.name}" />
-      
       <h:outputText value="Full Name" />
       <h:outputText id="fullName" value="#{user.fullName}" />
-      
       <h:outputText value="E-Mail Address" />
       <h:outputText id="email" value="#{user.EMailAddress}" />
-      
       <h:outputText value="Language" />
       <h:outputText id="language" value="#{user.language}" />
-      
       <h:outputText value="Formatting language" />
       <h:outputText id="formattingLanguage" value="#{user.formattingLanguage}" />
     </p:panelGrid>
-    
+
     <p:panelGrid columns="2" columnClasses="col-12 md:col-4 lg:col-4, col-12 md:col-8 lg:col-8" layout="flex"
       styleClass="grey-label-panel ui-fluid" rendered="#{user.external and !user.ivySecuritySystem}">
       <label>External Name</label>
