@@ -1,5 +1,6 @@
 package ch.ivyteam.workflowui.user;
 
+import ch.ivyteam.ivy.security.ISecurityConstants;
 import ch.ivyteam.ivy.security.ISecurityMember;
 import ch.ivyteam.ivy.workflow.task.IActivator;
 import ch.ivyteam.workflowui.util.PermissionsUtil;
@@ -8,14 +9,12 @@ public class UserComponentModel {
 
   private final String name;
   private final String cssIcon;
-  private final String userSecurityMemberId;
-  private final boolean hasUserDetailLink;
+  private final String detailLinkUrl;
 
-  public UserComponentModel(ISecurityMember activator) {
-    this.name = activator.getDisplayName();
-    this.cssIcon = getCssIcon(activator);
-    this.userSecurityMemberId = getUserSecurityMemberId(activator);
-    this.hasUserDetailLink = setHasUserDetailLink();
+  public UserComponentModel(ISecurityMember securityMember) {
+    this.name = securityMember.getDisplayName();
+    this.cssIcon = getCssIcon(securityMember);
+    this.detailLinkUrl = getUserDetailLink(securityMember);
   }
 
   public UserComponentModel(IActivator activator) {
@@ -26,8 +25,7 @@ public class UserComponentModel {
       this.name = securityMember.getDisplayName();
     }
     this.cssIcon = getCssIcon(securityMember);
-    this.userSecurityMemberId = getUserSecurityMemberId(securityMember);
-    this.hasUserDetailLink = setHasUserDetailLink();
+    this.detailLinkUrl = getUserDetailLink(securityMember);
   }
 
   private static String getCssIcon(ISecurityMember activator) {
@@ -44,30 +42,26 @@ public class UserComponentModel {
     return name;
   }
 
-  public String getUserSecurityMemberId(ISecurityMember activator) {
-    if (activator == null) {
-      return null;
-    }
-    if (activator.isUser()) {
-      return activator.getSecurityMemberId();
-    }
-    return null;
-  }
-
   public String getCssIcon() {
     return cssIcon;
   }
 
-  public String getSecurityMemberId() {
-    return userSecurityMemberId;
+  private static String getUserDetailLink(ISecurityMember activator) {
+    if (activator != null && activator.isUser()
+        && !ISecurityConstants.SYSTEM_USER_NAME.equals(activator.getName())
+        && PermissionsUtil.isAdmin()) {
+      var securityMemberId = activator.getSecurityMemberId();
+      return "user.xhtml?userId=" + securityMemberId;
+    }
+    return null;
   }
 
-  private boolean setHasUserDetailLink() {
-    return PermissionsUtil.isAdmin() && userSecurityMemberId != null;
+  public String getDetailLinkUrl() {
+    return detailLinkUrl;
   }
 
-  public boolean getHasUserDetailLink() {
-    return this.hasUserDetailLink;
+  public boolean getShowUserDetailLink() {
+    return detailLinkUrl != null;
   }
 
 }

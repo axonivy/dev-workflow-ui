@@ -13,11 +13,11 @@
       <i class="mr-1 si-lg #{userModel.cssIcon}" />
     </h:panelGroup>
 
-    <h:panelGroup rendered="#{userModel.hasUserDetailLink}">
-      <p:link id="userNameLink" value="#{userModel.name}" href="#{userDetailBean.createUserLink(userModel.securityMemberId)}"/>
+    <h:panelGroup rendered="#{userModel.getShowUserDetailLink()}">
+      <p:link id="userNameLink" value="#{userModel.name}" href="#{userModel.getDetailLinkUrl()}"/>
     </h:panelGroup>
 
-    <h:panelGroup rendered="#{!userModel.hasUserDetailLink}">
+    <h:panelGroup rendered="#{!userModel.getShowUserDetailLink()}">
       <h:outputText id="userName" value="#{userModel.name}" />
     </h:panelGroup>
   </h:panelGroup>

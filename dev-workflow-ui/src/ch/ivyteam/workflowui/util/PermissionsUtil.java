@@ -26,14 +26,14 @@ public class PermissionsUtil {
   }
 
   public static boolean isAdmin() {
-    return hasPermission(IPermission.TASK_READ_ALL) & hasPermission(IPermission.CASE_READ_ALL);
+    return hasPermission(IPermission.TASK_READ_ALL) && hasPermission(IPermission.CASE_READ_ALL);
   }
 
   public static Boolean hasPermission(IPermission... permissions) {
     var session = IWorkflowSession.current();
     var securityDescriptor = ISecurityContext.current().securityDescriptor();
     return Arrays
-            .stream(permissions)
-            .anyMatch(p -> session.hasPermission(securityDescriptor, p));
+        .stream(permissions)
+        .anyMatch(p -> session.hasPermission(securityDescriptor, p));
   }
 }

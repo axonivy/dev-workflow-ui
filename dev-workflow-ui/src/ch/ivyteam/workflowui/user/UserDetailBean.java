@@ -40,10 +40,6 @@ public class UserDetailBean {
     TaskUtil.displayTaskRow(event);
   }
 
-  public String createUserLink(String memberId) {
-    return "user.xhtml?userId=" + memberId;
-  }
-
   public void setUserId(String userId) {
     if (userId != null) {
       this.userId = userId;
@@ -54,14 +50,6 @@ public class UserDetailBean {
   public String getUserId() {
     return userId;
   }
-
-  // public void setUserName(String userName) {
-  // this.userName = userName;
-  // }
-  //
-  // public String getUserName() {
-  // return userName;
-  // }
 
   public void setUser(String userId) {
     this.user = securityContext.users().findById(userId);
