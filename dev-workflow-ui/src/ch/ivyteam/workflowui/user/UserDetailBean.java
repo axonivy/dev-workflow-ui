@@ -8,7 +8,9 @@ import org.primefaces.event.SelectEvent;
 import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.ivy.workflow.ICase;
+import ch.ivyteam.workflowui.util.PermissionsUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
+import ch.ivyteam.workflowui.util.ResponseHelper;
 import ch.ivyteam.workflowui.util.TaskUtil;
 
 @ManagedBean
@@ -17,7 +19,6 @@ public class UserDetailBean {
   private final ISecurityContext securityContext = ISecurityContext.current();
   private IUser user;
   private String userId;
-  // private String userName;
   private final UserPersonalTasksDataModel userTasksDataModel = new UserPersonalTasksDataModel();
   private final UserStartedCasesDataModel userCasesDataModel = new UserStartedCasesDataModel();
 
@@ -41,6 +42,10 @@ public class UserDetailBean {
   }
 
   public void setUserId(String userId) {
+    if (!PermissionsUtil.isAdmin()) {
+      ResponseHelper.noPermission("You have no permission to read detailpage");
+      return;
+    }
     if (userId != null) {
       this.userId = userId;
       setUser(userId);

@@ -17,4 +17,15 @@ public class ResponseHelper {
       throw new IllegalStateException(ex);
     }
   }
+
+  public static void noPermission(String msg) {
+    try {
+      var facesContext = FacesContext.getCurrentInstance();
+      var externalContext = facesContext.getExternalContext();
+      facesContext.responseComplete();
+      externalContext.responseSendError(HttpServletResponse.SC_FORBIDDEN, msg);
+    } catch (IOException ex) {
+      throw new IllegalStateException(ex);
+    }
+  }
 }
