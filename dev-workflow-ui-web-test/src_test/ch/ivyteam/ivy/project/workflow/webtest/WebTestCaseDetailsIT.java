@@ -45,7 +45,7 @@ class WebTestCaseDetailsIT {
 
   @Test
   void caseDetails() {
-    $(By.id("creatorUser:userName")).shouldBe(exactText("DeveloperTest"));
+    $(By.id("creatorUser:userNameLink")).shouldBe(exactText("DeveloperTest"));
     $(By.id("category")).shouldHave(exactText("TestData"));
 
     $(By.id("caseState:stateBadge")).hover();
