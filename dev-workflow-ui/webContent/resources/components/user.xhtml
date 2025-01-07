@@ -12,12 +12,13 @@
     <h:panelGroup rendered="#{not empty userModel.name}">
       <i class="mr-1 si-lg #{userModel.cssIcon}" />
     </h:panelGroup>
-    <h:outputText id="userName" value="#{userModel.name}" />
-    <p:spacer width="5" />
-    <h:panelGroup rendered="#{not empty userModel.securityMemberId and permissionsBean.admin}">
-      <a href="#{userIvyDevWfBean.createUserLink(userModel.securityMemberId)}" >
-        <i class="fa fa-link" />
-      </a>
+
+    <h:panelGroup rendered="#{userModel.hasUserDetailLink}">
+      <p:link value="#{userModel.name}" href="#{userDetailBean.createUserLink(userModel.securityMemberId)}"/>
+    </h:panelGroup>
+
+    <h:panelGroup rendered="#{!userModel.hasUserDetailLink}">
+      <h:outputText id="userName" value="#{userModel.name}" />
     </h:panelGroup>
   </h:panelGroup>
 </cc:implementation>

@@ -8,10 +8,8 @@
   xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://xmlns.jcp.org/jsf/composite/components">
 
-  <c:set var="user" value="#{userIvyDevWfBean.user}" />
-
-  <h:form id="userRoleInformationForm">
-    <p:dataTable value="#{user.getAllRoles()}" var="role">
+  <h:form id="userDetailRoleInformationForm">
+    <p:dataTable value="#{userDetailBean.user.getAllRoles()}" var="role">
       <p:column headerText="All Roles">
         <p:outputLabel value="#{role.getDisplayName()}" />
       </p:column>

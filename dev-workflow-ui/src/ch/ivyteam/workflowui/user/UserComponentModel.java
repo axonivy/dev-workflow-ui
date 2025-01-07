@@ -2,17 +2,20 @@ package ch.ivyteam.workflowui.user;
 
 import ch.ivyteam.ivy.security.ISecurityMember;
 import ch.ivyteam.ivy.workflow.task.IActivator;
+import ch.ivyteam.workflowui.util.PermissionsUtil;
 
 public class UserComponentModel {
 
   private final String name;
   private final String cssIcon;
-  private final String securityMemberId;
+  private final String userSecurityMemberId;
+  private final boolean hasUserDetailLink;
 
   public UserComponentModel(ISecurityMember activator) {
     this.name = activator.getDisplayName();
     this.cssIcon = getCssIcon(activator);
-    this.securityMemberId = getSecurityMemberId(activator);
+    this.userSecurityMemberId = getUserSecurityMemberId(activator);
+    this.hasUserDetailLink = setHasUserDetailLink();
   }
 
   public UserComponentModel(IActivator activator) {
@@ -22,8 +25,9 @@ public class UserComponentModel {
     } else {
       this.name = securityMember.getDisplayName();
     }
-    this.securityMemberId = getSecurityMemberId(securityMember);
     this.cssIcon = getCssIcon(securityMember);
+    this.userSecurityMemberId = getUserSecurityMemberId(securityMember);
+    this.hasUserDetailLink = setHasUserDetailLink();
   }
 
   private static String getCssIcon(ISecurityMember activator) {
@@ -40,7 +44,7 @@ public class UserComponentModel {
     return name;
   }
 
-  public String getSecurityMemberId(ISecurityMember activator) {
+  public String getUserSecurityMemberId(ISecurityMember activator) {
     if (activator == null) {
       return null;
     }
@@ -55,14 +59,15 @@ public class UserComponentModel {
   }
 
   public String getSecurityMemberId() {
-    return securityMemberId;
+    return userSecurityMemberId;
   }
 
-  public String getDetailLink() {
-    return "";
+  private boolean setHasUserDetailLink() {
+    return PermissionsUtil.isAdmin() && userSecurityMemberId != null;
   }
 
-  public boolean showDetailLink() {
-    return true;
+  public boolean getHasUserDetailLink() {
+    return this.hasUserDetailLink;
   }
+
 }

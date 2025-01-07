@@ -4,26 +4,27 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://xmlns.jcp.org/jsf/composite/components">
 
-  <c:set var="user" value="#{userIvyDevWfBean.user}" />
+  <c:set var="user" value="#{userDetailBean.user}" />
 
-  <h:form id="userInformationForm">
+  <h:form id="userDetailInformationForm">
     <p:panelGrid columns="2" columnClasses="col-12 md:col-4 lg:col-4, col-12 md:col-8 lg:col-8" layout="flex"
       styleClass="grey-label-panel ui-fluid">
-      <p:outputLabel for="name" value="Name" />
-      <p:inputText id="name" value="#{user.name}" disabled="true" />
-      <p:outputLabel for="fullName" value="Full Name" />
-      <p:inputText id="fullName" value="#{user.fullName}" disabled="true" />
-      <p:outputLabel for="email" value="E-Mail Address" />
-      <p:inputText id="email" value="#{user.EMailAddress}" autocomplete="new-email" disabled="true" />
-      <p:outputLabel for="language" value="Language" />
-      <p:selectOneMenu id="language" value="#{user.language}" converter="localeConverter" disabled="true" editable="true" >
-        <f:selectItems value="#{languageBean.getContentLanguages(user.securityContext)}" var="locale" itemLabel="#{languageBean.toDisplayName(locale)}" />
-      </p:selectOneMenu>
-      <p:outputLabel for="formattingLanguage" value="Formatting language" />
-      <p:selectOneMenu id="formattingLanguage" value="#{user.formattingLanguage}" disabled="true" editable="true" filter="true" filterMatchMode="contains" converter="localeConverter">
-        <f:selectItems value="#{languageBean.getFormattingLanguages(user.securityContext)}" var="locale" itemLabel="#{languageBean.toDisplayName(locale)}" />
-      </p:selectOneMenu>
+      <h:outputText value="Name" />
+      <h:outputText id="name" value="#{user.name}" />
+      
+      <h:outputText value="Full Name" />
+      <h:outputText id="fullName" value="#{user.fullName}" />
+      
+      <h:outputText value="E-Mail Address" />
+      <h:outputText id="email" value="#{user.EMailAddress}" />
+      
+      <h:outputText value="Language" />
+      <h:outputText id="language" value="#{user.language}" />
+      
+      <h:outputText value="Formatting language" />
+      <h:outputText id="formattingLanguage" value="#{user.formattingLanguage}" />
     </p:panelGrid>
+    
     <p:panelGrid columns="2" columnClasses="col-12 md:col-4 lg:col-4, col-12 md:col-8 lg:col-8" layout="flex"
       styleClass="grey-label-panel ui-fluid" rendered="#{user.external and !user.ivySecuritySystem}">
       <label>External Name</label>
