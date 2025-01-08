@@ -43,7 +43,7 @@ public class UserDetailBean {
 
   public void setUserId(String userId) {
     if (!PermissionsUtil.isAdmin()) {
-      ResponseHelper.noPermission("You have no permission to read detailpage");
+      ResponseHelper.forbidden("You have no permission to read detailpage");
       return;
     }
     if (userId != null) {

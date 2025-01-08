@@ -18,7 +18,7 @@ public class ResponseHelper {
     }
   }
 
-  public static void noPermission(String msg) {
+  public static void forbidden(String msg) {
     try {
       var facesContext = FacesContext.getCurrentInstance();
       var externalContext = facesContext.getExternalContext();
