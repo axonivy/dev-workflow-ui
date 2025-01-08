@@ -103,7 +103,7 @@ class WebTestTasksIT {
     $(By.tagName("body")).hover();
     $(By.id("taskState:stateBadge")).hover();
     $(By.id("taskState:tooltip")).$(".ui-tooltip-text").shouldHave(text("PARKED"));
-    $(By.id("workingUser:userName")).shouldBe(exactText($("#sessionUserName").getText()));
+    $(By.id("workingUser:userNameLink")).shouldBe(exactText($("#sessionUserName").getText()));
     $(By.id("workflowEvents:eventsTable:0:eventType")).shouldBe(exactText("EVENT_PARK_TASK"));
   }
 
@@ -171,7 +171,7 @@ class WebTestTasksIT {
     $(By.tagName("body")).hover();
     $(By.id("taskState:stateBadge")).hover();
     $(By.id("taskState:tooltip")).$(".ui-tooltip-text").shouldHave(text("PARKED"));
-    $("#workingUser\\:userName").shouldBe(exactText($("#sessionUserName").getText()));
+    $("#workingUser\\:userNameLink").shouldBe(exactText($("#sessionUserName").getText()));
     $("#actionMenuForm\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"));
   }
 
@@ -240,7 +240,7 @@ class WebTestTasksIT {
     PrimeUi.selectOne(By.id("delegateTaskForm:selectUserMenu")).selectItemByLabel("testuser");
 
     $(By.id("delegateTaskForm:delegateProceedButton")).click();
-    $(By.id("taskResponsible:userName")).shouldHave(text("testuser"));
+    $(By.id("taskResponsible:userNameLink")).shouldHave(text("testuser"));
   }
 
   @Test

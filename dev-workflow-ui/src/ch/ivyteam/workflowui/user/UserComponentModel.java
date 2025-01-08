@@ -1,16 +1,20 @@
 package ch.ivyteam.workflowui.user;
 
+import ch.ivyteam.ivy.security.ISecurityConstants;
 import ch.ivyteam.ivy.security.ISecurityMember;
 import ch.ivyteam.ivy.workflow.task.IActivator;
+import ch.ivyteam.workflowui.util.PermissionsUtil;
 
 public class UserComponentModel {
 
   private final String name;
   private final String cssIcon;
+  private final String detailLinkUrl;
 
-  public UserComponentModel(ISecurityMember activator) {
-    this.name = activator.getDisplayName();
-    this.cssIcon = getCssIcon(activator);
+  public UserComponentModel(ISecurityMember securityMember) {
+    this.name = securityMember.getDisplayName();
+    this.cssIcon = getCssIcon(securityMember);
+    this.detailLinkUrl = getUserDetailLink(securityMember);
   }
 
   public UserComponentModel(IActivator activator) {
@@ -21,6 +25,7 @@ public class UserComponentModel {
       this.name = securityMember.getDisplayName();
     }
     this.cssIcon = getCssIcon(securityMember);
+    this.detailLinkUrl = getUserDetailLink(securityMember);
   }
 
   private static String getCssIcon(ISecurityMember activator) {
@@ -40,4 +45,23 @@ public class UserComponentModel {
   public String getCssIcon() {
     return cssIcon;
   }
+
+  private static String getUserDetailLink(ISecurityMember activator) {
+    if (activator != null && activator.isUser()
+        && !ISecurityConstants.SYSTEM_USER_NAME.equals(activator.getName())
+        && PermissionsUtil.isAdmin()) {
+      var securityMemberId = activator.getSecurityMemberId();
+      return "user.xhtml?userId=" + securityMemberId;
+    }
+    return null;
+  }
+
+  public String getDetailLinkUrl() {
+    return detailLinkUrl;
+  }
+
+  public boolean getShowUserDetailLink() {
+    return detailLinkUrl != null;
+  }
+
 }

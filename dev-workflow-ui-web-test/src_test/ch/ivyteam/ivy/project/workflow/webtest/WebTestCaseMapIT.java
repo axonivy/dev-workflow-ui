@@ -42,7 +42,7 @@ class WebTestCaseMapIT {
     openView("cases.xhtml");
     $(By.id("casesForm:cases:0:caseName")).shouldBe(visible).click();
 
-    $(By.id("creatorUser:userName")).shouldBe(exactText("DeveloperTest"));
+    $(By.id("creatorUser:userNameLink")).shouldBe(exactText("DeveloperTest"));
     $(By.id("caseState:stateBadge")).hover();
     $(By.id("caseState:tooltip")).$(".ui-tooltip-text").shouldHave(text("RUNNING"));
 

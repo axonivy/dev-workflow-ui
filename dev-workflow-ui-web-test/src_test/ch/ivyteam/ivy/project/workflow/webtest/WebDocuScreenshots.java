@@ -60,6 +60,9 @@ class WebDocuScreenshots {
     $(By.id("casesForm:cases:0:caseName")).shouldBe(visible).click();
     takeScreenshot("workflow-ui-caseDetails", new Dimension(SCREENSHOT_WIDTH, 800));
 
+    $(By.id("creatorUser:userNameLink")).shouldBe(visible).click();
+    takeScreenshot("workflow-ui-userDetails", new Dimension(SCREENSHOT_WIDTH, 800));
+
     openView("starts.xhtml");
     takeScreenshot("workflow-ui-starts", new Dimension(SCREENSHOT_WIDTH, 800));
 

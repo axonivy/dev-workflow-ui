@@ -12,7 +12,14 @@
     <h:panelGroup rendered="#{not empty userModel.name}">
       <i class="mr-1 si-lg #{userModel.cssIcon}" />
     </h:panelGroup>
-    <h:outputText id="userName" value="#{userModel.name}" />
+
+    <h:panelGroup rendered="#{userModel.getShowUserDetailLink()}">
+      <p:link id="userNameLink" value="#{userModel.name}" href="#{userModel.getDetailLinkUrl()}"/>
+    </h:panelGroup>
+
+    <h:panelGroup rendered="#{!userModel.getShowUserDetailLink()}">
+      <h:outputText id="userName" value="#{userModel.name}" />
+    </h:panelGroup>
   </h:panelGroup>
 </cc:implementation>
 </html>
