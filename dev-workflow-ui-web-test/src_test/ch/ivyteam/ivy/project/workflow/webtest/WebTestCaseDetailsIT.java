@@ -9,9 +9,7 @@ import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Map;
 
@@ -25,22 +23,21 @@ import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.axonivy.ivy.webtest.primeui.widget.Table;
 import com.codeborne.selenide.Selenide;
 
+import ch.ivyteam.ivy.project.workflow.webtest.util.Navigation;
+
 @IvyWebTest
 class WebTestCaseDetailsIT {
 
   @BeforeAll
   static void setup() {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
-    loginDeveloper();
-    startTestProcess("1750C5211D94569D/TestData.ivp");
   }
 
   @BeforeEach
   void beforeEach() {
     loginDeveloper();
-    openView("cases.xhtml");
-    $(byText("Created case of TestData")).shouldBe(visible).click();
-    $(By.id("caseName")).shouldBe(visible).shouldHave(text("Created case of TestData"));
+    startTestProcess("1750C5211D94569D/TestData.ivp");
+    Navigation.openCase("Created case of TestData");
   }
 
   @Test
@@ -60,7 +57,7 @@ class WebTestCaseDetailsIT {
   @Test
   void caseNotFound() {
     openView("case.xhtml", Map.of("id", "NON-EXISTING-CASE"));
-    assertThat(Selenide.webdriver().driver().getWebDriver().getPageSource()).contains("Not Found");
+    $("body").shouldHave(text("Not Found"));
   }
 
   @Test
@@ -72,8 +69,7 @@ class WebTestCaseDetailsIT {
   @Test
   void checkTaskTableSystemTask() {
     startTestProcess("1750C5211D94569D/testIntermediateEventProcess.ivp");
-    openView("cases.xhtml");
-    $(By.id("casesForm:cases:0:caseName")).shouldBe(visible).click();
+    Navigation.openCase("testintermediateEventProcess case");
 
     Table tasksTable = PrimeUi.table(By.id("tasksForm:tasks"));
     tasksTable.containsNot("System");
@@ -99,8 +95,7 @@ class WebTestCaseDetailsIT {
     var caseId = $(By.id("caseId")).getText();
     $(By.id("workflowEvents:eventsTable")).shouldBe(visible);
     loginFromTable("testuser");
-    openView("cases.xhtml");
-    $(byText("Created case of TestData")).shouldBe(visible).click();
+    openView("case.xhtml", Map.of("id", caseId));
     $(By.id("caseId")).shouldBe(visible).shouldHave(exactText(caseId));
     $(By.id("workflowEvents:eventsTable")).shouldNotBe(visible);
     $(By.id("workflowEvents:noPermissionMessage")).shouldBe(visible).shouldHave(text("No permissions"));
@@ -120,8 +115,7 @@ class WebTestCaseDetailsIT {
   @Test
   void destoryCase() {
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
-    openView("cases.xhtml");
-    $(By.id("casesForm:cases:0:caseName")).shouldBe(visible).click();
+    Navigation.openCase("case created in UserTask during startBoundarySignal process");
     $(By.id("caseState:stateBadge")).hover();
     $(By.id("caseState:tooltip")).$(".ui-tooltip-text").shouldHave(text("RUNNING"));
     $(By.id("caseDestroyBtn")).shouldBe(visible).shouldNotHave(cssClass("ui-state-disabled"));

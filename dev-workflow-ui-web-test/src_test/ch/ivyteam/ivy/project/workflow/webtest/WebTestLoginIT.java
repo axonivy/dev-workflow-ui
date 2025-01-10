@@ -22,6 +22,7 @@ import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.axonivy.ivy.webtest.primeui.widget.Table;
 import com.codeborne.selenide.Selenide;
 
+import ch.ivyteam.ivy.project.workflow.webtest.util.Navigation;
 import ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil;
 
 @IvyWebTest
@@ -106,8 +107,7 @@ class WebTestLoginIT {
   void switchUserOnDetailPage() {
     loginFromTable("testuser");
     startTestProcess("1750C5211D94569D/TestData.ivp");
-    openView("tasks.xhtml");
-    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
+    Navigation.openTask("Created task of TestData");
     var taskId = $(By.id("taskId")).shouldBe(visible).text();
     assertCurrentUrlContains("task.xhtml?id=" + taskId);
 

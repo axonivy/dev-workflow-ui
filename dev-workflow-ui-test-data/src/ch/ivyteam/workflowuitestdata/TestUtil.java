@@ -59,6 +59,6 @@ public class TestUtil {
     if (session != null) {
       return session.getSessionUser();
     }
-    return Ivy.security().users().system();
+    return Ivy.security().users().find("DeveloperTest");
   }
 }
