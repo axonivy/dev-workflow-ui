@@ -7,9 +7,9 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openVi
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static com.codeborne.selenide.Condition.readonly;
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -72,8 +72,7 @@ class WebTestHomepageIT {
 
     $(By.id("viewerFrame")).shouldBe(visible);
     Selenide.switchTo().frame("viewerFrame");
-    $(By.id("name-id")).shouldBe(readonly);
-    assertThat($(By.id("name-id")).getAttribute("value")).isEqualTo("test _ case _ map");
+    $(By.id("name-id")).should(readonly, value("test _ case _ map"));
     $(By.className("fa-apple")).shouldBe(visible);
   }
 

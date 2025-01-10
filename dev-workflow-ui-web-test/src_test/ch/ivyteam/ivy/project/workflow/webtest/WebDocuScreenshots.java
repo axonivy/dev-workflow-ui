@@ -18,6 +18,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 
+import ch.ivyteam.ivy.project.workflow.webtest.util.Navigation;
 import ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil;
 
 @IvyWebTest
@@ -47,17 +48,17 @@ class WebDocuScreenshots {
     openView("login.xhtml");
     takeScreenshot("workflow-ui-login", new Dimension(SCREENSHOT_WIDTH, 800));
 
-    openView("tasks.xhtml");
+    Navigation.openTasks();
     takeScreenshot("workflow-ui-tasks", new Dimension(SCREENSHOT_WIDTH, 800));
 
-    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
+    Navigation.openTask("Created task of TestData");
     $("#actionMenuForm\\:taskActionsBtn").click();
     takeScreenshot("workflow-ui-taskDetails", new Dimension(SCREENSHOT_WIDTH, 800));
 
     openView("cases.xhtml");
     takeScreenshot("workflow-ui-cases", new Dimension(SCREENSHOT_WIDTH, 800));
 
-    $(By.id("casesForm:cases:0:caseName")).shouldBe(visible).click();
+    Navigation.openCase("Created case of TestData");
     takeScreenshot("workflow-ui-caseDetails", new Dimension(SCREENSHOT_WIDTH, 800));
 
     $(By.id("creatorUser:userNameLink")).shouldBe(visible).click();
