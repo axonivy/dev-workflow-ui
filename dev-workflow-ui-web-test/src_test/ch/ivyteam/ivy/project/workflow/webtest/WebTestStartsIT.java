@@ -25,6 +25,8 @@ import com.axonivy.ivy.webtest.engine.EngineUrl;
 import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.codeborne.selenide.Selenide;
 
+import ch.ivyteam.ivy.project.workflow.webtest.util.Navigation;
+
 @IvyWebTest
 class WebTestStartsIT {
 
@@ -154,8 +156,7 @@ class WebTestStartsIT {
     $(By.id("menuform:sr_home")).shouldHave(cssClass("active-nav-page"));
     assertCurrentUrlContains("home.xhtml");
 
-    openView("tasks.xhtml");
-    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
+    Navigation.openTask("Created task of TestData");
     $(".case-link").shouldHave(text("Created case of TestData"));
     $("#actionMenuForm\\:taskStartBtn").shouldBe(enabled).click();
     $(".case-link").shouldHave(text("Created case of TestData"));
