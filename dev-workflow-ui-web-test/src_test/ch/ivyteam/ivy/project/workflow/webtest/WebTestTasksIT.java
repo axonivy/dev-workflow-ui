@@ -12,7 +12,6 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Map;
 
@@ -25,6 +24,8 @@ import com.axonivy.ivy.webtest.IvyWebTest;
 import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.axonivy.ivy.webtest.primeui.widget.Table;
 import com.codeborne.selenide.Selenide;
+
+import ch.ivyteam.ivy.project.workflow.webtest.util.Navigation;
 
 @IvyWebTest
 class WebTestTasksIT {
@@ -44,16 +45,13 @@ class WebTestTasksIT {
   @Test
   void allTasksOnlyAdmin() {
     startTestProcess("1750C5211D94569D/HomePageTestData.ivp");
-    openView("tasks.xhtml");
-    Table table = PrimeUi.table(By.id("tasksForm:tasks"));
-    table.row(0).shouldHave(text("Created task of HomePageTestData"));
-    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
-    $(By.id("taskName")).shouldHave(text("Created task of HomePageTestData"));
+    Navigation.openTask("Created task of HomePageTestData");
     String taskId = $(By.id("taskId")).text();
     $(By.id("actionMenuForm:taskStartBtn")).shouldBe(enabled).click();
+
     loginFromTable("testuser");
-    openView("tasks.xhtml");
-    table = PrimeUi.table(By.id("tasksForm:tasks"));
+    Navigation.openTasks();
+    var table = PrimeUi.table(By.id("tasksForm:tasks"));
     if ("Created task of HomePageTestData".equals(table.row(0).text())) {
       $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
       $(By.id("taskId")).shouldNotBe(text(taskId));
@@ -63,7 +61,7 @@ class WebTestTasksIT {
   @Test
   void tasksTable() {
     startTestProcess("1750C5211D94569D/TestData.ivp");
-    openView("tasks.xhtml");
+    Navigation.openTasks();
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldHave(text("Created task of TestData"));
     table.valueAt(0, 1).contains("pause");
@@ -72,7 +70,7 @@ class WebTestTasksIT {
   @Test
   void systemTasks() {
     startTestProcess("1750C5211D94569D/testIntermediateEventProcess.ivp");
-    openView("tasks.xhtml");
+    Navigation.openTasks();
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.contains("System user");
 
@@ -84,9 +82,7 @@ class WebTestTasksIT {
 
   @Test
   void checkTaskDetails() {
-    openView("tasks.xhtml");
-    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
-
+    Navigation.openTask("Created task of TestData");
     $(".case-link").shouldHave(text("Created case of TestData"));
     $(By.id("taskResponsible:userName")).shouldBe(exactText("Everybody"));
     $(By.id("taskState:stateBadge")).hover();
@@ -109,8 +105,7 @@ class WebTestTasksIT {
 
   @Test
   void notesDialog() {
-    openView("tasks.xhtml");
-    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
+    Navigation.openTask("Created task of TestData");
     $(By.id("actionMenuForm:taskNotesBtn")).shouldBe(visible).click();
     var dialog = $(By.id("actionMenuForm:taskNotesBtn_dlg"));
     dialog.shouldBe(visible);
@@ -123,24 +118,19 @@ class WebTestTasksIT {
   @Test
   void notesBtnDisabled() {
     startTestProcess("1750C5211D94569D/HomePageTestData.ivp");
-    openView("tasks.xhtml");
-    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
+    Navigation.openTask("Created task of HomePageTestData");
     $(By.id("actionMenuForm:taskNotesBtn")).shouldBe(visible).shouldNotBe(enabled);
   }
 
   @Test
   void taskNotFound() {
     openView("task.xhtml", Map.of("id", "NON-EXISTING-TASK"));
-    assertThat(Selenide.webdriver().driver().getWebDriver().getPageSource()).contains("Not Found");
+    $("body").shouldHave(text("Not Found"));
   }
 
   @Test
   void startTask() {
-    openView("tasks.xhtml");
-
-    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
-    $(".case-link").shouldHave(text("Created case of TestData"));
-
+    Navigation.openTask("Created task of TestData");
     $(By.id("taskState:stateBadge")).hover();
     $(By.id("taskState:tooltip")).$(".ui-tooltip-text").shouldHave(text("SUSPENDED"));
     $(By.id("actionMenuForm:taskStartBtn")).shouldNotHave(cssClass("ui-state-disabled"))
@@ -156,11 +146,7 @@ class WebTestTasksIT {
   @Test
   void startParkedTask() {
     startTestProcess("1750C5211D94569D/TestData.ivp");
-    openView("tasks.xhtml");
-
-    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
-    $(".case-link").shouldHave(text("Created case of TestData"));
-
+    Navigation.openTask("Created task of TestData");
     $(By.id("taskState:stateBadge")).hover();
     $(By.id("taskState:tooltip")).$(".ui-tooltip-text").shouldHave(text("SUSPENDED"));
     $("#actionMenuForm\\:taskStartBtn").shouldNotHave(cssClass("ui-state-disabled"));
@@ -177,9 +163,7 @@ class WebTestTasksIT {
 
   @Test
   void workflowEventsPermission() {
-    openView("tasks.xhtml");
-    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
-    $(By.className("case-link")).shouldHave(text("Created case of TestData"));
+    Navigation.openTask("Created task of TestData");
     var taskId = $(By.id("taskId")).getText();
     $(By.id("workflowEvents:eventsTable")).shouldBe(visible);
 
@@ -191,10 +175,7 @@ class WebTestTasksIT {
 
   @Test
   void taskCustomFields() {
-    openView("tasks.xhtml");
-    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
-    $(By.className("case-link")).shouldHave(text("Created case of TestData"));
-
+    Navigation.openTask("Created task of TestData");
     Table fieldsTable = PrimeUi.table(By.id("customFields:customFieldsTable"));
     fieldsTable.valueAt(1, 0).contains("task test value");
   }
@@ -202,11 +183,7 @@ class WebTestTasksIT {
   @Test
   void checkDelayedTask() {
     startTestProcess("1750C5211D94569D/DelayedTestTask.ivp");
-    openView("tasks.xhtml");
-    Table table = PrimeUi.table(By.id("tasksForm:tasks"));
-    table.row(0).shouldHave(text("Created delayed task"));
-    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
-    $(By.id("taskName")).shouldBe(exactText("Created delayed task"));
+    Navigation.openTask("Created delayed task");
     $(By.id("taskState:stateBadge")).hover();
     $(By.id("taskState:tooltip")).$(".ui-tooltip-text").shouldHave(text("DELAYED"));
     $(By.id("delayDate:datetime")).shouldNotBe(exactText(""));
@@ -216,22 +193,14 @@ class WebTestTasksIT {
   @Test
   void checkCustomResponsibleUser() {
     startTestProcess("1750C5211D94569D/customUser.ivp");
-    openView("tasks.xhtml");
-    Table table = PrimeUi.table(By.id("tasksForm:tasks"));
-    table.row(0).shouldHave(text("Created task of CustomUser"));
-    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
-    $(By.id("taskName")).shouldBe(exactText("Created task of CustomUser"));
+    Navigation.openTask("Created task of CustomUser");
     $(By.id("taskResponsible:userName")).shouldHave(text("CustomUserTest"));
   }
 
   @Test
   void delegateTask() {
     startTestProcess("1750C5211D94569D/TestData.ivp");
-    openView("tasks.xhtml");
-    Table table = PrimeUi.table(By.id("tasksForm:tasks"));
-    table.row(0).shouldHave(text("Created task of TestData"));
-    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
-    $(By.id("taskName")).shouldBe(exactText("Created task of TestData"));
+    Navigation.openTask("Created task of TestData");
     $(By.id("taskResponsible:userName")).shouldBe(exactText("Everybody"));
 
     $(By.id("actionMenuForm:taskActionsBtn")).click();
@@ -246,11 +215,7 @@ class WebTestTasksIT {
   @Test
   void clearDelayOnTask() {
     startTestProcess("1750C5211D94569D/DelayedTestTask.ivp");
-    openView("tasks.xhtml");
-    Table table = PrimeUi.table(By.id("tasksForm:tasks"));
-    table.row(0).shouldHave(text("Created delayed task"));
-    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
-
+    Navigation.openTask("Created delayed task");
     $(By.id("taskState:stateBadge")).hover();
     $(By.id("taskState:tooltip")).$(".ui-tooltip-text").shouldHave(text("DELAYED"));
     $(By.id("delayDate:datetime")).shouldNotBe(exactText(""));
@@ -269,10 +234,8 @@ class WebTestTasksIT {
     $(By.id("startsForm:projectStarts:globalFilter")).setValue("embed in frame").pressEnter();
     $(By.id("startsForm:projectStarts:0:startName")).shouldBe(visible, text("Do not embed in Frame")).click();
     $(By.id("form:proceed")).shouldBe(visible).click();
-    openView("tasks.xhtml");
-    Table table = PrimeUi.table(By.id("tasksForm:tasks"));
-    table.row(0).shouldHave(text("notEmbedTask"));
-    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
+
+    Navigation.openTask("notEmbedTask");
     $(By.id("actionMenuForm:taskStartBtn")).shouldNotHave(text("?taskUrl"));
   }
 }

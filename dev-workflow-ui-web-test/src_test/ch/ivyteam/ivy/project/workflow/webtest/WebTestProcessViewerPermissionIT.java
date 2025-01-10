@@ -15,8 +15,9 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
-import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.axonivy.ivy.webtest.primeui.widget.Table;
+
+import ch.ivyteam.ivy.project.workflow.webtest.util.Navigation;
 
 @IvyWebTest
 class WebTestProcessViewerPermissionIT {
@@ -39,19 +40,13 @@ class WebTestProcessViewerPermissionIT {
 
   @Test
   void detail() {
-    openView("tasks.xhtml");
-    var table = PrimeUi.table(By.id("tasksForm:tasks"));
-    table.row(0).shouldHave(text("Test View Permission Task"));
-    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
-    $(By.id("taskName")).shouldHave(text("Test View Permission Task"));
+    Navigation.openTask("Test View Permission Task");
     $("a#openProcessViewerBtn").shouldBe(visible);
   }
 
   @Test
   void caseDetail() {
-    openView("cases.xhtml");
-    $(By.id("casesForm:cases:0:caseName")).shouldBe(visible).click();
-    $(By.id("caseName")).shouldBe(visible).shouldHave(text("Test View Permission Case"));
+    Navigation.openCase("Test View Permission Case");
     $(byText("Current Process is hidden")).shouldBe(visible);
   }
 
