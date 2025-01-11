@@ -17,9 +17,10 @@ public class WebServicesBean {
   private final List<WebServiceProcess> webServices;
   private String filter;
 
-  @SuppressWarnings("removal")
+  @SuppressWarnings("deprecation")
   public WebServicesBean() {
-    webServices = ProcessModelsUtil.getReleasedWorkflowPMVs().flatMap(pmv -> pmv.getWebServiceProcesses().stream())
+    webServices = ProcessModelsUtil.getReleasedWorkflowPMVs()
+        .flatMap(pmv -> pmv.getWebServiceProcesses().stream())
         .map(WebServiceProcess::new)
         .collect(Collectors.toList());
   }

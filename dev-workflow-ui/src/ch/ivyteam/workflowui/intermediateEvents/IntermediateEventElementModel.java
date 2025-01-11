@@ -15,9 +15,10 @@ public class IntermediateEventElementModel {
   private final String description;
   private final IntermediateEventModel eventModel;
 
-  @SuppressWarnings("removal")
+  @SuppressWarnings("deprecation")
   public static List<IntermediateEventElementModel> create() {
-    return getPMVs().stream().flatMap(pmv -> pmv.getIntermediateEventElements().stream())
+    return getPMVs().stream()
+        .flatMap(pmv -> pmv.getIntermediateEventElements().stream())
         .map(IntermediateEventElementModel::new)
         .collect(Collectors.toList());
   }
