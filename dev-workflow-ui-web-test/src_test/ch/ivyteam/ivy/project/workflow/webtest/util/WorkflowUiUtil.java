@@ -44,6 +44,10 @@ public class WorkflowUiUtil {
     assertCurrentUrlContains(page);
   }
 
+  public static void openViewNoAssertion(String page, Map<String, String> queryParams) {
+    open(viewUrl(page, queryParams));
+  }
+
   public static String viewUrl(String page) {
     return viewUrl(page, Map.of());
   }

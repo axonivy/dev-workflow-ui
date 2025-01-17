@@ -69,14 +69,14 @@
           }
 
           iframe.addEventListener("load", function() {
-            try{
+            try {
               // Try to access loaded iframe content
-              const content = iframe.contentWindow.content;
+              iframe.contentWindow.content;
               attachUnload();
               // Just in case the change wasn't dispatched during the unload event...
               dispatchChange();
               iframe.style.visibility = 'visible';
-            }catch(e) {
+            } catch(e) {
               // Open iframe content in current window if it could not be loaded
               window.location = iframe.src;
             }
