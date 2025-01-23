@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component"
+  xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
+  xmlns:jc="http://xmlns.jcp.org/jsf/composite/components">
+
+  <h:form id="userDetailCasesForm">
+     <p:dataTable id="cases" var="case" value="#{userDetailBean.userCasesDataModel}" widgetVar="casesTable"
+        styleClass="ui-fluid" emptyMessage="No Cases found with given criteria" paginatorPosition="bottom" rows="10"
+        lazy="true" paginator="true" paginatorAlwaysVisible="false" selectionMode="single" resizableColumns="true">
+        <p:ajax event="rowSelect" listener="#{userDetailBean.redirectToCaseRow}" />
+        <p:column headerText="State" filterBy="#{case.businessState}" sortBy="#{case.businessState}" width="90px" resizable="false">
+          <jc:stateBadge id="caseState" data="#{case}" />
+        </p:column>
+        <p:column headerText="Name" filterBy="#{case.getName(case)}" sortBy="#{case.name}" responsivePriority="1">
+          <h:outputText id="caseName" value="#{case.name}" />
+        </p:column>
+        <p:column headerText="Creator" filterBy="#{case.creatorUserName}" sortBy="#{case.creatorUserName}"
+          responsivePriority="3" width="160">
+          <jc:user user="#{case.creatorUser}" />
+        </p:column>
+        <p:column headerText="Start" sortBy="#{case.startTimestamp}" sortOrder="descending" responsivePriority="3"
+          width="90">
+          <jc:time id="startTime" datetime="#{case.startTimestamp}" />
+        </p:column>
+        <p:column headerText="End" sortBy="#{case.endTimestamp}" responsivePriority="4" width="90">
+          <jc:time id="endTime" datetime="#{case.endTimestamp}" />
+        </p:column>
+        <p:column width="30px" resizable="false">
+          <p:commandButton id="caseActionsBtn" icon="si si-navigation-menu-horizontal-filled"
+            styleClass="ui-button-flat text-color action-button" />
+          <p:menu id="caseActionsMenu" overlay="true" trigger="caseActionsBtn" my="right top" at="right bottom"
+            style="width: 200px">
+            <p:menuitem id="openCaseDetailsBtn" value="Open case details" url="#{case.detailLink}"
+              icon="si si-information-circle" />
+          </p:menu>
+        </p:column>
+      </p:dataTable>
+  </h:form>
+</ui:composition>
