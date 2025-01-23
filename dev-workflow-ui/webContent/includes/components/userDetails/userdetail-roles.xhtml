@@ -10,7 +10,7 @@
 
   <h:form id="userDetailRoleInformationForm">
     <p:dataTable value="#{userDetailBean.user.getAllRoles()}" var="role">
-      <p:column headerText="All Roles">
+      <p:column>
         <p:outputLabel value="#{role.getDisplayName()}" />
       </p:column>
     </p:dataTable>
