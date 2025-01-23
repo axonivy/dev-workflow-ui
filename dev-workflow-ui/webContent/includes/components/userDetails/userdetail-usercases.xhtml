@@ -33,10 +33,6 @@
             style="width: 200px">
             <p:menuitem id="openCaseDetailsBtn" value="Open case details" url="#{case.detailLink}"
               icon="si si-information-circle" />
-<!--             <p:menuitem id="openUserDetailsBtn" value="Open user details" url="#{userIvyDevWfBean.getUserLink(case.creatorUser.name)}" -->
-<!--               icon="pi pi-user" /> -->
-            <p:menuitem value="Rerun process" actionListener="#{casesIvyDevWfBean.rerunProcess(case)}"
-              id="rerunCaseProcessBtn" icon="si si-button-refresh-arrow" />
           </p:menu>
         </p:column>
       </p:dataTable>
