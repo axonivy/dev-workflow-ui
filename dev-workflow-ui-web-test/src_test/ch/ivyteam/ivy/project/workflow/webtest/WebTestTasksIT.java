@@ -4,6 +4,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.assert
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openViewNoAssertion;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static com.codeborne.selenide.Condition.checked;
 import static com.codeborne.selenide.Condition.cssClass;
@@ -13,6 +14,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -21,6 +23,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
+import com.axonivy.ivy.webtest.engine.EngineUrl;
 import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.axonivy.ivy.webtest.primeui.widget.Table;
 import com.codeborne.selenide.Selenide;
@@ -237,5 +240,15 @@ class WebTestTasksIT {
 
     Navigation.openTask("notEmbedTask");
     $(By.id("actionMenuForm:taskStartBtn")).shouldNotHave(text("?taskUrl"));
+  }
+
+  @Test
+  void iframeBreakout() {
+    Map<String, String> params = new HashMap<>();
+    var restUrl = EngineUrl.createRestUrl("iframe/noiframe").replace(EngineUrl.base(), "");
+    params.put("originalUrl", "home.xhtml");
+    params.put("taskUrl", restUrl);
+    openViewNoAssertion("frame.xhtml", params);
+    assertCurrentUrlContains(restUrl);
   }
 }
