@@ -3,6 +3,8 @@ package ch.ivyteam.ivy.project.workflow.webtest;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openViewNoAssertion;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.assertCurrentUrlContains;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.enabled;
@@ -17,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
+import com.axonivy.ivy.webtest.engine.EngineUrl;
 import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.axonivy.ivy.webtest.primeui.widget.Table;
 
@@ -218,5 +221,15 @@ public class WebTestTasksIT {
     table.row(0).shouldHave(text("notEmbedTask"));
     $(By.className("detail-btn")).shouldBe(visible).click();
     $(By.id("actionMenuForm:taskStartBtn")).shouldNotHave(text("?taskUrl"));
+  }
+
+  @Test
+  void iframeBreakout() {
+    var restUrl = EngineUrl.createRestUrl("iframe/noiframe").replace(EngineUrl.base(), "");
+    var originalUrl = "originalUrl=home.xhtml";
+    var taskUrl = "taskUrl=/" + restUrl;
+    var url = "frame.xhtml?" + originalUrl + "&" + taskUrl;
+    openViewNoAssertion(url);
+    assertCurrentUrlContains(restUrl);
   }
 }
