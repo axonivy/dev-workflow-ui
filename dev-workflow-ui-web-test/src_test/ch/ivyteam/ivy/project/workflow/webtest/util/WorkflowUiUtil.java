@@ -41,6 +41,10 @@ public class WorkflowUiUtil {
     assertCurrentUrlContains(page);
   }
 
+  public static void openViewNoAssertion(String page) {
+    open(viewUrl(page));
+  }
+
   public static String viewUrl(String page) {
     var securityContext = System.getProperty("test.integrated.workflow");
     if (StringUtils.isNotEmpty(securityContext)) {
