@@ -3,5 +3,7 @@
   "extends": [
     "config:recommended"
   ],
-  "assignees": ["alexsuter"]
+  "assignees": ["alexsuter"],
+  "baseBranches": ["master", "/^release\\/.*/"]
 }
+
