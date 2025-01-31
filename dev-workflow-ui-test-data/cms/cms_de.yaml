@@ -1,0 +1,13 @@
+CustomFields:
+  Cases:
+    ProductKind:
+      Description: Die Art des Produktes
+      Label: Produktart
+      Values:
+        Food: Essen
+  Tasks:
+    CustomerKind:
+      Description: Die Art des Kunden
+      Label: Kundenart
+      Values:
+        '10': Silber

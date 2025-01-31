@@ -7,3 +7,16 @@ Categories:
     cssIcon: si si-copy-paste
     name: 2. Example dialogs
     tooltip: Example dialogs
+CustomFields:
+  Cases:
+    ProductKind:
+      Description: The kind of product
+      Label: Product Kind
+      Values:
+        Food: Food
+  Tasks:
+    CustomerKind:
+      Description: The kind of customer
+      Label: Customer Kind
+      Values:
+        '10': Silver

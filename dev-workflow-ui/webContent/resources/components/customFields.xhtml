@@ -10,10 +10,15 @@
   <p:dataTable id="customFieldsTable" var="field" value="#{cc.attrs.customFields}">
     <p:column headerText="Name">
       <h:outputText id="customFieldLabel" value="#{field.label}"/>
-      <p:tooltip for="customFieldLabel" value="#{field.description}" position="top"/>
+      <p:tooltip for="customFieldLabel" value="#{field.description}" position="top">
+        <h:outputText value="#{field.labelAndName}"/>
+        <br/>
+        <h:outputText value="#{field.description}"/>
+      </p:tooltip>
     </p:column>
     <p:column headerText="Value">
-      <h:outputText value="#{field.value}"/>
+      <h:outputText id="customFieldValue" value="#{field.value}"/>
+      <p:tooltip for="customFieldValue" value="#{field.valueDescription}" position="top"/>
     </p:column>
     <p:column headerText="Type">
       <h:outputText value="#{field.type}"/>
