@@ -4,13 +4,16 @@ import javax.faces.bean.ManagedBean;
 
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
+import ch.ivyteam.workflowui.cases.CaseModel;
 import ch.ivyteam.workflowui.tasks.TaskModel;
 
 @ManagedBean
 public class StateBadgeBean {
 
   public StateBadgeModel toStateBadgeModel(Object data) {
-    if (data instanceof ICase caze) {
+    if (data instanceof CaseModel caseModel) {
+      return new StateBadgeModel(caseModel.getCase());
+    } else if (data instanceof ICase caze) {
       return new StateBadgeModel(caze);
     } else if (data instanceof TaskModel taskModel) {
       return new StateBadgeModel(taskModel);
