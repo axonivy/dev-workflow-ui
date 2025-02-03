@@ -9,6 +9,8 @@
   </f:metadata>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
+      <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotDevMode}" />
+
       <h:panelGroup layout="block" styleClass="static-message" rendered="#{!loginIvyDevWfBean.loggedIn}">
         <p:staticMessage severity="warn" summary="Warning" detail="You need to login to access that page" id="loginMessage"/>
       </h:panelGroup>

@@ -21,6 +21,8 @@ import ch.ivyteam.ivy.security.identity.spi.IdentityProvider;
 import ch.ivyteam.ivy.security.identity.spi.auth.oauth2.OAuth2Authenticator;
 import ch.ivyteam.ivy.security.restricted.ISecurityContextInternal;
 import ch.ivyteam.workflowui.login.LoginTableIvyDevWfBean.User;
+import ch.ivyteam.workflowui.util.EngineModeUtil;
+import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.UrlUtil;
 import ch.ivyteam.workflowui.util.UserUtil;
 
@@ -74,6 +76,12 @@ public class LoginIvyDevWfBean {
 
   public void redirectIfNotAdmin() {
     UserUtil.redirectIfNotAdmin();
+  }
+
+  public void redirectIfNotDevMode() {
+    if (!EngineModeUtil.isDemoOrDesigner()) {
+      RedirectUtil.redirect();
+    }
   }
 
   public String getRoles(IUser user) {
