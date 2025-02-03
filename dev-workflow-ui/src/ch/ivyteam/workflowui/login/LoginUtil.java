@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.licence.RuntimeLicenceException;
+import ch.ivyteam.workflowui.util.EngineModeUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.UrlUtil;
 
@@ -28,6 +29,9 @@ public class LoginUtil {
   }
 
   public static void tableLogin(String username, String originalUrl) {
+    if (!EngineModeUtil.isDemoOrDesigner()) {
+      return;
+    }
     if (!checkLoginAndRedirect(username, "", originalUrl)) {
       if (!checkLoginAndRedirect(username, username, originalUrl)) {
         redirectToLoginForm();
