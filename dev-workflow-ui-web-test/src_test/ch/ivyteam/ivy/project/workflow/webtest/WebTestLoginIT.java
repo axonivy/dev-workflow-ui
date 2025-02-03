@@ -5,12 +5,15 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginF
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.logout;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverConditions.urlContaining;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -117,10 +120,10 @@ class WebTestLoginIT {
   }
 
   @Test
-  void loginTableRedirect() {
-    loginFromTable("DifferentLogin");
-    assertCurrentUrlContains("login.xhtml?originalUrl=loginTable.xhtml");
-    WorkflowUiUtil.login("DifferentLogin", "DifferentPassword");
+  void loginTableOnlyTestUsers() {
+    open(viewUrl("loginTable.xhtml"));
+    $(By.id("loginTable")).find(byText("testuser")).should(visible);
+    $(By.id("loginTable")).find(byText("DifferentLogin")).shouldNot(exist);
   }
 
   @Test
