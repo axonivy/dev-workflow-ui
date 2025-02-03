@@ -35,6 +35,7 @@ public class CasesDetailsIvyDevWfBean {
 
   private String selectedCaseId;
   private ICase selectedCase;
+  private CaseModel selectedCaseModel;
   private List<CustomFieldModel> customFields;
   private List<DocumentModel> documents;
   private CaseMapModel caseMapModel;
@@ -56,6 +57,10 @@ public class CasesDetailsIvyDevWfBean {
     return selectedCase;
   }
 
+  public CaseModel getSelectedCaseModel() {
+    return selectedCaseModel;
+  }
+
   public void setSelectedCaseId(String selectedCaseId) {
     this.selectedCaseId = selectedCaseId;
     this.selectedCase = CaseUtil.getCaseById(selectedCaseId);
@@ -63,6 +68,7 @@ public class CasesDetailsIvyDevWfBean {
       ResponseHelper.notFound("Case " + selectedCaseId + " does not exist");
       return;
     }
+    selectedCaseModel = new CaseModel(selectedCase);
     customFields = CustomFieldModel.create(selectedCase);
     documents = DocumentModel.create(selectedCase);
     caseMapModel = CaseMapModel.create(selectedCase);
