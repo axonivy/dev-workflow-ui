@@ -21,6 +21,7 @@ public class LoginTableIvyDevWfBean {
 
   public LoginTableIvyDevWfBean() {
     users = UserUtil.getUsers().stream()
+        .filter(user -> ((ch.ivyteam.ivy.security.internal.user.User) user).isTestUser())
         .map(LoginTableIvyDevWfBean::toUser)
         .collect(toList());
     currentUser = toUser(ISession.current().getSessionUser());

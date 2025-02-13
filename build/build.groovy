@@ -11,7 +11,6 @@ def buildIntegration(def mvnArgs = '') {
         docker.build('maven', '-f build/Dockerfile .').inside("--name ${ivyName} --network ${networkName}") {
           def mvnBuildArgs = "-Dwdm.gitHubTokenName=ivy-team " +
               "-Dwdm.gitHubTokenSecret=${env.GITHUB_TOKEN} " +
-              "-Dengine.page.url=${params.engineSource} " +
               "-Dtest.engine.url=http://${ivyName}:8080 " +
               "-Dselenide.remote=http://${seleniumName}:4444/wd/hub " +
               mvnArgs
@@ -35,7 +34,7 @@ def build() {
 
 def mvnBuild(def mvnArgs = '') {
   def phase = isReleasingBranch() ? 'deploy' : 'verify'
-  maven cmd: "clean ${phase} -ntp -Divy.engine.version.latest.minor=true -Dmaven.test.skip=false " + mvnArgs
+  maven cmd: "clean ${phase} -ntp -Divy.engine.version.latest.minor=true -Dmaven.test.skip=false -Dengine.page.url=${params.engineSource} " + mvnArgs
   
   recordIssues tools: [eclipse()], qualityGates: [[threshold: 1, type: 'TOTAL']]
   recordIssues tools: [mavenConsole()], qualityGates: [[threshold: 1, type: 'TOTAL']], filters: [
