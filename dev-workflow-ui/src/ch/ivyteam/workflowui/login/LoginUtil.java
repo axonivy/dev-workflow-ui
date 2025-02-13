@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 
 import org.apache.commons.lang3.StringUtils;
 
+import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.licence.RuntimeLicenceException;
 import ch.ivyteam.workflowui.util.PermissionsUtil;
@@ -32,11 +33,13 @@ public class LoginUtil {
     if (!PermissionsUtil.isDemoOrDevMode()) {
       return;
     }
-    if (!checkLoginAndRedirect(username, "", originalUrl)) {
-      if (!checkLoginAndRedirect(username, username, originalUrl)) {
-        redirectToLoginForm();
+    var user = ISecurityContext.current().users().find(username);
+    if (user != null && ((ch.ivyteam.ivy.security.internal.user.User) user).isTestUser()) {
+      if (checkLoginAndRedirect(username, username, originalUrl)) {
+        return;
       }
     }
+    redirectToLoginForm();
   }
 
   private static boolean checkLoginAndRedirect(String username, String password, String originalUrl) {
