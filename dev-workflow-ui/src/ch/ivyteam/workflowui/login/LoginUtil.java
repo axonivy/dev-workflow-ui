@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -20,12 +21,20 @@ public class LoginUtil {
   public static void login(String username, String password, String originalUrl) {
     try {
       if (!checkLoginAndRedirect(username, password, originalUrl)) {
+        sendUnauthorizedStatusCode();
         FacesContext.getCurrentInstance().addMessage(null,
             new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login failed", "Login failed"));
       }
     } catch (RuntimeLicenceException ex) {
       FacesContext.getCurrentInstance().addMessage(null,
           new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), ex.getMessage()));
+    }
+  }
+
+  private static void sendUnauthorizedStatusCode() {
+    var response = FacesContext.getCurrentInstance().getExternalContext().getResponse();
+    if (response instanceof HttpServletResponse httpResponse) {
+      httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
     }
   }
 
