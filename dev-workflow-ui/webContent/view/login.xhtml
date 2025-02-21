@@ -29,7 +29,7 @@
         <p:inputText id="userName" autocomplete="off" value="#{loginIvyDevWfBean.username}" required="true" placeholder="Username / Email" />
         <p:password id="password" autocomplete="off" value="#{loginIvyDevWfBean.password}" required="true" placeholder="Password" />
 
-        <p:commandButton update="@form" id="login" actionListener="#{loginIvyDevWfBean.customLogin}" value="Sign In" icon="si si-login-3" />
+        <p:commandButton update="@form" id="login" actionListener="#{loginIvyDevWfBean.customLogin}" value="Sign In" icon="si si-login-3" ajax="false"/>
         <p:messages globalOnly="true" id="loginMessage" />
 
         <section class="oauth-providers">
