@@ -15,21 +15,38 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverConditions.urlContaining;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.axonivy.ivy.webtest.primeui.widget.Table;
+import com.browserup.bup.filters.ResponseFilter;
+import com.browserup.bup.util.HttpMessageContents;
+import com.browserup.bup.util.HttpMessageInfo;
 import com.codeborne.selenide.Selenide;
 
+import ch.ivyteam.ivy.project.workflow.webtest.test.ProxyExtension;
 import ch.ivyteam.ivy.project.workflow.webtest.util.Navigation;
 import ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil;
+import io.netty.handler.codec.http.HttpResponse;
 
 @IvyWebTest
+@ExtendWith({ProxyExtension.class})
 class WebTestLoginIT {
+  static final String LOGIN = "login.xhtml";
+  static final RecordLoginStatusCode STATUS = new RecordLoginStatusCode();
+
+  @BeforeAll
+  static void beforeAll() {
+    openView("starts.xhtml");
+    Selenide.webdriver().driver().getProxy().addResponseFilter(LOGIN, STATUS);
+  }
 
   @BeforeEach
   void init() {
@@ -68,13 +85,17 @@ class WebTestLoginIT {
   @Test
   void customLogin() {
     WorkflowUiUtil.login("DeveloperTest", "DeveloperTest");
+    assertThat(STATUS.code).isEqualTo(302);
+    assertThat(STATUS.isAjax).isEqualTo(false);
   }
 
   @Test
   void customLoginFailMessage() {
-    openView("login.xhtml");
+    openView(LOGIN);
     $("#loginForm\\:loginMessage").shouldNotBe(visible);
     WorkflowUiUtil.tryLogin("sadgs", "sdgasgd");
+    assertThat(STATUS.code).isEqualTo(401);
+    assertThat(STATUS.isAjax).isEqualTo(false);
     $("#loginForm\\:loginMessage").shouldBe(visible);
   }
 
@@ -138,4 +159,17 @@ class WebTestLoginIT {
         .shouldNotBe(visible);
   }
 
+  private static final class RecordLoginStatusCode implements ResponseFilter {
+    int code;
+    boolean isAjax;
+
+    @Override
+    public void filterResponse(HttpResponse response, HttpMessageContents contents, HttpMessageInfo messageInfo) {
+      if (messageInfo.getOriginalUrl().endsWith(LOGIN)) {
+        code = response.status().code();
+        var facesRequest = messageInfo.getOriginalRequest().headers().get("Faces-Request");
+        isAjax = facesRequest != null && "partial/ajax".equals(facesRequest);
+      }
+    }
+  }
 }
