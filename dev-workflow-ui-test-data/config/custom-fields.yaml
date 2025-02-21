@@ -7,12 +7,16 @@ CustomFields:
   #    MyTaskCustomField:
   #      Label: My task custom field
   #      Description: This new task custom field can be used to ...
-  #      Type: STRING        
+  #      Type: STRING
+    CustomerKind:
+      Type: NUMBER       
   Cases:
   #    MyCaseCustomField:
   #      Label: My case custom field
   #      Description: This new case custom field can be used to ...
-  #      Type: STRING        
+  #      Type: STRING   
+    ProductKind:
+      Type: STRING     
   Starts:
 #    MyStartCustomField:
 #      Label: My start custom field
