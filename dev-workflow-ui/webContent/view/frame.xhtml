@@ -4,7 +4,7 @@
   xmlns:pe="http://primefaces.org/ui/extensions">
 <h:body>
   <f:metadata>
-    <f:viewParam name="originalUrl" value="#{frameIvyDevWfBean.originalUrl}"/>
+    <f:viewParam name="originalUrl" value="#{frameIvyDevWfBean.originalUrl}" />
   </f:metadata>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
@@ -13,26 +13,31 @@
           <div class="card-header pb-0">
             <div class="card-title flex align-items-center">
               <i class="pr-3 si si-task-list-edit"></i>
-              <h6 class="m-0"><h:outputText id="frameTaskName" value="#{frameIvyDevWfBean.taskName}" /></h6>
+              <h6 class="m-0">
+                <h:outputText id="frameTaskName" value="#{frameIvyDevWfBean.taskName}" />
+              </h6>
             </div>
             <p:linkButton id="openStartFullscreenBtn" href="#{frameIvyDevWfBean.taskUrl}" icon="si si-expand-6"
-              styleClass="ml-auto ui-button-secondary rounded-button"/>
-            <p:tooltip for="openStartFullscreenBtn" value="Open current process start on a fullscreen page" position="left"/>
+              styleClass="ml-auto ui-button-secondary rounded-button" />
+            <p:tooltip for="openStartFullscreenBtn" value="Open current process start on a fullscreen page"
+              position="left" />
             <p:commandButton value="Sidesteps" styleClass="ml-1" id="sidestepsBtn"
               rendered="#{frameIvyDevWfBean.renderSidestepBtn()}" icon="si si-arrow-down-1" />
             <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
               model="#{frameIvyDevWfBean.sidestepsMenuModel}" styleClass="menu-no-icons" />
           </div>
-          <p:remoteCommand name="useTaskInIFrame" actionListener="#{frameIvyDevWfBean.useTaskInIFrame()}" update="@form" />
+          <p:remoteCommand name="useTaskInIFrame" actionListener="#{frameIvyDevWfBean.useTaskInIFrame()}"
+            update="@form" />
         </h:form>
-        <hr/>
-        <iframe id="iFrame" src="#{frameIvyDevWfBean.taskUrl}" style="height: calc(100vh - 205px); width: 100%; border: 0; visibility: hidden;"></iframe>
+        <hr />
+        <iframe id="iFrame" src="#{frameIvyDevWfBean.taskUrl}"
+          style="height: calc(100vh - 205px); width: 100%; border: 0; visibility: hidden;"></iframe>
       </div>
       <script>
         function iframeURLChange(iframe, callback) {
           var lastDispatched = null;
 
-          var dispatchChange = function() {
+          var dispatchChange = function () {
             useTaskInIFrame([{
               name: 'url',
               value: iframe.contentWindow.location.pathname
@@ -47,14 +52,14 @@
             }
           };
 
-          var updateHistory = function(newHref) {
+          var updateHistory = function (newHref) {
             var newHrefUrl = new URL(newHref);
             var historyUrl = new URL(window.location);
             historyUrl.searchParams.set('taskUrl', newHrefUrl.pathname + newHrefUrl.search);
             history.replaceState({}, "", historyUrl);
           }
 
-          var unloadHandler = function() {
+          var unloadHandler = function () {
             // Timeout needed because the URL changes immediately after
             // the `unload` event is dispatched.
             setTimeout(dispatchChange, 0);
@@ -68,7 +73,7 @@
             iframe.contentWindow.addEventListener("unload", unloadHandler);
           }
 
-          iframe.addEventListener("load", function() {
+          iframe.addEventListener("load", function () {
             try {
               // Try to access loaded iframe content
               iframe.contentWindow.content;
@@ -76,7 +81,7 @@
               // Just in case the change wasn't dispatched during the unload event...
               dispatchChange();
               iframe.style.visibility = 'visible';
-            } catch(e) {
+            } catch (e) {
               // Open iframe content in current window if it could not be loaded
               window.location = iframe.src;
             }
@@ -95,51 +100,60 @@
         const LOGINTABLE = 'loginTable.xhtml';
 
         const authorizedUrls = new Map([
-          ['/faces/home.xhtml', HOME],
-          ['/app/home.xhtml', HOME],
-          ['/faces/tasks.xhtml', TASKS],
-          ['/app/tasks.xhtml', TASKS],
-          ['/case.xhtml', CASES],
-          ['/faces/starts.xhtml', STARTS],
-          ['/app/starts.xhtml', STARTS],
-          ['/faces/login.xhtml', LOGIN],
-          ['/app/login.xhtml', LOGIN],
-          ['/faces/loginTable.xhtml', LOGINTABLE],
-          ['/faces/end.xhtml', HOME],
-          ['/app/end.xhtml', HOME],
+          ['/home.xhtml', HOME],
+          ['/tasks.xhtml', TASKS],
+          ['/starts.xhtml', STARTS],
+          ['/login.xhtml', LOGIN],
+          ['/loginTable.xhtml', LOGINTABLE],
+          ['/end.xhtml', HOME],
           ['DefaultApplicationHomePage.ivp', HOME],
           ['DefaultTaskListPage.ivp', TASKS],
           ['DefaultProcessStartListPage.ivp', STARTS],
           ['DefaultLoginPage.ivp', LOGIN],
-          ['DefaultEndPage.ivp', HOME] ]); 
+          ['DefaultEndPage.ivp', HOME]
+        ]);
 
-          function checkAndReturnUrl(newURL, originPage) {
-            authorizedUrls.forEach(function (value, key) {
-              if (newURL.includes(value)) {
-                return key;
+            function checkAndReturnUrl(newURL, originPage) {
+              alert("newURL: " + newURL + " | originPage: " + originPage);
+              if (newURL.includes(TASK)) {
+                alert("return substringTask " + newURL.substring(newURL.indexOf(TASK)));
+                return newURL.substring(newURL.indexOf(TASK));
               }
-              if (originPage.includes(value)) {
-                return key;
+
+              //no idea why this is not working?
+              // --> if(newURL.includes('?endedTaskId=') AND originPage.includes(TASK + "?id")){..}  
+              if (newURL.includes('?endedTaskId=') == originPage.includes(TASK + "?id") == true) {
+                var id = originPage.split("id=")[1];
+                if (id) {
+                  alert("return task");
+                  return TASK + "?id=" + id;
+                }
+                alert("return tasks");
+                return TASKS;
               }
-            })
-            if (newURL.includes('?endedTaskId=')) {
-              var id = originPage.split("id=")[1];
-              if (id != null) {
-                return TASK + "?id=" + id;
-              }
-              if(originPage.includes(CASE)){
+              if (newURL.includes('case.xhtml?id')) {
+                var id = originPage.split("id=")[1];
+                if (id != null) {
+                  alert("return case");
+                  return CASE + "?id=" + id;
+                }
+                alert("return cases");
                 return CASES;
               }
-              return HOME;
-            }
-            //never get to this  
-            //if (newURL.includes('task.xhtml')) {
-            //   return newURL.substring(newURL.indexOf('task.xhtml'));
-            //}
-            return undefined;
-          }
 
-        iframeURLChange(document.getElementById("iFrame"), function(newURL, iframe) {
+              var entry = [...authorizedUrls.entries()].find(([key, value]) =>
+                newURL.includes(key)
+              );
+              if (entry != null) {
+                alert("return, redirect to " + entry[1]);
+                return entry[1];
+              }
+
+              alert("undefined");
+              return undefined;
+            }
+
+        iframeURLChange(document.getElementById("iFrame"), function (newURL, iframe) {
           var originPage = new URLSearchParams(window.location.search).get('originalUrl');
           if (iframe.contentWindow.location.pathname.match("/default/redirect.xhtml")) {
             var redirectedPage = new URLSearchParams(iframe.contentWindow.location.search).get("redirectPage");
