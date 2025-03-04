@@ -114,21 +114,7 @@
           ['DefaultEndPage.ivp', HOME]
         ]); 
 
-        // const redirectIvp = new Map([
-        //   ['DefaultApplicationHomePage.ivp', HOME],
-        //   ['DefaultTaskListPage.ivp', TASKS],
-        //   ['DefaultProcessStartListPage.ivp', STARTS],
-        //   ['DefaultLoginPage.ivp', LOGIN],
-        //   ['DefaultEndPage.ivp', HOME]
-        // ]);
-
           function checkAndReturnUrl(newURL, originPage) {
-            // redirectIvp.forEach(function (value, key) {
-            //   if (newURL.includes(value)) {
-            //     return key;
-            //   }
-            // })
-
             authorizedUrls.forEach(function (value, key) {
               if (newURL.includes(value)) {
                 return key;
@@ -147,10 +133,11 @@
               }
               return HOME; 
             }
-
-            if (newURL.includes('task.xhtml')) {
-              return newURL.substring(newURL.indexOf('task.xhtml'));
-            }
+            // never get to this  
+            // if (newURL.includes('task.xhtml')) {
+            //   return newURL.substring(newURL.indexOf('task.xhtml'));
+            // }
+            
             return undefined;
           }
 
