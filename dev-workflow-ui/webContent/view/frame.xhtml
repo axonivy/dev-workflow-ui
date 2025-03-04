@@ -113,45 +113,46 @@
           ['DefaultEndPage.ivp', HOME]
         ]);
 
-            function checkAndReturnUrl(newURL, originPage) {
-              alert("newURL: " + newURL + " | originPage: " + originPage);
-              if (newURL.includes(TASK)) {
-                alert("return substringTask " + newURL.substring(newURL.indexOf(TASK)));
-                return newURL.substring(newURL.indexOf(TASK));
-              }
+        function checkAndReturnUrl(newURL, originPage) {
+          alert("start newURL: " + newURL + " | originPage: " + originPage);
+          if (newURL.includes(TASK)) {
+            alert("return substringTask " + newURL.substring(newURL.indexOf(TASK)));
+            return newURL.substring(newURL.indexOf(TASK));
+          }
 
-              //no idea why this is not working?
-              // --> if(newURL.includes('?endedTaskId=') AND originPage.includes(TASK + "?id")){..}  
-              if (newURL.includes('?endedTaskId=') == originPage.includes(TASK + "?id") == true) {
-                var id = originPage.split("id=")[1];
-                if (id) {
-                  alert("return task");
-                  return TASK + "?id=" + id;
-                }
-                alert("return tasks");
-                return TASKS;
+          //xhtml isnt working with and?
+          if (newURL.includes('?endedTaskId=')){
+            if (originPage.includes(TASK + "?id")) {
+              var id = originPage.split("id=");
+              if (id.length == 2) {
+                alert("return task: "+TASK + "?id=" + id[1]);
+                return TASK+ "?id=" + id[1];
               }
-              if (newURL.includes('case.xhtml?id')) {
-                var id = originPage.split("id=")[1];
-                if (id != null) {
-                  alert("return case");
-                  return CASE + "?id=" + id;
-                }
-                alert("return cases");
-                return CASES;
-              }
-
-              var entry = [...authorizedUrls.entries()].find(([key, value]) =>
-                newURL.includes(key)
-              );
-              if (entry != null) {
-                alert("return, redirect to " + entry[1]);
-                return entry[1];
-              }
-
-              alert("undefined");
-              return undefined;
+              alert("return tasks");
+              return TASKS;
             }
+          }
+          if (newURL.includes('case.xhtml?id')) {
+            var id = originPage.split("id=")[1];
+            if (id != null) {
+              alert("return case");
+              return CASE + "?id=" + id;
+            }
+            alert("return cases");
+            return CASES;
+          }
+
+          var entry = [...authorizedUrls.entries()].find(([key, value]) =>
+            newURL.includes(key)
+          );
+          if (entry != null) {
+            alert("return, redirect to " + entry[1]);
+            return entry[1];
+          }
+
+          alert("undefined");
+          return undefined;
+        }
 
         iframeURLChange(document.getElementById("iFrame"), function (newURL, iframe) {
           var originPage = new URLSearchParams(window.location.search).get('originalUrl');
