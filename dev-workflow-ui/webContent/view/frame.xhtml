@@ -84,34 +84,75 @@
 
           attachUnload();
         }
+        
+        const TASK = 'task.xhtml';
+        const TASKS = 'tasks.xhtml';
+        const CASE = 'case.xhtml';
+        const CASES = 'cases.xhtml';
+        const HOME = 'home.xhtml';
+        const STARTS = 'starts.xhtml';
+        const LOGIN = 'login.xhtml';
+        const LOGINTABLE = 'loginTable.xhtml';
+	
+        const authorizedUrls = new Map([
+          ['/faces/home.xhtml', HOME],
+          ['/app/home.xhtml', HOME],
+          ['/faces/tasks.xhtml', TASKS],
+          ['/app/tasks.xhtml', TASKS],
+          ['/case.xhtml', CASES],
+          ['/faces/starts.xhtml', STARTS],
+          ['/app/starts.xhtml', STARTS],
+          ['/faces/login.xhtml', LOGIN],
+          ['/app/login.xhtml', LOGIN],
+          ['/faces/loginTable.xhtml', LOGINTABLE],
+          ['/faces/end.xhtml', HOME],
+          ['/app/end.xhtml', HOME],
+          ['DefaultApplicationHomePage.ivp', HOME],
+          ['DefaultTaskListPage.ivp', TASKS],
+          ['DefaultProcessStartListPage.ivp', STARTS],
+          ['DefaultLoginPage.ivp', LOGIN],
+          ['DefaultEndPage.ivp', HOME]
+        ]); 
 
-        function checkAndReturnUrl(newURL, originPage) {
-          if (newURL.includes('task.xhtml')){
-            return newURL.substring(newURL.indexOf('task.xhtml'));
+        // const redirectIvp = new Map([
+        //   ['DefaultApplicationHomePage.ivp', HOME],
+        //   ['DefaultTaskListPage.ivp', TASKS],
+        //   ['DefaultProcessStartListPage.ivp', STARTS],
+        //   ['DefaultLoginPage.ivp', LOGIN],
+        //   ['DefaultEndPage.ivp', HOME]
+        // ]);
+
+          function checkAndReturnUrl(newURL, originPage) {
+            // redirectIvp.forEach(function (value, key) {
+            //   if (newURL.includes(value)) {
+            //     return key;
+            //   }
+            // })
+
+            authorizedUrls.forEach(function (value, key) {
+              if (newURL.includes(value)) {
+                return key;
+              }
+              if (originPage.includes(value)) {
+                return key;
+              }
+            })
+            if (newURL.includes('?endedTaskId=')) {
+              var id = originPage.split("id=")[1];
+              if (id != null) {
+                return TASK + "?id=" + id;
+              }
+              if(originPage.includes(CASE)){
+                return CASES;
+              }
+              return HOME; 
+            }
+
+            if (newURL.includes('task.xhtml')) {
+              return newURL.substring(newURL.indexOf('task.xhtml'));
+            }
+            return undefined;
           }
-          if (newURL.includes('?endedTaskId=')) {
-            return originPage;
-          }
-          if (newURL.endsWith('/faces/home.xhtml') || newURL.includes('DefaultApplicationHomePage.ivp') || newURL.endsWith('/app/home.xhtml')) {
-            return 'home.xhtml';
-          }
-          if (newURL.endsWith('/faces/tasks.xhtml') || newURL.includes('DefaultTaskListPage.ivp') || newURL.endsWith('/app/tasks.xhtml')) {
-            return 'tasks.xhtml';
-          }
-          if (newURL.endsWith('/faces/starts.xhtml') || newURL.includes('DefaultProcessStartListPage.ivp') || newURL.endsWith('/app/starts.xhtml')) {
-            return 'starts.xhtml';
-          }
-          if (newURL.endsWith('/faces/login.xhtml') || newURL.includes('DefaultLoginPage.ivp') || newURL.endsWith('/app/login.xhtml')) {
-            return 'login.xhtml';
-          }
-          if (newURL.endsWith('/faces/loginTable.xhtml')) {
-            return 'loginTable.xhtml';
-          }
-          if (newURL.endsWith('/faces/end.xhtml') || newURL.includes('DefaultEndPage.ivp') || newURL.endsWith('/app/end.xhtml')) {
-            return originPage;
-          }
-          return undefined;
-        }
 
         iframeURLChange(document.getElementById("iFrame"), function(newURL, iframe) {
           var originPage = new URLSearchParams(window.location.search).get('originalUrl');
