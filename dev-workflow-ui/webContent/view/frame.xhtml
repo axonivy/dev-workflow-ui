@@ -84,7 +84,7 @@
 
           attachUnload();
         }
-        
+
         const TASK = 'task.xhtml';
         const TASKS = 'tasks.xhtml';
         const CASE = 'case.xhtml';
@@ -93,7 +93,7 @@
         const STARTS = 'starts.xhtml';
         const LOGIN = 'login.xhtml';
         const LOGINTABLE = 'loginTable.xhtml';
-	
+
         const authorizedUrls = new Map([
           ['/faces/home.xhtml', HOME],
           ['/app/home.xhtml', HOME],
@@ -111,8 +111,7 @@
           ['DefaultTaskListPage.ivp', TASKS],
           ['DefaultProcessStartListPage.ivp', STARTS],
           ['DefaultLoginPage.ivp', LOGIN],
-          ['DefaultEndPage.ivp', HOME]
-        ]); 
+          ['DefaultEndPage.ivp', HOME] ]); 
 
           function checkAndReturnUrl(newURL, originPage) {
             authorizedUrls.forEach(function (value, key) {
@@ -131,13 +130,12 @@
               if(originPage.includes(CASE)){
                 return CASES;
               }
-              return HOME; 
+              return HOME;
             }
-            // never get to this  
-            // if (newURL.includes('task.xhtml')) {
+            //never get to this  
+            //if (newURL.includes('task.xhtml')) {
             //   return newURL.substring(newURL.indexOf('task.xhtml'));
-            // }
-            
+            //}
             return undefined;
           }
 
