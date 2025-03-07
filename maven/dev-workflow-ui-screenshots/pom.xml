@@ -4,13 +4,13 @@
 
   <groupId>ch.ivyteam.workflow</groupId>
   <artifactId>dev-workflow-ui-screenshots</artifactId>
-  <version>12.0.4-SNAPSHOT</version>
+  <version>12.0.5-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <parent>
     <groupId>ch.ivyteam.workflow</groupId>
     <artifactId>dev-workflow-ui-config</artifactId>
-    <version>12.0.4-SNAPSHOT</version>
+    <version>12.0.5-SNAPSHOT</version>
     <relativePath>../config</relativePath>
   </parent>
 
