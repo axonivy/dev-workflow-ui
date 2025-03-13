@@ -18,7 +18,6 @@ import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.ivy.workflow.businesscase.IBusinessCase;
 import ch.ivyteam.ivy.workflow.note.Note;
-import ch.ivyteam.ivy.workflow.task.IActivator;
 import ch.ivyteam.ivy.workflow.task.TaskBusinessState;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
@@ -39,8 +38,7 @@ public class TaskModel {
   private final ICase technicalCase;
   private final IUser workerUser;
   private final String category;
-  private final IActivator activator;
-  private final String activatorName;
+  private final List<ResponsibleModel> responsibles;
   private final Date startTimestamp;
   private final Date expiryTimestamp;
   private final Date endTimestamp;
@@ -74,8 +72,9 @@ public class TaskModel {
     this.technicalCase = task.getCase();
     this.workerUser = task.getWorkerUser();
     this.category = task.getCategory().getName();
-    this.activator = task.activator();
-    this.activatorName = task.getActivatorName();
+    this.responsibles = task.responsibles().all().stream()
+        .map(ResponsibleModel::new)
+        .toList();
     this.startTimestamp = task.getStartTimestamp();
     this.expiryTimestamp = task.getExpiryTimestamp();
     this.endTimestamp = task.getEndTimestamp();
@@ -129,12 +128,8 @@ public class TaskModel {
     return workerUser;
   }
 
-  public IActivator getActivator() {
-    return activator;
-  }
-
-  public String getActivatorName() {
-    return activatorName;
+  public List<ResponsibleModel> getResponsibles() {
+    return responsibles;
   }
 
   public Date getStartTimestamp() {

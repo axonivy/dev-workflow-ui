@@ -96,11 +96,11 @@ public class TaskUtil {
     if (PermissionsUtil.isAdmin()) {
       return true;
     }
-    var isActivator = task.activator().isMember(user.getUserToken());
+    var isResponsible = task.responsibles().all().stream().anyMatch(r -> r.get().isMember(user.getUserToken(), false));
     if (task.getWorkerUser() == null) {
-      return isActivator;
+      return isResponsible;
     }
     var isWorker = task.getWorkerUser().isMember(user.getUserToken(), false);
-    return isActivator || isWorker;
+    return isResponsible || isWorker;
   }
 }

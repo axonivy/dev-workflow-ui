@@ -122,7 +122,7 @@ public class TasksDetailsIvyDevWfBean {
     var itask = loadTask();
     var member = Ivy.security().members().find(delegateMember);
     if (member != null) {
-      itask.setActivator(member);
+      itask.responsibles().set(member);
       selectedTask = new TaskModel(itask);
     }
   }
@@ -148,14 +148,14 @@ public class TasksDetailsIvyDevWfBean {
       TaskState.DESTROYED);
 
   public boolean showInfoBanner() {
-    return isActivator() && activeTaskStates.contains(selectedTask.getState());
+    return isResponsible() && activeTaskStates.contains(selectedTask.getState());
   }
 
   public String getInfoBannerSeverity() {
     boolean validState = selectedTask.getState() == TaskState.RESUMED
         || selectedTask.getState() == TaskState.CREATED;
     boolean notCurrentSession = selectedTask.getWorkerSession() != ISession.current();
-    return validState && notCurrentSession && isActivator() && currentIsWorkerUser() ? "warn" : "info";
+    return validState && notCurrentSession && isResponsible() && currentIsWorkerUser() ? "warn" : "info";
   }
 
   public String getInfoBannerMessage() {
@@ -180,8 +180,8 @@ public class TasksDetailsIvyDevWfBean {
     };
   }
 
-  private boolean isActivator() {
-    return selectedTask.getActivator().isMember(ISession.current());
+  private boolean isResponsible() {
+    return selectedTask.getResponsibles().stream().anyMatch(r -> r.isMember(ISession.current()));
   }
 
   private boolean currentIsWorkerUser() {
