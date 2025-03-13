@@ -87,7 +87,7 @@ class WebTestTasksIT {
   void checkTaskDetails() {
     Navigation.openTask("Created task of TestData");
     $(".case-link").shouldHave(text("Created case of TestData"));
-    $(By.id("taskResponsible:userName")).shouldBe(exactText("Everybody"));
+    $(By.id("taskResponsibles:0:taskResponsible:userName")).shouldBe(exactText("Everybody"));
     $(By.id("taskState:stateBadge")).hover();
     $(By.id("taskState:tooltip")).$(".ui-tooltip-text").shouldHave(text("SUSPENDED"));
     $(By.id("category")).shouldHave(exactText("TaskWithACategory"));
@@ -197,14 +197,14 @@ class WebTestTasksIT {
   void checkCustomResponsibleUser() {
     startTestProcess("1750C5211D94569D/customUser.ivp");
     Navigation.openTask("Created task of CustomUser");
-    $(By.id("taskResponsible:userName")).shouldHave(text("CustomUserTest"));
+    $(By.id("taskResponsibles:0:taskResponsible:userNameLink")).shouldHave(text("CustomUserTest"));
   }
 
   @Test
   void delegateTask() {
     startTestProcess("1750C5211D94569D/TestData.ivp");
     Navigation.openTask("Created task of TestData");
-    $(By.id("taskResponsible:userName")).shouldBe(exactText("Everybody"));
+    $(By.id("taskResponsibles:0:taskResponsible:userName")).shouldBe(exactText("Everybody"));
 
     $(By.id("actionMenuForm:taskActionsBtn")).click();
     $(By.id("actionMenuForm:taskDelegateBtn")).should(visible).click();
@@ -212,7 +212,7 @@ class WebTestTasksIT {
     PrimeUi.selectOne(By.id("delegateTaskForm:selectUserMenu")).selectItemByLabel("testuser");
 
     $(By.id("delegateTaskForm:delegateProceedButton")).click();
-    $(By.id("taskResponsible:userNameLink")).shouldHave(text("testuser"));
+    $(By.id("taskResponsibles:0:taskResponsible:userNameLink")).shouldHave(text("testuser"));
   }
 
   @Test

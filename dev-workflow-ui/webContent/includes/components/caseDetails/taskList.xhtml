@@ -24,8 +24,8 @@
     </p:column>
 
     <p:column headerText="Responsible" responsivePriority="4">
-      <ui:repeat value="#{task.responsibles}" var="responsible">
-        <jc:user user="#{responsible}" />
+      <ui:repeat id="taskResponsibles" value="#{task.responsibles}" var="responsible">
+        <jc:user id="taskResponsible" user="#{responsible}" />
       </ui:repeat>
     </p:column>
 
