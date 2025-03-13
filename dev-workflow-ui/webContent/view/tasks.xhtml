@@ -47,9 +47,10 @@
               <h:outputText id="taskName" value="#{task.name}" />
             </p:column>
 
-            <p:column headerText="Responsible" filterBy="#{task.activator}" sortBy="#{task.activatorName}" width="160px"
-              responsivePriority="3">
-              <jc:user user="#{task.activator}" />
+            <p:column headerText="Responsible" width="160px" responsivePriority="3">
+              <ui:repeat value="#{task.responsibles}" var="responsible">
+                <jc:user user="#{responsible}" />
+              </ui:repeat>
             </p:column>
 
             <p:column headerText="Start" sortBy="#{task.startTimestamp}" sortOrder="descending" responsivePriority="3"

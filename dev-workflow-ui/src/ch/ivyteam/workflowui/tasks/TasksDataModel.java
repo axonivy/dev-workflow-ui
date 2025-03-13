@@ -112,9 +112,6 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
     if ("name".equals(sortField)) {
       applySorting(query.orderBy().name(), sortOrder);
     }
-    if ("activatorName".equals(sortField)) {
-      applySorting(query.orderBy().activatorName(), sortOrder);
-    }
     if ("startTimestamp".equals(sortField)) {
       applySorting(query.orderBy().startTimestamp(), sortOrder);
     }

@@ -38,7 +38,9 @@
     <jc:user user="#{task.workerUser}" id="workingUser" />
 
     <h:outputText value="Responsible" />
-    <jc:user id="taskResponsible" user="#{task.activator}" />
+    <ui:repeat value="#{task.responsibles}" var="responsible">
+      <jc:user id="taskResponsible" user="#{responsible}" />
+    </ui:repeat>
 
     <h:outputText value="Created" />
     <jc:datetime id="createdDate" datetime="#{task.startTimestamp}" />

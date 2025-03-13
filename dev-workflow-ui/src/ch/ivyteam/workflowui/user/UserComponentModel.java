@@ -2,7 +2,7 @@ package ch.ivyteam.workflowui.user;
 
 import ch.ivyteam.ivy.security.ISecurityConstants;
 import ch.ivyteam.ivy.security.ISecurityMember;
-import ch.ivyteam.ivy.workflow.task.IActivator;
+import ch.ivyteam.workflowui.tasks.ResponsibleModel;
 import ch.ivyteam.workflowui.util.PermissionsUtil;
 
 public class UserComponentModel {
@@ -17,22 +17,18 @@ public class UserComponentModel {
     this.detailLinkUrl = getUserDetailLink(securityMember);
   }
 
-  public UserComponentModel(IActivator activator) {
-    var securityMember = activator.get();
-    if (securityMember == null) {
-      this.name = activator.name();
-    } else {
-      this.name = securityMember.getDisplayName();
-    }
-    this.cssIcon = getCssIcon(securityMember);
-    this.detailLinkUrl = getUserDetailLink(securityMember);
+  public UserComponentModel(ResponsibleModel responsible) {
+    var member = responsible.member();
+    this.name = member.getDisplayName();
+    this.cssIcon = getCssIcon(member);
+    this.detailLinkUrl = getUserDetailLink(member);
   }
 
-  private static String getCssIcon(ISecurityMember activator) {
-    if (activator == null) {
+  private static String getCssIcon(ISecurityMember member) {
+    if (member == null) {
       return "si si-question-circle";
     }
-    if (activator.isUser()) {
+    if (member.isUser()) {
       return "si si-single-neutral-circle";
     }
     return "si si-multiple-neutral-1";
@@ -46,11 +42,11 @@ public class UserComponentModel {
     return cssIcon;
   }
 
-  private static String getUserDetailLink(ISecurityMember activator) {
-    if (activator != null && activator.isUser()
-        && !ISecurityConstants.SYSTEM_USER_NAME.equals(activator.getName())
+  private static String getUserDetailLink(ISecurityMember member) {
+    if (member != null && member.isUser()
+        && !ISecurityConstants.SYSTEM_USER_NAME.equals(member.getName())
         && PermissionsUtil.isAdmin()) {
-      var securityMemberId = activator.getSecurityMemberId();
+      var securityMemberId = member.getSecurityMemberId();
       return "user.xhtml?userId=" + securityMemberId;
     }
     return null;
