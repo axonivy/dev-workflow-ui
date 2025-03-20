@@ -197,7 +197,7 @@ class WebTestTasksIT {
   void checkCustomResponsibleUser() {
     startTestProcess("1750C5211D94569D/customUser.ivp");
     Navigation.openTask("Created task of CustomUser");
-    $(By.id("taskResponsibles:0:taskResponsible:userNameLink")).shouldHave(text("CustomUserTest"));
+    $(By.id("taskResponsibles:0:taskResponsible:userName")).shouldHave(text("CustomUserTest"));
   }
 
   @Test
