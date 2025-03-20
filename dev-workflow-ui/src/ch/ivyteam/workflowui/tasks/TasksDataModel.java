@@ -78,7 +78,8 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
     if (!isShowAll()) {
       taskQuery.where().and(TaskQuery.create().where().currentUserIsInvolved());
       if (PermissionsUtil.isAdmin()) {
-        taskQuery.where().and().not(TaskQuery.create().where().activatorId().isEqual(ISecurityContext.current().users().system().getSecurityMemberId()));
+        var systemUser = ISecurityContext.current().users().system().getSecurityMemberId();
+        taskQuery.where().and().not(TaskQuery.create().where().responsibleId().isEqual(systemUser));
       }
     }
   }
@@ -92,8 +93,8 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
           .filter(priority -> StringUtils.startsWithIgnoreCase(priority.toString(), filter))
           .findFirst().orElse(null);
       query.where().and(TaskQuery.create().where().name().isLikeIgnoreCase("%" + filter + "%")
-          .or().activatorName().isLikeIgnoreCase("%" + filter + "%")
-          .or().activatorDisplayName().isLikeIgnoreCase("%" + filter + "%")
+          .or().responsibleName().isLikeIgnoreCase("%" + filter + "%")
+          .or().responsibleDisplayName().isLikeIgnoreCase("%" + filter + "%")
           .or().businessState().isEqual(taskState)
           .or().priority().isEqual(taskPriority));
     }
