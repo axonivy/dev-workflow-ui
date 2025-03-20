@@ -2,6 +2,7 @@ package ch.ivyteam.workflowui.user;
 
 import ch.ivyteam.ivy.security.ISecurityConstants;
 import ch.ivyteam.ivy.security.ISecurityMember;
+import ch.ivyteam.ivy.security.restricted.UnknownSecurityMember;
 import ch.ivyteam.workflowui.tasks.ResponsibleModel;
 import ch.ivyteam.workflowui.util.PermissionsUtil;
 
@@ -25,7 +26,7 @@ public class UserComponentModel {
   }
 
   private static String getCssIcon(ISecurityMember member) {
-    if (member == null) {
+    if (isMemberUnknown(member)) {
       return "si si-question-circle";
     }
     if (member.isUser()) {
@@ -43,13 +44,19 @@ public class UserComponentModel {
   }
 
   private static String getUserDetailLink(ISecurityMember member) {
-    if (member != null && member.isUser()
-        && !ISecurityConstants.SYSTEM_USER_NAME.equals(member.getName())
-        && PermissionsUtil.isAdmin()) {
-      var securityMemberId = member.getSecurityMemberId();
-      return "user.xhtml?userId=" + securityMemberId;
+    if (isMemberUnknown(member)) {
+      return null;
     }
-    return null;
+    if (!member.isUser()) {
+      return null;
+    }
+    if (ISecurityConstants.SYSTEM_USER_NAME.equals(member.getName())) {
+      return null;
+    }
+    if (!PermissionsUtil.isAdmin()) {
+      return null;
+    }
+    return "user.xhtml?userId=" + member.getSecurityMemberId();
   }
 
   public String getDetailLinkUrl() {
@@ -60,4 +67,7 @@ public class UserComponentModel {
     return detailLinkUrl != null;
   }
 
+  private static boolean isMemberUnknown(ISecurityMember member) {
+    return member == null || member instanceof UnknownSecurityMember;
+  }
 }
