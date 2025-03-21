@@ -38,9 +38,14 @@
     <jc:user user="#{task.workerUser}" id="workingUser" />
 
     <h:outputText value="Responsible" />
-    <ui:repeat id="taskResponsibles" value="#{task.responsibles}" var="responsible">
-      <jc:user id="taskResponsible" user="#{responsible}" />
-    </ui:repeat>
+
+    <h:panelGroup styleClass="flex" layout="block" style="flex-direction:column;">
+      <ui:repeat id="taskResponsibles" value="#{task.responsibles}" var="responsible">
+        <h:panelGroup layout="block" style="padding-bottom: 2px;">
+          <jc:user id="taskResponsible" user="#{responsible}" />
+        </h:panelGroup>
+      </ui:repeat>
+    </h:panelGroup>
 
     <h:outputText value="Created" />
     <jc:datetime id="createdDate" datetime="#{task.startTimestamp}" />

@@ -48,9 +48,21 @@
             </p:column>
 
             <p:column headerText="Responsible" width="160px" responsivePriority="3">
-              <ui:repeat id="taskResponsibles" value="#{task.responsibles}" var="responsible">
-                <jc:user id="taskResponsible" user="#{responsible}" />
-              </ui:repeat>
+              <div class="flex">
+                <jc:user id="taskResponsible" user="#{task.firstResponsible}" rendered="#{task.hasResponsibles()}" />
+                <div>
+                  <h:panelGroup id="otherResponsibles" style="margin-left:3px;" rendered="#{task.responsibles.size() gt 1}" >
+                    (<i class="mr-1 si si-multiple-neutral-1" /><h:outputText  value="#{task.responsibles.size()})" />
+                  </h:panelGroup>
+                  <p:tooltip for="otherResponsibles"  position="top" autoHide="false">
+                    <ui:repeat id="taskResponsibles" value="#{task.otherResponsibles}" var="responsible">
+                      <div style="padding:5px;">
+                        <jc:user id="taskResponsible" user="#{responsible}" />
+                      </div>
+                    </ui:repeat>
+                  </p:tooltip>
+                </div>
+              </div>
             </p:column>
 
             <p:column headerText="Start" sortBy="#{task.startTimestamp}" sortOrder="descending" responsivePriority="3"

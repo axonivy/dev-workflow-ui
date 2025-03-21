@@ -132,6 +132,18 @@ public class TaskModel {
     return responsibles;
   }
 
+  public ResponsibleModel getFirstResponsible() {
+    return responsibles.isEmpty() ? null : responsibles.getFirst();
+  }
+
+  public boolean hasResponsibles() {
+    return !responsibles.isEmpty();
+  }
+
+  public List<ResponsibleModel> getOtherResponsibles() {
+    return responsibles.size() > 1 ? responsibles.subList(1, responsibles.size()) : List.of();
+  }
+
   public Date getStartTimestamp() {
     return startTimestamp;
   }
