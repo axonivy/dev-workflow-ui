@@ -12,7 +12,7 @@ import ch.ivyteam.ivy.security.context.EngineCockpitUrlPath;
 
 @ManagedBean
 @RequestScoped
-public class SidebarIvyDevWfBean {
+public class SidebarBean {
 
   private final String activePage;
   private final String[] developerPages = {
@@ -24,8 +24,8 @@ public class SidebarIvyDevWfBean {
       "webservices"
   };
 
-  public SidebarIvyDevWfBean() {
-    String currentUrl = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+  public SidebarBean() {
+    var currentUrl = FacesContext.getCurrentInstance().getViewRoot().getViewId();
     var page = StringUtils.substringAfterLast(currentUrl, "/");
     this.activePage = StringUtils.substringBeforeLast(page, ".");
   }

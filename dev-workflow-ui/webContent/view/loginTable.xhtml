@@ -5,28 +5,28 @@
 
 <h:body>
   <f:metadata>
-    <f:viewParam name="originalUrl" value="#{loginIvyDevWfBean.originalUrl}" />
+    <f:viewParam name="originalUrl" value="#{loginBean.originalUrl}" />
   </f:metadata>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotDevMode}" />
+      <f:event type="preRenderView" listener="#{loginBean.redirectIfNotDevMode}" />
 
-      <h:panelGroup layout="block" styleClass="static-message" rendered="#{!loginIvyDevWfBean.loggedIn}">
+      <h:panelGroup layout="block" styleClass="static-message" rendered="#{!loginBean.loggedIn}">
         <p:staticMessage severity="warn" summary="Warning" detail="You need to login to access that page"
           id="loginMessage" />
       </h:panelGroup>
       <h:form id="loginTable">
         <div class="card ui-fluid">
-          <p:dataTable id="users" var="user" value="#{loginTableIvyDevWfBean.users}" widgetVar="usersTable"
-            emptyMessage="No users found with given criteria" selection="#{loginTableIvyDevWfBean.currentUser}"
+          <p:dataTable id="users" var="user" value="#{loginTableBean.users}" widgetVar="usersTable"
+            emptyMessage="No users found with given criteria" selection="#{loginTableBean.currentUser}"
             selectionMode="single" rowKey="#{user.fullname}">
-            <p:ajax event="rowSelect" listener="#{loginIvyDevWfBean.loginFromTable}" />
+            <p:ajax event="rowSelect" listener="#{loginBean.loginFromTable}" />
             <f:facet name="header">
               <div class="flex justify-content-between pretty-search">
                 <h4 class="m-0">Login</h4>
                 <div class="ui-input-icon-left filter-container">
                   <i class="pi pi-search" />
-                  <p:inputText id="globalFilter" placeholder="Search" value="#{loginTableIvyDevWfBean.globalFilter}"
+                  <p:inputText id="globalFilter" placeholder="Search" value="#{loginTableBean.globalFilter}"
                     onkeyup="PF('usersTable').filter()" />
                 </div>
               </div>

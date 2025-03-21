@@ -6,7 +6,7 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotAdmin}" />
+      <f:event type="preRenderView" listener="#{loginBean.redirectIfNotAdmin}" />
 
       <div class="card">
         <h4 class="m-0">Cleanup</h4>
@@ -15,15 +15,15 @@
           <p>When you click through different processes you create different types of data like cases, tasks etc.
             Here you can clean that data to reset your designer.</p>
           <p:panelGrid columns="1" layout="flex">
-            <p:selectBooleanCheckbox id="casesAndTasksCheckbox" value="#{cleanupIvyDevWfBean.casesTasksAndDependent}"
+            <p:selectBooleanCheckbox id="casesAndTasksCheckbox" value="#{cleanupBean.casesTasksAndDependent}"
               itemLabel="All Cases, Tasks and dependent objects" />
-            <p:selectBooleanCheckbox id="businessDataCheckbox" value="#{cleanupIvyDevWfBean.businessDataAndSearchIndex}"
+            <p:selectBooleanCheckbox id="businessDataCheckbox" value="#{cleanupBean.businessDataAndSearchIndex}"
               itemLabel="All Business Data and the search index" />
             <p:selectBooleanCheckbox id="identityProviderTokenCheckbox"
-              value="#{cleanupIvyDevWfBean.identityProviderTokens}" itemLabel="All identity provider tokens" />
-            <p:selectBooleanCheckbox id="dataCaches" value="#{cleanupIvyDevWfBean.dataCaches}" itemLabel="Data caches" />
+              value="#{cleanupBean.identityProviderTokens}" itemLabel="All identity provider tokens" />
+            <p:selectBooleanCheckbox id="dataCaches" value="#{cleanupBean.dataCaches}" itemLabel="Data caches" />
             <p:commandButton id="cleanupBtn" value="Cleanup" icon="si si-recycling-trash-bin-2 "
-              actionListener="#{cleanupIvyDevWfBean.cleanup}" update="growl"
+              actionListener="#{cleanupBean.cleanup}" update="growl"
               disabled="#{!permissionsBean.devModeAndAdmin}" />
           </p:panelGrid>
         </h:form>

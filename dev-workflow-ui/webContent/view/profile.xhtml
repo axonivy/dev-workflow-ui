@@ -11,7 +11,7 @@
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
       <f:event type="preRenderView"
-        listener="#{loginIvyDevWfBean.redirectIfNotLoggedIn}" />
+        listener="#{loginBean.redirectIfNotLoggedIn}" />
 
       <div class="card ui-fluid">
         <h4>Profile</h4>

@@ -18,13 +18,13 @@ import ch.ivyteam.ivy.workflow.signal.IStartSignalEventElement;
 
 @ManagedBean
 @ViewScoped
-public class SignalsIvyDevWfBean {
+public class SignalsBean {
   private String code;
   private String payload;
   private final SignalsModel signalsModel;
   private final BoundarySignalModel boundarySignalModel;
 
-  public SignalsIvyDevWfBean() {
+  public SignalsBean() {
     signalsModel = new SignalsModel();
     boundarySignalModel = new BoundarySignalModel();
   }

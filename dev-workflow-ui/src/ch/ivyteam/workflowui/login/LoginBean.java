@@ -18,7 +18,7 @@ import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.ivy.security.identity.core.auth.oauth2.OAuth2Url;
 import ch.ivyteam.ivy.security.identity.spi.auth.oauth2.OAuth2Authenticator;
 import ch.ivyteam.ivy.security.restricted.ISecurityContextInternal;
-import ch.ivyteam.workflowui.login.LoginTableIvyDevWfBean.User;
+import ch.ivyteam.workflowui.login.LoginTableBean.User;
 import ch.ivyteam.workflowui.util.PermissionsUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.UrlUtil;
@@ -26,14 +26,14 @@ import ch.ivyteam.workflowui.util.UserUtil;
 
 @ManagedBean
 @ViewScoped
-public class LoginIvyDevWfBean {
+public class LoginBean {
 
   private String username;
   private String password;
   private String originalUrl;
   private OAuthProvider oauthProvider;
 
-  public LoginIvyDevWfBean() {
+  public LoginBean() {
     var ctx = ISecurityContext.current();
     var provider = ((ISecurityContextInternal) ctx).identityProvider();
     if (provider.authenticator() instanceof OAuth2Authenticator) {

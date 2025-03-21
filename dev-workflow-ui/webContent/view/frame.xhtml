@@ -4,7 +4,7 @@
   xmlns:pe="http://primefaces.org/ui/extensions">
 <h:body>
   <f:metadata>
-    <f:viewParam name="originalUrl" value="#{frameIvyDevWfBean.originalUrl}"/>
+    <f:viewParam name="originalUrl" value="#{frameBean.originalUrl}"/>
   </f:metadata>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
@@ -13,20 +13,20 @@
           <div class="card-header pb-0">
             <div class="card-title flex align-items-center">
               <i class="pr-3 si si-task-list-edit"></i>
-              <h6 class="m-0"><h:outputText id="frameTaskName" value="#{frameIvyDevWfBean.taskName}" /></h6>
+              <h6 class="m-0"><h:outputText id="frameTaskName" value="#{frameBean.taskName}" /></h6>
             </div>
-            <p:linkButton id="openStartFullscreenBtn" href="#{frameIvyDevWfBean.taskUrl}" icon="si si-expand-6"
+            <p:linkButton id="openStartFullscreenBtn" href="#{frameBean.taskUrl}" icon="si si-expand-6"
               styleClass="ml-auto ui-button-secondary rounded-button"/>
             <p:tooltip for="openStartFullscreenBtn" value="Open current process start on a fullscreen page" position="left"/>
             <p:commandButton value="Sidesteps" styleClass="ml-1" id="sidestepsBtn"
-              rendered="#{frameIvyDevWfBean.renderSidestepBtn()}" icon="si si-arrow-down-1" />
+              rendered="#{frameBean.renderSidestepBtn()}" icon="si si-arrow-down-1" />
             <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
-              model="#{frameIvyDevWfBean.sidestepsMenuModel}" styleClass="menu-no-icons" />
+              model="#{frameBean.sidestepsMenuModel}" styleClass="menu-no-icons" />
           </div>
-          <p:remoteCommand name="useTaskInIFrame" actionListener="#{frameIvyDevWfBean.useTaskInIFrame()}" update="@form" />
+          <p:remoteCommand name="useTaskInIFrame" actionListener="#{frameBean.useTaskInIFrame()}" update="@form" />
         </h:form>
         <hr/>
-        <iframe id="iFrame" src="#{frameIvyDevWfBean.taskUrl}" style="height: calc(100vh - 205px); width: 100%; border: 0; visibility: hidden;"></iframe>
+        <iframe id="iFrame" src="#{frameBean.taskUrl}" style="height: calc(100vh - 205px); width: 100%; border: 0; visibility: hidden;"></iframe>
       </div>
       <script>
         function iframeURLChange(iframe, callback) {

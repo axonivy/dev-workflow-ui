@@ -13,12 +13,12 @@ import ch.ivyteam.workflowui.util.ViewerUtil;
 
 @ManagedBean
 @ViewScoped
-public class ProcessesIvyDevWfBean {
+public class ProcessesBean {
   private final StartsDataModel startsDataModel;
   private String viewerLink;
   private String viewerTitle;
 
-  public ProcessesIvyDevWfBean() {
+  public ProcessesBean() {
     startsDataModel = new StartsDataModel();
   }
 

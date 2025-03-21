@@ -5,7 +5,7 @@
 
   <ul class="custom-list">
     <h:form id="documentsDownloadForm">
-      <ui:repeat var="document" value="#{casesDetailsIvyDevWfBean.documents}">
+      <ui:repeat var="document" value="#{casesDetailsBean.documents}">
         <li class="document-entry" style="list-style-type: none;">
           <span class="mr-1 si si-#{document.icon}"/>
           <h:commandLink value="#{document.name}">
@@ -15,7 +15,7 @@
       </ui:repeat>
     </h:form>
   </ul>
-  <c:if test="#{empty casesDetailsIvyDevWfBean.documents}">
+  <c:if test="#{empty casesDetailsBean.documents}">
     <h:outputText value="No Documents found" />
   </c:if>
 

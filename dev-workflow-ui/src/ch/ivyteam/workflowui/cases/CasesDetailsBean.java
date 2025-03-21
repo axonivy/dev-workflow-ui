@@ -31,7 +31,7 @@ import ch.ivyteam.workflowui.util.ViewerUtil;
 
 @ManagedBean
 @ViewScoped
-public class CasesDetailsIvyDevWfBean {
+public class CasesDetailsBean {
 
   private String selectedCaseId;
   private ICase selectedCase;

@@ -4,17 +4,17 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
 
   <h:panelGroup styleClass="ui-float-label">
-    <p:autoComplete id="signalCodeInput" dropdown="true" value="#{signalsIvyDevWfBean.code}"
-      completeMethod="#{signalsIvyDevWfBean.signalsComplete}" styleClass="width-100 signal-code-input" />
+    <p:autoComplete id="signalCodeInput" dropdown="true" value="#{signalsBean.code}"
+      completeMethod="#{signalsBean.signalsComplete}" styleClass="width-100 signal-code-input" />
     <p:outputLabel value="Signal Code" for="@previous" />
   </h:panelGroup>
 
   <h:panelGroup styleClass="ui-float-label mt-2">
-    <p:inputText id="signalPayloadInput" value="#{signalsIvyDevWfBean.payload}" styleClass="width-100" />
+    <p:inputText id="signalPayloadInput" value="#{signalsBean.payload}" styleClass="width-100" />
     <p:outputLabel value="Payload" for="@previous" />
   </h:panelGroup>
 
   <p:commandButton id="signalBtn" update="@form, boundarySignalsTable, firedSignalsTable"
-    styleClass="mt-2 send-signal-button" value="Send" actionListener="#{signalsIvyDevWfBean.sendSignal}"
+    styleClass="mt-2 send-signal-button" value="Send" actionListener="#{signalsBean.sendSignal}"
     disabled="#{!permissionsBean.demoDevModeOrAdmin}" icon="si si-send-email"/>
 </ui:composition>

@@ -5,20 +5,20 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotLoggedIn}" />
+      <f:event type="preRenderView" listener="#{loginBean.redirectIfNotLoggedIn}" />
       <h:form id="casesForm">
         <div class="card">
-          <p:dataTable id="cases" var="case" value="#{casesIvyDevWfBean.casesDataModel}" widgetVar="casesTable"
+          <p:dataTable id="cases" var="case" value="#{casesBean.casesDataModel}" widgetVar="casesTable"
             styleClass="ui-fluid" emptyMessage="No Cases found with given criteria" paginatorPosition="bottom" rows="10"
             lazy="true" paginator="true" paginatorAlwaysVisible="false" selectionMode="single" resizableColumns="true">
-            <p:ajax event="rowSelect" listener="#{casesIvyDevWfBean.redirectToCaseRow}" />
+            <p:ajax event="rowSelect" listener="#{casesBean.redirectToCaseRow}" />
             <f:facet name="header">
               <div class="flex justify-content-between mb-3 pretty-search">
                 <h4 class="m-0">Cases</h4>
                 <h:panelGroup id="showAllCasesSwitch_container" styleClass="ml-auto inline-flex align-items-center"
                   layout="block" rendered="#{permissionsBean.admin}">
                   <h:outputText value="Show all" styleClass="mr-2" />
-                  <p:toggleSwitch id="showAllCasesSwitch" value="#{casesIvyDevWfBean.casesDataModel.showAll}"
+                  <p:toggleSwitch id="showAllCasesSwitch" value="#{casesBean.casesDataModel.showAll}"
                     disabled="#{!permissionsBean.admin}">
                     <p:ajax update="cases" />
                   </p:toggleSwitch>
@@ -27,7 +27,7 @@
                   value="If enabled shows all cases, even the ones the user is not involved in" />
                 <div class="ui-input-icon-left filter-container ml-3">
                   <i class="pi pi-search" />
-                  <p:inputText id="globalFilter" value="#{casesIvyDevWfBean.casesDataModel.filter}"
+                  <p:inputText id="globalFilter" value="#{casesBean.casesDataModel.filter}"
                     onkeyup="PF('casesTable').filter()" placeholder="Search" />
                 </div>
               </div>
@@ -38,7 +38,7 @@
             </p:column>
 
             <p:column headerText="Name" filterBy="#{case.getName(case)}" sortBy="#{case.name}" responsivePriority="1">
-              <h:outputText id="caseName" value="#{casesIvyDevWfBean.getName(case)}" />
+              <h:outputText id="caseName" value="#{casesBean.getName(case)}" />
             </p:column>
 
             <p:column headerText="Creator" filterBy="#{case.creatorUserName}" sortBy="#{case.creatorUserName}"
@@ -62,7 +62,7 @@
                 style="width: 200px">
                 <p:menuitem id="openCaseDetailsBtn" value="Open case details" url="#{case.detailLink}"
                   icon="si si-information-circle" />
-                <p:menuitem value="Rerun process" actionListener="#{casesIvyDevWfBean.rerunProcess(case)}"
+                <p:menuitem value="Rerun process" actionListener="#{casesBean.rerunProcess(case)}"
                   id="rerunCaseProcessBtn" icon="si si-button-refresh-arrow" />
               </p:menu>
             </p:column>

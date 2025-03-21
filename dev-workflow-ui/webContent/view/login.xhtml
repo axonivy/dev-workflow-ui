@@ -16,7 +16,7 @@
 </h:head>
 
 <f:metadata>
-  <f:viewParam name="originalUrl" value="#{loginIvyDevWfBean.originalUrl}"/>
+  <f:viewParam name="originalUrl" value="#{loginBean.originalUrl}"/>
 </f:metadata>
 <h:body styleClass="login-body">
   <h:form id="loginForm">
@@ -27,17 +27,17 @@
         </div>
 
         <p:focus for="userName" />
-        <p:inputText id="userName" autocomplete="off" value="#{loginIvyDevWfBean.username}" required="true" placeholder="Username / Email" />
-        <p:password id="password" autocomplete="off" value="#{loginIvyDevWfBean.password}" required="true" placeholder="Password" />
+        <p:inputText id="userName" autocomplete="off" value="#{loginBean.username}" required="true" placeholder="Username / Email" />
+        <p:password id="password" autocomplete="off" value="#{loginBean.password}" required="true" placeholder="Password" />
 
-        <p:commandButton update="@form" id="login" actionListener="#{loginIvyDevWfBean.customLogin}" value="Sign In" icon="si si-login-3" ajax="false"/>
+        <p:commandButton update="@form" id="login" actionListener="#{loginBean.customLogin}" value="Sign In" icon="si si-login-3" ajax="false"/>
         <p:messages globalOnly="true" id="loginMessage" />
 
-        <h:panelGroup rendered="#{loginIvyDevWfBean.OAuthProvider != null}" styleClass="oauth-providers">
-          <h:outputLink value="#{loginIvyDevWfBean.OAuthProvider.link}">
-            <h:outputText value="#{loginIvyDevWfBean.OAuthProvider.image}" escape="false" />
+        <h:panelGroup rendered="#{loginBean.OAuthProvider != null}" styleClass="oauth-providers">
+          <h:outputLink value="#{loginBean.OAuthProvider.link}">
+            <h:outputText value="#{loginBean.OAuthProvider.image}" escape="false" />
             <span style="position: relative; bottom: 5px;">
-              Log in with <h:outputText value="#{loginIvyDevWfBean.OAuthProvider.displayName}" />
+              Log in with <h:outputText value="#{loginBean.OAuthProvider.displayName}" />
             </span>
           </h:outputLink>
         </h:panelGroup>

@@ -4,10 +4,10 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://xmlns.jcp.org/jsf/composite/components">
 
-  <p:dataTable id="tasks" var="task" value="#{casesDetailsIvyDevWfBean.tasks}" rowKey="#{task.uuid}"
+  <p:dataTable id="tasks" var="task" value="#{casesDetailsBean.tasks}" rowKey="#{task.uuid}"
     widgetVar="tasksTable" emptyMessage="No Tasks found with given criteria" lazy="true" rows="6"
     paginatorPosition="bottom" paginator="true" paginatorAlwaysVisible="false" selectionMode="single">
-    <p:ajax event="rowSelect" listener="#{tasksIvyDevWfBean.displayTaskRow}" update="@form" />
+    <p:ajax event="rowSelect" listener="#{tasksBean.displayTaskRow}" update="@form" />
 
     <p:column headerText="State" filterBy="#{task.businessState}" width="90px" styleClass="center-table-cell">
       <jc:stateBadge id="taskState" data="#{task}"/>
@@ -42,7 +42,7 @@
         styleClass="ui-button-flat text-color action-button" />
       <p:menu id="taskActionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom"
         style="width: 200px">
-        <p:menuitem value="Start task" actionListener="#{homepageIvyDevWfBean.executeTask(task)}" id="startTaskBtn"
+        <p:menuitem value="Start task" actionListener="#{homepageBean.executeTask(task)}" id="startTaskBtn"
           icon="si si-controls-play" />
         <p:menuitem id="openTaskDetailsBtn" value="Open task details" url="#{task.detailUrl}"
           icon="si si-information-circle" />

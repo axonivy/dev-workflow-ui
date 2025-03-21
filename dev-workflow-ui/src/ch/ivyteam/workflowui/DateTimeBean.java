@@ -9,7 +9,7 @@ import ch.ivyteam.workflowui.util.DateUtil;
 
 @ManagedBean
 @ViewScoped
-public class DateTimeIvyDevWfBean {
+public class DateTimeBean {
 
   public String getPrettyTime(Date date) {
     return DateUtil.getPrettyTime(date);

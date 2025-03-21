@@ -6,18 +6,18 @@
 
 <h:body>
   <f:metadata>
-    <f:viewParam name="id" value="#{tasksDetailsIvyDevWfBean.selectedTaskId}" />
+    <f:viewParam name="id" value="#{tasksDetailsBean.selectedTaskId}" />
   </f:metadata>
 
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <f:event type="preRenderView" listener="#{tasksDetailsIvyDevWfBean.redirectIfCantResume}" />
+      <f:event type="preRenderView" listener="#{tasksDetailsBean.redirectIfCantResume}" />
 
       <div class="layout-dashboard">
         <div class="info-banner-wrapper">
-          <p:staticMessage severity="#{tasksDetailsIvyDevWfBean.getInfoBannerSeverity()}"
-            detail="#{tasksDetailsIvyDevWfBean.getInfoBannerMessage()}"
-            rendered="#{tasksDetailsIvyDevWfBean.showInfoBanner()}"></p:staticMessage>
+          <p:staticMessage severity="#{tasksDetailsBean.getInfoBannerSeverity()}"
+            detail="#{tasksDetailsBean.getInfoBannerMessage()}"
+            rendered="#{tasksDetailsBean.showInfoBanner()}"></p:staticMessage>
         </div>
         <div class="grid">
           <div class="col-12">
@@ -41,7 +41,7 @@
                   <h6 class="m-0">Custom fields</h6>
                 </div>
               </div>
-              <jc:customFields id="customFields" customFields="#{tasksDetailsIvyDevWfBean.selectedTask.customFields}" />
+              <jc:customFields id="customFields" customFields="#{tasksDetailsBean.selectedTask.customFields}" />
             </div>
           </div>
 
@@ -54,39 +54,39 @@
                 </div>
               </div>
               <jc:workflowEventsTable id="workflowEvents"
-                workflowEvents="#{tasksDetailsIvyDevWfBean.selectedTask.workflowEvents}" />
+                workflowEvents="#{tasksDetailsBean.selectedTask.workflowEvents}" />
             </div>
           </div>
         </div>
       </div>
 
-      <jc:processViewer id="processViewer" title="Process of: #{tasksDetailsIvyDevWfBean.selectedTask.name}"
-        link="#{tasksDetailsIvyDevWfBean.viewerLink}" />
+      <jc:processViewer id="processViewer" title="Process of: #{tasksDetailsBean.selectedTask.name}"
+        link="#{tasksDetailsBean.viewerLink}" />
 
       <p:dialog header="Delegate task" id="delegateTaskDialog" widgetVar="delegateTaskModal" modal="true" width="400">
         <h:form id="delegateTaskForm">
           <h:outputText value="Delegate the task to a specified user or group" />
           <h:panelGroup id="delegateElements" layout="block" styleClass="ui-fluid">
-            <p:selectOneRadio value="#{tasksDetailsIvyDevWfBean.showUsers}" layout="responsive" columns="2"
+            <p:selectOneRadio value="#{tasksDetailsBean.showUsers}" layout="responsive" columns="2"
               styleClass="mt-2">
               <f:selectItem itemLabel="User" itemValue="true" />
               <f:selectItem itemLabel="Role" itemValue="false" />
               <p:ajax update="delegateElements" event="valueChange" />
             </p:selectOneRadio>
-            <p:selectOneMenu styleClass="mt-2" value="#{tasksDetailsIvyDevWfBean.delegateMember}"
-              rendered="#{tasksDetailsIvyDevWfBean.showUsers}" id="selectUserMenu" immediate="true">
-              <f:selectItems value="#{tasksDetailsIvyDevWfBean.allUsers}" var="member" itemLabel="#{member.displayName}"
+            <p:selectOneMenu styleClass="mt-2" value="#{tasksDetailsBean.delegateMember}"
+              rendered="#{tasksDetailsBean.showUsers}" id="selectUserMenu" immediate="true">
+              <f:selectItems value="#{tasksDetailsBean.allUsers}" var="member" itemLabel="#{member.displayName}"
                 itemValue="#{member.memberName}" />
             </p:selectOneMenu>
-            <p:selectOneMenu styleClass="mt-2" value="#{tasksDetailsIvyDevWfBean.delegateMember}"
-              rendered="#{!tasksDetailsIvyDevWfBean.showUsers}" id="selectRoleMenu" immediate="true">
-              <f:selectItems value="#{tasksDetailsIvyDevWfBean.allRoles}" var="member" itemLabel="#{member.displayName}"
+            <p:selectOneMenu styleClass="mt-2" value="#{tasksDetailsBean.delegateMember}"
+              rendered="#{!tasksDetailsBean.showUsers}" id="selectRoleMenu" immediate="true">
+              <f:selectItems value="#{tasksDetailsBean.allRoles}" var="member" itemLabel="#{member.displayName}"
                 itemValue="#{member.memberName}" />
             </p:selectOneMenu>
           </h:panelGroup>
           <h:panelGroup layout="block" styleClass="mt-2 dialog-button-container">
             <p:commandButton id="delegateProceedButton" value="Assign task"
-              actionListener="#{tasksDetailsIvyDevWfBean.delegateTask}" icon="si si-move-to-bottom" update="taskDetail"
+              actionListener="#{tasksDetailsBean.delegateTask}" icon="si si-move-to-bottom" update="taskDetail"
               onsuccess="PF('delegateTaskModal').hide();" />
             <p:commandButton value="Cancel" styleClass="ui-button-secondary ui-button-flat dialog-cancel-button"
               onclick="PF('delegateTaskModal').hide();" />

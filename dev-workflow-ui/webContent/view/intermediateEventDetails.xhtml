@@ -5,12 +5,12 @@
 
 <h:body>
   <f:metadata>
-    <f:viewParam name="intermediateEvent" value="#{intermediateEventDetailsIvyDevWfBean.processId}" />
+    <f:viewParam name="intermediateEvent" value="#{intermediateEventDetailsBean.processId}" />
   </f:metadata>
 
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <ui:param name="intermediateElement" value="#{intermediateEventDetailsIvyDevWfBean.selectedIntermediateElement}"></ui:param>
+      <ui:param name="intermediateElement" value="#{intermediateEventDetailsBean.selectedIntermediateElement}"></ui:param>
 
       <div class="layout-dashboard">
         <div class="grid">
@@ -38,7 +38,7 @@
               <div class="card-header">
                 <h4 class="m-0">Events</h4>
               </div>
-              <p:dataTable var="event" value="#{intermediateEventDetailsIvyDevWfBean.selectedIntermediateElement.eventModel}"
+              <p:dataTable var="event" value="#{intermediateEventDetailsBean.selectedIntermediateElement.eventModel}"
                 id="eventsTable" rows="10" paginator="true" paginatorPosition="bottom"
                 paginatorAlwaysVisible="false" lazy="true">
 
@@ -47,7 +47,7 @@
                 </p:column>
                 <p:column headerText="State" width="60" sortBy="#{event.state}">
                   <h:panelGroup id="eventStateIcon" styleClass="flex justify-content-center">
-                    <i class="si-lg #{intermediateEventDetailsIvyDevWfBean.getEventStateIconCss(event)}" />
+                    <i class="si-lg #{intermediateEventDetailsBean.getEventStateIconCss(event)}" />
                   </h:panelGroup>
                   <p:tooltip id="eventStateTooltip" for="eventStateIcon" value="#{event.state}" position="top" />
                 </p:column>

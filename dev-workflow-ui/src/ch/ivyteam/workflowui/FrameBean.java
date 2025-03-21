@@ -17,14 +17,15 @@ import ch.ivyteam.workflowui.util.UrlUtil;
 
 @ViewScoped
 @ManagedBean
-public class FrameIvyDevWfBean {
+public class FrameBean {
+
   private String taskName;
   private final String taskUrl;
   private List<SidestepModel> sidesteps;
   private String originalUrl;
   private MenuModel sidestepMenuModel;
 
-  public FrameIvyDevWfBean() {
+  public FrameBean() {
     this.taskUrl = checkTaskUrl();
   }
 

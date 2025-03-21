@@ -18,14 +18,15 @@ import ch.ivyteam.workflowui.util.ViewerUtil;
 
 @ManagedBean
 @ViewScoped
-public class HomepageIvyDevWfBean {
+public class HomepageBean {
+
   private final TasksDataModel tasksDataModel;
   private final StartedCasesDataModel startedCasesDataModel;
   private final Set<StartableModel> lastStarts;
   private String viewerTitle;
   private String viewerLink;
 
-  public HomepageIvyDevWfBean() {
+  public HomepageBean() {
     tasksDataModel = new PersonalTasksDataModel();
     startedCasesDataModel = new StartedCasesDataModel();
     lastStarts = LastSessionStarts.current().getAll();
