@@ -11,7 +11,7 @@
   <h:link id="caseLink" styleClass="case-link flex align-items-center" outcome="case">
     <f:param name="id" value="#{cc.attrs.case.uuid()}"/>
     <jc:stateBadge id="caseState" data="#{cc.attrs.case}"/>
-    <h:outputText id="caseName" value="#{casesIvyDevWfBean.getName(cc.attrs.case)}" styleClass="ml-2 case-link-name"/>
+    <h:outputText id="caseName" value="#{casesBean.getName(cc.attrs.case)}" styleClass="ml-2 case-link-name"/>
     <p:tooltip id="caseLinkTooltip" for="caseName" position="top">
       <h:panelGroup layout="block" styleClass="py-2">
         <h:outputText value="ID: #{cc.attrs.case.uuid()}"/>

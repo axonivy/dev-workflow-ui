@@ -9,7 +9,7 @@
       <h:form id="startsForm" onkeypress="if (event.keyCode == 13) { return false; }">
 
         <div class="card">
-          <p:dataTable id="projectStarts" value="#{processesIvyDevWfBean.startsDataModel.startables}" var="start"
+          <p:dataTable id="projectStarts" value="#{processesBean.startsDataModel.startables}" var="start"
             rows="15" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" rowKey="#{start.link}"
             selectionMode="single" widgetVar="projectStartsTable" styleClass="starts-table" resizableColumns="true">
             <f:facet name="header">
@@ -18,12 +18,12 @@
                 <div class="ui-input-icon-left filter-container">
                   <i class="pi pi-search" />
                   <p:inputText id="globalFilter" placeholder="Search"
-                    value="#{processesIvyDevWfBean.startsDataModel.filter}" onkeyup="PF('projectStartsTable').filter()" />
+                    value="#{processesBean.startsDataModel.filter}" onkeyup="PF('projectStartsTable').filter()" />
                 </div>
               </div>
             </f:facet>
 
-            <p:ajax event="rowSelect" listener="#{processesIvyDevWfBean.startRow}" />
+            <p:ajax event="rowSelect" listener="#{processesBean.startRow}" />
             <p:column width="20px" resizable="false">
               <h:outputText id="processStartIcon" class="#{start.icon} si-lg vertical-align-middle" />
             </p:column>
@@ -35,11 +35,11 @@
               </div>
             </p:column>
             <p:column headerText="Application" width="120px" sortBy="#{start.applicationName}" responsivePriority="4"
-              rendered="#{!processesIvyDevWfBean.startsDataModel.onlySingleApplication}" filterBy="#{start.applicationName}">
+              rendered="#{!processesBean.startsDataModel.onlySingleApplication}" filterBy="#{start.applicationName}">
               <h:outputText value="#{start.applicationName}" />
             </p:column>
             <p:column headerText="Project" width="120px" sortBy="#{start.projectName}" responsivePriority="4"
-              rendered="#{!processesIvyDevWfBean.startsDataModel.onlySingleProject}" filterBy="#{start.projectName}">
+              rendered="#{!processesBean.startsDataModel.onlySingleProject}" filterBy="#{start.projectName}">
               <div class="overflow-hidden-ellipsis">
                 <h:outputText id="project" value="#{start.projectName}" />
                 <p:tooltip for="project" position="top" value="#{start.projectName}" styleClass="text" />
@@ -67,15 +67,15 @@
                   value="#{start.isProcessStart() ? 'Open Process Viewer' : 'Open Case Map Viewer'}"
                   oncomplete="PF('process-viewer-dlg').show()" update="startsForm:processViewer:processViewerDialog"
                   rendered="#{start.viewerAllowed}"
-                  actionListener="#{processesIvyDevWfBean.setViewerStart(start.viewerLink)}"
+                  actionListener="#{processesBean.setViewerStart(start.viewerLink)}"
                   icon="si si-hierarchy-6 si-rotate-270" />
               </p:menu>
             </p:column>
           </p:dataTable>
         </div>
 
-        <jc:processViewer id="processViewer" title="#{processesIvyDevWfBean.viewerTitle}"
-          link="#{processesIvyDevWfBean.viewerLink}" />
+        <jc:processViewer id="processViewer" title="#{processesBean.viewerTitle}"
+          link="#{processesBean.viewerLink}" />
       </h:form>
     </ui:define>
   </ui:composition>

@@ -6,7 +6,7 @@
 
 <h:body>
   <f:metadata>
-    <f:viewParam name="id" value="#{casesDetailsIvyDevWfBean.selectedCaseId}" />
+    <f:viewParam name="id" value="#{casesDetailsBean.selectedCaseId}" />
   </f:metadata>
 
   <ui:composition template="../includes/template/template.xhtml">
@@ -22,17 +22,17 @@
                 </div>
                 <div>
                   <p:commandButton icon="si si-button-refresh-arrow" styleClass="ui-button-secondary rounded-button"
-                    id="caseRerunBtn" actionListener="#{casesDetailsIvyDevWfBean.rerunCase}" />
-                  <p:badge value="#{casesDetailsIvyDevWfBean.selectedCase.notes.size()}">
+                    id="caseRerunBtn" actionListener="#{casesDetailsBean.rerunCase}" />
+                  <p:badge value="#{casesDetailsBean.selectedCase.notes.size()}">
                     <p:commandButton id="caseNotesBtn"
                       styleClass="ui-button-secondary ui-button-outlined rounded-button ml-2"
-                      disabled="#{0 >= casesDetailsIvyDevWfBean.selectedCase.notes.size()}" icon="si si-notes-quill"
-                      actionListener="#{notesBean.openNotesDialog(casesDetailsIvyDevWfBean.selectedCaseId)}" />
+                      disabled="#{0 >= casesDetailsBean.selectedCase.notes.size()}" icon="si si-notes-quill"
+                      actionListener="#{notesBean.openNotesDialog(casesDetailsBean.selectedCaseId)}" />
                   </p:badge>
                   <p:tooltip for="caseNotesBtn" value="Show case notes" position="top" />
                   <p:commandButton icon="si si-delete-1" styleClass="ui-button-danger rounded-button ml-2"
-                    disabled="#{not casesDetailsIvyDevWfBean.canBeDestoryed()}" id="caseDestroyBtn"
-                    actionListener="#{casesDetailsIvyDevWfBean.selectedCase.destroy}"
+                    disabled="#{not casesDetailsBean.canBeDestoryed()}" id="caseDestroyBtn"
+                    actionListener="#{casesDetailsBean.selectedCase.destroy}"
                     update="@this, caseDetails, caseHierarchy" />
                   <p:tooltip for="caseDestroyBtn" value="Destroy case" position="top" />
                 </div>
@@ -41,7 +41,7 @@
             </div>
           </div>
 
-          <h:panelGroup styleClass="col-12 lg:col-4" layout="block" rendered="#{casesDetailsIvyDevWfBean.caseMap}">
+          <h:panelGroup styleClass="col-12 lg:col-4" layout="block" rendered="#{casesDetailsBean.caseMap}">
             <div class="card casemap-card flex flex-column">
               <div class="card-header">
                 <div class="card-title flex align-items-center">
@@ -49,10 +49,10 @@
                   <h6 class="m-0">Case Map</h6>
                 </div>
                 <div class="flex">
-                  <h:panelGroup layout="block" rendered="#{not empty casesDetailsIvyDevWfBean.sidesteps}">
+                  <h:panelGroup layout="block" rendered="#{not empty casesDetailsBean.sidesteps}">
                     <p:commandButton value="Sidesteps" icon="si si-arrow-down-1" id="sidestepsBtn" styleClass="mr-1" />
                     <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
-                      model="#{casesDetailsIvyDevWfBean.sidestepsMenuModel}" styleClass="menu-no-icons" />
+                      model="#{casesDetailsBean.sidestepsMenuModel}" styleClass="menu-no-icons" />
                   </h:panelGroup>
                   <p:link href="#" id="openCaseMapUiViewerBtn" onclick="PF('process-viewer-dlg').show()"
                     styleClass="flex align-items-center">
@@ -65,24 +65,24 @@
             </div>
           </h:panelGroup>
 
-          <h:panelGroup styleClass="col-12 lg:col-4" layout="block" rendered="#{!casesDetailsIvyDevWfBean.caseMap}">
+          <h:panelGroup styleClass="col-12 lg:col-4" layout="block" rendered="#{!casesDetailsBean.caseMap}">
             <div class="card flex flex-column">
               <div class="card-header">
                 <div class="card-title flex align-items-center">
                   <i class="pr-3 si si-information-circle"></i>
                   <h6 class="m-0">Process Viewer</h6>
                 </div>
-                <p:link rendered="#{casesDetailsIvyDevWfBean.viewerAllowed}" href="#" id="openProcessViewerBtn"
+                <p:link rendered="#{casesDetailsBean.viewerAllowed}" href="#" id="openProcessViewerBtn"
                   onclick="PF('process-viewer-dlg').show()" styleClass="flex align-items-center">
                   <i class="si si-information-circle detail-btn" />
                 </p:link>
-                <p:tooltip rendered="#{casesDetailsIvyDevWfBean.viewerAllowed}" for="openProcessViewerBtn"
+                <p:tooltip rendered="#{casesDetailsBean.viewerAllowed}" for="openProcessViewerBtn"
                   position="top" value="Open Process Viewer" />
               </div>
               <div class="height-100 flex justify-content-center align-items-center">
-                <div jsf:rendered="#{!casesDetailsIvyDevWfBean.viewerAllowed}">Current Process is hidden</div>
-                <iframe jsf:rendered="#{casesDetailsIvyDevWfBean.viewerAllowed}" id="processViewerFrame"
-                  class="process-viewer-preview" src="#{casesDetailsIvyDevWfBean.processPreviewLink}" />
+                <div jsf:rendered="#{!casesDetailsBean.viewerAllowed}">Current Process is hidden</div>
+                <iframe jsf:rendered="#{casesDetailsBean.viewerAllowed}" id="processViewerFrame"
+                  class="process-viewer-preview" src="#{casesDetailsBean.processPreviewLink}" />
               </div>
             </div>
           </h:panelGroup>
@@ -97,7 +97,7 @@
                   </div>
                   <h:panelGroup id="switchContainer" styleClass="inline-flex align-items-center">
                     <h:outputText value="Show system tasks" class="mr-2" />
-                    <p:toggleSwitch id="showSystemTasksSwitch" value="#{casesDetailsIvyDevWfBean.showSystemTasks}">
+                    <p:toggleSwitch id="showSystemTasksSwitch" value="#{casesDetailsBean.showSystemTasks}">
                       <p:ajax update="tasksForm:tasks" />
                     </p:toggleSwitch>
                   </h:panelGroup>
@@ -127,7 +127,7 @@
                   <h6 class="m-0">Custom fields</h6>
                 </div>
               </div>
-              <jc:customFields id="customFields" customFields="#{casesDetailsIvyDevWfBean.customFields}" />
+              <jc:customFields id="customFields" customFields="#{casesDetailsBean.customFields}" />
             </div>
           </div>
 
@@ -151,14 +151,14 @@
                   <h6 class="m-0">Workflow Events</h6>
                 </div>
               </div>
-              <jc:workflowEventsTable id="workflowEvents" workflowEvents="#{casesDetailsIvyDevWfBean.workflowEvents}" />
+              <jc:workflowEventsTable id="workflowEvents" workflowEvents="#{casesDetailsBean.workflowEvents}" />
             </div>
           </div>
         </div>
       </div>
 
-      <jc:processViewer id="processViewer" title="#{casesDetailsIvyDevWfBean.viewerDialogTitle}"
-        link="#{casesDetailsIvyDevWfBean.viewerLink}" />
+      <jc:processViewer id="processViewer" title="#{casesDetailsBean.viewerDialogTitle}"
+        link="#{casesDetailsBean.viewerLink}" />
     </ui:define>
   </ui:composition>
 </h:body>

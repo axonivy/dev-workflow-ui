@@ -8,7 +8,7 @@
 </cc:interface>
 
 <cc:implementation>
-  <ui:param name="task" value="#{tasksIvyDevWfBean.toTaskLinkModel(cc.attrs.task)}"/>
+  <ui:param name="task" value="#{tasksBean.toTaskLinkModel(cc.attrs.task)}"/>
   <h:link outcome="task" styleClass="flex align-items-center">
     <f:param name="id" value="#{task.uuid}"/>
     <i class="si si-task-list-edit ml-2" />

@@ -13,7 +13,7 @@ import ch.ivyteam.ivy.workflow.IWorkflowContext;
 @SuppressWarnings("restriction")
 @ManagedBean
 @ViewScoped
-public class CleanupIvyDevWfBean {
+public class CleanupBean {
   private boolean casesTasksAndDependent = true;
   private boolean businessDataAndSearchIndex = true;
   private boolean identityProviderTokens = true;

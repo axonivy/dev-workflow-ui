@@ -13,11 +13,11 @@ import ch.ivyteam.workflowui.util.PermissionsUtil;
 
 @ManagedBean
 @ViewScoped
-public class IntermediateEventsIvyDevWfBean {
+public class IntermediateEventsBean {
 
   private final List<IntermediateEventElementModel> intermediateEvents;
 
-  public IntermediateEventsIvyDevWfBean() {
+  public IntermediateEventsBean() {
     intermediateEvents = IntermediateEventElementModel.create();
   }
 

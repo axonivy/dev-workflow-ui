@@ -3,14 +3,14 @@
   xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ic="http://ivyteam.ch/jsf/component"
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
 
-<p:commandLink id="showNotifications" rendered="#{loginIvyDevWfBean.loggedIn}">
+<p:commandLink id="showNotifications" rendered="#{loginBean.loggedIn}">
   <i class="topbar-icon pi pi-bell"/>
   <div class="notification-badge">
     <h:outputText id="unreadNotifications" value="#{notificationBean.unreadNotifications}" />
   </div>
 </p:commandLink>
 
-<p:overlayPanel for="showNotifications" style="width:350px" rendered="#{loginIvyDevWfBean.loggedIn}">
+<p:overlayPanel for="showNotifications" style="width:350px" rendered="#{loginBean.loggedIn}">
   <h:panelGroup id="notifications">
     <div class="flex justify-content-between">
       <h6>Notifications</h6>

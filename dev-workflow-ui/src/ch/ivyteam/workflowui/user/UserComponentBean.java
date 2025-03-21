@@ -6,7 +6,7 @@ import ch.ivyteam.ivy.security.ISecurityMember;
 import ch.ivyteam.workflowui.tasks.ResponsibleModel;
 
 @ManagedBean
-public class UserComponentIvyDevWfBean {
+public class UserComponentBean {
 
   public UserComponentModel toComponentModel(Object user) {
     if (user instanceof ResponsibleModel responsible) {

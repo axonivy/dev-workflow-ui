@@ -4,17 +4,17 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://xmlns.jcp.org/jsf/composite/components">
 
-  <c:set var="task" value="#{tasksDetailsIvyDevWfBean.selectedTask}" />
+  <c:set var="task" value="#{tasksDetailsBean.selectedTask}" />
 
   <div class="detail-action-container">
     <h:form id="actionMenuForm">
-      <p:linkButton href="#{tasksDetailsIvyDevWfBean.executeTaskLink}" value="Start"
+      <p:linkButton href="#{tasksDetailsBean.executeTaskLink}" value="Start"
         id="taskStartBtn" disabled="#{!task.canBeStarted()}" icon="si si-controls-play" />
 
       <p:commandButton value="Sidesteps" styleClass="ml-2 ui-button-secondary" id="sidestepsBtn"
         rendered="#{task.renderSidestepBtn()}" icon="si si-arrow-down-1" />
       <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
-        model="#{tasksDetailsIvyDevWfBean.sidestepsMenuModel}" styleClass="menu-no-icons" />
+        model="#{tasksDetailsBean.sidestepsMenuModel}" styleClass="menu-no-icons" />
 
       <p:badge value="#{task.notes.size()}">
         <p:commandButton id="taskNotesBtn" styleClass="ml-2 ui-button-secondary ui-button-outlined rounded-button"
@@ -26,18 +26,18 @@
       <p:commandButton styleClass="ml-2 ui-button-secondary ui-button-outlined rounded-button" id="taskActionsBtn"
         disabled="#{task.done}" icon="si si-navigation-menu-horizontal-filled" />
       <p:menu id="actionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom">
-        <p:menuitem value="Reset" actionListener="#{tasksDetailsIvyDevWfBean.reset()}" update="taskDetail, workflowEvents:workflowEvents, @form"
+        <p:menuitem value="Reset" actionListener="#{tasksDetailsBean.reset()}" update="taskDetail, workflowEvents:workflowEvents, @form"
           disabled="#{!task.canReset()}" id="taskResetBtn"
           icon="si si-road-sign-u-turn-left" />
         <p:menuitem value="Delegate" onclick="PF('delegateTaskModal').show()" id="taskDelegateBtn"
           disabled="#{!task.state.active}" icon="si si-move-to-bottom" />
-        <p:menuitem value="Park" actionListener="#{tasksDetailsIvyDevWfBean.park()}" update="taskDetail, workflowEvents:workflowEvents, @form" id="taskParkBtn"
+        <p:menuitem value="Park" actionListener="#{tasksDetailsBean.park()}" update="taskDetail, workflowEvents:workflowEvents, @form" id="taskParkBtn"
           disabled="#{!task.canPark()}" icon="si si-road-sign-u-turn-right" />
-        <p:menuitem value="Destroy" actionListener="#{tasksDetailsIvyDevWfBean.destroy()}" update="taskDetail, workflowEvents:workflowEvents, @form"
+        <p:menuitem value="Destroy" actionListener="#{tasksDetailsBean.destroy()}" update="taskDetail, workflowEvents:workflowEvents, @form"
           disabled="#{!task.state.active}" id="taskDestoryBtn" icon="si si-delete-1" />
-        <p:menuitem value="Clear delay" actionListener="#{tasksDetailsIvyDevWfBean.clearDelay}" update="taskDetail, workflowEvents:workflowEvents, @form"
+        <p:menuitem value="Clear delay" actionListener="#{tasksDetailsBean.clearDelay}" update="taskDetail, workflowEvents:workflowEvents, @form"
           disabled="#{task.delayTimestamp == null}" icon="si si-button-refresh-arrows" id="taskClearDelayBtn" />
-        <p:menuitem value="Expire now" actionListener="#{tasksDetailsIvyDevWfBean.expireTask}" update="taskDetail, workflowEvents:workflowEvents, @form"
+        <p:menuitem value="Expire now" actionListener="#{tasksDetailsBean.expireTask}" update="taskDetail, workflowEvents:workflowEvents, @form"
           disabled="#{!task.state.active}" icon="si si-alarm-bell-timer"
           rendered="#{permissionsBean.demoDevModeOrAdmin}" id="taskExpireBtn" />
       </p:menu>

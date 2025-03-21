@@ -13,16 +13,16 @@ import ch.ivyteam.workflowui.util.UserUtil;
 
 @ManagedBean
 @ViewScoped
-public class LoginTableIvyDevWfBean {
+public class LoginTableBean {
 
   private final List<User> users;
   private final User currentUser;
   private String globalFilter;
 
-  public LoginTableIvyDevWfBean() {
+  public LoginTableBean() {
     users = UserUtil.getUsers().stream()
         .filter(user -> ((ch.ivyteam.ivy.security.internal.user.User) user).isTestUser())
-        .map(LoginTableIvyDevWfBean::toUser)
+        .map(LoginTableBean::toUser)
         .collect(toList());
     currentUser = toUser(ISession.current().getSessionUser());
   }

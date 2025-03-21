@@ -11,11 +11,11 @@ import ch.ivyteam.workflowui.util.RedirectUtil;
 
 @ManagedBean
 @ViewScoped
-public class CasesIvyDevWfBean {
+public class CasesBean {
 
   private final CasesDataModel casesDataModel;
 
-  public CasesIvyDevWfBean() {
+  public CasesBean() {
     casesDataModel = new CasesDataModel();
     casesDataModel.setFilter("");
   }

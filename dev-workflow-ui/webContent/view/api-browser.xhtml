@@ -6,7 +6,7 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotDevModeOrAdmin}" />
+      <f:event type="preRenderView" listener="#{loginBean.redirectIfNotDevModeOrAdmin}" />
 
       <div class="card">
         <div class="flex align-items-center mb-3">

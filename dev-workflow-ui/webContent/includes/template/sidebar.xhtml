@@ -5,18 +5,18 @@
     <div class="layout-menu-container justify-content-center">
       <h:form id="menuform">
         <pm:menu widgetVar="sidebar_menu">
-          <p:menuitem id="sr_home" value="Home" icon="si si-house-1" url="home.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('home') ? 'active-nav-page' : ''}" />
-          <p:menuitem id="sr_starts" value="Processes" icon="si si-hierarchy-6 si-rotate-270" url="starts.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('starts') ? 'active-nav-page' : ''}" />
-          <p:menuitem id="sr_tasks" value="Tasks" icon="si si-list-bullets" url="tasks.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('tasks') ? 'active-nav-page' : ''}" />
-          <p:menuitem id="sr_cases" value="Cases" icon="si si-pencil-write" url="cases.xhtml" containerStyleClass="#{sidebarIvyDevWfBean.isActive('cases') ? 'active-nav-page' : ''}" />
-          <p:submenu id="sr_actions" label="Developer" icon="si si-tools-wench" rendered="#{permissionsBean.demoDevModeOrAdmin}" styleClass="#{sidebarIvyDevWfBean.isDeveloperPageActive()}">
-            <p:menuitem id="sr_signals" value="Signals" icon="si si-network-signal" url="signals.xhtml" styleClass="#{sidebarIvyDevWfBean.isActive('signals') ? 'active-nav-submenu' : ''}"/>
-            <p:menuitem id="sr_intermediate_events" value="Intermediate Events" icon="si si-analytics-graph" url="intermediateEvents.xhtml" styleClass="#{sidebarIvyDevWfBean.isActive('intermediateEvents') ? 'active-nav-submenu' : ''}"/>
-            <p:menuitem id="sr_cleanup" value="Cleanup" icon="si si-recycling-trash-bin-2" url="cleanup.xhtml" rendered="#{permissionsBean.devModeAndAdmin}" styleClass="#{sidebarIvyDevWfBean.isActive('cleanup') ? 'active-nav-submenu' : ''}"/>
-            <p:menuitem id="sr_api-browser" value="API Browser" icon="si si-network-browser" url="api-browser.xhtml" styleClass="#{sidebarIvyDevWfBean.isActive('api-browser') ? 'active-nav-submenu' : ''}"/>
-            <p:menuitem id="sr_statistics" value="Statistics" icon="si si-analytics-graph" url="statistics.xhtml" styleClass="#{sidebarIvyDevWfBean.isActive('statistics') ? 'active-nav-submenu' : ''}"/>
-            <p:menuitem id="sr_webservices" value="Web Service" icon="si si-network-arrow" url="webservices.xhtml" styleClass="#{sidebarIvyDevWfBean.isActive('webservices') ? 'active-nav-submenu' : ''}"/>
-            <p:menuitem id="sr_engine-cockpit" value="Engine Cockpit" icon="si si-cog" url="#{sidebarIvyDevWfBean.cockpitPath}"/>
+          <p:menuitem id="sr_home" value="Home" icon="si si-house-1" url="home.xhtml" containerStyleClass="#{sidebarBean.isActive('home') ? 'active-nav-page' : ''}" />
+          <p:menuitem id="sr_starts" value="Processes" icon="si si-hierarchy-6 si-rotate-270" url="starts.xhtml" containerStyleClass="#{sidebarBean.isActive('starts') ? 'active-nav-page' : ''}" />
+          <p:menuitem id="sr_tasks" value="Tasks" icon="si si-list-bullets" url="tasks.xhtml" containerStyleClass="#{sidebarBean.isActive('tasks') ? 'active-nav-page' : ''}" />
+          <p:menuitem id="sr_cases" value="Cases" icon="si si-pencil-write" url="cases.xhtml" containerStyleClass="#{sidebarBean.isActive('cases') ? 'active-nav-page' : ''}" />
+          <p:submenu id="sr_actions" label="Developer" icon="si si-tools-wench" rendered="#{permissionsBean.demoDevModeOrAdmin}" styleClass="#{sidebarBean.isDeveloperPageActive()}">
+            <p:menuitem id="sr_signals" value="Signals" icon="si si-network-signal" url="signals.xhtml" styleClass="#{sidebarBean.isActive('signals') ? 'active-nav-submenu' : ''}"/>
+            <p:menuitem id="sr_intermediate_events" value="Intermediate Events" icon="si si-analytics-graph" url="intermediateEvents.xhtml" styleClass="#{sidebarBean.isActive('intermediateEvents') ? 'active-nav-submenu' : ''}"/>
+            <p:menuitem id="sr_cleanup" value="Cleanup" icon="si si-recycling-trash-bin-2" url="cleanup.xhtml" rendered="#{permissionsBean.devModeAndAdmin}" styleClass="#{sidebarBean.isActive('cleanup') ? 'active-nav-submenu' : ''}"/>
+            <p:menuitem id="sr_api-browser" value="API Browser" icon="si si-network-browser" url="api-browser.xhtml" styleClass="#{sidebarBean.isActive('api-browser') ? 'active-nav-submenu' : ''}"/>
+            <p:menuitem id="sr_statistics" value="Statistics" icon="si si-analytics-graph" url="statistics.xhtml" styleClass="#{sidebarBean.isActive('statistics') ? 'active-nav-submenu' : ''}"/>
+            <p:menuitem id="sr_webservices" value="Web Service" icon="si si-network-arrow" url="webservices.xhtml" styleClass="#{sidebarBean.isActive('webservices') ? 'active-nav-submenu' : ''}"/>
+            <p:menuitem id="sr_engine-cockpit" value="Engine Cockpit" icon="si si-cog" url="#{sidebarBean.cockpitPath}"/>
           </p:submenu>
         </pm:menu>
       </h:form>

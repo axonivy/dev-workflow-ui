@@ -5,14 +5,14 @@
   xmlns:jc="http://xmlns.jcp.org/jsf/composite/components">
 
   <h:panelGroup id="caseHierarchy">
-    <h:panelGroup layout="block" class="#{casesDetailsIvyDevWfBean.isCurrentHierarchyCase(casesDetailsIvyDevWfBean.selectedCase.getBusinessCase())}">
-      <jc:caseLink case="#{casesDetailsIvyDevWfBean.selectedCase.getBusinessCase()}" id="businessCase"/>
+    <h:panelGroup layout="block" class="#{casesDetailsBean.isCurrentHierarchyCase(casesDetailsBean.selectedCase.getBusinessCase())}">
+      <jc:caseLink case="#{casesDetailsBean.selectedCase.getBusinessCase()}" id="businessCase"/>
     </h:panelGroup>
 
     <h:panelGroup layout="block">
       <ul class="subcases-list">
-        <ui:repeat var="case" value="#{casesDetailsIvyDevWfBean.caseList}">
-          <li style="list-style-type: none;" class="#{casesDetailsIvyDevWfBean.isCurrentHierarchyCase(case)} mb-1">
+        <ui:repeat var="case" value="#{casesDetailsBean.caseList}">
+          <li style="list-style-type: none;" class="#{casesDetailsBean.isCurrentHierarchyCase(case)} mb-1">
             <jc:caseLink case="#{case}" id="subcase"/>
           </li>
         </ui:repeat>

@@ -10,10 +10,11 @@ import ch.ivyteam.workflowui.util.TaskUtil;
 
 @ManagedBean
 @ViewScoped
-public class TasksIvyDevWfBean {
+public class TasksBean {
+
   private final TasksDataModel tasksDataModel;
 
-  public TasksIvyDevWfBean() {
+  public TasksBean() {
     tasksDataModel = new TasksDataModel();
     tasksDataModel.setFilter("");
   }
