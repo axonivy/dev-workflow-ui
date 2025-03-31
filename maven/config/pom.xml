@@ -11,7 +11,7 @@
     <project.build.plugin.version>13.1.0-SNAPSHOT</project.build.plugin.version>
     <web.tester.version>12.0.2-SNAPSHOT</web.tester.version>
     <engineHomeDirectory>${basedir}/../maven/config/target/ivyEngine/</engineHomeDirectory>
-    <maven.surefire.version>3.5.2</maven.surefire.version>
+    <maven.surefire.version>3.5.3</maven.surefire.version>
   </properties>
 
   <build>
