@@ -1,16 +1,14 @@
-// Define a type for the callback function
 class DOMSelector {
   isSelecting = false;
   selectionOverlay = null;
-  hoveredElement = null;  // Track hovered element
-  originalOutline = ''; // Store the original outline style
+  hoveredElement = null;
+  originalOutline = '';
   doc;
   nodeSelectedCallback;
 
   constructor(doc, callback) {
     this.doc = doc || document;
-    this.nodeSelectedCallback = callback || null; // Use the passed callback or null
-    //  triggerElement.addEventListener('click', this.toggleSelectionMode);
+    this.nodeSelectedCallback = callback || null;
   }
 
   toggleSelectionMode = () => {
@@ -24,7 +22,6 @@ class DOMSelector {
   };
 
   startSelectionMode = () => {
-    // Create and attach the overlay
     this.selectionOverlay = this.doc.createElement('div');
     this.selectionOverlay.style.cssText = `
         position: fixed;
@@ -32,39 +29,46 @@ class DOMSelector {
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
-        z-index: 9999; /* Ensure it's on top */
-        pointer-events: none; /* Allow clicks to pass through */
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        pointer-events: none;
       `;
     this.doc.body.appendChild(this.selectionOverlay);
 
-    this.doc.addEventListener('click', this.handleElementClick);
-    this.doc.addEventListener('mouseover', this.handleMouseOver); // Add mouseover listener
-    this.doc.addEventListener('mouseout', this.handleMouseOut);   // Add mouseout listener
+    this.doc.addEventListener('click', this.handleElementClick, { capture: true });
+    this.doc.addEventListener('mousedown', this.stopEvent, { capture: true });
+    this.doc.addEventListener('mouseup', this.stopEvent, { capture: true });
+    this.doc.addEventListener('mouseover', this.handleMouseOver);
+    this.doc.addEventListener('mouseout', this.handleMouseOut);
 
     console.log('Selection mode started');
   };
 
-  endSelectionMode = () => {
-    this.doc.removeEventListener('click', this.handleElementClick);
-    this.doc.removeEventListener('mouseover', this.handleMouseOver); // Remove mouseover listener
-    this.doc.removeEventListener('mouseout', this.handleMouseOut);   // Remove mouseout listener
+  stopEvent = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
 
-    // Remove the overlay
+  endSelectionMode = () => {
+    this.doc.removeEventListener('click', this.handleElementClick, { capture: true });
+    this.doc.removeEventListener('mousedown', this.stopEvent, { capture: true });
+    this.doc.removeEventListener('mouseup', this.stopEvent, { capture: true });
+    this.doc.removeEventListener('mouseover', this.handleMouseOver);
+    this.doc.removeEventListener('mouseout', this.handleMouseOut);
+
     if (this.selectionOverlay) {
       this.doc.body.removeChild(this.selectionOverlay);
       this.selectionOverlay = null;
     }
 
-    this.clearHoveredElement(); // remove the highlight of a hovered element if present
+    this.clearHoveredElement();
 
     this.isSelecting = false;
     console.log('Selection mode ended');
   };
 
   handleElementClick = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
+    this.stopEvent(event);
 
     if (this.hoveredElement) {
       if (this.nodeSelectedCallback) {
@@ -74,10 +78,10 @@ class DOMSelector {
         alert(`Selected element: ${this.hoveredElement.tagName} #${this.hoveredElement.id}`);
       }
 
-      // this.endSelectionMode();
+      this.endSelectionMode();
     } else {
       console.log('No element with ID selected.');
-      alert('Please select an element with an ID.'); // Or some other feedback.
+      alert('Please select an element with an ID.');
     }
   };
 
@@ -85,13 +89,12 @@ class DOMSelector {
     let targetElement = event.target;
     let elementWithId = null;
 
-    // Traverse up the DOM tree to find an element with an ID.
     while (targetElement) {
       if (targetElement.id && targetElement.classList.contains('ui-widget')) {
         elementWithId = targetElement;
         break;
       }
-      targetElement = targetElement.parentElement; // Move to the parent
+      targetElement = targetElement.parentElement;
     }
 
     if (elementWithId) {
@@ -109,33 +112,22 @@ class DOMSelector {
     }
 
     this.hoveredElement = element;
-    this.originalOutline = element.style.outline;  // Store original outline
-    element.style.outline = '2px solid red'; // Highlight the element
+    this.originalOutline = element.style.outline;
+    element.style.outline = '2px solid red';
   };
 
   clearHoveredElement = () => {
     if (this.hoveredElement) {
-      this.hoveredElement.style.outline = this.originalOutline; // Restore original outline
+      this.hoveredElement.style.outline = this.originalOutline;
       this.hoveredElement = null;
     }
   };
 }
 
-// Usage (assuming you have a button with id "toggleButton")
-//  const toggleButton = document.getElementById('toggleButton');
-//  if (toggleButton) {
-//   const selector = new DOMSelector(toggleButton, (node) => {
-//    console.log("The selected node is:", node);
-//    // do something with the node here
-//   });
-//  } else {
-//   console.error('Toggle button not found');
-//  }
-
 var selector;
 const toggleSelectionMode = () => {
   if (!selector) {
-    selector = new DOMSelector(document.getElementById('iFrame').contentDocument, (node) => console.log("The selected node is:", node))
+    selector = new DOMSelector(document.getElementById('iFrame').contentDocument, (node) => console.log("The selected node is:", node.id))
   }
   selector.toggleSelectionMode()
 }
