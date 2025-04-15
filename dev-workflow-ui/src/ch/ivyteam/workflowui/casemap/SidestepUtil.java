@@ -37,6 +37,9 @@ public class SidestepUtil {
   }
 
   public static List<SidestepModel> getSidesteps(ICase caze) {
+    if (caze == null) {
+      return List.of();
+    }
     return ICaseMapService.current().getCaseMapService(caze.getBusinessCase()).findStartableSideSteps()
         .stream().map(SidestepModel::new).collect(Collectors.toList());
   }
