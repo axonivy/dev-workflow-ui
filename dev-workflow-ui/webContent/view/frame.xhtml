@@ -85,33 +85,92 @@
           attachUnload();
         }
 
+        const authorizedXhtml = [
+          '/faces/home.xhtml',
+          '/faces/tasks.xhtml',
+          '/faces/starts.xhtml',
+          '/faces/login.xhtml',
+          '/faces/loginTable.xhtml',
+          '/app/home.xhtml',
+          '/app/tasks.xhtml',
+          '/app/starts.xhtml',
+          '/app/login.xhtml'
+        ];
+
+        const authorizedIvp = new Map([
+          ['DefaultApplicationHomePage.ivp', 'home.xhtml'],
+          ['DefaultTaskListPage.ivp', 'tasks.xhtml'],
+          ['DefaultProcessStartListPage.ivp', 'starts.xhtml'],
+          ['DefaultLoginPage.ivp', 'login.xhtml']
+        ]);
+
         function checkAndReturnUrl(newURL, originPage) {
-          if (newURL.includes('task.xhtml')){
-            return newURL.substring(newURL.indexOf('task.xhtml'));
+          for (let url of authorizedXhtml) {
+            if (newURL.endsWith(url)) {
+              return newURL.substring(newURL.indexOf(url));
+            }
+          }
+
+          for (let url of authorizedIvp) {
+            if (newURL.includes(url[0])) {
+              alert("found "+ url[0]+ " : "+ url[1])
+              return url[1];
+            }
           }
           if (newURL.includes('?endedTaskId=')) {
+            if (originPage == 'home.xhtml'){
+              return originPage;
+            }
+            if (originPage == 'case.xhtml'){
+              return 'cases.xhtml';
+            }
+            if (originPage.includes('task.xhtml?id=')){
+              var id = originPage.split("id=");
+              if(id[1].length == 36){
+                return originPage;
+              }
+              return undefined;
+            }
+          }
+
+          if (newURL.includes('?endedTaskId=')) {
+            alert("1: " + "newUrl: "+newURL + " | originPage: "+ originPage);
             return originPage;
           }
-          if (newURL.endsWith('/faces/home.xhtml') || newURL.includes('DefaultApplicationHomePage.ivp') || newURL.endsWith('/app/home.xhtml')) {
-            return 'home.xhtml';
-          }
-          if (newURL.endsWith('/faces/tasks.xhtml') || newURL.includes('DefaultTaskListPage.ivp') || newURL.endsWith('/app/tasks.xhtml')) {
-            return 'tasks.xhtml';
-          }
-          if (newURL.endsWith('/faces/starts.xhtml') || newURL.includes('DefaultProcessStartListPage.ivp') || newURL.endsWith('/app/starts.xhtml')) {
-            return 'starts.xhtml';
-          }
-          if (newURL.endsWith('/faces/login.xhtml') || newURL.includes('DefaultLoginPage.ivp') || newURL.endsWith('/app/login.xhtml')) {
-            return 'login.xhtml';
-          }
-          if (newURL.endsWith('/faces/loginTable.xhtml')) {
-            return 'loginTable.xhtml';
-          }
           if (newURL.endsWith('/faces/end.xhtml') || newURL.includes('DefaultEndPage.ivp') || newURL.endsWith('/app/end.xhtml')) {
+            alert("2: " + "newUrl: "+newURL + " | originPage: "+ originPage);
             return originPage;
           }
           return undefined;
         }
+
+        // function checkAndReturnUrl(newURL, originPage) {
+        //   if (newURL.includes('task.xhtml')){
+        //     return newURL.substring(newURL.indexOf('task.xhtml'));
+        //   }
+        //   if (newURL.includes('?endedTaskId=')) {
+        //     return originPage;
+        //   }
+        //   if (newURL.endsWith('/faces/home.xhtml') || newURL.includes('DefaultApplicationHomePage.ivp') || newURL.endsWith('/app/home.xhtml')) {
+        //     return 'home.xhtml';
+        //   }
+        //   if (newURL.endsWith('/faces/tasks.xhtml') || newURL.includes('DefaultTaskListPage.ivp') || newURL.endsWith('/app/tasks.xhtml')) {
+        //     return 'tasks.xhtml';
+        //   }
+        //   if (newURL.endsWith('/faces/starts.xhtml') || newURL.includes('DefaultProcessStartListPage.ivp') || newURL.endsWith('/app/starts.xhtml')) {
+        //     return 'starts.xhtml';
+        //   }
+        //   if (newURL.endsWith('/faces/login.xhtml') || newURL.includes('DefaultLoginPage.ivp') || newURL.endsWith('/app/login.xhtml')) {
+        //     return 'login.xhtml';
+        //   }
+        //   if (newURL.endsWith('/faces/loginTable.xhtml')) {
+        //     return 'loginTable.xhtml';
+        //   }
+        //   if (newURL.endsWith('/faces/end.xhtml') || newURL.includes('DefaultEndPage.ivp') || newURL.endsWith('/app/end.xhtml')) {
+        //     return originPage;
+        //   }
+        //   return undefined;
+        // }
 
         iframeURLChange(document.getElementById("iFrame"), function(newURL, iframe) {
           var originPage = new URLSearchParams(window.location.search).get('originalUrl');
