@@ -57,6 +57,7 @@ const initDomSelector = () => {
   const startSelectionMode = () => {
     const doc = iframe.contentDocument;
     selectionOverlay = doc.createElement('div');
+    selectionOverlay.id = 'selectionOverlay'
     selectionOverlay.style.cssText = `
         position: fixed;
         inset: 0;
