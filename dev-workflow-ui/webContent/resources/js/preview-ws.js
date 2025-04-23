@@ -9,7 +9,7 @@ const initPreview = (baseUrl = 'http://localhost:8081') => {
   }
   const enableElementPicker = () => enableButton(document.querySelector("#iFrameForm\\:previewElementPicker"));
   const enableAutoRefresh = () => enableButton(document.querySelector("#iFrameForm\\:previewAutoReload"))
-  const toggleSpinAutoRefresh = () => document.querySelector("#iFrameForm\\:previewAutoReload .ui-icon").classList.toggle('si-is-spinning');
+  const toggleSpinAutoRefresh = () => document.querySelector("#iFrameForm\\:previewAutoReload").classList.toggle('ui-button-outlined');
   const isJsonRpcMessage = (message) => typeof message === 'object' && 'jsonrpc' in message && message.jsonrpc === "2.0" && 'method' in message;
   const isRefreshMessage = (message) => isJsonRpcMessage(message) && message.method === 'refresh';
 
