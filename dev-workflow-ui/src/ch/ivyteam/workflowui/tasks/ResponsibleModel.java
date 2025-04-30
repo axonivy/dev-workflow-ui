@@ -17,6 +17,6 @@ public class ResponsibleModel {
   }
 
   public boolean isMember(ISession session) {
-    return responsible.get().isMember(session, false);
+    return responsible.get().isMember(session);
   }
 }
