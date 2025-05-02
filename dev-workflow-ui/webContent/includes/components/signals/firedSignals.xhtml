@@ -4,23 +4,23 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
   xmlns:jc="http://xmlns.jcp.org/jsf/composite/components">
 
-  <p:dataTable id="firedSignalsTable" var="signal" value="#{signalsBean.signalsModel}"
+  <p:dataTable id="firedSignalsTable" var="signal" value="#{signalsBean.signalsModel}" emptyMessage="#{ivy.cm.co('/signals/noSignalsFound')}"
     rows="10" paginator="true" paginatorAlwaysVisible="false" lazy="true" paginatorPosition="bottom">
-    <p:column headerText="Code" sortBy="#{signal.signalCode}" width="100">
+    <p:column headerText="#{ivy.cm.co('/signals/code')}" sortBy="#{signal.signalCode}" width="100">
       <h:outputText value="#{signal.signalCode}" />
     </p:column>
-    <p:column headerText="Date" sortBy="#{signal.sentTimestamp}" sortOrder="descending" width="100">
+    <p:column headerText="#{ivy.cm.co('/common/date')}" sortBy="#{signal.sentTimestamp}" sortOrder="descending" width="100">
       <jc:time id="sentTime" datetime="#{signal.sentTimestamp}"/>
     </p:column>
-    <p:column headerText="Sent by" sortBy="#{signal.sentByUser}" width="120" responsivePriority="5">
+    <p:column headerText="#{ivy.cm.co('/signals/sentBy')}" sortBy="#{signal.sentByUser}" width="120" responsivePriority="5">
       <jc:user user="#{signal.sentByUser}"/>
     </p:column>
-    <p:column headerText="Destroyed tasks" width="260">
+    <p:column headerText="#{ivy.cm.co('/signals/destroyedTasks')}" width="260">
       <ui:repeat var="task" value="#{signal.destroyedTasks}" varStatus="status">
         <jc:taskLink task="#{task}" id="destroyedTask"/>
       </ui:repeat>
     </p:column>
-    <p:column headerText="Created cases" colspan="2" width="260">
+    <p:column headerText="#{ivy.cm.co('/signals/createdCases')}" colspan="2" width="260">
       <ui:repeat var="task" value="#{signal.createdTasks}" varStatus="status">
         <jc:caseLink case="#{task.case}" id="createdCase"/>
       </ui:repeat>

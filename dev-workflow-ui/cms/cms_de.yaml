@@ -1,0 +1,224 @@
+apiBrowser:
+  apiBrowser: API Browser
+  openInTab: API Browser in einem neuen Tab öffnen
+case:
+  caseHierarchy: Fall Hierarchie
+  caseMap: Case Map
+  currentProcessHidden: Prozess ist ausgeblendet
+  description: Beschreibung
+  destroyCase: Fall zerstören
+  documents: Dokumente
+  openCaseMap: Case Map
+  openProcessViewer: Process anzeigen
+  processViewer: Prozess Ansicht
+  showNotes: Fall Notizen anzeigen
+  showSystemTasks: System Aufgaben anzeigen
+  sidesteps: Sidesteps
+  taskList: Task Liste
+  workflowEvents: Workflow Events
+cleanup:
+  businessData: Alle Business Daten und den Such-Index
+  dataCaches: Daten Caches
+  introduction: When Du verschiedene Prozesse ausführtst, erzeugst Du verschiedene Typen von Daten wie Fälle, Aufgaben etc. Hier kannst Du diese Daten aufräumen um den Designer zurückzusetzen.
+  tokens: Alle Identity Provider Token
+  workflow: Alle Fälle, Aufgaben und abhängige Objekte
+common:
+  author: Autor
+  businessCase: Business Fall
+  category: Kategorie
+  clearDelay: Verzugsdatum löschen
+  completedOn: Beendet am
+  content: Inhalt
+  copyToClipboard: In Zwischenablage kopieren
+  created: Erstellt
+  creationDate: Erstelldatum
+  creator: Ersteller
+  currentElement: Aktuelles Element
+  customFields: Benutzerdefinierte Felder
+  date: Datum
+  delayDate: Verzugsdatum
+  delegate: Delegieren
+  description: Beschreibung
+  destroy: Zerstören
+  email: Email
+  end: Ende
+  event: Event
+  expireNow: Ablaufen lassen
+  expiry: Ablaufdatum
+  externalId: Externe ID
+  externalName: Externer Name
+  formattingLanguage: Formatierungs Sprache
+  fullname: Vollständiger Name
+  id: ID
+  language: Sprache
+  link: Link
+  loading: Laden
+  name: Name
+  noCasesFound: Keine Fälle gefunden
+  noCustomFieldsFound: Keine benutzerdefinierten Felder gefunden
+  noDocumentsFound: Keine Dokumente gefunden
+  noEventsFound: In Vollbildmodus öffnen
+  notes: Notizen
+  notificationChannels: Benachrichtigungs Kanäle
+  openCaseMapViewer: Case Map anzeigen
+  openDetails: Details anzeigen
+  openFullscreen: In Vollbildmodus öffnen
+  openProcessViewer: Prozess anzeigen
+  openTaskDetails: Aufgaben Details öffnen
+  openTasks: Offene Aufgaben
+  owner: Rollen
+  park: Prio
+  pmv: PMV
+  prio: Prio
+  priority: Priorität
+  processName: Prozess Name
+  rerunProcess: Prozess erneut starten
+  reset: Reset
+  responsible: Verantwortlicher
+  roles: Rollen
+  save: Speichern
+  search: Suchen
+  showAll: Alle anzeigen
+  start: Start
+  startProcess: Prozess starten
+  startTask: Aufgabe starten
+  startedCases: Gestartete Fälle
+  state: Status
+  technicalCase: Technischer Fall
+  type: Typ
+  username: Benutzername
+  value: Wert
+  workerUser: Bearbeiter
+  workflowEvents: Workflow Ereignisse
+end:
+  taskEnd: Aufgaben Ende
+  taskFinished: Du hast erfolgreich den Task beendet.
+enums:
+  caseBusinessState:
+    destroyed: Zerstört
+    done: Erledigt
+    open: Offen
+  caseState:
+    created: Erstellt
+    destroyed: Zerstört
+    done: Erledigt
+    running: Laufend
+  taskBusinessState:
+    delayed: Verspätet
+    destroyed: Zerstört
+    done: Erledigt
+    error: Fehler
+    in_progress: In Bearbeitung
+    open: Offen
+  taskState:
+    created: Erstellt
+    delayed: Verspätet
+    destroyed: Zerstört
+    done: Erledigt
+    failed: Fehlgeschlagen
+    join_failed: Zusammenführung fehlgeschlagen
+    joining: Zusammenführend
+    parked: Parkiert
+    ready_for_join: Bereit zum Zusammenführen
+    resumed: Aufgenommen
+    suspended: Ausgesetzt
+    waiting_for_intermediate_event: Wartend auf intermediate Event
+frame:
+  disableAutoRefresh: Deaktiviere automatisches neu laden der Seite wenn Änderungen an diesem Dialog gemacht werden
+  openCurrentProcess: Aktueller Prozess Start in einer Vollbildansicht anzeigen
+  openEditor: Öffne den Editor auf dem ausgewählten Widget
+  sidesteps: Sidesteps
+home:
+  goToProcessList: Gehe zur Prozess Liste
+  noCasesFound: Keine Fälle gefunden
+  noOpenTasks: Du hast keine offene Aufgaben. Mache eine Kaffee Pause.
+  noProcessesStarted: Du hast bisher kein Prozesses gestartet.
+  openTasks: Offene Aufgaben
+  startedCases: Gestartete Fälle
+  startedProcesses: Gestartete Prozesse
+  toStartProcess: um einen Prozess zu starten.
+intermediateEvents:
+  intermediateEventsBeans: Intermediate Events Beans
+  waiting: Wartend
+login:
+  logInWith: Anmelden mit
+  password: Passwort
+  signIn: Anmelden
+  username: Benutzername / Email
+notifications:
+  deleteAll: Alle löschen
+  markAllAsRead: Alle Benarchtigungen als gelesen markieren
+  markAsRead: Als gelesen markieren
+  noNotifications: Keine Benachrichtigungen
+  notifications: Benachrichtigungen
+profile:
+  currentContentLocale: Sprache der aktuellen Sitzung
+  currentFormattingLocale: Formattierungs Sprache der aktuellen Sitzung
+sidebar:
+  apiBrowser: API Browser
+  cases: Fälle
+  cleanup: Aufräumen
+  developer: Entwickler
+  engineCockpit: Engine Cockpit
+  home: Home
+  intermediateEvents: Intermediate Events
+  processes: Prozesse
+  signals: Signale
+  statistics: Statistiken
+  tasks: Aufgaben
+  webService: Web Service
+signals:
+  boundarySignals: Grenz Signale
+  code: Code
+  createdCases: Erstellte Fälle
+  destroyedTasks: Senden
+  firedSignals: Gefeuerte Signale
+  noSignalsFound: Keine Signale gefunden
+  payload: Daten
+  send: Senden
+  sendSignal: Signal senden
+  sentBy: Gesendet von
+  signalCode: Signal Code
+  signalPattern: Signal Pattern
+  waitingTask: Wartende Aufgabe
+starts:
+  application: Applikation
+  category: Kategorie
+  process: Prozess
+  processes: Prozesse
+  project: Projekt
+  search: Suchen
+statistics:
+  allCases: Alle Fälle
+  allTasks: Alle Aufgaben
+  casesByState: Fälle nach Status
+  casesStatistics: Fall Statistik
+  notEnoughData: Nicht genügend Daten
+  tasksByState: Aufgaben nach Status
+  tasksStatistics: Aufgaben Statistik
+  topCaseCreators: Top Fall Ersteller
+  topTaskWorkers: Top Aufgaben Bearbeiter
+switchUser:
+  clickLogin: Klicke auf einen Benutzer um Dich anzumelden
+  needLogin: Du musst Dich einloggen um auf diese Seite zugreifen zu können
+  noUsers: Keine Benutzer gefunden
+task:
+  canNotWork: Du kannst an dieser Aufgabe nicht arbeiten, weil ${user} arbeitet bereits daran.
+  completedByCurrent: Du hast diese Aufgabe bereits abgeschlossen.
+  completedByOther: Aufgabe wurde bereits von ${user} abgeschlossen.
+  destroyed: Du kannst an dieser Aufgabe nicht arbeiten, weil diese Aufgabe zerstört wurde.
+  invalid: Ungültiger Status
+  workingOn: Du arbeitest bereits an dieser Aufgabe, aber in einer anderen Sitzung. Du kannst diese Aufgabe zurücksetzen, falls Du den anderen Browser bereits geschlossen hast.
+tasks:
+  noTasksFound: Keine Aufgaben gefunden
+template:
+  login: Anmelden
+  logout: Abmelden
+  profile: Profil
+  switchUser: Benutzer wechseln
+webservices:
+  noWebServicesFound: Keine Web Service Prozesse gefunden
+  webServiceProcesses: Web Service Prozesse
+workflowEventsTable:
+  needPermission: You need workflow events read permission in order to see them.
+  noPermissions: No permissions

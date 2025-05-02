@@ -26,7 +26,9 @@ public class WorkflowEventModel {
   }
 
   public static List<WorkflowEventModel> toList(List<IWorkflowEvent> workflowEvents) {
-    return workflowEvents.stream().map(WorkflowEventModel::new).collect(Collectors.toList());
+    return workflowEvents.stream()
+        .map(WorkflowEventModel::new)
+        .collect(Collectors.toList());
   }
 
   public Date getEventTimestamp() {
@@ -48,5 +50,4 @@ public class WorkflowEventModel {
   public String getAdditionalInfo() {
     return additionalInfo;
   }
-
 }

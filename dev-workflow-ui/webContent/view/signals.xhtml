@@ -15,7 +15,7 @@
               <h:form id="signalForm">
                 <p:growl id="growl" showDetail="true" />
                 <div class="card-header">
-                  <h4 class="m-0">Send signal</h4>
+                  <h4 class="m-0">#{ivy.cm.co('/signals/sendSignal')}</h4>
                 </div>
                 <ui:include src="/includes/components/signals/sendSignal.xhtml" />
               </h:form>
@@ -25,7 +25,7 @@
           <div class="col-12 md:col-8">
             <div class="card">
               <div class="card-header">
-                <h4 class="m-0">Boundary signals</h4>
+                <h4 class="m-0">#{ivy.cm.co('/signals/boundarySignals')}</h4>
               </div>
               <ui:include src="/includes/components/signals/boundarySignals.xhtml" />
             </div>
@@ -34,7 +34,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="m-0">Fired signals</h4>
+                <h4 class="m-0">#{ivy.cm.co('/signals/firedSignals')}</h4>
               </div>
               <ui:include src="/includes/components/signals/firedSignals.xhtml" />
             </div>

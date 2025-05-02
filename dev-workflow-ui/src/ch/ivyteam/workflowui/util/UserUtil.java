@@ -1,8 +1,6 @@
 package ch.ivyteam.workflowui.util;
 
-import static java.util.stream.Collectors.toList;
-
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,13 +13,15 @@ import ch.ivyteam.workflowui.login.LoginUtil;
 public class UserUtil {
 
   public static List<IUser> getUsers() {
-    var users = Ivy.security().users().paged().stream().collect(toList());
-    Collections.sort(users, (user1, user2) -> user1.getName().compareToIgnoreCase(user2.getName()));
-    return users;
+    return Ivy.security().users().paged().stream()
+        .sorted(Comparator.comparing(IUser::getName))
+        .collect(Collectors.toList());
   }
 
   public static String getRoles(IUser user) {
-    return user.getRoles().stream().map(IRole::getDisplayName).collect(Collectors.joining(", "));
+    return user.getRoles().stream()
+        .map(IRole::getDisplayName)
+        .collect(Collectors.joining(", "));
   }
 
   public static void redirectIfNotLoggedIn() {

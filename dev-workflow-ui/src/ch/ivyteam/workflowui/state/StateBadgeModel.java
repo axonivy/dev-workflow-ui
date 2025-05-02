@@ -2,41 +2,46 @@ package ch.ivyteam.workflowui.state;
 
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
+import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.workflowui.tasks.TaskModel;
 
 public class StateBadgeModel {
 
-  private final String name;
+  private final String nameCmsPath;
   private final String cssClass;
-  private final String tooltip;
+  private final String tooltipCmsPath;
 
   public StateBadgeModel(TaskModel task) {
-    this(task.getBusinessState().toString(), task.getState().toString());
+    this("/enums/taskBusinessState/" + task.getBusinessState().toString().toLowerCase(), task.getBusinessState().toString(), "/enums/taskState/" + task.getState().toString().toLowerCase());
+  }
+
+  public StateBadgeModel(TaskState taskState) {
+    this("/enums/taskState/" + taskState.toString().toLowerCase(), taskState.getBusinessState().toString(), "/enums/taskState/" + taskState.toString().toLowerCase());
   }
 
   public StateBadgeModel(ITask task) {
-    this(task.getBusinessState().toString(), task.getState().toString());
+    this("/enums/taskBusinessState/" + task.getBusinessState().toString().toLowerCase(), task.getBusinessState().toString(), "/enums/taskState/" + task.getState().toString().toLowerCase());
   }
 
   public StateBadgeModel(ICase caze) {
-    this(caze.getBusinessState().toString(), caze.getState().toString());
+    this("/enums/caseBusinessState/" + caze.getBusinessState().toString().toLowerCase(), caze.getBusinessState().toString(), "/enums/caseState/" + caze.getState().toString().toLowerCase());
   }
 
-  private StateBadgeModel(String businessState, String state) {
-    this.name = businessState.toLowerCase().replace("_", " ");
+  private StateBadgeModel(String nameCmsPath, String businessState, String tooltipCmsPath) {
+    this.nameCmsPath = nameCmsPath;
     this.cssClass = "state-" + businessState.toLowerCase();
-    this.tooltip = "Technical state: " + state;
+    this.tooltipCmsPath = tooltipCmsPath;
   }
 
-  public String getName() {
-    return name;
+  public String getNameCmsPath() {
+    return nameCmsPath;
   }
 
   public String getCssClass() {
     return cssClass;
   }
 
-  public String getTooltip() {
-    return tooltip;
+  public String getTooltipCmsPath() {
+    return tooltipCmsPath;
   }
 }

@@ -10,10 +10,10 @@
 
       <div class="card">
         <div class="flex align-items-center mb-3">
-          <h4 class="m-0">API Browser</h4>
+          <h4 class="m-0">#{ivy.cm.co('/apiBrowser/apiBrowser')}</h4>
           <p:linkButton id="browseApiBtn" icon="si si-network-browser" styleClass="ml-auto rounded-button"
             target="_blank" href="/system/api-browser/index.html"/>
-          <p:tooltip for="browseApiBtn" value="Open API browser in a new tab" position="top"/>
+          <p:tooltip for="browseApiBtn" value="#{ivy.cm.co('/apiBrowser/openInTab')}" position="top"/>
         </div>
         <iframe id="apiBrowser" src="/system/api-browser/index.html" class="api-browser-frame"/>
       </div>

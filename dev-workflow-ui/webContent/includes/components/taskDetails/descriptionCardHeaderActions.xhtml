@@ -8,7 +8,7 @@
 
   <div class="detail-action-container">
     <h:form id="actionMenuForm">
-      <p:linkButton href="#{tasksDetailsBean.executeTaskLink}" value="Start"
+      <p:linkButton href="#{tasksDetailsBean.executeTaskLink}" value="#{ivy.cm.co('/common/start')}"
         id="taskStartBtn" disabled="#{!task.canBeStarted()}" icon="si si-controls-play" />
 
       <p:commandButton value="Sidesteps" styleClass="ml-2 ui-button-secondary" id="sidestepsBtn"
@@ -26,18 +26,18 @@
       <p:commandButton styleClass="ml-2 ui-button-secondary ui-button-outlined rounded-button" id="taskActionsBtn"
         disabled="#{task.done}" icon="si si-navigation-menu-horizontal-filled" />
       <p:menu id="actionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom">
-        <p:menuitem value="Reset" actionListener="#{tasksDetailsBean.reset()}" update="taskDetail, workflowEvents:workflowEvents, @form"
+        <p:menuitem value="#{ivy.cm.co('/common/reset')}" actionListener="#{tasksDetailsBean.reset()}" update="taskDetail, workflowEvents:workflowEvents, @form"
           disabled="#{!task.canReset()}" id="taskResetBtn"
           icon="si si-road-sign-u-turn-left" />
-        <p:menuitem value="Delegate" onclick="PF('delegateTaskModal').show()" id="taskDelegateBtn"
+        <p:menuitem value="#{ivy.cm.co('/common/delegate')}" onclick="PF('delegateTaskModal').show()" id="taskDelegateBtn"
           disabled="#{!task.state.active}" icon="si si-move-to-bottom" />
-        <p:menuitem value="Park" actionListener="#{tasksDetailsBean.park()}" update="taskDetail, workflowEvents:workflowEvents, @form" id="taskParkBtn"
+        <p:menuitem value="#{ivy.cm.co('/common/park')}" actionListener="#{tasksDetailsBean.park()}" update="taskDetail, workflowEvents:workflowEvents, @form" id="taskParkBtn"
           disabled="#{!task.canPark()}" icon="si si-road-sign-u-turn-right" />
-        <p:menuitem value="Destroy" actionListener="#{tasksDetailsBean.destroy()}" update="taskDetail, workflowEvents:workflowEvents, @form"
+        <p:menuitem value="#{ivy.cm.co('/common/destroy')}" actionListener="#{tasksDetailsBean.destroy()}" update="taskDetail, workflowEvents:workflowEvents, @form"
           disabled="#{!task.state.active}" id="taskDestoryBtn" icon="si si-delete-1" />
-        <p:menuitem value="Clear delay" actionListener="#{tasksDetailsBean.clearDelay}" update="taskDetail, workflowEvents:workflowEvents, @form"
+        <p:menuitem value="#{ivy.cm.co('/common/clearDelay')}" actionListener="#{tasksDetailsBean.clearDelay}" update="taskDetail, workflowEvents:workflowEvents, @form"
           disabled="#{task.delayTimestamp == null}" icon="si si-button-refresh-arrows" id="taskClearDelayBtn" />
-        <p:menuitem value="Expire now" actionListener="#{tasksDetailsBean.expireTask}" update="taskDetail, workflowEvents:workflowEvents, @form"
+        <p:menuitem value="#{ivy.cm.co('/common/expireNow')}" actionListener="#{tasksDetailsBean.expireTask}" update="taskDetail, workflowEvents:workflowEvents, @form"
           disabled="#{!task.state.active}" icon="si si-alarm-bell-timer"
           rendered="#{permissionsBean.demoDevModeOrAdmin}" id="taskExpireBtn" />
       </p:menu>

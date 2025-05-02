@@ -4,7 +4,7 @@
   xmlns:pe="http://primefaces.org/ui/extensions">
 <h:body>
   <ui:composition template="/includes/template/statisticsCard.xhtml">
-    <ui:define name="title">All tasks</ui:define>
+    <ui:define name="title">#{ivy.cm.co('/statistics/allTasks')}</ui:define>
     <ui:define name="content"><h:outputText value="#{statisticsBean.allTasks}" /></ui:define>
   </ui:composition>
 </h:body>

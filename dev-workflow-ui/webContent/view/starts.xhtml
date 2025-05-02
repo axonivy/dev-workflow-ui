@@ -14,10 +14,10 @@
             selectionMode="single" widgetVar="projectStartsTable" styleClass="starts-table" resizableColumns="true">
             <f:facet name="header">
               <div class="flex justify-content-between mb-3 pretty-search">
-                <h4 class="m-0">Processes</h4>
+                <h4 class="m-0">#{ivy.cm.co('/starts/processes')}</h4>
                 <div class="ui-input-icon-left filter-container">
                   <i class="pi pi-search" />
-                  <p:inputText id="globalFilter" placeholder="Search"
+                  <p:inputText id="globalFilter" placeholder="#{ivy.cm.co('/starts/search')}"
                     value="#{processesBean.startsDataModel.filter}" onkeyup="PF('projectStartsTable').filter()" />
                 </div>
               </div>
@@ -27,25 +27,25 @@
             <p:column width="20px" resizable="false">
               <h:outputText id="processStartIcon" class="#{start.icon} si-lg vertical-align-middle" />
             </p:column>
-            <p:column headerText="Process" sortBy="#{start.displayName}" filterBy="#{start.displayName}">
+            <p:column headerText="#{ivy.cm.co('/starts/process')}" sortBy="#{start.displayName}" filterBy="#{start.displayName}">
               <h:outputText id="startName" value="#{start.displayName}" styleClass="start-name text-primary-color"/>
               <div class="start-description overflow-hidden-ellipsis text-sm">
                 <h:outputText id="startDescription" value="#{start.description}" />
                 <p:tooltip for="startDescription" position="top" value="#{start.description}" styleClass="text" />
               </div>
             </p:column>
-            <p:column headerText="Application" width="120px" sortBy="#{start.applicationName}" responsivePriority="4"
+            <p:column headerText="#{ivy.cm.co('/starts/application')}" width="120px" sortBy="#{start.applicationName}" responsivePriority="4"
               rendered="#{!processesBean.startsDataModel.onlySingleApplication}" filterBy="#{start.applicationName}">
               <h:outputText value="#{start.applicationName}" />
             </p:column>
-            <p:column headerText="Project" width="120px" sortBy="#{start.projectName}" responsivePriority="4"
+            <p:column headerText="#{ivy.cm.co('/starts/project')}" width="120px" sortBy="#{start.projectName}" responsivePriority="4"
               rendered="#{!processesBean.startsDataModel.onlySingleProject}" filterBy="#{start.projectName}">
               <div class="overflow-hidden-ellipsis">
                 <h:outputText id="project" value="#{start.projectName}" />
                 <p:tooltip for="project" position="top" value="#{start.projectName}" styleClass="text" />
               </div>
             </p:column>
-            <p:column headerText="Category" width="120px" sortBy="#{start.category.name}" responsivePriority="3"
+            <p:column headerText="#{ivy.cm.co('/starts/category')}" width="120px" sortBy="#{start.category.name}" responsivePriority="3"
               filterBy="#{start.category.name}">
               <div class="overflow-hidden-ellipsis">
                 <h:outputText id="category" value="#{start.category.name}" />
@@ -57,14 +57,14 @@
                 styleClass="ui-button-flat text-color action-button" />
               <p:menu id="startsActionsMenu" overlay="true" trigger="startActionsBtn" my="right top" at="right bottom"
                 style="width: 200px">
-                <p:menuitem value="Start process" action="#{start.execute}" id="startProcessBtn"
+                <p:menuitem value="#{ivy.cm.co('/common/startProcess')}" action="#{start.execute}" id="startProcessBtn"
                   icon="si si-controls-play" />
-                <p:menuitem value="Copy to clipboard" onclick="copyToClipboard('#{start.link}')" id="copyStartLinkBtn"
+                <p:menuitem value="#{ivy.cm.co('/common/copyToClipboard')}" onclick="copyToClipboard('#{start.link}')" id="copyStartLinkBtn"
                   icon="si si-hyperlink-3" />
-                <p:menuitem value="Open fullscreen" url="#{start.link}" id="openStartFullscreenBtn"
+                <p:menuitem value="#{ivy.cm.co('/common/openFullscreen')}" url="#{start.link}" id="openStartFullscreenBtn"
                   rendered="#{start.embedInFrame}" icon="si si-expand-6" />
                 <p:menuitem id="openProcessViewer"
-                  value="#{start.isProcessStart() ? 'Open Process Viewer' : 'Open Case Map Viewer'}"
+                  value="#{start.isProcessStart() ? ivy.cm.co('/common/openProcessViewer') : ivy.cm.co('/common/openCaseMapViewer')}"
                   oncomplete="PF('process-viewer-dlg').show()" update="startsForm:processViewer:processViewerDialog"
                   rendered="#{start.viewerAllowed}"
                   actionListener="#{processesBean.setViewerStart(start.viewerLink)}"

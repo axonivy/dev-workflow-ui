@@ -9,15 +9,15 @@
       <h:form id="casesForm">
         <div class="card">
           <p:dataTable id="cases" var="case" value="#{casesBean.casesDataModel}" widgetVar="casesTable"
-            styleClass="ui-fluid" emptyMessage="No Cases found with given criteria" paginatorPosition="bottom" rows="10"
+            styleClass="ui-fluid" emptyMessage="#{ivy.cm.co('/common/noCasesFound')}" paginatorPosition="bottom" rows="10"
             lazy="true" paginator="true" paginatorAlwaysVisible="false" selectionMode="single" resizableColumns="true">
             <p:ajax event="rowSelect" listener="#{casesBean.redirectToCaseRow}" />
             <f:facet name="header">
               <div class="flex justify-content-between mb-3 pretty-search">
-                <h4 class="m-0">Cases</h4>
+                <h4 class="m-0">#{ivy.cm.co('/sidebar/cases')}</h4>
                 <h:panelGroup id="showAllCasesSwitch_container" styleClass="ml-auto inline-flex align-items-center"
                   layout="block" rendered="#{permissionsBean.admin}">
-                  <h:outputText value="Show all" styleClass="mr-2" />
+                  <h:outputText value="#{ivy.cm.co('/common/showAll')}" styleClass="mr-2" />
                   <p:toggleSwitch id="showAllCasesSwitch" value="#{casesBean.casesDataModel.showAll}"
                     disabled="#{!permissionsBean.admin}">
                     <p:ajax update="cases" />
@@ -28,30 +28,30 @@
                 <div class="ui-input-icon-left filter-container ml-3">
                   <i class="pi pi-search" />
                   <p:inputText id="globalFilter" value="#{casesBean.casesDataModel.filter}"
-                    onkeyup="PF('casesTable').filter()" placeholder="Search" />
+                    onkeyup="PF('casesTable').filter()" placeholder="#{ivy.cm.co('/common/search')}" />
                 </div>
               </div>
             </f:facet>
 
-            <p:column headerText="State" filterBy="#{case.businessState}" sortBy="#{case.businessState}" width="90px" resizable="false">
+            <p:column headerText="#{ivy.cm.co('/common/state')}" filterBy="#{case.businessState}" sortBy="#{case.businessState}" width="90px" resizable="false">
               <jc:stateBadge id="caseState" data="#{case}" />
             </p:column>
 
-            <p:column headerText="Name" filterBy="#{case.getName(case)}" sortBy="#{case.name}" responsivePriority="1">
+            <p:column headerText="#{ivy.cm.co('/common/name')}" filterBy="#{case.getName(case)}" sortBy="#{case.name}" responsivePriority="1">
               <h:outputText id="caseName" value="#{casesBean.getName(case)}" />
             </p:column>
 
-            <p:column headerText="Creator" filterBy="#{case.creatorUserName}" sortBy="#{case.creatorUserName}"
+            <p:column headerText="#{ivy.cm.co('/common/creator')}" filterBy="#{case.creatorUserName}" sortBy="#{case.creatorUserName}"
               responsivePriority="3" width="160">
               <jc:user user="#{case.creatorUser}" />
             </p:column>
 
-            <p:column headerText="Start" sortBy="#{case.startTimestamp}" sortOrder="descending" responsivePriority="3"
+            <p:column headerText="#{ivy.cm.co('/common/start')}" sortBy="#{case.startTimestamp}" sortOrder="descending" responsivePriority="3"
               width="90">
               <jc:time id="startTime" datetime="#{case.startTimestamp}" />
             </p:column>
 
-            <p:column headerText="End" sortBy="#{case.endTimestamp}" responsivePriority="4" width="90">
+            <p:column headerText="#{ivy.cm.co('/common/end')}" sortBy="#{case.endTimestamp}" responsivePriority="4" width="90">
               <jc:time id="endTime" datetime="#{case.endTimestamp}" />
             </p:column>
 
@@ -60,9 +60,9 @@
                 styleClass="ui-button-flat text-color action-button" />
               <p:menu id="caseActionsMenu" overlay="true" trigger="caseActionsBtn" my="right top" at="right bottom"
                 style="width: 200px">
-                <p:menuitem id="openCaseDetailsBtn" value="Open case details" url="#{case.detailLink}"
+                <p:menuitem id="openCaseDetailsBtn" value="#{ivy.cm.co('/common/openDetails')}" url="#{case.detailLink}"
                   icon="si si-information-circle" />
-                <p:menuitem value="Rerun process" actionListener="#{casesBean.rerunProcess(case)}"
+                <p:menuitem value="#{ivy.cm.co('/common/rerunProcess')}" actionListener="#{casesBean.rerunProcess(case)}"
                   id="rerunCaseProcessBtn" icon="si si-button-refresh-arrow" />
               </p:menu>
             </p:column>

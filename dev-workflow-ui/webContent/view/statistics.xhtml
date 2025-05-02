@@ -6,9 +6,6 @@
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
       <f:event type="preRenderView" listener="#{loginBean.redirectIfNotDevModeOrAdmin}" />
-      <div class="flex align-items-center m-3">
-        <h4 class="m-0">Statistics</h4>
-      </div>
       <div class="flex flex-wrap">
         <ui:include src="/includes/components/statistics/casesAll.xhtml" />
         <ui:include src="/includes/components/statistics/caseStateGraph.xhtml" />

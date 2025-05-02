@@ -9,8 +9,8 @@
 <cc:implementation>
   <ui:param name="state" value="#{stateBadgeBean.toStateBadgeModel(cc.attrs.data)}" />
   <h:panelGroup id="stateBadge" styleClass="state-badge #{state.cssClass}">
-    <h:outputText id="stateName" value="#{state.name}" />
-    <p:tooltip for="stateBadge" id="tooltip" value="#{state.tooltip}" position="top"/>
+    <h:outputText id="stateName" value="#{ivy.cm.co(state.nameCmsPath)}" />
+    <p:tooltip for="stateBadge" id="tooltip" value="#{ivy.cm.co(state.tooltipCmsPath)}" position="top"/>
   </h:panelGroup>
 </cc:implementation>
 </html>

@@ -14,14 +14,15 @@
 
           <p:dataTable id="webServices" var="webservice" rows="12" paginator="true"
             value="#{webServicesBean.webServices}" paginatorPosition="bottom" paginatorAlwaysVisible="false"
+            emptyMessage="#{ivy.cm.co('/webservices/noWebServicesFound')}"
             selectionMode="single" rowKey="#{webservice.link}" widgetVar="webServicesTable">
             <p:ajax event="rowSelect" listener="#{webServicesBean.executeRow}" />
             <f:facet name="header">
               <div class="flex justify-content-between mb-3 pretty-search">
-                <h4 class="m-0">Web Service Processes</h4>
+                <h4 class="m-0">#{ivy.cm.co('/webservices/webServiceProcesses')}</h4>
                 <div class="ui-input-icon-left filter-container">
                   <i class="pi pi-search" />
-                  <p:inputText id="globalFilter" placeholder="Search" value="#{webServicesBean.filter}"
+                  <p:inputText id="globalFilter" placeholder="#{ivy.cm.co('/common/search')}" value="#{webServicesBean.filter}"
                     onkeyup="PF('webServicesTable').filter()"/>
                 </div>
               </div>
@@ -30,13 +31,13 @@
             <p:column width="20">
               <i class="si si-lg si-network-arrow" />
             </p:column>
-            <p:column headerText="Name" sortBy="#{webservice.name}" filterBy="#{webservice.name}">
+            <p:column headerText="#{ivy.cm.co('/common/name')}" sortBy="#{webservice.name}" filterBy="#{webservice.name}">
               <h:outputText value="#{webservice.name}" />
             </p:column>
-            <p:column headerText="Process Name" sortBy="#{webservice.processName}" filterBy="#{webservice.processName}">
+            <p:column headerText="#{ivy.cm.co('/common/processName')}" sortBy="#{webservice.processName}" filterBy="#{webservice.processName}">
               <h:outputText value="#{webservice.processName}" />
             </p:column>
-            <p:column headerText="Link" sortBy="#{webservice.link}" responsivePriority="4">
+            <p:column headerText="#{ivy.cm.co('/common/link')}" sortBy="#{webservice.link}" responsivePriority="4">
               <h:outputText value="#{webservice.link}" />
             </p:column>
             <p:column width="80">

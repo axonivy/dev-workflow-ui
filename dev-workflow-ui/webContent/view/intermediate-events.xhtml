@@ -9,7 +9,7 @@
       <f:event type="preRenderView" listener="#{loginBean.redirectIfNotDevModeOrAdmin}" />
 
       <div class="card">
-        <h4 class="mb-3">Intermediate Event Beans</h4>
+        <h4 class="mb-3">#{ivy.cm.co('/intermediateEvents/intermediateEventsBeans')}</h4>
 
         <h:form id="intermediateEventBeansForm">
           <p:growl id="growl" showDetail="true"/>
@@ -19,13 +19,13 @@
             rowKey="#{intermediateEvent.processElementId}">
             <p:ajax event="rowSelect" listener="#{intermediateEventsBean.onRowSelect}" update="@form" />
 
-            <p:column headerText="Name" sortBy="#{intermediateEvent.name}">
+            <p:column headerText="#{ivy.cm.co('/common/name')}" sortBy="#{intermediateEvent.name}">
               <h:outputText value="#{intermediateEvent.name}" />
             </p:column>
-            <p:column headerText="Description" colspan="2" sortBy="#{intermediateEvent.description}">
+            <p:column headerText="#{ivy.cm.co('/common/description')}" colspan="2" sortBy="#{intermediateEvent.description}">
               <h:outputText value="#{intermediateEvent.description}" />
             </p:column>
-            <p:column headerText="Waiting" sortBy="#{intermediateEvent.size}" sortOrder="ascending">
+            <p:column headerText="#{ivy.cm.co('/intermediateEvents/waiting')}" sortBy="#{intermediateEvent.size}" sortOrder="ascending">
               <h:outputText value="#{intermediateEvent.size}" />
             </p:column>
 

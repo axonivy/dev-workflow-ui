@@ -8,7 +8,10 @@ import java.util.Date;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
+import ch.ivyteam.ivy.security.ISession;
+
 public class DateUtil {
+
   private static final PrettyTime pretty = new PrettyTime();
   private static final DateTimeFormatter defaultFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm");
 
@@ -16,11 +19,11 @@ public class DateUtil {
     if (date == null) {
       return "";
     }
-    LocalDateTime dateNow = LocalDateTime.now();
-    LocalDateTime dateThen = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+    var dateNow = LocalDateTime.now();
+    var dateThen = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
     long hoursPassed = Duration.between(dateThen, dateNow).toHours();
     if (hoursPassed < 24) {
-      return pretty.format(date);
+      return pretty.setLocale(ISession.current().getFormattingLocale()).format(date);
     }
     return dateThen.format(defaultFormatter).toString();
   }
@@ -33,7 +36,10 @@ public class DateUtil {
     if (date == null) {
       return "";
     }
-    LocalDateTime localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-    return localDate.format(format).toString();
+    return date.toInstant()
+            .atZone(ZoneId.systemDefault())
+            .toLocalDateTime()
+            .format(format)
+            .toString();
   }
 }

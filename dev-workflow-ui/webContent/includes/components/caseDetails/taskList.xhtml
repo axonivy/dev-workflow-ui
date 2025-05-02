@@ -9,7 +9,7 @@
     paginatorPosition="bottom" paginator="true" paginatorAlwaysVisible="false" selectionMode="single">
     <p:ajax event="rowSelect" listener="#{tasksBean.displayTaskRow}" update="@form" />
 
-    <p:column headerText="State" filterBy="#{task.businessState}" width="90px" styleClass="center-table-cell">
+    <p:column headerText="#{ivy.cm.co('/common/state')}" filterBy="#{task.businessState}" width="90px" styleClass="center-table-cell">
       <jc:stateBadge id="taskState" data="#{task}"/>
     </p:column>
 
@@ -19,7 +19,7 @@
       <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
     </p:column>
 
-    <p:column headerText="Name" filterBy="#{task.name}">
+    <p:column headerText="#{ivy.cm.co('/common/name')}" filterBy="#{task.name}">
       <h:outputText id="taskName" value="#{task.name}"/>
     </p:column>
 

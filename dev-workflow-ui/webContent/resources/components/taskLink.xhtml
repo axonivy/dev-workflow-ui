@@ -15,8 +15,8 @@
     <h:outputText id="taskLink" value="#{task.name}" styleClass="ml-2"/>
     <p:tooltip for="taskLink" position="top">
       <h:panelGroup layout="block" styleClass="py-2">
-        <h:outputText value="ID: #{task.uuid}"/><br/>
-        State: <jc:stateBadge id="taskState" data="#{cc.attrs.task}"/>
+        <h:outputText value="#{ivy.cm.co('/common/id')}: #{task.uuid}"/><br/>
+        #{ivy.cm.co('/common/state')}: <jc:stateBadge id="taskState" data="#{cc.attrs.task}"/>
       </h:panelGroup>
     </p:tooltip>
   </h:link>

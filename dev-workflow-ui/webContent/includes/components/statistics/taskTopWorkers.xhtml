@@ -5,14 +5,14 @@
 <h:body>
   <ui:composition template="/includes/template/statisticsCardBare.xhtml">
     <ui:define name="content">
-      <h4>Top task workers</h4>
+      <h4>#{ivy.cm.co('/statistics/topTaskWorkers')}</h4>
       <p:barChart id="topTaskWorkersChart" model="#{statisticsBean.topTaskWorkersModel}" style="max-height: 20rem; max-width: 36rem;"
         rendered="#{statisticsBean.topTaskWorkersModel != null}" />
       <h:panelGroup layout="block" rendered="#{statisticsBean.topTaskWorkersModel == null}"
         styleClass="h-full flex flex-column align-items-center justify-content-center"
         style="min-width:400px; min-height:200px;">
         <i class="pi pi-chart-bar text-7xl mb-4" />
-        <h:outputText value="No enough data available" />
+        <h:outputText value="#{ivy.cm.co('/statistics/notEnoughData')}" />
       </h:panelGroup>
     </ui:define>
   </ui:composition>

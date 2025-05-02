@@ -18,7 +18,7 @@ import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.ivy.security.identity.core.auth.oauth2.OAuth2Url;
 import ch.ivyteam.ivy.security.identity.spi.auth.oauth2.OAuth2Authenticator;
 import ch.ivyteam.ivy.security.restricted.ISecurityContextInternal;
-import ch.ivyteam.workflowui.login.LoginTableBean.User;
+import ch.ivyteam.workflowui.login.SwitchUserBean.User;
 import ch.ivyteam.workflowui.util.PermissionsUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.UrlUtil;
@@ -43,9 +43,9 @@ public class LoginBean {
   }
 
   public void loginFromTable(SelectEvent<?> event) {
-    Object object = event.getObject();
-    if (object instanceof User) {
-      login((User) object);
+    var object = event.getObject();
+    if (object instanceof User user) {
+      login(user);
     }
   }
 
@@ -63,7 +63,7 @@ public class LoginBean {
 
   private void login(User user) {
     username = user.getName();
-    LoginUtil.tableLogin(username, getOriginalUrl());
+    LoginUtil.switchUser(username, getOriginalUrl());
   }
 
   public void customLogin() {

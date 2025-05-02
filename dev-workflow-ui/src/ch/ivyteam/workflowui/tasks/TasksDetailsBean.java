@@ -20,7 +20,6 @@ import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.ResponseHelper;
-import ch.ivyteam.workflowui.util.RoleUtil;
 import ch.ivyteam.workflowui.util.TaskUtil;
 import ch.ivyteam.workflowui.util.UserUtil;
 
@@ -115,7 +114,7 @@ public class TasksDetailsBean {
   }
 
   public List<IRole> getAllRoles() {
-    return RoleUtil.getRoles();
+    return Ivy.security().roles().all();
   }
 
   public void delegateTask() {
@@ -158,26 +157,33 @@ public class TasksDetailsBean {
     return validState && notCurrentSession && isResponsible() && currentIsWorkerUser() ? "warn" : "info";
   }
 
-  public String getInfoBannerMessage() {
+  public String getInfoBannerMessageCmsPath() {
     return switch (selectedTask.getState()) {
       case CREATED, RESUMED, PARKED -> {
         if (currentIsWorkerUser()) {
-          yield "You are currently working on the task in a different session. You may reset the task and start it again if you have closed your browser.";
+          yield "/task/workingOn";
         } else {
-          yield "You cannot work on the task because user '%s' is currently working on it.".formatted(selectedTask.getWorkerUser().getName());
+          yield "/task/canNotWork";
         }
       }
       case DONE, READY_FOR_JOIN, JOINING, JOIN_FAILED -> {
         if (currentIsWorkerUser()) {
-          yield "You already have completed the task";
+          yield "/task/completedByCurrent";
         } else {
-          yield "Task has already been completed by user '%s'"
-              .formatted(selectedTask.getWorkerUser().getName());
+          yield "/task/completedByOther";// "Task has already been completed by user '%s'".formatted(selectedTask.getWorkerUser().getName());
         }
       }
-      case DESTROYED -> "You cannot work on the task because it was destroyed";
-      default -> "invalid state";
+      case DESTROYED -> "/task/destroyed";
+      default -> "/task/invalid";
     };
+  }
+
+  public String getWorkerUserName() {
+    var user = selectedTask.getWorkerUser();
+    if (user == null) {
+      return "";
+    }
+    return user.getName();
   }
 
   private boolean isResponsible() {

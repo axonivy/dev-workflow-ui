@@ -5,11 +5,12 @@
   xmlns:jc="http://xmlns.jcp.org/jsf/composite/components">
 
   <p:dataTable id="boundarySignalsTable" var="receiver" value="#{signalsBean.boundarySignalModel}" lazy="true"
+    emptyMessage="#{ivy.cm.co('/signals/noSignalsFound')}"
     rows="5" paginator="true" paginatorPosition="bottom" paginatorAlwaysVisible="false">
-    <p:column headerText="Signal pattern" sortBy="#{receiver.signalPattern}" sortOrder="ascending">
+    <p:column headerText="#{ivy.cm.co('/signals/signalPattern')}" sortBy="#{receiver.signalPattern}" sortOrder="ascending">
       <h:outputText value="#{receiver.signalPattern}" />
     </p:column>
-    <p:column headerText="Waiting task" sortBy="#{receiver.waitingTask}">
+    <p:column headerText="#{ivy.cm.co('/signals/waitingTask')}" sortBy="#{receiver.waitingTask}">
       <jc:taskLink task="#{receiver.waitingTask}" id="waitingTask" />
     </p:column>
     <p:column styleClass="table-btn-1">
