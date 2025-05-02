@@ -10,6 +10,8 @@ import org.primefaces.model.menu.MenuModel;
 
 import ch.ivyteam.ivy.bpm.error.BpmError;
 import ch.ivyteam.ivy.dialog.execution.api.DialogInstance;
+import ch.ivyteam.ivy.request.EngineUriResolver;
+import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
 import ch.ivyteam.workflowui.util.TaskUtil;
@@ -77,5 +79,9 @@ public class FrameIvyDevWfBean {
 
   public void setOriginalUrl(String originalUrl) {
     this.originalUrl = originalUrl;
+  }
+
+  public String getBaseUrl() {
+    return EngineUriResolver.instance().external().resolve(ISecurityContext.current().contextPath()).toString();
   }
 }

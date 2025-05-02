@@ -16,6 +16,8 @@
 
   <title><ui:insert name="title">#{ivyAdvisor.applicationName} #{ivyAdvisor.versionShort}</ui:insert></title>
   <link rel="shortcut icon" href="#{resource['ivy-branding:favicon']}" />
+
+  <ui:insert name="head" />
 </h:head>
 <h:body>
   <div class="layout-wrapper layout-topbar-#{ivyFreyaTheme.mode} layout-menu-#{ivyFreyaTheme.mode} layout-horizontal layout-designer">
