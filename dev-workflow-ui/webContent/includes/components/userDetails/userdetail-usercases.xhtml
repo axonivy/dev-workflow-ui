@@ -29,8 +29,7 @@
         <p:column width="30px" resizable="false">
           <p:commandButton id="caseActionsBtn" icon="si si-navigation-menu-horizontal-filled"
             styleClass="ui-button-flat text-color action-button" />
-          <p:menu id="caseActionsMenu" overlay="true" trigger="caseActionsBtn" my="right top" at="right bottom"
-            style="width: 200px">
+          <p:menu id="caseActionsMenu" overlay="true" trigger="caseActionsBtn" my="right top" at="right bottom">
             <p:menuitem id="openCaseDetailsBtn" value="#{ivy.cm.co('/common/openDetails')}" url="#{case.detailLink}"
               icon="si si-information-circle" />
           </p:menu>

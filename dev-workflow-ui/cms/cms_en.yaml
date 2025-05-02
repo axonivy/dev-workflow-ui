@@ -25,6 +25,7 @@ cleanup:
 common:
   author: Author
   businessCase: Business Case
+  cancel: Cancel
   category: Category
   clearDelay: Clear delay
   completedOn: Completed on
@@ -40,6 +41,7 @@ common:
   delegate: Delegate
   description: Description
   destroy: Destroy
+  element: Element
   email: Email
   end: End
   event: Event
@@ -50,14 +52,17 @@ common:
   formattingLanguage: Formatting Language
   fullname: Fullname
   id: ID
+  key: Key
   language: Language
   link: Link
   loading: Loading
   name: Name
+  noCaseMapsFound: No case maps found
   noCasesFound: No cases found
   noCustomFieldsFound: No custom fields found
-  noDocumentsFound: No Documents found
+  noDocumentsFound: No documents found
   noEventsFound: No events found
+  noTasksFound: No tasks found
   notes: Notes
   notificationChannels: Notification Channels
   openCaseMapViewer: Show Case Map
@@ -71,6 +76,7 @@ common:
   pmv: PMV
   prio: Prio
   priority: Priority
+  process: Process
   processName: Process Name
   rerunProcess: Rerun process
   reset: Reset
@@ -84,6 +90,7 @@ common:
   startTask: Start task
   startedCases: Started Cases
   state: State
+  task: Task
   technicalCase: Technical Case
   type: Type
   username: Username
@@ -123,6 +130,20 @@ enums:
     resumed: Resumed
     suspended: Suspended
     waiting_for_intermediate_event: Waiting for intermediate Event
+exception:
+  application: Application
+  attributes: Attributes
+  errorId: Error ID
+  processCallStack: Process call stack
+  requestUri: Request Uri
+  servlet: Servlet
+  stacktrace: Stacktrace
+  technicalCause: Technical cause
+  theViewOrSessionHasExpired: The view or session has expired.
+  threadLocalValues: Thread Local Values
+  thrownBy: Thrown by
+  unexpectedError: An unexpected error has occured
+  viewOrSessionExpired: View or Session expired
 frame:
   disableAutoRefresh: Disable auto refresh when changes are made to this dialog
   openCurrentProcess: Open current process start on a fullscreen page
@@ -138,7 +159,16 @@ home:
   startedProcesses: Started Processes
   toStartProcess: to start a process.
 intermediateEvents:
+  elementName: Element Name
+  elementProcessId: Element Process ID
+  eventId: Event ID
+  eventReceived: Event Received
+  events: Events
   intermediateEventsBeans: Intermediate Events Beans
+  noBeansFound: No beans found
+  result: Result
+  timeout: Timeout
+  timeoutAction: Timeout Action
   waiting: Waiting
 login:
   logInWith: Log in with
@@ -183,8 +213,10 @@ signals:
   waitingTask: Waiting Task
 starts:
   application: Application
+  areYouSure: Are you sure you didn't mean to go to starts.xhtml page?
   category: Category
   process: Process
+  processNotFound: Process start with ID ${id} could not be found.
   processes: Processes
   project: Project
   search: Search
@@ -203,11 +235,16 @@ switchUser:
   needLogin: You need to login to access that page
   noUsers: No users found
 task:
+  assignTask: Assign task
   canNotWork: You cannot work on the task because ${user} is currently working on it.
   completedByCurrent: You already have completed the task
   completedByOther: Task has already been completed by ${user}
+  delegateTask: Delegate task
+  delegateTaskToUserOrRole: Delegate the task to a specified user or role
   destroyed: You cannot work on the task because it was destroyed
   invalid: Invalid state
+  role: Rolle
+  user: User
   workingOn: You are currently working on the task in a different session. You may reset the task and start it again if you have closed your browser.
 tasks:
   noTasksFound: No tasks found

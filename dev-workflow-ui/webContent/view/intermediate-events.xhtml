@@ -15,7 +15,7 @@
           <p:growl id="growl" showDetail="true"/>
           <p:dataTable id="intermediateEventsTable" var="intermediateEvent"
             value="#{intermediateEventsBean.intermediateEvents}" rows="12" paginator="true"
-            paginatorPosition="bottom" paginatorAlwaysVisible="false" selectionMode="single"
+            paginatorPosition="bottom" paginatorAlwaysVisible="false" selectionMode="single" emptyMessage="#{ivy.cm.co('/common/noEventsFound')}"
             rowKey="#{intermediateEvent.processElementId}">
             <p:ajax event="rowSelect" listener="#{intermediateEventsBean.onRowSelect}" update="@form" />
 

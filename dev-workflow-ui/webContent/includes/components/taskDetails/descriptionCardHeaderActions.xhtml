@@ -11,7 +11,7 @@
       <p:linkButton href="#{tasksDetailsBean.executeTaskLink}" value="#{ivy.cm.co('/common/start')}"
         id="taskStartBtn" disabled="#{!task.canBeStarted()}" icon="si si-controls-play" />
 
-      <p:commandButton value="Sidesteps" styleClass="ml-2 ui-button-secondary" id="sidestepsBtn"
+      <p:commandButton value="#{ivy.cm.co('/case/sidesteps')}" styleClass="ml-2 ui-button-secondary" id="sidestepsBtn"
         rendered="#{task.renderSidestepBtn()}" icon="si si-arrow-down-1" />
       <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
         model="#{tasksDetailsBean.sidestepsMenuModel}" styleClass="menu-no-icons" />

@@ -35,8 +35,7 @@
         <p:column responsivePriority="2" width="30px" resizable="false">
           <p:commandButton id="taskActionsBtn" icon="si si-navigation-menu-horizontal-filled"
             styleClass="ui-button-flat text-color action-button" />
-          <p:menu id="taskActionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom"
-            style="width: 200px">
+          <p:menu id="taskActionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom">
             <p:menuitem id="openTaskDetailsBtn" value="#{ivy.cm.co('/common/openDetails')}" url="#{task.detailUrl}"
               icon="si si-information-circle" />
             <p:menuitem value="#{ivy.cm.co('/common/startTask')}" actionListener="#{homepageBean.executeTask(task)}"

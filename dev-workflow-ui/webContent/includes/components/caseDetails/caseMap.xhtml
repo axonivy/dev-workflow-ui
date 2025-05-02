@@ -26,7 +26,7 @@
     </h:panelGroup>
     <c:if test="#{empty casesDetailsBean.getCaseMap().stages}">
       <i class="si si-road-sign-warning mr-1"/>
-      <h:outputText value="No Case Map found." />
+      <h:outputText value="#{ivy.cm.co('/common/noCaseMapsFound')}" />
     </c:if>
   </div>
 

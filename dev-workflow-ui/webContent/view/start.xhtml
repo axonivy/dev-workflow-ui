@@ -16,9 +16,9 @@
 
       <div class="card">
         <p:staticMessage severity="error"
-          detail="Process start with id '#{processByUrlBean.startableId}' could not be found." />
+          detail="#{ivy.cm.content('/starts/processNotFound').replace('id', processByUrlBean.startableId).get()}" />
           <h:outputText rendered="#{!processByUrlBean.startableIdSet}">
-            Are you sure you didn't mean to go to <p:link outcome="starts.xhtml">starts.xhtml</p:link> page?
+            <p:link outcome="starts.xhtml">#{ivy.cm.co('/starts/areYouSure')}</p:link>
           </h:outputText>
       </div>
     </ui:define>
