@@ -10,6 +10,13 @@ const initDomSelector = () => {
     event.stopPropagation();
   };
 
+  const escapeEvent = (event) => {
+    if (event.code === 'Escape') {
+      stopEvent(event);
+      endSelectionMode();
+    }
+  }
+
   const handleElementClick = (event) => {
     stopEvent(event);
     if (!hoveredElement) {
@@ -18,7 +25,6 @@ const initDomSelector = () => {
     }
     console.log('Selected element:', hoveredElement);
     preview?.navigateTo(iframe.contentWindow.location.href, hoveredElement.id);
-    endSelectionMode();
   };
 
   const handleMouseOver = (event) => {
@@ -72,6 +78,7 @@ const initDomSelector = () => {
     doc.addEventListener('mouseup', stopEvent, { capture: true });
     doc.addEventListener('mouseover', handleMouseOver);
     doc.addEventListener('mouseout', handleMouseOut);
+    document.addEventListener('keydown', escapeEvent);
 
     console.log('Selection mode started');
   };
@@ -83,6 +90,7 @@ const initDomSelector = () => {
     doc.removeEventListener('mouseup', stopEvent, { capture: true });
     doc.removeEventListener('mouseover', handleMouseOver);
     doc.removeEventListener('mouseout', handleMouseOut);
+    document.removeEventListener('keydown', escapeEvent);
 
     if (selectionOverlay) {
       doc.body.removeChild(selectionOverlay);
