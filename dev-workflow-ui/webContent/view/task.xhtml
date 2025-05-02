@@ -63,14 +63,14 @@
       <jc:processViewer id="processViewer" title="Process of: #{tasksDetailsBean.selectedTask.name}"
         link="#{tasksDetailsBean.viewerLink}" />
 
-      <p:dialog header="Delegate task" id="delegateTaskDialog" widgetVar="delegateTaskModal" modal="true" width="400">
+      <p:dialog header="#{ivy.cm.co('/task/delegateTask')}" id="delegateTaskDialog" widgetVar="delegateTaskModal" modal="true" width="400">
         <h:form id="delegateTaskForm">
-          <h:outputText value="Delegate the task to a specified user or group" />
+          <h:outputText value="#{ivy.cm.co('/task/delegateTaskToUserOrRole')}" />
           <h:panelGroup id="delegateElements" layout="block" styleClass="ui-fluid">
             <p:selectOneRadio value="#{tasksDetailsBean.showUsers}" layout="responsive" columns="2"
               styleClass="mt-2">
-              <f:selectItem itemLabel="User" itemValue="true" />
-              <f:selectItem itemLabel="Role" itemValue="false" />
+              <f:selectItem itemLabel="#{ivy.cm.co('/task/user')}" itemValue="true" />
+              <f:selectItem itemLabel="#{ivy.cm.co('/task/role')}" itemValue="false" />
               <p:ajax update="delegateElements" event="valueChange" />
             </p:selectOneRadio>
             <p:selectOneMenu styleClass="mt-2" value="#{tasksDetailsBean.delegateMember}"
@@ -85,10 +85,10 @@
             </p:selectOneMenu>
           </h:panelGroup>
           <h:panelGroup layout="block" styleClass="mt-2 dialog-button-container">
-            <p:commandButton id="delegateProceedButton" value="Assign task"
+            <p:commandButton id="delegateProceedButton" value="#{ivy.cm.co('/task/assignTask')}"
               actionListener="#{tasksDetailsBean.delegateTask}" icon="si si-move-to-bottom" update="taskDetail"
               onsuccess="PF('delegateTaskModal').hide();" />
-            <p:commandButton value="Cancel" styleClass="ui-button-secondary ui-button-flat dialog-cancel-button"
+            <p:commandButton value="#{ivy.cm.co('/common/cancel')}" styleClass="ui-button-secondary ui-button-flat dialog-cancel-button"
               onclick="PF('delegateTaskModal').hide();" />
           </h:panelGroup>
         </h:form>

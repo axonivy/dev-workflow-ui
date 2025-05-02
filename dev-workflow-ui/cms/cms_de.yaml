@@ -25,6 +25,7 @@ cleanup:
 common:
   author: Autor
   businessCase: Business Fall
+  cancel: Abbrechen
   category: Kategorie
   clearDelay: Verzugsdatum löschen
   completedOn: Beendet am
@@ -40,6 +41,7 @@ common:
   delegate: Delegieren
   description: Beschreibung
   destroy: Zerstören
+  element: Element
   email: Email
   end: Ende
   event: Event
@@ -50,14 +52,17 @@ common:
   formattingLanguage: Formatierungs Sprache
   fullname: Vollständiger Name
   id: ID
+  key: Schlüssel
   language: Sprache
   link: Link
   loading: Laden
   name: Name
+  noCaseMapsFound: Keine Case Maps gefunden
   noCasesFound: Keine Fälle gefunden
   noCustomFieldsFound: Keine benutzerdefinierten Felder gefunden
   noDocumentsFound: Keine Dokumente gefunden
-  noEventsFound: In Vollbildmodus öffnen
+  noEventsFound: Keine Ereignisse gefunden
+  noTasksFound: Keine Aufgaben gefunden
   notes: Notizen
   notificationChannels: Benachrichtigungs Kanäle
   openCaseMapViewer: Case Map anzeigen
@@ -71,6 +76,7 @@ common:
   pmv: PMV
   prio: Prio
   priority: Priorität
+  process: Prozess
   processName: Prozess Name
   rerunProcess: Prozess erneut starten
   reset: Reset
@@ -84,6 +90,7 @@ common:
   startTask: Aufgabe starten
   startedCases: Gestartete Fälle
   state: Status
+  task: Aufgabe
   technicalCase: Technischer Fall
   type: Typ
   username: Benutzername
@@ -123,6 +130,20 @@ enums:
     resumed: Aufgenommen
     suspended: Ausgesetzt
     waiting_for_intermediate_event: Wartend auf intermediate Event
+exception:
+  application: Applikation
+  attributes: Attribute
+  errorId: Fehler ID
+  processCallStack: Prozess Aufruf Stack
+  requestUri: Request Uri
+  servlet: Servlet
+  stacktrace: Stacktrace
+  technicalCause: Technischer Grund
+  theViewOrSessionHasExpired: Die Ansicht oder Sitzung ist abgelaufen.
+  threadLocalValues: Thread Local Values
+  thrownBy: Geworfen von
+  unexpectedError: Ein unerwarteter Fehler ist aufgetreten
+  viewOrSessionExpired: Ansicht oder Sitzung abgelaufen
 frame:
   disableAutoRefresh: Deaktiviere automatisches neu laden der Seite wenn Änderungen an diesem Dialog gemacht werden
   openCurrentProcess: Aktueller Prozess Start in einer Vollbildansicht anzeigen
@@ -138,7 +159,16 @@ home:
   startedProcesses: Gestartete Prozesse
   toStartProcess: um einen Prozess zu starten.
 intermediateEvents:
+  elementName: Element Name
+  elementProcessId: Element Prozess ID
+  eventId: Ereigniss ID
+  eventReceived: Keine Beans gefunden
+  events: Ereignisse
   intermediateEventsBeans: Intermediate Events Beans
+  noBeansFound: Keine Beans gefunden
+  result: Ergebniss
+  timeout: Timeout
+  timeoutAction: Timeout Aktion
   waiting: Wartend
 login:
   logInWith: Anmelden mit
@@ -183,8 +213,10 @@ signals:
   waitingTask: Wartende Aufgabe
 starts:
   application: Applikation
+  areYouSure: Bist Du sicher, dass Du nicht auf die starts.xhtml Seite wolltest?
   category: Kategorie
   process: Prozess
+  processNotFound: Prozess Start mit ID ${id} konnte nicht gefunden werden.
   processes: Prozesse
   project: Projekt
   search: Suchen
@@ -203,11 +235,16 @@ switchUser:
   needLogin: Du musst Dich einloggen um auf diese Seite zugreifen zu können
   noUsers: Keine Benutzer gefunden
 task:
+  assignTask: Aufgabe zuweisen
   canNotWork: Du kannst an dieser Aufgabe nicht arbeiten, weil ${user} arbeitet bereits daran.
   completedByCurrent: Du hast diese Aufgabe bereits abgeschlossen.
   completedByOther: Aufgabe wurde bereits von ${user} abgeschlossen.
+  delegateTask: Aufgabe delegieren
+  delegateTaskToUserOrRole: Delegiere den Task zu einem Benutzer oder an eine Rolle
   destroyed: Du kannst an dieser Aufgabe nicht arbeiten, weil diese Aufgabe zerstört wurde.
   invalid: Ungültiger Status
+  role: Rolle
+  user: Benutzer
   workingOn: Du arbeitest bereits an dieser Aufgabe, aber in einer anderen Sitzung. Du kannst diese Aufgabe zurücksetzen, falls Du den anderen Browser bereits geschlossen hast.
 tasks:
   noTasksFound: Keine Aufgaben gefunden

@@ -17,17 +17,17 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="m-0">Description</h4>
+                <h4 class="m-0">#{ivy.cm.co('/common/description')}</h4>
               </div>
               <p:panelGrid id="intermediateElement" columns="2" layout="flex"
                 columnClasses="col-12 md:col-3, col-12 md:col-9">
-                <h:outputText value="Element Process ID" styleClass="details-description-label" />
+                <h:outputText value="#{ivy.cm.co('/intermediateEvents/elementProcessId')}" styleClass="details-description-label" />
                 <h:outputText value="#{intermediateElement.processElementId}" id="id" />
 
-                <h:outputText value="Element Name" styleClass="details-description-label" />
+                <h:outputText value="#{ivy.cm.co('/intermediateEvents/elementName')}" styleClass="details-description-label" />
                 <h:outputText value="#{intermediateElement.name}" id="name" />
 
-                <h:outputText value="Description" styleClass="details-description-label" />
+                <h:outputText value="#{ivy.cm.co('/common/description')}" styleClass="details-description-label" />
                 <h:outputText value="#{intermediateElement.description}" id="description" />
               </p:panelGrid>
             </div>
@@ -36,37 +36,37 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="m-0">Events</h4>
+                <h4 class="m-0">#{ivy.cm.co('/intermediateEvents/events')}</h4>
               </div>
               <p:dataTable var="event" value="#{intermediateEventDetailsBean.selectedIntermediateElement.eventModel}"
-                id="eventsTable" rows="10" paginator="true" paginatorPosition="bottom"
+                id="eventsTable" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{ivy.cm.co('/intermediateEvents/noBeansFound')}"
                 paginatorAlwaysVisible="false" lazy="true">
 
-                <p:column headerText="ID" width="50" sortBy="#{event.id}" sortOrder="ascending" responsivePriority="3">
+                <p:column headerText="#{ivy.cm.co('/common/id')}" width="50" sortBy="#{event.id}" sortOrder="ascending" responsivePriority="3">
                   <h:outputText value="#{event.id}" />
                 </p:column>
-                <p:column headerText="State" width="60" sortBy="#{event.state}">
+                <p:column headerText="#{ivy.cm.co('/common/state')}" width="60" sortBy="#{event.state}">
                   <h:panelGroup id="eventStateIcon" styleClass="flex justify-content-center">
                     <i class="si-lg #{intermediateEventDetailsBean.getEventStateIconCss(event)}" />
                   </h:panelGroup>
                   <p:tooltip id="eventStateTooltip" for="eventStateIcon" value="#{event.state}" position="top" />
                 </p:column>
-                <p:column headerText="Task" sortBy="#{event.task}" width="200">
+                <p:column headerText="#{ivy.cm.co('/common/task')}" sortBy="#{event.task}" width="200">
                   <jc:taskLink task="#{event.task}" id="event-task" />
                 </p:column>
-                <p:column headerText="Event ID" sortBy="#{event.eventIdentifier}" width="80">
+                <p:column headerText="#{ivy.cm.co('/intermediateEvents/eventId')}" sortBy="#{event.eventIdentifier}" width="80">
                   <h:outputText value="#{event.eventIdentifier}" />
                 </p:column>
-                <p:column headerText="Event received" sortBy="#{event.eventTimestamp}">
+                <p:column headerText="#{ivy.cm.co('/intermediateEvents/eventReceived')}" sortBy="#{event.eventTimestamp}">
                   <h:outputText value="#{event.eventTimestamp}" />
                 </p:column>
-                <p:column headerText="Timeout" sortBy="#{event.timeoutTimestamp}" responsivePriority="4">
+                <p:column headerText="#{ivy.cm.co('/intermediateEvents/timeout')}" sortBy="#{event.timeoutTimestamp}" responsivePriority="4">
                   <h:outputText value="#{event.timeoutTimestamp}" />
                 </p:column>
-                <p:column headerText="Timeout action" sortBy="#{event.timeoutAction}" responsivePriority="4">
+                <p:column headerText="#{ivy.cm.co('/intermediateEvents/timeoutAction')}" sortBy="#{event.timeoutAction}" responsivePriority="4">
                   <h:outputText value="#{event.timeoutAction}" />
                 </p:column>
-                <p:column headerText="Result">
+                <p:column headerText="#{ivy.cm.co('/intermediateEvents/result')}">
                   <h:outputText value="#{event.resultObject}" />
                 </p:column>
               </p:dataTable>
