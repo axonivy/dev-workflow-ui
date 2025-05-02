@@ -46,7 +46,7 @@
         let preview;
       </script>
       <h:outputScript rendered="#{permissionsBean.demoOrDevMode}">
-        preview = initPreview("#{frameBean.baseUrl}");
+        preview = initPreview("#{frameIvyDevWfBean.baseUrl}");
         const selector = initDomSelector();
       </h:outputScript>
       <script>
