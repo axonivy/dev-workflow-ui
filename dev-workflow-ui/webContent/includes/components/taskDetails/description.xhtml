@@ -10,34 +10,34 @@
     columnClasses="details-description-label flex align-items-center col-6 md:col-2, flex align-items-center col-6 md:col-4,
      details-description-label flex align-items-center col-6 md:col-2, flex align-items-center col-6 md:col-4">
 
-    <h:outputText value="Task ID" />
+    <h:outputText value="#{ivy.cm.co('/common/id')}" />
     <h:outputText id="taskId" value="#{task.uuid}" />
 
-    <h:outputText value="Task name" />
+    <h:outputText value="#{ivy.cm.co('/common/name')}" />
     <h:outputText value="#{task.name}" id="taskName" />
 
-    <h:outputText value="Priority" />
+    <h:outputText value="#{ivy.cm.co('/common/priority')}" />
     <h:outputText>
       <i class="si si-#{task.priorityIcon} mr-2" />
       <h:outputText value="#{task.priority}" id="taskPriority" />
     </h:outputText>
 
-    <h:outputText value="Category" />
+    <h:outputText value="#{ivy.cm.co('/common/category')}" />
     <h:outputText value="#{task.category}" id="category" />
 
-    <h:outputText value="State" />
+    <h:outputText value="#{ivy.cm.co('/common/state')}" />
     <jc:stateBadge id="taskState" data="#{task}"/>
 
-    <h:outputText value="Business case" />
+    <h:outputText value="#{ivy.cm.co('/common/businessCase')}" />
     <jc:caseLink case="#{task.case.getBusinessCase()}" id="businessCase" />
 
-    <h:outputText value="Technical case" />
+    <h:outputText value="#{ivy.cm.co('/common/technicalCase')}" />
     <jc:caseLink case="#{task.case}" id="technicalCase" />
 
-    <h:outputText value="Working user" />
+    <h:outputText value="#{ivy.cm.co('/common/workerUser')}" />
     <jc:user user="#{task.workerUser}" id="workingUser" />
 
-    <h:outputText value="Responsible" />
+    <h:outputText value="#{ivy.cm.co('/common/responsible')}" />
 
     <h:panelGroup styleClass="flex" layout="block" style="flex-direction:column;">
       <ui:repeat id="taskResponsibles" value="#{task.responsibles}" var="responsible">
@@ -47,25 +47,25 @@
       </ui:repeat>
     </h:panelGroup>
 
-    <h:outputText value="Created" />
+    <h:outputText value="#{ivy.cm.co('/common/created')}" />
     <jc:datetime id="createdDate" datetime="#{task.startTimestamp}" />
 
-    <h:outputText value="Expiry" />
+    <h:outputText value="#{ivy.cm.co('/common/expiry')}" />
     <jc:datetime id="expiryDate" datetime="#{task.expiryTimestamp}" />
 
-    <h:outputText value="Delay date" />
+    <h:outputText value="#{ivy.cm.co('/common/delayDate')}" />
     <jc:datetime id="delayDate" datetime="#{task.delayTimestamp}" />
 
-    <h:outputText value="Completed on" />
+    <h:outputText value="#{ivy.cm.co('/common/completedOn')}" />
     <jc:datetime id="completedDate" datetime="#{task.endTimestamp}" />
 
-    <h:outputText value="Description" />
+    <h:outputText value="#{ivy.cm.co('/common/description')}" />
     <h:outputText value="#{task.description}" id="taskDescription" />
 
-    <h:outputText value="PMV" />
+    <h:outputText value="#{ivy.cm.co('/common/pmv')}" />
     <h:outputText value="#{task.pmv}" id="pmv" />
 
-    <h:outputText value="Current Element" />
+    <h:outputText value="#{ivy.cm.co('/common/currentElement')}" />
     <p:commandLink id="openProcessViewerBtn" styleClass="flex align-items-center"
       actionListener="#{tasksDetailsBean.setViewerLink()}" oncomplete="PF('process-viewer-dlg').show()"
       update="processViewer:processViewerDialog"
@@ -74,6 +74,6 @@
       #{task.currentElement}
     </p:commandLink>
   </p:panelGrid>
-  <p:tooltip for="taskId" value="ID: #{task.getId()}" position="top"/>
+  <p:tooltip for="taskId" value="#{ivy.cm.co('/common/id')}: #{task.getId()}" position="top"/>
 
 </ui:composition>

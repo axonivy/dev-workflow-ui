@@ -9,23 +9,23 @@
   <h:form id="userDetailInformationForm">
     <p:panelGrid columns="2" columnClasses="col-12 md:col-4 lg:col-4, col-12 md:col-8 lg:col-8" layout="flex"
       styleClass="grey-label-panel ui-fluid">
-      <h:outputText value="Name" />
+      <h:outputText value="#{ivy.cm.co('/common/name')}" />
       <h:outputText id="name" value="#{user.name}" />
-      <h:outputText value="Full Name" />
+      <h:outputText value="#{ivy.cm.co('/common/fullname')}" />
       <h:outputText id="fullName" value="#{user.fullName}" />
-      <h:outputText value="E-Mail Address" />
+      <h:outputText value="#{ivy.cm.co('/common/email')}" />
       <h:outputText id="email" value="#{user.EMailAddress}" />
-      <h:outputText value="Language" />
+      <h:outputText value="#{ivy.cm.co('/common/language')}" />
       <h:outputText id="language" value="#{user.language}" />
-      <h:outputText value="Formatting language" />
+      <h:outputText value="#{ivy.cm.co('/common/formattingLanguage')}" />
       <h:outputText id="formattingLanguage" value="#{user.formattingLanguage}" />
     </p:panelGrid>
 
     <p:panelGrid columns="2" columnClasses="col-12 md:col-4 lg:col-4, col-12 md:col-8 lg:col-8" layout="flex"
       styleClass="grey-label-panel ui-fluid" rendered="#{user.external and !user.ivySecuritySystem}">
-      <label>External Name</label>
+      <label>#{ivy.cm.co('/common/externalName')}</label>
       <h:outputText id="externalName" value="#{user.externalName}" />
-      <label>External ID</label>
+      <label>#{ivy.cm.co('/common/externalId')}</label>
       <h:outputText id="externalId" value="#{user.externalId}" />
     </p:panelGrid>
   </h:form>

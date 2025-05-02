@@ -13,7 +13,7 @@
           <div class="col-12 lg:col-5">
             <div class="card flex flex-column startedProcessesCard">
               <div class="card-header">
-                <h4 class="m-0">Started Processes</h4>
+                <h4 class="m-0">#{ivy.cm.co('/home/startedProcesses')}</h4>
               </div>
               <p:dataTable id="startedProcesses" var="start" value="#{homepageBean.lastStarts}" selectionMode="single"
                 rowKey="#{start.displayName}" rows="10" styleClass="table-header-none"
@@ -30,15 +30,15 @@
                     <p:commandButton id="startedProcessMenuLink" icon="si si-navigation-menu-horizontal-filled"
                       styleClass="ui-button-flat text-color action-button" />
                     <p:menu id="startsActionsMenu" overlay="true" trigger="startedProcessMenuLink" my="right top"
-                      at="right bottom" style="width: 200px">
-                      <p:menuitem value="Start process" action="#{start.execute}" id="startProcessBtn"
+                      at="right bottom">
+                      <p:menuitem value="#{ivy.cm.co('/common/startProcess')}" action="#{start.execute}" id="startProcessBtn"
                         icon="si si-controls-play" />
-                      <p:menuitem value="Copy to clipboard" onclick="copyToClipboard('#{start.link}')"
+                      <p:menuitem value="#{ivy.cm.co('/common/copyToClipboard')}" onclick="copyToClipboard('#{start.link}')"
                         id="copyStartLinkBtn" icon="si si-hyperlink-3" />
-                      <p:menuitem value="Open fullscreen" url="#{start.link}" id="openStartFullscreenBtn"
+                      <p:menuitem value="#{ivy.cm.co('/common/openFullscreen')}" url="#{start.link}" id="openStartFullscreenBtn"
                         rendered="#{start.embedInFrame}" icon="si si-expand-6" />
                       <p:menuitem id="openProcessViewer"
-                        value="#{start.isProcessStart() ? 'Open Process Viewer' : 'Open Case Map Viewer'}"
+                        value="#{start.isProcessStart() ? ivy.cm.co('/common/openProcessViewer') : ivy.cm.co('/common/openCaseMapViewer')}"
                         oncomplete="PF('process-viewer-dlg').show()" update="processViewer:processViewerDialog"
                         actionListener="#{homepageBean.setViewerStart(start.viewerLink)}"
                         rendered="#{start.viewerAllowed}" icon="si si-hierarchy-6 si-rotate-270" />
@@ -50,7 +50,7 @@
                 styleClass="flex flex-column justify-content-center align-items-center gap-4">
                 <i class="si si-hierarchy-6 si-rotate-270 text-4xl" />
                 <span style="text-align: center; text-wrap: balance;">
-                  You haven't started any processes yet,<br /><p:link value="go to process list" outcome="starts.xhtml"/> to start a process
+                  #{ivy.cm.co('/home/noProcessesStarted')} <p:link value="#{ivy.cm.co('/home/goToProcessList')}" outcome="starts.xhtml"/> #{ivy.cm.co('/home/toStartProcess')}
                 </span>
               </h:panelGroup>
             </div>
@@ -59,21 +59,21 @@
           <div class="col-12 lg:col-7">
             <div class="card active-tasks-card">
               <div class="card-header">
-                <h4 class="m-0">Open Tasks</h4>
+                <h4 class="m-0">#{ivy.cm.co('/home/openTasks')}</h4>
               </div>
               <p:dataTable id="activeTasks" var="task" value="#{homepageBean.tasksDataModel}" lazy="true"
                 rows="6" paginator="true" paginatorAlwaysVisible="false" resizableColumns="true"
                 rendered="#{homepageBean.tasksDataModel.size gt 0}" paginatorPosition="bottom" selectionMode="single">
                 <p:ajax event="rowSelect" listener="#{homepageBean.executeTaskRow}" />
-                <p:column headerText="Prio" sortBy="#{task.priority}" styleClass="center-table-cell" width="50px" resizable="false">
+                <p:column headerText="#{ivy.cm.co('/common/prio')}" sortBy="#{task.priority}" styleClass="center-table-cell" width="50px" resizable="false">
                   <h:outputText id="taskPrio" styleClass="si text-800 si-#{task.priorityIcon}" />
                   <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
                 </p:column>
-                <p:column headerText="Name" sortBy="#{task.name}" responsivePriority="1">
+                <p:column headerText="#{ivy.cm.co('/common/name')}" sortBy="#{task.name}" responsivePriority="1">
                   <h:outputText id="taskName" value="#{task.name}" styleClass="white-space-nowrap"/>
                   <p:tooltip for="taskName" value="#{task.name}" position="top" />
                 </p:column>
-                <p:column headerText="Expiry" sortBy="#{task.expiryTimestamp}" responsivePriority="2" width="100px">
+                <p:column headerText="#{ivy.cm.co('/common/expiry')}" sortBy="#{task.expiryTimestamp}" responsivePriority="2" width="100px">
                   <jc:time id="expiryTime" datetime="#{task.expiryTimestamp}" />
                 </p:column>
                 <p:column width="30px" resizable="false">
@@ -81,9 +81,9 @@
                     styleClass="ui-button-flat text-color action-button" />
                   <p:menu id="taskActionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom"
                     style="width: 200px">
-                    <p:menuitem value="Start task" actionListener="#{homepageBean.executeTask(task)}"
+                    <p:menuitem value="#{ivy.cm.co('/common/startTask')}" actionListener="#{homepageBean.executeTask(task)}"
                       id="startTaskBtn" icon="si si-controls-play" />
-                    <p:menuitem id="openTaskDetailsBtn" value="Open task details" url="#{task.detailUrl}"
+                    <p:menuitem id="openTaskDetailsBtn" value="#{ivy.cm.co('/common/openDetails')}" url="#{task.detailUrl}"
                       icon="si si-information-circle" />
                   </p:menu>
                 </p:column>
@@ -91,7 +91,7 @@
               <h:panelGroup rendered="#{homepageBean.tasksDataModel.size eq 0}" layout="block"
                 styleClass="flex flex-column justify-content-center align-items-center gap-4">
                 <i class="si si-list-bullets text-4xl" />
-                <span style="text-align: center; text-wrap: balance;">You don't have any active tasks.<br />Go take a coffee break</span>
+                <span style="text-align: center; text-wrap: balance;">#{ivy.cm.co('/home/noOpenTasks')}</span>
               </h:panelGroup>
             </div>
           </div>
@@ -99,28 +99,28 @@
           <div class="col-12">
             <div class="card starts-card">
               <div class="card-header">
-                <h4 class="m-0">Started Cases</h4>
+                <h4 class="m-0">#{ivy.cm.co('/home/startedCases')}</h4>
               </div>
               <p:dataTable id="startedCases" var="case" value="#{homepageBean.startedCasesDataModel}"
-                widgetVar="casesTable" emptyMessage="No Cases found with given criteria" paginatorPosition="bottom"
+                widgetVar="casesTable" emptyMessage="#{ivy.cm.co('/home/noCasesFound')}" paginatorPosition="bottom"
                 rows="6" lazy="true" paginator="true" paginatorAlwaysVisible="false" selectionMode="single" resizableColumns="true">
                 <p:ajax event="rowSelect" listener="#{casesBean.redirectToCaseRow}" />
 
-                <p:column headerText="State" filterBy="#{case.businessState}" sortBy="#{case.businessState}"
+                <p:column headerText="#{ivy.cm.co('/common/state')}" filterBy="#{case.businessState}" sortBy="#{case.businessState}"
                   width="90px" resizable="false">
                   <jc:stateBadge id="caseState" data="#{case}"/>
                 </p:column>
 
-                <p:column headerText="Name" filterBy="#{case.getName(case)}" sortBy="#{case.name}">
+                <p:column headerText="#{ivy.cm.co('/common/name')}" filterBy="#{case.getName(case)}" sortBy="#{case.name}">
                   <h:outputText id="caseName" value="#{casesBean.getName(case)}" />
                 </p:column>
 
-                <p:column headerText="Start" sortBy="#{case.startTimestamp}" responsivePriority="2"
+                <p:column headerText="#{ivy.cm.co('/common/start')}" sortBy="#{case.startTimestamp}" responsivePriority="2"
                   sortOrder="descending" width="150px">
                   <jc:time id="startTime" datetime="#{case.startTimestamp}" />
                 </p:column>
 
-                <p:column headerText="End" sortBy="#{case.endTimestamp}" responsivePriority="3" width="100">
+                <p:column headerText="#{ivy.cm.co('/common/end')}" sortBy="#{case.endTimestamp}" responsivePriority="3" width="100">
                   <jc:time id="endTime" datetime="#{case.endTimestamp}" />
                 </p:column>
 
@@ -128,10 +128,10 @@
                   <p:commandButton id="caseActionsBtn" icon="si si-navigation-menu-horizontal-filled"
                     styleClass="ui-button-flat text-color action-button" />
                   <p:menu id="caseActionsMenu" overlay="true" trigger="caseActionsBtn" my="right top"
-                    at="right bottom" style="width: 200px">
-                    <p:menuitem id="openCaseDetailsBtn" value="Open case details"
+                    at="right bottom">
+                    <p:menuitem id="openCaseDetailsBtn" value="#{ivy.cm.co('/common/openDetails')}"
                       url="#{case.detailLink}" icon="si si-information-circle" />
-                    <p:menuitem value="Rerun process" actionListener="#{casesBean.rerunProcess(case)}"
+                    <p:menuitem value="#{ivy.cm.co('/common/rerunProcess')}" actionListener="#{casesBean.rerunProcess(case)}"
                       id="rerunCaseProcessBtn" icon="si si-button-refresh-arrow" />
                   </p:menu>
                 </p:column>

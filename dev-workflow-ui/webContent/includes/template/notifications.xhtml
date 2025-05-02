@@ -13,23 +13,23 @@
 <p:overlayPanel for="showNotifications" style="width:350px" rendered="#{loginBean.loggedIn}">
   <h:panelGroup id="notifications">
     <div class="flex justify-content-between">
-      <h6>Notifications</h6>
+      <h6>#{ivy.cm.co('/notifications/notifications')}</h6>
 
       <div class="flex">
         <p:commandLink id="notificationMarkAllAsRead" rendered="#{notificationBean.hasUnreadNotifications()}" actionListener="#{notificationBean.readAll()}" update="notifications unreadNotifications">
           <i class="notification-button si si-check-double-1 mr-1" />
         </p:commandLink>
-        <p:tooltip for="notificationMarkAllAsRead" value="Mark all notifications as read" />
+        <p:tooltip for="notificationMarkAllAsRead" value="#{ivy.cm.co('/notifications/markAllAsRead')}" />
 
         <p:commandLink id="notificationHideAll" rendered="#{notificationBean.hasNotifications()}" actionListener="#{notificationBean.hideAll()}" update="notifications unreadNotifications">
           <i class="notification-button si si-bin-1" />
         </p:commandLink>
-        <p:tooltip for="notificationHideAll" value="Delete all notifications" />
+        <p:tooltip for="notificationHideAll" value="#{ivy.cm.co('/notifications/deleteAll')}" />
       </div>
     </div>
 
     <h:panelGroup id="no-notifications" rendered="#{!notificationBean.hasNotifications()}">
-      <div class="text-center" style="padding:20px;">No Notifications </div>
+      <div class="text-center" style="padding:20px;">#{ivy.cm.co('/notifications/noNotifications')}</div>
     </h:panelGroup>
 
     <h:panelGroup rendered="#{notificationBean.hasNotifications()}">
@@ -55,7 +55,7 @@
                   <p:commandLink id="notificationMarkAsRead" process="@this" actionListener="#{notificationBean.markAsRead(notification)}" update="notifications unreadNotifications" rendered="#{!notification.read}">
                     <i class="notification-action si si-check-circle-1 mr-1 " />
                   </p:commandLink>
-                  <p:tooltip for="notificationMarkAsRead" value="Mark as read" />
+                  <p:tooltip for="notificationMarkAsRead" value="#{ivy.cm.co('/notifications/markAsRead')}" />
                 </h:panelGroup>
               </div>
             </div>

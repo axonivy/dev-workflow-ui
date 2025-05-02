@@ -42,7 +42,7 @@ class WebDocuScreenshots {
     openView("home.xhtml");
     takeScreenshot("workflow-ui-home", new Dimension(SCREENSHOT_WIDTH, 800));
 
-    openView("loginTable.xhtml");
+    openView("switch-user.xhtml");
     takeScreenshot("workflow-ui-loginTable", new Dimension(SCREENSHOT_WIDTH, 800));
 
     openView("login.xhtml");
@@ -84,7 +84,7 @@ class WebDocuScreenshots {
     takeScreenshot("workflow-ui-caseMap", new Dimension(SCREENSHOT_WIDTH, 800));
 
     startTestProcess("1750C5211D94569D/testIntermediateEventProcess.ivp");
-    openView("intermediateEvents.xhtml");
+    openView("intermediate-events.xhtml");
     takeScreenshot("workflow-ui-intermediateEvents", new Dimension(SCREENSHOT_WIDTH, 800));
 
     $(byText("TestIntermediateEvent")).click();

@@ -18,6 +18,7 @@ import com.axonivy.ivy.webtest.primeui.PrimeUi;
 
 @IvyWebTest
 class WebTestIntermediateEventsIT {
+
   @BeforeAll
   static void setup() {
     startTestProcess("175461E47A870BF8/makeAdminUser.ivp");
@@ -31,7 +32,7 @@ class WebTestIntermediateEventsIT {
 
   @Test
   void checkIntermediateElementDetails() {
-    openView("intermediateEvents.xhtml");
+    openView("intermediate-events.xhtml");
     $(byText("TestIntermediateEvent")).click();
     $(By.id("name")).shouldHave(text("TestIntermediateEvent"));
     $(By.id("description")).shouldHave(text("intermediate event description"));
@@ -39,12 +40,10 @@ class WebTestIntermediateEventsIT {
 
   @Test
   void checkIntermediateElementEventsTable() {
-    openView("intermediateEvents.xhtml");
+    openView("intermediate-events.xhtml");
     $(byText("TestIntermediateEvent")).click();
     $(By.id("id")).shouldBe(visible);
-
     var eventsTable = PrimeUi.table(By.id("eventsTable"));
     eventsTable.valueAtShouldBe(0, 6, text("NOTHING"));
   }
-
 }

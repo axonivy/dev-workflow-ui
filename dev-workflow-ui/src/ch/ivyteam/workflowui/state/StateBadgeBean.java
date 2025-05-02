@@ -4,6 +4,7 @@ import javax.faces.bean.ManagedBean;
 
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
+import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.workflowui.cases.CaseModel;
 import ch.ivyteam.workflowui.tasks.TaskModel;
 
@@ -19,6 +20,8 @@ public class StateBadgeBean {
       return new StateBadgeModel(taskModel);
     } else if (data instanceof ITask task) {
       return new StateBadgeModel(task);
+    } else if (data instanceof TaskState state) {
+      return new StateBadgeModel(state);
     }
     throw new IllegalArgumentException("Unsupported data type");
   }

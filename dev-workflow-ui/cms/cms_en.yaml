@@ -1,0 +1,224 @@
+apiBrowser:
+  apiBrowser: API Browser
+  openInTab: Open API browser in a new tab
+case:
+  caseHierarchy: Case hierarchy
+  caseMap: Case Map
+  currentProcessHidden: Current Process is hidden
+  description: Description
+  destroyCase: Destroy case
+  documents: Documents
+  openCaseMap: Show Case Map
+  openProcessViewer: Show Process
+  processViewer: Process Viewer
+  showNotes: Show case notes
+  showSystemTasks: Show system tasks
+  sidesteps: Sidesteps
+  taskList: Task list
+  workflowEvents: Workflow Events
+cleanup:
+  businessData: All Business Data and the search index
+  dataCaches: Data caches
+  introduction: When you click through different processes you create different types of data like cases, tasks etc. Here you can clean that data to reset your designer.
+  tokens: All identity provider tokens
+  workflow: All Cases, Tasks and dependet objects
+common:
+  author: Author
+  businessCase: Business Case
+  category: Category
+  clearDelay: Clear delay
+  completedOn: Completed on
+  content: Content
+  copyToClipboard: Copy to clipboard
+  created: Created
+  creationDate: Creation Date
+  creator: Creator
+  currentElement: Current Element
+  customFields: Custom Fields
+  date: Date
+  delayDate: Delay date
+  delegate: Delegate
+  description: Description
+  destroy: Destroy
+  email: Email
+  end: End
+  event: Event
+  expireNow: Expire now
+  expiry: Expiry
+  externalId: External ID
+  externalName: External Name
+  formattingLanguage: Formatting Language
+  fullname: Fullname
+  id: ID
+  language: Language
+  link: Link
+  loading: Loading
+  name: Name
+  noCasesFound: No cases found
+  noCustomFieldsFound: No custom fields found
+  noDocumentsFound: No Documents found
+  noEventsFound: No events found
+  notes: Notes
+  notificationChannels: Notification Channels
+  openCaseMapViewer: Show Case Map
+  openDetails: Open details
+  openFullscreen: Open fullscreen
+  openProcessViewer: Show process
+  openTaskDetails: Open task details
+  openTasks: Open Tasks
+  owner: Owner
+  park: Park
+  pmv: PMV
+  prio: Prio
+  priority: Priority
+  processName: Process Name
+  rerunProcess: Rerun process
+  reset: Reset
+  responsible: Responsible
+  roles: Roles
+  save: Save
+  search: Search
+  showAll: Show all
+  start: Start
+  startProcess: Start process
+  startTask: Start task
+  startedCases: Started Cases
+  state: State
+  technicalCase: Technical Case
+  type: Type
+  username: Username
+  value: Value
+  workerUser: Worker
+  workflowEvents: Workflow Events
+end:
+  taskEnd: Task End
+  taskFinished: You have successfully finished the task.
+enums:
+  caseBusinessState:
+    destroyed: Destroyed
+    done: Done
+    open: Open
+  caseState:
+    created: Created
+    destroyed: Destroyed
+    done: Done
+    running: Running
+  taskBusinessState:
+    delayed: Delayed
+    destroyed: Destroyed
+    done: Done
+    error: Error
+    in_progress: In Progress
+    open: Open
+  taskState:
+    created: Created
+    delayed: Delayed
+    destroyed: Destroyed
+    done: Done
+    failed: Failed
+    join_failed: Join Failed
+    joining: Joining
+    parked: Parked
+    ready_for_join: Ready for Join
+    resumed: Resumed
+    suspended: Suspended
+    waiting_for_intermediate_event: Waiting for intermediate Event
+frame:
+  disableAutoRefresh: Disable auto refresh when changes are made to this dialog
+  openCurrentProcess: Open current process start on a fullscreen page
+  openEditor: Open editor on picked widget
+  sidesteps: Sidesteps
+home:
+  goToProcessList: Go to process list
+  noCasesFound: No cases found
+  noOpenTasks: You don't have any open tasks. Go take a coffee break.
+  noProcessesStarted: You haven't started any processes yet.
+  openTasks: Open Tasks
+  startedCases: Started Cases
+  startedProcesses: Started Processes
+  toStartProcess: to start a process.
+intermediateEvents:
+  intermediateEventsBeans: Intermediate Events Beans
+  waiting: Waiting
+login:
+  logInWith: Log in with
+  password: Password
+  signIn: Sign In
+  username: Username / Email
+notifications:
+  deleteAll: Delete all notifications
+  markAllAsRead: Mark all notifications as read
+  markAsRead: Mark as read
+  noNotifications: No Notifications
+  notifications: Notifications
+profile:
+  currentContentLocale: Content locale of the current session
+  currentFormattingLocale: Formatting locale of the current session
+sidebar:
+  apiBrowser: API Browser
+  cases: Cases
+  cleanup: Cleanup
+  developer: Developer
+  engineCockpit: Engine Cockpit
+  home: Home
+  intermediateEvents: Intermediate Events
+  processes: Processes
+  signals: Signals
+  statistics: Statistics
+  tasks: Tasks
+  webService: Web Service
+signals:
+  boundarySignals: Boundary Signals
+  code: Code
+  createdCases: Created Cases
+  destroyedTasks: Destroyed Tasks
+  firedSignals: Fired Signals
+  noSignalsFound: No signals found
+  payload: Payload
+  send: Send
+  sendSignal: Send Signal
+  sentBy: Sent by
+  signalCode: Signal Code
+  signalPattern: Signal Pattern
+  waitingTask: Waiting Task
+starts:
+  application: Application
+  category: Category
+  process: Process
+  processes: Processes
+  project: Project
+  search: Search
+statistics:
+  allCases: All Cases
+  allTasks: All Tasks
+  casesByState: Cases by State
+  casesStatistics: Cases Statistics
+  notEnoughData: Not enough data available
+  tasksByState: Tasks by State
+  tasksStatistics: Task Statistics
+  topCaseCreators: Top Case Creators
+  topTaskWorkers: Top Task Workers
+switchUser:
+  clickLogin: Click user to login
+  needLogin: You need to login to access that page
+  noUsers: No users found
+task:
+  canNotWork: You cannot work on the task because ${user} is currently working on it.
+  completedByCurrent: You already have completed the task
+  completedByOther: Task has already been completed by ${user}
+  destroyed: You cannot work on the task because it was destroyed
+  invalid: Invalid state
+  workingOn: You are currently working on the task in a different session. You may reset the task and start it again if you have closed your browser.
+tasks:
+  noTasksFound: No tasks found
+template:
+  login: Login
+  logout: Logout
+  profile: Profile
+  switchUser: Switch User
+webservices:
+  noWebServicesFound: Keine Web Service Prozesse gefunden
+  webServiceProcesses: Web Service Processes
+workflowEventsTable:
+  needPermission: You need workflow events read permission in order to see the events.
+  noPermissions: No permissions

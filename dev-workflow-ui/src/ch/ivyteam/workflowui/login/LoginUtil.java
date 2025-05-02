@@ -38,7 +38,7 @@ public class LoginUtil {
     }
   }
 
-  public static void tableLogin(String username, String originalUrl) {
+  public static void switchUser(String username, String originalUrl) {
     if (!PermissionsUtil.isDemoOrDevMode()) {
       return;
     }
@@ -71,6 +71,6 @@ public class LoginUtil {
 
   public static void redirectToLoginTable() {
     String origin = URLEncoder.encode(UrlUtil.evalOriginalPage(), StandardCharsets.UTF_8);
-    RedirectUtil.redirect("loginTable.xhtml?originalUrl=" + origin);
+    RedirectUtil.redirect("switch-user.xhtml?originalUrl=" + origin);
   }
 }

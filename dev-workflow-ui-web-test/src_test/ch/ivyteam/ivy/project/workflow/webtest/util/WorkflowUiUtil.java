@@ -80,7 +80,7 @@ public class WorkflowUiUtil {
   }
 
   public static void loginFromTable(String username) {
-    open(viewUrl("loginTable.xhtml"));
+    open(viewUrl("switch-user.xhtml"));
     $(By.id("loginTable")).find(byText(username)).should(visible).click();
     $(By.id("loginTable")).shouldNot(exist);
   }

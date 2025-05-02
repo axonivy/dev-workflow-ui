@@ -10,7 +10,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import org.apache.commons.lang3.StringUtils;
 import org.primefaces.model.menu.MenuModel;
 
 import ch.ivyteam.ivy.process.viewer.api.ProcessViewer;
@@ -91,8 +90,7 @@ public class CasesDetailsBean {
   }
 
   public String getDescription() {
-    return StringUtils.isEmpty(selectedCase.getDescription()) ? "No description"
-        : selectedCase.getDescription();
+    return selectedCase.getDescription();
   }
 
   public CaseMapModel getCaseMap() {

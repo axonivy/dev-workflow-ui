@@ -14,7 +14,7 @@
     <h:outputText id="caseName" value="#{casesBean.getName(cc.attrs.case)}" styleClass="ml-2 case-link-name"/>
     <p:tooltip id="caseLinkTooltip" for="caseName" position="top">
       <h:panelGroup layout="block" styleClass="py-2">
-        <h:outputText value="ID: #{cc.attrs.case.uuid()}"/>
+        <h:outputText value="#{ivy.cm.co('/common/id')}: #{cc.attrs.case.uuid()}"/>
       </h:panelGroup>
     </p:tooltip>
   </h:link>

@@ -16,7 +16,7 @@
       <div class="layout-dashboard">
         <div class="info-banner-wrapper">
           <p:staticMessage severity="#{tasksDetailsBean.getInfoBannerSeverity()}"
-            detail="#{tasksDetailsBean.getInfoBannerMessage()}"
+            detail="#{ivy.cm.content(tasksDetailsBean.getInfoBannerMessageCmsPath()).replace('user', taskDetailBean.workerUserName).get()}"
             rendered="#{tasksDetailsBean.showInfoBanner()}"></p:staticMessage>
         </div>
         <div class="grid">
@@ -25,7 +25,7 @@
               <div class="card-header">
                 <div class="card-title flex align-items-center">
                   <i class="pr-3 si si-common-file-text"></i>
-                  <h6 class="m-0">Description</h6>
+                  <h6 class="m-0">#{ivy.cm.co('/common/description')}</h6>
                 </div>
                 <ui:include src="/includes/components/taskDetails/descriptionCardHeaderActions.xhtml" />
               </div>
@@ -38,7 +38,7 @@
               <div class="card-header">
                 <div class="card-title flex align-items-center">
                   <i class="pr-3 si si-cog"></i>
-                  <h6 class="m-0">Custom fields</h6>
+                  <h6 class="m-0">#{ivy.cm.co('/common/customFields')}</h6>
                 </div>
               </div>
               <jc:customFields id="customFields" customFields="#{tasksDetailsBean.selectedTask.customFields}" />
@@ -50,7 +50,7 @@
               <div class="card-header">
                 <div class="card-title flex align-items-center">
                   <i class="pr-3 si si-synchronize-arrow-clock"></i>
-                  <h6 class="m-0">Workflow Events</h6>
+                  <h6 class="m-0">#{ivy.cm.co('/common/workflowEvents')}</h6>
                 </div>
               </div>
               <jc:workflowEventsTable id="workflowEvents"

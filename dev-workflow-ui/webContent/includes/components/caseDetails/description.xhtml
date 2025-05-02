@@ -10,33 +10,33 @@
     columnClasses="details-description-label col-6 md:col-2, col-6 md:col-4,
      details-description-label col-6 md:col-2, col-6 md:col-4">
 
-    <h:outputText value="Case ID" />
+    <h:outputText value="#{ivy.cm.co('/common/id')}" />
     <h:outputText value="#{case.uuid}" id="caseId"/>
 
-    <h:outputText value="Case name" />
+    <h:outputText value="#{ivy.cm.co('/common/name')}" />
     <h:outputText value="#{case.name}" id="caseName" />
 
-    <h:outputText value="Case Owner" />
+    <h:outputText value="#{ivy.cm.co('/common/owner')}" />
     <h:outputText value="#{case.owners}" id="caseResponsible" />
 
-    <h:outputText value="Creator" />
+    <h:outputText value="#{ivy.cm.co('/common/creator')}" />
     <jc:user user="#{case.creatorUser}" id="creatorUser" />
 
-    <h:outputText value="State" />
+    <h:outputText value="#{ivy.cm.co('/common/state')}" />
     <jc:stateBadge id="caseState" data="#{case}" />
 
-    <h:outputText value="Category" />
+    <h:outputText value="#{ivy.cm.co('/common/category')}" />
     <h:outputText value="#{case.category.name}" id="category" />
 
-    <h:outputText value="Created" />
+    <h:outputText value="#{ivy.cm.co('/common/created')}" />
     <jc:datetime datetime="#{case.startTimestamp}" id="createdDate" />
 
-    <h:outputText value="Completed on" />
+    <h:outputText value="#{ivy.cm.co('/common/completedOn')}" />
     <jc:datetime datetime="#{case.endTimestamp}" id="expiryDate" />
 
-    <h:outputText value="Description" />
+    <h:outputText value="#{ivy.cm.co('/common/description')}" />
     <h:outputText value="#{casesDetailsBean.description}" id="caseDescription" />
   </p:panelGrid>
-  <p:tooltip for="caseId" value="ID: #{case.id}" />
+  <p:tooltip for="caseId" value="#{ivy.cm.co('/common/id')}: #{case.id}" />
 
 </ui:composition>

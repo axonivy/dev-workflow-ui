@@ -118,8 +118,8 @@ function checkAndReturnUrl(newURL, originPage) {
   ) {
     return "login.xhtml";
   }
-  if (newURL.endsWith("/faces/loginTable.xhtml")) {
-    return "loginTable.xhtml";
+  if (newURL.endsWith("/faces/switch-user.xhtml")) {
+    return "switch-user.xhtml";
   }
   if (
     newURL.endsWith("/faces/end.xhtml") ||

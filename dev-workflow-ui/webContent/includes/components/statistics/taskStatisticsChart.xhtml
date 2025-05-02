@@ -5,7 +5,7 @@
 <h:body>
   <ui:composition template="/includes/template/statisticsCardBare.xhtml">
     <ui:define name="content">
-      <h4>Tasks statistics</h4>
+      <h4>#{ivy.cm.co('/statistics/tasksStatistics')}</h4>
       <p:lineChart id="taskStatisticsChart" model="#{statisticsBean.tasksPerHourChart}" style="max-height: 20rem"/>
     </ui:define>
   </ui:composition>

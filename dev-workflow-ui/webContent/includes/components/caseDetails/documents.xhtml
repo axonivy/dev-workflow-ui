@@ -16,7 +16,7 @@
     </h:form>
   </ul>
   <c:if test="#{empty casesDetailsBean.documents}">
-    <h:outputText value="No Documents found" />
+    <h:outputText value="#{ivy.cm.co('/common/noDocumentsFound')}" />
   </c:if>
 
 </ui:composition>

@@ -58,7 +58,7 @@ class WebTestLoginIT {
     logout();
     loginFromTable("testuser");
     $("#sessionUserName").shouldBe(exactText("testuser"));
-    Selenide.webdriver().shouldNotHave(urlContaining("/loginTable.xhtml"));
+    Selenide.webdriver().shouldNotHave(urlContaining("/switch-user.xhtml"));
   }
 
   @Test
@@ -73,8 +73,8 @@ class WebTestLoginIT {
   }
 
   @Test
-  void loginTableSearch() throws Exception {
-    openView("loginTable.xhtml");
+  void switchUserSearch() throws Exception {
+    openView("switch-user.xhtml");
     Table table = PrimeUi.table(By.id("loginTable:users"));
     table.contains("DeveloperTest");
     table.searchGlobal("testuser");
@@ -104,11 +104,11 @@ class WebTestLoginIT {
     loginFromTable("testuser");
     logout();
     openView("cases.xhtml");
-    assertCurrentUrlContains("loginTable.xhtml?originalUrl=cases.xhtml");
+    assertCurrentUrlContains("switch-user.xhtml?originalUrl=cases.xhtml");
     $("#loginMessage").shouldBe(visible).shouldHave(text("you need to login"));
 
     openView("tasks.xhtml");
-    assertCurrentUrlContains("loginTable.xhtml?originalUrl=tasks.xhtml");
+    assertCurrentUrlContains("switch-user.xhtml?originalUrl=tasks.xhtml");
     $("#loginMessage").shouldBe(visible).shouldHave(text("you need to login"));
 
     loginFromTable("testuser");
@@ -121,7 +121,7 @@ class WebTestLoginIT {
     loginFromTable("testuser");
     logout();
     openView("cases.xhtml");
-    assertCurrentUrlContains("loginTable.xhtml?originalUrl=cases.xhtml");
+    assertCurrentUrlContains("switch-user.xhtml?originalUrl=cases.xhtml");
     $("#loginMessage").shouldBe(visible).shouldHave(text("you need to login"));
     $(byText("testuser")).click();
     assertCurrentUrlContains("cases.xhtml");
@@ -137,24 +137,24 @@ class WebTestLoginIT {
 
     $(".user-profile").shouldBe(visible).click();
     $(By.id("loginTableBtn")).shouldBe(visible).click();
-    assertCurrentUrlContains("loginTable.xhtml?originalUrl=task.xhtml%3Fid%3D" + taskId);
+    assertCurrentUrlContains("switch-user.xhtml?originalUrl=task.xhtml%3Fid%3D" + taskId);
   }
 
   @Test
-  void loginTableOnlyTestUsers() {
-    open(viewUrl("loginTable.xhtml"));
+  void switchUserOnlyTestUsers() {
+    open(viewUrl("switch-user.xhtml"));
     $(By.id("loginTable")).find(byText("testuser")).should(visible);
     $(By.id("loginTable")).find(byText("DifferentLogin")).shouldNot(exist);
   }
 
   @Test
-  void loginTableHighlightCurrentUser() {
+  void switchUserHighlightCurrentUser() {
     loginFromTable("testuser");
-    openView("loginTable.xhtml");
+    openView("switch-user.xhtml");
     $("#loginTable\\:users_data > .ui-state-highlight")
         .shouldBe(visible);
     logout();
-    openView("loginTable.xhtml");
+    openView("switch-user.xhtml");
     $("#loginTable\\:users_data > .ui-state-highlight")
         .shouldNotBe(visible);
   }

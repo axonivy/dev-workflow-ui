@@ -7,8 +7,8 @@
 </cc:interface>
 
 <cc:implementation>
-  <p:dataTable id="customFieldsTable" var="field" value="#{cc.attrs.customFields}">
-    <p:column headerText="Name">
+  <p:dataTable id="customFieldsTable" var="field" value="#{cc.attrs.customFields}" emptyMessage="#{ivy.cm.co('/common/noCustomFieldsFound')}">
+    <p:column headerText="#{ivy.cm.co('/common/name')}">
       <h:outputText id="customFieldLabel" value="#{field.label}"/>
       <p:tooltip for="customFieldLabel" value="#{field.description}" position="top">
         <h:outputText value="#{field.labelAndName}"/>
@@ -16,11 +16,11 @@
         <h:outputText value="#{field.description}"/>
       </p:tooltip>
     </p:column>
-    <p:column headerText="Value">
+    <p:column headerText="#{ivy.cm.co('/common/value')}">
       <h:outputText id="customFieldValue" value="#{field.value}"/>
       <p:tooltip for="customFieldValue" value="#{field.valueDescription}" position="top"/>
     </p:column>
-    <p:column headerText="Type">
+    <p:column headerText="#{ivy.cm.co('/common/type')}">
       <h:outputText value="#{field.type}"/>
     </p:column>
   </p:dataTable>

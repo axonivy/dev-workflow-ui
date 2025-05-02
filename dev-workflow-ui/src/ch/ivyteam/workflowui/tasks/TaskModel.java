@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import ch.ivyteam.ivy.model.value.WebLink;
 import ch.ivyteam.ivy.process.model.value.PID;
 import ch.ivyteam.ivy.process.viewer.api.ProcessViewer;
@@ -157,7 +155,7 @@ public class TaskModel {
   }
 
   public String getDescription() {
-    return StringUtils.isEmpty(description) ? "No description" : description;
+    return description;
   }
 
   public String getPmv() {

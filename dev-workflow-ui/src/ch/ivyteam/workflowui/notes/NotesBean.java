@@ -65,6 +65,6 @@ public class NotesBean {
         .build();
     Map<String, List<String>> params = new HashMap<>();
     params.put("id", List.of(elementId));
-    PrimeFaces.current().dialog().openDynamic("notesDialog", options, params);
+    PrimeFaces.current().dialog().openDynamic("notes-dialog", options, params);
   }
 }

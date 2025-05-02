@@ -17,7 +17,7 @@ public class SidebarBean {
   private final String activePage;
   private final String[] developerPages = {
       "signals",
-      "intermediateEvents",
+      "intermediate-events",
       "cleanup",
       "api-browser",
       "statistics",
