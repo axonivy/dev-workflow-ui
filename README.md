@@ -1,5 +1,7 @@
 # Developer Workflow UI
 
+[![translation-status](https://hosted.weblate.org/widget/axonivy/dev-workflow-ui/svg-badge.svg)](https://hosted.weblate.org/engage/axonivy/)
+
 This is a the new workflow user interface to develop, simulate and execute Axon Ivy Processes.
 
 ## Features
