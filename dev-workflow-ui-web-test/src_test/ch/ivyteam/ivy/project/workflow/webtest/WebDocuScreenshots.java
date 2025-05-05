@@ -40,23 +40,23 @@ class WebDocuScreenshots {
     startTestProcess("1750C5211D94569D/TestData.ivp");
 
     openView("home.xhtml");
-    takeScreenshot("workflow-ui-home", new Dimension(SCREENSHOT_WIDTH, 800));
+    takeScreenshot("workflow-ui-home", new Dimension(SCREENSHOT_WIDTH, 500));
 
     openView("switch-user.xhtml");
-    takeScreenshot("workflow-ui-loginTable", new Dimension(SCREENSHOT_WIDTH, 800));
+    takeScreenshot("workflow-ui-loginTable", new Dimension(SCREENSHOT_WIDTH, 450));
 
     openView("login.xhtml");
     takeScreenshot("workflow-ui-login", new Dimension(SCREENSHOT_WIDTH, 800));
 
     Navigation.openTasks();
-    takeScreenshot("workflow-ui-tasks", new Dimension(SCREENSHOT_WIDTH, 800));
+    takeScreenshot("workflow-ui-tasks", new Dimension(SCREENSHOT_WIDTH, 400));
 
     Navigation.openTask("Created task of TestData");
     $("#actionMenuForm\\:taskActionsBtn").click();
     takeScreenshot("workflow-ui-taskDetails", new Dimension(SCREENSHOT_WIDTH, 800));
 
     openView("cases.xhtml");
-    takeScreenshot("workflow-ui-cases", new Dimension(SCREENSHOT_WIDTH, 800));
+    takeScreenshot("workflow-ui-cases", new Dimension(SCREENSHOT_WIDTH, 350));
 
     Navigation.openCase("Created case of TestData");
     takeScreenshot("workflow-ui-caseDetails", new Dimension(SCREENSHOT_WIDTH, 800));
@@ -68,14 +68,14 @@ class WebDocuScreenshots {
     takeScreenshot("workflow-ui-starts", new Dimension(SCREENSHOT_WIDTH, 800));
 
     openView("cleanup.xhtml");
-    takeScreenshot("workflow-ui-cleanup", new Dimension(SCREENSHOT_WIDTH, 800));
+    takeScreenshot("workflow-ui-cleanup", new Dimension(SCREENSHOT_WIDTH, 500));
 
     openView("signals.xhtml");
     $(By.id("signalForm:signalCodeInput_input")).sendKeys("Screenshot data signal");
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
     startTestProcess("1750C5211D94569D/startBoundarySignal.ivp");
     openView("signals.xhtml");
-    takeScreenshot("workflow-ui-signals", new Dimension(SCREENSHOT_WIDTH, 800));
+    takeScreenshot("workflow-ui-signals", new Dimension(SCREENSHOT_WIDTH, 600));
     $(By.id("boundarySignalsTable:0:sendSignalIcon")).shouldBe(visible).click();
 
     WorkflowUiUtil.startTestCaseMap();
@@ -85,11 +85,11 @@ class WebDocuScreenshots {
 
     startTestProcess("1750C5211D94569D/testIntermediateEventProcess.ivp");
     openView("intermediate-events.xhtml");
-    takeScreenshot("workflow-ui-intermediateEvents", new Dimension(SCREENSHOT_WIDTH, 800));
+    takeScreenshot("workflow-ui-intermediateEvents", new Dimension(SCREENSHOT_WIDTH, 350));
 
     $(byText("TestIntermediateEvent")).click();
     $(By.id("id")).shouldBe(visible);
-    takeScreenshot("workflow-ui-intermediateElementDetails", new Dimension(SCREENSHOT_WIDTH, 800));
+    takeScreenshot("workflow-ui-intermediateElementDetails", new Dimension(SCREENSHOT_WIDTH, 600));
 
     openView("api-browser.xhtml");
     if ($(By.id("apiBrowser")).is(visible)) {
