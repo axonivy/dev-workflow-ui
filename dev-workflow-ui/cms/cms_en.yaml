@@ -182,7 +182,9 @@ notifications:
   noNotifications: No Notifications
   notifications: Notifications
 profile:
+  currentContentLanguage: Current language
   currentContentLocale: Content locale of the current session
+  currentFormattingLanguage: Current formatting language
   currentFormattingLocale: Formatting locale of the current session
 sidebar:
   apiBrowser: API Browser

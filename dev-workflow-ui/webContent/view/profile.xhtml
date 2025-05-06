@@ -35,7 +35,7 @@
                   itemLabel="#{profileBean.toDisplayName(locale)}" />
               </p:selectOneMenu>
               <small>
-                <h:outputText id="contentLanguageDisplay" value="#{profileBean.contentLanguageSource}" escape="false"/>
+                <h:outputText id="contentLanguageDisplay" value="#{ivy.cm.co('/profile/currentContentLanguage')} #{profileBean.contentLanguageSource}" escape="false"/>
                 <p:tooltip for="contentLanguageDisplay" value="#{ivy.cm.co('/profile/currentContentLocale')}" position="bottom"/>
               </small>
             </h:panelGroup>
@@ -48,7 +48,7 @@
                   itemLabel="#{profileBean.toDisplayName(locale)}" />
               </p:selectOneMenu>
               <small>
-                <h:outputText id="formattingLanguageDisplay" value="#{profileBean.formattingLanguageSource}" escape="false" />
+                <h:outputText id="formattingLanguageDisplay" value="#{ivy.cm.co('/profile/currentFormattingLanguage')} #{profileBean.formattingLanguageSource}" escape="false" />
                 <p:tooltip for="formattingLanguageDisplay" value="#{ivy.cm.co('/profile/currentFormattingLocale')}" position="bottom"/>
               </small>
             </h:panelGroup>
