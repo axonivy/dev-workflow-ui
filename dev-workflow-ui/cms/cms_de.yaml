@@ -182,7 +182,9 @@ notifications:
   noNotifications: Keine Benachrichtigungen
   notifications: Benachrichtigungen
 profile:
+  currentContentLanguage: Aktuelle Sprache
   currentContentLocale: Sprache der aktuellen Sitzung
+  currentFormattingLanguage: AKtuelle formattierungs Sprache
   currentFormattingLocale: Formattierungs Sprache der aktuellen Sitzung
 sidebar:
   apiBrowser: API Browser
@@ -257,5 +259,5 @@ webservices:
   noWebServicesFound: Keine Web Service Prozesse gefunden
   webServiceProcesses: Web Service Prozesse
 workflowEventsTable:
-  needPermission: You need workflow events read permission in order to see them.
+  needPermission: Du benötigts Lese Berechtigungen um Workflow Ereignisse zu sehen.
   noPermissions: No permissions
