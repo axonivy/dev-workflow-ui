@@ -167,7 +167,7 @@ class WebTestStartsIT {
     openView("starts.xhtml");
     var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
     starts.searchGlobal("startTestDialog1");
-    starts.row(0).shouldHave(text("TestData/startTestDialog1.ivp"));
+    starts.row(0).shouldHave(text("startTestDialog1"));
     $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
     $(By.id("startsForm:projectStarts:0:openStartFullscreenBtn")).shouldBe(visible).click();
     $(By.id("topbar-logo")).shouldNotBe(visible);

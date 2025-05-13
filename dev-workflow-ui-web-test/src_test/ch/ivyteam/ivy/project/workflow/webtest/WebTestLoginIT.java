@@ -17,10 +17,10 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverConditions.urlContaining;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
@@ -29,23 +29,33 @@ import com.axonivy.ivy.webtest.primeui.widget.Table;
 import com.browserup.bup.filters.ResponseFilter;
 import com.browserup.bup.util.HttpMessageContents;
 import com.browserup.bup.util.HttpMessageInfo;
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 
-import ch.ivyteam.ivy.project.workflow.webtest.test.ProxyExtension;
 import ch.ivyteam.ivy.project.workflow.webtest.util.Navigation;
 import ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil;
 import io.netty.handler.codec.http.HttpResponse;
 
 @IvyWebTest
-@ExtendWith({ProxyExtension.class})
 class WebTestLoginIT {
   static final String LOGIN = "login.xhtml";
   static final RecordLoginStatusCode STATUS = new RecordLoginStatusCode();
+  private static boolean originalProxyEnabled;
 
   @BeforeAll
   static void beforeAll() {
+    Selenide.closeWebDriver();
+    originalProxyEnabled = Configuration.proxyEnabled;
+    Configuration.proxyEnabled = true;
     openView("starts.xhtml");
     Selenide.webdriver().driver().getProxy().addResponseFilter(LOGIN, STATUS);
+  }
+
+  @AfterAll()
+  static void afterAll() {
+    Selenide.webdriver().driver().getProxy().removeRequestFilter(LOGIN);
+    Configuration.proxyEnabled = originalProxyEnabled;
+    Selenide.closeWebDriver();
   }
 
   @BeforeEach
