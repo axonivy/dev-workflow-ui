@@ -91,6 +91,7 @@
       "config" : {
         "signature" : "startTestDialog1",
         "request" : {
+          "name" : "startTestDialog1",
           "description" : "Dialog 1 for testing Developer Workflow-UI",
           "category" : "exampleDialogs"
         },
