@@ -23,17 +23,19 @@
                 <h6 class="m-0"><h:outputText id="frameTaskName" value="#{frameIvyDevWfBean.taskName}" /></h6>
               </div>
               <p:linkButton id="openStartFullscreenBtn" href="#{frameIvyDevWfBean.taskUrl}" icon="si si-expand-6"
-                styleClass="ml-auto ui-button-secondary rounded-button"/>
+                styleClass="ml-auto flex-shrink-0 ui-button-secondary rounded-button"/>
               <p:tooltip for="openStartFullscreenBtn" value="Open current process start on a fullscreen page" position="left"/>
-              <p:commandButton value="Sidesteps" styleClass="ml-1" id="sidestepsBtn"
+              <p:commandButton value="Sidesteps" styleClass="ml-1 flex-shrink-0" id="sidestepsBtn"
                 rendered="#{frameIvyDevWfBean.renderSidestepBtn()}" icon="si si-arrow-down-1" />
               <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
                 model="#{frameIvyDevWfBean.sidestepsMenuModel}" styleClass="menu-no-icons" />
             </h:panelGroup>
             <h:panelGroup rendered="#{permissionsBean.demoOrDevMode}">
-              <p:commandButton id="previewElementPicker" widgetVar="previewElementPicker" disabled="true" type="button" onclick="selector.toggleSelectionMode()" styleClass="ml-1 rounded-button" icon="si si-pencil-write" />
+              <p:commandButton id="previewElementPicker" widgetVar="previewElementPicker" disabled="true" type="button"
+                onclick="selector.toggleSelectionMode()" styleClass="ml-1 flex-shrink-0 rounded-button" icon="si si-pencil-write" />
               <p:tooltip for="previewElementPicker" value="Open editor on picked widget" position="left"/>
-              <p:commandButton id="previewAutoReload" widgetVar="previewAutoReload" disabled="true" type="button" onclick="preview.toggleAutoRefresh()" styleClass="ml-1 rounded-button ui-button-outlined" icon="si si-button-refresh-arrows" />
+              <p:commandButton id="previewAutoReload" widgetVar="previewAutoReload" disabled="true" type="button"
+                onclick="preview.toggleAutoRefresh()" styleClass="ml-1 flex-shrink-0 rounded-button ui-button-outlined" icon="si si-button-refresh-arrows" />
               <p:tooltip for="previewAutoReload" value="Disable auto refresh when changes are made to this dialog" position="left"/>
             </h:panelGroup>
           </div>
