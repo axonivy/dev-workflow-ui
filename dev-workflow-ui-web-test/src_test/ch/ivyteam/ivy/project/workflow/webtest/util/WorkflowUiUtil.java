@@ -8,7 +8,6 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.webdriver;
 import static com.codeborne.selenide.WebDriverConditions.urlContaining;
 
@@ -16,8 +15,10 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 
 import com.axonivy.ivy.webtest.engine.EngineUrl;
+import com.codeborne.selenide.Selenide;
 
 public class WorkflowUiUtil {
   public static String pmvName() {
@@ -115,6 +116,23 @@ public class WorkflowUiUtil {
     if (!$("#sessionUserName").has(text("Unknown User"))) {
       $(".user-profile").$("a").shouldBe(visible).click();
       $("#sessionLogoutBtn").shouldBe(visible).click();
+    }
+  }
+
+  public static void open(String url) {
+    open(url, 1);
+  }
+
+  private static void open(String url, int retry) {
+    if (retry >= 3) {
+      throw new RuntimeException("Could not start browser instance.");
+    }
+    try {
+      Selenide.open(url);
+    } catch (TimeoutException ex) {
+      System.out.println("Browser didn't respond in time, retry: " + retry);
+      Selenide.closeWebDriver();
+      open(url, retry++);
     }
   }
 }
