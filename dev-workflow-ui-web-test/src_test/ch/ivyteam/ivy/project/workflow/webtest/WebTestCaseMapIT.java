@@ -1,7 +1,6 @@
 package ch.ivyteam.ivy.project.workflow.webtest;
 
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
-import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestCaseMap;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static com.codeborne.selenide.Condition.cssClass;
@@ -22,6 +21,8 @@ import org.openqa.selenium.By;
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.codeborne.selenide.Selenide;
 
+import ch.ivyteam.ivy.project.workflow.webtest.util.Navigation;
+
 @IvyWebTest
 class WebTestCaseMapIT {
 
@@ -39,9 +40,7 @@ class WebTestCaseMapIT {
 
   @Test
   void caseDetails() {
-    openView("cases.xhtml");
-    $(By.id("casesForm:cases:0:caseName")).shouldBe(visible).click();
-
+    Navigation.openCase("startTestDialog1");
     $(By.id("creatorUser:userName")).shouldBe(exactText("DeveloperTest"));
     $(By.id("caseState:stateBadge")).hover();
     $(By.id("caseState:tooltip")).$(".ui-tooltip-text").shouldHave(text("RUNNING"));
@@ -52,9 +51,7 @@ class WebTestCaseMapIT {
 
   @Test
   void sidestepsCaseDetails() {
-    openView("cases.xhtml");
-    $(By.id("casesForm:cases:0:caseName")).shouldBe(visible).click();
-
+    Navigation.openCase("startTestDialog1");
     $(".current-hierarchy-case").find("a").shouldNotHave(text("Created case of TestData"));
 
     $(By.id("sidestepsBtn")).shouldBe(visible).click();
@@ -65,9 +62,7 @@ class WebTestCaseMapIT {
 
   @Test
   void sidestepsTaskDetails() {
-    openView("tasks.xhtml");
-    $(By.id("tasksForm:tasks:0:taskName")).shouldBe(visible).click();
-
+    Navigation.openTask("First task of");
     $(By.id("actionMenuForm:sidestepsBtn")).shouldBe(visible).click();
     $(By.id("actionMenuForm:sidestepMenu")).shouldBe(visible).find(By.className("ui-menuitem-link")).click();
     $(By.id("actionMenuForm:sidestepsBtn")).shouldBe(visible);
@@ -80,8 +75,7 @@ class WebTestCaseMapIT {
 
   @Test
   void caseMapUi() {
-    openView("cases.xhtml");
-    $(By.id("casesForm:cases:0:caseName")).shouldBe(visible).click();
+    Navigation.openCase("startTestDialog1");
     $(By.className("current-hierarchy-case")).find("a").shouldNotHave(text("Created case of TestData"));
     $(By.className("casemap-card")).shouldBe(visible);
     $(By.id("openCaseMapUiViewerBtn")).shouldBe(visible).click();
