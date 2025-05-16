@@ -16,7 +16,6 @@
   <properties>
     <test.target.dir>${project.basedir}/../../dev-workflow-ui-web-test/target/</test.target.dir>
     <screenshotArtifactId>dev-workflow-ui-screenshots</screenshotArtifactId>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <ref.screenshot.build>master</ref.screenshot.build>
     <img.similarity>92</img.similarity>
   </properties>
@@ -29,7 +28,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-antrun-plugin</artifactId>
-            <version>3.1.0</version>
             <executions>
               <execution>
                 <id>download-latest-screenshots</id>
