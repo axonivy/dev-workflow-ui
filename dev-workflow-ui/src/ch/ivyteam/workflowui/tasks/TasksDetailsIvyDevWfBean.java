@@ -134,7 +134,7 @@ public class TasksDetailsIvyDevWfBean {
   }
 
   private boolean canResume() {
-    return TaskUtil.canResume(selectedTask.getUuid());
+    return selectedTask != null && TaskUtil.canResume(selectedTask.getUuid());
   }
 
   private final EnumSet<TaskState> activeTaskStates = EnumSet.of(
