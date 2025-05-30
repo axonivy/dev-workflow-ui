@@ -52,6 +52,9 @@ const initPreview = (baseUrl = 'http://localhost:8081') => {
     previewAutoRefresh = !previewAutoRefresh;
     toggleSpinAutoRefresh();
     window.localStorage.setItem('preview-autorefresh', previewAutoRefresh);
+    if (previewAutoRefresh) {
+      window.location.reload();
+    }
   }
 
   return { listenTo, navigateTo, toggleAutoRefresh };
