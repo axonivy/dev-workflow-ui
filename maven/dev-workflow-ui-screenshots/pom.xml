@@ -14,13 +14,6 @@
     <relativePath>../config</relativePath>
   </parent>
 
-  <distributionManagement>
-    <snapshotRepository>
-      <id>nexus.ivyteam.io</id>
-      <url>https://nexus.ivyteam.io/repository/maven-snapshots/</url>
-    </snapshotRepository>
-  </distributionManagement>
-
   <profiles>
     <profile>
       <id>screenshots</id>
@@ -28,7 +21,6 @@
         <plugins>
           <plugin>
             <artifactId>maven-assembly-plugin</artifactId>
-            <version>3.7.1</version>
             <executions>
               <execution>
                 <id>zip</id>
