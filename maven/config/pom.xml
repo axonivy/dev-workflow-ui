@@ -17,13 +17,6 @@
     <engineHomeDirectory>${basedir}/../maven/config/target/ivyEngine/</engineHomeDirectory>
   </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>com.axonivy.ivy.api</groupId>
-      <artifactId>ivy-api</artifactId>
-    </dependency>
-  </dependencies>
-
   <build>
     <plugins>
       <plugin>
