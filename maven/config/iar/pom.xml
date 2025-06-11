@@ -12,10 +12,6 @@
     <relativePath>..</relativePath>
   </parent>
 
-  <properties>
-    <engine.page.url>https://product.ivyteam.io</engine.page.url>
-  </properties>
-
   <build>
     <plugins>
       <plugin>

@@ -36,7 +36,6 @@
     <dependency>
       <groupId>com.axonivy.ivy.webtest</groupId>
       <artifactId>web-tester</artifactId>
-      <version>${web.tester.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -44,6 +43,10 @@
       <artifactId>selenide-proxy</artifactId>
       <version>7.9.3</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.axonivy.ivy.api</groupId>
+      <artifactId>ivy-api</artifactId>
     </dependency>
   </dependencies>
 
@@ -95,7 +98,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>${maven.surefire.version}</version>
         <configuration>
           <testFailureIgnore>true</testFailureIgnore>
           <trimStackTrace>false</trimStackTrace>
@@ -113,7 +115,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>${maven.surefire.version}</version>
         <configuration>
           <skip>${skip.integration.test}</skip>
         </configuration>
@@ -157,7 +158,6 @@
     
           <plugin>
             <artifactId>maven-resources-plugin</artifactId>
-            <version>3.3.1</version>
             <executions>
               <execution>
                 <id>copy-resource-one</id>
@@ -183,7 +183,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
-            <version>${maven.surefire.version}</version>
             <configuration>
               <testFailureIgnore>true</testFailureIgnore>
               <trimStackTrace>false</trimStackTrace>
@@ -255,7 +254,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
-            <version>${maven.surefire.version}</version>
             <configuration>
               <testFailureIgnore>true</testFailureIgnore>
               <trimStackTrace>false</trimStackTrace>
