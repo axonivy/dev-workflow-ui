@@ -19,7 +19,9 @@ case:
 cleanup:
   businessData: All Business Data and the search index
   dataCaches: Data caches
-  introduction: When you click through different processes you create different types of data like cases, tasks etc. Here you can clean that data to reset your designer.
+  introduction: When you click through different processes you create different 
+    types of data like cases, tasks etc. Here you can clean that data to reset 
+    your designer.
   tokens: All identity provider tokens
   workflow: All Cases, Tasks and dependet objects
 common:
@@ -238,16 +240,18 @@ switchUser:
   noUsers: No users found
 task:
   assignTask: Assign task
-  canNotWork: You cannot work on the task because ${user} is currently working on it.
+  canNotWork: You cannot work on the task because ${user} is currently working 
+    on it.
   completedByCurrent: You already have completed the task
   completedByOther: Task has already been completed by ${user}
   delegateTask: Delegate task
   delegateTaskToUserOrRole: Delegate the task to a specified user or role
   destroyed: You cannot work on the task because it was destroyed
   invalid: Invalid state
-  role: Rolle
+  role: Role
   user: User
-  workingOn: You are currently working on the task in a different session. You may reset the task and start it again if you have closed your browser.
+  workingOn: You are currently working on the task in a different session. You 
+    may reset the task and start it again if you have closed your browser.
 tasks:
   noTasksFound: No tasks found
 template:
@@ -256,8 +260,9 @@ template:
   profile: Profile
   switchUser: Switch User
 webservices:
-  noWebServicesFound: Keine Web Service Prozesse gefunden
+  noWebServicesFound: No Web Service processes found
   webServiceProcesses: Web Service Processes
 workflowEventsTable:
-  needPermission: You need workflow events read permission in order to see the events.
+  needPermission: You need workflow events read permission in order to see the 
+    events.
   noPermissions: No permissions
