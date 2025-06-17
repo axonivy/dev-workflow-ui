@@ -2,31 +2,31 @@ apiBrowser:
   apiBrowser: API Browser
   openInTab: API Browser in einem neuen Tab öffnen
 case:
-  caseHierarchy: Fall Hierarchie
+  caseHierarchy: Case Hierarchie
   caseMap: Case Map
   currentProcessHidden: Prozess ist ausgeblendet
   description: Beschreibung
-  destroyCase: Fall zerstören
+  destroyCase: Case löschen
   documents: Dokumente
-  openCaseMap: Case Map
+  openCaseMap: Case Map anzeigen
   openProcessViewer: Process anzeigen
   processViewer: Prozess Ansicht
-  showNotes: Fall Notizen anzeigen
-  showSystemTasks: System Aufgaben anzeigen
+  showNotes: Case Notizen anzeigen
+  showSystemTasks: System Tasks anzeigen
   sidesteps: Sidesteps
-  taskList: Task Liste
+  taskList: Task-Liste
   workflowEvents: Workflow Events
 cleanup:
   businessData: Alle Business Daten und den Such-Index
   dataCaches: Daten Caches
-  introduction: When Du verschiedene Prozesse ausführtst, erzeugst Du verschiedene
-    Typen von Daten wie Fälle, Aufgaben etc. Hier kannst Du diese Daten aufräumen
-    um den Designer zurückzusetzen.
+  introduction: Beim Ausführen von Prozessen, erzeugst Du verschiedene Typen von
+    Daten wie Cases, Tasks etc. Hier kannst Du diese Daten aufräumen und den 
+    Designer zurückzusetzen.
   tokens: Alle Identity Provider Token
-  workflow: Alle Fälle, Aufgaben und abhängige Objekte
+  workflow: Alle Cases, Tasks und abhängige Objekte
 common:
   author: Autor
-  businessCase: Business Fall
+  businessCase: Business Case
   cancel: Abbrechen
   category: Kategorie
   clearDelay: Verzugsdatum löschen
@@ -64,15 +64,15 @@ common:
   noCustomFieldsFound: Keine benutzerdefinierten Felder gefunden
   noDocumentsFound: Keine Dokumente gefunden
   noEventsFound: Keine Ereignisse gefunden
-  noTasksFound: Keine Aufgaben gefunden
+  noTasksFound: Keine Tasks gefunden
   notes: Notizen
   notificationChannels: Benachrichtigungs Kanäle
   openCaseMapViewer: Case Map anzeigen
   openDetails: Details anzeigen
   openFullscreen: In Vollbildmodus öffnen
   openProcessViewer: Prozess anzeigen
-  openTaskDetails: Aufgaben Details öffnen
-  openTasks: Offene Aufgaben
+  openTaskDetails: Task Details öffnen
+  openTasks: Offene Tasks
   owner: Rollen
   park: Prio
   pmv: PMV
@@ -89,19 +89,19 @@ common:
   showAll: Alle anzeigen
   start: Start
   startProcess: Prozess starten
-  startTask: Aufgabe starten
+  startTask: Task starten
   startedCases: Gestartete Fälle
   state: Status
-  task: Aufgabe
-  technicalCase: Technischer Fall
+  task: Task
+  technicalCase: Technischer Case
   type: Typ
   username: Benutzername
   value: Wert
   workerUser: Bearbeiter
   workflowEvents: Workflow Ereignisse
 end:
-  taskEnd: Aufgaben Ende
-  taskFinished: Du hast erfolgreich den Task beendet.
+  taskEnd: Task Ende
+  taskFinished: Du hast den Task erfolgreich beendet.
 enums:
   caseBusinessState:
     destroyed: Zerstört
@@ -147,17 +147,17 @@ exception:
   unexpectedError: Ein unerwarteter Fehler ist aufgetreten
   viewOrSessionExpired: Ansicht oder Sitzung abgelaufen
 frame:
-  disableAutoRefresh: Deaktiviere automatisches neu laden der Seite wenn Änderungen
-    an diesem Dialog gemacht werden
+  disableAutoRefresh: Deaktiviere automatisches neu laden der Seite wenn 
+    Änderungen an diesem Dialog gemacht werden
   openCurrentProcess: Aktueller Prozess Start in einer Vollbildansicht anzeigen
   openEditor: Öffne den Editor auf dem ausgewählten Widget
   sidesteps: Sidesteps
 home:
   goToProcessList: Gehe zur Prozess Liste
   noCasesFound: Keine Fälle gefunden
-  noOpenTasks: Du hast keine offene Aufgaben. Mache eine Kaffee Pause.
+  noOpenTasks: Du hast keinen offenen Tasks. Mache eine Kaffee Pause.
   noProcessesStarted: Du hast bisher kein Prozesses gestartet.
-  openTasks: Offene Aufgaben
+  openTasks: Offene Tasks
   startedCases: Gestartete Fälle
   startedProcesses: Gestartete Prozesse
   toStartProcess: um einen Prozess zu starten.
@@ -200,7 +200,7 @@ sidebar:
   processes: Prozesse
   signals: Signale
   statistics: Statistiken
-  tasks: Aufgaben
+  tasks: Tasks
   webService: Web Service
 signals:
   boundarySignals: Grenz Signale
@@ -215,7 +215,7 @@ signals:
   sentBy: Gesendet von
   signalCode: Signal Code
   signalPattern: Signal Pattern
-  waitingTask: Wartende Aufgabe
+  waitingTask: Wartender Tasks
 starts:
   application: Applikation
   areYouSure: Bist Du sicher, dass Du nicht auf die starts.xhtml Seite wolltest?
@@ -227,36 +227,36 @@ starts:
   search: Suchen
 statistics:
   allCases: Alle Fälle
-  allTasks: Alle Aufgaben
+  allTasks: Alle Tasks
   casesByState: Fälle nach Status
-  casesStatistics: Fall Statistik
+  casesStatistics: Case Statistik
   notEnoughData: Nicht genügend Daten
-  tasksByState: Aufgaben nach Status
-  tasksStatistics: Aufgaben Statistik
-  topCaseCreators: Top Fall Ersteller
-  topTaskWorkers: Top Aufgaben Bearbeiter
+  tasksByState: Tasks nach Status
+  tasksStatistics: Task Statistik
+  topCaseCreators: Top Case Ersteller
+  topTaskWorkers: Top Task Bearbeiter
 switchUser:
   clickLogin: Klicke auf einen Benutzer um Dich anzumelden
   needLogin: Du musst Dich einloggen um auf diese Seite zugreifen zu können
   noUsers: Keine Benutzer gefunden
 task:
-  assignTask: Aufgabe zuweisen
-  canNotWork: Du kannst an dieser Aufgabe nicht arbeiten, weil ${user} arbeitet bereits
-    daran.
-  completedByCurrent: Du hast diese Aufgabe bereits abgeschlossen.
-  completedByOther: Aufgabe wurde bereits von ${user} abgeschlossen.
-  delegateTask: Aufgabe delegieren
-  delegateTaskToUserOrRole: Delegiere den Task zu einem Benutzer oder an eine Rolle
-  destroyed: Du kannst an dieser Aufgabe nicht arbeiten, weil diese Aufgabe zerstört
-    wurde.
+  assignTask: Task zuweisen
+  canNotWork: Du kannst an diesem Task nicht arbeiten, weil ${user} den Task 
+    bereits geöffnet hat.
+  completedByCurrent: Dieser Task bereits abgeschlossen.
+  completedByOther: Der Task wurde bereits von ${user} abgeschlossen.
+  delegateTask: Task delegieren
+  delegateTaskToUserOrRole: Delegiere den Task an einen Benutzer oder an eine 
+    Rolle
+  destroyed: Dieser Task kann nicht bearbeitet, weil er gelöscht wurde.
   invalid: Ungültiger Status
   role: Rolle
   user: Benutzer
-  workingOn: Du arbeitest bereits an dieser Aufgabe, aber in einer anderen Sitzung.
-    Du kannst diese Aufgabe zurücksetzen, falls Du den anderen Browser bereits geschlossen
-    hast.
+  workingOn: Dieser Task ist in einer anderen Browser Session geöffnet. Du 
+    kannst den Task zurücksetzen und neu starten, wenn der andere Browser 
+    geschlossen wurde.
 tasks:
-  noTasksFound: Keine Aufgaben gefunden
+  noTasksFound: Keine Tasks gefunden
 template:
   login: Anmelden
   logout: Abmelden
@@ -266,5 +266,6 @@ webservices:
   noWebServicesFound: Keine Web Service Prozesse gefunden
   webServiceProcesses: Web Service Prozesse
 workflowEventsTable:
-  needPermission: Du benötigts Lese Berechtigungen um Workflow Ereignisse zu sehen.
-  noPermissions: No permissions
+  needPermission: Du benötigts Lese Berechtigungen um Workflow Ereignisse zu 
+    sehen.
+  noPermissions: Keine Berechtigung
