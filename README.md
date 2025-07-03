@@ -37,7 +37,7 @@ To run the tests, run the following command: `mvn clean verify`
 
 - [Axon Ivy Designer](https://developer.axonivy.com/) - IDE and process modelling tool
 - [JSF](https://www.oracle.com/java/technologies/jsf.html) - Java Server Faces
-- [Primefaces 11](https://www.primefaces.org/) - The web framework used
+- [Primefaces](https://www.primefaces.org/) - The web framework used
 - [Maven](https://maven.apache.org/) - Dependency Management
 
 ## Contributing
