@@ -230,6 +230,15 @@ statistics:
   notEnoughData: Not enough data available
   tasksByState: Tasks by State
   tasksStatistics: Task Statistics
+  timeRange: Time range
+  timeRanges:
+    allTime: All Time
+    last24h: Last 24 hours
+    last30d: Last month
+    last365d: Last year
+    last7d: Last week
+    last90d: Last 3 months
+    today: Today
   topCaseCreators: Top Case Creators
   topTaskWorkers: Top Task Workers
 switchUser:

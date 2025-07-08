@@ -45,10 +45,10 @@ class WebTestStatisticsIT {
 
     timeRangeDropdown.selectItemByLabel("Today");
     timeRangeDropdown.selectItemByLabel("Last 24 hours");
-    timeRangeDropdown.selectItemByLabel("Last 7 days");
-    timeRangeDropdown.selectItemByLabel("Last 30 days");
-    timeRangeDropdown.selectItemByLabel("Last 90 days");
-    timeRangeDropdown.selectItemByLabel("Last 365 days");
+    timeRangeDropdown.selectItemByLabel("Last week");
+    timeRangeDropdown.selectItemByLabel("Last month");
+    timeRangeDropdown.selectItemByLabel("Last 3 months");
+    timeRangeDropdown.selectItemByLabel("Last year");
     timeRangeDropdown.selectItemByLabel("All time");
   }
 
@@ -84,7 +84,7 @@ class WebTestStatisticsIT {
     $(By.id("statisticsForm")).shouldBe(visible);
     $(By.id("statisticsForm:caseStatisticsChart_canvas")).shouldBe(visible);
 
-    timeRangeDropdown.selectItemByLabel("Last 7 days");
+    timeRangeDropdown.selectItemByLabel("Last week");
     $(By.id("statisticsForm")).shouldBe(visible);
     $(By.id("statisticsForm:caseStatisticsChart_canvas")).shouldBe(visible);
 

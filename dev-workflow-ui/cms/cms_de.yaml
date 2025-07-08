@@ -230,6 +230,15 @@ statistics:
   notEnoughData: Nicht genügend Daten
   tasksByState: Aufgaben nach Status
   tasksStatistics: Aufgaben Statistik
+  timeRange: Zeitspanne
+  timeRanges:
+    allTime: Seit Beginn
+    last24h: Letzte 24 Stunden
+    last30d: Letzter Monat
+    last365d: Letztes Jahr
+    last7d: Letzte Woche
+    last90d: Letzte 3 Monate
+    today: Heute
   topCaseCreators: Top Fall Ersteller
   topTaskWorkers: Top Aufgaben Bearbeiter
 switchUser:
