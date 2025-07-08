@@ -6,20 +6,40 @@
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
       <f:event type="preRenderView" listener="#{loginBean.redirectIfNotDevModeOrAdmin}" />
-      <div class="flex flex-wrap">
-        <ui:include src="/includes/components/statistics/casesAll.xhtml" />
-        <ui:include src="/includes/components/statistics/caseStateGraph.xhtml" />
-        <ui:include src="/includes/components/statistics/caseStatisticsChart.xhtml" />
-      </div>
-      <div class="flex flex-wrap">
-        <ui:include src="/includes/components/statistics/tasksAll.xhtml" />
-        <ui:include src="/includes/components/statistics/taskStateGraph.xhtml" />
-        <ui:include src="/includes/components/statistics/taskStatisticsChart.xhtml" />
-      </div>
-      <div class="flex flex-wrap">
-        <ui:include src="/includes/components/statistics/caseTopCreators.xhtml" />
-        <ui:include src="/includes/components/statistics/taskTopWorkers.xhtml" />
-      </div>
+      <h:form id="statisticsForm">
+        <div class="flex m-3 justify-content-between">
+          <div class="flex align-items-center">
+            <h4 class="m-0">Statistics</h4>
+          </div>
+          <div class="flex align-items-center">
+            <h:outputText value="Time range:" />
+            <p:selectOneMenu id="timeDuration" value="#{statisticsBean.timeDuration}" styleClass="ml-2">
+              <p:ajax update="statisticsForm" event="valueChange" />
+              <f:selectItem itemLabel="Today" itemValue="today" />
+              <f:selectItem itemLabel="Last 24 hours" itemValue="24h" />
+              <f:selectItem itemLabel="Last 7 days" itemValue="7d/d" />
+              <f:selectItem itemLabel="Last 30 days" itemValue="30d/d" />
+              <f:selectItem itemLabel="Last 90 days" itemValue="90d/d" />
+              <f:selectItem itemLabel="Last 365 days" itemValue="365d/d" />
+              <f:selectItem itemLabel="All time" itemValue="all" />
+            </p:selectOneMenu>
+          </div>
+        </div>
+        <div class="flex flex-wrap">
+          <ui:include src="/includes/components/statistics/casesAll.xhtml" />
+          <ui:include src="/includes/components/statistics/caseStateGraph.xhtml" />
+          <ui:include src="/includes/components/statistics/caseStatisticsChart.xhtml" />
+        </div>
+        <div class="flex flex-wrap">
+          <ui:include src="/includes/components/statistics/tasksAll.xhtml" />
+          <ui:include src="/includes/components/statistics/taskStateGraph.xhtml" />
+          <ui:include src="/includes/components/statistics/taskStatisticsChart.xhtml" />
+        </div>
+        <div class="flex flex-wrap">
+          <ui:include src="/includes/components/statistics/caseTopCreators.xhtml" />
+          <ui:include src="/includes/components/statistics/taskTopWorkers.xhtml" />
+        </div>
+      </h:form>
     </ui:define>
   </ui:composition>
 </h:body>
