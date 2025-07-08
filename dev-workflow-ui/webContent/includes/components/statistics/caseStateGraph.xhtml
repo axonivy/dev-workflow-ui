@@ -6,7 +6,7 @@
   <ui:composition template="/includes/template/statisticsCardBare.xhtml">
     <ui:define name="content">
       <h4>#{ivy.cm.co('/statistics/casesByState')}</h4>
-      <p:donutChart model="#{statisticsBean.caseByStateGraph}" style="align-self: center; height: 18rem; width: 18rem;"
+      <p:donutChart id="caseStateGraph" model="#{statisticsBean.caseByStateGraph}" style="align-self: center; height: 18rem; width: 18rem;"
         rendered="#{statisticsBean.caseByStateGraph != null}" />
       <h:panelGroup layout="block" rendered="#{statisticsBean.caseByStateGraph == null}"
         styleClass="h-full flex flex-column align-items-center justify-content-center">

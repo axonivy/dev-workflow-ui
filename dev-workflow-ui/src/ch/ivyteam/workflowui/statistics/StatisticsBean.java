@@ -1,12 +1,9 @@
-package ch.ivyteam.workflowui;
+package ch.ivyteam.workflowui.statistics;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,27 +29,110 @@ import ch.ivyteam.ivy.workflow.task.TaskBusinessState;
 @ViewScoped
 public class StatisticsBean {
 
+  private String timeDuration = "24h";
+
+  public String getTimeFilter() {
+    return timeDuration;
+  }
+
+  public String getTimeDuration() {
+    return timeDuration;
+  }
+
+  public void setTimeDuration(String timeDuration) {
+    this.timeDuration = timeDuration;
+  }
+
   public LineChartModel getTasksPerHourChart() {
-    var aggrResult = WorkflowStats.current().task().aggregate("startTimestamp:bucket:hour,endTimestamp:bucket:hour");
-    var startCountMap = initializeTimeMap(12, true);
-    var endCountMap = initializeTimeMap(12, true);
+    return getTasksOverTimeChart();
+  }
+
+  public LineChartModel getCasesPerDayChart() {
+    return getCasesOverTimeChart();
+  }
+
+  public LineChartModel getTasksOverTimeChart() {
+    var resolution = StatisticsTimeResolver.getResolutionForDuration(timeDuration);
+    var aggrResult = WorkflowStats.current().task().aggregate(
+        "startTimestamp:bucket:" + resolution.bucketType + ",endTimestamp:bucket:" + resolution.bucketType,
+        StatisticsTimeResolver.buildTimeQuery(timeDuration));
+    var startCountMap = StatisticsTimeResolver.initializeTimeMap(timeDuration, resolution);
+    var endCountMap = StatisticsTimeResolver.initializeTimeMap(timeDuration, resolution);
+
     for (var agg : aggrResult.aggs()) {
       if (agg instanceof Buckets buckets) {
         for (Bucket bucket : buckets.buckets()) {
-          processHourBucket(bucket, startCountMap);
-          processNestedHourBuckets(bucket, endCountMap);
+          processBucket(bucket, startCountMap, resolution.labelFormatter);
+          processNestedBuckets(bucket, endCountMap, resolution.labelFormatter);
         }
       }
     }
     return createStartAndFinishLineChart(startCountMap, endCountMap);
   }
 
-  private LineChartModel createStartAndFinishLineChart(Map<String, Long> startCountMap, Map<String, Long> endCountMap, String... colors) {
+  public LineChartModel getCasesOverTimeChart() {
+    var resolution = StatisticsTimeResolver.getResolutionForDuration(timeDuration);
+    var aggrResult = WorkflowStats.current().caze().aggregate(
+        "startTimestamp:bucket:" + resolution.bucketType + ",endTimestamp:bucket:" + resolution.bucketType,
+        StatisticsTimeResolver.buildTimeQuery(timeDuration));
+    var startCountMap = StatisticsTimeResolver.initializeTimeMap(timeDuration, resolution);
+    var endCountMap = StatisticsTimeResolver.initializeTimeMap(timeDuration, resolution);
+
+    for (var agg : aggrResult.aggs()) {
+      if (agg instanceof Buckets buckets) {
+        for (Bucket bucket : buckets.buckets()) {
+          processBucket(bucket, startCountMap, resolution.labelFormatter);
+          processNestedBuckets(bucket, endCountMap, resolution.labelFormatter);
+        }
+      }
+    }
+    return createStartAndFinishLineChart(startCountMap, endCountMap, "rgb(255, 159, 64)");
+  }
+
+  public long getAllTasks() {
+    var allTasks = WorkflowStats.current().task().aggregate("businessState", StatisticsTimeResolver.buildTimeQuery(timeDuration));
+    return getCountFromAggregation(allTasks);
+  }
+
+  public long getAllCases() {
+    var allCases = WorkflowStats.current().caze().aggregate("businessState", StatisticsTimeResolver.buildTimeQuery(timeDuration));
+    return getCountFromAggregation(allCases);
+  }
+
+  public DonutChartModel getTaskByStateGraph() {
+    Map<String, String> labelToColor = Map.of(TaskBusinessState.OPEN.toString(), "rgb(0, 148, 210)",
+        TaskBusinessState.IN_PROGRESS.toString(), "rgb(255, 206, 86)", TaskBusinessState.DONE.toString(),
+        "rgb(54, 199, 38)", TaskBusinessState.DELAYED.toString(), "rgb(200, 200, 200)",
+        TaskBusinessState.DESTROYED.toString(), "rgb(130, 130, 130)", TaskBusinessState.ERROR.toString(),
+        "rgb(255, 99, 132)");
+    var aggrResult = WorkflowStats.current().task().aggregate("businessState", StatisticsTimeResolver.buildTimeQuery(timeDuration));
+    return createDonutChartModel(aggrResult, labelToColor);
+  }
+
+  public DonutChartModel getCaseByStateGraph() {
+    Map<String, String> labelToColor = Map.of(CaseBusinessState.OPEN.toString(), "rgb(0, 148, 210)",
+        CaseBusinessState.DONE.toString(), "rgb(54, 199, 38)", CaseBusinessState.DESTROYED.toString(),
+        "rgb(130, 130, 130)");
+    var aggResult = WorkflowStats.current().caze().aggregate("businessState", StatisticsTimeResolver.buildTimeQuery(timeDuration));
+    return createDonutChartModel(aggResult, labelToColor);
+  }
+
+  public BarChartModel getTopCaseCreatorsModel() {
+    var aggrResult = WorkflowStats.current().caze().aggregate("creator.name", StatisticsTimeResolver.buildTimeQuery(timeDuration));
+    return createBarChartModel(aggrResult, "Cases created", "rgb(255, 159, 64)");
+  }
+
+  public BarChartModel getTopTaskWorkersModel() {
+    var aggrResult = WorkflowStats.current().task().aggregate("worker.name", StatisticsTimeResolver.buildCombinedQuery("businessState:DONE", timeDuration));
+    return createBarChartModel(aggrResult, "Tasks completed", "rgb(0, 148, 210)");
+  }
+
+  private LineChartModel createStartAndFinishLineChart(Map<String, Long> startCountMap, Map<String, Long> endCountMap,
+      String... colors) {
     var color = colors.length > 0 ? colors[0] : "rgb(54, 162, 235)";
     var startDataSet = createLineChartDataSet(new ArrayList<>(startCountMap.values()), "Started", color);
     color = colors.length > 1 ? colors[1] : "rgb(255, 99, 132)";
     var endDataSet = createLineChartDataSet(new ArrayList<>(endCountMap.values()), "Finished", color);
-
     var data = new ChartData();
     data.addChartDataSet(startDataSet);
     data.addChartDataSet(endDataSet);
@@ -69,8 +149,12 @@ public class StatisticsBean {
     return dataSet;
   }
 
-  private void processNestedHourBuckets(Bucket startBucket, Map<String, Long> timeCountMap) {
-    var labelFormatter = DateTimeFormatter.ofPattern("HH:00").withZone(ZoneId.systemDefault());
+  private void processBucket(Bucket bucket, Map<String, Long> timeCountMap, DateTimeFormatter labelFormatter) {
+    updateCountMap(bucket, timeCountMap, labelFormatter);
+  }
+
+  private void processNestedBuckets(Bucket startBucket, Map<String, Long> timeCountMap,
+      DateTimeFormatter labelFormatter) {
     for (var agg : startBucket.aggs()) {
       if (agg instanceof Buckets buckets) {
         for (Bucket endBucket : buckets.buckets()) {
@@ -92,98 +176,15 @@ public class StatisticsBean {
     }
   }
 
-  public LineChartModel getCasesPerDayChart() {
-    var casesStartedAggr = WorkflowStats.current().caze().aggregate("startTimestamp:bucket:day,endTimestamp:bucket:day");
-    var startCountMap = initializeTimeMap(7, false);
-    var endCountMap = initializeTimeMap(7, false);
-    for (var agg : casesStartedAggr.aggs()) {
-      if (agg instanceof Buckets buckets) {
-        for (Bucket bucket : buckets.buckets()) {
-          processDayBucket(bucket, startCountMap);
-          processNestedDayBuckets(bucket, endCountMap);
-        }
-      }
-    }
-    return createStartAndFinishLineChart(startCountMap, endCountMap, "rgb(255, 159, 64)");
-  }
-
-  private LinkedHashMap<String, Long> initializeTimeMap(int timeRange, boolean isHour) {
-    var timeCountMap = new LinkedHashMap<String, Long>();
-    var currentTime = ZonedDateTime.ofInstant(Instant.now(), ZoneId.systemDefault()).withMinute(0);
-    var formatter = isHour ? DateTimeFormatter.ofPattern("HH:00") : DateTimeFormatter.ofPattern("MM-dd");
-    for (int i = timeRange; i > 0; i--) {
-      var timeLabel = formatter.format(isHour ? currentTime.minusHours(i) : currentTime.minusDays(i));
-      timeCountMap.put(timeLabel, 0L);
-    }
-    return timeCountMap;
-  }
-
-  private void processHourBucket(Bucket bucket, Map<String, Long> timeCountMap) {
-    var labelFormatter = DateTimeFormatter.ofPattern("HH:00").withZone(ZoneId.systemDefault());
-    updateCountMap(bucket, timeCountMap, labelFormatter);
-  }
-
-  private void processNestedDayBuckets(Bucket startBucket, Map<String, Long> timeCountMap) {
-    var labelFormatter = DateTimeFormatter.ofPattern("MM-dd").withZone(ZoneId.systemDefault());
-    for (var agg : startBucket.aggs()) {
-      if (agg instanceof Buckets buckets) {
-        for (Bucket endBucket : buckets.buckets()) {
-          updateCountMap(endBucket, timeCountMap, labelFormatter);
-        }
-      }
-    }
-  }
-
-  private void processDayBucket(Bucket bucket, Map<String, Long> timeCountMap) {
-    var labelFormatter = DateTimeFormatter.ofPattern("MM-dd").withZone(ZoneId.systemDefault());
-    updateCountMap(bucket, timeCountMap, labelFormatter);
-  }
-
   private LineChartModel createLineChart(ChartData data) {
     var model = new LineChartModel();
     model.setData(data);
     return model;
   }
 
-  public long getAllTasks() {
-    var allTasks = WorkflowStats.current().task().aggregate("businessState");
-    return getCountFromAggregation(allTasks);
-  }
-
-  public long getAllCases() {
-    var allCases = WorkflowStats.current().caze().aggregate("businessState");
-    return getCountFromAggregation(allCases);
-  }
-
   private long getCountFromAggregation(AggregationResult aggrResult) {
-    return aggrResult.aggs().stream()
-        .filter(Buckets.class::isInstance)
-        .map(aggregation -> (Buckets) aggregation)
-        .flatMap(buckets -> buckets.buckets().stream())
-        .map(Bucket::count)
-        .findFirst()
-        .orElse(0l);
-  }
-
-  public DonutChartModel getTaskByStateGraph() {
-    Map<String, String> labelToColor = Map.of(
-        TaskBusinessState.OPEN.toString(), "rgb(0, 148, 210)",
-        TaskBusinessState.IN_PROGRESS.toString(), "rgb(255, 206, 86)",
-        TaskBusinessState.DONE.toString(), "rgb(54, 199, 38)",
-        TaskBusinessState.DELAYED.toString(), "rgb(200, 200, 200)",
-        TaskBusinessState.DESTROYED.toString(), "rgb(130, 130, 130)",
-        TaskBusinessState.ERROR.toString(), "rgb(255, 99, 132)");
-    var aggrResult = WorkflowStats.current().task().aggregate("businessState");
-    return createDonutChartModel(aggrResult, labelToColor);
-  }
-
-  public DonutChartModel getCaseByStateGraph() {
-    Map<String, String> labelToColor = Map.of(
-        CaseBusinessState.OPEN.toString(), "rgb(0, 148, 210)",
-        CaseBusinessState.DONE.toString(), "rgb(54, 199, 38)",
-        CaseBusinessState.DESTROYED.toString(), "rgb(130, 130, 130)");
-    var aggResult = WorkflowStats.current().caze().aggregate("businessState");
-    return createDonutChartModel(aggResult, labelToColor);
+    return aggrResult.aggs().stream().filter(Buckets.class::isInstance).map(aggregation -> (Buckets) aggregation)
+        .flatMap(buckets -> buckets.buckets().stream()).map(Bucket::count).findFirst().orElse(0l);
   }
 
   private DonutChartModel createDonutChartModel(AggregationResult aggrResult, Map<String, String> labelToColor) {
@@ -214,16 +215,6 @@ public class StatisticsBean {
     data.setLabels(labels);
     donutModel.setData(data);
     return donutModel;
-  }
-
-  public BarChartModel getTopCaseCreatorsModel() {
-    var aggrResult = WorkflowStats.current().caze().aggregate("creator.name");
-    return createBarChartModel(aggrResult, "Cases created", "rgb(255, 159, 64)");
-  }
-
-  public BarChartModel getTopTaskWorkersModel() {
-    var aggrResult = WorkflowStats.current().task().aggregate("worker.name", "businessState:DONE");
-    return createBarChartModel(aggrResult, "Tasks finished", "rgb(0, 148, 210)");
   }
 
   private BarChartModel createBarChartModel(AggregationResult agg, String title, String color) {
@@ -257,5 +248,4 @@ public class StatisticsBean {
   private static String cleanupUsername(String username) {
     return username.startsWith("#") ? username.substring(1) : username;
   }
-
 }

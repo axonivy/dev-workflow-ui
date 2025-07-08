@@ -100,8 +100,8 @@ class WebDocuScreenshots {
     Selenide.switchTo().defaultContent();
 
     openView("statistics.xhtml");
-    $(By.id("taskStatisticsChart_canvas")).shouldBe(visible);
-    $(By.id("topCaseCreatorsChart_canvas")).shouldBe(visible);
+    $(By.id("statisticsForm:taskStatisticsChart_canvas")).shouldBe(visible);
+    $(By.id("statisticsForm:topCaseCreatorsChart_canvas")).shouldBe(visible);
     takeScreenshot("workflow-ui-statistics", new Dimension(SCREENSHOT_WIDTH, 800));
   }
 
