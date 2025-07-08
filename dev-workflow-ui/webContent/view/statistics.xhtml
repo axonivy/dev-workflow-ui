@@ -9,19 +9,19 @@
       <h:form id="statisticsForm">
         <div class="flex m-3 justify-content-between">
           <div class="flex align-items-center">
-            <h4 class="m-0">Statistics</h4>
+            <h4 class="m-0">#{ivy.cm.co('/sidebar/statistics')}</h4>
           </div>
           <div class="flex align-items-center">
-            <h:outputText value="Time range:" />
+            <h:outputText value="#{ivy.cm.co('/statistics/timeRange')}:" />
             <p:selectOneMenu id="timeDuration" value="#{statisticsBean.timeDuration}" styleClass="ml-2">
               <p:ajax update="statisticsForm" event="valueChange" />
-              <f:selectItem itemLabel="Today" itemValue="today" />
-              <f:selectItem itemLabel="Last 24 hours" itemValue="24h" />
-              <f:selectItem itemLabel="Last 7 days" itemValue="7d/d" />
-              <f:selectItem itemLabel="Last 30 days" itemValue="30d/d" />
-              <f:selectItem itemLabel="Last 90 days" itemValue="90d/d" />
-              <f:selectItem itemLabel="Last 365 days" itemValue="365d/d" />
-              <f:selectItem itemLabel="All time" itemValue="all" />
+              <f:selectItem itemLabel="#{ivy.cm.co('/statistics/timeRanges/today')}" itemValue="today" />
+              <f:selectItem itemLabel="#{ivy.cm.co('/statistics/timeRanges/last24h')}" itemValue="24h" />
+              <f:selectItem itemLabel="#{ivy.cm.co('/statistics/timeRanges/last7d')}" itemValue="7d/d" />
+              <f:selectItem itemLabel="#{ivy.cm.co('/statistics/timeRanges/last30d')}" itemValue="30d/d" />
+              <f:selectItem itemLabel="#{ivy.cm.co('/statistics/timeRanges/last90d')}" itemValue="90d/d" />
+              <f:selectItem itemLabel="#{ivy.cm.co('/statistics/timeRanges/last365d')}" itemValue="365d/d" />
+              <f:selectItem itemLabel="#{ivy.cm.co('/statistics/timeRanges/allTime')}" itemValue="all" />
             </p:selectOneMenu>
           </div>
         </div>
