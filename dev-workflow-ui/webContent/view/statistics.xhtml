@@ -12,7 +12,7 @@
             <h4 class="m-0">#{ivy.cm.co('/sidebar/statistics')}</h4>
           </div>
           <div class="flex align-items-center">
-            <h:outputText value="#{ivy.cm.co('/statistics/timeRange')}:" />
+            <h:outputText value="#{ivy.cm.co('/statistics/timeRange')}" />
             <p:selectOneMenu id="timeDuration" value="#{statisticsBean.timeDuration}" styleClass="ml-2">
               <p:ajax update="statisticsForm" event="valueChange" />
               <f:selectItem itemLabel="#{ivy.cm.co('/statistics/timeRanges/today')}" itemValue="today" />
@@ -22,6 +22,14 @@
               <f:selectItem itemLabel="#{ivy.cm.co('/statistics/timeRanges/last90d')}" itemValue="90d/d" />
               <f:selectItem itemLabel="#{ivy.cm.co('/statistics/timeRanges/last365d')}" itemValue="365d/d" />
               <f:selectItem itemLabel="#{ivy.cm.co('/statistics/timeRanges/allTime')}" itemValue="all" />
+            </p:selectOneMenu>
+            <h:outputText value="—" styleClass="ml-2" />
+            <p:selectOneMenu id="chartResolution" value="#{statisticsBean.chartResolution}" styleClass="ml-2"
+              disabled="#{!statisticsBean.resolutionDropdownVisible}"
+              title="#{!statisticsBean.resolutionDropdownVisible ? 'Only one resolution available for this time range' : ''}">
+              <p:ajax update="statisticsForm" event="valueChange" />
+              <f:selectItems value="#{statisticsBean.validResolutions}" var="resolution"
+                itemLabel="#{ivy.cm.co('/statistics/resolutions/'.concat(resolution))}" itemValue="#{resolution}" />
             </p:selectOneMenu>
           </div>
         </div>

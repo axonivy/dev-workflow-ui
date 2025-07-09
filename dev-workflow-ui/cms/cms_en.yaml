@@ -227,6 +227,7 @@ statistics:
   allTasks: All Tasks
   casesByState: Cases by State
   casesStatistics: Cases Statistics
+  chartResolution: Chart resolution
   notEnoughData: Not enough data available
   tasksByState: Tasks by State
   tasksStatistics: Task Statistics
@@ -239,6 +240,12 @@ statistics:
     last7d: Last week
     last90d: Last 3 months
     today: Today
+  resolutions:
+    hour: hourly
+    hour6: every 6 hours
+    day: daily
+    week: weekly
+    month: monthly
   topCaseCreators: Top Case Creators
   topTaskWorkers: Top Task Workers
 switchUser:

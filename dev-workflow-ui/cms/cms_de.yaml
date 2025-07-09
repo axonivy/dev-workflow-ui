@@ -227,6 +227,7 @@ statistics:
   allTasks: Alle Aufgaben
   casesByState: Fälle nach Status
   casesStatistics: Fall Statistik
+  chartResolution: Diagramm Auflösung
   notEnoughData: Nicht genügend Daten
   tasksByState: Aufgaben nach Status
   tasksStatistics: Aufgaben Statistik
@@ -239,6 +240,12 @@ statistics:
     last7d: Letzte Woche
     last90d: Letzte 3 Monate
     today: Heute
+  resolutions:
+    hour: stündlich
+    hour6: alle 6 Stunden
+    day: täglich
+    week: wöchentlich
+    month: monatlich
   topCaseCreators: Top Fall Ersteller
   topTaskWorkers: Top Aufgaben Bearbeiter
 switchUser:
