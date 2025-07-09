@@ -32,7 +32,7 @@ class WebTestStatisticsIT {
     $("h4").shouldHave(text("Statistics"));
     $(By.id("statisticsForm")).shouldBe(visible);
 
-    $(By.id("statisticsForm")).shouldHave(text("Time range:"));
+    $(By.id("statisticsForm")).shouldHave(text("Time range"));
     var timeRangeDropdown = $(By.id("statisticsForm:timeDuration"));
     timeRangeDropdown.shouldBe(visible);
   }

@@ -29,7 +29,8 @@ import ch.ivyteam.ivy.workflow.task.TaskBusinessState;
 @ViewScoped
 public class StatisticsBean {
 
-  private String timeDuration = "24h";
+  private String timeDuration = TimeDuration.LAST_24H;
+  private String chartResolution = StatisticsTimeResolver.getDefaultResolution(TimeDuration.LAST_24H);
 
   public String getTimeFilter() {
     return timeDuration;
@@ -41,6 +42,23 @@ public class StatisticsBean {
 
   public void setTimeDuration(String timeDuration) {
     this.timeDuration = timeDuration;
+    this.chartResolution = StatisticsTimeResolver.getDefaultResolution(timeDuration);
+  }
+
+  public String getChartResolution() {
+    return chartResolution;
+  }
+
+  public void setChartResolution(String chartResolution) {
+    this.chartResolution = chartResolution;
+  }
+
+  public String[] getValidResolutions() {
+    return StatisticsTimeResolver.getValidResolutions(timeDuration);
+  }
+
+  public boolean isResolutionDropdownVisible() {
+    return getValidResolutions().length > 1;
   }
 
   public LineChartModel getTasksPerHourChart() {
@@ -52,9 +70,14 @@ public class StatisticsBean {
   }
 
   public LineChartModel getTasksOverTimeChart() {
-    var resolution = StatisticsTimeResolver.getResolutionForDuration(timeDuration);
+    var resolution = StatisticsTimeResolver.getResolutionForDurationAndType(timeDuration, chartResolution);
+    var searchBucketType = switch (resolution.bucketType) {
+      case Resolution.WEEK -> Resolution.DAY;
+      case Resolution.HOUR6 -> Resolution.HOUR;
+      default -> resolution.bucketType;
+    };
     var aggrResult = WorkflowStats.current().task().aggregate(
-        "startTimestamp:bucket:" + resolution.bucketType + ",endTimestamp:bucket:" + resolution.bucketType,
+        "startTimestamp:bucket:" + searchBucketType + ",endTimestamp:bucket:" + searchBucketType,
         StatisticsTimeResolver.buildTimeQuery(timeDuration));
     var startCountMap = StatisticsTimeResolver.initializeTimeMap(timeDuration, resolution);
     var endCountMap = StatisticsTimeResolver.initializeTimeMap(timeDuration, resolution);
@@ -71,9 +94,14 @@ public class StatisticsBean {
   }
 
   public LineChartModel getCasesOverTimeChart() {
-    var resolution = StatisticsTimeResolver.getResolutionForDuration(timeDuration);
+    var resolution = StatisticsTimeResolver.getResolutionForDurationAndType(timeDuration, chartResolution);
+    var searchBucketType = switch (resolution.bucketType) {
+      case Resolution.WEEK -> Resolution.DAY;
+      case Resolution.HOUR6 -> Resolution.HOUR;
+      default -> resolution.bucketType;
+    };
     var aggrResult = WorkflowStats.current().caze().aggregate(
-        "startTimestamp:bucket:" + resolution.bucketType + ",endTimestamp:bucket:" + resolution.bucketType,
+        "startTimestamp:bucket:" + searchBucketType + ",endTimestamp:bucket:" + searchBucketType,
         StatisticsTimeResolver.buildTimeQuery(timeDuration));
     var startCountMap = StatisticsTimeResolver.initializeTimeMap(timeDuration, resolution);
     var endCountMap = StatisticsTimeResolver.initializeTimeMap(timeDuration, resolution);
@@ -168,9 +196,16 @@ public class StatisticsBean {
     var inputFormatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy");
     try {
       var dateTime = LocalDateTime.parse(bucket.key().toString(), inputFormatter);
-      var bucketTime = dateTime.atZone(ZoneId.systemDefault()).toInstant();
-      var timeLabel = labelFormatter.format(bucketTime);
-      timeCountMap.merge(timeLabel, bucket.count(), Long::sum);
+      var bucketTime = dateTime.atZone(ZoneId.systemDefault());
+
+      if (Resolution.HOUR6.equals(chartResolution)) {
+        var adjustedTime = bucketTime.withHour((bucketTime.getHour() / 6) * 6).withMinute(0);
+        var timeLabel = labelFormatter.format(adjustedTime);
+        timeCountMap.merge(timeLabel, bucket.count(), Long::sum);
+      } else {
+        var timeLabel = labelFormatter.format(bucketTime);
+        timeCountMap.merge(timeLabel, bucket.count(), Long::sum);
+      }
     } catch (Exception e) {
       System.err.println("Failed to parse date: " + bucket.key());
     }
