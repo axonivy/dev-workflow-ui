@@ -10,6 +10,7 @@ import static com.codeborne.selenide.Condition.checked;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -250,5 +251,24 @@ class WebTestTasksIT {
     params.put("taskUrl", restUrl);
     openViewNoAssertion("frame.xhtml", params);
     assertCurrentUrlContains(restUrl);
+  }
+
+  @Test
+  void searchById() {
+    loginDeveloper();
+    startTestProcess("1750C5211D94569D/TestData.ivp");
+    Navigation.openTask("Created task of TestData");
+    var taskId = $(By.id("taskId")).getText();
+
+    startTestProcess("1750C5211D94569D/TestData.ivp");
+    openView("tasks.xhtml");
+    Table table = PrimeUi.table(By.id("tasksForm:tasks"));
+    table.row(0).should(exist);
+    table.row(1).should(exist);
+
+    $(By.id("tasksForm:tasks:globalFilter")).setValue(taskId).pressEnter();
+    table = PrimeUi.table(By.id("tasksForm:tasks"));
+    table.row(0).should(exist);
+    table.row(1).shouldNot(exist);
   }
 }
