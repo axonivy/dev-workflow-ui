@@ -11,17 +11,14 @@
       <div class="card">
         <h4 class="m-0">#{ivy.cm.co('/sidebar/cleanup')}</h4>
         <br />
-        <h:form id="clanupForm">
+        <h:form id="cleanupForm">
           <p:growl id="growl" showDetail="true" />
           <p>#{ivy.cm.co('/cleanup/introduction')}</p>
           <p:panelGrid columns="1" layout="flex">
-            <p:selectBooleanCheckbox id="casesAndTasksCheckbox" value="#{cleanupBean.casesTasksAndDependent}"
-              itemLabel="#{ivy.cm.co('/cleanup/workflow')}" />
-            <p:selectBooleanCheckbox id="businessDataCheckbox" value="#{cleanupBean.businessDataAndSearchIndex}"
-              itemLabel="#{ivy.cm.co('/cleanup/businessData')}" />
-            <p:selectBooleanCheckbox id="identityProviderTokenCheckbox"
-              value="#{cleanupBean.identityProviderTokens}" itemLabel="#{ivy.cm.co('/cleanup/tokens')}" />
-            <p:selectBooleanCheckbox id="dataCaches" value="#{cleanupBean.dataCaches}" itemLabel="#{ivy.cm.co('/cleanup/dataCaches')}" />
+            <p:selectManyCheckbox id="cleanups" value="#{cleanupBean.cleanupIds}" layout="pageDirection">
+               <f:selectItems value="#{cleanupBean.cleanups}" var="cleanup" itemLabel="#{cleanup.name}" itemValue="#{cleanup.id}"/>
+            </p:selectManyCheckbox>
+
             <p:commandButton id="cleanupBtn" value="#{ivy.cm.co('/sidebar/cleanup')}" icon="si si-recycling-trash-bin-2 "
               actionListener="#{cleanupBean.cleanup}" update="growl"
               disabled="#{!permissionsBean.devModeAndAdmin}" />

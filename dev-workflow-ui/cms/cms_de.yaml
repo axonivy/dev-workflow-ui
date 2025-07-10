@@ -17,11 +17,7 @@ case:
   taskList: Task Liste
   workflowEvents: Workflow Events
 cleanup:
-  businessData: Alle Business Daten und den Such-Index
-  dataCaches: Daten Caches
-  introduction: When Du verschiedene Prozesse ausführtst, erzeugst Du verschiedene Typen von Daten wie Fälle, Aufgaben etc. Hier kannst Du diese Daten aufräumen um den Designer zurückzusetzen.
-  tokens: Alle Identity Provider Token
-  workflow: Alle Fälle, Aufgaben und abhängige Objekte
+  introduction: Während du verschiedene Prozesse durchläufst, werden unterschiedliche Arten von Daten - wie Fälle, Aufgaben und mehr - erzeugt. Hier kannst du diese Daten bereinigen, um neu zu starten.
 common:
   author: Autor
   businessCase: Business Fall
@@ -229,6 +225,12 @@ statistics:
   casesStatistics: Fall Statistik
   chartResolution: Diagramm Auflösung
   notEnoughData: Nicht genügend Daten
+  resolutions:
+    day: täglich
+    hour: stündlich
+    hour6: alle 6 Stunden
+    month: monatlich
+    week: wöchentlich
   tasksByState: Aufgaben nach Status
   tasksStatistics: Aufgaben Statistik
   timeRange: Zeitspanne
@@ -240,12 +242,6 @@ statistics:
     last7d: Letzte Woche
     last90d: Letzte 3 Monate
     today: Heute
-  resolutions:
-    hour: stündlich
-    hour6: alle 6 Stunden
-    day: täglich
-    week: wöchentlich
-    month: monatlich
   topCaseCreators: Top Fall Ersteller
   topTaskWorkers: Top Aufgaben Bearbeiter
 switchUser:

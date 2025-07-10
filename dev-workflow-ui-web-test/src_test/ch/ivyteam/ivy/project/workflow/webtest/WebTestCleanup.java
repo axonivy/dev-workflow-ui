@@ -54,10 +54,10 @@ class WebTestCleanup {
   @Order(1)
   void noCleanupIfNotDevMode() {
     openView("cleanup.xhtml");
-    $(By.id("clanupForm:cleanupBtn")).shouldBe(disabled);
+    $(By.id("cleanupForm:cleanupBtn")).shouldBe(disabled);
     startTestProcess("1783B19164F69B78/designerStandard.ivp");
     openView("cleanup.xhtml");
-    $(By.id("clanupForm:cleanupBtn")).shouldBe(disabled);
+    $(By.id("cleanupForm:cleanupBtn")).shouldBe(disabled);
   }
 
   @Test
@@ -74,7 +74,7 @@ class WebTestCleanup {
     $(By.id("menuform:sr_actions")).shouldBe(visible).click();
     $(By.id("menuform:sr_cleanup")).shouldBe(visible);
     openView("cleanup.xhtml");
-    $(By.id("clanupForm:cleanupBtn")).shouldBe(enabled);
+    $(By.id("cleanupForm:cleanupBtn")).shouldBe(enabled);
   }
 
   @Test
@@ -86,26 +86,23 @@ class WebTestCleanup {
     casesTable.row(0).shouldHave(text("Created case of TestData"));
 
     openView("cleanup.xhtml");
-    $(By.id("clanupForm:growl_container")).shouldNotBe(visible);
+    $(By.id("cleanupForm:growl_container")).shouldNotBe(visible);
 
-    $(By.id("clanupForm:casesAndTasksCheckbox")).shouldBe(enabled).click();
-    $(By.id("clanupForm:businessDataCheckbox")).shouldBe(enabled).click();
-    $(By.id("clanupForm:identityProviderTokenCheckbox")).shouldBe(enabled).click();
-    $(By.id("clanupForm:dataCaches")).shouldBe(enabled).click();
-    $(By.id("clanupForm:cleanupBtn")).shouldNotBe(disabled).click();
-    $(By.id("clanupForm:growl_container")).shouldNotBe(visible);
+    $(By.id("cleanupForm:cleanups:1")).shouldBe(enabled).click();
+    $(By.id("cleanupForm:cleanups:2")).shouldBe(enabled).click();
+    $(By.id("cleanupForm:cleanupBtn")).shouldNotBe(disabled).click();
+    $(By.id("cleanupForm:growl_container")).shouldNotBe(visible);
 
     openView("cases.xhtml");
     casesTable.row(0).shouldHave(text("Created case of TestData"));
     checkProcessesExist();
 
     openView("cleanup.xhtml");
-    $(By.id("clanupForm:cleanupBtn")).shouldBe(visible).click();
-    $(By.id("clanupForm:growl_container")).shouldBe(visible);
+    $(By.id("cleanupForm:cleanupBtn")).shouldBe(visible).click();
+    $(By.id("cleanupForm:growl_container")).shouldBe(visible);
 
     openView("cases.xhtml");
     casesTable.row(0).shouldHave(text("No Cases found"));
     checkProcessesExist();
   }
-
 }
