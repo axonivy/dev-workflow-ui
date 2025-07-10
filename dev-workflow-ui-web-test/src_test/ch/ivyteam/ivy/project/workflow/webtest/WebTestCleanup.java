@@ -13,6 +13,8 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -88,8 +90,6 @@ class WebTestCleanup {
     openView("cleanup.xhtml");
     $(By.id("cleanupForm:growl_container")).shouldNotBe(visible);
 
-    $(By.id("cleanupForm:cleanups:1")).shouldBe(enabled).click();
-    $(By.id("cleanupForm:cleanups:2")).shouldBe(enabled).click();
     $(By.id("cleanupForm:cleanupBtn")).shouldNotBe(disabled).click();
     $(By.id("cleanupForm:growl_container")).shouldNotBe(visible);
 
@@ -98,6 +98,8 @@ class WebTestCleanup {
     checkProcessesExist();
 
     openView("cleanup.xhtml");
+    var checkbox = PrimeUi.selectManyCheckbox(By.id("cleanupForm:cleanups"));
+    checkbox.setCheckboxes(List.of("All Cases, Tasks and dependet objects"));
     $(By.id("cleanupForm:cleanupBtn")).shouldBe(visible).click();
     $(By.id("cleanupForm:growl_container")).shouldBe(visible);
 
