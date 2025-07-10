@@ -25,8 +25,10 @@ public class CleanupBean {
 
   public void cleanup() {
     EngineCleanup.clean(cleanupIds);
-    var msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Data has been cleaned");
-    FacesContext.getCurrentInstance().addMessage(null, msg);
+    if (!cleanupIds.isEmpty()) {
+      var msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Data has been cleaned");
+      FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
   }
 
   public List<String> getCleanupIds() {
