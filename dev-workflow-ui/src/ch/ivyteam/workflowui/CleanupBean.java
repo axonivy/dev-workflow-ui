@@ -1,78 +1,58 @@
 package ch.ivyteam.workflowui;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import ch.ivyteam.ivy.business.data.store.restricted.BusinessDataPersistence;
-import ch.ivyteam.ivy.data.cache.restricted.IDataCacheManager;
-import ch.ivyteam.ivy.rest.client.oauth2.SessionTokenStore;
-import ch.ivyteam.ivy.workflow.IWorkflowContext;
+import ch.ivyteam.ivy.engine.cleanup.EngineCleanup;
 
-@SuppressWarnings("restriction")
 @ManagedBean
 @ViewScoped
 public class CleanupBean {
-  private boolean casesTasksAndDependent = true;
-  private boolean businessDataAndSearchIndex = true;
-  private boolean identityProviderTokens = true;
-  private boolean dataCaches = true;
 
-  public boolean isCasesTasksAndDependent() {
-    return casesTasksAndDependent;
-  }
+  public List<String> cleanupIds = new ArrayList<>();
 
-  public void setCasesTasksAndDependent(boolean casesTasksAndDependent) {
-    this.casesTasksAndDependent = casesTasksAndDependent;
-  }
-
-  public boolean isBusinessDataAndSearchIndex() {
-    return businessDataAndSearchIndex;
-  }
-
-  public void setBusinessDataAndSearchIndex(boolean businessDataAndSearchIndex) {
-    this.businessDataAndSearchIndex = businessDataAndSearchIndex;
-  }
-
-  public boolean isIdentityProviderTokens() {
-    return identityProviderTokens;
-  }
-
-  public void setIdentityProviderTokens(boolean identityProviderTokens) {
-    this.identityProviderTokens = identityProviderTokens;
-  }
-
-  public boolean isDataCaches() {
-    return dataCaches;
-  }
-
-  public void setDataCaches(boolean dataCaches) {
-    this.dataCaches = dataCaches;
+  public List<EngineCleanupDTO> getCleanups() {
+    return EngineCleanup.all().stream()
+        .map(EngineCleanupDTO::new)
+        .collect(Collectors.toList());
   }
 
   public void cleanup() {
-    if (casesTasksAndDependent) {
-      IWorkflowContext.current().cleanup();
-      showMessage("All existing Cases and Tasks have been deleted");
-    }
-    if (businessDataAndSearchIndex) {
-      BusinessDataPersistence.instance().clearAll();
-      showMessage("All Business Data and the search index has been deleted");
-    }
-    if (identityProviderTokens) {
-      SessionTokenStore.clear();
-      showMessage("All identity provider tokens have been deleted");
-    }
-    if (dataCaches) {
-      IDataCacheManager.instance().invalidateAll();
-      showMessage("All data caches have been cleared");
-    }
+    EngineCleanup.clean(cleanupIds);
+    var msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Data has been cleaned");
+    FacesContext.getCurrentInstance().addMessage(null, msg);
   }
 
-  private void showMessage(String msg) {
-    FacesContext.getCurrentInstance().addMessage(null,
-        new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", msg));
+  public List<String> getCleanupIds() {
+    return cleanupIds;
   }
 
+  public void setCleanupIds(List<String> cleanupIds) {
+    this.cleanupIds = cleanupIds;
+  }
+
+  public static class EngineCleanupDTO {
+
+    private final String id;
+    private final String name;
+
+    public EngineCleanupDTO(EngineCleanup cleanup) {
+      this.id = cleanup.id();
+      this.name = cleanup.name();
+    }
+
+    public String getId() {
+      return id;
+    }
+
+    public String getName() {
+      return name;
+    }
+  }
 }
