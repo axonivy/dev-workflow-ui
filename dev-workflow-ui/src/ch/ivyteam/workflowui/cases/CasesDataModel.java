@@ -81,7 +81,16 @@ public class CasesDataModel extends LazyDataModel<ICase> {
       var casePriority = Arrays.asList(WorkflowPriority.values()).stream()
           .filter(priority -> StringUtils.startsWithIgnoreCase(priority.toString(), filter))
           .findFirst().orElse(null);
-      query.where().and(CaseQuery.create().where().name().isLikeIgnoreCase("%" + filter + "%")
+
+      var baseQuery = CaseQuery.create().where().name().isLikeIgnoreCase("%" + filter + "%");
+
+      try {
+        long caseId = Long.parseLong(filter);
+        baseQuery = baseQuery.or().caseId().isEqual(caseId);
+      } catch (NumberFormatException e) {}
+
+      query.where().and(baseQuery
+          .or().uuid().isEqual(filter)
           .or().businessState().isEqual(caseState)
           .or().priority().isEqual(casePriority)
           .or().creatorUserDisplayName().isLikeIgnoreCase("%" + filter + "%"));

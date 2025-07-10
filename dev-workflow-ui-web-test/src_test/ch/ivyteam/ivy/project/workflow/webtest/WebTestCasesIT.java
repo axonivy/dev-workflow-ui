@@ -5,6 +5,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginF
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static com.codeborne.selenide.Condition.enabled;
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -16,6 +17,8 @@ import org.openqa.selenium.By;
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.axonivy.ivy.webtest.primeui.widget.Table;
+
+import ch.ivyteam.ivy.project.workflow.webtest.util.Navigation;
 
 @IvyWebTest
 class WebTestCasesIT {
@@ -44,5 +47,24 @@ class WebTestCasesIT {
     Table table = PrimeUi.table(By.id("casesForm:cases"));
     table.row(0).shouldHave(text("Created case of TestData"));
     table.valueAt(0, 1).contains("running");
+  }
+
+  @Test
+  void searchById() {
+    loginDeveloper();
+    startTestProcess("1750C5211D94569D/TestData.ivp");
+    Navigation.openCase("Created case of TestData");
+    var caseId = $(By.id("caseId")).getText();
+
+    startTestProcess("1750C5211D94569D/TestData.ivp");
+    openView("cases.xhtml");
+    Table table = PrimeUi.table(By.id("casesForm:cases"));
+    table.row(0).should(exist);
+    table.row(1).should(exist);
+
+    $(By.id("casesForm:cases:globalFilter")).setValue(caseId).pressEnter();
+    table = PrimeUi.table(By.id("casesForm:cases"));
+    table.row(0).should(exist);
+    table.row(1).shouldNot(exist);
   }
 }

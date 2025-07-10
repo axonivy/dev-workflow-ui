@@ -92,7 +92,16 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
       var taskPriority = Arrays.asList(WorkflowPriority.values()).stream()
           .filter(priority -> StringUtils.startsWithIgnoreCase(priority.toString(), filter))
           .findFirst().orElse(null);
-      query.where().and(TaskQuery.create().where().name().isLikeIgnoreCase("%" + filter + "%")
+
+      var baseQuery = TaskQuery.create().where().name().isLikeIgnoreCase("%" + filter + "%");
+
+      try {
+        long taskId = Long.parseLong(filter);
+        baseQuery = baseQuery.or().taskId().isEqual(taskId);
+      } catch (NumberFormatException e) {}
+
+      query.where().and(baseQuery
+          .or().uuid().isEqual(filter)
           .or().responsibleName().isLikeIgnoreCase("%" + filter + "%")
           .or().responsibleDisplayName().isLikeIgnoreCase("%" + filter + "%")
           .or().businessState().isEqual(taskState)
