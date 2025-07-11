@@ -215,13 +215,18 @@ signals:
   waitingTask: Waiting Task
 starts:
   application: Application
+  apply: Apply
   areYouSure: Are you sure you didn't mean to go to starts.xhtml page?
   category: Category
+  deselectAll: Deselect All
   process: Process
   processNotFound: Process start with ID ${id} could not be found.
   processes: Processes
   project: Project
+  projects: Projects
   search: Search
+  searchProjects: Search Projects
+  selectAll: Select All
 statistics:
   allCases: All Cases
   allTasks: All Tasks

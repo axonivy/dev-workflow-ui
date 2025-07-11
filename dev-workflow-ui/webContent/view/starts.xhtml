@@ -8,17 +8,82 @@
     <ui:define name="content">
       <h:form id="startsForm" onkeypress="if (event.keyCode == 13) { return false; }">
 
+        <p:overlayPanel id="filterPanel" widgetVar="filterPanel" styleClass="table-content-filter" style="width: 350px;">
+          <div class="flex justify-content-between align-items-center">
+            <div class="flex align-items-center gap-2">
+              <p:commandLink id="selectAll" value="#{ivy.cm.co('/starts/selectAll')}" actionListener="#{processesBean.startsDataModel.projectFilterModel.resetTransientSelections}"
+                process="@this" update="filterCheckboxes" styleClass="text-primary-color" />
+              <span class="text-color-secondary">•</span>
+              <p:commandLink id="clearAll" value="#{ivy.cm.co('/starts/deselectAll')}" actionListener="#{processesBean.startsDataModel.projectFilterModel.clearTransientSelections}"
+                process="@this" update="filterCheckboxes" styleClass="text-primary-color" />
+            </div>
+            <p:commandLink id="toggleFilter" process="@this" update="projectFilterInputWrapper"
+              actionListener="#{processesBean.toggleProjectFilter}" styleClass="text-primary-color">
+              <i class="pi pi-search cursor-pointer"></i>
+            </p:commandLink>
+          </div>
+
+          <h:panelGroup id="projectFilterInputWrapper" layout="block" styleClass="w-full">
+            <p:inputText id="project-filter-input" styleClass="w-full mt-2"
+              rendered="#{processesBean.showProjectFilter}"
+              value="#{processesBean.startsDataModel.projectFilterModel.projectFilter}"
+              placeholder="#{ivy.cm.co('/starts/searchProjects')}">
+              <p:ajax event="keyup" process="@this :startsForm:filterCheckboxes" update="filterCheckboxes :startsForm:projectStarts:projectFilterButtons" delay="300"/>
+            </p:inputText>
+          </h:panelGroup>
+
+          <div class="mt-3" style="max-height: 200px; overflow-y: auto;">
+            <p:selectManyCheckbox id="filterCheckboxes" layout="grid" columns="1" value="#{processesBean.startsDataModel.projectFilterModel.transientSelectedProjects}">
+              <f:selectItems value="#{processesBean.startsDataModel.projectFilterModel.projects}"/>
+            </p:selectManyCheckbox>
+          </div>
+
+          <h:panelGroup layout="block" styleClass="mt-3 flex justify-content-end">
+            <p:commandButton id="cancelFilter" value="#{ivy.cm.co('/common/cancel')}" styleClass="ui-button-flat ui-button-secondary modal-input-button"
+              onclick="PF('filterPanel').hide();" type="button" />
+            <p:commandButton id="applyFilter" value="#{ivy.cm.co('/starts/apply')}" styleClass="ml-1 modal-input-button" icon="si si-check-1"
+              actionListener="#{processesBean.applyProjectFilter}"
+              process="@this :startsForm:filterCheckboxes" update=":startsForm:projectStarts :startsForm:projectStarts:projectFilterButtons" oncomplete="PF('filterPanel').hide()" />
+          </h:panelGroup>
+        </p:overlayPanel>
+
         <div class="card">
           <p:dataTable id="projectStarts" value="#{processesBean.startsDataModel.startables}" var="start"
-            rows="15" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" rowKey="#{start.link}"
-            selectionMode="single" widgetVar="projectStartsTable" styleClass="starts-table" resizableColumns="true">
+            rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" rowKey="#{start.link}"
+            selectionMode="single" widgetVar="projectStartsTable" styleClass="starts-table" resizableColumns="true"
+            rowsPerPageTemplate="10,15,20,30,50" style="overflow: unset">
             <f:facet name="header">
               <div class="flex justify-content-between mb-3 pretty-search">
                 <h4 class="m-0">#{ivy.cm.co('/starts/processes')}</h4>
-                <div class="ui-input-icon-left filter-container">
-                  <i class="pi pi-search" />
-                  <p:inputText id="globalFilter" placeholder="#{ivy.cm.co('/starts/search')}"
-                    value="#{processesBean.startsDataModel.filter}" onkeyup="PF('projectStartsTable').filter()" />
+                <div class="flex align-items-center">
+                  <h:panelGroup id="projectFilterButtons" styleClass="flex align-items-center">
+                    <h:panelGroup rendered="#{processesBean.startsDataModel.projectFilterModel.projectFilterActive}">
+                      <p:commandLink actionListener="#{processesBean.resetAllFilters}" process="@this"
+                        update=":startsForm:projectStarts :startsForm:projectStarts:projectFilterButtons :startsForm:filterCheckboxes"
+                        styleClass="ui-button-text ui-button-danger flex align-items-center mr-2">
+                        <i class="si si-button-refresh-arrow mr-1"/>#{ivy.cm.co('/common/reset')}
+                      </p:commandLink>
+                      <span class="mr-2" style="opacity: 0.5">•</span>
+                    </h:panelGroup>
+                    <h:panelGroup>
+                      <p:badge value="#{processesBean.startsDataModel.projectFilterModel.appliedProjects.size()}"
+                        visible="#{processesBean.startsDataModel.projectFilterModel.projectFilterActive}">
+                        <p:commandButton id="filterBtn" value="#{ivy.cm.co('/starts/projects')}" binding="#{filterBtn}" icon="si si-filter-1"
+                          styleClass="ui-button-secondary #{!processesBean.startsDataModel.projectFilterModel.projectFilterActive ? 'ui-button-outlined' : ''}"
+                          rendered="#{!processesBean.startsDataModel.onlySingleProject}"
+                          actionListener="#{processesBean.initFilter}" oncomplete="PF('filterPanel').show('#{filterBtn.clientId}')" />
+                      </p:badge>
+                    </h:panelGroup>
+                  </h:panelGroup>
+                  <h:panelGroup id="globalFilterGroup" layout="block" styleClass="ml-2">
+                    <div class="ui-input-icon-left filter-container">
+                      <i class="pi pi-search" />
+                      <p:inputText id="globalFilter" placeholder="#{ivy.cm.co('/starts/search')}"
+                        value="#{processesBean.startsDataModel.globalFilter}">
+                        <p:ajax event="keyup" delay="300" oncomplete="PF('projectStartsTable').filter()" process="@none"/>
+                      </p:inputText>
+                    </div>
+                  </h:panelGroup>
                 </div>
               </div>
             </f:facet>

@@ -215,13 +215,18 @@ signals:
   waitingTask: Wartende Aufgabe
 starts:
   application: Applikation
+  apply: Anwenden
   areYouSure: Bist Du sicher, dass Du nicht auf die starts.xhtml Seite wolltest?
   category: Kategorie
+  deselectAll: Auswahl aufheben
   process: Prozess
   processNotFound: Prozess Start mit ID ${id} konnte nicht gefunden werden.
   processes: Prozesse
   project: Projekt
+  projects: Projekte
   search: Suchen
+  searchProjects: Projekte suchen
+  selectAll: Alles auswählen
 statistics:
   allCases: Alle Fälle
   allTasks: Alle Aufgaben
