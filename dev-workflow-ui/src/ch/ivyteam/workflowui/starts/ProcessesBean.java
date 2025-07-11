@@ -17,6 +17,7 @@ public class ProcessesBean {
   private final StartsDataModel startsDataModel;
   private String viewerLink;
   private String viewerTitle;
+  private boolean showProjectFilter = false;
 
   public ProcessesBean() {
     startsDataModel = new StartsDataModel();
@@ -52,5 +53,27 @@ public class ProcessesBean {
 
   public String getViewerLink() {
     return viewerLink;
+  }
+
+  public boolean isShowProjectFilter() {
+    return showProjectFilter;
+  }
+
+  public void toggleProjectFilter() {
+    showProjectFilter = !showProjectFilter;
+  }
+
+  public void initFilter() {
+    startsDataModel.getProjectFilterModel().initTransientSelections();
+  }
+
+  public void applyProjectFilter() {
+    startsDataModel.getProjectFilterModel().applyFilter();
+    startsDataModel.applyProjectFilter();
+  }
+
+  public void resetAllFilters() {
+    startsDataModel.resetAllProjectFilters();
+    showProjectFilter = false;
   }
 }
