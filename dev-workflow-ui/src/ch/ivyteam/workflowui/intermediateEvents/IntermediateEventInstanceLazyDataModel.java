@@ -14,12 +14,12 @@ import ch.ivyteam.ivy.jsf.primefaces.sort.SortMetaConverter;
 import ch.ivyteam.ivy.workflow.IIntermediateEvent;
 import ch.ivyteam.ivy.workflow.IIntermediateEventElement;
 
-public class IntermediateEventModel extends LazyDataModel<IIntermediateEvent> {
+public class IntermediateEventInstanceLazyDataModel extends LazyDataModel<IntermediateEventInstance> {
 
   private static final long serialVersionUID = -7194541143134204696L;
   private final IIntermediateEventElement ie;
 
-  public IntermediateEventModel(IIntermediateEventElement ie) {
+  public IntermediateEventInstanceLazyDataModel(IIntermediateEventElement ie) {
     this.ie = ie;
   }
 
@@ -29,7 +29,7 @@ public class IntermediateEventModel extends LazyDataModel<IIntermediateEvent> {
   }
 
   @Override
-  public List<IIntermediateEvent> load(int first, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy) {
+  public List<IntermediateEventInstance> load(int first, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy) {
     var sort = new SortMetaConverter(sortBy);
     var events = ie.getIntermediateEvents();
     setRowCount(events.size());
@@ -41,6 +41,7 @@ public class IntermediateEventModel extends LazyDataModel<IIntermediateEvent> {
 
     return events.stream()
         .sorted(comp)
+        .map(IntermediateEventInstance::new)
         .collect(Collectors.toList());
   }
 

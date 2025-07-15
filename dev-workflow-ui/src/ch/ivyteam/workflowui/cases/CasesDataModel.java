@@ -4,21 +4,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortMeta;
 import org.primefaces.model.SortOrder;
 
 import ch.ivyteam.ivy.jsf.primefaces.sort.SortMetaConverter;
-import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
 import ch.ivyteam.ivy.workflow.caze.CaseBusinessState;
 import ch.ivyteam.ivy.workflow.query.CaseQuery;
 import ch.ivyteam.workflowui.util.CaseUtil;
 import ch.ivyteam.workflowui.util.PermissionsUtil;
 
-public class CasesDataModel extends LazyDataModel<ICase> {
+public class CasesDataModel extends LazyDataModel<CaseModel> {
 
   private static final long serialVersionUID = -7707950729638849827L;
   private String filter;
@@ -33,13 +31,17 @@ public class CasesDataModel extends LazyDataModel<ICase> {
   }
 
   @Override
-  public String getRowKey(ICase caze) {
-    return caze.uuid();
+  public String getRowKey(CaseModel caze) {
+    return caze.getUuid();
   }
 
   @Override
-  public ICase getRowData(String rowKey) {
-    return CaseUtil.getCaseById(rowKey);
+  public CaseModel getRowData(String rowKey) {
+    var caze = CaseUtil.getCaseById(rowKey);
+    if (caze == null) {
+      return null;
+    }
+    return new CaseModel(caze);
   }
 
   @Override
@@ -48,13 +50,16 @@ public class CasesDataModel extends LazyDataModel<ICase> {
   }
 
   @Override
-  public List<ICase> load(int first, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy) {
+  public List<CaseModel> load(int first, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy) {
     var caseQuery = createCaseQuery();
     applyOrdering(caseQuery, sortBy);
     return caseQuery
         .executor()
         .resultsPaged()
-        .window(first, pageSize);
+        .window(first, pageSize)
+        .stream()
+        .map(CaseModel::new)
+        .toList();
   }
 
   protected CaseQuery createCaseQuery() {
@@ -74,12 +79,13 @@ public class CasesDataModel extends LazyDataModel<ICase> {
   }
 
   private void applyFilter(CaseQuery query) {
-    if (StringUtils.isNotEmpty(filter)) {
-      var caseState = Arrays.asList(CaseBusinessState.values()).stream()
-          .filter(state -> StringUtils.startsWithIgnoreCase(state.toString(), filter))
+    if (filter != null && !filter.isEmpty()) {
+      var lowerFilter = filter.toLowerCase();
+      var caseState = Arrays.stream(CaseBusinessState.values())
+          .filter(state -> state.toString().toLowerCase().startsWith(lowerFilter))
           .findFirst().orElse(null);
-      var casePriority = Arrays.asList(WorkflowPriority.values()).stream()
-          .filter(priority -> StringUtils.startsWithIgnoreCase(priority.toString(), filter))
+      var casePriority = Arrays.stream(WorkflowPriority.values())
+          .filter(priority -> priority.toString().toLowerCase().startsWith(lowerFilter))
           .findFirst().orElse(null);
       query.where().and(CaseQuery.create().where().name().isLikeIgnoreCase("%" + filter + "%")
           .or().businessState().isEqual(caseState)

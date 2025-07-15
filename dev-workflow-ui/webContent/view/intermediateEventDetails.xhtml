@@ -38,36 +38,36 @@
               <div class="card-header">
                 <h4 class="m-0">Events</h4>
               </div>
-              <p:dataTable var="event" value="#{intermediateEventDetailsIvyDevWfBean.selectedIntermediateElement.eventModel}"
-                id="eventsTable" rows="10" paginator="true" paginatorPosition="bottom"
+              <p:dataTable var="instance" value="#{intermediateEventDetailsIvyDevWfBean.selectedIntermediateElement.eventInstances}"
+                id="eventsTable" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{ivy.cm.co('/intermediateEvents/noBeansFound')}"
                 paginatorAlwaysVisible="false" lazy="true">
 
-                <p:column headerText="ID" width="50" sortBy="#{event.id}" sortOrder="ascending" responsivePriority="3">
-                  <h:outputText value="#{event.id}" />
+                <p:column headerText="ID" width="50" sortBy="#{instance.id}" sortOrder="ascending" responsivePriority="3">
+                  <h:outputText value="#{instance.id}" />
                 </p:column>
-                <p:column headerText="State" width="60" sortBy="#{event.state}">
+                <p:column headerText="State" width="60" sortBy="#{instance.state}">
                   <h:panelGroup id="eventStateIcon" styleClass="flex justify-content-center">
-                    <i class="si-lg #{intermediateEventDetailsIvyDevWfBean.getEventStateIconCss(event)}" />
+                    <i class="si-lg #{intermediateEventDetailsIvyDevWfBean.getEventStateIconCss(instance)}" />
                   </h:panelGroup>
-                  <p:tooltip id="eventStateTooltip" for="eventStateIcon" value="#{event.state}" position="top" />
+                  <p:tooltip id="eventStateTooltip" for="eventStateIcon" value="#{instance.state}" position="top" />
                 </p:column>
-                <p:column headerText="Task" sortBy="#{event.task}" width="200">
-                  <jc:taskLink task="#{event.task}" id="event-task" />
+                <p:column headerText="Task" sortBy="#{instance.task}" width="200">
+                  <jc:taskLink task="#{instance.task}" id="event-task" />
                 </p:column>
-                <p:column headerText="Event ID" sortBy="#{event.eventIdentifier}" width="80">
-                  <h:outputText value="#{event.eventIdentifier}" />
+                <p:column headerText="Event ID" sortBy="#{instance.eventIdentifier}" width="80">
+                  <h:outputText value="#{instance.eventIdentifier}" />
                 </p:column>
-                <p:column headerText="Event received" sortBy="#{event.eventTimestamp}">
-                  <h:outputText value="#{event.eventTimestamp}" />
+                <p:column headerText="Event received" sortBy="#{instance.eventTimestamp}">
+                  <h:outputText value="#{instance.eventTimestamp}" />
                 </p:column>
-                <p:column headerText="Timeout" sortBy="#{event.timeoutTimestamp}" responsivePriority="4">
-                  <h:outputText value="#{event.timeoutTimestamp}" />
+                <p:column headerText="Timeout" sortBy="#{instance.timeoutTimestamp}" responsivePriority="4">
+                  <h:outputText value="#{instance.timeoutTimestamp}" />
                 </p:column>
-                <p:column headerText="Timeout action" sortBy="#{event.timeoutAction}" responsivePriority="4">
-                  <h:outputText value="#{event.timeoutAction}" />
+                <p:column headerText="Timeout action" sortBy="#{instance.timeoutAction}" responsivePriority="4">
+                  <h:outputText value="#{instance.timeoutAction}" />
                 </p:column>
                 <p:column headerText="Result">
-                  <h:outputText value="#{event.resultObject}" />
+                  <h:outputText value="#{instance.resultObject}" />
                 </p:column>
               </p:dataTable>
             </div>

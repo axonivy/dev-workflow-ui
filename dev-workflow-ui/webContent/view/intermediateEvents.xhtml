@@ -13,20 +13,20 @@
 
         <h:form id="intermediateEventBeansForm">
           <p:growl id="growl" showDetail="true"/>
-          <p:dataTable id="intermediateEventsTable" var="intermediateEvent"
-            value="#{intermediateEventsIvyDevWfBean.intermediateEvents}" rows="12" paginator="true"
+          <p:dataTable id="intermediateEventsTable" var="element"
+            value="#{intermediateEventElementsIvyDevWfBean.intermediateEventElements}" rows="12" paginator="true"
             paginatorPosition="bottom" paginatorAlwaysVisible="false" selectionMode="single"
             rowKey="#{intermediateEvent.processElementId}">
-            <p:ajax event="rowSelect" listener="#{intermediateEventsIvyDevWfBean.onRowSelect}" update="@form" />
+            <p:ajax event="rowSelect" listener="#{intermediateEventElementsIvyDevWfBean.onRowSelect}" update="@form" />
 
-            <p:column headerText="Name" sortBy="#{intermediateEvent.name}">
-              <h:outputText value="#{intermediateEvent.name}" />
+            <p:column headerText="Name" sortBy="#{element.name}">
+              <h:outputText value="#{element.name}" />
             </p:column>
-            <p:column headerText="Description" colspan="2" sortBy="#{intermediateEvent.description}">
-              <h:outputText value="#{intermediateEvent.description}" />
+            <p:column headerText="Description" colspan="2" sortBy="#{element.description}">
+              <h:outputText value="#{element.description}" />
             </p:column>
-            <p:column headerText="Waiting" sortBy="#{intermediateEvent.size}" sortOrder="ascending">
-              <h:outputText value="#{intermediateEvent.size}" />
+            <p:column headerText="Waiting" sortBy="#{element.eventInstancesCount}" sortOrder="ascending">
+              <h:outputText value="#{element.eventInstancesCount}" />
             </p:column>
 
           </p:dataTable>

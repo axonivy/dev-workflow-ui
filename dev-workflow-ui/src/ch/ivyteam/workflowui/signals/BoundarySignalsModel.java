@@ -12,9 +12,9 @@ import org.primefaces.model.SortOrder;
 import ch.ivyteam.ivy.jsf.primefaces.sort.SortMetaConverter;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.query.TaskBoundarySignalEventReceiverQuery;
-import ch.ivyteam.ivy.workflow.signal.ITaskBoundarySignalEventReceiver;
+import ch.ivyteam.ivy.workflow.query.TaskBoundarySignalEventReceiverQuery.OrderByColumnQuery;
 
-public class BoundarySignalModel extends LazyDataModel<ITaskBoundarySignalEventReceiver> {
+public class BoundarySignalsModel extends LazyDataModel<BoundarySignalReceiverModel> {
 
   private static final long serialVersionUID = -7194541143134204696L;
 
@@ -24,12 +24,13 @@ public class BoundarySignalModel extends LazyDataModel<ITaskBoundarySignalEventR
   }
 
   @Override
-  public List<ITaskBoundarySignalEventReceiver> load(int first, int pageSize, Map<String, SortMeta> sortBy,
+  public List<BoundarySignalReceiverModel> load(int first, int pageSize, Map<String, SortMeta> sortBy,
       Map<String, FilterMeta> filterBy) {
     var sort = new SortMetaConverter(sortBy);
     var taskBoundaryQuery = IWorkflowContext.current().signals().receivers().createTaskBoundaryQuery();
     applyOrdering(taskBoundaryQuery, sort.toField(), sort.toOrder());
-    var taskBoundaryList = taskBoundaryQuery.executor().resultsPaged().window(first, pageSize);
+    var taskBoundaryList = taskBoundaryQuery.executor().resultsPaged().window(first, pageSize).stream()
+        .map(BoundarySignalReceiverModel::new).toList();
     setRowCount((int) taskBoundaryQuery.executor().count());
     return taskBoundaryList;
   }
@@ -47,8 +48,7 @@ public class BoundarySignalModel extends LazyDataModel<ITaskBoundarySignalEventR
     }
   }
 
-  private static void applySorting(TaskBoundarySignalEventReceiverQuery.OrderByColumnQuery query,
-      SortOrder sortOrder) {
+  private static void applySorting(OrderByColumnQuery query, SortOrder sortOrder) {
     if (SortOrder.ASCENDING.equals(sortOrder)) {
       query.ascending();
     }
