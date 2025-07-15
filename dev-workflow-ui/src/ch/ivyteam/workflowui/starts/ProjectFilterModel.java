@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
+
 
 public class ProjectFilterModel {
 
@@ -25,7 +27,7 @@ public class ProjectFilterModel {
       projects = allProjects;
     } else {
       projects = allProjects.stream()
-          .filter(p -> StringUtils.containsIgnoreCase(p, projectFilter))
+          .filter(p -> Strings.CI.contains(p, projectFilter))
           .toList();
     }
     this.lastDisplayedProjects = projects;
