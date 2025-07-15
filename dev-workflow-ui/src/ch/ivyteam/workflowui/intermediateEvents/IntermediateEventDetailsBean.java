@@ -3,8 +3,6 @@ package ch.ivyteam.workflowui.intermediateEvents;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import ch.ivyteam.ivy.workflow.IIntermediateEvent;
-
 @ManagedBean
 @ViewScoped
 public class IntermediateEventDetailsBean {
@@ -29,7 +27,7 @@ public class IntermediateEventDetailsBean {
     return selectedIntermediateElement;
   }
 
-  public String getEventStateIconCss(IIntermediateEvent event) {
+  public String getEventStateIconCss(IntermediateEventInstance event) {
     return switch (event.getState()) {
       case CANCELED -> "si si-mood-warning";
       case PENDING, WAITING -> "si si-hourglass";

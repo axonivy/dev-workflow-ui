@@ -22,19 +22,19 @@ public class SignalsBean {
   private String code;
   private String payload;
   private final SignalsModel signalsModel;
-  private final BoundarySignalModel boundarySignalModel;
+  private final BoundarySignalsModel boundarySignalsModel;
 
   public SignalsBean() {
     signalsModel = new SignalsModel();
-    boundarySignalModel = new BoundarySignalModel();
+    boundarySignalsModel = new BoundarySignalsModel();
   }
 
   public SignalsModel getSignalsModel() {
     return signalsModel;
   }
 
-  public BoundarySignalModel getBoundarySignalModel() {
-    return boundarySignalModel;
+  public BoundarySignalsModel getBoundarySignalModel() {
+    return boundarySignalsModel;
   }
 
   public void sendBoundarySignal(String signalCode) {

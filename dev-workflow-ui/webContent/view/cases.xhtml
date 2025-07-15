@@ -33,15 +33,15 @@
               </div>
             </f:facet>
 
-            <p:column headerText="#{ivy.cm.co('/common/state')}" filterBy="#{case.businessState}" sortBy="#{case.businessState}" width="90px" resizable="false">
+            <p:column headerText="#{ivy.cm.co('/common/state')}" sortBy="#{case.businessState}" width="90px" resizable="false">
               <jc:stateBadge id="caseState" data="#{case}" />
             </p:column>
 
-            <p:column headerText="#{ivy.cm.co('/common/name')}" filterBy="#{case.getName(case)}" sortBy="#{case.name}" responsivePriority="1">
-              <h:outputText id="caseName" value="#{casesBean.getName(case)}" />
+            <p:column headerText="#{ivy.cm.co('/common/name')}" sortBy="#{case.name}" responsivePriority="1">
+              <h:outputText id="caseName" value="#{casesBean.getName(case.case)}" />
             </p:column>
 
-            <p:column headerText="#{ivy.cm.co('/common/creator')}" filterBy="#{case.creatorUserName}" sortBy="#{case.creatorUserName}"
+            <p:column headerText="#{ivy.cm.co('/common/creator')}" sortBy="#{case.creatorUserName}"
               responsivePriority="3" width="160">
               <jc:user user="#{case.creatorUser}" />
             </p:column>
@@ -60,9 +60,9 @@
                 styleClass="ui-button-flat text-color action-button" />
               <p:menu id="caseActionsMenu" overlay="true" trigger="caseActionsBtn" my="right top" at="right bottom"
                 style="width: 200px">
-                <p:menuitem id="openCaseDetailsBtn" value="#{ivy.cm.co('/common/openDetails')}" url="#{case.detailLink}"
+                <p:menuitem id="openCaseDetailsBtn" value="#{ivy.cm.co('/common/openDetails')}" url="#{case.case.detailLink}"
                   icon="si si-information-circle" />
-                <p:menuitem value="#{ivy.cm.co('/common/rerunProcess')}" actionListener="#{casesBean.rerunProcess(case)}"
+                <p:menuitem value="#{ivy.cm.co('/common/rerunProcess')}" actionListener="#{casesBean.rerunProcess(case.case)}"
                   id="rerunCaseProcessBtn" icon="si si-button-refresh-arrow" />
               </p:menu>
             </p:column>
