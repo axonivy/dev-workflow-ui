@@ -1,6 +1,7 @@
 package ch.ivyteam.workflowui.starts;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 import ch.ivyteam.ivy.model.value.WebLink;
 import ch.ivyteam.ivy.workflow.category.Category;
@@ -60,7 +61,7 @@ public class StartableModel {
 
   public static boolean evaluateEmbedInFrame(String value) {
     // default is true
-    return !StringUtils.contains(value, "false");
+    return !Strings.CS.contains(value, "false");
   }
 
   public String getDescription() {
