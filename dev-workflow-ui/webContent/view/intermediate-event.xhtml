@@ -38,36 +38,36 @@
               <div class="card-header">
                 <h4 class="m-0">#{ivy.cm.co('/intermediateEvents/events')}</h4>
               </div>
-              <p:dataTable var="event" value="#{intermediateEventDetailsBean.selectedIntermediateElement.eventModel}"
+              <p:dataTable var="instance" value="#{intermediateEventDetailsBean.selectedIntermediateElement.eventInstances}"
                 id="eventsTable" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{ivy.cm.co('/intermediateEvents/noBeansFound')}"
                 paginatorAlwaysVisible="false" lazy="true">
 
-                <p:column headerText="#{ivy.cm.co('/common/id')}" width="50" sortBy="#{event.id}" sortOrder="ascending" responsivePriority="3">
-                  <h:outputText value="#{event.id}" />
+                <p:column headerText="#{ivy.cm.co('/common/id')}" width="50" sortBy="#{instance.id}" sortOrder="ascending" responsivePriority="3">
+                  <h:outputText value="#{instance.id}" />
                 </p:column>
-                <p:column headerText="#{ivy.cm.co('/common/state')}" width="60" sortBy="#{event.state}">
+                <p:column headerText="#{ivy.cm.co('/common/state')}" width="60" sortBy="#{instance.state}">
                   <h:panelGroup id="eventStateIcon" styleClass="flex justify-content-center">
-                    <i class="si-lg #{intermediateEventDetailsBean.getEventStateIconCss(event)}" />
+                    <i class="si-lg #{intermediateEventDetailsBean.getEventStateIconCss(instance)}" />
                   </h:panelGroup>
-                  <p:tooltip id="eventStateTooltip" for="eventStateIcon" value="#{event.state}" position="top" />
+                  <p:tooltip id="eventStateTooltip" for="eventStateIcon" value="#{instance.state}" position="top" />
                 </p:column>
-                <p:column headerText="#{ivy.cm.co('/common/task')}" sortBy="#{event.task}" width="200">
-                  <jc:taskLink task="#{event.task}" id="event-task" />
+                <p:column headerText="#{ivy.cm.co('/common/task')}" sortBy="#{instance.task}" width="200">
+                  <jc:taskLink task="#{instance.task}" id="event-task" />
                 </p:column>
-                <p:column headerText="#{ivy.cm.co('/intermediateEvents/eventId')}" sortBy="#{event.eventIdentifier}" width="80">
-                  <h:outputText value="#{event.eventIdentifier}" />
+                <p:column headerText="#{ivy.cm.co('/intermediateEvents/eventId')}" sortBy="#{instance.eventIdentifier}" width="80">
+                  <h:outputText value="#{instance.eventIdentifier}" />
                 </p:column>
-                <p:column headerText="#{ivy.cm.co('/intermediateEvents/eventReceived')}" sortBy="#{event.eventTimestamp}">
-                  <h:outputText value="#{event.eventTimestamp}" />
+                <p:column headerText="#{ivy.cm.co('/intermediateEvents/eventReceived')}" sortBy="#{instance.eventTimestamp}">
+                  <h:outputText value="#{instance.eventTimestamp}" />
                 </p:column>
-                <p:column headerText="#{ivy.cm.co('/intermediateEvents/timeout')}" sortBy="#{event.timeoutTimestamp}" responsivePriority="4">
-                  <h:outputText value="#{event.timeoutTimestamp}" />
+                <p:column headerText="#{ivy.cm.co('/intermediateEvents/timeout')}" sortBy="#{instance.timeoutTimestamp}" responsivePriority="4">
+                  <h:outputText value="#{instance.timeoutTimestamp}" />
                 </p:column>
-                <p:column headerText="#{ivy.cm.co('/intermediateEvents/timeoutAction')}" sortBy="#{event.timeoutAction}" responsivePriority="4">
-                  <h:outputText value="#{event.timeoutAction}" />
+                <p:column headerText="#{ivy.cm.co('/intermediateEvents/timeoutAction')}" sortBy="#{instance.timeoutAction}" responsivePriority="4">
+                  <h:outputText value="#{instance.timeoutAction}" />
                 </p:column>
                 <p:column headerText="#{ivy.cm.co('/intermediateEvents/result')}">
-                  <h:outputText value="#{event.resultObject}" />
+                  <h:outputText value="#{instance.resultObject}" />
                 </p:column>
               </p:dataTable>
             </div>

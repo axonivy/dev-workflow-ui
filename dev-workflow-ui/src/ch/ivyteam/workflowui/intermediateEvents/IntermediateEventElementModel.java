@@ -13,7 +13,7 @@ public class IntermediateEventElementModel {
   private final String processElementId;
   private final String name;
   private final String description;
-  private final IntermediateEventModel eventModel;
+  private final IntermediateEventInstanceLazyDataModel eventInstances;
 
   @SuppressWarnings("deprecation")
   public static List<IntermediateEventElementModel> create() {
@@ -38,7 +38,7 @@ public class IntermediateEventElementModel {
     this.processElementId = ie.getProcessElementId();
     this.name = ie.getName();
     this.description = ie.getDescription();
-    this.eventModel = new IntermediateEventModel(ie);
+    this.eventInstances = new IntermediateEventInstanceLazyDataModel(ie);
   }
 
   public void redirectToElement() {
@@ -57,11 +57,11 @@ public class IntermediateEventElementModel {
     return processElementId;
   }
 
-  public int getSize() {
-    return getEventModel().getSize();
+  public int getEventInstancesCount() {
+    return eventInstances.getSize();
   }
 
-  public IntermediateEventModel getEventModel() {
-    return eventModel;
+  public IntermediateEventInstanceLazyDataModel getEventInstances() {
+    return eventInstances;
   }
 }

@@ -85,12 +85,13 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
   }
 
   private void applyFilter(TaskQuery query) {
-    if (StringUtils.isNotEmpty(filter)) {
-      var taskState = Arrays.asList(TaskBusinessState.values()).stream()
-          .filter(state -> StringUtils.startsWithIgnoreCase(state.toString(), filter))
+    if (filter != null && !filter.isEmpty()) {
+      var lowerFilter = filter.toLowerCase();
+      var taskState = Arrays.stream(TaskBusinessState.values())
+          .filter(state -> state.toString() != null && state.toString().toLowerCase().startsWith(lowerFilter))
           .findFirst().orElse(null);
-      var taskPriority = Arrays.asList(WorkflowPriority.values()).stream()
-          .filter(priority -> StringUtils.startsWithIgnoreCase(priority.toString(), filter))
+      var taskPriority = Arrays.stream(WorkflowPriority.values())
+          .filter(priority -> priority.toString() != null && priority.toString().toLowerCase().startsWith(lowerFilter))
           .findFirst().orElse(null);
 
       var baseQuery = TaskQuery.create().where().name().isLikeIgnoreCase("%" + filter + "%");

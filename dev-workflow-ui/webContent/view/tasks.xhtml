@@ -33,17 +33,17 @@
               </div>
             </f:facet>
 
-            <p:column headerText="#{ivy.cm.co('/common/state')}" filterBy="#{task.businessState}" sortBy="#{task.businessState}" width="90px" styleClass="center-table-cell" resizable="false">
+            <p:column headerText="#{ivy.cm.co('/common/state')}" sortBy="#{task.businessState}" width="90px" styleClass="center-table-cell" resizable="false">
               <jc:stateBadge id="taskState" data="#{task}"/>
             </p:column>
 
-            <p:column headerText="#{ivy.cm.co('/common/prio')}" id="priority" filterBy="#{task.priority}" styleClass="center-table-cell"
+            <p:column headerText="#{ivy.cm.co('/common/prio')}" id="priority" styleClass="center-table-cell"
               sortBy="#{task.priority}" width="45px" resizable="false">
               <h:outputText id="taskPrio" styleClass="si text-800 si-#{task.priorityIcon}" />
               <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
             </p:column>
 
-            <p:column headerText="#{ivy.cm.co('/common/name')}" filterBy="#{task.name}" sortBy="#{task.name}" responsivePriority="1">
+            <p:column headerText="#{ivy.cm.co('/common/name')}" sortBy="#{task.name}" responsivePriority="1">
               <h:outputText id="taskName" value="#{task.name}" />
             </p:column>
 

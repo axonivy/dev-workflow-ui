@@ -3,17 +3,22 @@ package ch.ivyteam.workflowui.cases;
 import java.util.Date;
 import java.util.stream.Collectors;
 
+import ch.ivyteam.ivy.model.value.WebLink;
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.category.Category;
+import ch.ivyteam.ivy.workflow.caze.CaseBusinessState;
+import ch.ivyteam.ivy.workflow.caze.owner.CaseOwner;
 
 public class CaseModel {
-  private final ICase caze;
-  private final String owners;
+  private ICase caze;
+  private String owners;
+
+  public CaseModel() {}
 
   CaseModel(ICase caze) {
     this.caze = caze;
-    this.owners = caze.owners().all().stream().map(o -> o.memberName()).collect(Collectors.joining(", "));
+    this.owners = caze.owners().all().stream().map(CaseOwner::memberName).collect(Collectors.joining(", "));
   }
 
   public ICase getCase() {
@@ -36,6 +41,10 @@ public class CaseModel {
     return owners;
   }
 
+  public String getCreatorUserName() {
+    return caze.getCreatorUserName();
+  }
+
   public IUser getCreatorUser() {
     return caze.getCreatorUser();
   }
@@ -52,4 +61,11 @@ public class CaseModel {
     return caze.getEndTimestamp();
   }
 
+  public CaseBusinessState getBusinessState() {
+    return caze.getBusinessState();
+  }
+
+  public WebLink getDetailLink() {
+    return caze.getDetailLink();
+  }
 }

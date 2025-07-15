@@ -7,9 +7,11 @@ import ch.ivyteam.ivy.notification.web.WebNotificationAction;
 
 public class NotificationDto {
 
-  private final WebNotification notification;
-  private final NotificationActionDTO info;
-  private final NotificationActionDTO run;
+  private WebNotification notification;
+  private NotificationActionDTO info;
+  private NotificationActionDTO run;
+
+  public NotificationDto() {}
 
   public NotificationDto(WebNotification notification) {
     this.notification = notification;
