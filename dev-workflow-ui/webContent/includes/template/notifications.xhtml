@@ -5,9 +5,9 @@
 
 <p:commandLink id="showNotifications" rendered="#{loginBean.loggedIn}">
   <i class="topbar-icon pi pi-bell"/>
-  <div class="notification-badge">
-    <h:outputText id="unreadNotifications" value="#{notificationBean.unreadNotifications}" />
-  </div>
+  <p:badge id="unreadNotifications" value="#{notificationBean.unreadNotifications}"
+    style="position: absolute; bottom: 2.7em; left: 2em;"
+    visible="#{notificationBean.hasUnreadNotifications()}"/>
 </p:commandLink>
 
 <p:overlayPanel for="showNotifications" style="width:350px" rendered="#{loginBean.loggedIn}">
