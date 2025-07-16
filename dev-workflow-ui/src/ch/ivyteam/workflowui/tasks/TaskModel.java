@@ -28,35 +28,37 @@ import ch.ivyteam.workflowui.util.TaskUtil;
 
 public class TaskModel {
 
-  private final long id;
-  private final String uuid;
-  private final String name;
-  private final WorkflowPriority priority;
-  private final String priorityIcon;
-  private final TaskBusinessState businessState;
-  private final TaskState state;
-  private final IBusinessCase businessCase;
-  private final ICase technicalCase;
-  private final IUser workerUser;
-  private final String category;
-  private final IActivator activator;
-  private final String activatorName;
-  private final Date startTimestamp;
-  private final Date expiryTimestamp;
-  private final Date endTimestamp;
-  private final Date delayTimestamp;
-  private final String description;
-  private final String pmv;
-  private final PID currentElement;
-  private final String viewerLink;
-  private final boolean viewerAllowed;
-  private final ISession workerSession;
+  private long id;
+  private String uuid;
+  private String name;
+  private WorkflowPriority priority;
+  private String priorityIcon;
+  private TaskBusinessState businessState;
+  private TaskState state;
+  private IBusinessCase businessCase;
+  private ICase technicalCase;
+  private IUser workerUser;
+  private String category;
+  private IActivator activator;
+  private String activatorName;
+  private Date startTimestamp;
+  private Date expiryTimestamp;
+  private Date endTimestamp;
+  private Date delayTimestamp;
+  private String description;
+  private String pmv;
+  private PID currentElement;
+  private String viewerLink;
+  private boolean viewerAllowed;
+  private ISession workerSession;
 
-  private final WebLink startLink;
-  private final List<WorkflowEventModel> workflowEvents;
-  private final List<SidestepModel> sidesteps;
-  private final List<CustomFieldModel> customFields;
-  private final List<Note> notes;
+  private WebLink startLink;
+  private List<WorkflowEventModel> workflowEvents;
+  private List<SidestepModel> sidesteps;
+  private List<CustomFieldModel> customFields;
+  private List<Note> notes;
+
+  public TaskModel() {}
 
   public TaskModel(long taskId) {
     this(IWorkflowContext.current().findTask(taskId));

@@ -13,12 +13,11 @@ import ch.ivyteam.workflowui.util.PermissionsUtil;
 
 @ManagedBean
 @ViewScoped
-public class IntermediateEventsIvyDevWfBean {
+public class IntermediateEventElementsIvyDevWfBean {
+  private final List<IntermediateEventElementModel> intermediateEventElements;
 
-  private final List<IntermediateEventElementModel> intermediateEvents;
-
-  public IntermediateEventsIvyDevWfBean() {
-    intermediateEvents = IntermediateEventElementModel.create();
+  public IntermediateEventElementsIvyDevWfBean() {
+    intermediateEventElements = IntermediateEventElementModel.create();
   }
 
   public void onRowSelect(SelectEvent<?> event) {
@@ -34,7 +33,7 @@ public class IntermediateEventsIvyDevWfBean {
     }
   }
 
-  public List<IntermediateEventElementModel> getIntermediateEvents() {
-    return intermediateEvents;
+  public List<IntermediateEventElementModel> getIntermediateEventElements() {
+    return intermediateEventElements;
   }
 }
