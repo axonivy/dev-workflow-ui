@@ -12,14 +12,14 @@ function iframeURLChange() {
       const redirectedPage = new URLSearchParams(iframe.contentWindow.location.search).get("redirectPage");
       const newPage = checkAndReturnUrl(redirectedPage, originPage);
       if (newPage) {
-        window.location = newPage;
+        window.location = getSafeUrl(newPage);
       } else {
-        window.location = redirectedPage;
+        window.location = getSafeUrl(redirectedPage);
       }
     } else {
       const newPage = checkAndReturnUrl(newHref, originPage);
       if (newPage) {
-        window.location = newPage;
+        window.location = getSafeUrl(newPage);
       }
     }
   };
@@ -76,7 +76,7 @@ function iframeURLChange() {
       iframe.style.visibility = "visible";
     } catch (e) {
       // Open iframe content in current window if it could not be loaded
-      window.location = iframe.src;
+      window.location = getSafeUrl(iframe.src);
     }
   });
 
@@ -129,4 +129,17 @@ function checkAndReturnUrl(newURL, originPage) {
     return originPage;
   }
   return undefined;
+}
+
+function getSafeUrl(urlString, defaultUrl = "home.xhtml") {
+  try {
+    const url = new URL(urlString, window.location.href);
+    if (url.origin === window.location.origin) {
+      return url.href;
+    } else {
+      return new URL(defaultUrl, window.location.href).href;
+    }
+  } catch (e) {
+    return new URL(defaultUrl, window.location.href).href;
+  }
 }
