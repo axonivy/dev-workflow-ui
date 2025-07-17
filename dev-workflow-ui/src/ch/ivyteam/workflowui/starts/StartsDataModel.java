@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
+
 import ch.ivyteam.workflowui.util.ProcessModelsUtil;
 
 public class StartsDataModel {
@@ -36,6 +39,22 @@ public class StartsDataModel {
     this.globalFilter = globalFilter;
   }
 
+  public void applyAllFilters() {
+    List<StartableModel> filtered = originalStartables.stream()
+        .filter(start -> projectFilterModel.getAppliedProjects().contains(start.getProjectName()))
+        .collect(Collectors.toList());
+
+    if (StringUtils.isNotBlank(globalFilter)) {
+      filtered = filtered.stream().filter(s -> Strings.CI.contains(s.getDisplayName(), globalFilter) ||
+          Strings.CI.contains(s.getDescription(), globalFilter) ||
+          Strings.CI.contains(s.getApplicationName(), globalFilter) ||
+          Strings.CI.contains(s.getProjectName(), globalFilter) ||
+          (s.getCategory() != null && Strings.CI.contains(s.getCategory().getName(), globalFilter)))
+          .collect(Collectors.toList());
+    }
+    this.startables = filtered;
+  }
+
   public void resetGlobalFilter() {
     this.globalFilter = "";
   }
@@ -53,13 +72,12 @@ public class StartsDataModel {
   }
 
   public void applyProjectFilter() {
-    this.startables = originalStartables.stream()
-        .filter(start -> this.projectFilterModel.getAppliedProjects().contains(start.getProjectName()))
-        .collect(Collectors.toList());
+    applyAllFilters();
   }
 
   public void resetAllProjectFilters() {
     projectFilterModel.resetAll();
-    applyProjectFilter();
+    resetGlobalFilter();
+    applyAllFilters();
   }
 }

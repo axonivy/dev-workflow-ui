@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 
-
 public class ProjectFilterModel {
 
   private final List<String> allProjects;
@@ -19,6 +18,10 @@ public class ProjectFilterModel {
     this.allProjects = allProjects;
     this.appliedProjects = new ArrayList<>(allProjects);
     this.selectionsInPanel = new ArrayList<>(appliedProjects);
+  }
+
+  public List<String> getAllProjects() {
+    return allProjects;
   }
 
   public List<String> getProjects() {
@@ -54,6 +57,11 @@ public class ProjectFilterModel {
     var newSelections = new ArrayList<>(hiddenSelections);
     newSelections.addAll(selectionsFromComponent);
     this.selectionsInPanel = newSelections.stream().distinct().toList();
+  }
+
+  public void setAppliedProjects(List<String> projects) {
+    this.appliedProjects = new ArrayList<>(projects);
+    initTransientSelections();
   }
 
   public void initTransientSelections() {
