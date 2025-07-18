@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 
+import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.ViewerUtil;
 
@@ -29,10 +30,12 @@ public class ProcessesBean {
   private String projects;
 
   public ProcessesBean() {
+    Ivy.log().fatal("ProcessesBean CONSTRUCTOR");
     startsDataModel = new StartsDataModel();
   }
 
   public void initializeView() {
+    Ivy.log().fatal("onLoad: globalFilter = " + startsDataModel.getGlobalFilter());
     if (FacesContext.getCurrentInstance().isPostback()) {
       return;
     }
@@ -59,6 +62,7 @@ public class ProcessesBean {
         startsDataModel.getProjectFilterModel().setAppliedProjects(validProjects);
         saveProjectFiltersToSession();
       }
+      PrimeFaces.current().ajax().update("startsForm:projectStarts");
     }
   }
 
