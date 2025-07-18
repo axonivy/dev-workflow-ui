@@ -54,31 +54,19 @@ class WebTestStartsIT {
   }
 
   private static void clearSessionFilters() {
-    try {
-      openView("starts.xhtml");
-
-      var resetButton = $(By.id("startsForm:projectStarts:resetFilter"));
-      if (resetButton.exists() && resetButton.isDisplayed()) {
-        resetButton.click();
-        resetButton.shouldNotBe(visible);
-      }
-
-      clearFilter();
-
-      var table = $(By.id("startsForm:projectStarts"));
-      table.shouldBe(visible);
-      $$(By.cssSelector("#startsForm\\:projectStarts tbody tr")).shouldHave(CollectionCondition.sizeGreaterThan(4));
-
-    } catch (Exception e) {}
-  }
-
-  @Test
-  void filter() {
-    startTestProcess("1750C5211D94569D/TestData.ivp");
     openView("starts.xhtml");
-    var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
-    typeFilterAndWait("makeAdmin");
-    starts.row(0).shouldHave(text("makeAdmin"), text("workflow-ui-test-data"));
+
+    var resetButton = $(By.id("startsForm:projectStarts:resetFilter"));
+    if (resetButton.exists() && resetButton.isDisplayed()) {
+      resetButton.click();
+    }
+    resetButton.shouldNotBe(visible);
+
+    clearFilter();
+
+    var table = $(By.id("startsForm:projectStarts"));
+    table.shouldBe(visible);
+    $$(By.cssSelector("#startsForm\\:projectStarts tbody tr")).shouldHave(CollectionCondition.sizeGreaterThan(4));
   }
 
   @Test
@@ -233,83 +221,50 @@ class WebTestStartsIT {
   }
 
   @Test
-  void filterFromUrl() {
-    var testValue = "thisistest";
-    openView("starts.xhtml");
-    $(By.id("startsForm:projectStarts:globalFilter")).shouldBe(empty);
-    openView("starts.xhtml", Map.of("q", testValue));
-    $(By.id("startsForm:projectStarts:globalFilter")).shouldHave(value(testValue));
-  }
-
-  @Test
-  void globalFilterDoesNotPersistAcrossPageReloads() {
-    openView("starts.xhtml");
-
-    typeFilterAndWait("makeAdmin");
-
-    openView("home.xhtml");
-    openView("starts.xhtml");
-
-    $(By.id("startsForm:projectStarts:globalFilter")).shouldBe(empty);
-  }
-
-  @Test
-  void urlParametersWorkForGlobalFilter() {
-    openView("starts.xhtml");
-
-    openView("starts.xhtml", Map.of("q", "urlFilter"));
-    $(By.id("startsForm:projectStarts:globalFilter")).shouldHave(value("urlFilter"));
-
-    openView("home.xhtml");
-    openView("starts.xhtml");
-    $(By.id("startsForm:projectStarts:globalFilter")).shouldBe(empty);
-  }
-
-  @Test
-  void projectFilterPersistence() {
+  void globalFilterWorks() {
     startTestProcess("1750C5211D94569D/TestData.ivp");
     openView("starts.xhtml");
+    var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
 
+    filterStarts("makeAdmin");
+    starts.row(0).shouldHave(text("makeAdmin"), text("workflow-ui-test-data"));
+
+    assertCurrentUrlContains("q=makeAdmin");
+
+    clearFilter();
+    $(By.id("startsForm:projectStarts:globalFilter")).shouldBe(empty);
+  }
+
+  @Test
+  void projectFilterWorks() {
+    startTestProcess("1750C5211D94569D/TestData.ivp");
+    openView("starts.xhtml");
     var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
 
     $(By.id("startsForm:projectStarts:filterBtn")).shouldBe(visible).click();
     $(By.id("startsForm:filterPanel")).shouldBe(visible);
 
     $(By.id("startsForm:clearAll")).click();
-
-    $(By.xpath("//label[text()='dev-workflow-ui-test-data']")).shouldBe(visible).click();
+    $(By.id("startsForm:filterCheckboxes"))
+        .$$("label")
+        .findBy(text("dev-workflow-ui-test-data"))
+        .shouldBe(visible)
+        .click();
 
     $(By.id("startsForm:applyFilter")).click();
     $(By.id("startsForm:filterPanel")).shouldNotBe(visible);
 
     starts.contains("dev-workflow-ui-test-data");
+    starts.containsNot("Main/DefaultApplicationHomePage.ivp");
     $(By.id("startsForm:projectStarts:resetFilter")).shouldBe(visible);
 
-    openView("home.xhtml");
-    openView("starts.xhtml");
-
-    $(By.id("startsForm:projectStarts:resetFilter")).shouldBe(visible);
-    starts = PrimeUi.table(By.id("startsForm:projectStarts"));
-    starts.contains("dev-workflow-ui-test-data");
+    $(By.id("startsForm:projectStarts:resetFilter")).click();
+    $(By.id("startsForm:projectStarts:resetFilter")).shouldNotBe(visible);
+    starts.contains("Main/DefaultApplicationHomePage.ivp");
   }
 
   @Test
-  void clearFiltersRemovesSessionData() {
-    openView("starts.xhtml");
-
-    var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
-    starts.searchGlobal("testFilter");
-
-    clearFilter();
-
-    openView("home.xhtml");
-    openView("starts.xhtml");
-
-    $(By.id("startsForm:projectStarts:globalFilter")).shouldBe(empty);
-  }
-
-  @Test
-  void shareableUrlWithFilters() {
+  void filtersAndUrlParametersPersistAcrossNavigation() {
     startTestProcess("1750C5211D94569D/TestData.ivp");
 
     openView("starts.xhtml", Map.of("q", "makeAdmin", "projects", "dev-workflow-ui-test-data"));
@@ -317,33 +272,42 @@ class WebTestStartsIT {
     $(By.id("startsForm:projectStarts:globalFilter")).shouldHave(value("makeAdmin"));
     var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
     starts.contains("dev-workflow-ui-test-data");
+    starts.containsNot("Main/DefaultApplicationHomePage.ivp");
+    $(By.id("startsForm:projectStarts:resetFilter")).shouldBe(visible);
 
     assertCurrentUrlContains("q=makeAdmin");
     assertCurrentUrlContains("projects=dev-workflow-ui-test-data");
-  }
 
-  @Test
-  void filterStateValidation() {
-    openView("starts.xhtml", Map.of("projects", "nonexistent-project"));
-
-    $(By.id("startsForm:projectStarts")).shouldBe(visible);
-  }
-
-  @Test
-  void emptyFilterStateHandling() {
-    openView("starts.xhtml", Map.of("q", "", "projects", ""));
+    openView("home.xhtml");
+    openView("starts.xhtml");
 
     $(By.id("startsForm:projectStarts:globalFilter")).shouldBe(empty);
+
+    $(By.id("startsForm:projectStarts:resetFilter")).shouldBe(visible);
+    starts = PrimeUi.table(By.id("startsForm:projectStarts"));
+    starts.contains("dev-workflow-ui-test-data");
+    starts.containsNot("Main/DefaultApplicationHomePage.ivp");
+  }
+
+  @Test
+  void wrongQueryParametersAreNotApplied() {
+    openView("starts.xhtml", Map.of("projects", "nonexistent-project"));
     $(By.id("startsForm:projectStarts")).shouldBe(visible);
+    $(By.id("startsForm:projectStarts:resetFilter")).shouldNotBe(visible);
+
+    openView("starts.xhtml", Map.of("q", "", "projects", ""));
+    $(By.id("startsForm:projectStarts:globalFilter")).shouldBe(empty);
+    $(By.id("startsForm:projectStarts")).shouldBe(visible);
+    $(By.id("startsForm:projectStarts:resetFilter")).shouldNotBe(visible);
   }
 
   static void clearFilter() {
-    typeFilterAndWait("");
+    filterStarts("");
     var globalFilterInput = $(By.id("startsForm:projectStarts:globalFilter"));
     globalFilterInput.shouldBe(empty);
   }
 
-  static void typeFilterAndWait(String text) {
+  static void filterStarts(String text) {
     var globalFilterInput = $(By.id("startsForm:projectStarts:globalFilter"));
     globalFilterInput.clear();
     if (!Objects.equals(text, "")) {

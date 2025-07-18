@@ -1,8 +1,5 @@
 package ch.ivyteam.workflowui.starts;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
@@ -12,6 +9,7 @@ import java.util.stream.Stream;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.ws.rs.core.UriBuilder;
 
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.PrimeFaces;
@@ -28,33 +26,63 @@ public class ProcessesBean {
   private String viewerLink;
   private String viewerTitle;
   private boolean showProjectFilter = false;
-  private String globalFilter;
   private String projects;
 
   public ProcessesBean() {
     startsDataModel = new StartsDataModel();
   }
 
-  public void applyUrlFilters() {
-    if (!FacesContext.getCurrentInstance().isPostback()) {
-      boolean hasUrlParams = StringUtils.isNotBlank(globalFilter) || StringUtils.isNotBlank(projects);
+  public void initializeView() {
+    if (FacesContext.getCurrentInstance().isPostback()) {
+      return;
+    }
 
-      if (!hasUrlParams && shouldLoadFromSession()) {
-        initializeFiltersFromSession();
-      } else if (hasUrlParams) {
-        if (StringUtils.isNotBlank(globalFilter)) {
-          startsDataModel.setGlobalFilter(globalFilter);
-        }
+    boolean hasUrlParams = StringUtils.isNotBlank(startsDataModel.getGlobalFilter()) || StringUtils.isNotBlank(projects);
 
-        if (StringUtils.isNotBlank(projects)) {
-          var projectList = Arrays.asList(projects.split(","));
-          startsDataModel.getProjectFilterModel().setAppliedProjects(projectList);
-          saveProjectFiltersToSession();
-        }
+    if (!hasUrlParams && shouldLoadFromSession()) {
+      initializeFiltersFromSession();
+      return;
+    }
 
-        startsDataModel.applyAllFilters();
+    if (!hasUrlParams) {
+      return;
+    }
+
+    if (StringUtils.isNotBlank(projects)) {
+      var projectList = Arrays.asList(projects.split(","));
+      var availableProjects = startsDataModel.getProjectFilterModel().getAllProjects();
+      var validProjects = projectList.stream()
+          .filter(availableProjects::contains)
+          .collect(Collectors.toList());
+
+      if (!validProjects.isEmpty()) {
+        startsDataModel.getProjectFilterModel().setAppliedProjects(validProjects);
+        saveProjectFiltersToSession();
       }
     }
+
+    startsDataModel.applyAllFilters();
+  }
+
+  private void updateUrlWithFilters() {
+    UriBuilder uriBuilder = UriBuilder.fromPath("starts.xhtml");
+
+    if (StringUtils.isNotBlank(startsDataModel.getGlobalFilter())) {
+      uriBuilder.queryParam("q", startsDataModel.getGlobalFilter());
+    }
+
+    var projectsToPersist = startsDataModel.getProjectFilterModel().getEffectiveAppliedProjects();
+    if (!projectsToPersist.isEmpty()) {
+      uriBuilder.queryParam("projects", String.join(",", projectsToPersist));
+    }
+
+    String url = uriBuilder.build().toString();
+    PrimeFaces.current().executeScript("history.pushState(null, null, '" + url + "');");
+  }
+
+  private void saveProjectFiltersToSession() {
+    var projectsToPersist = startsDataModel.getProjectFilterModel().getEffectiveAppliedProjects();
+    SessionFilters.current().save(new HashSet<>(projectsToPersist));
   }
 
   public StartsDataModel getStartsDataModel() {
@@ -120,51 +148,6 @@ public class ProcessesBean {
     updateUrlWithFilters();
   }
 
-  private void updateUrlWithFilters() {
-    var appliedProjects = startsDataModel.getProjectFilterModel().getAppliedProjects();
-    if (appliedProjects.size() == startsDataModel.getProjectFilterModel().getAllProjects().size()) {
-      appliedProjects = null;
-    }
-
-    var params = new java.util.LinkedHashMap<String, String>();
-    if (StringUtils.isNotBlank(startsDataModel.getGlobalFilter())) {
-      params.put("q", startsDataModel.getGlobalFilter());
-    }
-    if (appliedProjects != null && !appliedProjects.isEmpty()) {
-      params.put("projects", String.join(",", appliedProjects));
-    }
-
-    try {
-      String url = "starts.xhtml";
-      if (!params.isEmpty()) {
-        url += "?" + params.entrySet().stream()
-            .map(e -> {
-              try {
-                return e.getKey() + "=" + URLEncoder.encode(e.getValue(), StandardCharsets.UTF_8.toString());
-              } catch (UnsupportedEncodingException ex) {
-                throw new RuntimeException(ex);
-              }
-            })
-            .collect(Collectors.joining("&"));
-      }
-      PrimeFaces.current().executeScript("history.pushState(null, null, '" + url + "');");
-    } catch (Exception e) {
-      throw new RuntimeException(e);
-    }
-  }
-
-  private void saveProjectFiltersToSession() {
-    var currentAppliedProjects = startsDataModel.getProjectFilterModel().getAppliedProjects();
-
-    if (currentAppliedProjects != null &&
-        currentAppliedProjects.size() == startsDataModel.getProjectFilterModel().getAllProjects().size()) {
-      currentAppliedProjects = null;
-    }
-
-    var projectSet = currentAppliedProjects != null ? new HashSet<>(currentAppliedProjects) : null;
-    SessionFilters.current().save(projectSet);
-  }
-
   private boolean shouldLoadFromSession() {
     return StringUtils.isBlank(projects);
   }
@@ -196,19 +179,7 @@ public class ProcessesBean {
     SessionFilters.current().clear();
   }
 
-  public String getGlobalFilter() {
-    var dataModelFilter = startsDataModel.getGlobalFilter();
-    return StringUtils.isNotBlank(dataModelFilter) ? dataModelFilter : globalFilter;
-  }
 
-  public void setGlobalFilter(String globalFilter) {
-    this.globalFilter = globalFilter;
-    if (StringUtils.isNotBlank(globalFilter)) {
-      startsDataModel.setGlobalFilter(globalFilter);
-    } else {
-      startsDataModel.setGlobalFilter(null);
-    }
-  }
 
   public String getProjects() {
     return projects;

@@ -1,6 +1,7 @@
 package ch.ivyteam.workflowui.starts;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -39,6 +40,15 @@ public class ProjectFilterModel {
 
   public List<String> getAppliedProjects() {
     return appliedProjects;
+  }
+
+  public List<String> getEffectiveAppliedProjects() {
+    List<String> applied = getAppliedProjects();
+    List<String> all = getAllProjects();
+    if (applied.size() == all.size()) {
+      return Collections.emptyList();
+    }
+    return applied;
   }
 
   public List<String> getTransientSelectedProjects() {
