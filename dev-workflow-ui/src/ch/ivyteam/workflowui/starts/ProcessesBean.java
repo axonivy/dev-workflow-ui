@@ -60,11 +60,9 @@ public class ProcessesBean {
         saveProjectFiltersToSession();
       }
     }
-
-    startsDataModel.applyAllFilters();
   }
 
-  private void updateUrlWithFilters() {
+  public void updateUrlWithFilters() {
     UriBuilder uriBuilder = UriBuilder.fromPath("starts.xhtml");
 
     if (StringUtils.isNotBlank(startsDataModel.getGlobalFilter())) {
@@ -131,7 +129,6 @@ public class ProcessesBean {
 
   public void applyProjectFilter() {
     startsDataModel.getProjectFilterModel().applyFilter();
-    startsDataModel.applyAllFilters();
     updateUrlWithFilters();
     saveProjectFiltersToSession();
   }
@@ -141,11 +138,6 @@ public class ProcessesBean {
     showProjectFilter = false;
     updateUrlWithFilters();
     clearSessionFilters();
-  }
-
-  public void applyGlobalFilter() {
-    startsDataModel.applyAllFilters();
-    updateUrlWithFilters();
   }
 
   private boolean shouldLoadFromSession() {
@@ -170,7 +162,6 @@ public class ProcessesBean {
 
     if (!validProjects.isEmpty()) {
       startsDataModel.getProjectFilterModel().setAppliedProjects(validProjects);
-      startsDataModel.applyAllFilters();
       updateUrlWithFilters();
     }
   }
@@ -178,8 +169,6 @@ public class ProcessesBean {
   private void clearSessionFilters() {
     SessionFilters.current().clear();
   }
-
-
 
   public String getProjects() {
     return projects;
