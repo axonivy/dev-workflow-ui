@@ -1,9 +1,11 @@
 package ch.ivyteam.workflowui.starts;
 
 import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 
+import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.workflowui.util.ProcessModelsUtil;
 
 public class StartsDataModel {
@@ -15,6 +17,8 @@ public class StartsDataModel {
   private final ProjectFilterModel projectFilterModel;
 
   public StartsDataModel() {
+    Ivy.log().fatal("StartsDataModel CONSTRUCTOR");
+
     allStartables = ProcessModelsUtil.getDeployedStartables();
     isOnlySingleApplication = allStartables.stream().map(StartableModel::getApplicationName).distinct().count() == 1;
     isOnlySingleProject = allStartables.stream().map(StartableModel::getProjectName).distinct().count() == 1;
@@ -23,6 +27,7 @@ public class StartsDataModel {
   }
 
   public List<StartableModel> getStartables() {
+    Ivy.log().fatal("startables getter in startsDataModel");
     return allStartables.stream()
         .filter(start -> projectFilterModel.getAppliedProjects().contains(start.getProjectName()))
         .filter(this::matchesGlobalFilter)
@@ -30,6 +35,7 @@ public class StartsDataModel {
   }
 
   private boolean matchesGlobalFilter(StartableModel start) {
+    // Ivy.log().fatal("in matchesGlobalFilter: " + globalFilter);
     if (StringUtils.isBlank(globalFilter)) {
       return true;
     }
@@ -41,14 +47,17 @@ public class StartsDataModel {
   }
 
   public String getGlobalFilter() {
+    Ivy.log().fatal("SET globalFilter from JSF: " + globalFilter);
     return globalFilter;
   }
 
   public void setGlobalFilter(String globalFilter) {
+    Ivy.log().fatal("GET globalFilter: " + globalFilter);
     this.globalFilter = globalFilter;
   }
 
   public void resetGlobalFilter() {
+    Ivy.log().fatal("global filter reset");
     this.globalFilter = "";
   }
 

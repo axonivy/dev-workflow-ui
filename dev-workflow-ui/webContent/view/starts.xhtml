@@ -81,6 +81,8 @@
                     </h:panelGroup>
                   </h:panelGroup>
                   <h:panelGroup id="globalFilterGroup" layout="block" styleClass="ml-2">
+                  <h:outputText value="Current filter: #{processesBean.startsDataModel.globalFilter}" />
+                  
                     <div class="ui-input-icon-left">
                       <i class="pi pi-search" />
                       <p:inputText id="globalFilter" placeholder="#{ivy.cm.co('/starts/search')}"
@@ -149,26 +151,10 @@
       </h:form>
 
       <script>
-        function initializeGlobalFilter() {
-          const urlParams = new URLSearchParams(window.location.search);
-          const qParam = urlParams.get('q');
-
-          if (qParam) {
-            const globalFilterInput = document.querySelector('input[id$="globalFilter"]');
-            if (globalFilterInput) {
-              const decodedValue = decodeURIComponent(qParam);
-              globalFilterInput.value = decodedValue;
-              globalFilterInput.setAttribute('value', decodedValue);
-            }
-          }
-        }
-
         function handleBrowserNavigation(event) {
           // reload the page when user navigates back/forward
           window.location.reload();
         }
-
-        document.addEventListener('DOMContentLoaded', initializeGlobalFilter);
         window.addEventListener('popstate', handleBrowserNavigation);
       </script>
     </ui:define>
