@@ -1,11 +1,11 @@
 package ch.ivyteam.workflowui.starts;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
-
 
 public class ProjectFilterModel {
 
@@ -19,6 +19,10 @@ public class ProjectFilterModel {
     this.allProjects = allProjects;
     this.appliedProjects = new ArrayList<>(allProjects);
     this.selectionsInPanel = new ArrayList<>(appliedProjects);
+  }
+
+  public List<String> getAllProjects() {
+    return allProjects;
   }
 
   public List<String> getProjects() {
@@ -38,6 +42,15 @@ public class ProjectFilterModel {
     return appliedProjects;
   }
 
+  public List<String> getEffectiveAppliedProjects() {
+    List<String> applied = getAppliedProjects();
+    List<String> all = getAllProjects();
+    if (applied.size() == all.size()) {
+      return Collections.emptyList();
+    }
+    return applied;
+  }
+
   public List<String> getTransientSelectedProjects() {
     return selectionsInPanel;
   }
@@ -54,6 +67,11 @@ public class ProjectFilterModel {
     var newSelections = new ArrayList<>(hiddenSelections);
     newSelections.addAll(selectionsFromComponent);
     this.selectionsInPanel = newSelections.stream().distinct().toList();
+  }
+
+  public void setAppliedProjects(List<String> projects) {
+    this.appliedProjects = new ArrayList<>(projects);
+    initTransientSelections();
   }
 
   public void initTransientSelections() {

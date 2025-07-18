@@ -7,14 +7,19 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openVi
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.Condition.cssClass;
+import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 import java.util.Map;
+import java.util.Objects;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,6 +28,7 @@ import org.openqa.selenium.By;
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.axonivy.ivy.webtest.engine.EngineUrl;
 import com.axonivy.ivy.webtest.primeui.PrimeUi;
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Selenide;
 
 import ch.ivyteam.ivy.project.workflow.webtest.util.Navigation;
@@ -39,15 +45,28 @@ class WebTestStartsIT {
   void loginAdmin() {
     Selenide.switchTo().defaultContent();
     loginDeveloper();
+    clearSessionFilters();
   }
 
-  @Test
-  void filter() {
-    startTestProcess("1750C5211D94569D/TestData.ivp");
+  @AfterAll
+  static void cleanup() {
+    clearSessionFilters();
+  }
+
+  private static void clearSessionFilters() {
     openView("starts.xhtml");
-    var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
-    starts.searchGlobal("makeAdmin");
-    starts.row(0).shouldHave(text("makeAdmin"), text("workflow-ui-test-data"));
+
+    var resetButton = $(By.id("startsForm:projectStarts:resetFilter"));
+    if (resetButton.exists() && resetButton.isDisplayed()) {
+      resetButton.click();
+    }
+    resetButton.shouldNotBe(visible);
+
+    clearFilter();
+
+    var table = $(By.id("startsForm:projectStarts"));
+    table.shouldBe(visible);
+    $$(By.cssSelector("#startsForm\\:projectStarts tbody tr")).shouldHave(CollectionCondition.sizeGreaterThan(4));
   }
 
   @Test
@@ -199,5 +218,102 @@ class WebTestStartsIT {
     $(By.id("startsForm:projectStarts:0:processStartIcon")).shouldBe(visible).shouldHave(cssClass("si-controls-play"));
     starts.searchGlobal("HomePageTestData.ivp");
     $(By.id("startsForm:projectStarts:0:processStartIcon")).shouldBe(visible).shouldHave(cssClass("si-house-1"));
+  }
+
+  @Test
+  void globalFilterWorks() {
+    startTestProcess("1750C5211D94569D/TestData.ivp");
+    openView("starts.xhtml");
+    var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
+
+    filterStarts("makeAdmin");
+    starts.row(0).shouldHave(text("makeAdmin"), text("workflow-ui-test-data"));
+
+    assertCurrentUrlContains("q=makeAdmin");
+
+    clearFilter();
+    $(By.id("startsForm:projectStarts:globalFilter")).shouldBe(empty);
+  }
+
+  @Test
+  void projectFilterWorks() {
+    startTestProcess("1750C5211D94569D/TestData.ivp");
+    openView("starts.xhtml");
+    var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
+
+    $(By.id("startsForm:projectStarts:filterBtn")).shouldBe(visible).click();
+    $(By.id("startsForm:filterPanel")).shouldBe(visible);
+
+    $(By.id("startsForm:clearAll")).click();
+    $(By.id("startsForm:filterCheckboxes"))
+        .$$("label")
+        .findBy(text("dev-workflow-ui-test-data"))
+        .shouldBe(visible)
+        .click();
+
+    $(By.id("startsForm:applyFilter")).click();
+    $(By.id("startsForm:filterPanel")).shouldNotBe(visible);
+
+    starts.contains("dev-workflow-ui-test-data");
+    starts.containsNot("Main/DefaultApplicationHomePage.ivp");
+    $(By.id("startsForm:projectStarts:resetFilter")).shouldBe(visible);
+
+    $(By.id("startsForm:projectStarts:resetFilter")).click();
+    $(By.id("startsForm:projectStarts:resetFilter")).shouldNotBe(visible);
+    starts.contains("Main/DefaultApplicationHomePage.ivp");
+  }
+
+  @Test
+  void filtersAndUrlParametersPersistAcrossNavigation() {
+    startTestProcess("1750C5211D94569D/TestData.ivp");
+
+    openView("starts.xhtml", Map.of("q", "makeAdmin", "projects", "dev-workflow-ui-test-data"));
+
+    $(By.id("startsForm:projectStarts:globalFilter")).shouldHave(value("makeAdmin"));
+    var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
+    starts.contains("dev-workflow-ui-test-data");
+    starts.containsNot("Main/DefaultApplicationHomePage.ivp");
+    $(By.id("startsForm:projectStarts:resetFilter")).shouldBe(visible);
+
+    assertCurrentUrlContains("q=makeAdmin");
+    assertCurrentUrlContains("projects=dev-workflow-ui-test-data");
+
+    openView("home.xhtml");
+    openView("starts.xhtml");
+
+    $(By.id("startsForm:projectStarts:globalFilter")).shouldBe(empty);
+
+    $(By.id("startsForm:projectStarts:resetFilter")).shouldBe(visible);
+    starts = PrimeUi.table(By.id("startsForm:projectStarts"));
+    starts.contains("dev-workflow-ui-test-data");
+    starts.containsNot("Main/DefaultApplicationHomePage.ivp");
+  }
+
+  @Test
+  void wrongQueryParametersAreNotApplied() {
+    openView("starts.xhtml", Map.of("projects", "nonexistent-project"));
+    $(By.id("startsForm:projectStarts")).shouldBe(visible);
+    $(By.id("startsForm:projectStarts:resetFilter")).shouldNotBe(visible);
+
+    openView("starts.xhtml", Map.of("q", "", "projects", ""));
+    $(By.id("startsForm:projectStarts:globalFilter")).shouldBe(empty);
+    $(By.id("startsForm:projectStarts")).shouldBe(visible);
+    $(By.id("startsForm:projectStarts:resetFilter")).shouldNotBe(visible);
+  }
+
+  static void clearFilter() {
+    filterStarts("");
+    var globalFilterInput = $(By.id("startsForm:projectStarts:globalFilter"));
+    globalFilterInput.shouldBe(empty);
+  }
+
+  static void filterStarts(String text) {
+    var globalFilterInput = $(By.id("startsForm:projectStarts:globalFilter"));
+    globalFilterInput.clear();
+    if (!Objects.equals(text, "")) {
+      globalFilterInput.sendKeys(text);
+      globalFilterInput.shouldHave(value(text));
+      assertCurrentUrlContains("q=" + text);
+    }
   }
 }
