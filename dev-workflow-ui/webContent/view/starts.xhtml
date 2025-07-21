@@ -5,6 +5,11 @@
 
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
+    <f:metadata>
+      <f:viewParam name="q" value="#{processesBean.startsDataModel.globalFilter}" />
+      <f:viewParam name="projects" value="#{processesBean.projects}" />
+      <f:event type="preRenderView" listener="#{processesBean.initializeView}" />
+    </f:metadata>
     <ui:define name="content">
       <h:form id="startsForm" onkeypress="if (event.keyCode == 13) { return false; }">
 
@@ -51,14 +56,14 @@
           <p:dataTable id="projectStarts" value="#{processesBean.startsDataModel.startables}" var="start"
             rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" rowKey="#{start.link}"
             selectionMode="single" widgetVar="projectStartsTable" styleClass="starts-table" resizableColumns="true"
-            rowsPerPageTemplate="10,15,20,30,50" style="overflow: unset">
+            rowsPerPageTemplate="10,15,20,30,50" style="overflow: unset" globalFilter="#{processesBean.startsDataModel.globalFilter}">
             <f:facet name="header">
               <div class="flex justify-content-between mb-3 pretty-search">
                 <h4 class="m-0">#{ivy.cm.co('/starts/processes')}</h4>
                 <div class="flex align-items-center">
                   <h:panelGroup id="projectFilterButtons" styleClass="flex align-items-center">
                     <h:panelGroup rendered="#{processesBean.startsDataModel.projectFilterModel.projectFilterActive}">
-                      <p:commandLink actionListener="#{processesBean.resetAllFilters}" process="@this"
+                      <p:commandLink id="resetFilter" actionListener="#{processesBean.resetAllFilters}" process="@this"
                         update=":startsForm:projectStarts :startsForm:projectStarts:projectFilterButtons :startsForm:filterCheckboxes"
                         styleClass="ui-button-text ui-button-danger flex align-items-center mr-2">
                         <i class="si si-button-refresh-arrow mr-1"/>#{ivy.cm.co('/common/reset')}
@@ -80,7 +85,7 @@
                       <i class="pi pi-search" />
                       <p:inputText id="globalFilter" placeholder="#{ivy.cm.co('/starts/search')}"
                         value="#{processesBean.startsDataModel.globalFilter}">
-                        <p:ajax event="keyup" delay="300" oncomplete="PF('projectStartsTable').filter()" process="@none"/>
+                        <p:ajax event="keyup" delay="300" listener="#{processesBean.updateUrlWithFilters}" process="@this" update=":startsForm:projectStarts"/>
                       </p:inputText>
                     </div>
                   </h:panelGroup>
@@ -142,7 +147,17 @@
         <jc:processViewer id="processViewer" title="#{processesBean.viewerTitle}"
           link="#{processesBean.viewerLink}" />
       </h:form>
+
+      <script>
+        function handleBrowserNavigation(event) {
+          // reload the page when user navigates back/forward
+          // needed for when table filter is being written to the URL and then the user navigates back
+          window.location.reload();
+        }
+        window.addEventListener('popstate', handleBrowserNavigation);
+      </script>
     </ui:define>
   </ui:composition>
 </h:body>
+
 </html>
