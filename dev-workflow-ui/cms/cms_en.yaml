@@ -17,11 +17,13 @@ case:
   taskList: Task list
   workflowEvents: Workflow Events
 cleanup:
-  businessData: All Business Data and the search index
-  dataCaches: Data caches
+  cleanups:
+    businessData: All Business Data and the search index
+    dataCache: Data caches
+    sessionTokenStore: All identity provider tokens
+    userAndRole: All Users and Roles
+    workflow: All Cases, Tasks and dependent objects
   introduction: When you click through different processes you create different types of data like cases, tasks etc. Here you can clean that data to reset your designer.
-  tokens: All identity provider tokens
-  workflow: All Cases, Tasks and dependet objects
 common:
   author: Author
   businessCase: Business Case

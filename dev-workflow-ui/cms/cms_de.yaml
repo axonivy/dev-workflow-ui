@@ -17,11 +17,13 @@ case:
   taskList: Task-Liste
   workflowEvents: Workflow Events
 cleanup:
-  businessData: Alle Business Daten und den Such-Index
-  dataCaches: Daten Caches
+  cleanups:
+    businessData: Alle Business Daten und den Such-Index
+    dataCache: Daten Caches
+    sessionTokenStore: Alle Identity Provider Token
+    userAndRole: Alle Benutzern und Rollen
+    workflow: Alle Cases, Tasks und abhängige Objekte
   introduction: Beim Ausführen von Prozessen, erzeugst Du verschiedene Typen von Daten wie Cases, Tasks etc. Hier kannst Du diese Daten aufräumen und den Designer zurückzusetzen.
-  tokens: Alle Identity Provider Token
-  workflow: Alle Cases, Tasks und abhängige Objekte
 common:
   author: Autor
   businessCase: Business Case
@@ -230,20 +232,18 @@ starts:
 statistics:
   allCases: Alle Fälle
   allTasks: Alle Tasks
-  casesStatistics: Case Statistik
-  notEnoughData: Nicht genügend Daten
-  tasksByState: Tasks nach Status
-  tasksStatistics: Task Statistik
-  topCaseCreators: Top Case Ersteller
-  topTaskWorkers: Top Task Bearbeiter
   casesByState: Fälle nach Status
+  casesStatistics: Case Statistik
   chartResolution: Diagramm Auflösung
+  notEnoughData: Nicht genügend Daten
   resolutions:
     day: täglich
     hour: stündlich
     hour6: alle 6 Stunden
     month: monatlich
     week: wöchentlich
+  tasksByState: Tasks nach Status
+  tasksStatistics: Task Statistik
   timeRange: Zeitspanne
   timeRanges:
     allTime: Seit Beginn
@@ -253,6 +253,8 @@ statistics:
     last7d: Letzte Woche
     last90d: Letzte 3 Monate
     today: Heute
+  topCaseCreators: Top Case Ersteller
+  topTaskWorkers: Top Task Bearbeiter
 switchUser:
   clickLogin: Klicke auf einen Benutzer um Dich anzumelden
   needLogin: Du musst Dich einloggen um auf diese Seite zugreifen zu können

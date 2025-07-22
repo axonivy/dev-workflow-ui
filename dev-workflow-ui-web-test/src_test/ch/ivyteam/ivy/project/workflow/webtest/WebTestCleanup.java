@@ -11,6 +11,7 @@ import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
 import java.util.List;
@@ -98,8 +99,9 @@ class WebTestCleanup {
     checkProcessesExist();
 
     openView("cleanup.xhtml");
+    $(byText("All Cases, Tasks and dependent objects")).shouldBe(visible);
     var checkbox = PrimeUi.selectManyCheckbox(By.id("cleanupForm:cleanups"));
-    checkbox.setCheckboxes(List.of("All Cases, Tasks and dependet objects"));
+    checkbox.setCheckboxes(List.of("All Cases, Tasks and dependent objects"));
     $(By.id("cleanupForm:cleanupBtn")).shouldBe(visible).click();
     $(By.id("cleanupForm:growl_container")).shouldBe(visible);
 
