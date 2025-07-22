@@ -160,9 +160,9 @@
           ],
           "map" : { },
           "code" : [
-            "import ch.ivyteam.ivy.application.IApplication;",
+            "import ch.ivyteam.workflowui.DefaultFramePageHandler;",
             "",
-            "ch.ivyteam.ivy.request.IHttpResponse.current().sendRedirect(IApplication.current().getContextPath()+\"/faces/view/dev-workflow-ui/frame.xhtml?taskUrl=\"+param.relativeUrl);"
+            "DefaultFramePageHandler.handleRedirect(param.relativeUrl);"
           ]
         }
       },

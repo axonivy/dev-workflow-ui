@@ -241,6 +241,14 @@ class WebTestTasksIT {
 
     Navigation.openTask("notEmbedTask");
     $(By.id("actionMenuForm:taskStartBtn")).shouldNotHave(text("?taskUrl"));
+
+    var taskStartLink = $(By.id("actionMenuForm:taskStartBtn")).find(By.tagName("a")).getAttribute("href");
+    Selenide.open(taskStartLink);
+    $(By.id("iFrameForm")).shouldNotBe(visible);
+
+    taskStartLink = taskStartLink + "&embedInFrame";
+    Selenide.open(taskStartLink);
+    $(By.id("iFrameForm")).shouldNotBe(visible);
   }
 
   @Test
