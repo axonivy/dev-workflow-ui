@@ -212,7 +212,7 @@ signals:
   sentBy: Gesendet von
   signalCode: Signal Code
   signalPattern: Signal Pattern
-  waitingTask: Wartender Tasks
+  waitingTask: Wartender Task
 starts:
   application: Applikation
   apply: Anwenden
@@ -260,11 +260,11 @@ switchUser:
 task:
   assignTask: Task zuweisen
   canNotWork: Du kannst an diesem Task nicht arbeiten, weil ${user} den Task bereits geöffnet hat.
-  completedByCurrent: Dieser Task bereits abgeschlossen.
+  completedByCurrent: Dieser Task ist bereits abgeschlossen.
   completedByOther: Der Task wurde bereits von ${user} abgeschlossen.
   delegateTask: Task delegieren
   delegateTaskToUserOrRole: Delegiere den Task an einen Benutzer oder an eine Rolle
-  destroyed: Dieser Task kann nicht bearbeitet, weil er gelöscht wurde.
+  destroyed: Dieser Task kann nicht bearbeitet werden, weil er gelöscht wurde.
   invalid: Ungültiger Status
   role: Rolle
   user: Benutzer
