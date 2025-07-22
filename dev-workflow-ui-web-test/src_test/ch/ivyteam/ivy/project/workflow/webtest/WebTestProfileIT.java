@@ -77,8 +77,11 @@ class WebTestProfileIT {
     contentLanguage.selectedItemShould(empty);
     contentLanguage.selectItemByValue("de");
     save();
-
     contentLanguage.selectedItemShould(value("de"));
+
+    contentLanguage.selectItemByLabel("");
+    save();
+    contentLanguage.selectedItemShould(empty);
   }
 
   @Test

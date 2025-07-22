@@ -17,7 +17,11 @@ case:
   taskList: Task list
   workflowEvents: Workflow Events
 cleanup:
-  introduction: As you navigate through different processes, various types of data - such as cases, tasks, and more - are generated. Here, you can clean up that data to start fresh.
+  businessData: All Business Data and the search index
+  dataCaches: Data caches
+  introduction: When you click through different processes you create different types of data like cases, tasks etc. Here you can clean that data to reset your designer.
+  tokens: All identity provider tokens
+  workflow: All Cases, Tasks and dependet objects
 common:
   author: Author
   businessCase: Business Case
@@ -262,7 +266,7 @@ task:
   delegateTaskToUserOrRole: Delegate the task to a specified user or role
   destroyed: You cannot work on the task because it was destroyed
   invalid: Invalid state
-  role: Rolle
+  role: Role
   user: User
   workingOn: You are currently working on the task in a different session. You may reset the task and start it again if you have closed your browser.
 tasks:
@@ -273,7 +277,7 @@ template:
   profile: Profile
   switchUser: Switch User
 webservices:
-  noWebServicesFound: Keine Web Service Prozesse gefunden
+  noWebServicesFound: No Web Service processes found
   webServiceProcesses: Web Service Processes
 workflowEventsTable:
   needPermission: You need workflow events read permission in order to see the events.
