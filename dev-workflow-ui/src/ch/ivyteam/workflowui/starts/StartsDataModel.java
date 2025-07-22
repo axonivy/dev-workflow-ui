@@ -1,31 +1,49 @@
 package ch.ivyteam.workflowui.starts;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 import ch.ivyteam.workflowui.util.ProcessModelsUtil;
 
 public class StartsDataModel {
 
-  private final List<StartableModel> originalStartables;
-  private List<StartableModel> startables;
+  private final List<StartableModel> allStartables;
   private String globalFilter = "";
   private final boolean isOnlySingleApplication;
   private final boolean isOnlySingleProject;
   private final ProjectFilterModel projectFilterModel;
 
   public StartsDataModel() {
-    originalStartables = ProcessModelsUtil.getDeployedStartables();
-    startables = new ArrayList<>(originalStartables);
-    isOnlySingleApplication = startables.stream().map(StartableModel::getApplicationName).distinct().count() == 1;
-    isOnlySingleProject = startables.stream().map(StartableModel::getProjectName).distinct().count() == 1;
-    var allProjects = startables.stream().map(StartableModel::getProjectName).distinct().sorted().toList();
+    allStartables = ProcessModelsUtil.getDeployedStartables();
+    isOnlySingleApplication = allStartables.stream().map(StartableModel::getApplicationName).distinct().count() == 1;
+    isOnlySingleProject = allStartables.stream().map(StartableModel::getProjectName).distinct().count() == 1;
+    var allProjects = allStartables.stream().map(StartableModel::getProjectName).distinct().sorted().toList();
     projectFilterModel = new ProjectFilterModel(allProjects);
   }
 
   public List<StartableModel> getStartables() {
-    return startables;
+    return allStartables.stream()
+        .filter(start -> projectFilterModel.getAppliedProjects().contains(start.getProjectName()))
+        .filter(this::matchesGlobalFilter)
+        .toList();
+  }
+
+  private boolean matchesGlobalFilter(StartableModel start) {
+    if (start == null || globalFilter == null || globalFilter.isBlank()) {
+      return true;
+    }
+
+    var filter = globalFilter.toLowerCase();
+    return Stream.of(
+        start.getDisplayName(),
+        start.getDescription(),
+        start.getApplicationName(),
+        start.getProjectName(),
+        start.getCategory() != null ? start.getCategory().getName() : null)
+        .filter(Objects::nonNull)
+        .map(String::toLowerCase)
+        .anyMatch(text -> text.contains(filter));
   }
 
   public String getGlobalFilter() {
@@ -52,14 +70,8 @@ public class StartsDataModel {
     return projectFilterModel;
   }
 
-  public void applyProjectFilter() {
-    this.startables = originalStartables.stream()
-        .filter(start -> this.projectFilterModel.getAppliedProjects().contains(start.getProjectName()))
-        .collect(Collectors.toList());
-  }
-
   public void resetAllProjectFilters() {
     projectFilterModel.resetAll();
-    applyProjectFilter();
+    resetGlobalFilter();
   }
 }
