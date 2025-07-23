@@ -10,7 +10,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import ch.ivyteam.ivy.engine.cleanup.EngineCleanup;
-import ch.ivyteam.ivy.environment.Ivy;
+import ch.ivyteam.ivy.jsf.environment.IvyJsf;
 
 @ManagedBean
 @ViewScoped
@@ -47,7 +47,7 @@ public class CleanupBean {
 
     public EngineCleanupDTO(EngineCleanup cleanup) {
       this.id = cleanup.id();
-      this.name = Ivy.cm().co("/cleanup/cleanups/" + cleanup.name());
+      this.name = new IvyJsf().getCm().co("/cleanup/cleanups/" + cleanup.name());
     }
 
     public String getId() {
