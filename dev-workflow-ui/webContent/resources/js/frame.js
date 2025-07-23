@@ -13,8 +13,6 @@ function iframeURLChange() {
       const newPage = checkAndReturnUrl(redirectedPage, originPage);
       if (newPage) {
         window.location = newPage;
-      } else {
-        window.location = redirectedPage;
       }
     } else {
       const newPage = checkAndReturnUrl(newHref, originPage);
@@ -84,49 +82,79 @@ function iframeURLChange() {
 }
 
 function checkAndReturnUrl(newURL, originPage) {
-  if (newURL.includes("task.xhtml")) {
-    return newURL.substring(newURL.indexOf("task.xhtml"));
+  console.log("checkAndReturnUrl() called", { newURL, originPage });
+
+  const rules = [
+    {
+      match: (url) => url.includes("task.xhtml"),
+      target: (url) => url.substring(url.indexOf("task.xhtml")),
+    },
+    {
+      match: (url) => url.includes("?endedTaskId="),
+      target: () => originPage,
+    },
+    {
+      match: (url) =>
+        url.endsWith("/faces/home.xhtml") ||
+        url.includes("DefaultApplicationHomePage.ivp") ||
+        url.endsWith("/app/home.xhtml"),
+      target: () => "home.xhtml",
+    },
+    {
+      match: (url) =>
+        url.endsWith("/faces/tasks.xhtml") ||
+        url.includes("DefaultTaskListPage.ivp") ||
+        url.endsWith("/app/tasks.xhtml"),
+      target: () => "tasks.xhtml",
+    },
+    {
+      match: (url) =>
+        url.endsWith("/faces/starts.xhtml") ||
+        url.includes("DefaultProcessStartListPage.ivp") ||
+        url.endsWith("/app/starts.xhtml"),
+      target: () => "starts.xhtml",
+    },
+    {
+      match: (url) =>
+        url.endsWith("/faces/login.xhtml") ||
+        url.includes("DefaultLoginPage.ivp") ||
+        url.endsWith("/app/login.xhtml"),
+      target: () => "login.xhtml",
+    },
+    {
+      match: (url) => url.endsWith("/faces/switch-user.xhtml"),
+      target: () => "switch-user.xhtml",
+    },
+    {
+      match: (url) =>
+        url.endsWith("/faces/end.xhtml") ||
+        url.includes("DefaultEndPage.ivp") ||
+        url.endsWith("/app/end.xhtml"),
+      target: () => originPage,
+    },
+  ];
+
+  for (const rule of rules) {
+    if (rule.match(newURL)) {
+      const dest = rule.target(newURL);
+      console.log("Redirect rule matched", { newURL, dest });
+      return dest;
+    }
   }
-  if (newURL.includes("?endedTaskId=")) {
-    return originPage;
-  }
-  if (
-    newURL.endsWith("/faces/home.xhtml") ||
-    newURL.includes("DefaultApplicationHomePage.ivp") ||
-    newURL.endsWith("/app/home.xhtml")
-  ) {
-    return "home.xhtml";
-  }
-  if (
-    newURL.endsWith("/faces/tasks.xhtml") ||
-    newURL.includes("DefaultTaskListPage.ivp") ||
-    newURL.endsWith("/app/tasks.xhtml")
-  ) {
-    return "tasks.xhtml";
-  }
-  if (
-    newURL.endsWith("/faces/starts.xhtml") ||
-    newURL.includes("DefaultProcessStartListPage.ivp") ||
-    newURL.endsWith("/app/starts.xhtml")
-  ) {
-    return "starts.xhtml";
-  }
-  if (
-    newURL.endsWith("/faces/login.xhtml") ||
-    newURL.includes("DefaultLoginPage.ivp") ||
-    newURL.endsWith("/app/login.xhtml")
-  ) {
-    return "login.xhtml";
-  }
-  if (newURL.endsWith("/faces/switch-user.xhtml")) {
-    return "switch-user.xhtml";
-  }
-  if (
-    newURL.endsWith("/faces/end.xhtml") ||
-    newURL.includes("DefaultEndPage.ivp") ||
-    newURL.endsWith("/app/end.xhtml")
-  ) {
-    return originPage;
-  }
+
+  console.warn("No redirect rule matched for", newURL);
   return undefined;
 }
+
+window.addEventListener('message', function (evt) {
+  console.log("in frame.js dev-wf-ui");
+  console.log(evt);
+  if (evt.origin !== window.location.origin) { return; }
+  if (evt.data?.type === 'ivy.redirect') {
+    const originPage = new URLSearchParams(window.location.search).get('originalUrl');
+    const newPage = checkAndReturnUrl(evt.data.url, originPage);
+    if (newPage) {
+      window.location = newPage;
+    }
+  }
+});
