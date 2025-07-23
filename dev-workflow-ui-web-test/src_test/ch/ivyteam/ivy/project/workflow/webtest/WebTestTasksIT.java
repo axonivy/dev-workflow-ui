@@ -6,6 +6,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginF
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openViewNoAssertion;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.checked;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.enabled;
@@ -275,6 +276,9 @@ class WebTestTasksIT {
     table.row(1).should(exist);
 
     $(By.id("tasksForm:tasks:globalFilter")).setValue(taskId).pressEnter();
+
+    $(By.id("tasksForm:tasks_data")).findAll(By.tagName("tr")).shouldBe(size(1));
+
     table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).should(exist);
     table.row(1).shouldNot(exist);

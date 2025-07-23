@@ -4,6 +4,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginD
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
@@ -63,6 +64,9 @@ class WebTestCasesIT {
     table.row(1).should(exist);
 
     $(By.id("casesForm:cases:globalFilter")).setValue(caseId).pressEnter();
+
+    $(By.id("casesForm:cases_data")).findAll(By.tagName("tr")).shouldBe(size(1));
+
     table = PrimeUi.table(By.id("casesForm:cases"));
     table.row(0).should(exist);
     table.row(1).shouldNot(exist);
