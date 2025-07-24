@@ -21,7 +21,7 @@ import ch.ivyteam.workflowui.util.UrlUtil;
 @ManagedBean
 public class FrameBean {
 
-  private String taskName;
+  private String taskName = "Loading...";
   private final String taskUrl;
   private List<SidestepModel> sidesteps;
   private String originalUrl;
@@ -29,17 +29,19 @@ public class FrameBean {
 
   public FrameBean() {
     this.taskUrl = checkTaskUrl();
+    useTaskInIFrame();
   }
 
   public void useTaskInIFrame() {
     var processUrl = UrlUtil.getUrlParameter("url");
-    var task = DialogInstance.of(processUrl).task();
-    if (StringUtils.isNotBlank(processUrl) && task != null) {
-      this.taskName = TaskUtil.getName(task);
-      this.sidesteps = SidestepUtil.getSidesteps(task.getCase());
-      this.sidestepMenuModel = SidestepUtil.createMenuModel(getSidesteps(), getOriginalUrl());
-    } else {
-      this.taskName = "[No Task Name]";
+    if (processUrl != null && StringUtils.isNotBlank(processUrl)) {
+      var task = DialogInstance.of(processUrl).task();
+      if (task != null) {
+        this.taskName = TaskUtil.getName(task);
+        this.sidesteps = SidestepUtil.getSidesteps(task.getCase());
+        this.sidestepMenuModel = SidestepUtil.createMenuModel(getSidesteps(), getOriginalUrl());
+        return;
+      }
     }
   }
 

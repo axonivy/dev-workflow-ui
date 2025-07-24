@@ -42,7 +42,15 @@
           <p:remoteCommand name="useTaskInIFrame" actionListener="#{frameBean.useTaskInIFrame()}" update="@form:update" />
         </h:form>
         <hr/>
-        <iframe id="iFrame" src="#{frameBean.taskUrl}" style="height: calc(100vh - 205px); width: 100%; border: 0; visibility: hidden;"></iframe>
+        <div style="position: relative; width: 100%; height: calc(100vh - 205px);">
+          <iframe id="iFrame" src="#{frameBean.taskUrl}" style="height: 100%; width: 100%; border: 0; visibility: hidden;"></iframe>
+          <div id="iframeLoader" style="display: flex; align-items: center; justify-content: center; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.7); z-index: 1000;">
+            <div class="axonivy-loader">
+              <div class="spinner"></div>
+              <h5>Loading...</h5>
+            </div>
+          </div>
+        </div>
       </div>
       <script>
         let preview;
@@ -51,6 +59,12 @@
         preview = initPreview("#{frameBean.baseUrl}");
         const selector = initDomSelector();
       </h:outputScript>
+      <style>
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      </style>
       <script>
         iframeURLChange();
       </script>

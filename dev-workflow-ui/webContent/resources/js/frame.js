@@ -1,46 +1,31 @@
+let hasRedirected = false;
+
 function iframeURLChange() {
   const iframe = document.getElementById("iFrame");
+  const loader = document.getElementById("iframeLoader");
   if (!iframe) {
     return;
   }
+  console.log("iframeURLChange() called and iframe found");
 
   var lastDispatched = null;
 
-  const redirectMainWindow = (newHref, iframe) => {
-    const originPage = new URLSearchParams(window.location.search).get("originalUrl");
-    if (iframe.contentWindow.location.pathname.match("/default/redirect.xhtml")) {
-      const redirectedPage = new URLSearchParams(iframe.contentWindow.location.search).get("redirectPage");
-      const newPage = checkAndReturnUrl(redirectedPage, originPage);
-      if (newPage) {
-        window.location = newPage;
-      }
-    } else {
-      const newPage = checkAndReturnUrl(newHref, originPage);
-      if (newPage) {
-        window.location = newPage;
-      }
-    }
-  };
+  // Show loader when iframe starts loading
+  function showLoader() {
+    if (loader) loader.style.display = "flex";
+    iframe.style.visibility = "hidden";
+  }
+  // Hide loader when iframe is ready
+  function hideLoader() {
+    if (loader) loader.style.display = "none";
+    iframe.style.visibility = "visible";
+  }
 
-  const dispatchChange = () => {
-    useTaskInIFrame([
-      {
-        name: "url",
-        value: iframe.contentWindow.location.pathname,
-      },
-    ]);
-
-    const newHref = iframe.contentWindow.location.href;
-
-    if (newHref !== lastDispatched) {
-      redirectMainWindow(newHref, iframe);
-      lastDispatched = newHref;
-      updateHistory(newHref);
-      preview?.listenTo(newHref);
-    }
-  };
+  // Initial loader state
+  showLoader();
 
   const updateHistory = (newHref) => {
+    console.log("in updateHistory() newHref is: ", newHref);
     const newHrefUrl = new URL(newHref);
     const historyUrl = new URL(window.location);
     historyUrl.searchParams.set(
@@ -53,25 +38,33 @@ function iframeURLChange() {
   const unloadHandler = () => {
     // Timeout needed because the URL changes immediately after
     // the `unload` event is dispatched.
-    setTimeout(dispatchChange, 0);
-    iframe.style.visibility = "hidden";
+    setTimeout(() => {
+      showLoader();
+    }, 0);
   };
 
   const attachUnload = () => {
-    // Remove the unloadHandler in case it was already attached.
-    // Otherwise, there will be two handlers, which is unnecessary.
     iframe.contentWindow.removeEventListener("unload", unloadHandler);
     iframe.contentWindow.addEventListener("unload", unloadHandler);
   };
 
+  console.log("attaching load event listener to iframe");
   iframe.addEventListener("load", function () {
     try {
       // Try to access loaded iframe content
       iframe.contentWindow.content;
+      console.log("in iframe.addEventListener load event listener");
       attachUnload();
-      // Just in case the change wasn't dispatched during the unload event...
-      dispatchChange();
-      iframe.style.visibility = "visible";
+      // Hide loader when iframe is ready
+      hideLoader();
+      // Update history and preview
+      const newHref = iframe.contentWindow.location.href;
+      updateHistory(newHref);
+      preview?.listenTo(newHref);
+      // Trigger remote command to update task name
+      if (typeof useTaskInIFrame === 'function') {
+        useTaskInIFrame([{ name: "url", value: iframe.contentWindow.location.pathname }]);
+      }
     } catch (e) {
       // Open iframe content in current window if it could not be loaded
       window.location = iframe.src;
@@ -146,15 +139,49 @@ function checkAndReturnUrl(newURL, originPage) {
   return undefined;
 }
 
+// Strict whitelist of allowed redirect destinations
+const allowedPages = Object.freeze([
+  'home.xhtml',
+  'starts.xhtml',
+  'tasks.xhtml',
+  'cases.xhtml',
+  'login.xhtml',
+  'switch-user.xhtml',
+  'end.xhtml'
+]);
+
+function safeRedirect(newPage, source = 'unknown') {
+  if (hasRedirected) {
+    console.log("safeRedirect: already redirected once, ignoring further call to", newPage);
+    return;
+  }
+  if (allowedPages.includes(newPage)) {
+    console.log(`safeRedirect() navigating to: ${newPage} (triggered by ${source})`);
+    hasRedirected = true;
+    window.location = newPage;
+  } else {
+    console.warn(`Blocked unsafe redirect to: ${newPage} (triggered by ${source})`);
+    // Optionally, log/report this event for security monitoring
+  }
+}
+
 window.addEventListener('message', function (evt) {
-  console.log("in frame.js dev-wf-ui");
-  console.log(evt);
-  if (evt.origin !== window.location.origin) { return; }
+  // Only accept messages from same origin
+  if (evt.origin !== window.location.origin) {
+    console.warn('Blocked postMessage from unexpected origin:', evt.origin);
+    return;
+  }
   if (evt.data?.type === 'ivy.redirect') {
     const originPage = new URLSearchParams(window.location.search).get('originalUrl');
+    console.log("in frame.js dev-wf-ui. Got message from iframe. event data type is ivy.redirect, url is: ", evt.data.url);
+    console.log("originPage is: ", originPage);
     const newPage = checkAndReturnUrl(evt.data.url, originPage);
+    console.log("checkAndReturnUrl() returned: ", newPage);
     if (newPage) {
-      window.location = newPage;
+      console.log("calling safeRedirect() inside window.addEventListener message listener");
+      safeRedirect(newPage, 'postMessage');
+    } else {
+      console.warn('Blocked unsafe redirect attempt via postMessage:', evt.data.url);
     }
   }
 });
