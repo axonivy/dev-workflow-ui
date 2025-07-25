@@ -157,7 +157,8 @@ function safeRedirect(newPage, source = 'unknown') {
     console.log("safeRedirect: already redirected once, ignoring further call to", newPage);
     return;
   }
-  if (allowedPages.includes(newPage)) {
+  const pagePath = newPage.split('?')[0];
+  if (allowedPages.includes(pagePath)) {
     console.log(`safeRedirect() navigating to: ${newPage} (triggered by ${source})`);
     hasRedirected = true;
     window.location = newPage;
