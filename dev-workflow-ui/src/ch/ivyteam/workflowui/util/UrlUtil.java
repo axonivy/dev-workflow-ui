@@ -12,15 +12,12 @@ import ch.ivyteam.ivy.model.value.WebLink;
 
 public class UrlUtil {
 
-  public static String evalOriginalUrl() {
-    return getHttpServletRequest().getRequestURI();
-  }
-
-  public static String evalOriginalPage() {
-    var page = StringUtils.substringAfterLast(getHttpServletRequest().getRequestURI(), "/");
+  public static String evalOriginPage() {
+    var pageXhtml = StringUtils.substringAfterLast(getHttpServletRequest().getRequestURI(), "/");
+    var page = StringUtils.substringBefore(pageXhtml, ".xhtml");
     var parameter = getHttpServletRequest().getQueryString();
-    if ("frame.xhtml".equals(page)) {
-      page = "tasks.xhtml";
+    if ("frame".equals(page)) {
+      page = "tasks";
     }
     if (!StringUtils.isBlank(parameter)) {
       page += "?" + parameter;
@@ -38,17 +35,17 @@ public class UrlUtil {
   }
 
   public static String generateStartFrameUrl(WebLink startLink) {
-    return generateStartFrameUrl(startLink, evalOriginalPage());
+    return generateStartFrameUrl(startLink, evalOriginPage());
   }
 
-  public static String generateStartFrameUrl(WebLink startLink, String redirectUrl) {
-    return generateFrameUrl(startLink, redirectUrl);
+  public static String generateStartFrameUrl(WebLink startLink, String redirectPage) {
+    return generateFrameUrl(startLink, redirectPage);
   }
 
-  public static String generateFrameUrl(WebLink startLink, String redirectUrl) {
-    var originalPageEncoded = URLEncoder.encode(redirectUrl, StandardCharsets.UTF_8);
+  public static String generateFrameUrl(WebLink startLink, String redirectPage) {
+    var originalPageEncoded = URLEncoder.encode(redirectPage, StandardCharsets.UTF_8);
     String startLinkEncoded = URLEncoder.encode(startLink.get(), StandardCharsets.UTF_8);
-    return "frame.xhtml?originalUrl=" + originalPageEncoded + "&taskUrl=" + startLinkEncoded;
+    return "frame.xhtml?origin=" + originalPageEncoded + "&taskUrl=" + startLinkEncoded;
   }
 
 }

@@ -103,7 +103,7 @@
         "signature" : "DefaultLoginPage",
         "input" : {
           "params" : [
-            { "name" : "originalUrl", "type" : "String", "desc" : "" }
+            { "name" : "origin", "type" : "String", "desc" : "" }
           ],
           "map" : { }
         },
