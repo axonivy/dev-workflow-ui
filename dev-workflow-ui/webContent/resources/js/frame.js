@@ -7,7 +7,7 @@ function iframeURLChange() {
   var lastDispatched = null;
 
   const redirectMainWindow = (newHref, iframe) => {
-    const originPage = new URLSearchParams(window.location.search).get("originalUrl");
+    const originPage = new URLSearchParams(window.location.search).get("origin");
     if (iframe.contentWindow.location.pathname.match("/default/redirect.xhtml")) {
       const redirectedPage = new URLSearchParams(iframe.contentWindow.location.search).get("redirectPage");
       const newPage = checkAndReturnUrl(redirectedPage, originPage);
@@ -83,22 +83,23 @@ function iframeURLChange() {
   attachUnload();
 }
 
-const allowedPages = Object.freeze([
-  'home.xhtml',
-  'starts.xhtml',
-  'task.xhtml',
-  'tasks.xhtml',
-  'case.xhtml',
-  'cases.xhtml',
-  'login.xhtml',
-  'switch-user.xhtml',
-  'end.xhtml'
-]);
+const originToPage = Object.freeze({
+  home: 'home.xhtml',
+  starts: 'starts.xhtml',
+  task: 'task.xhtml',
+  tasks: 'tasks.xhtml',
+  case: 'case.xhtml',
+  cases: 'cases.xhtml',
+  login: 'login.xhtml',
+  'switch-user': 'switch-user.xhtml',
+  end: 'end.xhtml'
+});
 
-function safeRedirect(newPage) {
-  const pagePath = newPage.split('?')[0];
-  if (allowedPages.includes(pagePath)) {
-    window.location = newPage;
+function safeRedirect(origin) {
+  console.log("safeRedirect called with origin:", origin);
+  const page = originToPage[origin];
+  if (page) {
+    window.location = page;
   } else {
   }
 }
@@ -118,32 +119,32 @@ function checkAndReturnUrl(newURL, originPage) {
         url.endsWith("/faces/home.xhtml") ||
         url.includes("DefaultApplicationHomePage.ivp") ||
         url.endsWith("/app/home.xhtml"),
-      target: () => "home.xhtml",
+      target: () => "home",
     },
     {
       match: (url) =>
         url.endsWith("/faces/tasks.xhtml") ||
         url.includes("DefaultTaskListPage.ivp") ||
         url.endsWith("/app/tasks.xhtml"),
-      target: () => "tasks.xhtml",
+      target: () => "tasks",
     },
     {
       match: (url) =>
         url.endsWith("/faces/starts.xhtml") ||
         url.includes("DefaultProcessStartListPage.ivp") ||
         url.endsWith("/app/starts.xhtml"),
-      target: () => "starts.xhtml",
+      target: () => "starts",
     },
     {
       match: (url) =>
         url.endsWith("/faces/login.xhtml") ||
         url.includes("DefaultLoginPage.ivp") ||
         url.endsWith("/app/login.xhtml"),
-      target: () => "login.xhtml",
+      target: () => "login",
     },
     {
       match: (url) => url.endsWith("/faces/switch-user.xhtml"),
-      target: () => "switch-user.xhtml",
+      target: () => "switch-user",
     },
     {
       match: (url) =>
