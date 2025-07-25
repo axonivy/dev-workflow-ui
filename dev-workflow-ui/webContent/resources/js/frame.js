@@ -143,8 +143,10 @@ function checkAndReturnUrl(newURL, originPage) {
 const allowedPages = Object.freeze([
   'home.xhtml',
   'starts.xhtml',
+  'task.xhtml',
   'tasks.xhtml',
   'cases.xhtml',
+  'case.xhtml',
   'login.xhtml',
   'switch-user.xhtml',
   'end.xhtml'
