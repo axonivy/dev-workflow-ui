@@ -24,7 +24,7 @@ public class FrameBean {
   private String taskName;
   private final String taskUrl;
   private List<SidestepModel> sidesteps;
-  private String originalUrl;
+  private String origin;
   private MenuModel sidestepMenuModel;
 
   public FrameBean() {
@@ -37,7 +37,7 @@ public class FrameBean {
     if (StringUtils.isNotBlank(processUrl) && task != null) {
       this.taskName = TaskUtil.getName(task);
       this.sidesteps = SidestepUtil.getSidesteps(task.getCase());
-      this.sidestepMenuModel = SidestepUtil.createMenuModel(getSidesteps(), getOriginalUrl());
+      this.sidestepMenuModel = SidestepUtil.createMenuModel(getSidesteps(), getOrigin());
     } else {
       this.taskName = "[No Task Name]";
     }
@@ -74,12 +74,12 @@ public class FrameBean {
     return sidestepMenuModel;
   }
 
-  public String getOriginalUrl() {
-    return originalUrl;
+  public String getOrigin() {
+    return origin;
   }
 
-  public void setOriginalUrl(String originalUrl) {
-    this.originalUrl = originalUrl;
+  public void setOrigin(String origin) {
+    this.origin = origin;
   }
 
   public String getBaseUrl() {

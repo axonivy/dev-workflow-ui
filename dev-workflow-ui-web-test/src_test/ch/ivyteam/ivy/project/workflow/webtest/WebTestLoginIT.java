@@ -114,11 +114,11 @@ class WebTestLoginIT {
     loginFromTable("testuser");
     logout();
     openView("cases.xhtml");
-    assertCurrentUrlContains("switch-user.xhtml?originalUrl=cases.xhtml");
+    assertCurrentUrlContains("switch-user.xhtml?origin=cases");
     $("#loginMessage").shouldBe(visible).shouldHave(text("you need to login"));
 
     openView("tasks.xhtml");
-    assertCurrentUrlContains("switch-user.xhtml?originalUrl=tasks.xhtml");
+    assertCurrentUrlContains("switch-user.xhtml?origin=tasks");
     $("#loginMessage").shouldBe(visible).shouldHave(text("you need to login"));
 
     loginFromTable("testuser");
@@ -127,11 +127,11 @@ class WebTestLoginIT {
   }
 
   @Test
-  void redirectToOriginalUrl() {
+  void redirectToOriginalPage() {
     loginFromTable("testuser");
     logout();
     openView("cases.xhtml");
-    assertCurrentUrlContains("switch-user.xhtml?originalUrl=cases.xhtml");
+    assertCurrentUrlContains("switch-user.xhtml?origin=cases");
     $("#loginMessage").shouldBe(visible).shouldHave(text("you need to login"));
     $(byText("testuser")).click();
     assertCurrentUrlContains("cases.xhtml");
@@ -147,7 +147,7 @@ class WebTestLoginIT {
 
     $(".user-profile").shouldBe(visible).click();
     $(By.id("loginTableBtn")).shouldBe(visible).click();
-    assertCurrentUrlContains("switch-user.xhtml?originalUrl=task.xhtml%3Fid%3D" + taskId);
+    assertCurrentUrlContains("switch-user.xhtml?origin=task%3Fid%3D" + taskId);
   }
 
   @Test

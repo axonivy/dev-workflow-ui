@@ -16,14 +16,14 @@ import ch.ivyteam.workflowui.util.UrlUtil;
 public class SidestepUtil {
 
   public static MenuModel createMenuModel(List<SidestepModel> sidesteps) {
-    return createMenuModel(sidesteps, UrlUtil.evalOriginalPage());
+    return createMenuModel(sidesteps, UrlUtil.evalOriginPage());
   }
 
-  public static MenuModel createMenuModel(List<SidestepModel> sidesteps, String redirectUrl) {
+  public static MenuModel createMenuModel(List<SidestepModel> sidesteps, String redirectPage) {
     MenuModel menuModel = new DefaultMenuModel();
     if (sidesteps != null) {
       for (SidestepModel sidestep : sidesteps) {
-        var link = UrlUtil.generateStartFrameUrl(sidestep.getStartLink(), redirectUrl);
+        var link = UrlUtil.generateStartFrameUrl(sidestep.getStartLink(), redirectPage);
         DefaultMenuItem item = DefaultMenuItem.builder().value(sidestep.getName()).url(link).build();
         menuModel.getElements().add(item);
       }

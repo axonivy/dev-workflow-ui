@@ -70,13 +70,13 @@
                   </p:link>
                 </li>
                 <li jsf:rendered="#{permissionsBean.demoOrDevMode}">
-                  <p:link id="loginTableBtn" href="switch-user.xhtml?originalUrl=#{loginBean.originalPage}">
+                  <p:link id="loginTableBtn" href="switch-user.xhtml?origin=#{loginBean.originPage}">
                     <i class="si si-lg si-multiple-neutral-1"></i>
                     <span>#{ivy.cm.co('/template/switchUser')}</span>
                   </p:link>
                 </li>
                 <li>
-                  <p:link id="loginFormBtn" href="login.xhtml?originalUrl=#{loginBean.originalPage}">
+                  <p:link id="loginFormBtn" href="login.xhtml?origin=#{loginBean.originPage}">
                     <i class="si si-lg si-login-3"></i>
                     <span>#{ivy.cm.co('/template/login')}</span>
                   </p:link>
