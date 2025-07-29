@@ -30,7 +30,7 @@ public class LoginBean {
 
   private String username;
   private String password;
-  private String originalUrl;
+  private String origin;
   private OAuthProvider oauthProvider;
 
   public LoginBean() {
@@ -49,25 +49,25 @@ public class LoginBean {
     }
   }
 
-  public String getOriginalUrl() {
-    return originalUrl;
+  public String getOrigin() {
+    return origin;
   }
 
-  public void setOriginalUrl(String originalUrl) {
-    this.originalUrl = originalUrl;
+  public void setOrigin(String origin) {
+    this.origin = origin;
   }
 
-  public String getOriginalPage() {
-    return URLEncoder.encode(UrlUtil.evalOriginalPage(), StandardCharsets.UTF_8);
+  public String getOriginPage() {
+    return URLEncoder.encode(UrlUtil.evalOriginPage(), StandardCharsets.UTF_8);
   }
 
   private void login(User user) {
     username = user.getName();
-    LoginUtil.switchUser(username, getOriginalUrl());
+    LoginUtil.switchUser(username, getOrigin());
   }
 
   public void customLogin() {
-    LoginUtil.login(getUsername(), password, getOriginalUrl());
+    LoginUtil.login(getUsername(), password, getOrigin());
     password = "";
   }
 

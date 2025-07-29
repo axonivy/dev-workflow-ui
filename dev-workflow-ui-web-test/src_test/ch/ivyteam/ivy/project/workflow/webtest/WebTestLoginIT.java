@@ -5,6 +5,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginF
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.logout;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.open;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openViewNoAssertion;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.Condition.cssClass;
@@ -16,6 +17,8 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.WebDriverConditions.urlContaining;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Map;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -74,7 +77,7 @@ class WebTestLoginIT {
   @Test
   void logoutUser() {
     logout();
-    openView("home.xhtml");
+    openViewNoAssertion("home.xhtml");
     loginFromTable("testuser");
     $(By.id("menuform:sr_home")).shouldHave(cssClass("active-nav-page"));
     assertCurrentUrlContains("home.xhtml");
@@ -113,12 +116,12 @@ class WebTestLoginIT {
   void redirectIfNotLogggedIn() {
     loginFromTable("testuser");
     logout();
-    openView("cases.xhtml");
-    assertCurrentUrlContains("switch-user.xhtml?originalUrl=cases.xhtml");
+    openViewNoAssertion("cases.xhtml");
+    assertCurrentUrlContains("switch-user.xhtml?origin=cases");
     $("#loginMessage").shouldBe(visible).shouldHave(text("you need to login"));
 
-    openView("tasks.xhtml");
-    assertCurrentUrlContains("switch-user.xhtml?originalUrl=tasks.xhtml");
+    openViewNoAssertion("tasks.xhtml");
+    assertCurrentUrlContains("switch-user.xhtml?origin=tasks");
     $("#loginMessage").shouldBe(visible).shouldHave(text("you need to login"));
 
     loginFromTable("testuser");
@@ -127,14 +130,31 @@ class WebTestLoginIT {
   }
 
   @Test
-  void redirectToOriginalUrl() {
+  void redirectToOriginalPage() {
     loginFromTable("testuser");
     logout();
-    openView("cases.xhtml");
-    assertCurrentUrlContains("switch-user.xhtml?originalUrl=cases.xhtml");
+    openViewNoAssertion("cases.xhtml");
+    assertCurrentUrlContains("switch-user.xhtml?origin=cases");
     $("#loginMessage").shouldBe(visible).shouldHave(text("you need to login"));
     $(byText("testuser")).click();
     assertCurrentUrlContains("cases.xhtml");
+  }
+
+  @Test
+  void redirectToDifferentUrl_bothParams() {
+    var originPage = "tasks.xhtml";
+    var originalUrl = "cases.xhtml";
+
+    openView(LOGIN, Map.of("originalUrl", originalUrl, "origin", originPage));
+    $("#loginForm\\:loginMessage").shouldNotBe(visible);
+    WorkflowUiUtil.fillLoginData("Developer", "Developer");
+    assertCurrentUrlContains(originalUrl);
+
+    // Different order
+    openView(LOGIN, Map.of("origin", originPage, "originalUrl", originalUrl));
+    $("#loginForm\\:loginMessage").shouldNotBe(visible);
+    WorkflowUiUtil.fillLoginData("Developer", "Developer");
+    assertCurrentUrlContains(originalUrl);
   }
 
   @Test
@@ -147,7 +167,7 @@ class WebTestLoginIT {
 
     $(".user-profile").shouldBe(visible).click();
     $(By.id("loginTableBtn")).shouldBe(visible).click();
-    assertCurrentUrlContains("switch-user.xhtml?originalUrl=task.xhtml%3Fid%3D" + taskId);
+    assertCurrentUrlContains("switch-user.xhtml?origin=task%3Fid%3D" + taskId);
   }
 
   @Test

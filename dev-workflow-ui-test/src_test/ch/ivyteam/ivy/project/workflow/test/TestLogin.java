@@ -22,7 +22,7 @@ public class TestLogin {
     TestHandler handler = new TestHandler();
     RedirectUtil.setHandler(handler);
     login();
-    assertThat(handler.redirectUrl).isEqualTo("home.xhtml");
+    assertThat(handler.redirectUrl).isEqualTo("home");
     assertThat(ISession.current().getSessionUser().getName()).isEqualTo("testJunitUser");
   }
 

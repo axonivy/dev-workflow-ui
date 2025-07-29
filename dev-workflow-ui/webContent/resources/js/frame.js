@@ -7,19 +7,19 @@ function iframeURLChange() {
   var lastDispatched = null;
 
   const redirectMainWindow = (newHref, iframe) => {
-    const originPage = new URLSearchParams(window.location.search).get("originalUrl");
+    const originPage = new URLSearchParams(window.location.search).get("origin");
     if (iframe.contentWindow.location.pathname.match("/default/redirect.xhtml")) {
       const redirectedPage = new URLSearchParams(iframe.contentWindow.location.search).get("redirectPage");
       const newPage = checkAndReturnUrl(redirectedPage, originPage);
       if (newPage) {
-        window.location = newPage;
+        safeRedirect(newPage);
       } else {
         window.location = redirectedPage;
       }
     } else {
       const newPage = checkAndReturnUrl(newHref, originPage);
       if (newPage) {
-        window.location = newPage;
+        safeRedirect(newPage);
       }
     }
   };
@@ -83,50 +83,84 @@ function iframeURLChange() {
   attachUnload();
 }
 
+const originToPage = Object.freeze({
+  home: 'home.xhtml',
+  starts: 'starts.xhtml',
+  task: 'task.xhtml',
+  tasks: 'tasks.xhtml',
+  case: 'case.xhtml',
+  cases: 'cases.xhtml',
+  login: 'login.xhtml',
+  'switch-user': 'switch-user.xhtml',
+  end: 'end.xhtml'
+});
+
+function safeRedirect(origin) {
+  const [cleanOrigin, queryParams] = origin.split("?");
+  const page = originToPage[cleanOrigin];
+  if (page) {
+    const finalUrl = queryParams ? `${page}?${queryParams}` : page;
+    window.location = finalUrl;
+  }
+}
+
 function checkAndReturnUrl(newURL, originPage) {
-  if (newURL.includes("task.xhtml")) {
-    return newURL.substring(newURL.indexOf("task.xhtml"));
+  const rules = [
+    {
+      match: (url) => url.includes("task.xhtml"),
+      target: (url) => url.substring(url.indexOf("task.xhtml")),
+    },
+    {
+      match: (url) => url.includes("?endedTaskId="),
+      target: () => originPage,
+    },
+    {
+      match: (url) =>
+        url.endsWith("/faces/home.xhtml") ||
+        url.includes("DefaultApplicationHomePage.ivp") ||
+        url.endsWith("/app/home.xhtml"),
+      target: () => "home",
+    },
+    {
+      match: (url) =>
+        url.endsWith("/faces/tasks.xhtml") ||
+        url.includes("DefaultTaskListPage.ivp") ||
+        url.endsWith("/app/tasks.xhtml"),
+      target: () => "tasks",
+    },
+    {
+      match: (url) =>
+        url.endsWith("/faces/starts.xhtml") ||
+        url.includes("DefaultProcessStartListPage.ivp") ||
+        url.endsWith("/app/starts.xhtml"),
+      target: () => "starts",
+    },
+    {
+      match: (url) =>
+        url.endsWith("/faces/login.xhtml") ||
+        url.includes("DefaultLoginPage.ivp") ||
+        url.endsWith("/app/login.xhtml"),
+      target: () => "login",
+    },
+    {
+      match: (url) => url.endsWith("/faces/switch-user.xhtml"),
+      target: () => "switch-user",
+    },
+    {
+      match: (url) =>
+        url.endsWith("/faces/end.xhtml") ||
+        url.includes("DefaultEndPage.ivp") ||
+        url.endsWith("/app/end.xhtml"),
+      target: () => originPage,
+    },
+  ];
+
+  for (const rule of rules) {
+    if (rule.match(newURL)) {
+      const dest = rule.target(newURL);
+      return dest;
+    }
   }
-  if (newURL.includes("?endedTaskId=")) {
-    return originPage;
-  }
-  if (
-    newURL.endsWith("/faces/home.xhtml") ||
-    newURL.includes("DefaultApplicationHomePage.ivp") ||
-    newURL.endsWith("/app/home.xhtml")
-  ) {
-    return "home.xhtml";
-  }
-  if (
-    newURL.endsWith("/faces/tasks.xhtml") ||
-    newURL.includes("DefaultTaskListPage.ivp") ||
-    newURL.endsWith("/app/tasks.xhtml")
-  ) {
-    return "tasks.xhtml";
-  }
-  if (
-    newURL.endsWith("/faces/starts.xhtml") ||
-    newURL.includes("DefaultProcessStartListPage.ivp") ||
-    newURL.endsWith("/app/starts.xhtml")
-  ) {
-    return "starts.xhtml";
-  }
-  if (
-    newURL.endsWith("/faces/login.xhtml") ||
-    newURL.includes("DefaultLoginPage.ivp") ||
-    newURL.endsWith("/app/login.xhtml")
-  ) {
-    return "login.xhtml";
-  }
-  if (newURL.endsWith("/faces/switch-user.xhtml")) {
-    return "switch-user.xhtml";
-  }
-  if (
-    newURL.endsWith("/faces/end.xhtml") ||
-    newURL.includes("DefaultEndPage.ivp") ||
-    newURL.endsWith("/app/end.xhtml")
-  ) {
-    return originPage;
-  }
+
   return undefined;
 }

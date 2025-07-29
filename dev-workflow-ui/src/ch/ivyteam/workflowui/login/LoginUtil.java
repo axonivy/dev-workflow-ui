@@ -18,9 +18,9 @@ import ch.ivyteam.workflowui.util.UrlUtil;
 
 public class LoginUtil {
 
-  public static void login(String username, String password, String originalUrl) {
+  public static void login(String username, String password, String origin) {
     try {
-      if (!checkLoginAndRedirect(username, password, originalUrl)) {
+      if (!checkLoginAndRedirect(username, password, origin)) {
         sendUnauthorizedStatusCode();
         FacesContext.getCurrentInstance().addMessage(null,
             new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login failed", "Login failed"));
@@ -38,22 +38,22 @@ public class LoginUtil {
     }
   }
 
-  public static void switchUser(String username, String originalUrl) {
+  public static void switchUser(String username, String origin) {
     if (!PermissionsUtil.isDemoOrDevMode()) {
       return;
     }
     var user = ISecurityContext.current().users().find(username);
     if (user != null && ((ch.ivyteam.ivy.security.internal.user.User) user).isTestUser()) {
-      if (checkLoginAndRedirect(username, username, originalUrl)) {
+      if (checkLoginAndRedirect(username, username, origin)) {
         return;
       }
     }
     redirectToLoginForm();
   }
 
-  private static boolean checkLoginAndRedirect(String username, String password, String originalUrl) {
+  private static boolean checkLoginAndRedirect(String username, String password, String origin) {
     if (ISession.current().loginSessionUser(username, password)) {
-      RedirectUtil.redirect(StringUtils.isNotBlank(originalUrl) ? originalUrl : "home.xhtml");
+      RedirectUtil.redirect(StringUtils.isNotBlank(origin) ? origin : "home");
       return true;
     }
     return false;
@@ -65,12 +65,15 @@ public class LoginUtil {
   }
 
   public static void redirectToLoginForm() {
-    String origin = URLEncoder.encode(UrlUtil.evalOriginalPage(), StandardCharsets.UTF_8);
-    RedirectUtil.redirect("login.xhtml?originalUrl=" + origin);
+    redirectToLogin("login.xhtml");
   }
 
   public static void redirectToLoginTable() {
-    String origin = URLEncoder.encode(UrlUtil.evalOriginalPage(), StandardCharsets.UTF_8);
-    RedirectUtil.redirect("switch-user.xhtml?originalUrl=" + origin);
+    redirectToLogin("switch-user.xhtml");
+  }
+
+  private static void redirectToLogin(String page) {
+    String origin = URLEncoder.encode(UrlUtil.evalOriginPage(), StandardCharsets.UTF_8);
+    RedirectUtil.redirect(page + "?origin=" + origin);
   }
 }
