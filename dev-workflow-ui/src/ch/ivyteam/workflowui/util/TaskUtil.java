@@ -54,7 +54,7 @@ public class TaskUtil {
   }
 
   public static void redirectToTaskDetails(TaskModel model) {
-    RedirectUtil.redirect(model.getDetailUrl());
+    RedirectUtil.redirect("task?id=" + model.getUuid());
   }
 
   public static void executeTask(TaskModel model) {
@@ -97,7 +97,7 @@ public class TaskUtil {
       return true;
     }
     var isResponsible = task.responsibles().all().stream()
-      .anyMatch(r -> r.get().isMember(user.getUserToken()));
+        .anyMatch(r -> r.get().isMember(user.getUserToken()));
     if (task.getWorkerUser() == null) {
       return isResponsible;
     }

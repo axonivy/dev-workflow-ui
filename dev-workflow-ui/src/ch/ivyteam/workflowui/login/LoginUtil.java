@@ -1,8 +1,5 @@
 package ch.ivyteam.workflowui.login;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +11,7 @@ import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.licence.RuntimeLicenceException;
 import ch.ivyteam.workflowui.util.PermissionsUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
-import ch.ivyteam.workflowui.util.UrlUtil;
+import ch.ivyteam.workflowui.util.UserUtil;
 
 public class LoginUtil {
 
@@ -61,19 +58,18 @@ public class LoginUtil {
 
   public static void logout() {
     ISession.current().logoutSessionUser();
-    RedirectUtil.redirect();
+    UserUtil.redirectIfNotLoggedIn();
   }
 
   public static void redirectToLoginForm() {
-    redirectToLogin("login.xhtml");
+    redirectToLogin("login");
   }
 
   public static void redirectToLoginTable() {
-    redirectToLogin("switch-user.xhtml");
+    redirectToLogin("switch-user");
   }
 
-  private static void redirectToLogin(String page) {
-    String origin = URLEncoder.encode(UrlUtil.evalOriginPage(), StandardCharsets.UTF_8);
-    RedirectUtil.redirect(page + "?origin=" + origin);
+  private static void redirectToLogin(String loginPage) {
+    RedirectUtil.redirect(loginPage);
   }
 }

@@ -49,14 +49,26 @@ public class RedirectUtil {
         if (context == null) {
           return;
         }
-        var url = ORIGIN_TO_PAGE.get(page);
-        if (url != null) {
-          page = url;
+        var pageName = page.contains("?") ? page.substring(0, page.indexOf("?")) : page;
+        var queryParams = page.contains("?") ? page.substring(page.indexOf("?")) : "";
+
+        var url = ORIGIN_TO_PAGE.get(pageName);
+        if (url == null) {
+          throw new IllegalArgumentException("Page '" + pageName + "' is not whitelisted for redirect");
         }
-        context.getExternalContext().redirect(page);
+        context.getExternalContext().redirect(url + queryParams);
       } catch (IOException e) {
         throw new RuntimeException("Could not send redirect", e);
       }
+    }
+  }
+
+  public static final class LoginHandler implements RedirectHandler {
+
+    @Override
+    public void redirect(String page) {
+      // TODO: Implement login-specific redirect logic
+      throw new UnsupportedOperationException("LoginHandler redirect implementation pending");
     }
   }
 }
