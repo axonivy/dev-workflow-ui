@@ -16,7 +16,8 @@
 </h:head>
 
 <f:metadata>
-  <f:viewParam name="originalUrl" value="#{loginBean.originalUrl}"/>
+  <f:viewParam name="origin" value="#{loginBean.origin}"/>
+  <f:viewParam name="originalUrl" value="#{loginBean.origin}"/>
 </f:metadata>
 <h:body styleClass="login-body">
   <h:form id="loginForm">

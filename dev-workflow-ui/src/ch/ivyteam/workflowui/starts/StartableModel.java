@@ -107,7 +107,7 @@ public class StartableModel {
   public void execute() {
     LastSessionStarts.current().add(this);
     if (embedInFrame) {
-      RedirectUtil.redirect(UrlUtil.generateStartFrameUrl(this.getLink(), "home.xhtml"));
+      RedirectUtil.redirect(UrlUtil.generateStartFrameUrl(this.getLink(), "home"));
     } else {
       RedirectUtil.redirect(link.toString());
     }

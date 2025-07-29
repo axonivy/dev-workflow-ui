@@ -45,6 +45,10 @@ public class WorkflowUiUtil {
     assertCurrentUrlContains(page);
   }
 
+  public static void openViewNoAssertion(String page) {
+    open(viewUrl(page, Map.of()));
+  }
+
   public static void openViewNoAssertion(String page, Map<String, String> queryParams) {
     open(viewUrl(page, queryParams));
   }
@@ -105,6 +109,10 @@ public class WorkflowUiUtil {
 
   public static void tryLogin(String username, String password) {
     open(viewUrl("login.xhtml"));
+    fillLoginData(username, password);
+  }
+
+  public static void fillLoginData(String username, String password) {
     $(By.id("loginForm:userName")).shouldBe(interactable).clear();
     $(By.id("loginForm:userName")).sendKeys(username);
     $(By.id("loginForm:password")).clear();

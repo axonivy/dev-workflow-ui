@@ -256,7 +256,7 @@ class WebTestTasksIT {
   void iframeBreakout() {
     Map<String, String> params = new HashMap<>();
     var restUrl = EngineUrl.createRestUrl("iframe/noiframe").replace(EngineUrl.base(), "");
-    params.put("originalUrl", "home.xhtml");
+    params.put("origin", "home");
     params.put("taskUrl", restUrl);
     openViewNoAssertion("frame.xhtml", params);
     assertCurrentUrlContains(restUrl);
