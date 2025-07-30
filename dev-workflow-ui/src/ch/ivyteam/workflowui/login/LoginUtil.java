@@ -55,17 +55,18 @@ public class LoginUtil {
   }
 
   private static boolean checkLoginAndRedirect(String username, String password, String origin, String originalUrl) {
-    if (ISession.current().loginSessionUser(username, password)) {
-      if (origin != null && !origin.isBlank()) {
-        RedirectUtil.redirect(origin);
-      } else if (originalUrl != null && !originalUrl.isBlank()) {
-        new RedirectUtil.RelativePathHandler().redirect(originalUrl);
-      } else {
-        RedirectUtil.redirect();
-      }
-      return true;
+    if (!ISession.current().loginSessionUser(username, password)) {
+      return false;
     }
-    return false;
+
+    if (origin != null && !origin.isBlank()) {
+      RedirectUtil.redirect(origin);
+    } else if (originalUrl != null && !originalUrl.isBlank()) {
+      new RedirectUtil.RelativePathHandler().redirect(originalUrl);
+    } else {
+      RedirectUtil.redirect();
+    }
+    return true;
   }
 
   public static void logout() {
