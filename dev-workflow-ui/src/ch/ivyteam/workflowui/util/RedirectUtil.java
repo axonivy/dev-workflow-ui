@@ -11,20 +11,21 @@ public class RedirectUtil {
   private static RedirectHandler handler = new DefaultHandler();
 
   private static final Map<String, String> ORIGIN_TO_PAGE = Map.ofEntries(
-      Map.entry("home", "home.xhtml"),
-      Map.entry("starts", "starts.xhtml"),
-      Map.entry("frame", "frame.xhtml"),
-      Map.entry("tasks", "tasks.xhtml"),
-      Map.entry("task", "task.xhtml"),
-      Map.entry("cases", "cases.xhtml"),
-      Map.entry("case", "case.xhtml"),
-      Map.entry("login", "login.xhtml"),
-      Map.entry("switch-user", "switch-user.xhtml"),
-      Map.entry("end", "end.xhtml"),
-      Map.entry("signals", "signals.xhtml"),
-      Map.entry("intermediate-events", "intermediate-events.xhtml"),
       Map.entry("api-browser", "api-browser.xhtml"),
+      Map.entry("case", "case.xhtml"),
+      Map.entry("cases", "cases.xhtml"),
+      Map.entry("end", "end.xhtml"),
+      Map.entry("frame", "frame.xhtml"),
+      Map.entry("home", "home.xhtml"),
+      Map.entry("intermediate-event", "intermediate-event.xhtml"),
+      Map.entry("intermediate-events", "intermediate-events.xhtml"),
+      Map.entry("login", "login.xhtml"),
+      Map.entry("signals", "signals.xhtml"),
+      Map.entry("starts", "starts.xhtml"),
       Map.entry("statistics", "statistics.xhtml"),
+      Map.entry("switch-user", "switch-user.xhtml"),
+      Map.entry("task", "task.xhtml"),
+      Map.entry("tasks", "tasks.xhtml"),
       Map.entry("webservices", "webservices.xhtml"));
 
   public static void redirect() {

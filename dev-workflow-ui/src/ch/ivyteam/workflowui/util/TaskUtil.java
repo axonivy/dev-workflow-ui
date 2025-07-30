@@ -61,8 +61,10 @@ public class TaskUtil {
     var url = task.getStartLink().get();
     if (shouldOpenInFrame(task)) {
       url = "frame" + UrlUtil.generateStartFrameUrlParams(task.getStartLink());
+      RedirectUtil.redirect(url);
+    } else {
+      new RedirectUtil.RelativePathHandler().redirect(url);
     }
-    RedirectUtil.redirect(url);
   }
 
   public static String createTaskUrl(TaskModel task) {

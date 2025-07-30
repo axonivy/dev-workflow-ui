@@ -61,7 +61,7 @@ public class LoginUtil {
       } else if (originalUrl != null && !originalUrl.isBlank()) {
         new RedirectUtil.RelativePathHandler().redirect(originalUrl);
       } else {
-        RedirectUtil.redirect("home");
+        RedirectUtil.redirect();
       }
       return true;
     }

@@ -88,7 +88,7 @@ public class ProcessesBean {
   }
 
   public void redirect() {
-    RedirectUtil.redirect("home.xhtml");
+    RedirectUtil.redirect();
   }
 
   public void setViewerStart(String link) {
