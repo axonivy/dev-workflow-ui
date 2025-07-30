@@ -7,8 +7,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
-
 import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.licence.RuntimeLicenceException;
@@ -20,8 +18,12 @@ import ch.ivyteam.workflowui.util.UserUtil;
 public class LoginUtil {
 
   public static void login(String username, String password, String origin) {
+    login(username, password, origin, null);
+  }
+
+  public static void login(String username, String password, String origin, String originalUrl) {
     try {
-      if (!checkLoginAndRedirect(username, password, origin)) {
+      if (!checkLoginAndRedirect(username, password, origin, originalUrl)) {
         sendUnauthorizedStatusCode();
         FacesContext.getCurrentInstance().addMessage(null,
             new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login failed", "Login failed"));
@@ -45,16 +47,24 @@ public class LoginUtil {
     }
     var user = ISecurityContext.current().users().find(username);
     if (user != null && ((ch.ivyteam.ivy.security.internal.user.User) user).isTestUser()) {
-      if (checkLoginAndRedirect(username, username, origin)) {
+      if (checkLoginAndRedirect(username, username, origin, null)) {
         return;
       }
     }
     redirectToLoginForm();
   }
 
-  private static boolean checkLoginAndRedirect(String username, String password, String origin) {
+  private static boolean checkLoginAndRedirect(String username, String password, String origin, String originalUrl) {
     if (ISession.current().loginSessionUser(username, password)) {
-      RedirectUtil.redirect(StringUtils.isNotBlank(origin) ? origin : "home");
+      if (origin != null && !origin.isBlank()) {
+        RedirectUtil.redirect(origin);
+      } else if (originalUrl != null && !originalUrl.isBlank()) {
+        RedirectUtil.setHandler(new RedirectUtil.LoginHandler());
+        RedirectUtil.redirect(originalUrl);
+        RedirectUtil.resetToDefaultHandler();
+      } else {
+        RedirectUtil.redirect("home");
+      }
       return true;
     }
     return false;

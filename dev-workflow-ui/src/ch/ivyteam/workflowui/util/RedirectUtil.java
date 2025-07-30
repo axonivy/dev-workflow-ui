@@ -42,6 +42,10 @@ public class RedirectUtil {
     RedirectUtil.handler = handler;
   }
 
+  public static void resetToDefaultHandler() {
+    RedirectUtil.handler = new DefaultHandler();
+  }
+
   private static final class DefaultHandler implements RedirectHandler {
 
     @Override
