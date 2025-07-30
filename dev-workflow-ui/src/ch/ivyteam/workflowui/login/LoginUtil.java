@@ -59,9 +59,7 @@ public class LoginUtil {
       if (origin != null && !origin.isBlank()) {
         RedirectUtil.redirect(origin);
       } else if (originalUrl != null && !originalUrl.isBlank()) {
-        RedirectUtil.setHandler(new RedirectUtil.LoginHandler());
-        RedirectUtil.redirect(originalUrl);
-        RedirectUtil.resetToDefaultHandler();
+        new RedirectUtil.RelativePathHandler().redirect(originalUrl);
       } else {
         RedirectUtil.redirect("home");
       }

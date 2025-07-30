@@ -23,7 +23,7 @@ public class SidestepUtil {
     MenuModel menuModel = new DefaultMenuModel();
     if (sidesteps != null) {
       for (SidestepModel sidestep : sidesteps) {
-        var link = UrlUtil.generateStartFrameUrl(sidestep.getStartLink(), redirectPage);
+        var link = "frame.xhtml" + UrlUtil.generateStartFrameUrlParams(sidestep.getStartLink(), redirectPage);
         DefaultMenuItem item = DefaultMenuItem.builder().value(sidestep.getName()).url(link).build();
         menuModel.getElements().add(item);
       }

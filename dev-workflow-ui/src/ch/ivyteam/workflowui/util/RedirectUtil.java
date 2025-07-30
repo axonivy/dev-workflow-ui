@@ -13,6 +13,7 @@ public class RedirectUtil {
   private static final Map<String, String> ORIGIN_TO_PAGE = Map.ofEntries(
       Map.entry("home", "home.xhtml"),
       Map.entry("starts", "starts.xhtml"),
+      Map.entry("frame", "frame.xhtml"),
       Map.entry("tasks", "tasks.xhtml"),
       Map.entry("task", "task.xhtml"),
       Map.entry("cases", "cases.xhtml"),
@@ -69,7 +70,7 @@ public class RedirectUtil {
     }
   }
 
-  public static final class LoginHandler implements RedirectHandler {
+  public static final class RelativePathHandler implements RedirectHandler {
 
     @Override
     public void redirect(String url) {
@@ -78,7 +79,7 @@ public class RedirectUtil {
       } catch (RuntimeException e) {
         throw new RuntimeException("Redirecting to external websites is not allowed. Tried to redirect to: " + url, e);
       }
-      
+
       try {
         FacesContext context = FacesContext.getCurrentInstance();
         if (context == null) {

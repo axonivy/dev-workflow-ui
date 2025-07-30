@@ -51,18 +51,14 @@ public class UrlUtil {
     return getHttpServletRequest().getParameter(parameter);
   }
 
-  public static String generateStartFrameUrl(WebLink startLink) {
-    return generateStartFrameUrl(startLink, evalOriginPage());
+  public static String generateStartFrameUrlParams(WebLink startLink) {
+    return generateStartFrameUrlParams(startLink, evalOriginPage());
   }
 
-  public static String generateStartFrameUrl(WebLink startLink, String redirectPage) {
-    return generateFrameUrl(startLink, redirectPage);
-  }
-
-  private static String generateFrameUrl(WebLink startLink, String redirectPage) {
+  public static String generateStartFrameUrlParams(WebLink startLink, String redirectPage) {
     var originalPageEncoded = URLEncoder.encode(redirectPage, StandardCharsets.UTF_8);
     var startLinkEncoded = URLEncoder.encode(startLink.get(), StandardCharsets.UTF_8);
-    return "frame.xhtml?origin=" + originalPageEncoded + "&taskUrl=" + startLinkEncoded;
+    return "?origin=" + originalPageEncoded + "&taskUrl=" + startLinkEncoded;
   }
 
 }
