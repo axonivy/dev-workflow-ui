@@ -54,15 +54,15 @@ public class TaskUtil {
   }
 
   public static void redirectToTaskDetails(TaskModel model) {
-    RedirectUtil.redirect("task?id=" + model.getUuid());
+    RedirectUtil.redirect(model.getDetailUrl());
   }
 
   public static void executeTask(TaskModel task) {
-    var url = task.getStartLink().get();
     if (shouldOpenInFrame(task)) {
-      url = "frame" + UrlUtil.generateStartFrameUrlParams(task.getStartLink());
+      var url = "frame" + UrlUtil.generateStartFrameUrlParams(task.getStartLink());
       RedirectUtil.redirect(url);
     } else {
+      var url = task.getStartLink().get();
       new RedirectUtil.RelativePathHandler().redirect(url);
     }
   }
