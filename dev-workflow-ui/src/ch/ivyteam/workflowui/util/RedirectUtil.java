@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.faces.context.FacesContext;
 
+import ch.ivyteam.ivy.jsf.bean.wf.RedirectBean;
+
 public class RedirectUtil {
   private static RedirectHandler handler = new DefaultHandler();
 
@@ -66,9 +68,22 @@ public class RedirectUtil {
   public static final class LoginHandler implements RedirectHandler {
 
     @Override
-    public void redirect(String page) {
-      // TODO: Implement login-specific redirect logic
-      throw new UnsupportedOperationException("LoginHandler redirect implementation pending");
+    public void redirect(String url) {
+      try {
+        RedirectBean.checkUrl(url);
+      } catch (RuntimeException e) {
+        throw new RuntimeException("Redirecting to external websites is not allowed. Tried to redirect to: " + url, e);
+      }
+      
+      try {
+        FacesContext context = FacesContext.getCurrentInstance();
+        if (context == null) {
+          return;
+        }
+        context.getExternalContext().redirect(url);
+      } catch (IOException e) {
+        throw new RuntimeException("Could not send redirect", e);
+      }
     }
   }
 }
