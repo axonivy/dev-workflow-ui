@@ -48,8 +48,8 @@
               onclick="PF('filterPanel').hide();" type="button" />
             <p:commandButton id="applyFilter" value="#{ivy.cm.co('/starts/apply')}" styleClass="ml-1 modal-input-button"
               icon="si si-check-1" actionListener="#{processesBean.applyProjectFilter}" process="@this :startsForm:filterCheckboxes"
-              update=":startsForm:projectStarts :startsForm:projectStarts:projectFilterButtons" 
-              oncomplete="PF('filterPanel').hide() PF('projectStartsTable').filter()" />
+              update=":startsForm:projectStarts :startsForm:projectStarts:projectFilterButtons"
+              oncomplete="PF('filterPanel').hide(); PF('projectStartsTable').filter()" />
           </h:panelGroup>
         </p:overlayPanel>
 
@@ -66,7 +66,8 @@
                   <h:panelGroup id="projectFilterButtons" styleClass="flex align-items-center">
                     <h:panelGroup rendered="#{processesBean.startsDataModel.projectFilterModel.projectFilterActive}">
                       <p:commandLink id="resetFilter" actionListener="#{processesBean.resetAllFilters}"
-                        process="@this" update=":startsForm:projectStarts :startsForm:filterPanel"
+                        process="@this" update=":startsForm:projectStarts :startsForm:filterPanel :startsForm:projectStarts:globalFilter"
+                        oncomplete="PF('projectStartsTable').filter()"
                         styleClass="ui-button-text ui-button-danger flex align-items-center mr-2">
                         <i class="si si-button-refresh-arrow mr-1"/>#{ivy.cm.co('/common/reset')}
                       </p:commandLink>
@@ -82,15 +83,13 @@
                       </p:badge>
                     </h:panelGroup>
                   </h:panelGroup>
-                  <h:panelGroup id="globalFilterGroup" layout="block" styleClass="ml-2">
-                    <div class="ui-input-icon-left">
-                      <i class="pi pi-search" />
-                      <p:inputText id="globalFilter" placeholder="#{ivy.cm.co('/starts/search')}"
-                        value="#{processesBean.startsDataModel.globalFilter}" onkeyup="PF('projectStartsTable').filter()">
-                        <!--  <p:ajax event="keyup" delay="300" listener="#{processesBean.updateUrlWithFilters}"/>  -->
-                      </p:inputText>
-                    </div>
-                  </h:panelGroup>
+                  <div class="ui-input-icon-left ml-2">
+                    <i class="pi pi-search" />
+                    <p:inputText id="globalFilter" placeholder="#{ivy.cm.co('/starts/search')}"
+                      value="#{processesBean.startsDataModel.globalFilter}" onkeyup="PF('projectStartsTable').filter()">
+                      <p:ajax event="keyup" delay="300" listener="#{processesBean.updateUrlWithFilters}" process="@this"/>
+                    </p:inputText>
+                  </div>
                 </div>
               </div>
             </f:facet>

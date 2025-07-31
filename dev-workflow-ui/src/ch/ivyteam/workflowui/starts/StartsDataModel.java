@@ -25,7 +25,9 @@ public class StartsDataModel {
   }
 
   public List<StartableModel> getStartables() {
-    return allStartables;
+    return allStartables.stream()
+        .filter(start -> projectFilterModel.getAppliedProjects().contains(start.getProjectName()))
+        .toList();
   }
 
   public boolean globalFilterFunction(Object value, Object filter, Locale locale) {
