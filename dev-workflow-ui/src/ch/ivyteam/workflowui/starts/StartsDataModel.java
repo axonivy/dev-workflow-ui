@@ -1,14 +1,16 @@
 package ch.ivyteam.workflowui.starts;
 
 import java.util.List;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 import ch.ivyteam.workflowui.util.ProcessModelsUtil;
 
 public class StartsDataModel {
 
   private final List<StartableModel> allStartables;
+  private List<StartableModel> filteredStartables;
   private String globalFilter = "";
   private final boolean isOnlySingleApplication;
   private final boolean isOnlySingleProject;
@@ -23,21 +25,23 @@ public class StartsDataModel {
   }
 
   public List<StartableModel> getStartables() {
-    return allStartables.stream()
-        .filter(start -> projectFilterModel.getAppliedProjects().contains(start.getProjectName()))
-        .filter(this::matchesGlobalFilter)
-        .toList();
+    return allStartables;
   }
 
-  private boolean matchesGlobalFilter(StartableModel start) {
-    if (StringUtils.isBlank(globalFilter)) {
+  public boolean globalFilterFunction(Object value, Object filter, Locale locale) {
+    var filterText = (filter == null) ? "" : filter.toString().trim().toLowerCase();
+    if (filterText.isBlank()) {
       return true;
     }
-    return Strings.CI.contains(start.getDisplayName(), globalFilter) ||
-        Strings.CI.contains(start.getDescription(), globalFilter) ||
-        Strings.CI.contains(start.getApplicationName(), globalFilter) ||
-        Strings.CI.contains(start.getProjectName(), globalFilter) ||
-        (start.getCategory() != null && Strings.CI.contains(start.getCategory().getName(), globalFilter));
+    var start = (StartableModel) value;
+    return Stream.of(start.getDisplayName(),
+        start.getDescription(),
+        start.getApplicationName(),
+        start.getProjectName(),
+        (start.getCategory() != null ? start.getCategory().getName() : null))
+        .filter(Objects::nonNull)
+        .map(String::toLowerCase)
+        .anyMatch(text -> text.contains(filterText));
   }
 
   public String getGlobalFilter() {
@@ -67,5 +71,13 @@ public class StartsDataModel {
   public void resetAllProjectFilters() {
     projectFilterModel.resetAll();
     resetGlobalFilter();
+  }
+
+  public List<StartableModel> getFilteredStartables() {
+    return filteredStartables;
+  }
+
+  public void setFilteredStartables(List<StartableModel> filteredStartables) {
+    this.filteredStartables = filteredStartables;
   }
 }
