@@ -75,6 +75,7 @@ public class ProcessesBean {
     }
 
     String url = uriBuilder.build().toString();
+    PrimeFaces.current().executeScript("PF('projectStartsTable').filter();");
     PrimeFaces.current().executeScript("history.pushState(null, null, '" + url + "');");
   }
 
