@@ -1,7 +1,5 @@
 package ch.ivyteam.workflowui.starts;
 
-import org.apache.commons.lang3.StringUtils;
-
 import ch.ivyteam.ivy.model.value.WebLink;
 import ch.ivyteam.ivy.workflow.category.Category;
 import ch.ivyteam.ivy.workflow.start.IStartCustomFields;
@@ -52,7 +50,7 @@ public class StartableModel {
 
   private static String getIcon(IStartCustomFields customFields) {
     var customIcon = customFields.value("cssIcon");
-    if (StringUtils.isBlank(customIcon)) {
+    if (customIcon == null || customIcon.isBlank()) {
       return "si si-controls-play";
     }
     return customIcon;
@@ -60,7 +58,7 @@ public class StartableModel {
 
   public static boolean evaluateEmbedInFrame(String value) {
     // default is true
-    return !StringUtils.contains(value, "false");
+    return (value == null || !value.contains("false"));
   }
 
   public String getDescription() {

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 public class ProjectFilterModel {
 
   private final List<String> allProjects;
@@ -26,11 +24,12 @@ public class ProjectFilterModel {
 
   public List<String> getProjects() {
     List<String> projects;
-    if (StringUtils.isBlank(projectFilter)) {
+    if (projectFilter == null || projectFilter.isBlank()) {
       projects = allProjects;
     } else {
+      final String lowerCaseFilter = projectFilter.toLowerCase();
       projects = allProjects.stream()
-          .filter(p -> StringUtils.containsIgnoreCase(p, projectFilter))
+          .filter(p -> p.toLowerCase().contains(lowerCaseFilter))
           .toList();
     }
     this.lastDisplayedProjects = projects;
@@ -98,7 +97,7 @@ public class ProjectFilterModel {
   }
 
   public boolean isProjectFilterActive() {
-    return allProjects.size() != appliedProjects.size() || StringUtils.isNotBlank(projectFilter);
+    return allProjects.size() != appliedProjects.size() || (projectFilter != null && !projectFilter.isBlank());
   }
 
   public void resetAll() {
