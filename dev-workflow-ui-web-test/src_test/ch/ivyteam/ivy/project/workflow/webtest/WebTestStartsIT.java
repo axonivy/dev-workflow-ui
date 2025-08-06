@@ -16,7 +16,6 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 import java.util.Map;
-import java.util.Objects;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -58,7 +57,7 @@ class WebTestStartsIT {
     WorkflowUiUtil.loginDeveloper();
 
     openView("starts.xhtml");
-    var resetButton = $(By.id("startsForm:projectStarts:resetFilter"));
+    var resetButton = $(By.id("startsForm:resetFilter"));
     resetButton.shouldNotBe(visible);
 
     var table = $(By.id("startsForm:projectStarts"));
@@ -69,8 +68,8 @@ class WebTestStartsIT {
   @Test
   void executeStart() {
     openView("starts.xhtml");
+    $(By.id("startsForm:globalFilter")).setValue("startTestDialog1");
     var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
-    starts.searchGlobal("startTestDialog1");
     starts.contains("workflow-ui-test-data");
     starts.row(0).shouldHave(text("startTestDialog1")).find(".start-name").click();
     $(By.id("iFrame")).shouldBe(visible);
@@ -121,8 +120,8 @@ class WebTestStartsIT {
   @Test
   void startNotEmbedInFrame() {
     openView("starts.xhtml");
+    $(By.id("startsForm:globalFilter")).setValue("embed in frame");
     var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
-    starts.searchGlobal("embed in frame");
     starts.contains("workflow-ui-test-data");
     var start = starts.row(0).shouldHave(text("Do not embed in Frame"));
     $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
@@ -150,16 +149,16 @@ class WebTestStartsIT {
   @Test
   void webservicesVisible() {
     openView("webservices.xhtml");
+    $(By.id("webServicesForm:globalFilter")).setValue("testservice");
     var table = PrimeUi.table(By.id("webServicesForm:webServices"));
-    table.searchGlobal("testservice");
     table.contains("TestService");
   }
 
   @Test
   void redirectWhenFinished() {
     openView("starts.xhtml");
+    $(By.id("startsForm:globalFilter")).setValue("TestData/TestData.ivp");
     var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
-    starts.searchGlobal("TestData/TestData.ivp");
     starts.row(0).shouldHave(text("TestData/TestData.ivp")).find(".start-name").click();
 
     openView("tasks.xhtml");
@@ -181,8 +180,8 @@ class WebTestStartsIT {
   @Test
   void executeOnFullscreenPage() {
     openView("starts.xhtml");
+    $(By.id("startsForm:globalFilter")).setValue("startTestDialog1");
     var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
-    starts.searchGlobal("startTestDialog1");
     starts.row(0).shouldHave(text("startTestDialog1"));
     $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
     $(By.id("startsForm:projectStarts:0:openStartFullscreenBtn")).shouldBe(visible).click();
@@ -194,8 +193,8 @@ class WebTestStartsIT {
   @Test
   void frameHeaderBarSidestep() {
     openView("starts.xhtml");
+    $(By.id("startsForm:globalFilter")).setValue("test _ case _ map");
     var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
-    starts.searchGlobal("test _ case _ map");
     starts.row(0).shouldHave(text("test _ case _ map")).find(".start-name").click();
     $(By.id("iFrameForm:frameTaskName")).shouldHave(text("Test Developer Workflow-UI Dialog 1"));
     $(By.id("iFrameForm:sidestepsBtn")).shouldBe(visible).click();
@@ -210,10 +209,9 @@ class WebTestStartsIT {
   @Test
   void startableIcons() {
     openView("starts.xhtml");
-    var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
-    starts.searchGlobal("makeAdminUser.ivp");
+    $(By.id("startsForm:globalFilter")).setValue("makeAdminUser.ivp");
     $(By.id("startsForm:projectStarts:0:processStartIcon")).shouldBe(visible).shouldHave(cssClass("si-controls-play"));
-    starts.searchGlobal("HomePageTestData.ivp");
+    $(By.id("startsForm:globalFilter")).setValue("HomePageTestData.ivp");
     $(By.id("startsForm:projectStarts:0:processStartIcon")).shouldBe(visible).shouldHave(cssClass("si-house-1"));
   }
 
@@ -229,7 +227,7 @@ class WebTestStartsIT {
     assertCurrentUrlContains("q=makeAdmin");
 
     clearFilter();
-    $(By.id("startsForm:projectStarts:globalFilter")).shouldBe(empty);
+    $(By.id("startsForm:globalFilter")).shouldBe(empty);
   }
 
   @Test
@@ -238,7 +236,7 @@ class WebTestStartsIT {
     openView("starts.xhtml");
     var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
 
-    $(By.id("startsForm:projectStarts:filterBtn")).shouldBe(visible).click();
+    $(By.id("startsForm:filterBtn")).shouldBe(visible).click();
     $(By.id("startsForm:filterPanel")).shouldBe(visible);
 
     $(By.id("startsForm:clearAll")).click();
@@ -253,10 +251,10 @@ class WebTestStartsIT {
 
     starts.contains("dev-workflow-ui-test-data");
     starts.containsNot("Main/DefaultApplicationHomePage.ivp");
-    $(By.id("startsForm:projectStarts:resetFilter")).shouldBe(visible);
+    $(By.id("startsForm:resetFilter")).shouldBe(visible);
 
-    $(By.id("startsForm:projectStarts:resetFilter")).click();
-    $(By.id("startsForm:projectStarts:resetFilter")).shouldNotBe(visible);
+    $(By.id("startsForm:resetFilter")).click();
+    $(By.id("startsForm:resetFilter")).shouldNotBe(visible);
     starts.contains("Main/DefaultApplicationHomePage.ivp");
   }
 
@@ -266,11 +264,11 @@ class WebTestStartsIT {
 
     openView("starts.xhtml", Map.of("q", "makeAdmin", "projects", "dev-workflow-ui-test-data"));
 
-    $(By.id("startsForm:projectStarts:globalFilter")).shouldHave(value("makeAdmin"));
+    $(By.id("startsForm:globalFilter")).shouldHave(value("makeAdmin"));
     var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
     starts.contains("dev-workflow-ui-test-data");
     starts.containsNot("Main/DefaultApplicationHomePage.ivp");
-    $(By.id("startsForm:projectStarts:resetFilter")).shouldBe(visible);
+    $(By.id("startsForm:resetFilter")).shouldBe(visible);
 
     assertCurrentUrlContains("q=makeAdmin");
     assertCurrentUrlContains("projects=dev-workflow-ui-test-data");
@@ -278,9 +276,9 @@ class WebTestStartsIT {
     openView("home.xhtml");
     openView("starts.xhtml");
 
-    $(By.id("startsForm:projectStarts:globalFilter")).shouldBe(empty);
+    $(By.id("startsForm:globalFilter")).shouldBe(empty);
 
-    $(By.id("startsForm:projectStarts:resetFilter")).shouldBe(visible);
+    $(By.id("startsForm:resetFilter")).shouldBe(visible);
     starts = PrimeUi.table(By.id("startsForm:projectStarts"));
     starts.contains("dev-workflow-ui-test-data");
     starts.containsNot("Main/DefaultApplicationHomePage.ivp");
@@ -290,27 +288,23 @@ class WebTestStartsIT {
   void wrongQueryParametersAreNotApplied() {
     openView("starts.xhtml", Map.of("projects", "nonexistent-project"));
     $(By.id("startsForm:projectStarts")).shouldBe(visible);
-    $(By.id("startsForm:projectStarts:resetFilter")).shouldNotBe(visible);
+    $(By.id("startsForm:resetFilter")).shouldNotBe(visible);
 
     openView("starts.xhtml", Map.of("q", "", "projects", ""));
-    $(By.id("startsForm:projectStarts:globalFilter")).shouldBe(empty);
+    $(By.id("startsForm:globalFilter")).shouldBe(empty);
     $(By.id("startsForm:projectStarts")).shouldBe(visible);
-    $(By.id("startsForm:projectStarts:resetFilter")).shouldNotBe(visible);
+    $(By.id("startsForm:resetFilter")).shouldNotBe(visible);
   }
 
   static void clearFilter() {
     filterStarts("");
-    var globalFilterInput = $(By.id("startsForm:projectStarts:globalFilter"));
+    var globalFilterInput = $(By.id("startsForm:globalFilter"));
     globalFilterInput.shouldBe(empty);
   }
 
   static void filterStarts(String text) {
-    var globalFilterInput = $(By.id("startsForm:projectStarts:globalFilter"));
-    globalFilterInput.clear();
-    if (!Objects.equals(text, "")) {
-      globalFilterInput.sendKeys(text);
-      globalFilterInput.shouldHave(value(text));
-      assertCurrentUrlContains("q=" + text);
-    }
+    var globalFilterInput = $(By.id("startsForm:globalFilter"));
+    globalFilterInput.setValue(text);
+    assertCurrentUrlContains("q=" + text);
   }
 }

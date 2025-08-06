@@ -27,8 +27,8 @@ class WebTestHomepageIT {
 
     // start process to create test data
     openView("starts.xhtml");
+    $(By.id("startsForm:globalFilter")).setValue("test _ case _ map");
     var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
-    starts.searchGlobal("test _ case _ map");
     starts.row(0).shouldHave(text("test _ case _ map")).find(".start-name").click();
     $(By.id("iFrameForm:frameTaskName")).shouldBe(text("Test Developer Workflow-UI Dialog 1"));
     $(By.id("iFrame")).shouldBe(visible);
@@ -52,8 +52,8 @@ class WebTestHomepageIT {
     loginDeveloper();
     openView("starts.xhtml");
 
+    $(By.id("startsForm:globalFilter")).setValue("test _ case _ map");
     var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
-    starts.searchGlobal("test _ case _ map");
     starts.row(0).shouldHave(text("test _ case _ map")).find(".start-name").click();
     $(By.id("iFrame")).shouldBe(visible);
     openView("home.xhtml");

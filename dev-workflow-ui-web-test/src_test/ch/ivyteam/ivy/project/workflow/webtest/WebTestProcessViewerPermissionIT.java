@@ -54,12 +54,12 @@ class WebTestProcessViewerPermissionIT {
   void starts() {
     openView("starts.xhtml");
     var table = new Table(By.id("startsForm:projectStarts"));
-    table.searchGlobal("/testdata.ivp");
+    $(By.id("startsForm:globalFilter")).setValue("/testdata.ivp");
     table.row(0).shouldHave(text("testdata.ivp"));
     $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
     $(By.id("startsForm:projectStarts:0:openProcessViewer")).shouldBe(visible);
 
-    table.searchGlobal("TestViewPermission");
+    $(By.id("startsForm:globalFilter")).setValue("TestViewPermission");
     table.row(0).shouldHave(text("TestViewPermission"));
     $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
     $(By.id("startsForm:projectStarts:0:openProcessViewer")).shouldNotBe(visible);

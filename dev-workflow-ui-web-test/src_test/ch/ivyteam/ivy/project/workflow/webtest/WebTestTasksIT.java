@@ -79,9 +79,9 @@ class WebTestTasksIT {
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.contains("System user");
 
-    $(By.id("tasksForm:tasks:showAllTasksSwitch_input")).shouldBe(checked);
-    $(By.id("tasksForm:tasks:showAllTasksSwitch")).click();
-    $(By.id("tasksForm:tasks:showAllTasksSwitch_input")).shouldNotBe(checked);
+    $(By.id("tasksForm:showAllTasksSwitch_input")).shouldBe(checked);
+    $(By.id("tasksForm:showAllTasksSwitch")).click();
+    $(By.id("tasksForm:showAllTasksSwitch_input")).shouldNotBe(checked);
     table.containsNot("System user");
   }
 
@@ -236,7 +236,7 @@ class WebTestTasksIT {
   @Test
   void customFieldEmbedInFrame() {
     openView("starts.xhtml");
-    $(By.id("startsForm:projectStarts:globalFilter")).setValue("embed in frame").pressEnter();
+    $(By.id("startsForm:globalFilter")).setValue("embed in frame").pressEnter();
     $(By.id("startsForm:projectStarts:0:startName")).shouldBe(visible, text("Do not embed in Frame")).click();
     $(By.id("form:proceed")).shouldBe(visible).click();
 
@@ -275,7 +275,7 @@ class WebTestTasksIT {
     table.row(0).should(exist);
     table.row(1).should(exist);
 
-    $(By.id("tasksForm:tasks:globalFilter")).setValue(taskId).pressEnter();
+    $(By.id("tasksForm:globalFilter")).setValue(taskId).pressEnter();
 
     $(By.id("tasksForm:tasks_data")).findAll(By.tagName("tr")).shouldBe(size(1));
 

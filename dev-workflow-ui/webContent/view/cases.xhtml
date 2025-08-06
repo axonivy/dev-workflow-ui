@@ -8,30 +8,31 @@
       <f:event type="preRenderView" listener="#{loginBean.redirectIfNotLoggedIn}" />
       <h:form id="casesForm">
         <div class="card">
+          <div class="flex justify-content-between mb-3">
+            <h4 class="m-0">#{ivy.cm.co('/sidebar/cases')}</h4>
+            <h:panelGroup id="showAllCasesSwitch_container" styleClass="ml-auto inline-flex align-items-center"
+              layout="block" rendered="#{permissionsBean.admin}">
+              <h:outputText value="#{ivy.cm.co('/common/showAll')}" styleClass="mr-2" />
+              <p:toggleSwitch id="showAllCasesSwitch" value="#{casesBean.casesDataModel.showAll}"
+                disabled="#{!permissionsBean.admin}">
+                <p:ajax update="cases" />
+              </p:toggleSwitch>
+            </h:panelGroup>
+            <p:tooltip for="showAllCasesSwitch_container" position="top"
+              value="If enabled shows all cases, even the ones the user is not involved in" />
+            <div class="ui-input-icon-left ml-3">
+              <i class="pi pi-search" />
+              <p:inputText id="globalFilter" value="#{casesBean.casesDataModel.filter}"
+                placeholder="#{ivy.cm.co('/common/search')}">
+                <p:ajax event="keyup" delay="300" update=":casesForm:cases"/>
+              </p:inputText>
+            </div>
+          </div>
+
           <p:dataTable id="cases" var="case" value="#{casesBean.casesDataModel}" widgetVar="casesTable"
             styleClass="ui-fluid" emptyMessage="#{ivy.cm.co('/common/noCasesFound')}" paginatorPosition="bottom" rows="10"
             lazy="true" paginator="true" paginatorAlwaysVisible="false" selectionMode="single" resizableColumns="true">
             <p:ajax event="rowSelect" listener="#{casesBean.redirectToCaseRow}" />
-            <f:facet name="header">
-              <div class="flex justify-content-between mb-3 pretty-search">
-                <h4 class="m-0">#{ivy.cm.co('/sidebar/cases')}</h4>
-                <h:panelGroup id="showAllCasesSwitch_container" styleClass="ml-auto inline-flex align-items-center"
-                  layout="block" rendered="#{permissionsBean.admin}">
-                  <h:outputText value="#{ivy.cm.co('/common/showAll')}" styleClass="mr-2" />
-                  <p:toggleSwitch id="showAllCasesSwitch" value="#{casesBean.casesDataModel.showAll}"
-                    disabled="#{!permissionsBean.admin}">
-                    <p:ajax update="cases" />
-                  </p:toggleSwitch>
-                </h:panelGroup>
-                <p:tooltip for="showAllCasesSwitch_container" position="top"
-                  value="If enabled shows all cases, even the ones the user is not involved in" />
-                <div class="ui-input-icon-left ml-3">
-                  <i class="pi pi-search" />
-                  <p:inputText id="globalFilter" value="#{casesBean.casesDataModel.filter}"
-                    onkeyup="PF('casesTable').filter()" placeholder="#{ivy.cm.co('/common/search')}" />
-                </div>
-              </div>
-            </f:facet>
 
             <p:column headerText="#{ivy.cm.co('/common/state')}" sortBy="#{case.businessState}" width="90px" resizable="false">
               <jc:stateBadge id="caseState" data="#{case}" />

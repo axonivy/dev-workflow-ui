@@ -23,8 +23,8 @@ class WebTestDefaultPagesIT {
   void beforeEach() {
     loginDeveloper();
     openView("starts.xhtml");
+    $(By.id("startsForm:globalFilter")).setValue("testDefaultPages");
     var table = PrimeUi.table(By.id("startsForm:projectStarts"));
-    table.searchGlobal("testDefaultPages");
     table.contains("dev-workflow-ui-test-data");
     table.row(0).shouldHave(text("TestData/testDefaultPages.ivp")).find(".start-name").click();
     $(By.id("iFrame")).shouldBe(visible);

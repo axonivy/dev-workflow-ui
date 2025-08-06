@@ -41,8 +41,8 @@ class WebTestProcessViewerIT {
 
   @Test
   void openViewer() {
+    $(By.id("startsForm:globalFilter")).setValue("testdata/testdata.ivp");
     var table = new Table(By.id("startsForm:projectStarts"));
-    table.searchGlobal("testdata/testdata.ivp");
     table.row(0).shouldHave(text("testdata.ivp"));
     $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
     $(By.id("startsForm:projectStarts:0:openProcessViewer")).shouldBe(visible).click();
@@ -58,8 +58,8 @@ class WebTestProcessViewerIT {
 
   @Test
   void caseMapUiViewer() {
+    $(By.id("startsForm:globalFilter")).setValue("test _ case _ map");
     var table = new Table(By.id("startsForm:projectStarts"));
-    table.searchGlobal("test _ case _ map");
     table.row(0).shouldHave(text("test _ case _ map"));
     $(By.id("startsForm:projectStarts:0:startActionsBtn")).shouldBe(visible).click();
     $(By.id("startsForm:projectStarts:0:startsActionsMenu")).shouldBe(visible);

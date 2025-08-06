@@ -33,7 +33,7 @@
               rendered="#{processesBean.showProjectFilter}"
               value="#{processesBean.startsDataModel.projectFilterModel.projectFilter}"
               placeholder="#{ivy.cm.co('/starts/searchProjects')}">
-              <p:ajax event="keyup" process="@this :startsForm:filterCheckboxes" update="filterCheckboxes :startsForm:projectStarts:projectFilterButtons" delay="300"/>
+              <p:ajax event="keyup" process="@this :startsForm:filterCheckboxes" update="filterCheckboxes :startsForm:projectFilterButtons" delay="300"/>
             </p:inputText>
           </h:panelGroup>
 
@@ -48,61 +48,60 @@
               onclick="PF('filterPanel').hide();" type="button" />
             <p:commandButton id="applyFilter" value="#{ivy.cm.co('/starts/apply')}" styleClass="ml-1 modal-input-button" icon="si si-check-1"
               actionListener="#{processesBean.applyProjectFilter}"
-              process="@this :startsForm:filterCheckboxes" update=":startsForm:projectStarts :startsForm:projectStarts:projectFilterButtons" oncomplete="PF('filterPanel').hide()" />
+              process="@this :startsForm:filterCheckboxes" update=":startsForm:projectStarts :startsForm:projectFilterButtons" oncomplete="PF('filterPanel').hide()" />
           </h:panelGroup>
         </p:overlayPanel>
 
         <div class="card">
+          <div class="flex justify-content-between mb-3">
+            <h4 class="m-0">#{ivy.cm.co('/starts/processes')}</h4>
+            <div class="flex align-items-center">
+              <h:panelGroup id="projectFilterButtons" styleClass="flex align-items-center">
+                <h:panelGroup rendered="#{processesBean.startsDataModel.projectFilterModel.projectFilterActive}">
+                  <p:commandLink id="resetFilter" actionListener="#{processesBean.resetAllFilters}" process="@this"
+                    update=":startsForm:projectStarts :startsForm:projectFilterButtons :startsForm:filterCheckboxes"
+                    styleClass="ui-button-text ui-button-danger flex align-items-center mr-2">
+                    <i class="si si-button-refresh-arrow mr-1"/>#{ivy.cm.co('/common/reset')}
+                  </p:commandLink>
+                  <span class="mr-2" style="opacity: 0.5">•</span>
+                </h:panelGroup>
+                <h:panelGroup>
+                  <p:badge value="#{processesBean.startsDataModel.projectFilterModel.appliedProjects.size()}"
+                    visible="#{processesBean.startsDataModel.projectFilterModel.projectFilterActive}">
+                    <p:commandButton id="filterBtn" value="#{ivy.cm.co('/starts/projects')}" binding="#{filterBtn}" icon="si si-filter-1"
+                      styleClass="ui-button-secondary #{!processesBean.startsDataModel.projectFilterModel.projectFilterActive ? 'ui-button-outlined' : ''}"
+                      rendered="#{!processesBean.startsDataModel.onlySingleProject}"
+                      actionListener="#{processesBean.initFilter}" oncomplete="PF('filterPanel').show('#{filterBtn.clientId}')" />
+                  </p:badge>
+                </h:panelGroup>
+              </h:panelGroup>
+              <h:panelGroup id="globalFilterGroup" layout="block" styleClass="ml-2">
+                <div class="ui-input-icon-left">
+                  <i class="pi pi-search" />
+                  <p:inputText id="globalFilter" placeholder="#{ivy.cm.co('/starts/search')}"
+                    value="#{processesBean.startsDataModel.globalFilter}">
+                    <p:ajax event="keyup" delay="300" listener="#{processesBean.updateUrlWithFilters}" process="@this" update=":startsForm:projectStarts"/>
+                  </p:inputText>
+                </div>
+              </h:panelGroup>
+            </div>
+          </div>
+
           <p:dataTable id="projectStarts" value="#{processesBean.startsDataModel.startables}" var="start"
             rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" rowKey="#{start.link}"
             selectionMode="single" widgetVar="projectStartsTable" styleClass="starts-table" resizableColumns="true"
-            rowsPerPageTemplate="10,15,20,30,50" style="overflow: unset" globalFilter="#{processesBean.startsDataModel.globalFilter}">
-            <f:facet name="header">
-              <div class="flex justify-content-between mb-3 pretty-search">
-                <h4 class="m-0">#{ivy.cm.co('/starts/processes')}</h4>
-                <div class="flex align-items-center">
-                  <h:panelGroup id="projectFilterButtons" styleClass="flex align-items-center">
-                    <h:panelGroup rendered="#{processesBean.startsDataModel.projectFilterModel.projectFilterActive}">
-                      <p:commandLink id="resetFilter" actionListener="#{processesBean.resetAllFilters}" process="@this"
-                        update=":startsForm:projectStarts :startsForm:projectStarts:projectFilterButtons :startsForm:filterCheckboxes"
-                        styleClass="ui-button-text ui-button-danger flex align-items-center mr-2">
-                        <i class="si si-button-refresh-arrow mr-1"/>#{ivy.cm.co('/common/reset')}
-                      </p:commandLink>
-                      <span class="mr-2" style="opacity: 0.5">•</span>
-                    </h:panelGroup>
-                    <h:panelGroup>
-                      <p:badge value="#{processesBean.startsDataModel.projectFilterModel.appliedProjects.size()}"
-                        visible="#{processesBean.startsDataModel.projectFilterModel.projectFilterActive}">
-                        <p:commandButton id="filterBtn" value="#{ivy.cm.co('/starts/projects')}" binding="#{filterBtn}" icon="si si-filter-1"
-                          styleClass="ui-button-secondary #{!processesBean.startsDataModel.projectFilterModel.projectFilterActive ? 'ui-button-outlined' : ''}"
-                          rendered="#{!processesBean.startsDataModel.onlySingleProject}"
-                          actionListener="#{processesBean.initFilter}" oncomplete="PF('filterPanel').show('#{filterBtn.clientId}')" />
-                      </p:badge>
-                    </h:panelGroup>
-                  </h:panelGroup>
-                  <h:panelGroup id="globalFilterGroup" layout="block" styleClass="ml-2">
-                    <div class="ui-input-icon-left">
-                      <i class="pi pi-search" />
-                      <p:inputText id="globalFilter" placeholder="#{ivy.cm.co('/starts/search')}"
-                        value="#{processesBean.startsDataModel.globalFilter}">
-                        <p:ajax event="keyup" delay="300" listener="#{processesBean.updateUrlWithFilters}" process="@this" update=":startsForm:projectStarts"/>
-                      </p:inputText>
-                    </div>
-                  </h:panelGroup>
-                </div>
-              </div>
-            </f:facet>
-
+            rowsPerPageTemplate="10,15,20,30,50">
             <p:ajax event="rowSelect" listener="#{processesBean.startRow}" />
             <p:column width="20px" resizable="false">
               <h:outputText id="processStartIcon" class="#{start.icon} si-lg vertical-align-middle" />
             </p:column>
             <p:column headerText="#{ivy.cm.co('/starts/process')}" sortBy="#{start.displayName}" filterBy="#{start.displayName}">
               <h:outputText id="startName" value="#{start.displayName}" styleClass="start-name text-primary-color"/>
-              <div class="start-description overflow-hidden-ellipsis text-sm">
-                <h:outputText id="startDescription" value="#{start.description}" />
+              <h:panelGroup class="start-description overflow-hidden-ellipsis text-sm" layout="block"
+                rendered="#{not empty start.description}">
+                <h:outputText id="startDescription" value="#{start.description}"/>
                 <p:tooltip for="startDescription" position="top" value="#{start.description}" styleClass="text" />
-              </div>
+              </h:panelGroup>
             </p:column>
             <p:column headerText="#{ivy.cm.co('/starts/application')}" width="120px" sortBy="#{start.applicationName}" responsivePriority="4"
               rendered="#{!processesBean.startsDataModel.onlySingleApplication}" filterBy="#{start.applicationName}">
@@ -110,17 +109,17 @@
             </p:column>
             <p:column headerText="#{ivy.cm.co('/starts/project')}" width="120px" sortBy="#{start.projectName}" responsivePriority="4"
               rendered="#{!processesBean.startsDataModel.onlySingleProject}" filterBy="#{start.projectName}">
-              <div class="overflow-hidden-ellipsis">
+              <h:panelGroup class="overflow-hidden-ellipsis" layout="block" rendered="#{not empty start.projectName}">
                 <h:outputText id="project" value="#{start.projectName}" />
                 <p:tooltip for="project" position="top" value="#{start.projectName}" styleClass="text" />
-              </div>
+              </h:panelGroup>
             </p:column>
             <p:column headerText="#{ivy.cm.co('/starts/category')}" width="120px" sortBy="#{start.category.name}" responsivePriority="3"
               filterBy="#{start.category.name}">
-              <div class="overflow-hidden-ellipsis">
+              <h:panelGroup class="overflow-hidden-ellipsis" layout="block" rendered="#{not empty start.category.name}">
                 <h:outputText id="category" value="#{start.category.name}" />
                 <p:tooltip for="category" position="top" value="#{start.category.name}" styleClass="text" />
-              </div>
+              </h:panelGroup>
             </p:column>
             <p:column width="30px" resizable="false">
               <p:commandButton id="startActionsBtn" icon="si si-navigation-menu-horizontal-filled"

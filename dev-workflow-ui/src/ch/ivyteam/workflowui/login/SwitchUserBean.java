@@ -15,16 +15,21 @@ import ch.ivyteam.workflowui.util.UserUtil;
 @ViewScoped
 public class SwitchUserBean {
 
-  private final List<User> users;
+  private List<User> users;
   private final User currentUser;
   private String globalFilter;
 
   public SwitchUserBean() {
-    users = UserUtil.getUsers().stream()
+    users = setUsers();
+    currentUser = toUser(ISession.current().getSessionUser());
+  }
+
+  private List<User> setUsers() {
+    return UserUtil.getUsers().stream()
         .filter(user -> ((ch.ivyteam.ivy.security.internal.user.User) user).isTestUser())
+        .filter(user -> globalFilter == null || globalFilter.trim().isEmpty() || user.getName().toLowerCase().contains(globalFilter.toLowerCase()))
         .map(SwitchUserBean::toUser)
         .collect(toList());
-    currentUser = toUser(ISession.current().getSessionUser());
   }
 
   public List<User> getUsers() {
@@ -47,6 +52,7 @@ public class SwitchUserBean {
 
   public void setGlobalFilter(String globalFilter) {
     this.globalFilter = globalFilter;
+    this.users = setUsers();
   }
 
   public String getGlobalFilter() {
