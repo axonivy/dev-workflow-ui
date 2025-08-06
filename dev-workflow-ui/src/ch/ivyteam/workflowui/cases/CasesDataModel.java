@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortMeta;
@@ -55,19 +54,18 @@ public class CasesDataModel extends LazyDataModel<ICase> {
 
   @Override
   public int count(Map<String, FilterMeta> filterBy) {
-    return (int)createCaseQuery().executor().count();
+    return (int) createCaseQuery().executor().count();
   }
 
   @Override
   public List<ICase> load(int first, int pageSize, Map<String, SortMeta> sortBy,
-          Map<String, FilterMeta> filterBy) {
+      Map<String, FilterMeta> filterBy) {
     var caseQuery = createCaseQuery();
     applyOrdering(caseQuery, sortBy);
-    List<ICase> cases = caseQuery
-            .executor()
-            .resultsPaged()
-            .window(first, pageSize);
-    return cases;
+    return caseQuery
+        .executor()
+        .resultsPaged()
+        .window(first, pageSize);
   }
 
   private CaseQuery createCaseQuery() {
@@ -87,16 +85,19 @@ public class CasesDataModel extends LazyDataModel<ICase> {
   }
 
   private void applyFilter(CaseQuery query) {
-    if (StringUtils.isNotEmpty(filter)) {
-      var caseState = Arrays.asList(CaseState.values()).stream()
-              .filter(state -> StringUtils.startsWithIgnoreCase(state.toString(), filter))
-              .findFirst().orElse(null);
-      var casePriority = Arrays.asList(WorkflowPriority.values()).stream()
-              .filter(priority -> StringUtils.startsWithIgnoreCase(priority.toString(), filter))
-              .findFirst().orElse(null);
+    if (filter != null && !filter.isEmpty()) {
+      final String lowerCaseFilter = filter.toLowerCase();
+      var caseState = Arrays.stream(CaseState.values())
+          .filter(state -> state.toString().toLowerCase().startsWith(lowerCaseFilter))
+          .findFirst()
+          .orElse(null);
+      var casePriority = Arrays.stream(WorkflowPriority.values())
+          .filter(priority -> priority.toString().toLowerCase().startsWith(lowerCaseFilter))
+          .findFirst()
+          .orElse(null);
       query.where().and(CaseQuery.create().where().name().isLikeIgnoreCase("%" + filter + "%")
-              .or().state().isEqual(caseState)
-              .or().priority().isEqual(casePriority));
+          .or().state().isEqual(caseState)
+          .or().priority().isEqual(casePriority));
     }
   }
 

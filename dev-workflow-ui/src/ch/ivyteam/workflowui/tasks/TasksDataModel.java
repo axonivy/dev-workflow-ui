@@ -20,7 +20,7 @@ import ch.ivyteam.workflowui.util.UserUtil;
 public class TasksDataModel extends LazyDataModel<TaskModel> {
   private static final long serialVersionUID = -5287014754211109062L;
   private String filter;
-  private boolean showAllTasks = UserUtil.isAdmin();
+  private final boolean showAllTasks = UserUtil.isAdmin();
   private final boolean isPersonal;
 
   public TasksDataModel() {
@@ -68,7 +68,7 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
 
   @Override
   public List<TaskModel> load(int first, int pageSize, Map<String, SortMeta> sortBy,
-          Map<String, FilterMeta> filterBy) {
+      Map<String, FilterMeta> filterBy) {
     var sort = new SortMetaConverter(sortBy);
     var taskQuery = TaskQuery.create();
 
@@ -96,17 +96,18 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
   }
 
   private void applyFilter(TaskQuery query) {
-    if (StringUtils.isNotEmpty(filter)) {
+    if (filter != null && !filter.isEmpty()) {
+      final String lowerCaseFilter = filter.toLowerCase();
       var taskState = Arrays.asList(TaskState.values()).stream()
-              .filter(state -> StringUtils.startsWithIgnoreCase(state.toString(), filter))
-              .findFirst().orElse(null);
+          .filter(state -> state.toString().toLowerCase().startsWith(lowerCaseFilter))
+          .findFirst().orElse(null);
       var taskPriority = Arrays.asList(WorkflowPriority.values()).stream()
-              .filter(priority -> StringUtils.startsWithIgnoreCase(priority.toString(), filter))
-              .findFirst().orElse(null);
+          .filter(priority -> priority.toString().toLowerCase().startsWith(lowerCaseFilter))
+          .findFirst().orElse(null);
       query.where().and(TaskQuery.create().where().name().isLikeIgnoreCase("%" + filter + "%")
-              .or().activatorName().isLikeIgnoreCase(filter + "%")
-              .or().state().isEqual(taskState)
-              .or().priority().isEqual(taskPriority));
+          .or().activatorName().isLikeIgnoreCase(filter + "%")
+          .or().state().isEqual(taskState)
+          .or().priority().isEqual(taskPriority));
     }
   }
 
