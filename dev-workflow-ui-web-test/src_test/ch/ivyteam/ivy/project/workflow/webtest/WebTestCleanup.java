@@ -41,10 +41,10 @@ class WebTestCleanup {
 
   private static void checkProcessesExist() {
     openView("starts.xhtml");
+    $(By.id("startsForm:globalFilter")).setValue("test");
     var table = PrimeUi.table(By.id("startsForm:projectStarts"));
-    table.searchGlobal("test");
     table.contains("startTestDialog");
-    table.searchGlobal("case");
+    $(By.id("startsForm:globalFilter")).setValue("case");
     table.contains("test _ case _ map");
   }
 

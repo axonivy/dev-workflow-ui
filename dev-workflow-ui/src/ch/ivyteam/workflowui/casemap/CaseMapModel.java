@@ -6,7 +6,6 @@ import java.util.List;
 import ch.ivyteam.ivy.casemap.runtime.repo.restricted.ICaseMapBusinessCase;
 import ch.ivyteam.ivy.workflow.ICase;
 
-@SuppressWarnings("restriction")
 public class CaseMapModel {
   private final List<CaseMapStageModel> stages;
 

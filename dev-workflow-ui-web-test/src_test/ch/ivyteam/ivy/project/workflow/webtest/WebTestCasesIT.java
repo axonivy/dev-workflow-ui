@@ -33,11 +33,11 @@ class WebTestCasesIT {
   void allCasesOnlyAdmin() {
     loginFromTable("testuser");
     openView("cases.xhtml");
-    $(By.id("casesForm:cases:showAllCasesSwitch")).shouldNotBe(visible);
+    $(By.id("casesForm:showAllCasesSwitch")).shouldNotBe(visible);
     loginDeveloper();
     openView("cases.xhtml");
-    $(By.id("casesForm:cases:showAllCasesSwitch")).shouldBe(visible);
-    $(By.id("casesForm:cases:showAllCasesSwitch_input")).shouldBe(enabled);
+    $(By.id("casesForm:showAllCasesSwitch")).shouldBe(visible);
+    $(By.id("casesForm:showAllCasesSwitch_input")).shouldBe(enabled);
   }
 
   @Test
@@ -63,7 +63,7 @@ class WebTestCasesIT {
     table.row(0).should(exist);
     table.row(1).should(exist);
 
-    $(By.id("casesForm:cases:globalFilter")).setValue(caseId).pressEnter();
+    $(By.id("casesForm:globalFilter")).setValue(caseId).pressEnter();
 
     $(By.id("casesForm:cases_data")).findAll(By.tagName("tr")).shouldBe(size(1));
 

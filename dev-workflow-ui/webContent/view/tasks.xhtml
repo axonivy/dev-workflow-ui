@@ -8,30 +8,31 @@
       <f:event type="preRenderView" listener="#{loginBean.redirectIfNotLoggedIn}" />
       <h:form id="tasksForm">
         <div class="card">
+          <div class="flex justify-content-between mb-3">
+            <h4 class="m-0">#{ivy.cm.co('/sidebar/tasks')}</h4>
+            <h:panelGroup id="showAllTasksSwitch_container" styleClass="ml-auto inline-flex align-items-center"
+              layout="block" rendered="#{permissionsBean.admin}">
+              <h:outputText value="#{ivy.cm.co('/common/showAll')}" styleClass="mr-2" />
+              <p:toggleSwitch id="showAllTasksSwitch" value="#{tasksBean.tasksDataModel.showAll}"
+                disabled="#{!permissionsBean.admin}">
+                <p:ajax update="tasksForm" />
+              </p:toggleSwitch>
+            </h:panelGroup>
+            <p:tooltip for="showAllTasksSwitch_container" position="top"
+              value="If enabled shows all tasks, even the ones the user is not involved in" />
+            <div class="ui-input-icon-left ml-3">
+              <i class="pi pi-search" />
+              <p:inputText id="globalFilter" placeholder="#{ivy.cm.co('/common/search')}"
+                value="#{tasksBean.tasksDataModel.filter}">
+                <p:ajax event="keyup" delay="300" update=":tasksForm:tasks"/>
+              </p:inputText>
+            </div>
+          </div>
+
           <p:dataTable id="tasks" var="task" value="#{tasksBean.tasksDataModel}" widgetVar="tasksTable"
             styleClass="ui-fluid" emptyMessage="#{ivy.cm.co('/tasks/noTasksFound')}" paginatorPosition="bottom" rows="10"
             lazy="true" paginator="true" paginatorAlwaysVisible="false" selectionMode="single" resizableColumns="true">
             <p:ajax event="rowSelect" listener="#{tasksBean.displayTaskRow}" />
-            <f:facet name="header">
-              <div class="flex justify-content-between mb-3 pretty-search">
-                <h4 class="m-0">#{ivy.cm.co('/sidebar/tasks')}</h4>
-                <h:panelGroup id="showAllTasksSwitch_container" styleClass="ml-auto inline-flex align-items-center"
-                  layout="block" rendered="#{permissionsBean.admin}">
-                  <h:outputText value="#{ivy.cm.co('/common/showAll')}" styleClass="mr-2" />
-                  <p:toggleSwitch id="showAllTasksSwitch" value="#{tasksBean.tasksDataModel.showAll}"
-                    disabled="#{!permissionsBean.admin}">
-                    <p:ajax update="tasksForm" />
-                  </p:toggleSwitch>
-                </h:panelGroup>
-                <p:tooltip for="showAllTasksSwitch_container" position="top"
-                  value="If enabled shows all tasks, even the ones the user is not involved in" />
-                <div class="ui-input-icon-left ml-3">
-                  <i class="pi pi-search" />
-                  <p:inputText id="globalFilter" placeholder="#{ivy.cm.co('/common/search')}" value="#{tasksBean.tasksDataModel.filter}"
-                    onkeyup="PF('tasksTable').filter()" />
-                </div>
-              </div>
-            </f:facet>
 
             <p:column headerText="#{ivy.cm.co('/common/state')}" sortBy="#{task.businessState}" width="90px" styleClass="center-table-cell" resizable="false">
               <jc:stateBadge id="taskState" data="#{task}"/>
@@ -50,16 +51,16 @@
             <p:column headerText="#{ivy.cm.co('/common/responsible')}" width="160px" responsivePriority="3">
               <div class="flex">
                 <jc:user id="taskResponsible" user="#{task.firstResponsible}" rendered="#{task.hasResponsibles()}" />
-                  <h:panelGroup id="otherResponsibles" styleClass="flex align-items-center" style="margin-left:3px;" rendered="#{task.responsibles.size() gt 1}" >
-                    (<i class="mr-1 si si-multiple-neutral-1" /><h:outputText  value="#{task.responsibles.size()})" />
-                  </h:panelGroup>
-                  <p:tooltip for="otherResponsibles" position="top" autoHide="false">
-                    <ui:repeat id="taskResponsibles" value="#{task.otherResponsibles}" var="responsible">
-                      <div style="padding:5px;">
-                        <jc:user id="taskResponsible" user="#{responsible}" />
-                      </div>
-                    </ui:repeat>
-                  </p:tooltip>
+                <h:panelGroup id="otherResponsibles" styleClass="flex align-items-center" style="margin-left:3px;" rendered="#{task.responsibles.size() gt 1}" >
+                  (<i class="mr-1 si si-multiple-neutral-1" /><h:outputText  value="#{task.responsibles.size()})" />
+                </h:panelGroup>
+                <p:tooltip for="otherResponsibles" position="top" autoHide="false">
+                  <ui:repeat id="taskResponsibles" value="#{task.otherResponsibles}" var="responsible">
+                    <div style="padding:5px;">
+                      <jc:user id="taskResponsible" user="#{responsible}" />
+                    </div>
+                  </ui:repeat>
+                </p:tooltip>
               </div>
             </p:column>
 

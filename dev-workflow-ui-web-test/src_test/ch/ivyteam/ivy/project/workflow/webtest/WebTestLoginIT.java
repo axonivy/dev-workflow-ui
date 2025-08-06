@@ -90,7 +90,7 @@ class WebTestLoginIT {
     openView("switch-user.xhtml");
     Table table = PrimeUi.table(By.id("loginTable:users"));
     table.contains("DeveloperTest");
-    table.searchGlobal("testuser");
+    $(By.id("loginTable:globalFilter")).setValue("testuser");
     table.containsNot("DeveloperTest");
     table.contains("testuser");
   }
