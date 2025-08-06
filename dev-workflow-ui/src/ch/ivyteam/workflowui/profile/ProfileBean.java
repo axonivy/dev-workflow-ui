@@ -58,8 +58,8 @@ public class ProfileBean {
     this.email = email;
   }
 
-  public String getRoles() {
-    return user().getAllRoles().stream().map(IRole::getName).collect(Collectors.joining(", "));
+  public List<String> getRoles() {
+    return user().getAllRoles().stream().map(IRole::getName).toList();
   }
 
   public Locale getCurrentContentLocale() {

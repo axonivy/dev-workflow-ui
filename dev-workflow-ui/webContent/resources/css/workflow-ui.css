@@ -234,15 +234,6 @@ body .custom-accordion.ui-accordion .ui-accordion-header:first-child {
   padding-inline-start: 20px;
 }
 
-/* Profile */
-.profile-card .ui-panelgrid-content > div {
-  padding-block: 0.3rem;
-}
-.profile-card .ui-panelgrid-content > div:nth-child(even) {
-  padding-top: 0;
-  padding-bottom: 0.75em;
-}
-
 /* Notifications */
 .notification-action.si {
   font-size: 1.2em;

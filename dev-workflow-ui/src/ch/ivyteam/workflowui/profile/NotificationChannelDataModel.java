@@ -2,6 +2,7 @@ package ch.ivyteam.workflowui.profile;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import ch.ivyteam.ivy.notification.channel.Event;
 import ch.ivyteam.ivy.notification.channel.NotificationSubscription;
@@ -72,7 +73,7 @@ public class NotificationChannelDataModel {
     }
 
     public static List<NotificationEventDto> all() {
-      return Event.all().stream().map(NotificationEventDto::new).toList();
+      return Event.all().stream().map(NotificationEventDto::new).collect(Collectors.toList());
     }
 
     public static NotificationEventDto of(Event event) {
