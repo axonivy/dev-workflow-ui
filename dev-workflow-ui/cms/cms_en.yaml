@@ -188,6 +188,7 @@ profile:
   currentContentLocale: Content locale of the current session
   currentFormattingLanguage: Current formatting language
   currentFormattingLocale: Formatting locale of the current session
+  languageAndLocalization: Language & Localization
 sidebar:
   apiBrowser: API Browser
   cases: Cases

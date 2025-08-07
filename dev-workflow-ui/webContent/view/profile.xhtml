@@ -1,97 +1,128 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:f="http://xmlns.jcp.org/jsf/core"
-  xmlns:h="http://xmlns.jcp.org/jsf/html"
-  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-  xmlns:ic="http://ivyteam.ch/jsf/component"
-  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-  xmlns:p="http://primefaces.org/ui"
-  xmlns:pe="http://primefaces.org/ui/extensions">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:ic="http://ivyteam.ch/jsf/component"
+  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
 
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <f:event type="preRenderView"
-        listener="#{loginBean.redirectIfNotLoggedIn}" />
+      <f:event type="preRenderView" listener="#{loginBean.redirectIfNotLoggedIn}" />
 
-      <div class="card ui-fluid">
-        <h4>#{ivy.cm.co('/template/profile')}</h4>
-        <h:form id="profileForm">
-          <p:growl id="growl" showDetail="true" />
-          <p:panelGrid columns="1" layout="flex" styleClass="profile-card">
-            <h:outputLabel for="userName" styleClass="details-description-label">#{ivy.cm.co('/common/username')}</h:outputLabel>
-            <h:outputText id="userName" value="#{profileBean.userName}"></h:outputText>
+      <h:form id="profileForm">
+        <div class="grid mb-2">
+          <div class="col-12 md:col-6">
+            <div class="card ui-fluid">
+              <h4>#{ivy.cm.co('/template/profile')}</h4>
+              <p:growl id="growl" showDetail="true" />
+              <div>
+                <div class="mb-3">
+                  <h:outputLabel for="userName">#{ivy.cm.co('/common/username')}</h:outputLabel>
+                  <p:inputText id="userName" value="#{profileBean.userName}" styleClass="mt-2" disabled="true" />
+                </div>
 
-            <h:outputLabel for="fullName" styleClass="details-description-label">#{ivy.cm.co('/common/fullname')}</h:outputLabel>
-            <p:inputText id="fullName" value="#{profileBean.fullName}"></p:inputText>
+                <div class="mb-3">
+                  <h:outputLabel for="fullName">#{ivy.cm.co('/common/fullname')}</h:outputLabel>
+                  <p:inputText id="fullName" value="#{profileBean.fullName}" styleClass="mt-2" />
+                </div>
 
-            <h:outputLabel for="email" styleClass="details-description-label">#{ivy.cm.co('/common/email')}</h:outputLabel>
-            <p:inputText id="email" value="#{profileBean.email}"></p:inputText>
+                <div>
+                  <h:outputLabel for="email">#{ivy.cm.co('/common/email')}</h:outputLabel>
+                  <p:inputText id="email" value="#{profileBean.email}" styleClass="mt-2" />
+                </div>
+              </div>
 
-            <h:outputLabel for="contentLanguage" styleClass="details-description-label">#{ivy.cm.co('/common/language')}</h:outputLabel>
-            <h:panelGroup>
-              <p:selectOneMenu id="contentLanguage" value="#{profileBean.contentLanguage}" editable="true"
-                converter="localeConverter">
-                <f:selectItems value="#{profileBean.contentLanguages}" var="locale"
-                  itemLabel="#{profileBean.toDisplayName(locale)}" />
-              </p:selectOneMenu>
-              <small>
-                <h:outputText id="contentLanguageDisplay" value="#{ivy.cm.co('/profile/currentContentLanguage')} #{profileBean.contentLanguageSource}" escape="false"/>
-                <p:tooltip for="contentLanguageDisplay" value="#{ivy.cm.co('/profile/currentContentLocale')}" position="bottom"/>
-              </small>
-            </h:panelGroup>
+              <div class="mt-3 mb-2">#{ivy.cm.co('/common/roles')}</div>
+              <div id="roles" class="flex flex-wrap">
+                <ui:repeat var="role" value="#{profileBean.roles}">
+                  <div class="surface-50 my-1 mr-2 p-2 w-min border-round-lg">
+                    <h:outputText id="roles" value="#{role}" />
+                  </div>
+                </ui:repeat>
+              </div>
+            </div>
+          </div>
 
-            <h:outputLabel for="formattingLanguage" styleClass="details-description-label">#{ivy.cm.co('/common/formattingLanguage')}</h:outputLabel>
-            <h:panelGroup>
-              <p:selectOneMenu filter="true" filterMatchMode="contains" id="formattingLanguage" editable="true"
-                value="#{profileBean.formattingLanguage}" converter="localeConverter">
-                <f:selectItems value="#{profileBean.formattingLanguages}" var="locale"
-                  itemLabel="#{profileBean.toDisplayName(locale)}" />
-              </p:selectOneMenu>
-              <small>
-                <h:outputText id="formattingLanguageDisplay" value="#{ivy.cm.co('/profile/currentFormattingLanguage')} #{profileBean.formattingLanguageSource}" escape="false" />
-                <p:tooltip for="formattingLanguageDisplay" value="#{ivy.cm.co('/profile/currentFormattingLocale')}" position="bottom"/>
-              </small>
-            </h:panelGroup>
+          <div class="col-12 md:col-6">
+            <div class="card h-full">
+              <h4>#{ivy.cm.co('/profile/languageAndLocalization')}</h4>
 
-            <h:outputLabel for="roles" styleClass="details-description-label">#{ivy.cm.co('/common/roles')}</h:outputLabel>
-            <h:outputText id="roles" value="#{profileBean.roles}"></h:outputText>
+              <div class="mb-3">
+                <h:outputLabel for="contentLanguage">#{ivy.cm.co('/common/language')}</h:outputLabel>
+                <div class="mt-2">
+                  <p:selectOneMenu id="contentLanguage" value="#{profileBean.contentLanguage}" editable="true"
+                    converter="localeConverter" styleClass="w-full">
+                    <f:selectItems value="#{profileBean.contentLanguages}" var="locale"
+                      itemLabel="#{profileBean.toDisplayName(locale)}" />
+                  </p:selectOneMenu>
+                  <small> <h:outputText id="contentLanguageDisplay" escape="false" styleClass="text-500"
+                      value="#{ivy.cm.co('/profile/currentContentLanguage')} #{profileBean.contentLanguageSource}" />
+                  </small>
+                  <p:tooltip for="contentLanguageDisplay" value="#{ivy.cm.co('/profile/currentContentLocale')}"
+                    position="bottom" />
+                </div>
+              </div>
 
-            <h:outputLabel for="Notification" styleClass="details-description-label">#{ivy.cm.co('/common/notificationChannels')}</h:outputLabel>
-            <p:dataTable paginator="true" rows="10" paginatorPosition="bottom" paginatorAlwaysVisible="false"
-                var="event" value="#{profileBean.notificationChannels.events}" id="notificationChannelsTable"
-                lazy="false" styleClass="ui-fluid" rowIndexVar="rowIndex">
+              <div>
+                <h:outputLabel for="formattingLanguage">#{ivy.cm.co('/common/formattingLanguage')}</h:outputLabel>
+                <div class="mt-2">
+                  <p:selectOneMenu id="formattingLanguage" filter="true" filterMatchMode="contains" editable="true"
+                    value="#{profileBean.formattingLanguage}" converter="localeConverter" styleClass="w-full">
+                    <f:selectItems value="#{profileBean.formattingLanguages}" var="locale"
+                      itemLabel="#{profileBean.toDisplayName(locale)}" />
+                  </p:selectOneMenu>
+                  <p>
+                    <small> <h:outputText id="formattingLanguageDisplay" escape="false" styleClass="text-500"
+                        value="#{ivy.cm.co('/profile/currentFormattingLanguage')} #{profileBean.formattingLanguageSource}" />
+                    </small>
+                    <p:tooltip for="formattingLanguageDisplay" value="#{ivy.cm.co('/profile/currentFormattingLocale')}"
+                      position="bottom" />
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-              <p:column headerText="#{ivy.cm.co('/common/event')}" sortBy="#{event.displayName}">
-                <h:panelGroup id="event">
-                  <h:outputText value="#{event.displayName}" styleClass="event-kind" />
+        </div>
+
+        <div class="card mb-3">
+          <h4>#{ivy.cm.co('/common/notificationChannels')}</h4>
+          <p:dataTable paginator="true" rows="10" paginatorPosition="bottom" paginatorAlwaysVisible="false" var="event"
+            value="#{profileBean.notificationChannels.events}" id="notificationChannelsTable" lazy="false" styleClass="ui-fluid"
+            rowIndexVar="rowIndex">
+
+            <p:column headerText="#{ivy.cm.co('/common/event')}">
+              <h:panelGroup id="event" layout="block" styleClass="flex align-items-center">
+                <h:outputText value="#{event.displayName}" styleClass="event-kind mr-2" />
+                <p:outputPanel id="iconWrapper" styleClass="flex">
                   <i class="si si-question-circle"></i>
-                </h:panelGroup>
-                <p:tooltip for="profileForm:notificationChannelsTable:#{rowIndex}:event" value="#{event.description}" position="top" styleClass="pre-tooltip" />
-              </p:column>
+                </p:outputPanel>
+              </h:panelGroup>
+              <p:tooltip for="profileForm:notificationChannelsTable:#{rowIndex}:iconWrapper" value="#{event.description}" position="top"
+                styleClass="pre-tooltip" />
+            </p:column>
 
-              <p:columns id="channels" var="channel" value="#{profileBean.notificationChannels.channels}" style="text-align: center">
-                <f:facet name="header">
-                  <h:outputText value="#{channel.channel.displayName()}">
-                    <i class="#{channel.channel.displayIcon()} table-icon" />
-                  </h:outputText>
-                </f:facet>
+            <p:columns id="channels" var="channel" value="#{profileBean.notificationChannels.channels}" style="text-align: center">
+              <f:facet name="header">
+                <h:outputText value="#{channel.channel.displayName()}">
+                  <i class="#{channel.channel.displayIcon()} table-icon" />
+                </h:outputText>
+              </f:facet>
 
-                <c:set var="subscription" value="#{channel.getSubscription(event)}"/>
-                <i class="si table-icon si-#{subscription.icon} subscription-icon" title="#{subscription.title}"
-                    style="padding-right: 10px; vertical-align: top" />
-                <p:triStateCheckbox id="subscriptionCheckbox" value="#{subscription.stateAsString}">
-                  <p:ajax event="change" update="profileForm" listener="#{channel.setSubscriptionIconAndTitle(event)}" />
-                </p:triStateCheckbox>
-              </p:columns>
-            </p:dataTable>
+              <c:set var="subscription" value="#{channel.getSubscription(event)}" />
+              <i class="si table-icon si-#{subscription.icon} subscription-icon" title="#{subscription.title}"
+                style="padding-right: 10px; vertical-align: top" />
+              <p:triStateCheckbox id="subscriptionCheckbox" value="#{subscription.stateAsString}">
+                <p:ajax event="change" update="profileForm" listener="#{channel.setSubscriptionIconAndTitle(event)}" />
+              </p:triStateCheckbox>
+            </p:columns>
+          </p:dataTable>
+        </div>
 
-          </p:panelGrid>
-          <p:commandButton id="saveBtn" value="#{ivy.cm.co('/common/save')}"
-            icon="si si-floppy-disk"
-            style="max-width:200px;margin-top:20px;"
-            actionListener="#{profileBean.save}" update="@form" />
-        </h:form>
-      </div>
+        <div class="flex justify-content-end">
+          <p:commandButton id="saveBtn" value="#{ivy.cm.co('/common/save')}" icon="si si-floppy-disk"
+            styleClass="w-8rem" actionListener="#{profileBean.save}" update="@form" />
+        </div>
+      </h:form>
+
     </ui:define>
   </ui:composition>
 </h:body>

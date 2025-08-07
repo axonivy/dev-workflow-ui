@@ -5,11 +5,11 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openVi
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.empty;
-import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.exactValue;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,6 +18,7 @@ import org.openqa.selenium.By;
 import com.axonivy.ivy.webtest.IvyWebTest;
 import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.axonivy.ivy.webtest.primeui.widget.Table;
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
@@ -32,12 +33,12 @@ class WebTestProfileIT {
 
   @Test
   void userName() {
-    $("#profileForm\\:userName").shouldBe(exactText("testuser"));
+    $(By.id("profileForm:userName")).shouldHave(value("testuser"));
   }
 
   @Test
   void roles() {
-    $("#profileForm\\:roles").shouldBe(exactText("Everybody, testrole1, testrole2, testrole3"));
+    $$("#roles span").shouldHave(CollectionCondition.containExactTextsCaseSensitive("Everybody", "testrole1", "testrole2", "testrole3"));
   }
 
   @Test
