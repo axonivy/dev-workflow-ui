@@ -251,7 +251,7 @@ public class TaskModel {
   }
 
   public static String toDetailUrl(String uuid) {
-    return "task.xhtml?id=" + uuid;
+    return "task?id=" + uuid;
   }
 
   public ISession getWorkerSession() {

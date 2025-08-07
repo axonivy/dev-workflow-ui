@@ -30,7 +30,7 @@ public class WebServiceProcess {
   }
 
   public void execute() {
-    RedirectUtil.redirect(link.toString());
+    new RedirectUtil.RelativePathHandler().redirect(link.toString());
   }
 
   private static String toProcessName(IWebServiceProcess ws) {

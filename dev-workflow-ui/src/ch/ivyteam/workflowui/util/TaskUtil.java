@@ -57,13 +57,19 @@ public class TaskUtil {
     RedirectUtil.redirect(model.getDetailUrl());
   }
 
-  public static void executeTask(TaskModel model) {
-    RedirectUtil.redirect(createTaskUrl(model));
+  public static void executeTask(TaskModel task) {
+    if (shouldOpenInFrame(task)) {
+      var url = "frame" + UrlUtil.generateStartFrameUrlParams(task.getStartLink());
+      RedirectUtil.redirect(url);
+    } else {
+      var url = task.getStartLink().get();
+      new RedirectUtil.RelativePathHandler().redirect(url);
+    }
   }
 
   public static String createTaskUrl(TaskModel task) {
     if (shouldOpenInFrame(task)) {
-      return UrlUtil.generateStartFrameUrl(task.getStartLink());
+      return "frame.xhtml" + UrlUtil.generateStartFrameUrlParams(task.getStartLink());
     }
     return task.getStartLink().get();
   }
@@ -97,7 +103,7 @@ public class TaskUtil {
       return true;
     }
     var isResponsible = task.responsibles().all().stream()
-      .anyMatch(r -> r.get().isMember(user.getUserToken()));
+        .anyMatch(r -> r.get().isMember(user.getUserToken()));
     if (task.getWorkerUser() == null) {
       return isResponsible;
     }
