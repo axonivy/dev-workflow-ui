@@ -184,7 +184,6 @@ notifications:
   noNotifications: No Notifications
   notifications: Notifications
 profile:
-  accountAndRoles: Account & Roles
   currentContentLanguage: Current language
   currentContentLocale: Content locale of the current session
   currentFormattingLanguage: Current formatting language

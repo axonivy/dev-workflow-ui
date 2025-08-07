@@ -184,7 +184,6 @@ notifications:
   noNotifications: Keine Benachrichtigungen
   notifications: Benachrichtigungen
 profile:
-  accountAndRoles: Benutzerkonto & Rollen
   currentContentLanguage: Aktuelle Sprache
   currentContentLocale: Sprache der aktuellen Sitzung
   currentFormattingLanguage: AKtuelle formattierungs Sprache

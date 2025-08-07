@@ -8,47 +8,56 @@
       <f:event type="preRenderView" listener="#{loginBean.redirectIfNotLoggedIn}" />
 
       <h:form id="profileForm">
-        <div class="card ui-fluid">
-          <h5>#{ivy.cm.co('/template/profile')}</h5>
-          <p:growl id="growl" showDetail="true" />
-          <div class="grid">
-            <div class="col-4">
-              <h:outputLabel for="userName">#{ivy.cm.co('/common/username')}</h:outputLabel>
-              <p:inputText id="userName" value="#{profileBean.userName}" styleClass="mt-1" disabled="true" />
-            </div>
+        <div class="grid mb-2">
+          <div class="col-12 md:col-6">
+            <div class="card ui-fluid">
+              <h4>#{ivy.cm.co('/template/profile')}</h4>
+              <p:growl id="growl" showDetail="true" />
+              <div>
+                <div class="mb-3">
+                  <h:outputLabel for="userName">#{ivy.cm.co('/common/username')}</h:outputLabel>
+                  <p:inputText id="userName" value="#{profileBean.userName}" styleClass="mt-2" disabled="true" />
+                </div>
 
-            <div class="col-4">
-              <h:outputLabel for="fullName">#{ivy.cm.co('/common/fullname')}</h:outputLabel>
-              <p:inputText id="fullName" value="#{profileBean.fullName}" styleClass="mt-1" />
-            </div>
+                <div class="mb-3">
+                  <h:outputLabel for="fullName">#{ivy.cm.co('/common/fullname')}</h:outputLabel>
+                  <p:inputText id="fullName" value="#{profileBean.fullName}" styleClass="mt-2" />
+                </div>
 
-            <div class="col-4">
-              <h:outputLabel for="email">#{ivy.cm.co('/common/email')}</h:outputLabel>
-              <p:inputText id="email" value="#{profileBean.email}" styleClass="mt-1" />
+                <div>
+                  <h:outputLabel for="email">#{ivy.cm.co('/common/email')}</h:outputLabel>
+                  <p:inputText id="email" value="#{profileBean.email}" styleClass="mt-2" />
+                </div>
+              </div>
+
+              <div class="mt-3 mb-2">#{ivy.cm.co('/common/roles')}</div>
+              <div id="roles" class="flex flex-wrap">
+                <ui:repeat var="role" value="#{profileBean.roles}">
+                  <div class="surface-50 my-1 mr-2 p-2 w-min border-round-lg">
+                    <h:outputText id="roles" value="#{role}" />
+                  </div>
+                </ui:repeat>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="grid mb-4">
           <div class="col-12 md:col-6">
             <div class="card h-full">
-              <h5>#{ivy.cm.co('/profile/languageAndLocalization')}</h5>
+              <h4>#{ivy.cm.co('/profile/languageAndLocalization')}</h4>
 
-              <div class="mb-4">
+              <div class="mb-3">
                 <h:outputLabel for="contentLanguage">#{ivy.cm.co('/common/language')}</h:outputLabel>
                 <div class="mt-2">
                   <p:selectOneMenu id="contentLanguage" value="#{profileBean.contentLanguage}" editable="true"
-                    converter="localeConverter">
+                    converter="localeConverter" styleClass="w-full">
                     <f:selectItems value="#{profileBean.contentLanguages}" var="locale"
                       itemLabel="#{profileBean.toDisplayName(locale)}" />
                   </p:selectOneMenu>
-                  <p>
-                    <small> <h:outputText id="contentLanguageDisplay" escape="false" styleClass="text-500"
-                        value="#{ivy.cm.co('/profile/currentContentLanguage')} #{profileBean.contentLanguageSource}" />
-                    </small>
-                    <p:tooltip for="contentLanguageDisplay" value="#{ivy.cm.co('/profile/currentContentLocale')}"
-                      position="bottom" />
-                  </p>
+                  <small> <h:outputText id="contentLanguageDisplay" escape="false" styleClass="text-500"
+                      value="#{ivy.cm.co('/profile/currentContentLanguage')} #{profileBean.contentLanguageSource}" />
+                  </small>
+                  <p:tooltip for="contentLanguageDisplay" value="#{ivy.cm.co('/profile/currentContentLocale')}"
+                    position="bottom" />
                 </div>
               </div>
 
@@ -56,7 +65,7 @@
                 <h:outputLabel for="formattingLanguage">#{ivy.cm.co('/common/formattingLanguage')}</h:outputLabel>
                 <div class="mt-2">
                   <p:selectOneMenu id="formattingLanguage" filter="true" filterMatchMode="contains" editable="true"
-                    value="#{profileBean.formattingLanguage}" converter="localeConverter">
+                    value="#{profileBean.formattingLanguage}" converter="localeConverter" styleClass="w-full">
                     <f:selectItems value="#{profileBean.formattingLanguages}" var="locale"
                       itemLabel="#{profileBean.toDisplayName(locale)}" />
                   </p:selectOneMenu>
@@ -72,23 +81,10 @@
             </div>
           </div>
 
-          <div class="col-12 md:col-6">
-            <div class="card h-full">
-              <h5>#{ivy.cm.co('/profile/accountAndRoles')}</h5>
-              <div class="mb-2">#{ivy.cm.co('/common/roles')}</div>
-              <div id="roles" class="flex flex-wrap">
-                <ui:repeat var="role" value="#{profileBean.roles}">
-                  <div class="surface-50 my-1 mr-2 p-2 w-min border-round-lg">
-                    <h:outputText id="roles" value="#{role}" />
-                  </div>
-                </ui:repeat>
-              </div>
-            </div>
-          </div>
         </div>
 
-        <div class="card mb-0">
-          <h5>#{ivy.cm.co('/common/notificationChannels')}</h5>
+        <div class="card mb-3">
+          <h4>#{ivy.cm.co('/common/notificationChannels')}</h4>
           <p:dataTable paginator="true" rows="10" paginatorPosition="bottom" paginatorAlwaysVisible="false" var="event"
             value="#{profileBean.notificationChannels.events}" id="notificationChannelsTable" lazy="false" styleClass="ui-fluid"
             rowIndexVar="rowIndex">
@@ -96,9 +92,11 @@
             <p:column headerText="#{ivy.cm.co('/common/event')}">
               <h:panelGroup id="event" layout="block" styleClass="flex align-items-center">
                 <h:outputText value="#{event.displayName}" styleClass="event-kind mr-2" />
-                <i class="si si-question-circle"></i>
+                <p:outputPanel id="iconWrapper" styleClass="flex">
+                  <i class="si si-question-circle"></i>
+                </p:outputPanel>
               </h:panelGroup>
-              <p:tooltip for="profileForm:notificationChannelsTable:#{rowIndex}:event" value="#{event.description}" position="top"
+              <p:tooltip for="profileForm:notificationChannelsTable:#{rowIndex}:iconWrapper" value="#{event.description}" position="top"
                 styleClass="pre-tooltip" />
             </p:column>
 
@@ -119,8 +117,10 @@
           </p:dataTable>
         </div>
 
-        <p:commandButton id="saveBtn" value="#{ivy.cm.co('/common/save')}" icon="si si-floppy-disk"
-          style="max-width:200px; margin-top:20px; float:right;" actionListener="#{profileBean.save}" update="@form" />
+        <div class="flex justify-content-end">
+          <p:commandButton id="saveBtn" value="#{ivy.cm.co('/common/save')}" icon="si si-floppy-disk"
+            styleClass="w-8rem" actionListener="#{profileBean.save}" update="@form" />
+        </div>
       </h:form>
 
     </ui:define>
