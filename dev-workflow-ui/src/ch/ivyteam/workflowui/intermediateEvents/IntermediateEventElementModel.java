@@ -42,7 +42,7 @@ public class IntermediateEventElementModel {
   }
 
   public void redirectToElement() {
-    RedirectUtil.redirect("intermediate-event.xhtml?intermediateEvent=" + processElementId);
+    RedirectUtil.redirect("intermediate-event?intermediateEvent=" + processElementId);
   }
 
   public String getName() {

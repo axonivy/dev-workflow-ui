@@ -57,8 +57,8 @@ public class TaskUtil {
     RedirectUtil.redirect(model.getDetailUrl());
   }
 
-  public static void executeTask(TaskModel model) {
-    RedirectUtil.redirect(createTaskUrl(model));
+  public static void executeTask(TaskModel task) {
+    RedirectUtil.redirectUnsafe(createTaskUrl(task));
   }
 
   public static String createTaskUrl(TaskModel task) {
@@ -97,7 +97,7 @@ public class TaskUtil {
       return true;
     }
     var isResponsible = task.responsibles().all().stream()
-      .anyMatch(r -> r.get().isMember(user.getUserToken()));
+        .anyMatch(r -> r.get().isMember(user.getUserToken()));
     if (task.getWorkerUser() == null) {
       return isResponsible;
     }

@@ -39,7 +39,7 @@ public class CasesBean {
   public void redirectToCaseRow(SelectEvent<CaseModel> event) {
     var object = event.getObject();
     if (object instanceof CaseModel caze) {
-      RedirectUtil.redirect("case.xhtml?id=" + caze.getUuid());
+      RedirectUtil.redirect("case?id=" + caze.getUuid());
     }
   }
 }

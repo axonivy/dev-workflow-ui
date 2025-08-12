@@ -5,23 +5,28 @@ import java.util.Map;
 
 import javax.faces.context.FacesContext;
 
+import ch.ivyteam.ivy.jsf.bean.wf.RedirectBean;
+
 public class RedirectUtil {
-  private static RedirectHandler handler = new DefaultHandler();
 
   private static final Map<String, String> ORIGIN_TO_PAGE = Map.ofEntries(
-      Map.entry("home", "home.xhtml"),
-      Map.entry("starts", "starts.xhtml"),
-      Map.entry("tasks", "tasks.xhtml"),
-      Map.entry("task", "task.xhtml"),
-      Map.entry("cases", "cases.xhtml"),
-      Map.entry("case", "case.xhtml"),
-      Map.entry("login", "login.xhtml"),
-      Map.entry("switch-user", "switch-user.xhtml"),
-      Map.entry("end", "end.xhtml"),
-      Map.entry("signals", "signals.xhtml"),
-      Map.entry("intermediate-events", "intermediate-events.xhtml"),
       Map.entry("api-browser", "api-browser.xhtml"),
+      Map.entry("case", "case.xhtml"),
+      Map.entry("cases", "cases.xhtml"),
+      Map.entry("cleanup", "cleanup.xhtml"),
+      Map.entry("end", "end.xhtml"),
+      Map.entry("frame", "frame.xhtml"),
+      Map.entry("home", "home.xhtml"),
+      Map.entry("intermediate-event", "intermediate-event.xhtml"),
+      Map.entry("intermediate-events", "intermediate-events.xhtml"),
+      Map.entry("login", "login.xhtml"),
+      Map.entry("profile", "profile.xhtml"),
+      Map.entry("signals", "signals.xhtml"),
+      Map.entry("starts", "starts.xhtml"),
       Map.entry("statistics", "statistics.xhtml"),
+      Map.entry("switch-user", "switch-user.xhtml"),
+      Map.entry("task", "task.xhtml"),
+      Map.entry("tasks", "tasks.xhtml"),
       Map.entry("webservices", "webservices.xhtml"));
 
   public static void redirect() {
@@ -29,34 +34,35 @@ public class RedirectUtil {
   }
 
   public static void redirect(String page) {
-    handler.redirect(page);
+    var pageName = page.contains("?") ? page.substring(0, page.indexOf("?")) : page;
+    var queryParams = page.contains("?") ? page.substring(page.indexOf("?")) : "";
+
+    var url = ORIGIN_TO_PAGE.get(pageName);
+    if (url == null) {
+      throw new IllegalArgumentException("Page '" + pageName + "' is not whitelisted for redirect");
+    }
+    redirectUnsafe(url + queryParams);
   }
 
-  public interface RedirectHandler {
-    void redirect(String url);
+  public static void redirectRelative(String url) {
+    try {
+      RedirectBean.checkUrl(url);
+    } catch (RuntimeException e) {
+      throw new RuntimeException("Redirecting to external websites is not allowed. Tried to redirect to: " + url, e);
+    }
+    redirectUnsafe(url);
   }
 
-  public static void setHandler(RedirectHandler handler) {
-    RedirectUtil.handler = handler;
-  }
-
-  private static final class DefaultHandler implements RedirectHandler {
-
-    @Override
-    public void redirect(String page) {
-      try {
-        FacesContext context = FacesContext.getCurrentInstance();
-        if (context == null) {
-          return;
-        }
-        var url = ORIGIN_TO_PAGE.get(page);
-        if (url != null) {
-          page = url;
-        }
-        context.getExternalContext().redirect(page);
-      } catch (IOException e) {
-        throw new RuntimeException("Could not send redirect", e);
+  // This should be only used if you are 100% sure the url is safe
+  public static void redirectUnsafe(String url) {
+    try {
+      FacesContext context = FacesContext.getCurrentInstance();
+      if (context == null) {
+        return;
       }
+      context.getExternalContext().redirect(url);
+    } catch (IOException e) {
+      throw new RuntimeException("Could not send redirect", e);
     }
   }
 }
