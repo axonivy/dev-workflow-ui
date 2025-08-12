@@ -32,69 +32,60 @@ class WebTestProfileIT {
   }
 
   @Test
-  void userName() {
+  void profile() {
     $(By.id("profileForm:userName")).shouldHave(value("testuser"));
-  }
 
-  @Test
-  void roles() {
     $$("#roles span").shouldHave(CollectionCondition.containExactTextsCaseSensitive("Everybody", "testrole1", "testrole2", "testrole3"));
-  }
 
-  @Test
-  void email() {
-    var email = $("#profileForm\\:email");
+    var email = $(By.id("profileForm:email"));
+    var fullName = $(By.id("profileForm:fullName"));
+
     email.shouldBe(empty);
     email.sendKeys("any@email.com");
-    save();
-
-    email.shouldBe(exactValue("any@email.com"));
-    email.clear();
-    save();
-
-    email.shouldBe(empty);
-  }
-
-  @Test
-  void fullName() {
-    var fullName = $("#profileForm\\:fullName");
     fullName.shouldBe(exactValue("testuser"));
     fullName.setValue("fullname for test");
     save();
 
+    email.shouldBe(exactValue("any@email.com"));
     fullName.shouldBe(exactValue("fullname for test"));
+
+    email.clear();
     fullName.setValue("testuser");
     save();
 
+    email.shouldBe(empty);
     fullName.shouldBe(exactValue("testuser"));
   }
 
   @Test
-  void contentLanguage() {
+  void language() {
     var contentLanguage = PrimeUi.selectOne(By.id("profileForm:contentLanguage"));
-    contentLanguage.selectItemByLabel("");
-    save();
-
-    contentLanguage.selectedItemShould(empty);
-    contentLanguage.selectItemByValue("de");
-    save();
-    contentLanguage.selectedItemShould(value("de"));
-
-    contentLanguage.selectItemByLabel("");
-    save();
-    contentLanguage.selectedItemShould(empty);
-  }
-
-  @Test
-  void formattingLanguage() {
     var formattingLanguage = PrimeUi.selectOne(By.id("profileForm:formattingLanguage"));
-    formattingLanguage.selectItemByLabel("");
+    var contentLanguageInput = $(By.id("profileForm:contentLanguage_editableInput"));
+    var formattingLanguageInput = $(By.id("profileForm:formattingLanguage_editableInput"));
+
+    contentLanguageInput.setValue("");
+    formattingLanguageInput.setValue("");
     save();
 
+    contentLanguage.selectedItemShould(empty);
     formattingLanguage.selectedItemShould(empty);
+    contentLanguage.selectItemByValue("de");
     formattingLanguage.selectItemByValue("de_CH");
     save();
+
+    contentLanguage.selectedItemShould(value("de"));
     formattingLanguage.selectedItemShould(value("de_CH"));
+
+    contentLanguageInput.setValue("");
+    formattingLanguageInput.setValue("");
+    save();
+
+    contentLanguage.selectedItemShould(empty);
+    formattingLanguage.selectedItemShould(empty);
+
+    contentLanguage.selectItemByValue("en");
+    save();
   }
 
   @Test
@@ -136,7 +127,8 @@ class WebTestProfileIT {
   }
 
   private void save() {
-    $("#profileForm\\:saveBtn").click();
+    $(By.id("profileForm:saveBtn")).click();
+    $(By.id("profileForm:growl_container")).has(text("Profile Saved"));
     Selenide.refresh();
   }
 
