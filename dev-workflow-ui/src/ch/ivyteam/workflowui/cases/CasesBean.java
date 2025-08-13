@@ -1,5 +1,7 @@
 package ch.ivyteam.workflowui.cases;
 
+import java.util.Map;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -8,6 +10,7 @@ import org.primefaces.event.SelectEvent;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.workflowui.util.CaseUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
+import ch.ivyteam.workflowui.util.url.Page;
 
 @ManagedBean
 @ViewScoped
@@ -39,7 +42,7 @@ public class CasesBean {
   public void redirectToCaseRow(SelectEvent<CaseModel> event) {
     var object = event.getObject();
     if (object instanceof CaseModel caze) {
-      RedirectUtil.redirect("case?id=" + caze.getUuid());
+      RedirectUtil.redirect(Page.CASE, Map.of("id", caze.getUuid()));
     }
   }
 }

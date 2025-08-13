@@ -1,47 +1,35 @@
 package ch.ivyteam.workflowui.util;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javax.faces.context.FacesContext;
 
 import ch.ivyteam.ivy.jsf.bean.wf.RedirectBean;
+import ch.ivyteam.workflowui.util.url.Page;
 
-public class RedirectUtil {
-
-  private static final Map<String, String> ORIGIN_TO_PAGE = Map.ofEntries(
-      Map.entry("api-browser", "api-browser.xhtml"),
-      Map.entry("case", "case.xhtml"),
-      Map.entry("cases", "cases.xhtml"),
-      Map.entry("cleanup", "cleanup.xhtml"),
-      Map.entry("end", "end.xhtml"),
-      Map.entry("frame", "frame.xhtml"),
-      Map.entry("home", "home.xhtml"),
-      Map.entry("intermediate-event", "intermediate-event.xhtml"),
-      Map.entry("intermediate-events", "intermediate-events.xhtml"),
-      Map.entry("login", "login.xhtml"),
-      Map.entry("profile", "profile.xhtml"),
-      Map.entry("signals", "signals.xhtml"),
-      Map.entry("starts", "starts.xhtml"),
-      Map.entry("statistics", "statistics.xhtml"),
-      Map.entry("switch-user", "switch-user.xhtml"),
-      Map.entry("task", "task.xhtml"),
-      Map.entry("tasks", "tasks.xhtml"),
-      Map.entry("webservices", "webservices.xhtml"));
+public final class RedirectUtil {
 
   public static void redirect() {
-    redirect("home");
+    redirect(Page.HOME);
   }
 
-  public static void redirect(String page) {
-    var pageName = page.contains("?") ? page.substring(0, page.indexOf("?")) : page;
-    var queryParams = page.contains("?") ? page.substring(page.indexOf("?")) : "";
+  public static void redirect(Page page) {
+    redirect(page, Collections.emptyMap());
+  }
 
-    var url = ORIGIN_TO_PAGE.get(pageName);
-    if (url == null) {
-      throw new IllegalArgumentException("Page '" + pageName + "' is not whitelisted for redirect");
+  public static void redirect(Page page, Map<String, String> parameters) {
+    Objects.requireNonNull(page, "page");
+    var url = page.getView();
+    if (parameters != null && !parameters.isEmpty()) {
+      url = url + "?" + buildQueryString(parameters);
     }
-    redirectUnsafe(url + queryParams);
+    redirectUnsafe(url);
   }
 
   public static void redirectRelative(String url) {
@@ -64,5 +52,13 @@ public class RedirectUtil {
     } catch (IOException e) {
       throw new RuntimeException("Could not send redirect", e);
     }
+  }
+
+  private static String buildQueryString(Map<String, String> parameters) {
+    return parameters.entrySet().stream()
+        .filter(e -> e.getKey() != null && e.getValue() != null)
+        .map(e -> URLEncoder.encode(e.getKey(), StandardCharsets.UTF_8)
+            + "=" + URLEncoder.encode(e.getValue(), StandardCharsets.UTF_8))
+        .collect(Collectors.joining("&"));
   }
 }

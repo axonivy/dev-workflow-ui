@@ -1,7 +1,6 @@
 package ch.ivyteam.workflowui.login;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -14,6 +13,7 @@ import ch.ivyteam.workflowui.util.PermissionsUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.UrlUtil;
 import ch.ivyteam.workflowui.util.UserUtil;
+import ch.ivyteam.workflowui.util.url.Page;
 
 public class LoginUtil {
 
@@ -59,7 +59,7 @@ public class LoginUtil {
 
   static void redirectAfterLogin(String origin, String originalUrl) {
     if (origin != null && !origin.isBlank()) {
-      RedirectUtil.redirect(origin);
+      RedirectUtil.redirect(Page.fromString(origin));
     } else if (originalUrl != null && !originalUrl.isBlank()) {
       RedirectUtil.redirectRelative(originalUrl);
     } else {
@@ -73,15 +73,14 @@ public class LoginUtil {
   }
 
   public static void redirectToLoginForm() {
-    redirectToLogin("login");
+    redirectToLogin(Page.LOGIN);
   }
 
   public static void redirectToLoginTable() {
-    redirectToLogin("switch-user");
+    redirectToLogin(Page.SWITCH_USER);
   }
 
-  private static void redirectToLogin(String loginPage) {
-    String origin = URLEncoder.encode(UrlUtil.evalOriginPage(), StandardCharsets.UTF_8);
-    RedirectUtil.redirect(loginPage + "?origin=" + origin);
+  private static void redirectToLogin(Page loginPage) {
+    RedirectUtil.redirect(loginPage, Map.of("origin", UrlUtil.evalOriginPage()));
   }
 }

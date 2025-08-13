@@ -1,6 +1,7 @@
 package ch.ivyteam.workflowui.util;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
@@ -11,6 +12,7 @@ import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.workflowui.starts.CustomFieldsHelper;
 import ch.ivyteam.workflowui.tasks.TaskModel;
+import ch.ivyteam.workflowui.util.url.Page;
 
 public class TaskUtil {
 
@@ -54,7 +56,7 @@ public class TaskUtil {
   }
 
   public static void redirectToTaskDetails(TaskModel model) {
-    RedirectUtil.redirect(model.getDetailUrl());
+    RedirectUtil.redirect(Page.TASK, Map.of("id", model.getUuid()));
   }
 
   public static void executeTask(TaskModel task) {
