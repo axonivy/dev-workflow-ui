@@ -166,8 +166,4 @@ public class CasesDetailsBean {
   public String getProcessPreviewLink() {
     return processPreviewLink;
   }
-
-  public void rerunCase() {
-    CaseUtil.rerunCaseProcess(selectedCase);
-  }
 }

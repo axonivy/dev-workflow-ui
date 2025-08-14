@@ -9,6 +9,7 @@ import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.category.Category;
 import ch.ivyteam.ivy.workflow.caze.CaseBusinessState;
 import ch.ivyteam.ivy.workflow.caze.owner.CaseOwner;
+import ch.ivyteam.workflowui.util.CaseUtil;
 
 public class CaseModel {
   private ICase caze;
@@ -67,5 +68,9 @@ public class CaseModel {
 
   public WebLink getDetailLink() {
     return caze.getDetailLink();
+  }
+
+  public void rerunCase() {
+    CaseUtil.rerunCaseProcess(this);
   }
 }
