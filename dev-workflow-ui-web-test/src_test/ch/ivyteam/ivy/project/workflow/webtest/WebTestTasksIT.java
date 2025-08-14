@@ -67,7 +67,7 @@ class WebTestTasksIT {
     Navigation.openTasks();
     Table table = PrimeUi.table(By.id("tasksForm:tasks"));
     table.row(0).shouldHave(text("Created task of TestData"));
-    table.valueAt(0, 1).contains("pause");
+    table.valueAtShouldBe(0, 0, text("Open"));
   }
 
   @Test
@@ -180,7 +180,7 @@ class WebTestTasksIT {
   void taskCustomFields() {
     Navigation.openTask("Created task of TestData");
     Table fieldsTable = PrimeUi.table(By.id("customFields:customFieldsTable"));
-    fieldsTable.valueAt(1, 0).contains("task test value");
+    fieldsTable.valueAtShouldBe(1, 0, text("test field 1"));
   }
 
   @Test

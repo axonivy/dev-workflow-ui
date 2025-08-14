@@ -84,14 +84,13 @@ class WebTestHomepageIT {
     openView("home.xhtml");
 
     var startedCasesTable = PrimeUi.table(By.id("startedCases"));
-    startedCasesTable.valueAt(1, 1).contains("Created case of TestData");
-    startedCasesTable.valueAt(0, 1).contains("Created case of CustomUser");
-    startedCasesTable.valueAt(0, 0).contains("rerunCaseIcon");
+    startedCasesTable.valueAtShouldBe(0, 1, text("Created case CustomUser"));
+    startedCasesTable.valueAtShouldBe(1, 1, text("Created case of TestData"));
 
     $(By.id("startedCases:0:caseActionsBtn")).shouldBe(visible).click();
     $(By.id("startedCases:0:rerunCaseProcessBtn")).shouldBe(visible).click();
-    startedCasesTable = PrimeUi.table(By.id("startedCases"));
-    startedCasesTable.valueAt(1, 1).contains("Created case of CustomUser");
-    startedCasesTable.valueAt(0, 1).contains("Created case of CustomUser");
+    startedCasesTable.valueAtShouldBe(0, 1, text("Created case CustomUser"));
+    startedCasesTable.valueAtShouldBe(1, 1, text("Created case CustomUser"));
+    startedCasesTable.valueAtShouldBe(2, 1, text("Created case of TestData"));
   }
 }

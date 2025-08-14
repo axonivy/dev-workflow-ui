@@ -23,7 +23,7 @@
                 </div>
                 <div>
                   <p:commandButton icon="si si-button-refresh-arrow" styleClass="ui-button-secondary rounded-button"
-                    id="caseRerunBtn" actionListener="#{casesDetailsIvyDevWfBean.rerunCase}" />
+                    id="caseRerunBtn" actionListener="#{casesDetailsIvyDevWfBean.selectedCaseModel.rerunCase()}" />
                   <p:badge value="#{casesDetailsIvyDevWfBean.selectedCase.notes.size()}">
                     <p:commandButton id="caseNotesBtn"
                       styleClass="ui-button-secondary ui-button-outlined rounded-button ml-2"

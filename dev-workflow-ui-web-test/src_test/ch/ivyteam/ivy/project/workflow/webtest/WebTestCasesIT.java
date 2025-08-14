@@ -43,6 +43,8 @@ class WebTestCasesIT {
     openView("cases.xhtml");
     Table table = PrimeUi.table(By.id("casesForm:cases"));
     table.row(0).shouldHave(text("Created case of TestData"));
-    table.valueAt(0, 1).contains("running");
+    table.valueAtShouldBe(0, 0, text("open"));
+    $(By.id("casesForm:cases:0:caseState:stateName")).hover();
+    $(By.id("casesForm:cases:0:caseState:tooltip")).shouldHave(text("running"));
   }
 }

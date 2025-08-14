@@ -168,8 +168,4 @@ public class CasesDetailsIvyDevWfBean {
   public String getProcessPreviewLink() {
     return processPreviewLink;
   }
-
-  public void rerunCase() {
-    CaseUtil.rerunCaseProcess(selectedCase);
-  }
 }
