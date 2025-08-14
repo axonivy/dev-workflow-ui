@@ -62,7 +62,7 @@
                 style="width: 200px">
                 <p:menuitem id="openCaseDetailsBtn" value="Open case details" url="#{case.detailLink}"
                   icon="si si-information-circle" />
-                <p:menuitem value="Rerun process" actionListener="#{casesIvyDevWfBean.rerunProcess(case)}"
+                <p:menuitem value="Rerun process" actionListener="#{case.rerunCase()}"
                   id="rerunCaseProcessBtn" icon="si si-button-refresh-arrow" />
               </p:menu>
             </p:column>

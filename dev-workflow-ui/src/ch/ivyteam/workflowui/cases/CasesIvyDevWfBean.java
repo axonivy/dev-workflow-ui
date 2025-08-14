@@ -32,10 +32,6 @@ public class CasesIvyDevWfBean {
     return CaseUtil.getPrettyName(caseModel.getCase());
   }
 
-  public void rerunProcess(ICase caze) {
-    CaseUtil.rerunCaseProcess(caze);
-  }
-
   public void redirectToCaseRow(SelectEvent<CaseModel> event) {
     var object = event.getObject();
     if (object instanceof CaseModel caze) {
