@@ -1,62 +1,64 @@
 package ch.ivyteam.workflowui.util;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javax.faces.context.FacesContext;
 
-public class RedirectUtil {
-  private static RedirectHandler handler = new DefaultHandler();
+import ch.ivyteam.ivy.jsf.bean.wf.RedirectBean;
+import ch.ivyteam.workflowui.util.url.Page;
 
-  private static final Map<String, String> ORIGIN_TO_PAGE = Map.ofEntries(
-      Map.entry("home", "home.xhtml"),
-      Map.entry("starts", "starts.xhtml"),
-      Map.entry("tasks", "tasks.xhtml"),
-      Map.entry("task", "task.xhtml"),
-      Map.entry("cases", "cases.xhtml"),
-      Map.entry("case", "case.xhtml"),
-      Map.entry("login", "login.xhtml"),
-      Map.entry("switch-user", "switch-user.xhtml"),
-      Map.entry("end", "end.xhtml"),
-      Map.entry("signals", "signals.xhtml"),
-      Map.entry("intermediate-events", "intermediate-events.xhtml"),
-      Map.entry("api-browser", "api-browser.xhtml"),
-      Map.entry("statistics", "statistics.xhtml"),
-      Map.entry("webservices", "webservices.xhtml"));
+public final class RedirectUtil {
 
   public static void redirect() {
-    redirect("home");
+    redirect(Page.HOME);
   }
 
-  public static void redirect(String page) {
-    handler.redirect(page);
+  public static void redirect(Page page) {
+    redirect(page, Collections.emptyMap());
   }
 
-  public interface RedirectHandler {
-    void redirect(String url);
-  }
-
-  public static void setHandler(RedirectHandler handler) {
-    RedirectUtil.handler = handler;
-  }
-
-  private static final class DefaultHandler implements RedirectHandler {
-
-    @Override
-    public void redirect(String page) {
-      try {
-        FacesContext context = FacesContext.getCurrentInstance();
-        if (context == null) {
-          return;
-        }
-        var url = ORIGIN_TO_PAGE.get(page);
-        if (url != null) {
-          page = url;
-        }
-        context.getExternalContext().redirect(page);
-      } catch (IOException e) {
-        throw new RuntimeException("Could not send redirect", e);
-      }
+  public static void redirect(Page page, Map<String, String> parameters) {
+    Objects.requireNonNull(page, "page");
+    var url = page.getView();
+    if (parameters != null && !parameters.isEmpty()) {
+      url = url + "?" + buildQueryString(parameters);
     }
+    redirectUnsafe(url);
+  }
+
+  public static void redirectRelative(String url) {
+    try {
+      RedirectBean.checkUrl(url);
+    } catch (RuntimeException e) {
+      throw new RuntimeException("Redirecting to external websites is not allowed. Tried to redirect to: " + url, e);
+    }
+    redirectUnsafe(url);
+  }
+
+  // This should be only used if you are 100% sure the url is safe
+  public static void redirectUnsafe(String url) {
+    try {
+      FacesContext context = FacesContext.getCurrentInstance();
+      if (context == null) {
+        return;
+      }
+      context.getExternalContext().redirect(url);
+    } catch (IOException e) {
+      throw new RuntimeException("Could not send redirect", e);
+    }
+  }
+
+  private static String buildQueryString(Map<String, String> parameters) {
+    return parameters.entrySet().stream()
+        .filter(e -> e.getKey() != null && e.getValue() != null)
+        .map(e -> URLEncoder.encode(e.getKey(), StandardCharsets.UTF_8)
+            + "=" + URLEncoder.encode(e.getValue(), StandardCharsets.UTF_8))
+        .collect(Collectors.joining("&"));
   }
 }

@@ -31,6 +31,7 @@ public class LoginBean {
   private String username;
   private String password;
   private String origin;
+  private String originalUrl;
   private OAuthProvider oauthProvider;
 
   public LoginBean() {
@@ -57,6 +58,14 @@ public class LoginBean {
     this.origin = origin;
   }
 
+  public String getOriginalUrl() {
+    return originalUrl;
+  }
+
+  public void setOriginalUrl(String originalUrl) {
+    this.originalUrl = originalUrl;
+  }
+
   public String getOriginPage() {
     return URLEncoder.encode(UrlUtil.evalOriginPage(), StandardCharsets.UTF_8);
   }
@@ -67,7 +76,7 @@ public class LoginBean {
   }
 
   public void customLogin() {
-    LoginUtil.login(getUsername(), password, getOrigin());
+    LoginUtil.login(getUsername(), password, getOrigin(), getOriginalUrl());
     password = "";
   }
 

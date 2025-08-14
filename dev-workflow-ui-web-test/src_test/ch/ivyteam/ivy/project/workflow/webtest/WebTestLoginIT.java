@@ -141,20 +141,31 @@ class WebTestLoginIT {
   }
 
   @Test
+  void dontRedirectToDifferentUrl() {
+    var urlToRedirect = "https://dev.axonivy.com";
+    openView(LOGIN, Map.of("originalUrl", urlToRedirect));
+    $(By.id("loginForm:loginMessage")).shouldNotBe(visible);
+    WorkflowUiUtil.fillLoginData("Developer", "Developer");
+    $(By.className("exception-content"))
+        .shouldBe(visible)
+        .shouldHave(text("Redirecting to external websites is not allowed. Tried to redirect to: " + urlToRedirect));
+  }
+
+  @Test
   void redirectToDifferentUrl_bothParams() {
-    var originPage = "tasks.xhtml";
+    var originPage = "tasks";
     var originalUrl = "cases.xhtml";
 
     openView(LOGIN, Map.of("originalUrl", originalUrl, "origin", originPage));
-    $("#loginForm\\:loginMessage").shouldNotBe(visible);
+    $(By.id("loginForm:loginMessage")).shouldNotBe(visible);
     WorkflowUiUtil.fillLoginData("Developer", "Developer");
-    assertCurrentUrlContains(originalUrl);
+    assertCurrentUrlContains(originPage);
 
     // Different order
     openView(LOGIN, Map.of("origin", originPage, "originalUrl", originalUrl));
-    $("#loginForm\\:loginMessage").shouldNotBe(visible);
+    $(By.id("loginForm:loginMessage")).shouldNotBe(visible);
     WorkflowUiUtil.fillLoginData("Developer", "Developer");
-    assertCurrentUrlContains(originalUrl);
+    assertCurrentUrlContains(originPage);
   }
 
   @Test

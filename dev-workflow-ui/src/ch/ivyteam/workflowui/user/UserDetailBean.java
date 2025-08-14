@@ -1,5 +1,7 @@
 package ch.ivyteam.workflowui.user;
 
+import java.util.Map;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -12,6 +14,7 @@ import ch.ivyteam.workflowui.util.PermissionsUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.ResponseHelper;
 import ch.ivyteam.workflowui.util.TaskUtil;
+import ch.ivyteam.workflowui.util.url.Page;
 
 @ManagedBean
 @ViewScoped
@@ -29,7 +32,7 @@ public class UserDetailBean {
   public void redirectToCaseRow(SelectEvent<ICase> event) {
     var object = event.getObject();
     if (object instanceof ICase caze) {
-      RedirectUtil.redirect("case.xhtml?id=" + caze.uuid());
+      RedirectUtil.redirect(Page.CASE, Map.of("id", caze.uuid()));
     }
   }
 

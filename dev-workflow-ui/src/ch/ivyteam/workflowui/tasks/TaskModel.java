@@ -247,10 +247,6 @@ public class TaskModel {
   }
 
   public String getDetailUrl() {
-    return toDetailUrl(uuid);
-  }
-
-  public static String toDetailUrl(String uuid) {
     return "task.xhtml?id=" + uuid;
   }
 

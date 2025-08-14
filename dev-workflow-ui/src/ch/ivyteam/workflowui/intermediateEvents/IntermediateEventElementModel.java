@@ -1,12 +1,14 @@
 package ch.ivyteam.workflowui.intermediateEvents;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import ch.ivyteam.ivy.workflow.IIntermediateEventElement;
 import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
 import ch.ivyteam.workflowui.util.ProcessModelsUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
+import ch.ivyteam.workflowui.util.url.Page;
 
 public class IntermediateEventElementModel {
 
@@ -42,7 +44,7 @@ public class IntermediateEventElementModel {
   }
 
   public void redirectToElement() {
-    RedirectUtil.redirect("intermediate-event.xhtml?intermediateEvent=" + processElementId);
+    RedirectUtil.redirect(Page.INTERMEDIATE_EVENT, Map.of("intermediateEvent", processElementId));
   }
 
   public String getName() {

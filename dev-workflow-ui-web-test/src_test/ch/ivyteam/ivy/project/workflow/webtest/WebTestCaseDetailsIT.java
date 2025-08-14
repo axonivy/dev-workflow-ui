@@ -63,7 +63,12 @@ class WebTestCaseDetailsIT {
   @Test
   void taskList() {
     Table tasksTable = PrimeUi.table(By.id("tasksForm:tasks"));
-    tasksTable.valueAt(0, 0).contains("Test Task");
+    tasksTable.valueAtShouldBe(0, 2, text("First task of TestData"));
+
+    $(By.id("tasksForm:tasks:0:taskActionsBtn")).shouldBe(visible).click();
+    $(By.id("tasksForm:tasks:0:openTaskDetailsBtn")).shouldBe(visible).click();
+
+    $(By.id("taskName")).shouldBe(text("First task of TestData"));
   }
 
   @Test
