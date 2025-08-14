@@ -37,7 +37,7 @@
       <outputDirectory>./META-INF/resources/components</outputDirectory>
     </fileSet>
     <fileSet>
-    <directory>cms</directory>
+      <directory>cms</directory>
       <outputDirectory>./META-INF/ivy/cms</outputDirectory>
     </fileSet>
   </fileSets>
