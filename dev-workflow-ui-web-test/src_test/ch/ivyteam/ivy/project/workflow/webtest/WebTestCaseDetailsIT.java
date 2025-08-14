@@ -92,7 +92,7 @@ class WebTestCaseDetailsIT {
   @Test
   void customFields() {
     Table fieldsTable = PrimeUi.table(By.id("customFields:customFieldsTable"));
-    fieldsTable.valueAt(1, 0).contains("field 2");
+    fieldsTable.valueAtShouldBe(0, 0, text("field 2"));
   }
 
   @Test
