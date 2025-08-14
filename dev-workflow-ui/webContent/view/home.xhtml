@@ -131,7 +131,7 @@
                     at="right bottom">
                     <p:menuitem id="openCaseDetailsBtn" value="#{ivy.cm.co('/common/openDetails')}"
                       url="#{case.detailLink}" icon="si si-information-circle" />
-                    <p:menuitem value="#{ivy.cm.co('/common/rerunProcess')}" actionListener="#{casesBean.rerunProcess(case)}"
+                    <p:menuitem value="#{ivy.cm.co('/common/rerunProcess')}" actionListener="#{case.rerunCase()}"
                       id="rerunCaseProcessBtn" icon="si si-button-refresh-arrow" />
                   </p:menu>
                 </p:column>
