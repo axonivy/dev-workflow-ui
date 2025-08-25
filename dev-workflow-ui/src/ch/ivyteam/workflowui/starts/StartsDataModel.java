@@ -1,14 +1,16 @@
 package ch.ivyteam.workflowui.starts;
 
 import java.util.List;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import ch.ivyteam.workflowui.util.ProcessModelsUtil;
 
 public class StartsDataModel {
 
   private final List<StartableModel> allStartables;
+  private List<StartableModel> filteredStartables;
   private String globalFilter = "";
   private final boolean isOnlySingleApplication;
   private final boolean isOnlySingleProject;
@@ -20,24 +22,28 @@ public class StartsDataModel {
     isOnlySingleProject = allStartables.stream().map(StartableModel::getProjectName).distinct().count() == 1;
     var allProjects = allStartables.stream().map(StartableModel::getProjectName).distinct().sorted().toList();
     projectFilterModel = new ProjectFilterModel(allProjects);
+    applyFilters();
   }
 
   public List<StartableModel> getStartables() {
-    return allStartables.stream()
-        .filter(start -> projectFilterModel.getAppliedProjects().contains(start.getProjectName()))
-        .filter(this::matchesGlobalFilter)
-        .toList();
+    return filteredStartables;
   }
 
   private boolean matchesGlobalFilter(StartableModel start) {
-    if (StringUtils.isBlank(globalFilter)) {
+    if (start == null || globalFilter == null || globalFilter.isBlank()) {
       return true;
     }
-    return Strings.CI.contains(start.getDisplayName(), globalFilter) ||
-        Strings.CI.contains(start.getDescription(), globalFilter) ||
-        Strings.CI.contains(start.getApplicationName(), globalFilter) ||
-        Strings.CI.contains(start.getProjectName(), globalFilter) ||
-        (start.getCategory() != null && Strings.CI.contains(start.getCategory().getName(), globalFilter));
+
+    var filter = globalFilter.toLowerCase();
+    return Stream.of(
+        start.getDisplayName(),
+        start.getDescription(),
+        start.getApplicationName(),
+        start.getProjectName(),
+        start.getCategory() != null ? start.getCategory().getName() : null)
+        .filter(Objects::nonNull)
+        .map(String::toLowerCase)
+        .anyMatch(text -> text.contains(filter));
   }
 
   public String getGlobalFilter() {
@@ -46,6 +52,14 @@ public class StartsDataModel {
 
   public void setGlobalFilter(String globalFilter) {
     this.globalFilter = globalFilter;
+    applyFilters();
+  }
+
+  private void applyFilters() {
+    this.filteredStartables = allStartables.stream()
+        .filter(start -> projectFilterModel.getAppliedProjects().contains(start.getProjectName()))
+        .filter(this::matchesGlobalFilter)
+        .collect(Collectors.toList());
   }
 
   public void resetGlobalFilter() {
@@ -61,6 +75,7 @@ public class StartsDataModel {
   }
 
   public ProjectFilterModel getProjectFilterModel() {
+    applyFilters();
     return projectFilterModel;
   }
 

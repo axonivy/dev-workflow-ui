@@ -14,6 +14,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Map;
 
@@ -236,18 +237,7 @@ class WebTestStartsIT {
     openView("starts.xhtml");
     var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
 
-    $(By.id("startsForm:filterBtn")).shouldBe(visible).click();
-    $(By.id("startsForm:filterPanel")).shouldBe(visible);
-
-    $(By.id("startsForm:clearAll")).click();
-    $(By.id("startsForm:filterCheckboxes"))
-        .$$("label")
-        .findBy(text("dev-workflow-ui-test-data"))
-        .shouldBe(visible)
-        .click();
-
-    $(By.id("startsForm:applyFilter")).click();
-    $(By.id("startsForm:filterPanel")).shouldNotBe(visible);
+    selectProjectFilter("dev-workflow-ui-test-data");
 
     starts.contains("dev-workflow-ui-test-data");
     starts.containsNot("Main/DefaultApplicationHomePage.ivp");
@@ -255,7 +245,33 @@ class WebTestStartsIT {
 
     $(By.id("startsForm:resetFilter")).click();
     $(By.id("startsForm:resetFilter")).shouldNotBe(visible);
+    $(By.id("startsForm:globalFilter")).shouldBe(empty);
     starts.contains("Main/DefaultApplicationHomePage.ivp");
+  }
+
+  @Test
+  void startsTableSorting() {
+    openView("starts.xhtml");
+    var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
+    $(By.id("startsForm:projectStarts:startNameColumn")).shouldBe(visible).click();
+    var firstSorting = starts.valueAt(0, 1);
+
+    $(By.id("startsForm:projectStarts:startNameColumn")).shouldBe(visible).click();
+    var secondSorting = starts.valueAt(0, 1);
+    assertThat(firstSorting).isNotEqualTo(secondSorting);
+  }
+
+  @Test
+  void projectFilterAfterGlobalFilter() {
+    openView("starts.xhtml");
+    var starts = PrimeUi.table(By.id("startsForm:projectStarts"));
+
+    filterStarts("defaultusernotificationsettingspage");
+    starts.valueAtShouldBe(0, 1, text("Main/DefaultUserNotificationSettingsPage.ivp"));
+    starts.containsNot("dev-workflow-ui-test-data");
+
+    selectProjectFilter("dev-workflow-ui-test-data");
+    starts.containsNot("Main/DefaultUserNotificationSettingsPage.ivp");
   }
 
   @Test
@@ -294,6 +310,21 @@ class WebTestStartsIT {
     $(By.id("startsForm:globalFilter")).shouldBe(empty);
     $(By.id("startsForm:projectStarts")).shouldBe(visible);
     $(By.id("startsForm:resetFilter")).shouldNotBe(visible);
+  }
+
+  static void selectProjectFilter(String projectName) {
+    $(By.id("startsForm:filterBtn")).shouldBe(visible).click();
+    $(By.id("startsForm:filterPanel")).shouldBe(visible);
+
+    $(By.id("startsForm:clearAll")).click();
+    $(By.id("startsForm:filterCheckboxes"))
+        .$$("label")
+        .findBy(text(projectName))
+        .shouldBe(visible)
+        .click();
+
+    $(By.id("startsForm:applyFilter")).click();
+    $(By.id("startsForm:filterPanel")).shouldNotBe(visible);
   }
 
   static void clearFilter() {

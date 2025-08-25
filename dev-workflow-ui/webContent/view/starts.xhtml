@@ -59,7 +59,7 @@
               <h:panelGroup id="projectFilterButtons" styleClass="flex align-items-center">
                 <h:panelGroup rendered="#{processesBean.startsDataModel.projectFilterModel.projectFilterActive}">
                   <p:commandLink id="resetFilter" actionListener="#{processesBean.resetAllFilters}" process="@this"
-                    update=":startsForm:projectStarts :startsForm:projectFilterButtons :startsForm:filterCheckboxes"
+                    update=":startsForm:projectStarts :startsForm:projectFilterButtons :startsForm:filterCheckboxes startsForm:globalFilter"
                     styleClass="ui-button-text ui-button-danger flex align-items-center mr-2">
                     <i class="si si-button-refresh-arrow mr-1"/>#{ivy.cm.co('/common/reset')}
                   </p:commandLink>
@@ -95,7 +95,7 @@
             <p:column width="20px" resizable="false">
               <h:outputText id="processStartIcon" class="#{start.icon} si-lg vertical-align-middle" />
             </p:column>
-            <p:column headerText="#{ivy.cm.co('/starts/process')}" sortBy="#{start.displayName}" filterBy="#{start.displayName}">
+            <p:column id="startNameColumn" headerText="#{ivy.cm.co('/starts/process')}" sortBy="#{start.displayName}" filterBy="#{start.displayName}">
               <h:outputText id="startName" value="#{start.displayName}" styleClass="start-name text-primary-color"/>
               <h:panelGroup class="start-description overflow-hidden-ellipsis text-sm" layout="block"
                 rendered="#{not empty start.description}">
