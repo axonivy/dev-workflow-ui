@@ -97,7 +97,7 @@
             <p:column width="20px" resizable="false">
               <h:outputText id="processStartIcon" class="#{start.icon} si-lg vertical-align-middle" />
             </p:column>
-            <p:column headerText="Process" sortBy="#{start.displayName}" filterBy="#{start.displayName}">
+            <p:column id="startNameColumn" headerText="Process" sortBy="#{start.displayName}" filterBy="#{start.displayName}">
               <h:outputText id="startName" value="#{start.displayName}" styleClass="start-name text-primary-color"/>
               <div class="start-description overflow-hidden-ellipsis text-sm">
                 <h:outputText id="startDescription" value="#{start.description}" />
