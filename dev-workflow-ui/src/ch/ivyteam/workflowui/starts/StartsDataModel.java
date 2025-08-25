@@ -2,6 +2,7 @@ package ch.ivyteam.workflowui.starts;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import ch.ivyteam.workflowui.util.ProcessModelsUtil;
@@ -9,6 +10,7 @@ import ch.ivyteam.workflowui.util.ProcessModelsUtil;
 public class StartsDataModel {
 
   private final List<StartableModel> allStartables;
+  private List<StartableModel> filteredStartables;
   private String globalFilter = "";
   private final boolean isOnlySingleApplication;
   private final boolean isOnlySingleProject;
@@ -20,13 +22,11 @@ public class StartsDataModel {
     isOnlySingleProject = allStartables.stream().map(StartableModel::getProjectName).distinct().count() == 1;
     var allProjects = allStartables.stream().map(StartableModel::getProjectName).distinct().sorted().toList();
     projectFilterModel = new ProjectFilterModel(allProjects);
+    applyFilters();
   }
 
   public List<StartableModel> getStartables() {
-    return allStartables.stream()
-        .filter(start -> projectFilterModel.getAppliedProjects().contains(start.getProjectName()))
-        .filter(this::matchesGlobalFilter)
-        .toList();
+    return filteredStartables;
   }
 
   private boolean matchesGlobalFilter(StartableModel start) {
@@ -52,6 +52,14 @@ public class StartsDataModel {
 
   public void setGlobalFilter(String globalFilter) {
     this.globalFilter = globalFilter;
+    applyFilters();
+  }
+
+  private void applyFilters() {
+    this.filteredStartables = allStartables.stream()
+        .filter(start -> projectFilterModel.getAppliedProjects().contains(start.getProjectName()))
+        .filter(this::matchesGlobalFilter)
+        .collect(Collectors.toList());
   }
 
   public void resetGlobalFilter() {
@@ -67,6 +75,7 @@ public class StartsDataModel {
   }
 
   public ProjectFilterModel getProjectFilterModel() {
+    applyFilters();
     return projectFilterModel;
   }
 
