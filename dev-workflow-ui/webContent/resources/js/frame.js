@@ -8,19 +8,9 @@ function iframeURLChange() {
 
   const redirectMainWindow = (newHref, iframe) => {
     const originPage = new URLSearchParams(window.location.search).get("origin");
-    if (iframe.contentWindow.location.pathname.match("/default/redirect.xhtml")) {
-      const redirectedPage = new URLSearchParams(iframe.contentWindow.location.search).get("redirectPage");
-      const newPage = checkAndReturnUrl(redirectedPage, originPage);
-      if (newPage) {
-        safeRedirect(newPage);
-      } else {
-        window.location = redirectedPage;
-      }
-    } else {
-      const newPage = checkAndReturnUrl(newHref, originPage);
-      if (newPage) {
-        safeRedirect(newPage);
-      }
+    const newPage = checkAndReturnUrl(newHref, originPage);
+    if (newPage) {
+      safeRedirect(newPage);
     }
   };
 
@@ -116,30 +106,34 @@ function checkAndReturnUrl(newURL, originPage) {
     },
     {
       match: (url) =>
-        url.endsWith("/faces/home.xhtml") ||
         url.includes("DefaultApplicationHomePage.ivp") ||
-        url.endsWith("/app/home.xhtml"),
+        url.endsWith("/faces/home.xhtml") ||
+        url.endsWith("/app/home.xhtml") ||
+        url.endsWith("/go/home"),
       target: () => "home",
     },
     {
       match: (url) =>
-        url.endsWith("/faces/tasks.xhtml") ||
         url.includes("DefaultTaskListPage.ivp") ||
-        url.endsWith("/app/tasks.xhtml"),
+        url.endsWith("/faces/tasks.xhtml") ||
+        url.endsWith("/app/tasks.xhtml") ||
+        url.endsWith("/go/tasks"),
       target: () => "tasks",
     },
     {
       match: (url) =>
-        url.endsWith("/faces/starts.xhtml") ||
         url.includes("DefaultProcessStartListPage.ivp") ||
-        url.endsWith("/app/starts.xhtml"),
+        url.endsWith("/faces/starts.xhtml") ||
+        url.endsWith("/app/starts.xhtml") ||
+        url.endsWith("/go/starts"),
       target: () => "starts",
     },
     {
       match: (url) =>
-        url.endsWith("/faces/login.xhtml") ||
         url.includes("DefaultLoginPage.ivp") ||
-        url.endsWith("/app/login.xhtml"),
+        url.endsWith("/faces/login.xhtml") ||
+        url.endsWith("/app/login.xhtml") ||
+        url.endsWith("/go/login"),
       target: () => "login",
     },
     {
