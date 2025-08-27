@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 import javax.faces.context.FacesContext;
 
-import ch.ivyteam.ivy.jsf.bean.wf.RedirectBean;
+import ch.ivyteam.util.uri.UriChecker;
 import ch.ivyteam.workflowui.util.url.Page;
 
 public final class RedirectUtil {
@@ -34,7 +34,7 @@ public final class RedirectUtil {
 
   public static void redirectRelative(String url) {
     try {
-      RedirectBean.checkUrl(url);
+      UriChecker.checkUrl(url);
     } catch (RuntimeException e) {
       throw new RuntimeException("Redirecting to external websites is not allowed. Tried to redirect to: " + url, e);
     }
