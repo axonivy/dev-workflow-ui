@@ -2,6 +2,7 @@ package ch.ivyteam.ivy.project.workflow.webtest;
 
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.open;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static com.codeborne.selenide.CollectionCondition.size;
@@ -19,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import com.axonivy.ivy.webtest.IvyWebTest;
+import com.axonivy.ivy.webtest.engine.EngineUrl;
 import com.axonivy.ivy.webtest.primeui.PrimeUi;
 import com.axonivy.ivy.webtest.primeui.widget.Table;
 import com.codeborne.selenide.Selenide;
@@ -132,6 +134,16 @@ class WebTestCaseDetailsIT {
     $(".current-hierarchy-case").findAll(By.id("businessCase:caseLink")).shouldBe(size(1)).get(0).hover();
     $(By.id("businessCase:caseState:stateName")).shouldHave(text("destroyed"));
     $(By.id("caseDestroyBtn")).shouldHave(cssClass("ui-state-disabled"));
+  }
+
+  @Test
+  void rerunCase() {
+    open(EngineUrl.createProcessUrl("/dev-workflow-ui-test-data/1750C5211D94569D/doubleDialog.ivp"));
+    $(By.id("testDialogTitle")).shouldHave(text("Hey! This is first test dialog."));
+    $(By.id("form:proceed")).shouldBe(visible).click();
+    Navigation.openCase("Case created in UserTask during doubleDialog process");
+    $(By.id("caseRerunBtn")).shouldBe(visible).click();
+    $(By.id("iFrameForm:frameTaskName")).shouldHave(text("First task of doubleDialog"));
   }
 
   @Test
