@@ -186,7 +186,7 @@ notifications:
 profile:
   currentContentLanguage: Aktuelle Sprache
   currentContentLocale: Sprache der aktuellen Sitzung
-  currentFormattingLanguage: AKtuelle formattierungs Sprache
+  currentFormattingLanguage: Aktuelle formattierungs Sprache
   currentFormattingLocale: Formattierungs Sprache der aktuellen Sitzung
   languageAndLocalization: Sprache & Lokalisierung
 sidebar:
