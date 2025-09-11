@@ -3,9 +3,6 @@ package ch.ivyteam.workflowui.profile;
 import java.util.List;
 import java.util.Locale;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-
 import ch.ivyteam.ivy.notification.channel.Event;
 import ch.ivyteam.ivy.notification.channel.NotificationSubscription;
 import ch.ivyteam.ivy.security.ISecurityContext;
@@ -29,21 +26,8 @@ public class NotificationChannelDataModel {
     channels = NotificationChannelDto.all(subscriber, securityContext);
   }
 
-  public void reset() {
-    channels.forEach(this::resetChannel);
-    onload();
-    addMessage("Notification Channels reset");
-  }
-
-  private void resetChannel(NotificationChannelDto channel) {
-    channel.getSubscriptions().forEach(
-        (event, subscription) -> subscription.setState(NotificationChannelSubscriptionDto.State.USE_DEFAULT));
-    saveChannel(channel);
-  }
-
   public void save() {
     channels.forEach(this::saveChannel);
-    addMessage("Notification Channels changes saved");
   }
 
   private void saveChannel(NotificationChannelDto channel) {
@@ -51,10 +35,6 @@ public class NotificationChannelDataModel {
       var subscription = NotificationSubscription.of(subscriber, channel.getChannel(), eventSubscription.getKey());
       subscription.state(eventSubscription.getValue().getState().toDbState());
     });
-  }
-
-  private void addMessage(String msg) {
-    FacesContext.getCurrentInstance().addMessage("notificationMessage", new FacesMessage(msg));
   }
 
   public List<NotificationChannelDto> getChannels() {
