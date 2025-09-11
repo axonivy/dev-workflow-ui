@@ -22,7 +22,7 @@
                 </div>
                 <div>
                   <p:commandButton icon="si si-button-refresh-arrow" styleClass="ui-button-secondary rounded-button"
-                    id="caseRerunBtn" actionListener="#{casesDetailsBean.rerunCase}" />
+                    id="caseRerunBtn" actionListener="#{casesDetailsBean.selectedCaseModel.rerunCase}" />
                   <p:badge value="#{casesDetailsBean.selectedCase.notes.size()}">
                     <p:commandButton id="caseNotesBtn"
                       styleClass="ui-button-secondary ui-button-outlined rounded-button ml-2"
