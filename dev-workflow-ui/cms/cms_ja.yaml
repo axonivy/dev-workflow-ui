@@ -22,7 +22,7 @@ cleanup:
     dataCache: データキャッシュ
     sessionTokenStore: すべての ID プロバイダートークン
     userAndRole: すべてのユーザーとロール
-    workflow: すべてのケース、タスク、依存関係オブジェクト
+    workflow: すべてのケース、タスク、依存オブジェクト
   introduction: 異なるプロセスをクリックしていくと、ケースやタスクなどの異なる種類のデータを作成できます。 これにより、そのデータを消去してデザイナーをリセットすることができます。
 common:
   description: 説明
@@ -49,7 +49,7 @@ common:
   expireNow: もうすぐ期限切れ
   expiry: 有効期限
   externalId: 外部 ID
-  externalName: 外部名称
+  externalName: 外部名
   formattingLanguage: フォーマット言語
   fullname: フルネーム
   id: ID
@@ -81,7 +81,7 @@ common:
   processName: プロセス名
   rerunProcess: 再実行プロセス
   reset: リセット
-  responsible: 責任者
+  responsible: 担当
   roles: ロール
   save: 保存
   search: 検索
@@ -200,7 +200,7 @@ signals:
 starts:
   application: アプリケーション
   apply: 適用
-  areYouSure: starts.xhtml ページに移動するつもりはなかったのですか?
+  areYouSure: starts.xhtml ページに移動するつもりはありませんでしたか？
   category: カテゴリー
   deselectAll: すべて選択解除
   process: プロセス
