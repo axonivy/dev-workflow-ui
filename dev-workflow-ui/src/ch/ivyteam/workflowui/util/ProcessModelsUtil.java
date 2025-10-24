@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.application.IProcessModel;
 import ch.ivyteam.ivy.application.app.IApplicationRepository;
 import ch.ivyteam.ivy.security.ISecurityContext;
@@ -32,9 +33,11 @@ public class ProcessModelsUtil {
   }
 
   public static Stream<IWorkflowProcessModelVersion> getReleasedWorkflowPMVs() {
-    return getProcessModels().stream()
-        .map(IProcessModel::getReleasedProcessModelVersion)
+    var securityContext = ISecurityContext.current();
+    return IApplicationRepository.of(securityContext).all().stream()
+        .map(IApplication::getReleasedProcessModel)
         .filter(Objects::nonNull)
+        .flatMap(pm -> pm.getProcessModelVersions().stream())
         .map(IWorkflowProcessModelVersion::of);
   }
 
