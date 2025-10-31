@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import ch.ivyteam.ivy.workflow.IIntermediateEventElement;
-import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
 import ch.ivyteam.workflowui.util.ProcessModelsUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.url.Page;
@@ -19,7 +18,7 @@ public class IntermediateEventElementModel {
 
   @SuppressWarnings("deprecation")
   public static List<IntermediateEventElementModel> create() {
-    return getPMVs().stream()
+    return ProcessModelsUtil.getWorkflowPMVs().stream()
         .flatMap(pmv -> pmv.getIntermediateEventElements().stream())
         .map(IntermediateEventElementModel::new)
         .collect(Collectors.toList());
@@ -30,10 +29,6 @@ public class IntermediateEventElementModel {
         .filter(ie -> ie.getProcessElementId().equals(processElementId))
         .findFirst()
         .orElse(null);
-  }
-
-  private static List<IWorkflowProcessModelVersion> getPMVs() {
-    return ProcessModelsUtil.getWorkflowPMVs();
   }
 
   public IntermediateEventElementModel(IIntermediateEventElement ie) {
