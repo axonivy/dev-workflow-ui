@@ -1,0 +1,91 @@
+Error:
+  Page:
+    Error: Fehler
+    ErrorId: Fehler Nr.
+    ErrorTimestamp: Fehler Zeitstempel
+    Attributes: Attribute
+    ThrownBy: Geworfen von
+    ProcessCallStack: Prozess Aufrufstack
+    TechnicalCause: Technischer Grund
+    ContactAdmin: Bitte informieren Sie den Systemadministrator
+    RequestUri: Anfrage Uri
+    Servlet: Servlet
+    Application: Applikation
+    ThreadLocalValues: Anfragekontext
+    Name: Name
+    Value: Wert
+    StackTrace: Aufrufstack
+    StartLastProcess: 
+      Label: Starte den letzten Prozess nochmals
+      Description: Starte den letzten Prozess der gestarted wurde mit einer Laufkonfiguration oder durch drücken von x auf einem Start Element.
+    Details: Details
+    BackToApplication: Zurück zur Applikation
+  UnavailablePage:
+    Unavailable: ${product} momentan nicht verfügbar
+    State:
+      STARTING: ${product} ist am Starten
+      STOPPING: ${product} ist am Stoppen
+      RUNNING: ${product} läuft
+      STOPPED: ${product} ist gestopped
+  StatusCode:
+    "400": Ungültige Anfrage
+    "401": Nicht authorisiert
+    "403": Verboten
+    "404": Nicht gefunden
+    "409": Konflikt
+    "500": Server Fehler
+    "503": Dienst nicht verfügbar
+  Exception: 
+    ViewExpired: Ansicht abgelaufen
+Notification:
+  business:
+    Description: Diese Notifikation wird gesendet wenn in einem Prozess eine geschäftlich relavante Änderung passiert.
+    DisplayName: Geschäftliche Informationen
+    Labels:
+      Actions:
+        Details: Details des Vorgangs
+      Footer:
+        Sender: Diese E-Mail wurde gesendet von der Applikation
+        Settings: Verwalten von Benachrichtigungen
+      Greeting: Guten Tag
+      GreetingShort: Hallo
+      Title: Geschäftliche Information
+    Templates:
+      Default:
+        mail:
+          Subject: <%= message %>
+        web:
+          Subject: <%= ivy.html.escape(message) %>
+  new-task:
+    Description: Diese Notifikation wird immer dann gesendet wenn Ihnen eine neue Aufgabe zugewiesen wird.
+    DisplayName: Neue Aufgabe zugewiesen
+    Labels:
+      Actions:
+        Details: Details der Aufgabe
+        Start: Aufgabe starten
+      Description: Die folgende Aufgabe wurde Ihnen zugewiesen und wartet darauf, bearbeitet zu werden
+      Footer:
+        Sender: Diese E-Mail wurde gesendet von der Applikation
+        Settings: Verwalten von Benachrichtigungen
+      Greeting: Guten Tag
+      GreetingShort: Hallo
+      Task:
+        Created: Datum der Erstellung
+        Description: Beschreibung
+        Expiry: Bearbeitungsfrist
+        Name: Name
+        Priority: Priorität
+        PriorityLabels:
+          EXCEPTION: Ausnahme
+          HIGH: Hoch
+          LOW: Niedrig
+          NORMAL: Normal
+        Responsible: Verantwortlich
+        Title: Details der Aufgabe
+      Title: Ihnen wurde eine neue Aufgabe zugewiesen
+    Templates:
+      Default:
+        mail:
+          Subject: 'Neue Aufgabe "<%= ivy.html.escape(ivy.task.name) %>" zugewiesen zu: <%= ivy.html.escape(ivy.task.responsibles().displayName()) %>'
+        web:
+          Subject: Neue Aufgabe '<%= ivy.html.escape(ivy.task.name) %>' für <%= ivy.html.escape(ivy.task.responsibles().displayName()) %>

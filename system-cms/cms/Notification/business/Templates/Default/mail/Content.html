@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <style><%= ivy.cm.co("/Notification/business/Templates/Default/mail/Resources/Style") %></style>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td class="mail-content">
+          <img
+            class="logo"
+            src="<%= ivy.branding.ref("logo_mail") %>"
+            alt="Logo"
+            height="16"
+          />
+          <hr />
+          <h3><%= ivy.cm.co("/Notification/business/Labels/Title") %></h3>
+          <p><%= ivy.cm.co("/Notification/business/Labels/Greeting") %> <%= ivy.session.getSessionUser().getFullName() %>,</p>
+          <p><%= ivy.html.escape(message) %></p>
+          <hr />
+          <%= ivy.case == null ? "" : String.format("
+          <table>
+            <tbody>
+              <tr class=\"actions\">
+                <td class=\"case-details-action\">
+                  <!--[if !mso]> <!-->
+                  <div>
+                    <img
+                      src=\"%1$s\"
+                      height=\"12\"
+                    />
+                    <a href=\"%2$s\">
+                      %3$s
+                    </a>
+                  </div>
+                  <!-- <![endif]-->
+                  <!--[if mso]>
+                  <v:roundrect
+                    xmlns:v=\"urn:schemas-microsoft-com:vml\"
+                    xmlns:w=\"urn:schemas-microsoft-com:office:word\"
+                    href=\"%2$s\"
+                    style=\"height: 28px; width: 103px;\"
+                    strokecolor=\"none\"
+                    fillcolor=\"#D8D9D9\"
+                  >
+                    <table>
+                      <tr>
+                        <td>
+                          <img
+                            src=\"%1$s\"
+                            height=\"12\"
+                          />
+                        </td>
+                        <td align=\"right\">
+                          %3$s
+                        </td>
+                      </tr>
+                    </table>
+                  </v:roundrect>
+                  <![endif]-->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <hr />",
+            ivy.cm.ref("/Notification/business/Templates/Default/mail/Resources/Info"),
+            ivy.case.getDetailLink().getAbsoluteEncoded(),
+            ivy.cm.co("/Notification/business/Labels/Actions/Details")
+          )
+          %>
+          <table class="footer">
+            <tr>
+              <td>
+                <%= ivy.cm.co("/Notification/business/Labels/Footer/Sender") %> <a href="<%= ivy.html.applicationHomeLink().getAbsolute() %>"><%= ivy.application.getName() %></a>
+              </td>
+              <td class="right">
+                <a href="<%= ivy.html.userNotificationSettingsLink().getAbsolute() %>"><%= ivy.cm.co("/Notification/business/Labels/Footer/Settings") %></a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

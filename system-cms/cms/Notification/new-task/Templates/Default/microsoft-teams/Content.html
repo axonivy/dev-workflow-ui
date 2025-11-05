@@ -1,0 +1,27 @@
+<html>
+  <body>
+    <p><b><%= ivy.cm.co("/Notification/new-task/Labels/Title") %>!</b></p>
+    <br />
+    <p><%= ivy.cm.co("/Notification/new-task/Labels/GreetingShort") %> <%= ivy.session.getSessionUser().getFullName() %>,</p>
+    <p><%= ivy.cm.co("/Notification/new-task/Labels/Description") %>:</p>
+    <br />
+    <p><b><%= ivy.cm.co("/Notification/new-task/Labels/Task/Name") %></b>&nbsp;&nbsp;&nbsp;<%= ivy.html.escape(ivy.task.name) %></p>
+    <p><b><%= ivy.cm.co("/Notification/new-task/Labels/Task/Description") %></b>&nbsp;&nbsp;&nbsp;<%= ivy.html.escape(ivy.task.description) %></p>
+    <p><b><%= ivy.cm.co("/Notification/new-task/Labels/Task/Responsible") %></b>&nbsp;&nbsp;&nbsp;<%= ivy.html.escape(ivy.task.responsibles().displayName()) %></p>
+    <p><b><%= ivy.cm.co("/Notification/new-task/Labels/Task/Priority") %></b>&nbsp;&nbsp;&nbsp;<%= ivy.cm.co("/Notification/new-task/Labels/Task/PriorityLabels/" + ivy.task.getPriority()) %></p>
+    <p><b><%= ivy.cm.co("/Notification/new-task/Labels/Task/Expiry") %></b>&nbsp;&nbsp;&nbsp;<%= ivy.task.getExpiryTimestamp() is initialized ? ivy.task.getExpiryTimestamp().format("short", "short") : "-" %></p>
+    <br />
+    <p>
+      <a href="<%= ivy.task.getStartLinkEmbedded().getAbsoluteEncoded() %>">
+        <%= ivy.cm.co("/Notification/new-task/Labels/Actions/Start") %>
+      </a>
+    </p>
+    <p>
+      <a href="<%= ivy.task.getDetailLink().getAbsoluteEncoded() %>">
+        <%= ivy.cm.co("/Notification/new-task/Labels/Actions/Details") %>
+      </a>
+    </p>
+    <br />
+    <img src="<%= ivy.branding.ref("logo_mail") %>" alt="Logo" style="width: 105px; height: 16px" />
+  </body>
+</html>

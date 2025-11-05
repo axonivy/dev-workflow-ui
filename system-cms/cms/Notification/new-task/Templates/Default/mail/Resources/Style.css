@@ -1,0 +1,109 @@
+body {
+  font-family: "Segoe UI", "Arial", "Helvetica Neue", "Helvetica", "sans-serif";
+}
+
+body,
+table {
+  font-size: 9pt;
+  border-spacing: 0;
+}
+
+.mail-content {
+  width: 800px;
+}
+
+.logo {
+  height: 16px;
+}
+
+hr {
+  background-color: #D8D9D9;
+  height: 1px;
+  border: none;
+  margin: 20px 0;
+}
+
+h3 {
+  font-size: 11pt;
+  margin: 20px 0;
+}
+
+th {
+  font-weight: 500;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.task-details td {
+  color: #585656;
+  padding: 0 0 10px 0;
+}
+
+th,
+.task-details td {
+  vertical-align: top;
+  padding: 0 30px 10px 0;
+}
+
+a {
+  text-decoration: none;
+  color: #006F94;
+}
+
+.actions td {
+  padding-top: 10px;
+  padding-bottom: 0;
+  vertical-align: middle;
+}
+
+.actions div {
+  display: inline-block;
+  border-radius: 5px;
+  padding: 6px 10px;
+  line-height: 12px;
+}
+
+.actions img,
+.actions a {
+  vertical-align: middle;
+}
+
+.actions img {
+  height: 12px;
+}
+
+.start-task-action div {
+  background-color: #006F94;
+}
+
+.start-task-action a,
+.start-task-action td {
+  color: #FFFFFF;
+}
+
+.task-details-action div {
+  background-color: #D8D9D9;
+}
+
+.task-details-action a,
+.task-details-action td {
+  color: #000000;
+}
+
+.actions table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.actions table td {
+  padding: 0 2px 0 0;
+}
+
+.footer {
+  font-size: 7pt;
+  width: 100%;
+}
+
+.right {
+  text-align: right;
+}
