@@ -1,0 +1,91 @@
+Error:
+  Page:
+    Error: Error
+    ErrorId: Error id
+    ErrorTimestamp: Error Timestamp
+    Attributes: Attributes
+    ThrownBy: Thrown by
+    ProcessCallStack: Process call stack
+    TechnicalCause: Technical cause
+    RequestUri: Request Uri
+    Servlet: Servlet
+    Application: Application
+    ThreadLocalValues: Request context
+    Name: Name
+    Value: Value
+    StackTrace: Stack Trace
+    StartLastProcess:
+      Label: Start last process
+      Description: Starts the last process that was started with a launch configuration or by pressing x on a start element.
+    ContactAdmin: Please contact the system administrator
+    Details: Details
+    BackToApplication: Back to application
+  UnavailablePage:
+    Unavailable: ${product} currently not available
+    State:
+      STARTING: ${product} is starting
+      STOPPING: ${product} is stopping
+      RUNNING: ${product} is running
+      STOPPED: ${product} is stopped
+  StatusCode:
+    "400": Bad Request
+    "401": Unauthorized
+    "403": Forbidden
+    "404": Not Found
+    "409": Conflict
+    "500": Server Error
+    "503": Service Unavailable
+  Exception: 
+    ViewExpired: View Expired
+Notification:
+  business:
+    Description: This notification will be sent if a business relevant change happens in a process.
+    DisplayName: Business Information
+    Labels:
+      Actions:
+        Details: Case Details
+      Footer:
+        Sender: This email was sent by application
+        Settings: Manage notifications
+      Greeting: Hello
+      GreetingShort: Hi
+      Title: Business Information
+    Templates:
+      Default:
+        mail:
+          Subject: <%= message %>
+        web:
+          Subject: <%= ivy.html.escape(message) %>
+  new-task:
+    Description: This notification is sent whenever a new task is assigned to you.
+    DisplayName: New task assigned
+    Labels:
+      Actions:
+        Details: Task Details
+        Start: Start Task
+      Description: The following task has been assigned to you and is waiting to be processed
+      Footer:
+        Sender: This email was sent by application
+        Settings: Manage notifications
+      Greeting: Hello
+      GreetingShort: Hi
+      Task:
+        Created: Date created
+        Description: Description
+        Expiry: Expiry date
+        Name: Name
+        Priority: Priority
+        PriorityLabels:
+          EXCEPTION: Exception
+          HIGH: High
+          LOW: Low
+          NORMAL: Normal
+        Responsible: Responsible
+        Title: Task details
+      Title: A new task was assigned to you
+    Templates:
+      Default:
+        mail:
+          Subject: 'New Task "<%= ivy.html.escape(ivy.task.name) %>" assigned to: <%= ivy.html.escape(ivy.task.responsibles().displayName()) %>'
+        web:
+          Subject: New Task '<%= ivy.html.escape(ivy.task.name) %>' for <%= ivy.html.escape(ivy.task.responsibles().displayName()) %>

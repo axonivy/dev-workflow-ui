@@ -1,0 +1,21 @@
+<html>
+  <body>
+    <p><b><%= ivy.cm.co("/Notification/business/Labels/Title") %></b></p>
+    <br />
+    <p><%= ivy.cm.co("/Notification/business/Labels/GreetingShort") %> <%= ivy.session.getSessionUser().getFullName() %>,</p>
+    <p><%= ivy.html.escape(message) %></p>
+    <br />
+    <%= ivy.case == null ? "" : String.format("
+    <p>
+      <a href=\"%s\">
+        %s
+      </a>
+    </p>
+    <br />",
+      ivy.case.getDetailLink().getAbsoluteEncoded(),
+      ivy.cm.co("/Notification/business/Labels/Actions/Details")
+    )
+    %>
+    <img src="<%= ivy.branding.ref("logo_mail") %>" alt="Logo" style="width: 105px; height: 16px" />
+  </body>
+</html>

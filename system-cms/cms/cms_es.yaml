@@ -1,0 +1,90 @@
+Error:
+  Page:
+    Error: Error
+    ErrorId: Id. del error
+    ErrorTimestamp: Marca de tiempo del erro
+    Attributes: Atributos
+    ThrownBy: Generado por
+    ProcessCallStack: Pila de llamadas del proceso
+    TechnicalCause: Causa técnica
+    RequestUri:  Uri de la solicitud
+    Servlet: Servlet
+    Application: Aplicación
+    ThreadLocalValues: Contexto de la solicitud
+    Name: Nombre
+    Value: Valor
+    StackTrace:  Rastreo de pila
+    StartLastProcess:
+      Label:  Iniciar último proceso
+      Description: Inicia el último proceso que se inició con una configuración de inicio o pulsando x en un elemento de inicio.
+    ContactAdmin: Póngase en contacto con el administrador del sistema.
+    Details: Detalles
+    BackToApplication: Volver a la aplicación
+  UnavailablePage:
+    Unavailable: ${product} no está disponible actualmente
+    State:
+      STARTING: ${product} se está iniciando
+      STOPPING: ${product} se está deteniendo
+      RUNNING: ${product} está en funcionamiento
+      STOPPED: ${product} se ha detenido
+  StatusCode:
+    "400": Solicitud incorrecta
+    "401": No autorizado
+    "403": Prohibido
+    "404": No encontrado
+    "409": Conflicto
+    "500": Error del servidor
+    "503": Servicio no disponible
+  Exception: 
+    ViewExpired: Vista caducada
+  business:
+    Description: Esta notificación se enviará, si se produce un cambio comercial relevante.
+    DisplayName: Información comercial
+    Labels:
+      Actions:
+        Details: Detalles del caso
+      Footer:
+        Sender: Este correo electrónico fue enviado desde la aplicación
+        Settings: Gestionar las notificaciones
+      Greeting: Buenos días
+      GreetingShort: Hola
+      Title: Información comercial
+    Templates:
+      Default:
+        mail:
+          Subject: <%= message %>
+        web:
+          Subject: <%= ivy.html.escape(message) %>
+  new-task:
+    Description: Esta notificación se enviará cada vez que se le asigne una tarea nueva.
+    DisplayName: Nueva tarea asignada
+    Labels:
+      Actions:
+        Details: Detalles de la tarea
+        Start: Iniciar tarea
+      Description: La siguiente tarea le ha sido asignada y está a la espera de ser procesada
+      Footer:
+        Sender: Este correo electrónico fue enviado desde la aplicación
+        Settings: Gestionar las notificaciones
+      Greeting: Buenos días
+      GreetingShort: Hola
+      Task:
+        Created: Fecha de creación
+        Description: Descripción
+        Expiry: Fecha de caducidad
+        Name: Nombre
+        Priority: Prioridad
+        PriorityLabels:
+          EXCEPTION: Excepción
+          HIGH: Alta
+          LOW: Bajo
+          NORMAL: Normal
+        Responsible: Responsable
+        Title: Detalles de la tarea
+      Title: Se le ha asignado una nueva tarea
+    Templates:
+      Default:
+        mail:
+          Subject: 'Nueva tarea "<%= ivy.html.escape(ivy.task.name) %>" asignado a: <%= ivy.html.escape(ivy.task.responsibles().displayName()) %>'
+        web:
+          Subject: Nueva tarea '<%= ivy.html.escape(ivy.task.name) %>' para <%= ivy.html.escape(ivy.task.responsibles().displayName()) %>
