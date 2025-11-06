@@ -37,6 +37,15 @@ Error:
     "503": Dienst nicht verfügbar
   Exception: 
     ViewExpired: Ansicht abgelaufen
+    NotFound:
+      CaseMap:
+        UUID: "Case Map mit UUID '${uuid}' nicht gefunden!"
+        BusinessCase: "Business case mit id '${businessCaseId}' nicht gefunden."
+        BusinessCaseIdMustBeNumber: "Parameter businessCaseId muss eine Nummer sein"
+    PermissionDenied:
+      CaseMap: 
+        AnonymousUser: "Ein anonymer Anwender darf keine Case Map oder Nebenschritt starten."
+        ExecuteProcess: "Keine Berechtigung zur Ausführung des Prozesses '${processId}'"
 Notification:
   business:
     Description: Diese Notifikation wird gesendet wenn in einem Prozess eine geschäftlich relavante Änderung passiert.
