@@ -39,13 +39,86 @@ Error:
     ViewExpired: Vista caducada
     NotFound:
       CaseMap:
-        UUID: "¡No se ha encontrado el mapa de casos con UUID '${uuid}'"
-        BusinessCase: "No se ha encontrado el caso de negocio con id '${businessCaseId}'"
-        BusinessCaseIdMustBeNumber: "El parámetro businessCaseId debe ser un número"
+        UUID: ¡No se ha encontrado el mapa de casos con UUID '${uuid}'
+        BusinessCase: No se ha encontrado el caso de negocio con id '${businessCaseId}'
+        BusinessCaseIdMustBeNumber: El parámetro businessCaseId debe ser un número
     PermissionDenied:
       CaseMap:
-        AnonymousUser: "Los usuarios anónimos no pueden iniciar un mapa de casos ni un paso lateral."
-        ExecuteProcess: "No hay permiso para ejecutar el proceso '${processId}'"
+        AnonymousUser: Los usuarios anónimos no pueden iniciar un mapa de casos ni un paso lateral.
+        ExecuteProcess: No hay permiso para ejecutar el proceso '${processId}'
+    Request:
+      App:
+        InMaintenace: La aplicación '${appName}' no está disponible actualmente debido a mantenimiento.
+        NameMissing: Falta el nombre de la aplicación
+        NotFound: La aplicación solicitada no fue encontrada
+      CaseMap:
+        NoProcessId: ¡El parámetro de proceso secundario '${processId}' debe ser definido!
+        RequestPathNoUUID: No se encontró UUID de Case Map en la ruta de la solicitud
+        WrongFormat: ¡El UUID de Case Map solicitado tiene un formato incorrecto!
+      BeanNotFound: Bean '${object}' no encontrado en la solicitud. ¿Falta un filtro?
+      ContentObject:
+        IsNull: El objeto de contenido '${object}' no tiene valor
+        IsNoPage: El objeto de contenido '${object}' no se puede usar como página.
+        NotFound: El objeto de contenido '${object}' no fue encontrado
+        NotResolved: No se resolvió valor de objeto de contenido para '${object}'.
+      Dialog:
+        IdNotFound: Tiempo de ejecución de diálogo '${dialogId}' no encontrado
+        NotAvailable: El tiempo de ejecución de diálogo ya no está disponible
+        NotFound: El diálogo de usuario solicitado no fue encontrado
+        RequestMustBeGuid: La ID del tiempo de ejecución de diálogo solicitada debe ser un GUID
+      Engine:
+        NotRunning: ¡El motor de procesos debería estar en estado de ejecución ('running'), pero no lo está!
+        NotStarted: El motor de procesos no está en funcionamiento. Por favor, inicie el motor de procesos primero
+      File:
+        LoadingEx: Excepción al cargar el archivo solicitado
+        NameMissing: Falta el nombre del área de archivo
+        NameUnknown: El nombre del área de archivo solicitado es desconocido.
+        NotFound: Archivo solicitado no encontrado
+        PathNotFound: Archivo '${filePath}' no encontrado.
+      Licence:
+        ClusterLimit: Violación de licencia, nodo de clúster no licenciado porque se excede el límite de nodos de clúster
+        NoPublicUrl: Violación de licencia, la URL solicitada no coincide con ninguna de las URLs públicas licenciadas
+      Param:
+        Missing: Falta el parámetro '${parameter}'
+        NotValid: El parámetro '${parameter}' debe ser un número largo válido
+        NotValidChars: El parámetro '${parameter}' contiene caracteres no permitidos
+      PathNoDialogId: No se encontró UserDialogId en la ruta de la solicitud
+      PageContentNotFound: Objeto de contenido de página solicitado no encontrado.
+      PageNoHttpResponse: La página de proceso automático no pudo escribirse en la respuesta HTTP.
+      PageEngine:
+        InvalidRequest: Tipo de solicitud no soportado ${type} 
+        WrongState: El estado de PageEngine debería ser 'RUNNING' pero era '${serviceState}'
+      Pm:
+        InMaintenace: El modelo de proceso '${pmName}' de la aplicación '${appName}' no está disponible actualmente debido a mantenimiento.
+        NotFound: El modelo de proceso solicitado de la aplicación '${appName}' no fue encontrado.
+      Pmv:
+        InMaintenance: La versión del modelo de proceso '${pmvId}' del modelo de proceso '${pmName}' de la aplicación '${appName}' no está disponible actualmente debido a mantenimiento.
+        NameIsMissing: "Falta el nombre de la versión del modelo de proceso"
+        NotReleased: No hay una versión del modelo de proceso liberada para el modelo de proceso '${pmName}' de la aplicación '${appName}'.
+        NotFound: La versión del modelo de proceso solicitada no fue encontrada.
+        PmNotFound: La versión del modelo de proceso solicitada del modelo de proceso '${pmName}' de la aplicación '${appName}' no fue encontrada.
+      Render:  
+        NoTxtObject: No es un objeto de tipo texto '${object}'
+        NoImageObject: No es una imagen '${object}'
+        NoMimeObject: No se puede renderizar la imagen al tipo MIME '${object}'
+        NoResponse: No hay una respuesta de renderizador configurada
+      RestPathMissing: Falta la ruta Rest
+      SessionExpired: Su sesión ha expirado.
+      Start:
+        NotFoundPmv: El inicio de proceso solicitado en la versión del modelo de proceso '${pmvId}' del modelo de proceso '${pmName}' de la aplicación web '${appName}' no fue encontrado.
+        NotReleasedPmv: No está permitido iniciar un caso en la versión del modelo de proceso '${pmvId}' del modelo de proceso '${pmName}' de la aplicación web '${appName}' porque no está liberada.
+      Task:
+        Forbidden : No tiene permiso para trabajar en la tarea con el identificador '${taskId}'.
+        NotFound: La tarea con el identificador '${taskId}' no existe.
+        InvalidPath: Ruta de solicitud de tarea no válida
+        IsDestroyed: Ya no puede trabajar en la tarea '${taskName}' con el identificador '${taskId}' porque la tarea fue destruida mientras tanto.
+        IsDone: No puede trabajar en la tarea '${taskName}' con el identificador '${taskId}' porque el usuario '${userName}' ya la ha finalizado.
+        InProcess: No puede trabajar en la tarea '${taskName}' con el identificador '${taskId}' porque el usuario '${userName}' está trabajando en ella actualmente.
+        UriOnWrongApp: La aplicación en la URI de solicitud no es igual a la aplicación de la tarea.
+        MustBePreAnalyzed: El parámetro de tarea debe ser analizado por filtros anteriores
+      UrlWrongType: La URL solicitada tiene un tipo de solicitud no válido '${path}'.
+      ViewFileMissing: Falta el archivo de vista
+      WrongPathFormat: Formato de ruta incorrecto
 Notification:
   business:
     Description: Esta notificación se enviará, si se produce un cambio comercial relevante.

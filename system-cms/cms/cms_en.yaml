@@ -39,13 +39,86 @@ Error:
     ViewExpired: View Expired
     NotFound:
       CaseMap:
-        UUID: "Case Map with UUID '${uuid}' not found!"
-        BusinessCase: "Business case with id '${businessCaseId}' not found."
-        BusinessCaseIdMustBeNumber: "Parameter businessCaseId must be a number"
+        UUID: Case Map with UUID '${uuid}' not found!
+        BusinessCase: Business case with id '${businessCaseId}' not found.
+        BusinessCaseIdMustBeNumber: Parameter businessCaseId must be a number
     PermissionDenied:
       CaseMap:
-        AnonymousUser: "An anonymous user is not allowed to start a case map or a side step."
-        ExecuteProcess: "No permission to execute process '${processId}'"
+        AnonymousUser: An anonymous user is not allowed to start a case map or a side step.
+        ExecuteProcess: No permission to execute process '${processId}'
+    Request:
+      App:
+        InMaintenace: The application '${appName}' is currently unavailable because of maintenance.
+        NameMissing: Application name missing
+        NotFound: The requested application was not found
+      CaseMap:
+        NoProcessId: Side step process parameter '${processId}' must be defined!
+        RequestPathNoUUID: No Case Map UUID found in request path
+        WrongFormat: Requested Case Map UUID has wrong format!
+      BeanNotFound: Bean '${object}' not found on request. Filter missing?
+      ContentObject:
+        IsNull: Content object '${object}' has no value
+        IsNoPage: Content object '${object}' cannot be used as page.
+        NotFound: The content object '${object}' was not found
+        NotResolved: Not content object value resolved for '${object}'.
+      Dialog:
+        IdNotFound: Dialog runtime '${dialogId}' not found
+        NotAvailable: Dialog Runtime no longer available
+        NotFound: Requested user dialog not found
+        RequestMustBeGuid: Requested dialog runtime id must be a GUID
+      Engine:
+        NotRunning: Process engine should be in running state, but is not!
+        NotStarted: The process engine is not running. Please start the process engine first
+      File:
+        LoadingEx: Exception while loading requested file
+        NameMissing: Missing file area name
+        NameUnknown: Requested file area name is unknown.
+        NotFound: Requested file not found
+        PathNotFound: File '${filePath}' not found.
+      Licence:
+        ClusterLimit: Licence violation cluster node not licenced because cluster nodes limit is exceeded
+        NoPublicUrl: Licence violation requested URL does not match any of the licenced public URLs
+      Param:
+        Missing: Parameter '${parameter}' is missing
+        NotValid: Parameter '${parameter}' must be a valid long number
+        NotValidChars: Parameter '${parameter}' contains not allowed characters
+      PathNoDialogId: No UserDialogId found in request path
+      PageContentNotFound: Requested page content object not found.
+      PageNoHttpResponse: Auto process page could not be written to HTTP response. 
+      PageEngine:
+        InvalidRequest: Unsupported request type ${type} 
+        WrongState: PageEngine state should be 'RUNNING' but was '${serviceState}'
+      Pm:
+        InMaintenace: The process model '${pmName}' of application '${appName}' is currently unavailable because of maintenance.
+        NotFound: The requested process model of application '${appName}' was not found.
+      Pmv:
+        InMaintenance: The process model version '${pmvId}' of process model '${pmName}' of application '${appName}' is currently unavailable because of maintenance.
+        NameIsMissing: "Process model version name missing"
+        NotReleased: There is no process model version released for process model '${pmName}' of application '${appName}'.
+        NotFound: The requested process model version was not found.
+        PmNotFound: The requested process model version of process model '${pmName}' of application '${appName}' was not found.
+      Render:  
+        NoTxtObject: Not a text type object '${object}'
+        NoImageObject: Not an image '${object}'
+        NoMimeObject: Cannot renderer image to mime type '${object}'
+        NoResponse: There is no renderer response set
+      RestPathMissing: Rest path missing
+      SessionExpired: Your session has expired.
+      Start:
+        NotFoundPmv: The requested process start in process model version '${pmvId}' of process model '${pmName}' of web application '${appName}' was not found.
+        NotReleasedPmv: It is not allowed to start a case on the process model version '${pmvId}' of process model '${pmName}' of web application '${appName}' because it is not released.
+      Task:
+        Forbidden : You are not allowed to work on the task with the identifier '${taskId}'.
+        NotFound: The task with the identifier '${taskId}' does not exist.
+        InvalidPath: Invalid request path of Task
+        IsDestroyed: You can no longer work on the task '${taskName}' with the identifier '${taskId}' because the task was meanwhile destroyed.
+        IsDone: You cannot work on the task '${taskName}' with the identifier '${taskId}' because the user '${userName}' has already finished it.
+        InProcess: You cannot work on the task '${taskName}' with the identifier '${taskId}' because the user '${userName}' is currently working on it.
+        UriOnWrongApp: The application in request uri is not equal with the application of the task.
+        MustBePreAnalyzed: Task parameter must be analyzed by earlier filters
+      UrlWrongType: Requested URL has an invalid request type '${path}'.
+      ViewFileMissing: View file missing
+      WrongPathFormat: Wrong Path format
 Notification:
   business:
     Description: This notification will be sent if a business relevant change happens in a process.
