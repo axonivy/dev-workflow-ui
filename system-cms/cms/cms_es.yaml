@@ -37,6 +37,7 @@ Error:
     "503": Servicio no disponible
   Exception: 
     ViewExpired: Vista caducada
+Notification:
   business:
     Description: Esta notificación se enviará, si se produce un cambio comercial relevante.
     DisplayName: Información comercial
