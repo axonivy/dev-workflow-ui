@@ -37,6 +37,15 @@ Error:
     "503": Service Unavailable
   Exception: 
     ViewExpired: View Expired
+    NotFound:
+      CaseMap:
+        UUID: "Case Map with UUID '${uuid}' not found!"
+        BusinessCase: "Business case with id '${businessCaseId}' not found."
+        BusinessCaseIdMustBeNumber: "Parameter businessCaseId must be a number"
+    PermissionDenied:
+      CaseMap:
+        AnonymousUser: "An anonymous user is not allowed to start a case map or a side step."
+        ExecuteProcess: "No permission to execute process '${processId}'"
 Notification:
   business:
     Description: This notification will be sent if a business relevant change happens in a process.

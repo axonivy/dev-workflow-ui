@@ -37,6 +37,15 @@ Error:
     "503": Servicio no disponible
   Exception: 
     ViewExpired: Vista caducada
+    NotFound:
+      CaseMap:
+        UUID: "¡No se ha encontrado el mapa de casos con UUID '${uuid}'"
+        BusinessCase: "No se ha encontrado el caso de negocio con id '${businessCaseId}'"
+        BusinessCaseIdMustBeNumber: "El parámetro businessCaseId debe ser un número"
+    PermissionDenied:
+      CaseMap:
+        AnonymousUser: "Los usuarios anónimos no pueden iniciar un mapa de casos ni un paso lateral."
+        ExecuteProcess: "No hay permiso para ejecutar el proceso '${processId}'"
 Notification:
   business:
     Description: Esta notificación se enviará, si se produce un cambio comercial relevante.

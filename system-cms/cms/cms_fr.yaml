@@ -37,6 +37,15 @@ Error:
     "503": Service indisponible
   Exception: 
     ViewExpired: Affichage expiré
+    NotFound:
+      CaseMap:
+        UUID: "Carte de cas avec UUID '${uuid}' introuvable!"
+        BusinessCase: "Cas commercial avec id '${businessCaseId}' introuvable."
+        BusinessCaseIdMustBeNumber: "Le paramètre businessCaseId doit être un nombre"
+    PermissionDenied:
+      CaseMap:
+        AnonymousUser: "Un utilisateur anonyme n'est pas autorisé à démarrer une carte de cas ou une étape secondaire."
+        ExecuteProcess: "Aucune autorisation pour exécuter le processus '${processId}'"
 Notification:
   business:
     Description: Cette notification sera envoyée si un changement important pour l'entreprise se produit dans un processus.
