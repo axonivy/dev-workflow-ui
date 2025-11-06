@@ -39,13 +39,86 @@ Error:
     ViewExpired: Ansicht abgelaufen
     NotFound:
       CaseMap:
-        UUID: "Case Map mit UUID '${uuid}' nicht gefunden!"
-        BusinessCase: "Business case mit id '${businessCaseId}' nicht gefunden."
-        BusinessCaseIdMustBeNumber: "Parameter businessCaseId muss eine Nummer sein"
+        UUID: Case Map mit UUID '${uuid}' nicht gefunden!
+        BusinessCase: Business case mit id '${businessCaseId}' nicht gefunden.
+        BusinessCaseIdMustBeNumber: Parameter businessCaseId muss eine Nummer sein
     PermissionDenied:
       CaseMap: 
-        AnonymousUser: "Ein anonymer Anwender darf keine Case Map oder Nebenschritt starten."
-        ExecuteProcess: "Keine Berechtigung zur Ausführung des Prozesses '${processId}'"
+        AnonymousUser: Ein anonymer Anwender darf keine Case Map oder Nebenschritt starten.
+        ExecuteProcess: Keine Berechtigung zur Ausführung des Prozesses '${processId}'
+    Request:
+      App:
+        InMaintenace: Die Anwendung '${appName}' ist wegen Wartungsarbeiten momentan nicht verfügbar.
+        NameMissing: Name der Anwendung fehlt
+        NotFound: Die angeforderte Anwendung wurde nicht gefunden
+      CaseMap:
+        NoProcessId: Seitenprozess-Parameter '${processId}' muss definiert werden!
+        RequestPathNoUUID: Keine Case Map UUID im Anforderungspfad gefunden
+        WrongFormat: Angeforderte Case Map UUID hat falsches Format!
+      BeanNotFound: Bean '${object}' in der Anforderung nicht gefunden. Filter fehlt?
+      ContentObject:
+        IsNull: Inhaltsobjekt '${object}' hat keinen Wert
+        IsNoPage: Inhaltsobjekt '${object}' kann nicht als Seite verwendet werden.
+        NotFound: Das Inhaltsobjekt '${object}' wurde nicht gefunden
+        NotResolved: Kein Wert für das Inhaltsobjekt '${object}' aufgelöst.
+      Dialog:
+        IdNotFound: Dialog-Laufzeit mit id '${dialogId}' nicht gefunden
+        NotAvailable: Dialog-Laufzeit nicht länger verfügbar
+        NotFound: Angeforderter Benutzerdialog nicht gefunden
+        RequestMustBeGuid: Angeforderte Dialog-Laufzeit-ID muss eine GUID sein
+      Engine:
+        NotRunning: Prozess-Engine sollte sich im Status 'running' befinden, ist es aber nicht!
+        NotStarted: Die Prozess-Engine läuft nicht. Bitte starten Sie zuerst die Prozess-Engine
+      File:
+        LoadingEx: Ausnahme beim Laden der angeforderten Datei
+        NameMissing: Name des Dateibereichs fehlt
+        NameUnknown: Der angeforderte Dateibereichsname ist unbekannt.
+        NotFound: Angeforderte Datei nicht gefunden
+        PathNotFound: Datei '${filePath}' nicht gefunden.
+      Licence:
+        ClusterLimit: Lizenzverletzung, Cluster-Knoten nicht lizenziert, da das Limit für Cluster-Knoten überschritten wurde
+        NoPublicUrl: Lizenzverletzung, Die angeforderte URL stimmt mit keiner der lizenzierten öffentlichen URLs überein
+      Param:
+        Missing: Parameter '${parameter}' fehlt
+        NotValid: Parameter '${parameter}' muss eine gültige Zahl (long) sein
+        NotValidChars: Parameter '${parameter}' enthält nicht erlaubte Zeichen
+      PathNoDialogId: Keine UserDialogId im Anforderungspfad gefunden
+      PageContentNotFound: Angefordertes Seiten-Inhaltsobjekt nicht gefunden.
+      PageNoHttpResponse: Die automatische Prozessseite konnte nicht in die HTTP-Antwort geschrieben werden.
+      PageEngine:
+        InvalidRequest: Nicht unterstützter Anforderungstyp ${type}
+        WrongState: PageEngine-Status sollte 'RUNNING' sein, war aber '${serviceState}'
+      Pm:
+        InMaintenace: Das Prozessmodell '${pmName}' der Anwendung '${appName}' ist wegen Wartungsarbeiten momentan nicht verfügbar.
+        NotFound: Das angeforderte Prozessmodell der Anwendung '${appName}' wurde nicht gefunden.
+      Pmv:
+        InMaintenance: Die Prozessmodellversion '${pmvId}' des Prozessmodells '${pmName}' der Anwendung '${appName}' ist wegen Wartungsarbeiten momentan nicht verfügbar.
+        NameIsMissing: "Name der Prozessmodellversion fehlt"
+        NotReleased: Es ist keine Prozessmodellversion für das Prozessmodell '${pmName}' der Anwendung '${appName}' freigegeben.
+        NotFound: Die angeforderte Prozessmodellversion wurde nicht gefunden.
+        PmNotFound: Die angeforderte Prozessmodellversion des Prozessmodells '${pmName}' der Anwendung '${appName}' wurde nicht gefunden.
+      Render:  
+        NoTxtObject: Kein Text-Typ-Objekt '${object}'
+        NoImageObject: Kein Bild '${object}'
+        NoMimeObject: Bild kann nicht in den MIME-Typ '${object}' gerendert werden
+        NoResponse: Es ist keine Renderer-Antwort gesetzt
+      RestPathMissing: Rest-Pfad fehlt
+      SessionExpired: Ihre Sitzung ist abgelaufen.
+      Start:
+        NotFoundPmv: Der angeforderte Prozessstart in der Prozessmodellversion '${pmvId}' des Prozessmodells '${pmName}' der Webanwendung '${appName}' wurde nicht gefunden.
+        NotReleasedPmv: Es ist nicht erlaubt, einen Fall in der Prozessmodellversion '${pmvId}' des Prozessmodells '${pmName}' der Webanwendung '${appName}' zu starten, weil sie nicht freigegeben ist.
+      Task:
+        Forbidden : Sie sind nicht berechtigt, an der Aufgabe mit dem Bezeichner '${taskId}' zu arbeiten.
+        NotFound: Die Aufgabe mit dem Bezeichner '${taskId}' existiert nicht.
+        InvalidPath: Ungültiger Anforderungspfad der Aufgabe
+        IsDestroyed: Sie können nicht länger an der Aufgabe '${taskName}' mit dem Bezeichner '${taskId}' arbeiten, da die Aufgabe zwischenzeitlich zerstört wurde.
+        IsDone: Sie können nicht an der Aufgabe '${taskName}' mit dem Bezeichner '${taskId}' arbeiten, da der Benutzer '${userName}' sie bereits abgeschlossen hat.
+        InProcess: Sie können nicht an der Aufgabe '${taskName}' mit dem Bezeichner '${taskId}' arbeiten, da der Benutzer '${userName}' momentan daran arbeitet.
+        UriOnWrongApp: Die Anwendung im Anforderungs-URI stimmt nicht mit der Anwendung der Aufgabe überein.
+        MustBePreAnalyzed: Aufgabenparameter muss durch frühere Filter analysiert werden
+      UrlWrongType: Die angeforderte URL hat einen ungültigen Anforderungstyp '${path}'.
+      ViewFileMissing: UI-datei fehlt
+      WrongPathFormat: Falsches Pfadformat        
 Notification:
   business:
     Description: Diese Notifikation wird gesendet wenn in einem Prozess eine geschäftlich relavante Änderung passiert.
