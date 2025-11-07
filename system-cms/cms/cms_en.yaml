@@ -48,19 +48,19 @@ Error:
         ExecuteProcess: No permission to execute process '${processId}'
     Request:
       App:
-        InMaintenace: The application '${appName}' is currently unavailable because of maintenance.
+        InMaintenance: The application '${appName}' is currently unavailable because of maintenance.
         NameMissing: Application name missing
         NotFound: The requested application was not found
       CaseMap:
         NoProcessId: Side step process parameter '${processId}' must be defined!
         RequestPathNoUUID: No Case Map UUID found in request path
         WrongFormat: Requested Case Map UUID has wrong format!
-      BeanNotFound: Bean '${object}' not found on request. Filter missing?
+      BeanNotFound: Bean '${beanClass}' not found on request. Filter missing?
       ContentObject:
-        IsNull: Content object '${object}' has no value
-        IsNoPage: Content object '${object}' cannot be used as page.
-        NotFound: The content object '${object}' was not found
-        NotResolved: Not content object value resolved for '${object}'.
+        IsNull: Content object '${cmsUri}' has no value
+        IsNoPage: Content object '${cmsUri}' cannot be used as page.
+        NotFound: The content object '${cmsUri}' was not found
+        NotResolved: Not content object value resolved for '${cmsUri}'.
       Dialog:
         IdNotFound: Dialog runtime '${dialogId}' not found
         NotAvailable: Dialog Runtime no longer available
@@ -89,7 +89,7 @@ Error:
         InvalidRequest: Unsupported request type ${type} 
         WrongState: PageEngine state should be 'RUNNING' but was '${serviceState}'
       Pm:
-        InMaintenace: The process model '${pmName}' of application '${appName}' is currently unavailable because of maintenance.
+        InMaintenance: The process model '${pmName}' of application '${appName}' is currently unavailable because of maintenance.
         NotFound: The requested process model of application '${appName}' was not found.
       Pmv:
         InMaintenance: The process model version '${pmvId}' of process model '${pmName}' of application '${appName}' is currently unavailable because of maintenance.
@@ -98,11 +98,11 @@ Error:
         NotFound: The requested process model version was not found.
         PmNotFound: The requested process model version of process model '${pmName}' of application '${appName}' was not found.
       Render:  
-        NoTxtObject: Not a text type object '${object}'
-        NoImageObject: Not an image '${object}'
-        NoMimeObject: Cannot renderer image to mime type '${object}'
+        NoTxtObject: Not a text type object '${cmsUri}'
+        NoImageObject: Not an image '${cmsUri}'
+        NoMimeObject: Cannot renderer image to mime type '${mimeType}'
         NoResponse: There is no renderer response set
-      RestPathMissing: Rest path missing
+      RestPathMissing: REST path missing
       SessionExpired: Your session has expired.
       Start:
         NotFoundPmv: The requested process start in process model version '${pmvId}' of process model '${pmName}' of web application '${appName}' was not found.

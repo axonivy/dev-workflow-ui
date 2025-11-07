@@ -48,19 +48,19 @@ Error:
         ExecuteProcess: Keine Berechtigung zur Ausführung des Prozesses '${processId}'
     Request:
       App:
-        InMaintenace: Die Anwendung '${appName}' ist wegen Wartungsarbeiten momentan nicht verfügbar.
+        InMaintenance: Die Anwendung '${appName}' ist wegen Wartungsarbeiten momentan nicht verfügbar.
         NameMissing: Name der Anwendung fehlt
         NotFound: Die angeforderte Anwendung wurde nicht gefunden
       CaseMap:
         NoProcessId: Seitenprozess-Parameter '${processId}' muss definiert werden!
         RequestPathNoUUID: Keine Case Map UUID im Anforderungspfad gefunden
         WrongFormat: Angeforderte Case Map UUID hat falsches Format!
-      BeanNotFound: Bean '${object}' in der Anforderung nicht gefunden. Filter fehlt?
+      BeanNotFound: Bean '${beanClass}' in der Anforderung nicht gefunden. Filter fehlt?
       ContentObject:
-        IsNull: Inhaltsobjekt '${object}' hat keinen Wert
-        IsNoPage: Inhaltsobjekt '${object}' kann nicht als Seite verwendet werden.
-        NotFound: Das Inhaltsobjekt '${object}' wurde nicht gefunden
-        NotResolved: Kein Wert für das Inhaltsobjekt '${object}' aufgelöst.
+        IsNull: Inhaltsobjekt '${cmsUri}' hat keinen Wert
+        IsNoPage: Inhaltsobjekt '${cmsUri}' kann nicht als Seite verwendet werden.
+        NotFound: Das Inhaltsobjekt '${cmsUri}' wurde nicht gefunden
+        NotResolved: Kein Wert für das Inhaltsobjekt '${cmsUri}' aufgelöst.
       Dialog:
         IdNotFound: Dialog-Laufzeit mit id '${dialogId}' nicht gefunden
         NotAvailable: Dialog-Laufzeit nicht länger verfügbar
@@ -89,7 +89,7 @@ Error:
         InvalidRequest: Nicht unterstützter Anforderungstyp ${type}
         WrongState: PageEngine-Status sollte 'RUNNING' sein, war aber '${serviceState}'
       Pm:
-        InMaintenace: Das Prozessmodell '${pmName}' der Anwendung '${appName}' ist wegen Wartungsarbeiten momentan nicht verfügbar.
+        InMaintenance: Das Prozessmodell '${pmName}' der Anwendung '${appName}' ist wegen Wartungsarbeiten momentan nicht verfügbar.
         NotFound: Das angeforderte Prozessmodell der Anwendung '${appName}' wurde nicht gefunden.
       Pmv:
         InMaintenance: Die Prozessmodellversion '${pmvId}' des Prozessmodells '${pmName}' der Anwendung '${appName}' ist wegen Wartungsarbeiten momentan nicht verfügbar.
@@ -98,11 +98,11 @@ Error:
         NotFound: Die angeforderte Prozessmodellversion wurde nicht gefunden.
         PmNotFound: Die angeforderte Prozessmodellversion des Prozessmodells '${pmName}' der Anwendung '${appName}' wurde nicht gefunden.
       Render:  
-        NoTxtObject: Kein Text-Typ-Objekt '${object}'
-        NoImageObject: Kein Bild '${object}'
-        NoMimeObject: Bild kann nicht in den MIME-Typ '${object}' gerendert werden
+        NoTxtObject: Kein Text-Typ-Objekt '${cmsUri}'
+        NoImageObject: Kein Bild '${cmsUri}'
+        NoMimeObject: Bild kann nicht in den MIME-Typ '${mimeType}' gerendert werden
         NoResponse: Es ist keine Renderer-Antwort gesetzt
-      RestPathMissing: Rest-Pfad fehlt
+      RestPathMissing: REST Pfad fehlt
       SessionExpired: Ihre Sitzung ist abgelaufen.
       Start:
         NotFoundPmv: Der angeforderte Prozessstart in der Prozessmodellversion '${pmvId}' des Prozessmodells '${pmName}' der Webanwendung '${appName}' wurde nicht gefunden.

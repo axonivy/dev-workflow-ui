@@ -48,19 +48,19 @@ Error:
         ExecuteProcess: Aucune autorisation pour exécuter le processus '${processId}'
     Request:
       App:
-        InMaintenace: L'application '${appName}' est actuellement indisponible en raison de maintenance.
+        InMaintenance: L'application '${appName}' est actuellement indisponible en raison de maintenance.
         NameMissing: Nom de l'application manquant
         NotFound: L'application demandée n'a pas été trouvée
       CaseMap:
         NoProcessId: Le paramètre de processus d'étape latérale '${processId}' doit être défini!
         RequestPathNoUUID: Aucune UUID de Case Map trouvée dans le chemin de la requête
         WrongFormat: L'UUID de Case Map demandé est de format incorrect!
-      BeanNotFound: Bean '${object}' non trouvé sur la requête. Filtre manquant?
+      BeanNotFound: Bean '${beanClass}' non trouvé sur la requête. Filtre manquant?
       ContentObject:
-        IsNull: L'objet de contenu '${object}' n'a pas de valeur
-        IsNoPage: L'objet de contenu '${object}' ne peut pas être utilisé comme page.
-        NotFound: L'objet de contenu '${object}' n'a pas été trouvé
-        NotResolved: Aucune valeur d'objet de contenu résolue pour '${object}'.
+        IsNull: L'objet de contenu '${cmsUri}' n'a pas de valeur
+        IsNoPage: L'objet de contenu '${cmsUri}' ne peut pas être utilisé comme page.
+        NotFound: L'objet de contenu '${cmsUri}' n'a pas été trouvé
+        NotResolved: Aucune valeur d'objet de contenu résolue pour '${cmsUri}'.
       Dialog:
         IdNotFound: L'exécution de dialogue '${dialogId}' n'a pas été trouvée
         NotAvailable: L'exécution du dialogue n'est plus disponible
@@ -89,7 +89,7 @@ Error:
         InvalidRequest: Type de requête non supporté ${type}
         WrongState: L'état de PageEngine devrait être 'RUNNING' mais était '${serviceState}'
       Pm:
-        InMaintenace: Le modèle de processus '${pmName}' de l'application '${appName}' est actuellement indisponible en raison de maintenance.
+        InMaintenance: Le modèle de processus '${pmName}' de l'application '${appName}' est actuellement indisponible en raison de maintenance.
         NotFound: Le modèle de processus demandé de l'application '${appName}' n'a pas été trouvé.
       Pmv:
         InMaintenance: La version du modèle de processus '${pmvId}' du modèle de processus '${pmName}' de l'application '${appName}' est actuellement indisponible en raison de maintenance.
@@ -98,11 +98,11 @@ Error:
         NotFound: La version du modèle de processus demandée n'a pas été trouvée.
         PmNotFound: La version du modèle de processus demandée du modèle de processus '${pmName}' de l'application '${appName}' n'a pas été trouvée.
       Render:  
-        NoTxtObject: N'est pas un objet de type texte '${object}'
-        NoImageObject: N'est pas une image '${object}'
-        NoMimeObject: Impossible de rendre l'image au type Mime '${object}'
+        NoTxtObject: N'est pas un objet de type texte '${cmsUri}'
+        NoImageObject: N'est pas une image '${cmsUri}'
+        NoMimeObject: Impossible de rendre l'image au type Mime '${mimeType}'
         NoResponse: Aucune réponse de rendu n'est définie
-      RestPathMissing: Chemin Rest manquant
+      RestPathMissing: Chemin REST manquant
       SessionExpired: Votre session a expiré.
       Start:
         NotFoundPmv: Le démarrage de processus demandé dans la version du modèle de processus '${pmvId}' du modèle de processus '${pmName}' de l'application web '${appName}' n'a pas été trouvé.
