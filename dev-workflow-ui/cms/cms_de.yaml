@@ -60,7 +60,7 @@ common:
   loading: Laden
   name: Name
   noCaseMapsFound: Keine Case Maps gefunden
-  noCasesFound: Keine Fälle gefunden
+  noCasesFound: Keine Cases gefunden
   noCustomFieldsFound: Keine benutzerdefinierten Felder gefunden
   noDocumentsFound: Keine Dokumente gefunden
   noEventsFound: Keine Ereignisse gefunden
@@ -73,8 +73,8 @@ common:
   openProcessViewer: Prozess anzeigen
   openTaskDetails: Task Details öffnen
   openTasks: Offene Tasks
-  owner: Rollen
-  park: Prio
+  owner: Inhaber
+  park: Park
   pmv: PMV
   prio: Prio
   priority: Priorität
@@ -90,7 +90,7 @@ common:
   start: Start
   startProcess: Prozess starten
   startTask: Task starten
-  startedCases: Gestartete Fälle
+  startedCases: Gestartete Cases
   state: Status
   task: Task
   technicalCase: Technischer Case
@@ -157,14 +157,14 @@ home:
   noOpenTasks: Du hast keinen offenen Tasks. Mache eine Kaffee Pause.
   noProcessesStarted: Du hast bisher kein Prozesses gestartet.
   openTasks: Offene Tasks
-  startedCases: Gestartete Fälle
+  startedCases: Gestartete Cases
   startedProcesses: Gestartete Prozesse
   toStartProcess: um einen Prozess zu starten.
 intermediateEvents:
   elementName: Element Name
   elementProcessId: Element Prozess ID
   eventId: Ereigniss ID
-  eventReceived: Keine Beans gefunden
+  eventReceived: Ereignis Empfangen
   events: Ereignisse
   intermediateEventsBeans: Intermediate Events Beans
   noBeansFound: Keine Beans gefunden
@@ -191,7 +191,7 @@ profile:
   languageAndLocalization: Sprache & Lokalisierung
 sidebar:
   apiBrowser: API Browser
-  cases: Fälle
+  cases: Cases
   cleanup: Aufräumen
   developer: Entwickler
   engineCockpit: Engine Cockpit
@@ -206,10 +206,10 @@ signals:
   boundarySignals: Grenz Signale
   code: Code
   createdCases: Erstellte Fälle
-  destroyedTasks: Senden
-  firedSignals: Gefeuerte Signale
+  destroyedTasks: Zerstörte Tasks
+  firedSignals: Ausgelöste Signale
   noSignalsFound: Keine Signale gefunden
-  payload: Daten
+  payload: Nutzlast
   send: Senden
   sendSignal: Signal senden
   sentBy: Gesendet von
@@ -231,9 +231,9 @@ starts:
   searchProjects: Projekte suchen
   selectAll: Alles auswählen
 statistics:
-  allCases: Alle Fälle
+  allCases: Alle Cases
   allTasks: Alle Tasks
-  casesByState: Fälle nach Status
+  casesByState: Cases nach Status
   casesStatistics: Case Statistik
   chartResolution: Diagramm Auflösung
   notEnoughData: Nicht genügend Daten

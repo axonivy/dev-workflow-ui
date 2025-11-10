@@ -1,0 +1,287 @@
+apiBrowser:
+  apiBrowser: API ブラウザ
+  openInTab: API ブラウザを新しいタブで開く
+case:
+  caseHierarchy: ケース階層
+  caseMap: ケースマップ
+  currentProcessHidden: 現在のプロセスは非表示です
+  description: 説明
+  destroyCase: ケースを破棄する
+  documents: ドキュメント
+  openCaseMap: ケースマップを表示
+  openProcessViewer: プロセスを表示
+  processViewer: プロセスビューアー
+  showNotes: ケースメモを表示する
+  showSystemTasks: システムタスクを表示する
+  sidesteps: サイドステップ
+  taskList: タスクリスト
+  workflowEvents: ワークフローイベント
+cleanup:
+  cleanups:
+    businessData: すべてのビジネスデータと検索インデックス
+    dataCache: データキャッシュ
+    sessionTokenStore: すべての ID プロバイダートークン
+    userAndRole: すべてのユーザーとロール
+    workflow: すべてのケース、タスク、依存オブジェクト
+  introduction: 異なるプロセスをクリックしていくと、ケースやタスクなどの異なる種類のデータを作成できます。 これにより、そのデータを消去してデザイナーをリセットすることができます。
+common:
+  description: 説明
+  destroy: 破棄
+  element: 要素
+  email: メール
+  end: 終了
+  businessCase: ビジネスケース
+  cancel: キャンセル
+  category: カテゴリー
+  clearDelay: 遅延をクリアする
+  completedOn: 完了日
+  content: コンテンツ
+  copyToClipboard: クリップボードにコピーする
+  created: 作成済み
+  creationDate: 作成日
+  creator: 作成者
+  currentElement: 現在の要素
+  customFields: カスタムフィールド
+  date: 日付
+  delayDate: 遅延日
+  delegate: 委任
+  event: イベント
+  expireNow: もうすぐ期限切れ
+  expiry: 有効期限
+  externalId: 外部 ID
+  externalName: 外部名
+  formattingLanguage: フォーマット言語
+  fullname: フルネーム
+  id: ID
+  key: キー
+  language: 言語
+  link: リンク
+  loading: 読み込み中
+  name: 名前
+  noCaseMapsFound: ケースマップが見つかりません
+  noCasesFound: ケースが見つかりません
+  noCustomFieldsFound: カスタムフィールドが見つかりません
+  noDocumentsFound: ドキュメントが見つかりません
+  noEventsFound: イベントが見つかりません
+  noTasksFound: タスクが見つかりません
+  notes: 注記
+  notificationChannels: 通知チャネル
+  openCaseMapViewer: ケースマップを表示
+  openDetails: 詳細情報を開く
+  openFullscreen: フルスクリーンで開く
+  openProcessViewer: プロセスを表示する
+  openTaskDetails: タスクの詳細を開く
+  openTasks: タスクを開く
+  owner: 所有者
+  park: 保留
+  pmv: PMV
+  prio: 優先度
+  priority: 優先度
+  process: プロセス
+  processName: プロセス名
+  rerunProcess: 再実行プロセス
+  reset: リセット
+  responsible: 担当
+  roles: ロール
+  save: 保存
+  search: 検索
+  showAll: すべて表示
+  start: 開始
+  startProcess: プロセスを開始する
+  startTask: タスクを開始する
+  startedCases: 開始済みのケース
+  state: 状態
+  task: タスク
+  technicalCase: テクニカルケース
+  type: タイプ
+  username: ユーザー名
+  value: 値
+  workerUser: ワーカー
+  workflowEvents: ワークフローイベント
+  author: 作成者
+end:
+  taskEnd: タスク終了
+  taskFinished: タスクを正常に完了しました。
+enums:
+  caseBusinessState:
+    destroyed: 破棄
+    done: 完了
+    open: オープン
+  caseState:
+    created: 作成済み
+    destroyed: 破棄
+    done: 完了
+    running: 実行中
+  taskBusinessState:
+    delayed: 遅延
+    destroyed: 破棄
+    done: 完了
+    error: エラー
+    in_progress: 進行中
+    open: オープン
+  taskState:
+    created: 作成済み
+    delayed: 遅延
+    destroyed: 破棄
+    done: 完了
+    failed: 失敗
+    join_failed: 結合失敗
+    joining: 結合中
+    ready_for_join: 結合準備完了
+    resumed: 再開済み
+    suspended: 中断
+    waiting_for_intermediate_event: 中間イベントの待機中
+    parked: 保留済み
+exception:
+  application: アプリケーション
+  attributes: 属性
+  errorId: エラー ID
+  processCallStack: プロセスコールスタック
+  requestUri: リクエスト URI
+  servlet: サーブレット
+  stacktrace: スタックトレース
+  technicalCause: 技術的な原因
+  theViewOrSessionHasExpired: ビューまたはセッションが期限切れになりました。
+  threadLocalValues: スレッドローカル値
+  thrownBy: 次によってスローされた
+  unexpectedError: 予期しないエラーが発生しました
+  viewOrSessionExpired: ビューまたはセッションの有効期限切れ
+frame:
+  disableAutoRefresh: 変更がこのダイアログに行われたときに自動更新を無効にする
+  openCurrentProcess: 現在のプロセス開始をフルスクリーンページで開く
+  openEditor: 選択したウィジェットでエディターを開く
+  sidesteps: サイドステップ
+home:
+  goToProcessList: プロセスリストに移動する
+  noCasesFound: ケースが見つかりません
+  noOpenTasks: 開いているタスクがありません。少し休憩しましょう。
+  noProcessesStarted: プロセスをまだ開始していません。
+  openTasks: タスクを開く
+  startedCases: 開始済みのケース
+  startedProcesses: 開始済みのプロセス
+  toStartProcess: プロセスを開始します。
+intermediateEvents:
+  elementName: 要素名
+  elementProcessId: 要素プロセス ID
+  eventId: イベント ID
+  eventReceived: イベント受信済み
+  events: イベント
+  intermediateEventsBeans: 中間イベント Bean
+  noBeansFound: Bean が見つかりません
+  result: 結果
+  timeout: タイムアウト
+  timeoutAction: タイムアウトアクション
+  waiting: 待機中
+login:
+  logInWith: 次の認証情報でログイン
+  password: パスワード
+  signIn: サインイン
+  username: ユーザー名／メール
+notifications:
+  deleteAll: すべての通知を削除する
+  markAllAsRead: すべての通知を既読としてマークする
+  markAsRead: 既読としてマークする
+  noNotifications: 通知なし
+  notifications: 通知
+signals:
+  code: コード
+  createdCases: 作成されたケース
+  destroyedTasks: 破棄されたタスク
+  send: 送信
+  sendSignal: シグナルを送信
+  sentBy: 送信者
+  signalCode: シグナルコード
+  signalPattern: シグナルパターン
+  waitingTask: 待機中のタスク
+  boundarySignals: 境界シグナル
+  firedSignals: 発信済みシグナル
+  noSignalsFound: シグナルが見つかりません
+  payload: ペイロード
+starts:
+  application: アプリケーション
+  apply: 適用
+  areYouSure: starts.xhtml ページに移動するつもりはありませんでしたか？
+  category: カテゴリー
+  deselectAll: すべて選択解除
+  process: プロセス
+  processNotFound: ID ${id} で始まるプロセスは見つかりませんでした。
+  processes: プロセス
+  project: プロジェクト
+  projects: プロジェクト
+  search: 検索
+  searchProjects: プロジェクトを検索
+  selectAll: すべて選択
+statistics:
+  allCases: すべてのケース
+  allTasks: すべてのタスク
+  casesByState: 状態別のケース
+  casesStatistics: ケース統計
+  chartResolution: チャートの解像度
+  notEnoughData: 利用可能なデータが十分にありません
+  resolutions:
+    day: 毎日
+    hour: 毎時
+    hour6: 6 時間ごと
+    month: 毎月
+    week: 毎週
+  tasksByState: 状態別タスク
+  tasksStatistics: タスク統計
+  timeRange: 時間範囲
+  timeRanges:
+    allTime: 常時
+    last24h: 直近 24 時間
+    last30d: 前月
+    last365d: 前年
+    last7d: 前週
+    last90d: 直近 3 か月
+    today: 今日
+  topCaseCreators: トップケース作成者
+  topTaskWorkers: トップタスクワーカー
+switchUser:
+  clickLogin: ユーザーをクリックしてログイン
+  needLogin: そのページにアクセスするためにはログインする必要があります
+  noUsers: ユーザーが見つかりません
+task:
+  assignTask: タスクを割り当てる
+  canNotWork: ${user} が現在作業中であるため、このタスクを処理することはできません。
+  completedByCurrent: すでにタスクを完了しました
+  completedByOther: タスクはすでに ${user} によって完了されました
+  delegateTask: タスクを委任する
+  delegateTaskToUserOrRole: タスクを指定したユーザーまたはロールに委任する
+  destroyed: 破棄されたため、このタスクを処理することはできません
+  invalid: 無効な状態
+  role: ロール
+  user: ユーザー
+  workingOn: 現在、異なるセッションでタスクを処理しています。 ブラウザを閉じた場合、タスクをリセットして再び起動することができます。
+tasks:
+  noTasksFound: タスクが見つかりません
+template:
+  login: ログイン
+  logout: ログアウト
+  profile: プロファイル
+  switchUser: ユーザーを切り替える
+webservices:
+  noWebServicesFound: Web サービスプロセスが見つかりません
+  webServiceProcesses: Web サービスプロセス
+workflowEventsTable:
+  needPermission: イベントを見るためにはワークフローイベントの読み取り権限が必要です。
+  noPermissions: 権限がありません
+profile:
+  currentContentLanguage: 現在の言語
+  currentContentLocale: 現在のセッションのコンテンツロケール
+  currentFormattingLanguage: 現在のフォーマット言語
+  currentFormattingLocale: 現在のセッションのフォーマットロケール
+  languageAndLocalization: 言語とローカリゼーション
+sidebar:
+  apiBrowser: API ブラウザ
+  cases: ケース
+  cleanup: クリーンアップ
+  developer: 開発者
+  engineCockpit: エンジンコックピット
+  home: ホーム
+  intermediateEvents: 中間イベント
+  processes: プロセス
+  signals: シグナル
+  statistics: 統計
+  tasks: タスク
+  webService: Web サービス

@@ -18,6 +18,7 @@
     <module>dev-workflow-ui-test</module>
     <module>dev-workflow-ui-test-data</module>
     <module>dev-workflow-ui-web-test</module>
+    <module>system-cms</module>
     <module>maven/config</module>
     <module>maven/config/iar</module>
     <module>maven/config/test</module>

@@ -1,0 +1,173 @@
+Error:
+  Page:
+    Error: Error
+    ErrorId: Id. del error
+    ErrorTimestamp: Marca de tiempo del erro
+    Attributes: Atributos
+    ThrownBy: Generado por
+    ProcessCallStack: Pila de llamadas del proceso
+    TechnicalCause: Causa técnica
+    RequestUri:  Uri de la solicitud
+    Servlet: Servlet
+    Application: Aplicación
+    ThreadLocalValues: Contexto de la solicitud
+    Name: Nombre
+    Value: Valor
+    StackTrace:  Rastreo de pila
+    StartLastProcess:
+      Label:  Iniciar último proceso
+      Description: Inicia el último proceso que se inició con una configuración de inicio o pulsando x en un elemento de inicio.
+    ContactAdmin: Póngase en contacto con el administrador del sistema.
+    Details: Detalles
+    BackToApplication: Volver a la aplicación
+  UnavailablePage:
+    Unavailable: ${product} no está disponible actualmente
+    State:
+      STARTING: ${product} se está iniciando
+      STOPPING: ${product} se está deteniendo
+      RUNNING: ${product} está en funcionamiento
+      STOPPED: ${product} se ha detenido
+  StatusCode:
+    "400": Solicitud incorrecta
+    "401": No autorizado
+    "403": Prohibido
+    "404": No encontrado
+    "409": Conflicto
+    "500": Error del servidor
+    "503": Servicio no disponible
+  Exception: 
+    ViewExpired: Vista caducada
+    NotFound:
+      CaseMap:
+        UUID: ¡No se ha encontrado el mapa de casos con UUID '${uuid}'
+        BusinessCase: No se ha encontrado el caso de negocio con id '${businessCaseId}'
+        BusinessCaseIdMustBeNumber: El parámetro businessCaseId debe ser un número
+    PermissionDenied:
+      CaseMap:
+        AnonymousUser: Los usuarios anónimos no pueden iniciar un mapa de casos ni un paso lateral.
+        ExecuteProcess: No hay permiso para ejecutar el proceso '${processId}'
+    Request:
+      App:
+        InMaintenance: La aplicación '${appName}' no está disponible actualmente debido a mantenimiento.
+        NameMissing: Falta el nombre de la aplicación
+        NotFound: La aplicación solicitada no fue encontrada
+      CaseMap:
+        NoProcessId: ¡El parámetro de proceso secundario '${processId}' debe ser definido!
+        RequestPathNoUUID: No se encontró UUID de Case Map en la ruta de la solicitud
+        WrongFormat: ¡El UUID de Case Map solicitado tiene un formato incorrecto!
+      BeanNotFound: Bean '${beanClass}' no encontrado en la solicitud. ¿Falta un filtro?
+      ContentObject:
+        IsNull: El objeto de contenido '${cmsUri}' no tiene valor
+        IsNoPage: El objeto de contenido '${cmsUri}' no se puede usar como página.
+        NotFound: El objeto de contenido '${cmsUri}' no fue encontrado
+        NotResolved: No se resolvió valor de objeto de contenido para '${cmsUri}'.
+      Dialog:
+        IdNotFound: Tiempo de ejecución de diálogo '${dialogId}' no encontrado
+        NotAvailable: El tiempo de ejecución de diálogo ya no está disponible
+        NotFound: El diálogo de usuario solicitado no fue encontrado
+        RequestMustBeGuid: La ID del tiempo de ejecución de diálogo solicitada debe ser un GUID
+      Engine:
+        NotRunning: ¡El motor de procesos debería estar en estado de ejecución ('running'), pero no lo está!
+        NotStarted: El motor de procesos no está en funcionamiento. Por favor, inicie el motor de procesos primero
+      File:
+        LoadingEx: Excepción al cargar el archivo solicitado
+        NameMissing: Falta el nombre del área de archivo
+        NameUnknown: El nombre del área de archivo solicitado es desconocido.
+        NotFound: Archivo solicitado no encontrado
+        PathNotFound: Archivo '${filePath}' no encontrado.
+      Licence:
+        ClusterLimit: Violación de licencia, nodo de clúster no licenciado porque se excede el límite de nodos de clúster
+        NoPublicUrl: Violación de licencia, la URL solicitada no coincide con ninguna de las URLs públicas licenciadas
+      Param:
+        Missing: Falta el parámetro '${parameter}'
+        NotValid: El parámetro '${parameter}' debe ser un número largo válido
+        NotValidChars: El parámetro '${parameter}' contiene caracteres no permitidos
+      PathNoDialogId: No se encontró UserDialogId en la ruta de la solicitud
+      PageContentNotFound: Objeto de contenido de página solicitado no encontrado.
+      PageNoHttpResponse: La página de proceso automático no pudo escribirse en la respuesta HTTP.
+      PageEngine:
+        InvalidRequest: Tipo de solicitud no soportado ${type} 
+        WrongState: El estado de PageEngine debería ser 'RUNNING' pero era '${serviceState}'
+      Pm:
+        InMaintenance: El modelo de proceso '${pmName}' de la aplicación '${appName}' no está disponible actualmente debido a mantenimiento.
+        NotFound: El modelo de proceso solicitado de la aplicación '${appName}' no fue encontrado.
+      Pmv:
+        InMaintenance: La versión del modelo de proceso '${pmvId}' del modelo de proceso '${pmName}' de la aplicación '${appName}' no está disponible actualmente debido a mantenimiento.
+        NameIsMissing: "Falta el nombre de la versión del modelo de proceso"
+        NotReleased: No hay una versión del modelo de proceso liberada para el modelo de proceso '${pmName}' de la aplicación '${appName}'.
+        NotFound: La versión del modelo de proceso solicitada no fue encontrada.
+        PmNotFound: La versión del modelo de proceso solicitada del modelo de proceso '${pmName}' de la aplicación '${appName}' no fue encontrada.
+      Render:  
+        NoTxtObject: No es un objeto de tipo texto '${cmsUri}'
+        NoImageObject: No es una imagen '${cmsUri}'
+        NoMimeObject: No se puede renderizar la imagen al tipo MIME '${mimeType}'
+        NoResponse: No hay una respuesta de renderizador configurada
+      RestPathMissing: Falta la ruta REST
+      SessionExpired: Su sesión ha expirado.
+      Start:
+        NotFoundPmv: El inicio de proceso solicitado en la versión del modelo de proceso '${pmvId}' del modelo de proceso '${pmName}' de la aplicación web '${appName}' no fue encontrado.
+        NotReleasedPmv: No está permitido iniciar un caso en la versión del modelo de proceso '${pmvId}' del modelo de proceso '${pmName}' de la aplicación web '${appName}' porque no está liberada.
+      Task:
+        Forbidden : No tiene permiso para trabajar en la tarea con el identificador '${taskId}'.
+        NotFound: La tarea con el identificador '${taskId}' no existe.
+        InvalidPath: Ruta de solicitud de tarea no válida
+        IsDestroyed: Ya no puede trabajar en la tarea '${taskName}' con el identificador '${taskId}' porque la tarea fue destruida mientras tanto.
+        IsDone: No puede trabajar en la tarea '${taskName}' con el identificador '${taskId}' porque el usuario '${userName}' ya la ha finalizado.
+        InProcess: No puede trabajar en la tarea '${taskName}' con el identificador '${taskId}' porque el usuario '${userName}' está trabajando en ella actualmente.
+        UriOnWrongApp: La aplicación en la URI de solicitud no es igual a la aplicación de la tarea.
+        MustBePreAnalyzed: El parámetro de tarea debe ser analizado por filtros anteriores
+      UrlWrongType: La URL solicitada tiene un tipo de solicitud no válido '${path}'.
+      ViewFileMissing: Falta el archivo de vista
+      WrongPathFormat: Formato de ruta incorrecto
+Notification:
+  business:
+    Description: Esta notificación se enviará, si se produce un cambio comercial relevante.
+    DisplayName: Información comercial
+    Labels:
+      Actions:
+        Details: Detalles del caso
+      Footer:
+        Sender: Este correo electrónico fue enviado desde la aplicación
+        Settings: Gestionar las notificaciones
+      Greeting: Buenos días
+      GreetingShort: Hola
+      Title: Información comercial
+    Templates:
+      Default:
+        mail:
+          Subject: <%= message %>
+        web:
+          Subject: <%= ivy.html.escape(message) %>
+  new-task:
+    Description: Esta notificación se enviará cada vez que se le asigne una tarea nueva.
+    DisplayName: Nueva tarea asignada
+    Labels:
+      Actions:
+        Details: Detalles de la tarea
+        Start: Iniciar tarea
+      Description: La siguiente tarea le ha sido asignada y está a la espera de ser procesada
+      Footer:
+        Sender: Este correo electrónico fue enviado desde la aplicación
+        Settings: Gestionar las notificaciones
+      Greeting: Buenos días
+      GreetingShort: Hola
+      Task:
+        Created: Fecha de creación
+        Description: Descripción
+        Expiry: Fecha de caducidad
+        Name: Nombre
+        Priority: Prioridad
+        PriorityLabels:
+          EXCEPTION: Excepción
+          HIGH: Alta
+          LOW: Bajo
+          NORMAL: Normal
+        Responsible: Responsable
+        Title: Detalles de la tarea
+      Title: Se le ha asignado una nueva tarea
+    Templates:
+      Default:
+        mail:
+          Subject: 'Nueva tarea "<%= ivy.html.escape(ivy.task.name) %>" asignado a: <%= ivy.html.escape(ivy.task.responsibles().displayName()) %>'
+        web:
+          Subject: Nueva tarea '<%= ivy.html.escape(ivy.task.name) %>' para <%= ivy.html.escape(ivy.task.responsibles().displayName()) %>
