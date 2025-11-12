@@ -35,7 +35,7 @@ Error:
     "409": Conflit
     "500": Erreur serveur
     "503": Service indisponible
-  Exception: 
+  Exception:
     ViewExpired: Affichage expiré
     NotFound:
       CaseMap:
@@ -97,7 +97,7 @@ Error:
         NotReleased: Aucune version de modèle de processus n'est publiée pour le modèle de processus '${pmName}' de l'application '${appName}'.
         NotFound: La version du modèle de processus demandée n'a pas été trouvée.
         PmNotFound: La version du modèle de processus demandée du modèle de processus '${pmName}' de l'application '${appName}' n'a pas été trouvée.
-      Render:  
+      Render:
         NoTxtObject: N'est pas un objet de type texte '${cmsUri}'
         NoImageObject: N'est pas une image '${cmsUri}'
         NoMimeObject: Impossible de rendre l'image au type Mime '${mimeType}'
@@ -108,7 +108,7 @@ Error:
         NotFoundPmv: Le démarrage de processus demandé dans la version du modèle de processus '${pmvId}' du modèle de processus '${pmName}' de l'application web '${appName}' n'a pas été trouvé.
         NotReleasedPmv: Il n'est pas permis de démarrer un cas sur la version du modèle de processus '${pmvId}' du modèle de processus '${pmName}' de l'application web '${appName}' car elle n'est pas publiée.
       Task:
-        Forbidden : Vous n'êtes pas autorisé à travailler sur la tâche avec l'identifiant '${taskId}'.
+        Forbidden: Vous n'êtes pas autorisé à travailler sur la tâche avec l'identifiant '${taskId}'.
         NotFound: La tâche avec l'identifiant '${taskId}' n'existe pas.
         InvalidPath: Chemin de requête de Tâche invalide
         IsDestroyed: Vous ne pouvez plus travailler sur la tâche '${taskName}' avec l'identifiant '${taskId}' car la tâche a été détruite entre-temps.

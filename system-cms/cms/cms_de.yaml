@@ -1,7 +1,7 @@
 Error:
   Page:
     Error: Fehler
-    ErrorId: Fehler Nr.
+    ErrorId: Fehler-ID
     ErrorTimestamp: Fehler Zeitstempel
     Attributes: Attribute
     ThrownBy: Geworfen von
@@ -15,7 +15,7 @@ Error:
     Name: Name
     Value: Wert
     StackTrace: Aufrufstack
-    StartLastProcess: 
+    StartLastProcess:
       Label: Starte den letzten Prozess nochmals
       Description: Starte den letzten Prozess der gestarted wurde mit einer Laufkonfiguration oder durch drücken von x auf einem Start Element.
     Details: Details
@@ -35,7 +35,7 @@ Error:
     "409": Konflikt
     "500": Server Fehler
     "503": Dienst nicht verfügbar
-  Exception: 
+  Exception:
     ViewExpired: Ansicht abgelaufen
     NotFound:
       CaseMap:
@@ -43,7 +43,7 @@ Error:
         BusinessCase: Business case mit id '${businessCaseId}' nicht gefunden.
         BusinessCaseIdMustBeNumber: Parameter businessCaseId muss eine Nummer sein
     PermissionDenied:
-      CaseMap: 
+      CaseMap:
         AnonymousUser: Ein anonymer Anwender darf keine Case Map oder Nebenschritt starten.
         ExecuteProcess: Keine Berechtigung zur Ausführung des Prozesses '${processId}'
     Request:
@@ -97,7 +97,7 @@ Error:
         NotReleased: Es ist keine Prozessmodellversion für das Prozessmodell '${pmName}' der Anwendung '${appName}' freigegeben.
         NotFound: Die angeforderte Prozessmodellversion wurde nicht gefunden.
         PmNotFound: Die angeforderte Prozessmodellversion des Prozessmodells '${pmName}' der Anwendung '${appName}' wurde nicht gefunden.
-      Render:  
+      Render:
         NoTxtObject: Kein Text-Typ-Objekt '${cmsUri}'
         NoImageObject: Kein Bild '${cmsUri}'
         NoMimeObject: Bild kann nicht in den MIME-Typ '${mimeType}' gerendert werden
@@ -108,7 +108,7 @@ Error:
         NotFoundPmv: Der angeforderte Prozessstart in der Prozessmodellversion '${pmvId}' des Prozessmodells '${pmName}' der Webanwendung '${appName}' wurde nicht gefunden.
         NotReleasedPmv: Es ist nicht erlaubt, einen Fall in der Prozessmodellversion '${pmvId}' des Prozessmodells '${pmName}' der Webanwendung '${appName}' zu starten, weil sie nicht freigegeben ist.
       Task:
-        Forbidden : Sie sind nicht berechtigt, an der Aufgabe mit dem Bezeichner '${taskId}' zu arbeiten.
+        Forbidden: Sie sind nicht berechtigt, an der Aufgabe mit dem Bezeichner '${taskId}' zu arbeiten.
         NotFound: Die Aufgabe mit dem Bezeichner '${taskId}' existiert nicht.
         InvalidPath: Ungültiger Anforderungspfad der Aufgabe
         IsDestroyed: Sie können nicht länger an der Aufgabe '${taskName}' mit dem Bezeichner '${taskId}' arbeiten, da die Aufgabe zwischenzeitlich zerstört wurde.
@@ -118,7 +118,7 @@ Error:
         MustBePreAnalyzed: Aufgabenparameter muss durch frühere Filter analysiert werden
       UrlWrongType: Die angeforderte URL hat einen ungültigen Anforderungstyp '${path}'.
       ViewFileMissing: UI-datei fehlt
-      WrongPathFormat: Falsches Pfadformat        
+      WrongPathFormat: Falsches Pfadformat
 Notification:
   business:
     Description: Diese Notifikation wird gesendet wenn in einem Prozess eine geschäftlich relavante Änderung passiert.
