@@ -39,7 +39,7 @@
     <dependency>
       <groupId>com.axonivy.ivy.api</groupId>
       <artifactId>ivy-api</artifactId>
-	    </dependency>
+    </dependency>
     -->
   </dependencies>
   <build>
