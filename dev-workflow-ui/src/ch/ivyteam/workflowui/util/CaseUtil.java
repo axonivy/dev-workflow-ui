@@ -14,7 +14,6 @@ import ch.ivyteam.ivy.workflow.internal.Task;
 import ch.ivyteam.workflowui.cases.CaseModel;
 import ch.ivyteam.workflowui.starts.StartableModel;
 
-@SuppressWarnings("restriction")
 public class CaseUtil {
 
   public static List<ITask> filterTasksOfCase(List<ITask> tasks, boolean showSystemTasks) {

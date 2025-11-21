@@ -34,6 +34,11 @@
       <groupId>com.axonivy.ivy.api.restricted</groupId>
       <artifactId>ivy-dev-workflow-ui-api</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.axonivy.ivy.api</groupId>
+      <artifactId>ivy-runtime</artifactId>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <build>
