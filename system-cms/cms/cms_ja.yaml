@@ -52,7 +52,7 @@ Error:
         NameMissing: アプリケーション名がありません
         NotFound: リクエストされたアプリケーションは見つかりませんでした
       CaseMap:
-        NoProcessId: サイドステッププロセスパラメータ '${processId}' を定義する必要があります!
+        NoProcessId: サイドステッププロセスパラメーター '${processId}' を定義する必要があります!
         RequestPathNoUUID: リクエストパスにケースマップの UUID が見つかりません
         WrongFormat: リクエストされたケースマップの UUID は間違ったフォーマットです!
       BeanNotFound: リクエストで Bean '${beanClass}' が見つかりません。フィルターがありませんか?
