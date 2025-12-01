@@ -37,6 +37,7 @@ Error:
     "503": Service Unavailable
   Exception: 
     ViewExpired: View Expired
+    Provision: Unable to provision
     NotFound:
       CaseMap:
         UUID: Case Map with UUID '${uuid}' not found!

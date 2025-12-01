@@ -3,7 +3,7 @@ package ch.ivyteam.workflowui.casemap;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.ivyteam.ivy.casemap.runtime.repo.restricted.ICaseMapBusinessCase;
+import ch.ivyteam.ivy.casemap.runtime.ICaseMapService;
 import ch.ivyteam.ivy.workflow.ICase;
 
 public class CaseMapModel {
@@ -11,10 +11,12 @@ public class CaseMapModel {
 
   public static CaseMapModel create(ICase selectedCase) {
     var stageModels = new ArrayList<CaseMapStageModel>();
-    var caseMapBusinessCase = ICaseMapBusinessCase.of(selectedCase.getBusinessCase());
-    if (caseMapBusinessCase != null) {
-      var stages = caseMapBusinessCase.getCaseMap().getStages();
-      var runningStageIndex = stages.indexOf(caseMapBusinessCase.findCurrentStage());
+    var caseMapService = ICaseMapService.current().getCaseMapService(selectedCase.getBusinessCase());
+    var caseMap = caseMapService.find().current();
+    if (caseMap != null) {
+      var stages = caseMap.getStages();
+      var currentCaseMap = caseMapService.findCurrentStage();
+      var runningStageIndex = currentCaseMap != null ? stages.indexOf(currentCaseMap) : -1;
       for (int i = 0; i < stages.size(); i++) {
         stageModels.add(new CaseMapStageModel(stages.get(i), i, runningStageIndex, stages.size()));
       }
