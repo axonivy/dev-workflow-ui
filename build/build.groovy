@@ -34,7 +34,7 @@ def build() {
 
 def mvnBuild(def mvnArgs = '') {
   def phase = isReleasingBranch() ? 'deploy' : 'deploy'
-  maven cmd: "clean ${phase} -ntp -Divy.engine.version.latest.minor=true -Dmaven.test.skip=false -Dengine.page.url=${params.engineSource} " + mvnArgs
+  maven cmd: "clean ${phase} -P-ivy -ntp -Divy.engine.version.latest.minor=true -Dmaven.test.skip=false -Dengine.page.url=${params.engineSource} " + mvnArgs
   
   recordIssues tools: [eclipse()], qualityGates: [[threshold: 1, type: 'TOTAL']]
   recordIssues tools: [mavenConsole()], qualityGates: [[threshold: 1, type: 'TOTAL']], filters: [
