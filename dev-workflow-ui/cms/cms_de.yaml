@@ -19,7 +19,7 @@ case:
 cleanup:
   cleanups:
     businessData: Alle Business Daten und den Such-Index
-    dataCache: Daten Caches
+    dataCache: Alle Daten Caches
     sessionTokenStore: Alle Identity Provider Token
     userAndRole: Alle Benutzern und Rollen
     workflow: Alle Cases, Tasks und abhängige Objekte
