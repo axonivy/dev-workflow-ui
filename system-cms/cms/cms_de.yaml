@@ -7,7 +7,7 @@ Error:
     ThrownBy: Geworfen von
     ProcessCallStack: Prozess Aufrufstack
     TechnicalCause: Technischer Grund
-    ContactAdmin: Bitte informieren Sie den Systemadministrator
+    ContactAdmin: Bitte kontaktieren Sie den Systemadministrator
     RequestUri: Anfrage Uri
     Servlet: Servlet
     Application: Applikation
@@ -16,7 +16,7 @@ Error:
     Value: Wert
     StackTrace: Aufrufstack
     StartLastProcess:
-      Label: Starte den letzten Prozess nochmals
+      Label: Starte den letzten Prozess
       Description: Starte den letzten Prozess der gestarted wurde mit einer Laufkonfiguration oder durch drücken von x auf einem Start Element.
     Details: Details
     BackToApplication: Zurück zur Applikation
