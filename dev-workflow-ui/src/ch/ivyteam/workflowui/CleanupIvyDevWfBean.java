@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 import ch.ivyteam.ivy.business.data.store.restricted.BusinessDataPersistence;
 import ch.ivyteam.ivy.data.cache.restricted.IDataCacheManager;
 import ch.ivyteam.ivy.rest.client.oauth2.SessionTokenStore;
+import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 
 @SuppressWarnings("restriction")
@@ -52,20 +53,24 @@ public class CleanupIvyDevWfBean {
   }
 
   public void cleanup() {
+    var context = ISecurityContext.current();
+    if (context == null) {
+      return;
+    }
     if (casesTasksAndDependent) {
-      IWorkflowContext.current().cleanup();
+      IWorkflowContext.of(context).cleanup();
       showMessage("All existing Cases and Tasks have been deleted");
     }
     if (businessDataAndSearchIndex) {
-      BusinessDataPersistence.instance().clearAll();
+      BusinessDataPersistence.instance().clear(context);
       showMessage("All Business Data and the search index has been deleted");
     }
     if (identityProviderTokens) {
-      SessionTokenStore.clear();
+      SessionTokenStore.clear(context);
       showMessage("All identity provider tokens have been deleted");
     }
     if (dataCaches) {
-      IDataCacheManager.instance().invalidateAll();
+      IDataCacheManager.instance().invalidate(context);
       showMessage("All data caches have been cleared");
     }
   }
