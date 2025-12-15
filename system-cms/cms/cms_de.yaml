@@ -119,6 +119,7 @@ Error:
       UrlWrongType: Die angeforderte URL hat einen ungültigen Anforderungstyp '${path}'.
       ViewFileMissing: UI-datei fehlt
       WrongPathFormat: Falsches Pfadformat
+    Provision: Bereitstellung nicht möglich
 Notification:
   business:
     Description: Diese Notifikation wird gesendet wenn in einem Prozess eine geschäftlich relavante Änderung passiert.
