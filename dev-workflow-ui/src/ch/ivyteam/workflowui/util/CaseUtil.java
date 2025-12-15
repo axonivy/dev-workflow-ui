@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
+import ch.ivyteam.ivy.casemap.runtime.ICaseMapService;
 import ch.ivyteam.ivy.casemap.runtime.model.ICaseMap;
-import ch.ivyteam.ivy.casemap.runtime.repo.restricted.ICaseMapBusinessCase;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
@@ -33,11 +33,7 @@ public class CaseUtil {
   }
 
   public static ICaseMap getCaseMap(ICase caze) {
-    var caseMapBusinessCase = ICaseMapBusinessCase.of(caze.getBusinessCase());
-    if (caseMapBusinessCase != null) {
-      return caseMapBusinessCase.getCaseMap();
-    }
-    return null;
+    return ICaseMapService.current().find().byBusinessCase(caze.getBusinessCase());
   }
 
   public static ICase getCaseById(String uuid) {
