@@ -14,7 +14,7 @@ Error:
     ThreadLocalValues: Anfragekontext
     Name: Name
     Value: Wert
-    StackTrace: Aufrufstack
+    StackTrace: Stack Trace
     StartLastProcess:
       Label: Starte den letzten Prozess
       Description: Starte den letzten Prozess der gestarted wurde mit einer Laufkonfiguration oder durch drücken von x auf einem Start Element.
@@ -77,7 +77,7 @@ Error:
         PathNotFound: Datei '${filePath}' nicht gefunden.
       Licence:
         ClusterLimit: Lizenzverletzung, Cluster-Knoten nicht lizenziert, da das Limit für Cluster-Knoten überschritten wurde
-        NoPublicUrl: Lizenzverletzung, Die angeforderte URL stimmt mit keiner der lizenzierten öffentlichen URLs überein
+        NoPublicUrl: Lizenzverletzung, die angeforderte URL stimmt mit keiner der lizenzierten öffentlichen URLs überein
       Param:
         Missing: Parameter '${parameter}' fehlt
         NotValid: Parameter '${parameter}' muss eine gültige Zahl (long) sein
@@ -117,7 +117,7 @@ Error:
         UriOnWrongApp: Die Anwendung im Anforderungs-URI stimmt nicht mit der Anwendung der Aufgabe überein.
         MustBePreAnalyzed: Aufgabenparameter muss durch frühere Filter analysiert werden
       UrlWrongType: Die angeforderte URL hat einen ungültigen Anforderungstyp '${path}'.
-      ViewFileMissing: UI-datei fehlt
+      ViewFileMissing: View-Datei fehlt
       WrongPathFormat: Falsches Pfadformat
     Provision: Bereitstellung nicht möglich
 Notification:
@@ -130,7 +130,7 @@ Notification:
       Footer:
         Sender: Diese E-Mail wurde gesendet von der Applikation
         Settings: Verwalten von Benachrichtigungen
-      Greeting: Guten Tag
+      Greeting: Hallo
       GreetingShort: Hallo
       Title: Geschäftliche Information
     Templates:
@@ -150,7 +150,7 @@ Notification:
       Footer:
         Sender: Diese E-Mail wurde gesendet von der Applikation
         Settings: Verwalten von Benachrichtigungen
-      Greeting: Guten Tag
+      Greeting: Hallo
       GreetingShort: Hallo
       Task:
         Created: Datum der Erstellung
