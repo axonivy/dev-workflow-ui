@@ -7,7 +7,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import ch.ivyteam.ivy.security.restricted.IUserInternal;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.workflowui.util.UserUtil;
@@ -27,7 +26,7 @@ public class SwitchUserBean {
 
   private List<User> setUsers() {
     return UserUtil.getUsers().stream()
-        .filter(user -> ((IUserInternal) user).isTestUser())
+        .filter(user -> ((ch.ivyteam.ivy.security.internal.user.User) user).isTestUser())
         .filter(user -> globalFilter == null || globalFilter.trim().isEmpty() || user.getName().toLowerCase().contains(globalFilter.toLowerCase()))
         .map(SwitchUserBean::toUser)
         .collect(toList());
