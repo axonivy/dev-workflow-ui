@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.security.ISession;
+import ch.ivyteam.ivy.security.restricted.IUserInternal;
 import ch.ivyteam.licence.RuntimeLicenceException;
 import ch.ivyteam.workflowui.util.PermissionsUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
@@ -44,7 +45,7 @@ public class LoginUtil {
       return;
     }
     var user = ISecurityContext.current().users().find(username);
-    if (user != null && ((ch.ivyteam.ivy.security.internal.user.User) user).isTestUser()) {
+    if (user != null && ((IUserInternal) user).isTestUser()) {
       if (attemptLogin(username, username)) {
         redirectAfterLogin(origin, null);
         return;

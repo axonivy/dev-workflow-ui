@@ -1,7 +1,5 @@
 package ch.ivyteam.workflowui.login;
 
-import java.io.IOException;
-import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -9,15 +7,11 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.event.SelectEvent;
 
 import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.security.IUser;
-import ch.ivyteam.ivy.security.identity.core.auth.oauth2.OAuth2Url;
-import ch.ivyteam.ivy.security.identity.spi.auth.oauth2.OAuth2Authenticator;
-import ch.ivyteam.ivy.security.restricted.ISecurityContextInternal;
 import ch.ivyteam.workflowui.login.SwitchUserBean.User;
 import ch.ivyteam.workflowui.util.PermissionsUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
@@ -35,11 +29,10 @@ public class LoginBean {
   private OAuthProvider oauthProvider;
 
   public LoginBean() {
-    var ctx = ISecurityContext.current();
-    var provider = ((ISecurityContextInternal) ctx).identityProvider();
-    if (provider.authenticator() instanceof OAuth2Authenticator) {
-      var initUri = OAuth2Url.initUri(ctx, provider);
-      oauthProvider = new OAuthProvider(provider.displayName(), loadResource(provider.logo()), initUri);
+    var authProviders = ISecurityContext.current().authProviders();
+    if (authProviders.size() > 0) {
+      var authProvider = authProviders.get(0);
+      oauthProvider = new OAuthProvider(authProvider.displayName(), authProvider.logo(), authProvider.url());
     }
   }
 
@@ -140,11 +133,4 @@ public class LoginBean {
     return oauthProvider;
   }
 
-  private String loadResource(URI uri) {
-    try {
-      return IOUtils.toString(uri, StandardCharsets.UTF_8);
-    } catch (IOException ex) {
-      throw new RuntimeException(ex);
-    }
-  }
 }

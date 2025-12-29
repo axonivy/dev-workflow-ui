@@ -1,0 +1,174 @@
+Error:
+  Page:
+    Error: エラー
+    ErrorId: エラーID
+    ErrorTimestamp: エラータイムスタンプ
+    Attributes: 属性
+    ThrownBy: スロー元
+    ProcessCallStack: プロセスコールスタック
+    TechnicalCause: 技術的な原因
+    RequestUri: リクエスト URI
+    Servlet: サーブレット
+    Application: アプリケーション
+    ThreadLocalValues: リクエストコンテキスト
+    Name: 名前
+    Value: 値
+    StackTrace: スタックトレース
+    StartLastProcess:
+      Label: 最後のプロセスを開始する
+      Description: 起動設定で開始された最後のプロセス、または開始要素で「x」を押して開始された最後のプロセスを起動します。
+    ContactAdmin: システム管理者にお問い合わせください
+    Details: 詳細
+    BackToApplication: アプリケーションに戻る
+  UnavailablePage:
+    Unavailable: ${product}は現在使用できません
+    State:
+      STARTING: ${product}を起動中です
+      STOPPING: ${product}は停止中です
+      RUNNING: ${product}は実行中です
+      STOPPED: ${product}は停止しました
+  StatusCode:
+    "400": 無効なリクエスト
+    "401": 無許可
+    "403": 禁止
+    "404": 見つかりません
+    "409": 競合
+    "500": サーバーエラー
+    "503": サービス利用不可
+  Exception:
+    ViewExpired: 表示有効期限切れ
+    NotFound:
+      CaseMap:
+        UUID: UUIDが'${uuid}'のケースマップが見つかりません。
+        BusinessCase: IDが'${businessCaseId}'のビジネスケースが見つかりません。
+        BusinessCaseIdMustBeNumber: パラメーターbusinessCaseIdは数字でなければなりません
+    PermissionDenied:
+      CaseMap:
+        AnonymousUser: 匿名ユーザーは、ケースマップまたはサイドステップを開始することはできません。
+        ExecuteProcess: プロセス'${processId}'を実行する権限がありません
+    Request:
+      App:
+        InMaintenance: メンテナンスのため、アプリケーション'${appName}'は現在利用できません。
+        NameMissing: アプリケーション名がありません
+        NotFound: リクエストされたアプリケーションは見つかりませんでした
+      CaseMap:
+        NoProcessId: サイドステッププロセスパラメーター'${processId}'を定義する必要があります。
+        RequestPathNoUUID: リクエストパスにケースマップのUUIDが見つかりません
+        WrongFormat: リクエストされたケースマップのUUIDは間違ったフォーマットです。
+      BeanNotFound: リクエストでBean'${beanClass}'が見つかりません。フィルターがありませんか？
+      ContentObject:
+        IsNull: コンテンツオブジェクト'${cmsUri}'には値がありません
+        IsNoPage: コンテンツオブジェクト '${cmsUri}'はページとして使用できません。
+        NotFound: コンテンツオブジェクト'${cmsUri}'は見つかりませんでした
+        NotResolved: "'${cmsUri}'に対して解決されたコンテンツオブジェクトの値ではありません。"
+      Dialog:
+        IdNotFound: ダイアログランタイム'${dialog Id}'が見つかりません
+        NotAvailable: ダイアログランタイムはもう使用できません
+        NotFound: リクエストされたユーザーダイアログが見つかりません
+        RequestMustBeGuid: リクエストされたダイアログのランタイムIDはGUIDでなければなりません
+      Engine:
+        NotRunning: プロセスエンジンは実行状態にある必要がありますが、実行状態ではありません。
+        NotStarted: プロセスエンジンが実行されていません。最初にプロセスエンジンを起動してください
+      File:
+        LoadingEx: リクエストされたファイルの読み込み中に例外が発生しました
+        NameMissing: ファイルエリア名がありません
+        NameUnknown: リクエストされたファイルエリア名は不明です。
+        NotFound: リクエストされたファイルが見つかりません
+        PathNotFound: ファイル'${filePath}'が見つかりません。
+      Licence:
+        ClusterLimit: ライセンス違反クラスタノードは、クラスタノード制限を超えたためライセンスされていません
+        NoPublicUrl: リクエストされたライセンス違反のURLは、ライセンス公開URLのいずれかに一致しません
+      Param:
+        Missing: パラメーター'${parameter}'がありません
+        NotValid: パラメーター'${parameter}'は有効なLong型の数字でなければなりません
+        NotValidChars: パラメーター'${parameter}'には許可されていない文字が含まれます
+      PathNoDialogId: リクエストパスでUserDialogIdが見つかりません
+      PageContentNotFound: リクエストされたページコンテンツオブジェクトが見つかりません。
+      PageNoHttpResponse: 自動処理ページをHTTP応答に書き込めませんでした。
+      PageEngine:
+        InvalidRequest: サポートされていないリクエストタイプ${type}
+        WrongState: PageEngineの状態は'RUNNING'である必要がありますが、'${serviceState}'でした
+      Pm:
+        InMaintenance: アプリケーション'${appName}'のプロセスモデル'${pmName}'は、メンテナンスのため現在使用できません。
+        NotFound: アプリケーション'${appName}'のリクエストされたプロセスモデルは見つかりませんでした。
+      Pmv:
+        InMaintenance: アプリケーション'${appName}'のプロセスモデル'${pmName}'のプロセスモデルバージョン'${pmvId}'は、メンテナンスのため現在使用できません。
+        NameIsMissing: プロセスモデルバージョン名がありません
+        NotReleased: アプリケーション'${appName}'のプロセスモデル'${pmName}'にリリースされたプロセスモデルバージョンはありません。
+        NotFound: リクエストされたプロセスモデルバージョンは見つかりませんでした。
+        PmNotFound: アプリケーション'${appName}'のプロセスモデル'${pmName}'のリクエストされたプロセスモデルバージョンは見つかりませんでした。
+      Render:
+        NoTxtObject: テキスト型オブジェクト'${cmsUri}'ではありません
+        NoImageObject: 画像'${cmsUri}'ではありません
+        NoMimeObject: 画像をMIMEタイプ'${mimeType}'にレンダリングできません
+        NoResponse: レンダラー応答セットがありません
+      RestPathMissing: RESTパスがありません
+      SessionExpired: セッションは期限切れになりました。
+      Start:
+        NotFoundPmv: Webアプリケーション'${appName}'のプロセスモデル'${pmName}'のプロセスモデルバージョン'${pmvId}'で始まるリクエストされたプロセスが見つかりませんでした。
+        NotReleasedPmv: リリースされていないため、Webアプリケーション'${appName}'のプロセスモデル'${pmName}'のプロセスモデルバージョン'${pmvId}'でケースを開始できません。
+      Task:
+        Forbidden: 識別子'${taskId}'付きのタスクでの作業は許可されていません。
+        NotFound: 識別子'${taskId}'付きのタスクは存在しません。
+        InvalidPath: タスクの無効なリクエストパス
+        IsDestroyed: 識別子'${taskId}'付きのタスク'${taskName}'は途中で破棄されたため、そのタスクでは作業できません。
+        IsDone: ユーザー'${userName}'が既に終了したため、識別子'${taskId}'付きのタスク'${taskName}'では作業できません。
+        InProcess: ユーザー'${userName}'が識別子'${taskId}'付きのタスク'${taskName}'で現在作業中であるため、そのタスクでは作業できません。
+        UriOnWrongApp: リクエストURIのアプリケーションは、タスクのアプリケーションと等しくありません。
+        MustBePreAnalyzed: 前のフィルターによりタスクパラメーターを解析する必要があります
+      UrlWrongType: リクエストされたURLには無効なリクエストタイプ'${path}'が含まれます。
+      ViewFileMissing: 不足ファイルを表示する
+      WrongPathFormat: パスフォーマットが間違っています
+    Provision: プロビジョニングできません
+Notification:
+  business:
+    Description: この通知は、プロセスでビジネスに関連する変更が行われる場合に送信されます。
+    DisplayName: ビジネス情報
+    Labels:
+      Actions:
+        Details: ケース詳細
+      Footer:
+        Sender: このメールはアプリケーションによって送信されました
+        Settings: 通知を管理する
+      Greeting: Hello
+      GreetingShort: Hi
+      Title: ビジネス情報
+    Templates:
+      Default:
+        mail:
+          Subject: <%= message %>
+        web:
+          Subject: <%= ivy.html.escape(message) %>
+  new-task:
+    Description: この通知は、新しいタスクが割り当てられると送信されます。
+    DisplayName: 新しいタスクが割り当てられました
+    Labels:
+      Actions:
+        Details: タスクの詳細
+        Start: タスクを開始
+      Description: 次のタスクが割り当てられました。処理の待機中です
+      Footer:
+        Sender: このメールはアプリケーションによって送信されました
+        Settings: 通知を管理する
+      Greeting: Hello
+      Task:
+        Created: 作成された日付
+        Description: 説明
+        Expiry: 有効期限
+        Name: 名前
+        Priority: 優先順位
+        PriorityLabels:
+          EXCEPTION: 例外
+          HIGH: 高
+          LOW: 低
+          NORMAL: ノーマル
+        Responsible: 担当
+        Title: タスクの詳細
+      Title: 新しいタスクが割り当てられました
+      GreetingShort: Hi
+    Templates:
+      Default:
+        mail:
+          Subject: 新しいタスク"<%= ivy.html.escape(ivy.task.name) %>"が<%= ivy.html.escape(ivy.task.responsibles().displayName()) %>に割り当てられました
+        web:
+          Subject: <%= ivy.html.escape(ivy.task.responsibles().displayName()) %>の新しいタスク'<%= ivy.html.escape(ivy.task.name) %>'
