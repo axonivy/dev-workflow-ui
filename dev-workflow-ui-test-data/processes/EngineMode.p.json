@@ -7,11 +7,11 @@
   "elements" : [ {
       "id" : "f10",
       "type" : "RequestStart",
-      "name" : "designerEmbedded",
+      "name" : "devMode",
       "config" : {
-        "signature" : "designerEmbedded",
+        "signature" : "devMode",
         "request" : {
-          "description" : "Sets designer mode to Embedded. Used for CI testing. Might break the designer if executed",
+          "description" : "Sets dev mode true and DEMO engine mode. Used for CI testing.",
           "category" : "actions"
         }
       },
@@ -35,9 +35,8 @@
         "output" : {
           "code" : [
             "import ch.ivyteam.ivy.server.restricted.EngineMode;",
-            "",
-            "",
-            "EngineMode.set(EngineMode.DESIGNER_EMBEDDED);"
+            "EngineMode.set(EngineMode.DEMO);",
+            "System.setProperty(\"dev.mode\", \"true\");"
           ]
         }
       },
