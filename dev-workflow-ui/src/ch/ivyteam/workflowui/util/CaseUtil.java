@@ -10,7 +10,6 @@ import ch.ivyteam.ivy.casemap.runtime.model.ICaseMap;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
-import ch.ivyteam.ivy.workflow.internal.Task;
 import ch.ivyteam.workflowui.cases.CaseModel;
 import ch.ivyteam.workflowui.starts.StartableModel;
 
@@ -21,7 +20,7 @@ public class CaseUtil {
       return tasks;
     }
     return tasks.stream()
-        .filter(task -> !((Task) task).responsibles().system())
+        .filter(task -> !task.responsibles().isSystem())
         .collect(Collectors.toList());
   }
 

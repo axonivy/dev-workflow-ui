@@ -66,7 +66,7 @@ class WebTestCleanup {
   @Test
   @Order(2)
   void cleanupUserPermissions() {
-    startTestProcess("1783B19164F69B78/designerEmbedded.ivp");
+    startTestProcess("1783B19164F69B78/devMode.ivp");
     loginFromTable("testuser");
     $(By.id("menuform:sr_actions")).shouldBe(visible).click();
     $(By.id("menuform:sr_cleanup")).shouldNotBe(visible);
