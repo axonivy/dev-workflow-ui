@@ -21,10 +21,6 @@
         <configuration>
           <engineListPageUrl>${engine.page.url}</engineListPageUrl>
           <skipScriptValidation>false</skipScriptValidation>
-          <compilerOptions>
-            <!-- unnecessary suppress warnings: false positives off -->
-            <compilerOption>-warn:-warningToken</compilerOption>
-          </compilerOptions>
         </configuration>
       </plugin>
       <plugin>
