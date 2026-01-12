@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://json-schema.axonivy.com/app/14.0.0/roles.json
 Roles:
-- Id: testrole1
-- Id: testrole2
-- Id: testrole3
+  - Id: testrole1
+  - Id: testrole2
+  - Id: testrole3
