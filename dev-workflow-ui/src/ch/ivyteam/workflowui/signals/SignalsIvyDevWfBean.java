@@ -44,7 +44,7 @@ public class SignalsIvyDevWfBean {
 
   public void sendSignal() {
     IBpmSignalService signals = IWorkflowSession.current().getWorkflowContext().signals();
-    SignalCode signalCode = new SignalCode(code);
+    SignalCode signalCode = SignalCode.of(code);
 
     if (StringUtils.isBlank(payload)) {
       signals.send(signalCode);
