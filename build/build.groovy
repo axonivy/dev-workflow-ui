@@ -7,8 +7,8 @@ def buildIntegration(def mvnArgs = '') {
     def dbName = "db-" + random
     sh "docker network create ${networkName}"
     try {
-      docker.image("selenium/standalone-firefox:4").withRun("-e START_XVFB=false --shm-size=2g --name ${seleniumName} --network ${networkName} --shm-size 1g --hostname=ivy") {
-        docker.build('maven', '-f build/Dockerfile .').inside("--name ${ivyName} --network ${networkName}") {
+      docker.build('selenium', '-f build/Dockerfile.selenium .').withRun("--shm-size=2g --name ${seleniumName} --network ${networkName} --hostname=ivy") {
+        docker.build('maven', '-f build/Dockerfile.maven .').inside("--name ${ivyName} --network ${networkName}") {
           def mvnBuildArgs = "-Dwdm.gitHubTokenName=ivy-team " +
               "-Dwdm.gitHubTokenSecret=${env.GITHUB_TOKEN} " +
               "-Dtest.engine.url=http://${ivyName}:8080 " +
@@ -27,7 +27,7 @@ def buildIntegration(def mvnArgs = '') {
 }
 
 def build() {
-  docker.build('maven', '-f build/Dockerfile .').inside("") {
+  docker.build('maven', '-f build/Dockerfile.maven .').inside("") {
     mvnBuild('-Pcreate-deploy-zip');
   }
 }
