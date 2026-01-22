@@ -2,6 +2,18 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "local>axonivy/renovate-config"
+  ],
+  "packageRules": [
+    {
+      "description": "disable non public dependencies",
+      "matchPackageNames": [
+        "ch.ivyteam.workflow:dev-workflow-ui-config-iar",
+        "ch.ivyteam.workflow:dev-workflow-ui",
+        "ch.ivyteam.workflow:dev-workflow-ui-config",
+        "ch.ivyteam.workflow:dev-workflow-ui-test-data",
+        "ch.ivyteam.maven:screenshot-html-plugin"
+      ],
+      "enabled": false
+    }
   ]
 }
-
