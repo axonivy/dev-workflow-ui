@@ -2,11 +2,11 @@ package ch.ivyteam.workflowui.util;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import ch.ivyteam.ivy.application.IProcessModel;
+import ch.ivyteam.ivy.application.IApplication;
+import ch.ivyteam.ivy.application.ReleaseState;
 import ch.ivyteam.ivy.application.app.IApplicationRepository;
 import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.security.ISession;
@@ -17,24 +17,19 @@ import ch.ivyteam.workflowui.starts.StartableModel;
 
 public class ProcessModelsUtil {
 
-  private static List<IProcessModel> getProcessModels() {
+  public static List<IWorkflowProcessModelVersion> getWorkflowPMVs() {
     var securityContext = ISecurityContext.current();
     return IApplicationRepository.of(securityContext).all().stream()
-        .flatMap(a -> a.getProcessModels().stream())
-        .collect(Collectors.toList());
-  }
-
-  public static List<IWorkflowProcessModelVersion> getWorkflowPMVs() {
-    return getProcessModels().stream()
-        .flatMap(pm -> pm.getProcessModelVersions().stream())
+        .flatMap(IApplication::getProcessModelVersions)
         .map(IWorkflowProcessModelVersion::of)
         .collect(Collectors.toList());
   }
 
   public static Stream<IWorkflowProcessModelVersion> getReleasedWorkflowPMVs() {
-    return getProcessModels().stream()
-        .map(IProcessModel::getReleasedProcessModelVersion)
-        .filter(Objects::nonNull)
+    var securityContext = ISecurityContext.current();
+    return IApplicationRepository.of(securityContext).all().stream()
+        .filter(app -> app.getReleaseState() == ReleaseState.RELEASED)
+        .flatMap(IApplication::getProcessModelVersions)
         .map(IWorkflowProcessModelVersion::of);
   }
 

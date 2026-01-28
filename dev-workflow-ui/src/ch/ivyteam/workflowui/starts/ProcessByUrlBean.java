@@ -2,6 +2,7 @@ package ch.ivyteam.workflowui.starts;
 
 import javax.faces.bean.ManagedBean;
 
+import ch.ivyteam.ivy.application.ReleaseState;
 import ch.ivyteam.ivy.application.app.IApplicationRepository;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
@@ -9,17 +10,24 @@ import ch.ivyteam.ivy.workflow.start.IWebStartable;
 
 @ManagedBean
 public class ProcessByUrlBean {
-  private String app;
-  private String pmv;
+
+  private String appName;
+  private String projectName;
   private String startableId;
 
   public void executeStart() {
-    var releasedPmv = IApplicationRepository.instance().findByName(app)
-        .map(a -> a.findProcessModelVersion(pmv));
-    if (!releasedPmv.isPresent()) {
+    var app = IApplicationRepository.instance().findByName(appName).stream()
+        .filter(a -> a.getReleaseState() == ReleaseState.RELEASED)
+        .findAny()
+        .orElse(null);
+    if (app == null) {
       return;
     }
-    IWorkflowProcessModelVersion.of(releasedPmv.get()).getAllStartables(ISession.current())
+    var project = app.findProcessModelVersion(projectName);
+    if (project == null) {
+      return;
+    }
+    IWorkflowProcessModelVersion.of(project).getAllStartables(ISession.current())
         .filter(s -> s.getId().equals(startableId))
         .findFirst()
         .map(ProcessByUrlBean::createCaseMapOrProcessStartable)
@@ -46,19 +54,18 @@ public class ProcessByUrlBean {
   }
 
   public String getApp() {
-    return app;
+    return appName;
   }
 
   public void setApp(String app) {
-    this.app = app;
+    this.appName = app;
   }
 
   public String getPmv() {
-    return pmv;
+    return projectName;
   }
 
   public void setPmv(String pmv) {
-    this.pmv = pmv;
+    this.projectName = pmv;
   }
-
 }

@@ -87,7 +87,7 @@ class WebTestStartsIT {
   @Test
   void startProcessByUrlParameter() {
     var app = EngineUrl.applicationName();
-    var pmv = "dev-workflow-ui-test-data$1";
+    var pmv = "dev-workflow-ui-test-data";
     var startableId = EngineUrl.applicationName() + "/dev-workflow-ui-test-data/TestData/startTestDialog1.ivp";
     open(viewUrl("start.xhtml", Map.of("app", app, "pmv", pmv, "id", startableId)));
     assertCurrentUrlContains("frame.xhtml?");
@@ -101,7 +101,7 @@ class WebTestStartsIT {
   @Test
   void checkIsNonVisibleStartEventStartable() {
     var app = EngineUrl.applicationName();
-    var pmv = "dev-workflow-ui-test-data$1";
+    var pmv = "dev-workflow-ui-test-data";
     var startableId = EngineUrl.applicationName() + "/dev-workflow-ui-test-data/TestData/nonVisibleStartTestDialog3.ivp";
     open(viewUrl("start.xhtml", Map.of("app", app, "pmv", pmv, "id", startableId)));
     assertCurrentUrlContains("frame.xhtml?");
