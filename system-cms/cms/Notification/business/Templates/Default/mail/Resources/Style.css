@@ -17,7 +17,7 @@ logo {
 }
 
 hr {
-  background-color: #D8D9D9;
+  background-color: #d8d9d9;
   height: 1px;
   border: none;
   margin: 20px 0px;
@@ -28,43 +28,22 @@ h3 {
   margin: 20px 0px;
 }
 
-a {
-  text-decoration: none;
-  color: #006F94;
-}
-
-.actions div {
-  display: inline-block;
+.actions-table-td {
   border-radius: 5px;
   padding: 6px 10px;
-  line-height: 12px;
 }
 
-.actions img,
-.actions a {
-  vertical-align: middle;
+a {
+  text-decoration: none;
 }
 
-.actions img {
-  height: 12px;
-}
-
-.case-details-action div {
-  background-color: #D8D9D9;
-}
-
-.case-details-action a,
-.case-details-action td {
+.case-details-action-span {
   color: #000000;
 }
 
-.actions table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.actions table td {
-  padding: 0;
+img,
+span {
+  vertical-align: middle;
 }
 
 .footer {

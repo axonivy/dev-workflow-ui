@@ -22,102 +22,54 @@
             <tbody>
               <tr>
                 <th><%= ivy.cm.co("/Notification/new-task/Labels/Task/Name") %></th>
-                <td><%= ivy.html.escape(ivy.task.name) %></td>
+                <td class="task-details-td"><%= ivy.html.escape(ivy.task.name) %></td>
               </tr>
               <tr>
                 <th><%= ivy.cm.co("/Notification/new-task/Labels/Task/Description") %></th>
-                <td><%= ivy.html.escape(ivy.task.description) %></td>
+                <td class="task-details-td"><%= ivy.html.escape(ivy.task.description) %></td>
               </tr>
               <tr>
                 <th><%= ivy.cm.co("/Notification/new-task/Labels/Task/Responsible") %></th>
-                <td><%= ivy.html.escape(ivy.task.responsibles().displayName()) %></td>
+                <td class="task-details-td"><%= ivy.html.escape(ivy.task.responsibles().displayName()) %></td>
               </tr>
               <tr>
                 <th><%= ivy.cm.co("/Notification/new-task/Labels/Task/Priority") %></th>
-                <td><%= ivy.cm.co("/Notification/new-task/Labels/Task/PriorityLabels/" + ivy.task.getPriority()) %></td>
+                <td class="task-details-td"><%= ivy.cm.co("/Notification/new-task/Labels/Task/PriorityLabels/" + ivy.task.getPriority()) %></td>
               </tr>
               <tr>
                 <th><%= ivy.cm.co("/Notification/new-task/Labels/Task/Created") %></th>
-                <td><%= ivy.task.getStartTimestamp().format("short", "short") %></td>
+                <td class="task-details-td"><%= ivy.task.getStartTimestamp().format("short", "short") %></td>
               </tr>
               <tr>
                 <th><%= ivy.cm.co("/Notification/new-task/Labels/Task/Expiry") %></th>
-                <td><%= ivy.task.getExpiryTimestamp() is initialized ? ivy.task.getExpiryTimestamp().format("short", "short") : "-" %></td>
+                <td class="task-details-td"><%= ivy.task.getExpiryTimestamp() is initialized ? ivy.task.getExpiryTimestamp().format("short", "short") : "-" %></td>
               </tr>
-              <tr class="actions">
-                <td class="start-task-action">
-                  <!--[if !mso]> <!-->
-                  <div>
-                    <img
-                      src="<%= ivy.cm.ref("/Notification/new-task/Templates/Default/mail/Resources/Play") %>"
-                      height="12"
-                    />
-                    <a href="<%= ivy.task.getStartLinkEmbedded().getAbsoluteEncoded() %>">
-                      <%= ivy.cm.co("/Notification/new-task/Labels/Actions/Start") %>
-                    </a>
-                  </div>
-                  <!-- <![endif]-->
-                  <!--[if mso]>
-                  <v:roundrect
-                    xmlns:v="urn:schemas-microsoft-com:vml"
-                    xmlns:w="urn:schemas-microsoft-com:office:word"
-                    href="<%= ivy.task.getStartLinkEmbedded().getAbsoluteEncoded() %>"
-                    style="height: 28px; width: 133px;"
-                    strokecolor="none"
-                    fillcolor="#006F94"
-                  >
-                    <table>
-                      <tr>
-                        <td>
-                          <img
-                            src="<%= ivy.cm.ref("/Notification/new-task/Templates/Default/mail/Resources/Play") %>"
-                            height="12"
-                          />
-                        </td>
-                        <td align="left">
-                          <%= ivy.cm.co("/Notification/new-task/Labels/Actions/Start") %>
-                        </td>
-                      </tr>
-                    </table>
-                  </v:roundrect>
-                  <![endif]-->
+              <tr>
+                <td class="start-task-action-td">
+                  <table>
+                    <tr>
+                      <td class="actions-table-td" bgcolor="#006f94">
+                        <a href="<%= ivy.task.getStartLinkEmbedded().getAbsoluteEncoded() %>">
+                          <img src="<%= ivy.cm.ref("/Notification/new-task/Templates/Default/mail/Resources/Play") %>" height="12"/>
+                          <!--[if mso]>&nbsp;<![endif]-->
+                          <span class="start-task-action-span"><%= ivy.cm.co("/Notification/new-task/Labels/Actions/Start") %></span>
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
                 </td>
-                <td class="task-details-action">
-                  <!--[if !mso]> <!-->
-                  <div>
-                    <img
-                      src="<%= ivy.cm.ref("/Notification/new-task/Templates/Default/mail/Resources/Info") %>"
-                      height="12"
-                    />
-                    <a href="<%= ivy.task.getDetailLink().getAbsoluteEncoded() %>">
-                      <%= ivy.cm.co("/Notification/new-task/Labels/Actions/Details") %>
-                    </a>
-                  </div>
-                  <!-- <![endif]-->
-                  <!--[if mso]>
-                  <v:roundrect
-                    xmlns:v="urn:schemas-microsoft-com:vml"
-                    xmlns:w="urn:schemas-microsoft-com:office:word"
-                    href="<%= ivy.task.getDetailLink().getAbsoluteEncoded() %>"
-                    style="height: 28px; width: 143px;"
-                    strokecolor="none"
-                    fillcolor="#D8D9D9"
-                  >
-                    <table>
-                      <tr>
-                        <td>
-                          <img
-                            src="<%= ivy.cm.ref("/Notification/new-task/Templates/Default/mail/Resources/Info") %>"
-                            height="12"
-                          />
-                        </td>
-                        <td align="left">
-                          <%= ivy.cm.co("/Notification/new-task/Labels/Actions/Details") %>
-                        </td>
-                      </tr>
-                    </table>
-                  </v:roundrect>
-                  <![endif]-->
+                <td>
+                  <table>
+                    <tr>
+                      <td class="actions-table-td" bgcolor="#d8d9d9">
+                        <a href="<%= ivy.task.getDetailLink().getAbsoluteEncoded() %>">
+                          <img src="<%= ivy.cm.ref("/Notification/new-task/Templates/Default/mail/Resources/Info") %>" height="12"/>
+                          <!--[if mso]>&nbsp;<![endif]-->
+                          <span class="task-details-action-span"><%= ivy.cm.co("/Notification/new-task/Labels/Actions/Details") %></span>
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
                 </td>
               </tr>
             </tbody>
