@@ -20,43 +20,19 @@
           <%= ivy.case == null ? "" : String.format("
           <table>
             <tbody>
-              <tr class=\"actions\">
-                <td class=\"case-details-action\">
-                  <!--[if !mso]> <!-->
-                  <div>
-                    <img
-                      src=\"%1$s\"
-                      height=\"12\"
-                    />
-                    <a href=\"%2$s\">
-                      %3$s
-                    </a>
-                  </div>
-                  <!-- <![endif]-->
-                  <!--[if mso]>
-                  <v:roundrect
-                    xmlns:v=\"urn:schemas-microsoft-com:vml\"
-                    xmlns:w=\"urn:schemas-microsoft-com:office:word\"
-                    href=\"%2$s\"
-                    style=\"height: 28px; width: 103px;\"
-                    strokecolor=\"none\"
-                    fillcolor=\"#D8D9D9\"
-                  >
-                    <table>
-                      <tr>
-                        <td>
-                          <img
-                            src=\"%1$s\"
-                            height=\"12\"
-                          />
-                        </td>
-                        <td align=\"right\">
-                          %3$s
-                        </td>
-                      </tr>
-                    </table>
-                  </v:roundrect>
-                  <![endif]-->
+              <tr>
+                <td>
+                  <table>
+                    <tr>
+                      <td class=\"actions-table-td\" bgcolor=\"#d8d9d9\">
+                        <a href=\"%2$s\">
+                          <img src=\"%1$s\" height=\"12\"/>
+                          <!--[if mso]>&nbsp;<![endif]-->
+                          <span class=\"case-details-action-span\">%3$s</span>
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
                 </td>
               </tr>
             </tbody>
