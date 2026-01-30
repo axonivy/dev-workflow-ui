@@ -33,10 +33,13 @@ th {
   text-align: left;
   white-space: nowrap;
   padding: 0 30px 10px 0;
+  vertical-align: top;
 }
 
 .task-details-td {
   color: #585656;
+  padding-bottom: 10px;
+  vertical-align: top;
 }
 
 .start-task-action-td {
