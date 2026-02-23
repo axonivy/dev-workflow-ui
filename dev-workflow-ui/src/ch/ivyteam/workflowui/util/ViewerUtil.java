@@ -44,7 +44,7 @@ public class ViewerUtil {
       return ProcessViewer.of(processStartable).url().themeMode(readThemeMode()).toWebLink();
     }
     if (startable instanceof ICaseMapWebStartable caseMapStartable) {
-      return CaseMapViewer.of(caseMapStartable).url().toWebLink();
+      return CaseMapViewer.of(caseMapStartable).url().themeMode(readThemeMode()).toWebLink();
     }
     throw new IllegalArgumentException("The provided IWebStartable does not support the generation of a viewer link.");
   }

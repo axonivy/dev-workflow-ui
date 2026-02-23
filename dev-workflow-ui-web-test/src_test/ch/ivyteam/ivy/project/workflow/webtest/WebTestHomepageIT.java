@@ -5,9 +5,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginD
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
-import static com.codeborne.selenide.Condition.readonly;
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -72,8 +70,7 @@ class WebTestHomepageIT {
 
     $(By.id("viewerFrame")).shouldBe(visible);
     Selenide.switchTo().frame("viewerFrame");
-    $(By.id("name-id")).should(readonly, value("test _ case _ map"));
-    $(By.className("fa-apple")).shouldBe(visible);
+    $(By.className("case-map-viewer")).shouldBe(visible);
   }
 
   @Test

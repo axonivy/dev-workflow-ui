@@ -6,9 +6,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startT
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.readonly;
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -82,7 +80,6 @@ class WebTestCaseMapIT {
     $(By.id("processViewer:processViewerDialog")).shouldBe(visible);
     $(By.id("viewerFrame")).shouldBe(visible);
     Selenide.switchTo().frame("viewerFrame");
-    $(By.className("fa-apple")).shouldBe(visible);
-    $(By.id("name-id")).should(readonly, value("test _ case _ map"));
+    $(By.className("case-map-viewer")).shouldBe(visible);
   }
 }
