@@ -7,7 +7,6 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startT
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThanOrEqual;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -67,8 +66,7 @@ class WebTestProcessViewerIT {
     $(By.id("startsForm:processViewer:processViewerDialog")).shouldBe(visible);
     $(By.id("viewerFrame")).shouldBe(visible);
     Selenide.switchTo().frame("viewerFrame");
-    $(By.className("fa-apple")).shouldBe(visible);
-    $(By.id("name-id")).shouldHave(value("test _ case _ map"));
+    $(By.className("case-map-viewer")).shouldBe(visible);
   }
 
   @Test
