@@ -23,7 +23,7 @@ public class ViewerUtil {
   public static String getViewerLink(ICase caze) {
     var businessCase = caze.getBusinessCase();
     if (hasCaseMap(businessCase)) {
-      return CaseMapViewer.of(businessCase).url().toWebLink().get();
+      return CaseMapViewer.of(businessCase).url().themeMode(readThemeMode()).toWebLink().get();
     }
     return ProcessViewer.of(caze).url().toWebLink().get();
   }
