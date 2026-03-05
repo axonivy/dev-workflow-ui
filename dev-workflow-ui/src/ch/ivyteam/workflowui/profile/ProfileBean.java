@@ -109,12 +109,12 @@ public class ProfileBean {
     return locale.getDisplayLanguage(getCurrentContentLocale()) + " (" + locale.toString() + ")";
   }
 
-  public String getContentLanguageSource() {
-    return "<b>" + getCurrentContentLocale().toString() + "</b> (" + session().getContentLocaleInfo().source() + ")";
+  public String getCurrentContentLocaleSource() {
+    return session().getContentLocaleInfo().source();
   }
 
-  public String getFormattingLanguageSource() {
-    return "<b>" + getCurrentFormattingLocale().toString() + "</b> (" + session().getFormattingLocaleInfo().source() + ")";
+  public String getCurrentFormattingLocaleSource() {
+    return session().getFormattingLocaleInfo().source();
   }
 
   public NotificationChannelDataModel getNotificationChannels() {

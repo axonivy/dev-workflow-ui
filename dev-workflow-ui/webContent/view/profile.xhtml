@@ -53,8 +53,12 @@
                     <f:selectItems value="#{profileBean.contentLanguages}" var="locale"
                       itemLabel="#{profileBean.toDisplayName(locale)}" />
                   </p:selectOneMenu>
-                  <small> <h:outputText id="contentLanguageDisplay" escape="false" styleClass="text-500"
-                      value="#{ivy.cm.co('/profile/currentContentLanguage')} #{profileBean.contentLanguageSource}" />
+                  <small>
+                    <h:panelGroup id="contentLanguageDisplay" styleClass="text-500">
+                      <h:outputText value="#{ivy.cm.co('/profile/currentContentLanguage')} " />
+                      <b><h:outputText value="#{profileBean.currentContentLocale} " /></b>
+                      <h:outputText value="(#{profileBean.currentContentLocaleSource})" />
+                    </h:panelGroup>
                   </small>
                   <p:tooltip for="contentLanguageDisplay" value="#{ivy.cm.co('/profile/currentContentLocale')}"
                     position="bottom" />
@@ -70,8 +74,12 @@
                       itemLabel="#{profileBean.toDisplayName(locale)}" />
                   </p:selectOneMenu>
                   <p>
-                    <small> <h:outputText id="formattingLanguageDisplay" escape="false" styleClass="text-500"
-                        value="#{ivy.cm.co('/profile/currentFormattingLanguage')} #{profileBean.formattingLanguageSource}" />
+                    <small>
+                      <h:panelGroup id="formattingLanguageDisplay" styleClass="text-500">
+                        <h:outputText value="#{ivy.cm.co('/profile/currentFormattingLanguage')} " />
+                        <b><h:outputText value="#{profileBean.currentFormattingLocale} " /></b>
+                        <h:outputText value="(#{profileBean.currentFormattingLocaleSource})" />
+                      </h:panelGroup>
                     </small>
                     <p:tooltip for="formattingLanguageDisplay" value="#{ivy.cm.co('/profile/currentFormattingLocale')}"
                       position="bottom" />
