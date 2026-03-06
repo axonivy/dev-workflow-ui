@@ -109,12 +109,12 @@ public class ProfileBean {
     return locale.getDisplayLanguage(getCurrentContentLocale()) + " (" + locale.toString() + ")";
   }
 
-  public String getContentLanguageSource() {
-    return "Current language is <b>" + getCurrentContentLocale().toString() + "</b> (from " + session().getContentLocaleInfo().source() + ")";
+  public String getCurrentContentLocaleSource() {
+    return session().getContentLocaleInfo().source();
   }
 
-  public String getFormattingLanguageSource() {
-    return "Current formatting language is <b>" + getCurrentFormattingLocale().toString() + "</b> (from " + session().getFormattingLocaleInfo().source() + ")";
+  public String getCurrentFormattingLocaleSource() {
+    return session().getFormattingLocaleInfo().source();
   }
 
   public NotificationChannelDataModel getNotificationChannels() {

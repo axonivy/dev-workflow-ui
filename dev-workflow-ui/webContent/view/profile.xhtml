@@ -35,7 +35,11 @@
                   itemLabel="#{profileBean.toDisplayName(locale)}" />
               </p:selectOneMenu>
               <small>
-                <h:outputText id="contentLanguageDisplay" value="#{profileBean.contentLanguageSource}" escape="false"/>
+                <h:panelGroup id="contentLanguageDisplay">
+                  <h:outputText value="Current language is " />
+                  <b><h:outputText value="#{profileBean.currentContentLocale} " /></b>
+                  <h:outputText value="(from #{profileBean.currentContentLocaleSource})" />
+                </h:panelGroup>
                 <p:tooltip for="contentLanguageDisplay" value="Content locale of the current session." position="bottom"/>
               </small>
             </h:panelGroup>
@@ -48,7 +52,11 @@
                   itemLabel="#{profileBean.toDisplayName(locale)}" />
               </p:selectOneMenu>
               <small>
-                <h:outputText id="formattingLanguageDisplay" value="#{profileBean.formattingLanguageSource}" escape="false" />
+                <h:panelGroup id="formattingLanguageDisplay">
+                  <h:outputText value="Current formatting language is " />
+                  <b><h:outputText value="#{profileBean.currentFormattingLocale} " /></b>
+                  <h:outputText value="(from #{profileBean.currentFormattingLocaleSource})" />
+                </h:panelGroup>
                 <p:tooltip for="formattingLanguageDisplay" value="Formatting locale of the current session." position="bottom"/>
               </small>
             </h:panelGroup>
