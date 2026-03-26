@@ -80,6 +80,6 @@ class WebTestCaseMapIT {
     $(By.id("processViewer:processViewerDialog")).shouldBe(visible);
     $(By.id("viewerFrame")).shouldBe(visible);
     Selenide.switchTo().frame("viewerFrame");
-    $(By.className("case-map-viewer")).shouldBe(visible);
+    $("div[data-element-type='flow']").shouldBe(visible, text("stage1"));
   }
 }
