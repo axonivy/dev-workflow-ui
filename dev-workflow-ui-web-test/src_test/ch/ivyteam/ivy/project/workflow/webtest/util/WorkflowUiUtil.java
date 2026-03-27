@@ -31,7 +31,7 @@ public class WorkflowUiUtil {
   }
 
   public static void startTestCaseMap() {
-    open(createCaseMapUrl("/dev-workflow-ui-test-data/0cf1f054-a4ad-4b2b-bcf1-c9c34ec0a2ab.icm"));
+    open(createCaseMapUrl("/dev-workflow-ui-test-data/0cf1f054-a4ad-4b2b-bcf1-c9c34ec0a2ab.m.json"));
     $(By.id("form:proceed")).shouldBe(visible).click();
     assertCurrentUrlContains("end.xhtml");
   }
