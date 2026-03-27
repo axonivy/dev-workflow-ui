@@ -1,4 +1,5 @@
 {
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/casemap.json",
   "uuid" : "0cf1f054-a4ad-4b2b-bcf1-c9c34ec0a2ab",
   "id" : "test___case___map",
   "name" : "test _ case _ map",
