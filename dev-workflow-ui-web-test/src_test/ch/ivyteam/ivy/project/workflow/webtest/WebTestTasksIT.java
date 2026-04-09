@@ -94,7 +94,7 @@ class WebTestTasksIT {
     $(By.id("taskState:tooltip")).$(".ui-tooltip-text").shouldHave(text("SUSPENDED"));
     $(By.id("category")).shouldHave(exactText("TaskWithACategory"));
     $(By.id("pmv")).shouldBe(exactText("dev-workflow-ui-test-data"));
-    $(By.className("si-hierarchy-6")).shouldBe(visible);
+    $(By.className("ti-sitemap")).shouldBe(visible);
 
     $(By.id("workflowEvents:eventsTable:0:eventType")).shouldBe(exactText("EVENT_CREATE_TASK_BY_JOINED_TASKS"));
     $(By.id("actionMenuForm:taskActionsBtn")).click();

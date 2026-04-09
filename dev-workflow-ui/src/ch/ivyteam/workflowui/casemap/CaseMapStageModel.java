@@ -32,9 +32,9 @@ public class CaseMapStageModel {
 
   private static String calculateStateIconCss(int index, int currentStageIndex) {
     if (currentStageIndex == index) {
-      return "si-controls-play case-state-running";
+      return "ti-player-play case-state-running";
     } else if (currentStageIndex > index) {
-      return "si-check-1 case-state-finished";
+      return "ti-check case-state-finished";
     }
     return "";
   }

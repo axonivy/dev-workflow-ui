@@ -1,38 +1,12 @@
-dev-workflow-ui/src/ch/ivyteam/workflowui/intermediateEvents/IntermediateEventDetailsBean.java	si si-hourglass	ti ti-hourglass-low
-dev-workflow-ui/src/ch/ivyteam/workflowui/intermediateEvents/IntermediateEventDetailsBean.java	si si-mood-warning	ti ti-alert-octagon
-dev-workflow-ui/src/ch/ivyteam/workflowui/user/UserComponentModel.java	si si-single-neutral-circle	ti ti-user-circle
-dev-workflow-ui-test-data/processes/test_case_map.m.json	fa fa-ambulance	ti ti-ambulance
-dev-workflow-ui-test-data/processes/test_case_map.m.json	fa fa-apple	ti ti-brand-apple
-dev-workflow-ui-test-data/processes/TestData.p.json	si si-single-neutral-circle	ti ti-user-circle
-dev-workflow-ui-test-data/src_hd/ch/ivyteam/ivy/project/workflow/DummyHtmlDialog/DummyHtmlDialog.xhtml	pi pi-check	ti ti-check
-dev-workflow-ui-test-data/src_hd/ch/ivyteam/ivy/project/workflow/TaskTestDialog/TaskTestDialog.xhtml	pi pi-check	ti ti-check
-dev-workflow-ui/webContent/includes/components/statistics/caseStateGraph.xhtml	pi pi-chart-pie	ti ti-chart-pie
-dev-workflow-ui/webContent/includes/components/statistics/caseTopCreators.xhtml	pi pi-chart-bar	ti ti-chart-bar
-dev-workflow-ui/webContent/includes/components/statistics/taskStateGraph.xhtml	pi pi-chart-pie	ti ti-chart-pie
-dev-workflow-ui/webContent/includes/components/statistics/taskTopWorkers.xhtml	pi pi-chart-bar	ti ti-chart-bar
-dev-workflow-ui/webContent/includes/components/taskDetails/descriptionCardHeaderActions.xhtml	si si-alarm-bell-timer	ti ti-bell-plus
-dev-workflow-ui/webContent/includes/components/taskDetails/descriptionCardHeaderActions.xhtml	si si-move-to-bottom	ti ti-arrow-big-down-lines
-dev-workflow-ui/webContent/includes/template/notifications.xhtml	pi pi-bell	ti ti-bell
-dev-workflow-ui/webContent/includes/template/sidebar.xhtml	si si-analytics-graph	ti ti-chart-dots
-dev-workflow-ui/webContent/includes/template/sidebar.xhtml	si si-network-browser	ti ti-browser
-dev-workflow-ui/webContent/includes/template/sidebar.xhtml	si si-network-signal	ti ti-building-broadcast-tower
-dev-workflow-ui/webContent/includes/template/sidebar.xhtml	si si-pencil-write	ti ti-file-pencil
-dev-workflow-ui/webContent/includes/template/sidebar.xhtml	si si-recycling-trash-bin-2	ti ti-recycle
-dev-workflow-ui/webContent/includes/template/sidebar.xhtml	si si-tools-wench	ti ti-tool
-dev-workflow-ui/webContent/includes/template/statisticsCard.xhtml	pi pi-chart-line	ti ti-chart-line
-dev-workflow-ui/webContent/includes/template/template.xhtml	pi pi-bars	ti ti-menu-2
-dev-workflow-ui/webContent/includes/template/template.xhtml	si si-single-neutral-circle	ti ti-user-circle
-dev-workflow-ui/webContent/view/api-browser.xhtml	si si-network-browser	ti ti-browser
-dev-workflow-ui/webContent/view/cases.xhtml	pi pi-search	ti ti-search
-dev-workflow-ui/webContent/view/cases.xhtml	si si-button-refresh-arrow	ti ti-refresh
-dev-workflow-ui/webContent/view/case.xhtml	si si-button-refresh-arrow	ti ti-refresh
-dev-workflow-ui/webContent/view/case.xhtml	si si-task-list-approve	ti ti-clipboard-list
-dev-workflow-ui/webContent/view/cleanup.xhtml	si si-recycling-trash-bin-2	ti ti-recycle
-dev-workflow-ui/webContent/view/frame.xhtml	si si-pencil-write	ti ti-file-pencil
-dev-workflow-ui/webContent/view/home.xhtml	si si-button-refresh-arrow	ti ti-refresh
-dev-workflow-ui/webContent/view/starts.xhtml	pi pi-search	ti ti-search
-dev-workflow-ui/webContent/view/starts.xhtml	si si-button-refresh-arrow	ti ti-refresh
-dev-workflow-ui/webContent/view/switch-user.xhtml	pi pi-search	ti ti-search
-dev-workflow-ui/webContent/view/tasks.xhtml	pi pi-search	ti ti-search
-dev-workflow-ui/webContent/view/task.xhtml	si si-move-to-bottom	ti ti-arrow-big-down-lines
-dev-workflow-ui/webContent/view/webservices.xhtml	pi pi-search	ti ti-search
+dev-workflow-ui/src/ch/ivyteam/workflowui/casemap/CaseMapStageModel.java	si-check-1	ti-check
+dev-workflow-ui/src/ch/ivyteam/workflowui/casemap/CaseMapStageModel.java	si-controls-play	ti-player-play
+dev-workflow-ui/src/ch/ivyteam/workflowui/notification/NotificationActionDTO.java	si-controls-play	ti-player-play
+dev-workflow-ui/webContent/includes/template/template.xhtml	si-login-3	ti-login-2
+dev-workflow-ui/webContent/includes/template/template.xhtml	si-multiple-neutral-1	ti-users
+dev-workflow-ui/webContent/includes/template/template.xhtml	si-single-neutral-circle	ti-user-circle
+dev-workflow-ui/webContent/view/webservices.xhtml	si-network-arrow	ti-network
+dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	si-check-circle-1	ti-circle-check
+dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	si-remove-circle	ti-circle-minus
+dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestStartsIT.java	si-controls-play	ti-player-play
+dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestStartsIT.java	si-house-1	ti-home
+dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestTasksIT.java	si-hierarchy-6	ti-sitemap

@@ -1,0 +1,316 @@
+si si-add: ti ti-plus
+si-add: ti-plus
+si si-add-circle: ti ti-circle-plus
+si-add-circle: ti-circle-plus
+si si-add-small: ti ti-plus
+si-add-small: ti-plus
+si si-advertising-megaphone: ti ti-speakerphone
+si-advertising-megaphone: ti-speakerphone
+si si-advertising-megaphone-2: ti ti-speakerphone
+si-advertising-megaphone-2: ti-speakerphone
+si si-alarm-bell: ti ti-bell
+si-alarm-bell: ti-bell
+si si-alert-circle: ti ti-alert-circle
+si-alert-circle: ti-alert-circle
+si si-analytics-bars: ti ti-chart-bar
+si-analytics-bars: ti-chart-bar
+si si-analytics-board-graph-line: ti ti-chart-line
+si-analytics-board-graph-line: ti-chart-line
+si si-analytics-pie-2: ti ti-chart-pie
+si-analytics-pie-2: ti-chart-pie
+si si-arrow-down-1: ti ti-chevron-down
+si-arrow-down-1: ti-chevron-down
+si si-arrow-left: ti ti-arrow-left
+si-arrow-left: ti-arrow-left
+si si-arrow-left-1: ti ti-chevron-left
+si-arrow-left-1: ti-chevron-left
+si si-arrow-right: ti ti-arrow-right
+si-arrow-right: ti-arrow-right
+si si-arrow-right-1: ti ti-chevron-right
+si-arrow-right-1: ti-chevron-right
+si si-bin-1: ti ti-trash
+si-bin-1: ti-trash
+si si-book-open-1: ti ti-book
+si-book-open-1: ti-book
+si si-bulb: ti ti-bulb
+si-bulb: ti-bulb
+si si-business-contract-handshake-sign: ti ti-contract
+si-business-contract-handshake-sign: ti-contract
+si si-button-refresh-arrows: ti ti-refresh
+si-button-refresh-arrows: ti-refresh
+si si-calendar-date: ti ti-calendar-event
+si-calendar-date: ti-calendar-event
+si si-chat-translate: ti ti-message-2
+si-chat-translate: ti-message-2
+si si-check-1: ti ti-check
+si-check-1: ti-check
+si si-check-circle: ti ti-circle-check
+si-check-circle: ti-circle-check
+si si-check-circle-1: ti ti-circle-check
+si-check-circle-1: ti-circle-check
+si si-check-double-1: ti ti-checks
+si-check-double-1: ti-checks
+si si-checklist-pen: ti ti-clipboard-check
+si-checklist-pen: ti-clipboard-check
+si si-close: ti ti-x
+si-close: ti-x
+si si-cog: ti ti-settings
+si-cog: ti-settings
+si si-cog-double-2: ti ti-settings
+si-cog-double-2: ti-settings
+si si-common-file-add: ti ti-file-plus
+si-common-file-add: ti-file-plus
+si si-common-file-empty: ti ti-file
+si-common-file-empty: ti-file
+si si-common-file-text: ti ti-file-text
+si-common-file-text: ti-file-text
+si si-controls-play: ti ti-player-play
+si-controls-play: ti-player-play
+si si-copy-paste: ti ti-copy
+si-copy-paste: ti-copy
+si si-delete: ti ti-trash
+si-delete: ti-trash
+si si-delete-1: ti ti-trash
+si-delete-1: ti-trash
+si si-download-bottom: ti ti-download
+si-download-bottom: ti-download
+si si-email-action-unread: ti ti-mail-opened
+si-email-action-unread: ti-mail-opened
+si si-expand-1: ti ti-arrows-maximize
+si-expand-1: ti-arrows-maximize
+si si-expand-6: ti ti-queue-pop-out
+si-expand-6: ti-queue-pop-out
+si si-file-code-upload-1: ti ti-file-upload
+si-file-code-upload-1: ti-file-upload
+si si-file-csv: ti ti-file-type-xls
+si-file-csv: ti-file-type-xls
+si si-file-edit: ti ti-file-pencil
+si-file-edit: ti-file-pencil
+si si-file-xml: ti ti-file-code
+si-file-xml: ti-file-code
+si si-file-zip: ti ti-file-zip
+si-file-zip: ti-file-zip
+si si-filter-1: ti ti-filter
+si-filter-1: ti-filter
+si si-floppy-disk: ti ti-device-floppy
+si-floppy-disk: ti-device-floppy
+si si-folder-search: ti ti-folder-search
+si-folder-search: ti-folder-search
+si si-graphic-tablet-drawing-pen: ti ti-pencil
+si-graphic-tablet-drawing-pen: ti-pencil
+si si-help-wheel: ti ti-help-circle
+si-help-wheel: ti-help-circle
+si si-hierarchy-6: ti ti-sitemap
+si-hierarchy-6: ti-sitemap
+si si-house-1: ti ti-home
+si-house-1: ti-home
+si si-house-chimney-2: ti ti-home
+si-house-chimney-2: ti-home
+si si-hyperlink-3: ti ti-link
+si-hyperlink-3: ti-link
+si si-image-file-landscape: ti ti-photo
+si-image-file-landscape: ti-photo
+si si-information-circle: ti ti-info-circle
+si-information-circle: ti-info-circle
+si si-layers-grid-settings: ti ti-layout-grid
+si-layers-grid-settings: ti-layout-grid
+si si-layout-bullets: ti ti-folder-open
+si-layout-bullets: ti-folder-open
+si si-layout-dashboard: ti ti-layout-dashboard
+si-layout-dashboard: ti-layout-dashboard
+si si-list-bullets: ti ti-folder-open
+si-list-bullets: ti-folder-open
+si si-lock-1: ti ti-lock
+si-lock-1: ti-lock
+si si-login-3: ti ti-login-2
+si-login-3: ti-login-2
+si si-messages-bubble: ti ti-message
+si-messages-bubble: ti-message
+si si-messages-bubble-add: ti ti-message-plus
+si-messages-bubble-add: ti-message-plus
+si si-messages-bubble-square-sync: ti ti-message-2-share
+si-messages-bubble-square-sync: ti-message-2-share
+si si-module: ti ti-layout-grid
+si-module: ti-layout-grid
+si si-monetization-approve: ti ti-rosette-discount-check
+si-monetization-approve: ti-rosette-discount-check
+si si-move-back: ti ti-corner-up-left
+si-move-back: ti-corner-up-left
+si si-move-expand-vertical: ti ti-arrows-vertical
+si-move-expand-vertical: ti-arrows-vertical
+si si-move-shrink-vertical: ti ti-arrows-minimize
+si-move-shrink-vertical: ti-arrows-minimize
+si si-multiple-actions-add: ti ti-user-plus
+si-multiple-actions-add: ti-user-plus
+si si-multiple-neutral-1: ti ti-users
+si-multiple-neutral-1: ti-users
+si si-navigation-down-circle: ti ti-circle-arrow-down
+si-navigation-down-circle: ti-circle-arrow-down
+si si-navigation-menu: ti ti-menu-2
+si-navigation-menu: ti-menu-2
+si si-navigation-menu-horizontal: ti ti-dots
+si-navigation-menu-horizontal: ti-dots
+si si-navigation-menu-horizontal-filled: ti ti-dots
+si-navigation-menu-horizontal-filled: ti-dots
+si si-navigation-right-circle: ti ti-circle-arrow-right
+si-navigation-right-circle: ti-circle-arrow-right
+si si-navigation-right-circle-1: ti ti-circle-arrow-right
+si-navigation-right-circle-1: ti-circle-arrow-right
+si si-navigation-up-circle: ti ti-circle-arrow-up
+si-navigation-up-circle: ti-circle-arrow-up
+si si-network-arrow: ti ti-network
+si-network-arrow: ti-network
+si si-network-share: ti ti-world
+si-network-share: ti-world
+si si-notes-add: ti ti-notes
+si-notes-add: ti-notes
+si si-notes-quill: ti ti-notes
+si-notes-quill: ti-notes
+si si-office-file-: ti ti-file
+si-office-file-: ti-file
+si si-office-file-doc-1: ti ti-file-type-doc
+si-office-file-doc-1: ti-file-type-doc
+si si-office-file-pdf-1: ti ti-file-type-pdf
+si-office-file-pdf-1: ti-file-type-pdf
+si si-office-file-xls-1: ti ti-file-type-xls
+si-office-file-xls-1: ti-file-type-xls
+si si-pencil: ti ti-pencil
+si-pencil: ti-pencil
+si si-pie-line-graph: ti ti-number
+si-pie-line-graph: ti-number
+si si-pin: ti ti-pin
+si-pin: ti-pin
+si si-pin-bold: ti ti-pin
+si-pin-bold: ti-pin
+si si-presentation-statistics: ti ti-presentation-analytics
+si-presentation-statistics: ti-presentation-analytics
+si si-question-circle: ti ti-help-circle
+si-question-circle: ti-help-circle
+si si-remove: ti ti-x
+si-remove: ti-x
+si si-remove-circle: ti ti-circle-minus
+si-remove-circle: ti-circle-minus
+si si-road-sign-u-turn-left: ti ti-arrow-back-up
+si-road-sign-u-turn-left: ti-arrow-back-up
+si si-road-sign-u-turn-right: ti ti-arrow-forward-up
+si-road-sign-u-turn-right: ti-arrow-forward-up
+si si-road-sign-warning: ti ti-alert-triangle
+si-road-sign-warning: ti-alert-triangle
+si si-search: ti ti-search
+si-search: ti-search
+si si-send-email: ti ti-mail
+si-send-email: ti-mail
+si si-share: ti ti-share
+si-share: ti-share
+si si-shopping-cart-check: ti ti-shopping-cart-check
+si-shopping-cart-check: ti-shopping-cart-check
+si si-shrink-1: ti ti-arrows-minimize
+si-shrink-1: ti-arrows-minimize
+si si-single-neutral-actions: ti ti-user-check
+si-single-neutral-actions: ti-user-check
+si si-single-neutral-shield: ti ti-lock-square-rounded
+si-single-neutral-shield: ti-lock-square-rounded
+si si-statistics-daytum: ti ti-brand-google-analytics
+si-statistics-daytum: ti-brand-google-analytics
+si si-subtract: ti ti-minus
+si-subtract: ti-minus
+si si-subtract-circle: ti ti-circle-minus
+si-subtract-circle: ti-circle-minus
+si si-subtract-small: ti ti-minus
+si-subtract-small: ti-minus
+si si-synchronize-arrow-clock: ti ti-clock-play
+si-synchronize-arrow-clock: ti-clock-play
+si si-task-list-1: ti ti-list-check
+si-task-list-1: ti-list-check
+si si-task-list-edit: ti ti-checklist
+si-task-list-edit: ti-checklist
+si si-time-clock-circle: ti ti-clock
+si-time-clock-circle: ti-clock
+si si-touchpad-finger: ti ti-pointer
+si-touchpad-finger: ti-pointer
+si si-undo: ti ti-arrow-back-up
+si-undo: ti-arrow-back-up
+si si-user-logout: ti ti-logout
+si-user-logout: ti-logout
+si si-view-1: ti ti-eye
+si-view-1: ti-eye
+fa fa-anchor: ti ti-anchor
+fa-anchor: ti-anchor
+fa fa-angle-double-down: ti ti-chevrons-down
+fa-angle-double-down: ti-chevrons-down
+fa fa-angle-down: ti ti-chevron-down
+fa-angle-down: ti-chevron-down
+fa fa-angle-up: ti ti-chevron-up
+fa-angle-up: ti-chevron-up
+fa fa-ban: ti ti-ban
+fa-ban: ti-ban
+fa fa-check-circle-o: ti ti-circle-check
+fa-check-circle-o: ti-circle-check
+fa fa-chevron-left: ti ti-chevron-left
+fa-chevron-left: ti-chevron-left
+fa fa-chevron-right: ti ti-chevron-right
+fa-chevron-right: ti-chevron-right
+fa fa-diamond: ti ti-diamond
+fa-diamond: ti-diamond
+fa fa-ellipsis-h: ti ti-dots
+fa-ellipsis-h: ti-dots
+fa fa-ellipsis-v: ti ti-dots-vertical
+fa-ellipsis-v: ti-dots-vertical
+fa fa-filter: ti ti-filter
+fa-filter: ti-filter
+fa fa-group: ti ti-users
+fa-group: ti-users
+fa fa-language: ti ti-language
+fa-language: ti-language
+fa fa-paper-plane: ti ti-send
+fa-paper-plane: ti-send
+fa fa-paperclip: ti ti-paperclip
+fa-paperclip: ti-paperclip
+fa fa-play: ti ti-player-play
+fa-play: ti-player-play
+fa fa-square: ti ti-square
+fa-square: ti-square
+fa fa-subway: ti ti-train
+fa-subway: ti-train
+fa fa-ambulance: ti ti-ambulance
+fa-ambulance: ti-ambulance
+fa fa-apple: ti ti-brand-apple
+fa-apple: ti-brand-apple
+si si-single-neutral-circle: ti ti-user-circle
+si-single-neutral-circle: ti-user-circle
+si si-alarm-bell-timer: ti ti-bell-plus
+si-alarm-bell-timer: ti-bell-plus
+si si-analytics-graph: ti ti-chart-dots
+si-analytics-graph: ti-chart-dots
+si si-button-refresh-arrow: ti ti-refresh
+si-button-refresh-arrow: ti-refresh
+si si-hourglass: ti ti-hourglass-low
+si-hourglass: ti-hourglass-low
+si si-mood-warning: ti ti-alert-octagon
+si-mood-warning: ti-alert-octagon
+si si-move-to-bottom: ti ti-arrow-big-down-lines
+si-move-to-bottom: ti-arrow-big-down-lines
+si si-network-browser: ti ti-browser
+si-network-browser: ti-browser
+si si-network-signal: ti ti-building-broadcast-tower
+si-network-signal: ti-building-broadcast-tower
+si si-pencil-write: ti ti-file-pencil
+si-pencil-write: ti-file-pencil
+si si-recycling-trash-bin-2: ti ti-recycle
+si-recycling-trash-bin-2: ti-recycle
+si si-task-list-approve: ti ti-clipboard-list
+si-task-list-approve: ti-clipboard-list
+si si-tools-wench: ti ti-tool
+si-tools-wench: ti-tool
+pi pi-bars: ti ti-menu-2
+pi-bars: ti-menu-2
+pi pi-bell: ti ti-bell
+pi-bell: ti-bell
+pi pi-chart-bar: ti ti-chart-bar
+pi-chart-bar: ti-chart-bar
+pi pi-chart-line: ti ti-chart-line
+pi-chart-line: ti-chart-line
+pi pi-chart-pie: ti ti-chart-pie
+pi-chart-pie: ti-chart-pie
+pi pi-check: ti ti-check
+pi-check: ti-check

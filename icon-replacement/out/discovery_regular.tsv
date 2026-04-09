@@ -1,45 +1,26 @@
-pi pi-search	Regular	dev-workflow-ui/webContent/view/cases.xhtml	24
-si si-button-refresh-arrow	Regular	dev-workflow-ui/webContent/view/cases.xhtml	67
-pi pi-check	Regular	dev-workflow-ui-test-data/src_hd/ch/ivyteam/ivy/project/workflow/DummyHtmlDialog/DummyHtmlDialog.xhtml	20
-fa fa-ambulance	Regular	dev-workflow-ui-test-data/processes/test_case_map.m.json	9
-fa fa-apple	Regular	dev-workflow-ui-test-data/processes/test_case_map.m.json	23
-si si-button-refresh-arrow	Regular	dev-workflow-ui/webContent/view/case.xhtml	24
-si si-task-list-approve	Regular	dev-workflow-ui/webContent/view/case.xhtml	116
-pi pi-search	Regular	dev-workflow-ui/webContent/view/starts.xhtml	27
-si si-button-refresh-arrow	Regular	dev-workflow-ui/webContent/view/starts.xhtml	64
-pi pi-search	Regular	dev-workflow-ui/webContent/view/starts.xhtml	80
-si si-single-neutral-circle	Regular	dev-workflow-ui-test-data/processes/TestData.p.json	540
-pi pi-search	Regular	dev-workflow-ui/webContent/view/tasks.xhtml	24
-si si-pencil-write	Regular	dev-workflow-ui/webContent/view/frame.xhtml	35
-si si-recycling-trash-bin-2	Regular	dev-workflow-ui/webContent/view/cleanup.xhtml	22
-si si-move-to-bottom	Regular	dev-workflow-ui/webContent/view/task.xhtml	89
-pi pi-check	Regular	dev-workflow-ui-test-data/src_hd/ch/ivyteam/ivy/project/workflow/TaskTestDialog/TaskTestDialog.xhtml	27
-pi pi-search	Regular	dev-workflow-ui/webContent/view/webservices.xhtml	17
-si si-lg	Regular	dev-workflow-ui/webContent/view/webservices.xhtml	32
-pi pi-search	Regular	dev-workflow-ui/webContent/view/switch-user.xhtml	26
-si si-network-browser	Regular	dev-workflow-ui/webContent/view/api-browser.xhtml	14
-si si-button-refresh-arrow	Regular	dev-workflow-ui/webContent/view/home.xhtml	135
-pi pi-chart-line	Regular	dev-workflow-ui/webContent/includes/template/statisticsCard.xhtml	6
-pi pi-bars	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	28
-si si-single-neutral-circle	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	59
+si-lg	Regular	dev-workflow-ui/webContent/resources/components/user.xhtml	13
+si-hierarchy-6	Regular	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestTasksIT.java	97
+si-check-circle-1	Regular	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	168
+si-remove-circle	Regular	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	170
 si si-lg	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	68
+si-single-neutral-circle	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	68
 si si-lg	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	74
+si-multiple-neutral-1	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	74
 si si-lg	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	80
+si-login-3	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	80
 si si-lg	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	87
-pi pi-bell	Regular	dev-workflow-ui/webContent/includes/template/notifications.xhtml	7
-si si-pencil-write	Regular	dev-workflow-ui/webContent/includes/template/sidebar.xhtml	11
-si si-tools-wench	Regular	dev-workflow-ui/webContent/includes/template/sidebar.xhtml	12
-si si-network-signal	Regular	dev-workflow-ui/webContent/includes/template/sidebar.xhtml	13
-si si-analytics-graph	Regular	dev-workflow-ui/webContent/includes/template/sidebar.xhtml	14
-si si-recycling-trash-bin-2	Regular	dev-workflow-ui/webContent/includes/template/sidebar.xhtml	15
-si si-network-browser	Regular	dev-workflow-ui/webContent/includes/template/sidebar.xhtml	16
-si si-analytics-graph	Regular	dev-workflow-ui/webContent/includes/template/sidebar.xhtml	17
-si si-mood-warning	Regular	dev-workflow-ui/src/ch/ivyteam/workflowui/intermediateEvents/IntermediateEventDetailsBean.java	32
-si si-hourglass	Regular	dev-workflow-ui/src/ch/ivyteam/workflowui/intermediateEvents/IntermediateEventDetailsBean.java	33
-si si-single-neutral-circle	Regular	dev-workflow-ui/src/ch/ivyteam/workflowui/user/UserComponentModel.java	33
-pi pi-chart-bar	Regular	dev-workflow-ui/webContent/includes/components/statistics/taskTopWorkers.xhtml	14
-pi pi-chart-pie	Regular	dev-workflow-ui/webContent/includes/components/statistics/taskStateGraph.xhtml	13
-si si-move-to-bottom	Regular	dev-workflow-ui/webContent/includes/components/taskDetails/descriptionCardHeaderActions.xhtml	33
-si si-alarm-bell-timer	Regular	dev-workflow-ui/webContent/includes/components/taskDetails/descriptionCardHeaderActions.xhtml	41
-pi pi-chart-bar	Regular	dev-workflow-ui/webContent/includes/components/statistics/caseTopCreators.xhtml	14
-pi pi-chart-pie	Regular	dev-workflow-ui/webContent/includes/components/statistics/caseStateGraph.xhtml	13
+si-logout-1	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	87
+si-lg	Regular	dev-workflow-ui/webContent/view/starts.xhtml	96
+si-rotate-270	Regular	dev-workflow-ui/webContent/view/starts.xhtml	140
+si-controls-play	Regular	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestStartsIT.java	214
+si-house-1	Regular	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestStartsIT.java	216
+si-rotate-270	Regular	dev-workflow-ui/webContent/view/home.xhtml	44
+si-rotate-270	Regular	dev-workflow-ui/webContent/view/home.xhtml	51
+si si-lg	Regular	dev-workflow-ui/webContent/view/webservices.xhtml	32
+si-network-arrow	Regular	dev-workflow-ui/webContent/view/webservices.xhtml	32
+si-lg	Regular	dev-workflow-ui/webContent/view/intermediate-event.xhtml	50
+si-controls-play	Regular	dev-workflow-ui/src/ch/ivyteam/workflowui/notification/NotificationActionDTO.java	24
+si-rotate-270	Regular	dev-workflow-ui/webContent/includes/template/sidebar.xhtml	9
+si-rotate-270	Regular	dev-workflow-ui/webContent/includes/components/taskDetails/description.xhtml	73
+si-controls-play	Regular	dev-workflow-ui/src/ch/ivyteam/workflowui/casemap/CaseMapStageModel.java	35
+si-check-1	Regular	dev-workflow-ui/src/ch/ivyteam/workflowui/casemap/CaseMapStageModel.java	37

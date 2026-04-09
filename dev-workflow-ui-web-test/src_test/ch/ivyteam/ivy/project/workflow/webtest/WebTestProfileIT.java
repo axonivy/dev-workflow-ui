@@ -165,9 +165,9 @@ class WebTestProfileIT {
 
   private void iconShouldHaveSubscribedState(SelenideElement icon, boolean subscribed) {
     if (subscribed) {
-      icon.shouldHave(cssClass("si-check-circle-1"));
+      icon.shouldHave(cssClass("ti-circle-check"));
     } else {
-      icon.shouldHave(cssClass("si-remove-circle"));
+      icon.shouldHave(cssClass("ti-circle-minus"));
     }
   }
 
