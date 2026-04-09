@@ -86,7 +86,7 @@
           </h:panelGroup>
           <h:panelGroup layout="block" styleClass="mt-2 dialog-button-container">
             <p:commandButton id="delegateProceedButton" value="#{ivy.cm.co('/task/assignTask')}"
-              actionListener="#{tasksDetailsBean.delegateTask}" icon="si si-move-to-bottom" update="taskDetail"
+              actionListener="#{tasksDetailsBean.delegateTask}" icon="ti ti-arrow-big-down-lines" update="taskDetail"
               onsuccess="PF('delegateTaskModal').hide();" />
             <p:commandButton value="#{ivy.cm.co('/common/cancel')}" styleClass="ui-button-secondary ui-button-flat dialog-cancel-button"
               onclick="PF('delegateTaskModal').hide();" />

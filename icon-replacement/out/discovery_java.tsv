@@ -8,11 +8,7 @@
     return icon;	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/profile/NotificationChannelSubscriptionDto.java	38
   public void setIcon(String icon) {	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/profile/NotificationChannelSubscriptionDto.java	41
     this.icon = icon;	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/profile/NotificationChannelSubscriptionDto.java	42
-  private final String icon;	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/starts/StartableModel.java	22
-      String applicationName, String projectName, String icon, boolean embedInFrame, WebLink viewerLink, boolean viewerAllowed) {	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/starts/StartableModel.java	28
-    this.icon = icon;	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/starts/StartableModel.java	35
-      return "si si-controls-play";	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/starts/StartableModel.java	57
-    return icon;	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/starts/StartableModel.java	117
+      return "si si-single-neutral-circle";	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/user/UserComponentModel.java	33
     var webNewTaskIcon = $(By.className("subscription-icon"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	94
       case 0 -> checkbox.shouldNotHave(cssClass("ui-icon"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	159
       case 1 -> checkbox.shouldHave(cssClass("ui-icon-check"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	160
@@ -25,13 +21,10 @@
       icon.shouldNotHave(cssClass("light"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	178
   private void iconShouldHaveTitle(SelenideElement icon, String title) {	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	182
     icon.shouldHave(attribute("title", title));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	183
+  private final String icon;	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/starts/StartableModel.java	22
+      String applicationName, String projectName, String icon, boolean embedInFrame, WebLink viewerLink, boolean viewerAllowed) {	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/starts/StartableModel.java	28
+    this.icon = icon;	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/starts/StartableModel.java	35
+    return icon;	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/starts/StartableModel.java	117
       case CANCELED -> "si si-mood-warning";	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/intermediateEvents/IntermediateEventDetailsBean.java	32
       case PENDING, WAITING -> "si si-hourglass";	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/intermediateEvents/IntermediateEventDetailsBean.java	33
-      case PROCESSED -> "si si-check-1";	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/intermediateEvents/IntermediateEventDetailsBean.java	34
-      case TIMEOUTED -> "si si-alarm-bell";	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/intermediateEvents/IntermediateEventDetailsBean.java	35
-      case TIMEOUTED_AND_PROCESSED -> "si si-alarm-bell-timer";	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/intermediateEvents/IntermediateEventDetailsBean.java	36
-      default -> "si si-question-circle";	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/intermediateEvents/IntermediateEventDetailsBean.java	37
-      return "si si-question-circle";	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/user/UserComponentModel.java	30
-      return "si si-single-neutral-circle";	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/user/UserComponentModel.java	33
-    return "si si-multiple-neutral-1";	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/user/UserComponentModel.java	35
     // open in fullscreen link icon shouldn't be visible	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestStartsIT.java	129

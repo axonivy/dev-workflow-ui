@@ -30,7 +30,7 @@ public class UserComponentModel {
       return "ti ti-help-circle";
     }
     if (member.isUser()) {
-      return "si si-single-neutral-circle";
+      return "ti ti-user-circle";
     }
     return "ti ti-users";
   }

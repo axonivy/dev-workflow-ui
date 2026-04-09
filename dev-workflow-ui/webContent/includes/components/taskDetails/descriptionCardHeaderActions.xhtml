@@ -30,7 +30,7 @@
           disabled="#{!task.canReset()}" id="taskResetBtn"
           icon="ti ti-arrow-back-up" />
         <p:menuitem value="#{ivy.cm.co('/common/delegate')}" onclick="PF('delegateTaskModal').show()" id="taskDelegateBtn"
-          disabled="#{!task.state.active}" icon="si si-move-to-bottom" />
+          disabled="#{!task.state.active}" icon="ti ti-arrow-big-down-lines" />
         <p:menuitem value="#{ivy.cm.co('/common/park')}" actionListener="#{tasksDetailsBean.park()}" update="taskDetail, workflowEvents:workflowEvents, @form" id="taskParkBtn"
           disabled="#{!task.canPark()}" icon="ti ti-arrow-forward-up" />
         <p:menuitem value="#{ivy.cm.co('/common/destroy')}" actionListener="#{tasksDetailsBean.destroy()}" update="taskDetail, workflowEvents:workflowEvents, @form"
@@ -38,7 +38,7 @@
         <p:menuitem value="#{ivy.cm.co('/common/clearDelay')}" actionListener="#{tasksDetailsBean.clearDelay}" update="taskDetail, workflowEvents:workflowEvents, @form"
           disabled="#{task.delayTimestamp == null}" icon="ti ti-refresh" id="taskClearDelayBtn" />
         <p:menuitem value="#{ivy.cm.co('/common/expireNow')}" actionListener="#{tasksDetailsBean.expireTask}" update="taskDetail, workflowEvents:workflowEvents, @form"
-          disabled="#{!task.state.active}" icon="si si-alarm-bell-timer"
+          disabled="#{!task.state.active}" icon="ti ti-bell-plus"
           rendered="#{permissionsBean.demoDevModeOrAdmin}" id="taskExpireBtn" />
       </p:menu>
     </h:form>

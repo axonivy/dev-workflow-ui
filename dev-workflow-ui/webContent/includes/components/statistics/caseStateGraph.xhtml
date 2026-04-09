@@ -10,7 +10,7 @@
         rendered="#{statisticsBean.caseByStateGraph != null}" />
       <h:panelGroup layout="block" rendered="#{statisticsBean.caseByStateGraph == null}"
         styleClass="h-full flex flex-column align-items-center justify-content-center">
-        <i class="pi pi-chart-pie text-7xl mb-4" />
+        <i class="ti ti-chart-pie text-7xl mb-4" />
         <h:outputText value="#{ivy.cm.co('/statistics/notEnoughData')}" />
       </h:panelGroup>
     </ui:define>

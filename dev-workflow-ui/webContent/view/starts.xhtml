@@ -24,7 +24,7 @@
             </div>
             <p:commandLink id="toggleFilter" process="@this" update="projectFilterInputWrapper"
               actionListener="#{processesBean.toggleProjectFilter}" styleClass="text-primary-color">
-              <i class="pi pi-search cursor-pointer"></i>
+              <i class="ti ti-search cursor-pointer"></i>
             </p:commandLink>
           </div>
 
@@ -61,7 +61,7 @@
                   <p:commandLink id="resetFilter" actionListener="#{processesBean.resetAllFilters}" process="@this"
                     update=":startsForm:projectStarts :startsForm:projectFilterButtons :startsForm:filterCheckboxes startsForm:globalFilter"
                     styleClass="ui-button-text ui-button-danger flex align-items-center mr-2">
-                    <i class="si si-button-refresh-arrow mr-1"/>#{ivy.cm.co('/common/reset')}
+                    <i class="ti ti-refresh mr-1"/>#{ivy.cm.co('/common/reset')}
                   </p:commandLink>
                   <span class="mr-2" style="opacity: 0.5">•</span>
                 </h:panelGroup>
@@ -77,7 +77,7 @@
               </h:panelGroup>
               <h:panelGroup id="globalFilterGroup" layout="block" styleClass="ml-2">
                 <div class="ui-input-icon-left">
-                  <i class="pi pi-search" />
+                  <i class="ti ti-search" />
                   <p:inputText id="globalFilter" placeholder="#{ivy.cm.co('/starts/search')}"
                     value="#{processesBean.startsDataModel.globalFilter}">
                     <p:ajax event="keyup" delay="300" listener="#{processesBean.updateUrlWithFilters}" process="@this" update=":startsForm:projectStarts"/>

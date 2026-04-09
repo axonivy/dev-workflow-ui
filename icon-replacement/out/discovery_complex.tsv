@@ -4,7 +4,7 @@ si-#{task.priorityIcon}" />	Complex	dev-workflow-ui/webContent/view/home.xhtml	6
 pi pi-#{ivyFreyaTheme.mode == 'light' ? 'moon' : 'sun'}"/>	Complex	dev-workflow-ui/webContent/includes/template/template.xhtml	51
 si #{notification.runAction.icon()} mr-1 " />	Complex	dev-workflow-ui/webContent/includes/template/notifications.xhtml	51
 si si-#{document.icon}"/>	Complex	dev-workflow-ui/webContent/includes/components/caseDetails/documents.xhtml	10
-si si-#{task.priorityIcon} mr-2" />	Complex	dev-workflow-ui/webContent/includes/components/taskDetails/description.xhtml	21
-si #{stage.stateIconCss} case-map-state-icon"/>	Complex	dev-workflow-ui/webContent/includes/components/caseDetails/caseMap.xhtml	14
 si-#{task.priorityIcon}" />	Complex	dev-workflow-ui/webContent/includes/components/caseDetails/taskList.xhtml	18
+si #{stage.stateIconCss} case-map-state-icon"/>	Complex	dev-workflow-ui/webContent/includes/components/caseDetails/caseMap.xhtml	14
+si si-#{task.priorityIcon} mr-2" />	Complex	dev-workflow-ui/webContent/includes/components/taskDetails/description.xhtml	21
 si-#{task.priorityIcon}" />	Complex	dev-workflow-ui/webContent/includes/components/userDetails/userdetail-usertasks.xhtml	17

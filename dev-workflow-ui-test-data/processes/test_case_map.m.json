@@ -6,7 +6,7 @@
   "stages" : [ {
     "id" : "stage1",
     "name" : "stage1",
-    "icon" : "css:fa fa-ambulance",
+    "icon" : "css:ti ti-ambulance",
     "processes" : [ {
       "id" : "testdialog1",
       "name" : "TestDialog1",
@@ -20,7 +20,7 @@
   }, {
     "id" : "stage_2",
     "name" : "stage 2",
-    "icon" : "css:fa fa-apple",
+    "icon" : "css:ti ti-brand-apple",
     "processes" : [ {
       "id" : "homepage_test_data",
       "name" : "HomePageTestData",

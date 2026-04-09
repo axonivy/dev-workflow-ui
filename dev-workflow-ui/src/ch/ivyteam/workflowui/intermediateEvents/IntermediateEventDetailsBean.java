@@ -29,8 +29,8 @@ public class IntermediateEventDetailsBean {
 
   public String getEventStateIconCss(IntermediateEventInstance event) {
     return switch (event.getState()) {
-      case CANCELED -> "si si-mood-warning";
-      case PENDING, WAITING -> "si si-hourglass";
+      case CANCELED -> "ti ti-alert-octagon";
+      case PENDING, WAITING -> "ti ti-hourglass-low";
       case PROCESSED -> "ti ti-check";
       case TIMEOUTED -> "ti ti-bell";
       case TIMEOUTED_AND_PROCESSED -> "ti ti-bell-timer";

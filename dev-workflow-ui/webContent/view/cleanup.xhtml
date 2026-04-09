@@ -19,7 +19,7 @@
                <f:selectItems value="#{cleanupBean.cleanups}" var="cleanup" itemLabel="#{cleanup.name}" itemValue="#{cleanup.id}"/>
             </p:selectManyCheckbox>
 
-            <p:commandButton id="cleanupBtn" value="#{ivy.cm.co('/sidebar/cleanup')}" icon="si si-recycling-trash-bin-2 "
+            <p:commandButton id="cleanupBtn" value="#{ivy.cm.co('/sidebar/cleanup')}" icon="ti ti-recycle "
               actionListener="#{cleanupBean.cleanup}" update="growl"
               disabled="#{!permissionsBean.devModeAndAdmin}" />
           </p:panelGrid>

@@ -32,7 +32,7 @@
             </h:panelGroup>
             <h:panelGroup rendered="#{permissionsBean.demoOrDevMode}">
               <p:commandButton id="previewElementPicker" widgetVar="previewElementPicker" disabled="true" type="button"
-                onclick="selector.toggleSelectionMode()" styleClass="ml-1 flex-shrink-0 rounded-button" icon="si si-pencil-write" />
+                onclick="selector.toggleSelectionMode()" styleClass="ml-1 flex-shrink-0 rounded-button" icon="ti ti-file-pencil" />
               <p:tooltip for="previewElementPicker" value="#{ivy.cm.co('/frame/openEditor')}" position="left"/>
               <p:commandButton id="previewAutoReload" widgetVar="previewAutoReload" disabled="true" type="button"
                 onclick="preview.toggleAutoRefresh()" styleClass="ml-1 flex-shrink-0 rounded-button ui-button-outlined" icon="ti ti-refresh" />

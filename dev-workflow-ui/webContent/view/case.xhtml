@@ -21,7 +21,7 @@
                   <h6 class="m-0">#{ivy.cm.co('/case/description')}</h6>
                 </div>
                 <div>
-                  <p:commandButton icon="si si-button-refresh-arrow" styleClass="ui-button-secondary rounded-button"
+                  <p:commandButton icon="ti ti-refresh" styleClass="ui-button-secondary rounded-button"
                     id="caseRerunBtn" actionListener="#{casesDetailsBean.selectedCaseModel.rerunCase}" />
                   <p:badge value="#{casesDetailsBean.selectedCase.notes.size()}">
                     <p:commandButton id="caseNotesBtn"
@@ -113,7 +113,7 @@
             <div class="card">
               <div class="card-header">
                 <div class="card-title flex align-items-center">
-                  <i class="pr-3 si si-task-list-approve"></i>
+                  <i class="pr-3 ti ti-clipboard-list"></i>
                   <h6 class="m-0">#{ivy.cm.co('/case/caseHierarchy')}</h6>
                 </div>
               </div>

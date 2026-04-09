@@ -537,7 +537,7 @@
           "description" : "Process which generates some test task and case data",
           "category" : "TestData",
           "customFields" : [
-            { "name" : "cssIcon", "value" : "si si-single-neutral-circle" }
+            { "name" : "cssIcon", "value" : "ti ti-user-circle" }
           ]
         },
         "task" : {
