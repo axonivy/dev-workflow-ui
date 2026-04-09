@@ -25,7 +25,7 @@
       </ui:repeat>
     </h:panelGroup>
     <c:if test="#{empty casesDetailsBean.getCaseMap().stages}">
-      <i class="si si-road-sign-warning mr-1"/>
+      <i class="ti ti-alert-triangle mr-1"/>
       <h:outputText value="#{ivy.cm.co('/common/noCaseMapsFound')}" />
     </c:if>
   </div>

@@ -9,34 +9,34 @@
   <div class="detail-action-container">
     <h:form id="actionMenuForm">
       <p:linkButton href="#{tasksDetailsBean.executeTaskLink}" value="#{ivy.cm.co('/common/start')}"
-        id="taskStartBtn" disabled="#{!task.canBeStarted()}" icon="si si-controls-play" />
+        id="taskStartBtn" disabled="#{!task.canBeStarted()}" icon="ti ti-player-play" />
 
       <p:commandButton value="#{ivy.cm.co('/case/sidesteps')}" styleClass="ml-2 ui-button-secondary" id="sidestepsBtn"
-        rendered="#{task.renderSidestepBtn()}" icon="si si-arrow-down-1" />
+        rendered="#{task.renderSidestepBtn()}" icon="ti ti-chevron-down" />
       <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
         model="#{tasksDetailsBean.sidestepsMenuModel}" styleClass="menu-no-icons" />
 
       <p:badge value="#{task.notes.size()}">
         <p:commandButton id="taskNotesBtn" styleClass="ml-2 ui-button-secondary ui-button-outlined rounded-button"
-          disabled="#{0 >= task.notes.size()}" icon="si si-notes-quill"
+          disabled="#{0 >= task.notes.size()}" icon="ti ti-notes"
           actionListener="#{notesBean.openNotesDialog(task.Uuid)}" />
       </p:badge>
       <p:tooltip for="taskNotesBtn" value="Show task notes" />
 
       <p:commandButton styleClass="ml-2 ui-button-secondary ui-button-outlined rounded-button" id="taskActionsBtn"
-        disabled="#{task.done}" icon="si si-navigation-menu-horizontal-filled" />
+        disabled="#{task.done}" icon="ti ti-dots" />
       <p:menu id="actionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom">
         <p:menuitem value="#{ivy.cm.co('/common/reset')}" actionListener="#{tasksDetailsBean.reset()}" update="taskDetail, workflowEvents:workflowEvents, @form"
           disabled="#{!task.canReset()}" id="taskResetBtn"
-          icon="si si-road-sign-u-turn-left" />
+          icon="ti ti-arrow-back-up" />
         <p:menuitem value="#{ivy.cm.co('/common/delegate')}" onclick="PF('delegateTaskModal').show()" id="taskDelegateBtn"
           disabled="#{!task.state.active}" icon="si si-move-to-bottom" />
         <p:menuitem value="#{ivy.cm.co('/common/park')}" actionListener="#{tasksDetailsBean.park()}" update="taskDetail, workflowEvents:workflowEvents, @form" id="taskParkBtn"
-          disabled="#{!task.canPark()}" icon="si si-road-sign-u-turn-right" />
+          disabled="#{!task.canPark()}" icon="ti ti-arrow-forward-up" />
         <p:menuitem value="#{ivy.cm.co('/common/destroy')}" actionListener="#{tasksDetailsBean.destroy()}" update="taskDetail, workflowEvents:workflowEvents, @form"
-          disabled="#{!task.state.active}" id="taskDestoryBtn" icon="si si-delete-1" />
+          disabled="#{!task.state.active}" id="taskDestoryBtn" icon="ti ti-trash" />
         <p:menuitem value="#{ivy.cm.co('/common/clearDelay')}" actionListener="#{tasksDetailsBean.clearDelay}" update="taskDetail, workflowEvents:workflowEvents, @form"
-          disabled="#{task.delayTimestamp == null}" icon="si si-button-refresh-arrows" id="taskClearDelayBtn" />
+          disabled="#{task.delayTimestamp == null}" icon="ti ti-refresh" id="taskClearDelayBtn" />
         <p:menuitem value="#{ivy.cm.co('/common/expireNow')}" actionListener="#{tasksDetailsBean.expireTask}" update="taskDetail, workflowEvents:workflowEvents, @form"
           disabled="#{!task.state.active}" icon="si si-alarm-bell-timer"
           rendered="#{permissionsBean.demoDevModeOrAdmin}" id="taskExpireBtn" />

@@ -57,12 +57,12 @@
             </p:column>
 
             <p:column width="30px" resizable="false">
-              <p:commandButton id="caseActionsBtn" icon="si si-navigation-menu-horizontal-filled"
+              <p:commandButton id="caseActionsBtn" icon="ti ti-dots"
                 styleClass="ui-button-flat text-color action-button" />
               <p:menu id="caseActionsMenu" overlay="true" trigger="caseActionsBtn" my="right top" at="right bottom"
                 style="width: 200px">
                 <p:menuitem id="openCaseDetailsBtn" value="#{ivy.cm.co('/common/openDetails')}" url="#{case.case.detailLink}"
-                  icon="si si-information-circle" />
+                  icon="ti ti-info-circle" />
                 <p:menuitem value="#{ivy.cm.co('/common/rerunProcess')}" actionListener="#{case.rerunCase()}"
                   id="rerunCaseProcessBtn" icon="si si-button-refresh-arrow" />
               </p:menu>

@@ -31,7 +31,7 @@
         <p:inputText id="userName" autocomplete="off" value="#{loginBean.username}" required="true" placeholder="#{ivy.cm.co('/login/username')}" />
         <p:password id="password" autocomplete="off" value="#{loginBean.password}" required="true" placeholder="#{ivy.cm.co('/login/password')}" />
 
-        <p:commandButton update="@form" id="login" actionListener="#{loginBean.customLogin}" value="#{ivy.cm.co('/login/signIn')}" icon="si si-login-3" ajax="false"/>
+        <p:commandButton update="@form" id="login" actionListener="#{loginBean.customLogin}" value="#{ivy.cm.co('/login/signIn')}" icon="ti ti-login-2" ajax="false"/>
         <p:messages globalOnly="true" id="loginMessage" />
 
         <h:panelGroup rendered="#{loginBean.OAuthProvider != null}" styleClass="oauth-providers">

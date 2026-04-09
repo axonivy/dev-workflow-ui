@@ -101,7 +101,7 @@
               <h:panelGroup id="event" layout="block" styleClass="flex align-items-center">
                 <h:outputText value="#{event.displayName}" styleClass="event-kind mr-2" />
                 <p:outputPanel id="iconWrapper" styleClass="flex">
-                  <i class="si si-question-circle"></i>
+                  <i class="ti ti-help-circle"></i>
                 </p:outputPanel>
               </h:panelGroup>
               <p:tooltip for="profileForm:notificationChannelsTable:#{rowIndex}:iconWrapper" value="#{event.description}" position="top"
@@ -126,7 +126,7 @@
         </div>
 
         <div class="flex justify-content-end">
-          <p:commandButton id="saveBtn" value="#{ivy.cm.co('/common/save')}" icon="si si-floppy-disk"
+          <p:commandButton id="saveBtn" value="#{ivy.cm.co('/common/save')}" icon="ti ti-device-floppy"
             styleClass="w-8rem" actionListener="#{profileBean.save}" update="@form" />
         </div>
       </h:form>

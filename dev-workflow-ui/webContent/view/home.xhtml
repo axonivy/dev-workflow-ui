@@ -27,28 +27,28 @@
                   <p:tooltip for="startedProcess" value="#{start.displayName}" position="top" />
 
                   <h:panelGroup>
-                    <p:commandButton id="startedProcessMenuLink" icon="si si-navigation-menu-horizontal-filled"
+                    <p:commandButton id="startedProcessMenuLink" icon="ti ti-dots"
                       styleClass="ui-button-flat text-color action-button" />
                     <p:menu id="startsActionsMenu" overlay="true" trigger="startedProcessMenuLink" my="right top"
                       at="right bottom">
                       <p:menuitem value="#{ivy.cm.co('/common/startProcess')}" action="#{start.execute}" id="startProcessBtn"
-                        icon="si si-controls-play" />
+                        icon="ti ti-player-play" />
                       <p:menuitem value="#{ivy.cm.co('/common/copyToClipboard')}" onclick="copyToClipboard('#{start.link}')"
-                        id="copyStartLinkBtn" icon="si si-hyperlink-3" />
+                        id="copyStartLinkBtn" icon="ti ti-link" />
                       <p:menuitem value="#{ivy.cm.co('/common/openFullscreen')}" url="#{start.link}" id="openStartFullscreenBtn"
-                        rendered="#{start.embedInFrame}" icon="si si-expand-6" />
+                        rendered="#{start.embedInFrame}" icon="ti ti-queue-pop-out" />
                       <p:menuitem id="openProcessViewer"
                         value="#{start.isProcessStart() ? ivy.cm.co('/common/openProcessViewer') : ivy.cm.co('/common/openCaseMapViewer')}"
                         oncomplete="PF('process-viewer-dlg').show()" update="processViewer:processViewerDialog"
                         actionListener="#{homepageBean.setViewerStart(start.viewerLink)}"
-                        rendered="#{start.viewerAllowed}" icon="si si-hierarchy-6 si-rotate-270" />
+                        rendered="#{start.viewerAllowed}" icon="ti ti-sitemap si-rotate-270" />
                     </p:menu>
                   </h:panelGroup>
                 </p:column>
               </p:dataTable>
               <h:panelGroup rendered="#{empty homepageBean.lastStarts}" layout="block"
                 styleClass="flex flex-column justify-content-center align-items-center gap-4">
-                <i class="si si-hierarchy-6 si-rotate-270 text-4xl" />
+                <i class="ti ti-sitemap si-rotate-270 text-4xl" />
                 <span style="text-align: center; text-wrap: balance;">
                   #{ivy.cm.co('/home/noProcessesStarted')} <p:link value="#{ivy.cm.co('/home/goToProcessList')}" outcome="starts.xhtml"/> #{ivy.cm.co('/home/toStartProcess')}
                 </span>
@@ -77,20 +77,20 @@
                   <jc:time id="expiryTime" datetime="#{task.expiryTimestamp}" />
                 </p:column>
                 <p:column width="30px" resizable="false">
-                  <p:commandButton id="taskActionsBtn" icon="si si-navigation-menu-horizontal-filled"
+                  <p:commandButton id="taskActionsBtn" icon="ti ti-dots"
                     styleClass="ui-button-flat text-color action-button" />
                   <p:menu id="taskActionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom"
                     style="width: 200px">
                     <p:menuitem value="#{ivy.cm.co('/common/startTask')}" actionListener="#{homepageBean.executeTask(task)}"
-                      id="startTaskBtn" icon="si si-controls-play" />
+                      id="startTaskBtn" icon="ti ti-player-play" />
                     <p:menuitem id="openTaskDetailsBtn" value="#{ivy.cm.co('/common/openDetails')}" url="#{task.detailUrl}"
-                      icon="si si-information-circle" />
+                      icon="ti ti-info-circle" />
                   </p:menu>
                 </p:column>
               </p:dataTable>
               <h:panelGroup rendered="#{homepageBean.tasksDataModel.size eq 0}" layout="block"
                 styleClass="flex flex-column justify-content-center align-items-center gap-4">
-                <i class="si si-list-bullets text-4xl" />
+                <i class="ti ti-folder-open text-4xl" />
                 <span style="text-align: center; text-wrap: balance;">#{ivy.cm.co('/home/noOpenTasks')}</span>
               </h:panelGroup>
             </div>
@@ -125,12 +125,12 @@
                 </p:column>
 
                 <p:column width="30px" styleClass="text-center" resizable="false">
-                  <p:commandButton id="caseActionsBtn" icon="si si-navigation-menu-horizontal-filled"
+                  <p:commandButton id="caseActionsBtn" icon="ti ti-dots"
                     styleClass="ui-button-flat text-color action-button" />
                   <p:menu id="caseActionsMenu" overlay="true" trigger="caseActionsBtn" my="right top"
                     at="right bottom">
                     <p:menuitem id="openCaseDetailsBtn" value="#{ivy.cm.co('/common/openDetails')}"
-                      url="#{case.detailLink}" icon="si si-information-circle" />
+                      url="#{case.detailLink}" icon="ti ti-info-circle" />
                     <p:menuitem value="#{ivy.cm.co('/common/rerunProcess')}" actionListener="#{case.rerunCase()}"
                       id="rerunCaseProcessBtn" icon="si si-button-refresh-arrow" />
                   </p:menu>

@@ -14,7 +14,7 @@
           "description" : "Process which generates some test task and case data",
           "category" : "TestData",
           "customFields" : [
-            { "name" : "cssIcon", "value" : "si si-add" }
+            { "name" : "cssIcon", "value" : "ti ti-plus" }
           ]
         },
         "task" : {
@@ -272,7 +272,7 @@
           "description" : "Different process which generates test data. Mostly used for CI tests",
           "category" : "TestData",
           "customFields" : [
-            { "name" : "cssIcon", "value" : "si si-house-1" }
+            { "name" : "cssIcon", "value" : "ti ti-home" }
           ]
         },
         "task" : {
@@ -504,7 +504,7 @@
           "description" : "Process which generates some test task and case data",
           "category" : "TestData",
           "customFields" : [
-            { "name" : "cssIcon", "value" : "si si-time-clock-circle" }
+            { "name" : "cssIcon", "value" : "ti ti-clock" }
           ]
         },
         "task" : {

@@ -16,5 +16,5 @@
 
   <p:commandButton id="signalBtn" update="@form, boundarySignalsTable, firedSignalsTable"
     styleClass="mt-2 send-signal-button" value="#{ivy.cm.co('/signals/send')}" actionListener="#{signalsBean.sendSignal}"
-    disabled="#{!permissionsBean.demoDevModeOrAdmin}" icon="si si-send-email"/>
+    disabled="#{!permissionsBean.demoDevModeOrAdmin}" icon="ti ti-mail"/>
 </ui:composition>

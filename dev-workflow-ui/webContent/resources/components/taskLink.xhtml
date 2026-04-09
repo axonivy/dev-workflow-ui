@@ -11,7 +11,7 @@
   <ui:param name="task" value="#{tasksBean.toTaskLinkModel(cc.attrs.task)}"/>
   <h:link outcome="task" styleClass="flex align-items-center">
     <f:param name="id" value="#{task.uuid}"/>
-    <i class="si si-task-list-edit ml-2" />
+    <i class="ti ti-checklist ml-2" />
     <h:outputText id="taskLink" value="#{task.name}" styleClass="ml-2"/>
     <p:tooltip for="taskLink" position="top">
       <h:panelGroup layout="block" styleClass="py-2">

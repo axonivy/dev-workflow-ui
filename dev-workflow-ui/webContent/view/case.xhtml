@@ -17,7 +17,7 @@
             <div class="card">
               <div class="card-header">
                 <div class="card-title flex align-items-center">
-                  <i class="pr-3 si si-common-file-text"></i>
+                  <i class="pr-3 ti ti-file-text"></i>
                   <h6 class="m-0">#{ivy.cm.co('/case/description')}</h6>
                 </div>
                 <div>
@@ -26,11 +26,11 @@
                   <p:badge value="#{casesDetailsBean.selectedCase.notes.size()}">
                     <p:commandButton id="caseNotesBtn"
                       styleClass="ui-button-secondary ui-button-outlined rounded-button ml-2"
-                      disabled="#{0 >= casesDetailsBean.selectedCase.notes.size()}" icon="si si-notes-quill"
+                      disabled="#{0 >= casesDetailsBean.selectedCase.notes.size()}" icon="ti ti-notes"
                       actionListener="#{notesBean.openNotesDialog(casesDetailsBean.selectedCaseId)}" />
                   </p:badge>
                   <p:tooltip for="caseNotesBtn" value="#{ivy.cm.co('/case/showNotes')}" position="top" />
-                  <p:commandButton icon="si si-delete-1" styleClass="ui-button-danger rounded-button ml-2"
+                  <p:commandButton icon="ti ti-trash" styleClass="ui-button-danger rounded-button ml-2"
                     disabled="#{not casesDetailsBean.canBeDestoryed()}" id="caseDestroyBtn"
                     actionListener="#{casesDetailsBean.selectedCase.destroy}"
                     update="@this, caseDetails, caseHierarchy" />
@@ -47,18 +47,18 @@
             <div class="card casemap-card flex flex-column">
               <div class="card-header">
                 <div class="card-title flex align-items-center">
-                  <i class="pr-3 si si-information-circle"></i>
+                  <i class="pr-3 ti ti-info-circle"></i>
                   <h6 class="m-0">#{ivy.cm.co('/case/caseMap')}</h6>
                 </div>
                 <div class="flex">
                   <h:panelGroup layout="block" rendered="#{not empty casesDetailsBean.sidesteps}">
-                    <p:commandButton value="#{ivy.cm.co('/case/sidesteps')}" icon="si si-arrow-down-1" id="sidestepsBtn" styleClass="mr-1" />
+                    <p:commandButton value="#{ivy.cm.co('/case/sidesteps')}" icon="ti ti-chevron-down" id="sidestepsBtn" styleClass="mr-1" />
                     <p:menu id="sidestepMenu" overlay="true" trigger="sidestepsBtn" my="right top" at="right bottom"
                       model="#{casesDetailsBean.sidestepsMenuModel}" styleClass="menu-no-icons" />
                   </h:panelGroup>
                   <p:link href="#" id="openCaseMapUiViewerBtn" onclick="PF('process-viewer-dlg').show()"
                     styleClass="flex align-items-center">
-                    <i class="si si-information-circle detail-btn" />
+                    <i class="ti ti-info-circle detail-btn" />
                   </p:link>
                   <p:tooltip for="openCaseMapUiViewerBtn" position="top" value="#{ivy.cm.co('/case/openCaseMap')}" />
                 </div>
@@ -71,12 +71,12 @@
             <div class="card flex flex-column">
               <div class="card-header">
                 <div class="card-title flex align-items-center">
-                  <i class="pr-3 si si-information-circle"></i>
+                  <i class="pr-3 ti ti-info-circle"></i>
                   <h6 class="m-0">#{ivy.cm.co('/case/processViewer')}</h6>
                 </div>
                 <p:link rendered="#{casesDetailsBean.viewerAllowed}" href="#" id="openProcessViewerBtn"
                   onclick="PF('process-viewer-dlg').show()" styleClass="flex align-items-center">
-                  <i class="si si-information-circle detail-btn" />
+                  <i class="ti ti-info-circle detail-btn" />
                 </p:link>
                 <p:tooltip rendered="#{casesDetailsBean.viewerAllowed}" for="openProcessViewerBtn"
                   position="top" value="#{ivy.cm.co('/case/openProcessViewer')}" />
@@ -94,7 +94,7 @@
               <h:form id="tasksForm">
                 <div class="card-header">
                   <div class="card-title flex align-items-center">
-                    <i class="pr-3 si si-layout-bullets"></i>
+                    <i class="pr-3 ti ti-folder-open"></i>
                     <h6 class="m-0">#{ivy.cm.co('/case/taskList')}</h6>
                   </div>
                   <h:panelGroup id="switchContainer" styleClass="inline-flex align-items-center">
@@ -125,7 +125,7 @@
             <div class="card">
               <div class="card-header">
                 <div class="card-title flex align-items-center">
-                  <i class="pr-3 si si-cog"></i>
+                  <i class="pr-3 ti ti-settings"></i>
                   <h6 class="m-0">#{ivy.cm.co('/common/customFields')}</h6>
                 </div>
               </div>
@@ -137,7 +137,7 @@
             <div class="card documents-card">
               <div class="card-header">
                 <div class="card-title flex align-items-center">
-                  <i class="pr-3 si si-office-file-doc-1"></i>
+                  <i class="pr-3 ti ti-file-type-doc"></i>
                   <h6 class="m-0">#{ivy.cm.co('/case/documents')}</h6>
                 </div>
               </div>
@@ -149,7 +149,7 @@
             <div class="card">
               <div class="card-header">
                 <div class="card-title flex align-items-center">
-                  <i class="pr-3 si si-synchronize-arrow-clock"></i>
+                  <i class="pr-3 ti ti-clock-play"></i>
                   <h6 class="m-0">#{ivy.cm.co('/case/workflowEvents')}</h6>
                 </div>
               </div>

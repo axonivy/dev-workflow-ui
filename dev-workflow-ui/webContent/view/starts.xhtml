@@ -46,7 +46,7 @@
           <h:panelGroup layout="block" styleClass="mt-3 flex justify-content-end">
             <p:commandButton id="cancelFilter" value="#{ivy.cm.co('/common/cancel')}" styleClass="ui-button-flat ui-button-secondary modal-input-button"
               onclick="PF('filterPanel').hide();" type="button" />
-            <p:commandButton id="applyFilter" value="#{ivy.cm.co('/starts/apply')}" styleClass="ml-1 modal-input-button" icon="si si-check-1"
+            <p:commandButton id="applyFilter" value="#{ivy.cm.co('/starts/apply')}" styleClass="ml-1 modal-input-button" icon="ti ti-check"
               actionListener="#{processesBean.applyProjectFilter}"
               process="@this :startsForm:filterCheckboxes" update=":startsForm:projectStarts :startsForm:projectFilterButtons" oncomplete="PF('filterPanel').hide()" />
           </h:panelGroup>
@@ -68,7 +68,7 @@
                 <h:panelGroup>
                   <p:badge value="#{processesBean.startsDataModel.projectFilterModel.appliedProjects.size()}"
                     visible="#{processesBean.startsDataModel.projectFilterModel.projectFilterActive}">
-                    <p:commandButton id="filterBtn" value="#{ivy.cm.co('/starts/projects')}" binding="#{filterBtn}" icon="si si-filter-1"
+                    <p:commandButton id="filterBtn" value="#{ivy.cm.co('/starts/projects')}" binding="#{filterBtn}" icon="ti ti-filter"
                       styleClass="ui-button-secondary #{!processesBean.startsDataModel.projectFilterModel.projectFilterActive ? 'ui-button-outlined' : ''}"
                       rendered="#{!processesBean.startsDataModel.onlySingleProject}"
                       actionListener="#{processesBean.initFilter}" oncomplete="PF('filterPanel').show('#{filterBtn.clientId}')" />
@@ -122,22 +122,22 @@
               </h:panelGroup>
             </p:column>
             <p:column width="30px" resizable="false">
-              <p:commandButton id="startActionsBtn" icon="si si-navigation-menu-horizontal-filled"
+              <p:commandButton id="startActionsBtn" icon="ti ti-dots"
                 styleClass="ui-button-flat text-color action-button" />
               <p:menu id="startsActionsMenu" overlay="true" trigger="startActionsBtn" my="right top" at="right bottom"
                 style="width: 200px">
                 <p:menuitem value="#{ivy.cm.co('/common/startProcess')}" action="#{start.execute}" id="startProcessBtn"
-                  icon="si si-controls-play" />
+                  icon="ti ti-player-play" />
                 <p:menuitem value="#{ivy.cm.co('/common/copyToClipboard')}" onclick="copyToClipboard('#{start.link}')" id="copyStartLinkBtn"
-                  icon="si si-hyperlink-3" />
+                  icon="ti ti-link" />
                 <p:menuitem value="#{ivy.cm.co('/common/openFullscreen')}" url="#{start.link}" id="openStartFullscreenBtn"
-                  rendered="#{start.embedInFrame}" icon="si si-expand-6" />
+                  rendered="#{start.embedInFrame}" icon="ti ti-queue-pop-out" />
                 <p:menuitem id="openProcessViewer"
                   value="#{start.isProcessStart() ? ivy.cm.co('/common/openProcessViewer') : ivy.cm.co('/common/openCaseMapViewer')}"
                   oncomplete="PF('process-viewer-dlg').show()" update="startsForm:processViewer:processViewerDialog"
                   rendered="#{start.viewerAllowed}"
                   actionListener="#{processesBean.setViewerStart(start.viewerLink)}"
-                  icon="si si-hierarchy-6 si-rotate-270" />
+                  icon="ti ti-sitemap si-rotate-270" />
               </p:menu>
             </p:column>
           </p:dataTable>
