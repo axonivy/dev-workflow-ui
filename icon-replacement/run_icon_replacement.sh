@@ -52,7 +52,7 @@ INCLUDE_ROOTS=(
   "$ROOT_DIR/system-cms"
 )
 
-ALLOWED_REPLACE_EXT_REGEX='\.(xhtml|xml|html|yaml|yml|json)$'
+ALLOWED_REPLACE_EXT_REGEX='\.(xhtml|xml|html|yaml|yml|json|java)$'
 
 if [[ ! -f "$MAPPING_FILE" ]]; then
   echo "Mapping file not found: $MAPPING_FILE" >&2
