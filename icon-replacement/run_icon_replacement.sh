@@ -14,10 +14,6 @@ TMP_JAVA="$OUT_DIR/discovery_java.tsv"
 PAIRS_FILE="$OUT_DIR/replacement_pairs.tsv"
 REPLACED_PAIRS_FILE="$OUT_DIR/replaced_pairs.tsv"
 
-echo "Script directory: $SCRIPT_DIR"
-echo "Root directory: $ROOT_DIR"
-echo "Mapping file: $MAPPING_FILE"
-
 INCLUDE_ROOTS=(
   "$ROOT_DIR/dev-workflow-ui"
   "$ROOT_DIR/dev-workflow-ui-test"
@@ -58,8 +54,6 @@ read_and_extend_mapping_yaml() {
     key="$(echo "$key" | xargs)"
     value="$(echo "$value" | xargs)"
 
-    echo "Processing mapping: '$key' -> '$value'"
-
     # Skip empty or comment lines
     [[ -z "$key" || "$key" == \#* ]] && continue
 
@@ -79,8 +73,6 @@ read_and_extend_mapping_yaml() {
     # Strip first 3 non-whitespace characters from key and value
     new_key="$(echo "$key" | sed 's/^[^ ]\+ //')"
     new_value="$(echo "$value" | sed 's/^ti //')"
-
-    echo "Extended mapping: '$key' -> '$new_key', '$value' -> '$new_value'"
 
     echo "$new_key: $new_value" >> "$outfile"
   done < "$infile"
