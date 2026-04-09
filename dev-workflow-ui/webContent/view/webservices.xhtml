@@ -29,7 +29,7 @@
             <p:ajax event="rowSelect" listener="#{webServicesBean.executeRow}" />
 
             <p:column width="20">
-              <i class="si si-lg ti-network" />
+              <i class="ti ti-network" style="font-size: 1.4em" />
             </p:column>
             <p:column headerText="#{ivy.cm.co('/common/name')}" sortBy="#{webservice.name}" filterBy="#{webservice.name}">
               <h:outputText value="#{webservice.name}" />

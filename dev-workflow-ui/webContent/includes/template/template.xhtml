@@ -65,26 +65,26 @@
               <ul>
                 <li>
                   <p:link id="profileBtn" outcome="profile.xhtml" rendered="#{loginBean.loggedIn}">
-                    <i class="si si-lg ti-user-circle"></i>
+                    <i class="ti ti-user-circle" style="font-size: 1.4em"></i>
                     <span>#{ivy.cm.co('/template/profile')}</span>
                   </p:link>
                 </li>
                 <li jsf:rendered="#{permissionsBean.demoOrDevMode}">
                   <p:link id="loginTableBtn" href="switch-user.xhtml?origin=#{loginBean.originPage}">
-                    <i class="si si-lg ti-users"></i>
+                    <i class="ti ti-users" style="font-size: 1.4em"></i>
                     <span>#{ivy.cm.co('/template/switchUser')}</span>
                   </p:link>
                 </li>
                 <li>
                   <p:link id="loginFormBtn" href="login.xhtml?origin=#{loginBean.originPage}">
-                    <i class="si si-lg ti-login-2"></i>
+                    <i class="ti ti-login-2" style="font-size: 1.4em"></i>
                     <span>#{ivy.cm.co('/template/login')}</span>
                   </p:link>
                 </li>
                 <li>
                   <p:commandLink id="sessionLogoutBtn" actionListener="#{loginBean.logout}"
                     rendered="#{!userBean.sessionUserUnknown}">
-                    <i class="si si-lg ti-logout"></i><span>#{ivy.cm.co('/template/logout')}</span>
+                    <i class="ti ti-logout" style="font-size: 1.4em"></i><span>#{ivy.cm.co('/template/logout')}</span>
                   </p:commandLink>
                 </li>
               </ul>
