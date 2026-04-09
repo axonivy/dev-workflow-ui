@@ -21,3 +21,8 @@ dev-workflow-ui/lib/
 .flattened-pom.xml
 
 dev-workflow-ui-web-test/build/downloads/
+
+# icon replacement
+icon-replacement/**/*
+!icon-replacement/icon-mapping.yaml
+!icon-replacement/run_icon_replacement.sh
