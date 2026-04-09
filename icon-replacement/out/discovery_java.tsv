@@ -1,9 +1,9 @@
+  public String icon() {	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/notification/NotificationActionDTO.java	23
     var icon = new StringBuilder();	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/profile/NotificationChannelDto.java	64
       icon.append("check-circle-1 state-active");	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/profile/NotificationChannelDto.java	68
       icon.append("remove-circle state-inactive");	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/profile/NotificationChannelDto.java	71
       icon.append(" light");	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/profile/NotificationChannelDto.java	76
     subscription.setIcon(icon.toString());	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/profile/NotificationChannelDto.java	80
-  public String icon() {	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/notification/NotificationActionDTO.java	23
   private String icon;	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/profile/NotificationChannelSubscriptionDto.java	9
     return icon;	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/profile/NotificationChannelSubscriptionDto.java	38
   public void setIcon(String icon) {	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/profile/NotificationChannelSubscriptionDto.java	41
@@ -12,16 +12,16 @@
       String applicationName, String projectName, String icon, boolean embedInFrame, WebLink viewerLink, boolean viewerAllowed) {	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/starts/StartableModel.java	28
     this.icon = icon;	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/starts/StartableModel.java	35
     return icon;	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/starts/StartableModel.java	117
+    // open in fullscreen link icon shouldn't be visible	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestStartsIT.java	129
     var webNewTaskIcon = $(By.className("subscription-icon"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	94
       case 0 -> checkbox.shouldNotHave(cssClass("ui-icon"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	159
       case 1 -> checkbox.shouldHave(cssClass("ui-icon-check"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	160
       case 2 -> checkbox.shouldHave(cssClass("ui-icon-closethick"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	161
   private void iconShouldHaveSubscribedState(SelenideElement icon, boolean subscribed) {	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	166
-      icon.shouldHave(cssClass("si-check-circle-1"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	168
-      icon.shouldHave(cssClass("si-remove-circle"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	170
+      icon.shouldHave(cssClass("ti-circle-check"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	168
+      icon.shouldHave(cssClass("ti-circle-minus"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	170
   private void iconShouldHaveByDefaultState(SelenideElement icon, boolean byDefault) {	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	174
       icon.shouldHave(cssClass("light"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	176
       icon.shouldNotHave(cssClass("light"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	178
   private void iconShouldHaveTitle(SelenideElement icon, String title) {	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	182
     icon.shouldHave(attribute("title", title));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	183
-    // open in fullscreen link icon shouldn't be visible	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestStartsIT.java	129

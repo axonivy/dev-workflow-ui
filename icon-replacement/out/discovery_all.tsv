@@ -1,45 +1,32 @@
-si-lg	Regular	dev-workflow-ui/webContent/resources/components/user.xhtml	13
-si-hierarchy-6	Regular	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestTasksIT.java	97
-si-check-circle-1	Regular	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	168
-si-remove-circle	Regular	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	170
 si si-lg	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	68
-si-single-neutral-circle	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	68
 si si-lg	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	74
-si-multiple-neutral-1	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	74
 si si-lg	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	80
-si-login-3	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	80
 si si-lg	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	87
-si-logout-1	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	87
+si-rotate-270	Regular	dev-workflow-ui/webContent/includes/template/sidebar.xhtml	9
 si-lg	Regular	dev-workflow-ui/webContent/view/starts.xhtml	96
 si-rotate-270	Regular	dev-workflow-ui/webContent/view/starts.xhtml	140
-si-controls-play	Regular	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestStartsIT.java	214
-si-house-1	Regular	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestStartsIT.java	216
+si-lg	Regular	dev-workflow-ui/webContent/resources/components/user.xhtml	13
+si-lg	Regular	dev-workflow-ui/webContent/view/intermediate-event.xhtml	50
+si si-lg	Regular	dev-workflow-ui/webContent/view/webservices.xhtml	32
 si-rotate-270	Regular	dev-workflow-ui/webContent/view/home.xhtml	44
 si-rotate-270	Regular	dev-workflow-ui/webContent/view/home.xhtml	51
-si si-lg	Regular	dev-workflow-ui/webContent/view/webservices.xhtml	32
-si-network-arrow	Regular	dev-workflow-ui/webContent/view/webservices.xhtml	32
-si-lg	Regular	dev-workflow-ui/webContent/view/intermediate-event.xhtml	50
-si-controls-play	Regular	dev-workflow-ui/src/ch/ivyteam/workflowui/notification/NotificationActionDTO.java	24
-si-rotate-270	Regular	dev-workflow-ui/webContent/includes/template/sidebar.xhtml	9
 si-rotate-270	Regular	dev-workflow-ui/webContent/includes/components/taskDetails/description.xhtml	73
-si-controls-play	Regular	dev-workflow-ui/src/ch/ivyteam/workflowui/casemap/CaseMapStageModel.java	35
-si-check-1	Regular	dev-workflow-ui/src/ch/ivyteam/workflowui/casemap/CaseMapStageModel.java	37
-si-#{task.priorityIcon}" />	Complex	dev-workflow-ui/webContent/view/home.xhtml	69
-si-#{subscription.icon} subscription-icon" title="#{subscription.title}"	Complex	dev-workflow-ui/webContent/view/profile.xhtml	119
-si-#{task.priorityIcon}" />	Complex	dev-workflow-ui/webContent/view/tasks.xhtml	43
-si #{notification.runAction.icon()} mr-1 " />	Complex	dev-workflow-ui/webContent/includes/template/notifications.xhtml	51
 pi pi-#{ivyFreyaTheme.mode == 'light' ? 'moon' : 'sun'}"/>	Complex	dev-workflow-ui/webContent/includes/template/template.xhtml	51
+si #{notification.runAction.icon()} mr-1 " />	Complex	dev-workflow-ui/webContent/includes/template/notifications.xhtml	51
+si-#{task.priorityIcon}" />	Complex	dev-workflow-ui/webContent/view/home.xhtml	69
+si-#{task.priorityIcon}" />	Complex	dev-workflow-ui/webContent/view/tasks.xhtml	43
+si-#{subscription.icon} subscription-icon" title="#{subscription.title}"	Complex	dev-workflow-ui/webContent/view/profile.xhtml	119
 si si-#{task.priorityIcon} mr-2" />	Complex	dev-workflow-ui/webContent/includes/components/taskDetails/description.xhtml	21
-si-#{task.priorityIcon}" />	Complex	dev-workflow-ui/webContent/includes/components/userDetails/userdetail-usertasks.xhtml	17
-si #{stage.stateIconCss} case-map-state-icon"/>	Complex	dev-workflow-ui/webContent/includes/components/caseDetails/caseMap.xhtml	14
 si si-#{document.icon}"/>	Complex	dev-workflow-ui/webContent/includes/components/caseDetails/documents.xhtml	10
+si-#{task.priorityIcon}" />	Complex	dev-workflow-ui/webContent/includes/components/userDetails/userdetail-usertasks.xhtml	17
 si-#{task.priorityIcon}" />	Complex	dev-workflow-ui/webContent/includes/components/caseDetails/taskList.xhtml	18
+si #{stage.stateIconCss} case-map-state-icon"/>	Complex	dev-workflow-ui/webContent/includes/components/caseDetails/caseMap.xhtml	14
+  public String icon() {	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/notification/NotificationActionDTO.java	23
     var icon = new StringBuilder();	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/profile/NotificationChannelDto.java	64
       icon.append("check-circle-1 state-active");	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/profile/NotificationChannelDto.java	68
       icon.append("remove-circle state-inactive");	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/profile/NotificationChannelDto.java	71
       icon.append(" light");	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/profile/NotificationChannelDto.java	76
     subscription.setIcon(icon.toString());	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/profile/NotificationChannelDto.java	80
-  public String icon() {	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/notification/NotificationActionDTO.java	23
   private String icon;	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/profile/NotificationChannelSubscriptionDto.java	9
     return icon;	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/profile/NotificationChannelSubscriptionDto.java	38
   public void setIcon(String icon) {	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/profile/NotificationChannelSubscriptionDto.java	41
@@ -48,16 +35,16 @@ si-#{task.priorityIcon}" />	Complex	dev-workflow-ui/webContent/includes/componen
       String applicationName, String projectName, String icon, boolean embedInFrame, WebLink viewerLink, boolean viewerAllowed) {	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/starts/StartableModel.java	28
     this.icon = icon;	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/starts/StartableModel.java	35
     return icon;	Java	dev-workflow-ui/src/ch/ivyteam/workflowui/starts/StartableModel.java	117
+    // open in fullscreen link icon shouldn't be visible	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestStartsIT.java	129
     var webNewTaskIcon = $(By.className("subscription-icon"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	94
       case 0 -> checkbox.shouldNotHave(cssClass("ui-icon"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	159
       case 1 -> checkbox.shouldHave(cssClass("ui-icon-check"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	160
       case 2 -> checkbox.shouldHave(cssClass("ui-icon-closethick"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	161
   private void iconShouldHaveSubscribedState(SelenideElement icon, boolean subscribed) {	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	166
-      icon.shouldHave(cssClass("si-check-circle-1"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	168
-      icon.shouldHave(cssClass("si-remove-circle"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	170
+      icon.shouldHave(cssClass("ti-circle-check"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	168
+      icon.shouldHave(cssClass("ti-circle-minus"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	170
   private void iconShouldHaveByDefaultState(SelenideElement icon, boolean byDefault) {	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	174
       icon.shouldHave(cssClass("light"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	176
       icon.shouldNotHave(cssClass("light"));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	178
   private void iconShouldHaveTitle(SelenideElement icon, String title) {	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	182
     icon.shouldHave(attribute("title", title));	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	183
-    // open in fullscreen link icon shouldn't be visible	Java	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestStartsIT.java	129

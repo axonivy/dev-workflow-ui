@@ -1,26 +1,13 @@
-si-lg	Regular	dev-workflow-ui/webContent/resources/components/user.xhtml	13
-si-hierarchy-6	Regular	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestTasksIT.java	97
-si-check-circle-1	Regular	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	168
-si-remove-circle	Regular	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestProfileIT.java	170
 si si-lg	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	68
-si-single-neutral-circle	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	68
 si si-lg	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	74
-si-multiple-neutral-1	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	74
 si si-lg	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	80
-si-login-3	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	80
 si si-lg	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	87
-si-logout-1	Regular	dev-workflow-ui/webContent/includes/template/template.xhtml	87
+si-rotate-270	Regular	dev-workflow-ui/webContent/includes/template/sidebar.xhtml	9
 si-lg	Regular	dev-workflow-ui/webContent/view/starts.xhtml	96
 si-rotate-270	Regular	dev-workflow-ui/webContent/view/starts.xhtml	140
-si-controls-play	Regular	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestStartsIT.java	214
-si-house-1	Regular	dev-workflow-ui-web-test/src_test/ch/ivyteam/ivy/project/workflow/webtest/WebTestStartsIT.java	216
+si-lg	Regular	dev-workflow-ui/webContent/resources/components/user.xhtml	13
+si-lg	Regular	dev-workflow-ui/webContent/view/intermediate-event.xhtml	50
+si si-lg	Regular	dev-workflow-ui/webContent/view/webservices.xhtml	32
 si-rotate-270	Regular	dev-workflow-ui/webContent/view/home.xhtml	44
 si-rotate-270	Regular	dev-workflow-ui/webContent/view/home.xhtml	51
-si si-lg	Regular	dev-workflow-ui/webContent/view/webservices.xhtml	32
-si-network-arrow	Regular	dev-workflow-ui/webContent/view/webservices.xhtml	32
-si-lg	Regular	dev-workflow-ui/webContent/view/intermediate-event.xhtml	50
-si-controls-play	Regular	dev-workflow-ui/src/ch/ivyteam/workflowui/notification/NotificationActionDTO.java	24
-si-rotate-270	Regular	dev-workflow-ui/webContent/includes/template/sidebar.xhtml	9
 si-rotate-270	Regular	dev-workflow-ui/webContent/includes/components/taskDetails/description.xhtml	73
-si-controls-play	Regular	dev-workflow-ui/src/ch/ivyteam/workflowui/casemap/CaseMapStageModel.java	35
-si-check-1	Regular	dev-workflow-ui/src/ch/ivyteam/workflowui/casemap/CaseMapStageModel.java	37
