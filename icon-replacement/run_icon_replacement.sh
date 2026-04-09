@@ -1,39 +1,9 @@
-#!/usr/bin/env bash
-set -euo pipefail
-
-CLEANUP_MODE=0
-
-usage() {
-  cat <<'EOF'
-Usage: run_icon_replacement.sh [--cleanup]
-
-Options:
-  --cleanup   Remove all files in icon-replacement/out except report.csv after execution.
-  -h, --help  Show this help.
-EOF
-}
-
-while [[ $# -gt 0 ]]; do
-  case "$1" in
-    --cleanup)
-      CLEANUP_MODE=1
-      shift
-      ;;
-    -h|--help)
-      usage
-      exit 0
-      ;;
-    *)
-      echo "Unknown option: $1" >&2
-      usage >&2
-      exit 1
-      ;;
-  esac
-done
+#!/usr/bin/bash
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 MAPPING_FILE="$SCRIPT_DIR/icon-mapping.yaml"
+MAPPING_EXTENDED_FILE="$SCRIPT_DIR/icon-mapping-extended.yaml"
 OUT_DIR="$SCRIPT_DIR/out"
 REPORT_CSV="$OUT_DIR/report.csv"
 WORK_TSV="$OUT_DIR/report.work.tsv"
@@ -43,6 +13,10 @@ TMP_COMPLEX="$OUT_DIR/discovery_complex.tsv"
 TMP_JAVA="$OUT_DIR/discovery_java.tsv"
 PAIRS_FILE="$OUT_DIR/replacement_pairs.tsv"
 REPLACED_PAIRS_FILE="$OUT_DIR/replaced_pairs.tsv"
+
+echo "Script directory: $SCRIPT_DIR"
+echo "Root directory: $ROOT_DIR"
+echo "Mapping file: $MAPPING_FILE"
 
 INCLUDE_ROOTS=(
   "$ROOT_DIR/dev-workflow-ui"
@@ -54,18 +28,13 @@ INCLUDE_ROOTS=(
 
 ALLOWED_REPLACE_EXT_REGEX='\.(xhtml|xml|html|yaml|yml|json|java)$'
 
-if [[ ! -f "$MAPPING_FILE" ]]; then
-  echo "Mapping file not found: $MAPPING_FILE" >&2
-  exit 1
-fi
+REGEX_FIXED_SHORT_MATCH='(?<![a-zA-Z0-9])(fa|si|pi)-[a-zA-Z0-9\-]+'
+REGEX_FIXED_EXTENDED_MATCH='(?<![a-zA-Z0-9])(fa|si|pi)\s(fa|si|pi)-[a-zA-Z0-9\-]+'
+REGEX_FIXED_BOTH_MATCH='(?<![a-zA-Z0-9])((fa|si|pi)\s)?(fa|si|pi)-[a-zA-Z0-9\-]+'
+REGEX_COMPLEX_MATCH='((fa|si|pi)\s?)?(fa|si|pi)[-\s]?#\{.*'
 
 if ! command -v rg >/dev/null 2>&1; then
   echo "ripgrep (rg) is required but not found in PATH." >&2
-  exit 1
-fi
-
-if ! command -v perl >/dev/null 2>&1; then
-  echo "perl is required but not found in PATH." >&2
   exit 1
 fi
 
@@ -76,33 +45,46 @@ mkdir -p "$OUT_DIR"
 : > "$TMP_JAVA"
 : > "$REPLACED_PAIRS_FILE"
 
-# Validate mapping format: simple YAML key: value with full class pair style.
-awk '
-BEGIN { ok=1 }
-/^[[:space:]]*#/ || /^[[:space:]]*$/ { next }
-{
-  line=$0;
-  colon=index(line, ":");
-  if (colon > 1 && substr(line, 1, 1) != "#") {
-    key=substr(line, 1, colon-1);
-    val=substr(line, colon+1);
-    gsub(/^[[:space:]]+|[[:space:]]+$/, "", key);
-    gsub(/^[[:space:]]+|[[:space:]]+$/, "", val);
-    if (key !~ /^(fa|si|pi)[[:space:]]+(fa|si|pi)-[A-Za-z0-9-]+$/) {
-      print "Invalid mapping key format: " key > "/dev/stderr";
-      ok=0;
-    }
-    if (val !~ /^(fa|si|pi|ti|tif)[[:space:]]+(fa|si|pi|ti|tif)-[A-Za-z0-9-]+$/) {
-      print "Invalid mapping value format: " val > "/dev/stderr";
-      ok=0;
-    }
-  } else {
-    print "Invalid mapping line: " $0 > "/dev/stderr";
-    ok=0;
-  }
+read_and_extend_mapping_yaml() {
+  local pattern_key="^(fa|si|pi)[[:space:]]+(fa|si|pi)-[a-zA-Z0-9\-]+$"
+  local pattern_value="^ti[[:space:]]+ti-[a-zA-Z0-9\-]+$"
+  local infile="$MAPPING_FILE"
+  local outfile="$MAPPING_EXTENDED_FILE"
+  : > "$outfile"  # Clear or create the output file
+
+  while IFS=: read -r key value || [ -n "$key$value" ]; do
+    
+    # Trim whitespace
+    key="$(echo "$key" | xargs)"
+    value="$(echo "$value" | xargs)"
+
+    echo "Processing mapping: '$key' -> '$value'"
+
+    # Skip empty or comment lines
+    [[ -z "$key" || "$key" == \#* ]] && continue
+
+    # Validate key and value
+    if ! [[ "$key" =~ $pattern_key ]]; then
+      echo "Invalid key: '$key'"
+      continue
+    fi
+    if ! [[ "$value" =~ $pattern_value ]]; then
+      echo "Invalid value: '$value'"
+      continue
+    fi
+
+    # Write original key-value pair
+    echo "$key: $value" >> "$outfile"
+
+    # Strip first 3 non-whitespace characters from key and value
+    new_key="$(echo "$key" | sed 's/^[^ ]\+ //')"
+    new_value="$(echo "$value" | sed 's/^ti //')"
+
+    echo "Extended mapping: '$key' -> '$new_key', '$value' -> '$new_value'"
+
+    echo "$new_key: $new_value" >> "$outfile"
+  done < "$infile"
 }
-END { if (!ok) exit 1 }
-' "$MAPPING_FILE"
 
 emit_matches() {
   local type="$1"
@@ -131,11 +113,14 @@ emit_matches() {
   >> "$out_file"
 }
 
+
+read_and_extend_mapping_yaml
+
 # Regular candidates: exact class pair snippets.
-emit_matches "Regular" '(fa|si|pi)\s+(fa|si|pi)-[A-Za-z0-9-]+' "$TMP_REGULAR" "${INCLUDE_ROOTS[@]}" || true
+emit_matches "Regular" "$REGEX_FIXED_BOTH_MATCH" "$TMP_REGULAR" "${INCLUDE_ROOTS[@]}" || true
 
 # Complex candidates: expression/composed style snippets.
-emit_matches "Complex" '((fa|si|pi)\s?)?(fa|si|pi)[-\s]?#\{.*' "$TMP_COMPLEX" "${INCLUDE_ROOTS[@]}" || true
+emit_matches "Complex" "$REGEX_COMPLEX_MATCH" "$TMP_COMPLEX" "${INCLUDE_ROOTS[@]}" || true
 
 # Java review-only candidates: likely icon-returning logic or icon class literals.
 rg -n --no-heading --with-filename --pcre2 \
@@ -163,7 +148,8 @@ rg -n --no-heading --with-filename --pcre2 \
 
 cat "$TMP_REGULAR" "$TMP_COMPLEX" "$TMP_JAVA" > "$TMP_ALL"
 
-awk -v mapping="$MAPPING_FILE" '
+# Find all matches between the mapping and the found candidates, and mark which mapping (if any) they match to.
+awk -v mapping="$MAPPING_EXTENDED_FILE" '
 BEGIN {
   FS="\t"; OFS="\t";
   while ((getline line < mapping) > 0) {
@@ -253,31 +239,3 @@ done < "$PAIRS_FILE"
   }
   ' "$WORK_TSV"
 } > "$REPORT_CSV"
-
-# Update replaced markers in working TSV as well for follow-up runs.
-awk -v pairs="$REPLACED_PAIRS_FILE" '
-BEGIN {
-  FS="\t"; OFS="\t";
-  while ((getline p < pairs) > 0) {
-    split(p, f, "\t");
-    key = f[1] "|" f[2];
-    replaced[key]=1;
-  }
-  close(pairs);
-}
-{
-  pair=$3 "|" $5;
-  if ($2 == "Regular" && $5 != "" && (pair in replaced)) {
-    $7="replaced";
-  }
-  print $0;
-}
-' "$WORK_TSV" > "$WORK_TSV.tmp"
-mv "$WORK_TSV.tmp" "$WORK_TSV"
-
-if [[ "$CLEANUP_MODE" -eq 1 ]]; then
-  find "$OUT_DIR" -maxdepth 1 -type f ! -name 'report.csv' -delete
-fi
-
-echo "Report generated: $REPORT_CSV"
-echo "Working data: $WORK_TSV"
