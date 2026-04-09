@@ -58,7 +58,7 @@ si si-information-circle: ti ti-info-circle
 si si-layers-grid-settings: ti ti-layout-grid
 si si-layout-bullets: ti ti-folder-open
 si si-layout-dashboard: ti ti-layout-dashboard
-si si-list-bullets: ti ti-folder-open
+si si-list-bullets: ti ti-list
 si si-lock-1: ti ti-lock
 si si-login-3: ti ti-login-2
 si si-messages-bubble: ti ti-message
