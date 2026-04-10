@@ -6,7 +6,7 @@
       <h:form id="menuform">
         <pm:menu widgetVar="sidebar_menu">
           <p:menuitem id="sr_home" value="#{ivy.cm.co('/sidebar/home')}" icon="ti ti-home" url="home.xhtml" containerStyleClass="#{sidebarBean.isActive('home') ? 'active-nav-page' : ''}" />
-          <p:menuitem id="sr_starts" value="#{ivy.cm.co('/sidebar/processes')}" icon="ti ti-sitemap si-rotate-270" url="starts.xhtml" containerStyleClass="#{sidebarBean.isActive('starts') ? 'active-nav-page' : ''}" />
+          <p:menuitem id="sr_starts" value="#{ivy.cm.co('/sidebar/processes')}" icon="ti ti-sitemap ti-rotate-270" url="starts.xhtml" containerStyleClass="#{sidebarBean.isActive('starts') ? 'active-nav-page' : ''}" />
           <p:menuitem id="sr_tasks" value="#{ivy.cm.co('/sidebar/tasks')}" icon="ti ti-list" url="tasks.xhtml" containerStyleClass="#{sidebarBean.isActive('tasks') ? 'active-nav-page' : ''}" />
           <p:menuitem id="sr_cases" value="#{ivy.cm.co('/sidebar/cases')}" icon="ti ti-file-pencil" url="cases.xhtml" containerStyleClass="#{sidebarBean.isActive('cases') ? 'active-nav-page' : ''}" />
           <p:submenu id="sr_actions" label="#{ivy.cm.co('/sidebar/developer')}" icon="ti ti-tool" rendered="#{permissionsBean.demoDevModeOrAdmin}" styleClass="#{sidebarBean.isDeveloperPageActive()}">
