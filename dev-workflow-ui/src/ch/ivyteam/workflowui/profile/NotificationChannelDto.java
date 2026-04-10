@@ -65,10 +65,10 @@ public class NotificationChannelDto {
     var iconTitle = new StringBuilder();
 
     if (subscribedByUser || (useDefault && subscription.isSubscribedByDefault())) {
-      icon.append("check-circle-1 state-active");
+      icon.append("circle-check state-active");
       iconTitle.append("Subscribed");
     } else {
-      icon.append("remove-circle state-inactive");
+      icon.append("circle-minus state-inactive");
       iconTitle.append("Not subscribed");
     }
 
