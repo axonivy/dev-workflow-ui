@@ -48,7 +48,7 @@
               <div class="flex notification-action-container">
                 <h:panelGroup styleClass="flex notification-run">
                   <h:outputLink rendered="#{notification.runAction != null}" id="notificationAction" value="#{notification.runAction.link}">
-                    <i class="notification-action si #{notification.runAction.icon()} mr-1 " />
+                    <i class="notification-action ti #{notification.runAction.icon()} mr-1 " />
                   </h:outputLink>
                   <p:tooltip for="notificationAction" value="#{notification.runAction.title}" />
                 </h:panelGroup>
