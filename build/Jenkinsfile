@@ -10,7 +10,6 @@ pipeline {
   }
 
   parameters {
-    string(name: 'engineSource', defaultValue: 'https://product.ivyteam.io', description: 'Engine page url')
     string(name: 'deployToEngineUrl', defaultValue: 'https://nightly.demo.ivyteam.io', description: 'Deploy to engine (e.g. see: https://demo.ivyteam.io)')
   }
 
