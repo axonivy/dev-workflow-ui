@@ -30,10 +30,10 @@ public class TaskUtil {
   public static String getPriorityIcon(ITask task) {
     return switch (task.getPriority()) {
       case EXCEPTION -> "alert-circle";
-      case HIGH -> "arrow-up-1";
-      case LOW -> "arrow-down-1";
-      case NORMAL -> "subtract";
-      default -> "subtract";
+      case HIGH -> "chevron-up";
+      case LOW -> "chevron-down";
+      case NORMAL -> "minus";
+      default -> "minus";
     };
   }
 
