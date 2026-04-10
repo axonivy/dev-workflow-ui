@@ -290,3 +290,9 @@ body .notification-scroll>.ui-datascroller-content::-webkit-scrollbar {
 .table-icon.light {
   opacity: 0.5;
 }
+
+/* Icon rotation */
+.ti-rotate-270 {
+  display: inline-block;
+  transform: rotate(270deg);
+}
