@@ -93,7 +93,7 @@
             rowsPerPageTemplate="10,15,20,30,50">
             <p:ajax event="rowSelect" listener="#{processesBean.startRow}" />
             <p:column width="20px" resizable="false">
-              <h:outputText id="processStartIcon" class="#{start.icon} si-lg vertical-align-middle" />
+              <h:outputText id="processStartIcon" class="#{start.icon} ti-lg vertical-align-middle" />
             </p:column>
             <p:column id="startNameColumn" headerText="#{ivy.cm.co('/starts/process')}" sortBy="#{start.displayName}" filterBy="#{start.displayName}">
               <h:outputText id="startName" value="#{start.displayName}" styleClass="start-name text-primary-color"/>
