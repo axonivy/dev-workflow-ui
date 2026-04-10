@@ -14,7 +14,7 @@
         </p:column>
         <p:column headerText="Prio" id="priority" filterBy="#{task.priority}" styleClass="center-table-cell"
           sortBy="#{task.priority}" width="45px" resizable="false">
-          <h:outputText id="taskPrio" styleClass="si text-800 si-#{task.priorityIcon}" />
+          <h:outputText id="taskPrio" styleClass="ti ti-#{task.priorityIcon}" />
           <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
         </p:column>
         <p:column headerText="#{ivy.cm.co('/common/name')}" filterBy="#{task.name}" sortBy="#{task.name}" responsivePriority="1">
