@@ -66,7 +66,7 @@
                 rendered="#{homepageBean.tasksDataModel.size gt 0}" paginatorPosition="bottom" selectionMode="single">
                 <p:ajax event="rowSelect" listener="#{homepageBean.executeTaskRow}" />
                 <p:column headerText="#{ivy.cm.co('/common/prio')}" sortBy="#{task.priority}" styleClass="center-table-cell" width="50px" resizable="false">
-                  <h:outputText id="taskPrio" styleClass="si text-800 si-#{task.priorityIcon}" />
+                  <h:outputText id="taskPrio" styleClass="ti ti-#{task.priorityIcon}" />
                   <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
                 </p:column>
                 <p:column headerText="#{ivy.cm.co('/common/name')}" sortBy="#{task.name}" responsivePriority="1">
