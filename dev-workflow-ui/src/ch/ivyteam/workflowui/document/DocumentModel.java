@@ -18,7 +18,7 @@ public class DocumentModel {
 
   static final Set<String> extensionsNoFileIcon = Set.of("exe", "rar", "gif");
   static final Set<String> extensionsFileIcon = Set.of("csv", "html", "xml", "zip", "bmp", "jpg", "png", "pdf", "ppt", "txt", "xls");
-  
+
   private final IDocument doc;
 
   public static List<DocumentModel> create(ICase selectedCase) {
