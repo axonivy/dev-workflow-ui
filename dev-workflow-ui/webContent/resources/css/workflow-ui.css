@@ -291,8 +291,12 @@ body .notification-scroll>.ui-datascroller-content::-webkit-scrollbar {
   opacity: 0.5;
 }
 
-/* Icon rotation */
+/* Icon styling */
 .ti-rotate-270 {
   display: inline-block;
   transform: rotate(270deg);
+}
+
+.ti-lg {
+  font-size: 1.4em;
 }

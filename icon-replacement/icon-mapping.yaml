@@ -159,3 +159,4 @@ pi pi-check: ti ti-check
 pi pi-search: ti ti-search
 si si-logout-1: ti ti-logout
 si si-rotate-270: ti ti-rotate-270
+si si-lg: ti ti-lg
