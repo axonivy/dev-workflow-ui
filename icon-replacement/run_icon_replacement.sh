@@ -34,6 +34,17 @@ if ! command -v rg >/dev/null 2>&1; then
   exit 1
 fi
 
+# --- DRY RUN FLAG ---
+DRY_RUN=false
+
+# Parse args for --dry-run
+for arg in "$@"; do
+  if [[ "$arg" == "--dry-run" ]]; then
+    DRY_RUN=true
+    break
+  fi
+done
+
 mkdir -p "$OUT_DIR"
 : > "$TMP_ALL"
 : > "$TMP_REGULAR"
@@ -191,14 +202,17 @@ BEGIN { FS="\t"; OFS="\t" }
 }
 ' "$WORK_TSV" | sort -u > "$PAIRS_FILE"
 
-# Apply replacements only in approved static file extensions.
+# Apply replacements only in approved static file extensions. Only if DRY_RUN is false, otherwise just record what would happen
 while IFS=$'\t' read -r file key val; do
   [[ -n "$file" ]] || continue
   abs_file="$ROOT_DIR/$file"
   if [[ "$file" =~ $ALLOWED_REPLACE_EXT_REGEX ]]; then
     if [[ -f "$abs_file" ]] && grep -Fq -- "$key" "$abs_file"; then
-      perl -0777 -i -pe "s/\Q${key}\E/${val}/g" "$abs_file"
       printf '%s\t%s\n' "$file" "$key" >> "$REPLACED_PAIRS_FILE"
+      if [[ "$DRY_RUN" != true ]]; then
+        # Do replacmenet, if DRY_RUN is false
+        perl -0777 -i -pe "s/\Q${key}\E/${val}/g" "$abs_file"
+      fi
     fi
   fi
 done < "$PAIRS_FILE"
