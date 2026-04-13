@@ -15,7 +15,7 @@
 
     <p:column headerText="#{ivy.cm.co('/common/prio')}" id="priority" filterBy="#{task.priority}"
       width="20px" responsivePriority="3" styleClass="center-table-cell">
-      <h:outputText id="taskPrio" styleClass="si text-800 si-#{task.priorityIcon}" />
+      <h:outputText id="taskPrio" styleClass="ti ti-#{task.priorityIcon}" />
       <p:tooltip for="taskPrio" value="Priority: #{task.priority}" position="top" />
     </p:column>
 
@@ -38,14 +38,14 @@
     </p:column>
 
     <p:column width="30px">
-      <p:commandButton id="taskActionsBtn" icon="si si-navigation-menu-horizontal-filled"
+      <p:commandButton id="taskActionsBtn" icon="ti ti-dots"
         styleClass="ui-button-flat text-color action-button" />
       <p:menu id="taskActionsMenu" overlay="true" trigger="taskActionsBtn" my="right top" at="right bottom"
         style="width: 200px">
         <p:menuitem value="#{ivy.cm.co('/common/startTask')}" actionListener="#{homepageBean.executeTask(task)}" id="startTaskBtn"
-          icon="si si-controls-play" />
+          icon="ti ti-player-play" />
         <p:menuitem id="openTaskDetailsBtn" value="#{ivy.cm.co('/common/openDetails')}" url="#{task.detailUrl}"
-          icon="si si-information-circle" />
+          icon="ti ti-info-circle" />
       </p:menu>
     </p:column>
   </p:dataTable>

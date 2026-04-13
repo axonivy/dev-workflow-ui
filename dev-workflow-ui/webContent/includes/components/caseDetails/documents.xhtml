@@ -7,7 +7,7 @@
     <h:form id="documentsDownloadForm">
       <ui:repeat var="document" value="#{casesDetailsBean.documents}">
         <li class="document-entry" style="list-style-type: none;">
-          <span class="mr-1 si si-#{document.icon}"/>
+          <span class="mr-1 ti ti-#{document.icon}"/>
           <h:commandLink value="#{document.name}">
             <p:fileDownload value="#{document.streamedContent}"></p:fileDownload>
           </h:commandLink>

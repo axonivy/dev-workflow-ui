@@ -16,9 +16,8 @@ import ch.ivyteam.ivy.workflow.document.Path;
 
 public class DocumentModel {
 
-  static final Set<String> extensionsDefault = Set.of("csv", "exe", "html", "rar", "xml", "zip");
-  static final Set<String> extensionsImages = Set.of("bmp", "gif", "jpg", "png");
-  static final Set<String> extensionsOffice = Set.of("pdf", "ppt", "txt", "xls");
+  static final Set<String> extensionsNoFileIcon = Set.of("exe", "rar", "gif");
+  static final Set<String> extensionsFileIcon = Set.of("csv", "html", "xml", "zip", "bmp", "jpg", "png", "pdf", "ppt", "txt", "xls");
 
   private final IDocument doc;
 
@@ -33,14 +32,12 @@ public class DocumentModel {
   }
 
   private static String getDocumentIcon(String extension) {
-    if (extensionsDefault.contains(extension)) {
-      return "file-" + extension;
-    } else if (extensionsImages.contains(extension)) {
-      return "image-file-" + extension;
-    } else if (extensionsOffice.contains(extension)) {
-      return "office-file-" + extension + "-1";
+    if (extensionsFileIcon.contains(extension)) {
+      return "file-type-" + extension;
+    } else if (extensionsNoFileIcon.contains(extension)) {
+      return "file";
     }
-    return "common-file-text";
+    return "file";
   }
 
   public StreamedContent getStreamedContent() {

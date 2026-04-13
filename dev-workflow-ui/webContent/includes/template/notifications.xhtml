@@ -4,7 +4,7 @@
   xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
 
 <p:commandLink id="showNotifications" rendered="#{loginBean.loggedIn}">
-  <i class="topbar-icon pi pi-bell"/>
+  <i class="topbar-icon ti ti-bell"/>
   <p:badge id="unreadNotifications" value="#{notificationBean.unreadNotifications}"
     style="position: absolute; bottom: 2.7em; left: 2em;"
     visible="#{notificationBean.hasUnreadNotifications()}"/>
@@ -17,12 +17,12 @@
 
       <div class="flex">
         <p:commandLink id="notificationMarkAllAsRead" rendered="#{notificationBean.hasUnreadNotifications()}" actionListener="#{notificationBean.readAll()}" update="notifications unreadNotifications">
-          <i class="notification-button si si-check-double-1 mr-1" />
+          <i class="notification-button ti ti-checks mr-1" />
         </p:commandLink>
         <p:tooltip for="notificationMarkAllAsRead" value="#{ivy.cm.co('/notifications/markAllAsRead')}" />
 
         <p:commandLink id="notificationHideAll" rendered="#{notificationBean.hasNotifications()}" actionListener="#{notificationBean.hideAll()}" update="notifications unreadNotifications">
-          <i class="notification-button si si-bin-1" />
+          <i class="notification-button ti ti-trash" />
         </p:commandLink>
         <p:tooltip for="notificationHideAll" value="#{ivy.cm.co('/notifications/deleteAll')}" />
       </div>
@@ -48,14 +48,14 @@
               <div class="flex notification-action-container">
                 <h:panelGroup styleClass="flex notification-run">
                   <h:outputLink rendered="#{notification.runAction != null}" id="notificationAction" value="#{notification.runAction.link}">
-                    <i class="notification-action si #{notification.runAction.icon()} mr-1 " />
+                    <i class="notification-action ti #{notification.runAction.icon()} mr-1 " />
                   </h:outputLink>
                   <p:tooltip for="notificationAction" value="#{notification.runAction.title}" />
                 </h:panelGroup>
 
                 <h:panelGroup styleClass="flex notification-mark-as-read">
                   <p:commandLink id="notificationMarkAsRead" process="@this" actionListener="#{notificationBean.markAsRead(notification)}" update="notifications unreadNotifications" rendered="#{!notification.read}">
-                    <i class="notification-action si si-check-circle-1 mr-1 " />
+                    <i class="notification-action ti ti-circle-check mr-1 " />
                   </p:commandLink>
                   <p:tooltip for="notificationMarkAsRead" value="#{ivy.cm.co('/notifications/markAsRead')}" />
                 </h:panelGroup>

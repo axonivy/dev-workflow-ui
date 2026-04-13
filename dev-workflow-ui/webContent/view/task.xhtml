@@ -24,7 +24,7 @@
             <div class="card">
               <div class="card-header">
                 <div class="card-title flex align-items-center">
-                  <i class="pr-3 si si-common-file-text"></i>
+                  <i class="pr-3 ti ti-file-text"></i>
                   <h6 class="m-0">#{ivy.cm.co('/common/description')}</h6>
                 </div>
                 <ui:include src="/includes/components/taskDetails/descriptionCardHeaderActions.xhtml" />
@@ -37,7 +37,7 @@
             <div class="card">
               <div class="card-header">
                 <div class="card-title flex align-items-center">
-                  <i class="pr-3 si si-cog"></i>
+                  <i class="pr-3 ti ti-settings"></i>
                   <h6 class="m-0">#{ivy.cm.co('/common/customFields')}</h6>
                 </div>
               </div>
@@ -49,7 +49,7 @@
             <div class="card">
               <div class="card-header">
                 <div class="card-title flex align-items-center">
-                  <i class="pr-3 si si-synchronize-arrow-clock"></i>
+                  <i class="pr-3 ti ti-clock-play"></i>
                   <h6 class="m-0">#{ivy.cm.co('/common/workflowEvents')}</h6>
                 </div>
               </div>
@@ -86,7 +86,7 @@
           </h:panelGroup>
           <h:panelGroup layout="block" styleClass="mt-2 dialog-button-container">
             <p:commandButton id="delegateProceedButton" value="#{ivy.cm.co('/task/assignTask')}"
-              actionListener="#{tasksDetailsBean.delegateTask}" icon="si si-move-to-bottom" update="taskDetail"
+              actionListener="#{tasksDetailsBean.delegateTask}" icon="ti ti-arrow-big-down-lines" update="taskDetail"
               onsuccess="PF('delegateTaskModal').hide();" />
             <p:commandButton value="#{ivy.cm.co('/common/cancel')}" styleClass="ui-button-secondary ui-button-flat dialog-cancel-button"
               onclick="PF('delegateTaskModal').hide();" />

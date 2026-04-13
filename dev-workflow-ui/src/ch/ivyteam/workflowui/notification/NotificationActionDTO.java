@@ -21,6 +21,6 @@ public class NotificationActionDTO {
   }
 
   public String icon() {
-    return "si-controls-play";
+    return "ti-player-play";
   }
 }

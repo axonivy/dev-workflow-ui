@@ -21,7 +21,7 @@
             <p:tooltip for="showAllCasesSwitch_container" position="top"
               value="If enabled shows all cases, even the ones the user is not involved in" />
             <div class="ui-input-icon-left ml-3">
-              <i class="pi pi-search" />
+              <i class="ti ti-search" />
               <p:inputText id="globalFilter" value="#{casesBean.casesDataModel.filter}"
                 placeholder="#{ivy.cm.co('/common/search')}">
                 <p:ajax event="keyup" delay="300" update=":casesForm:cases"/>
@@ -57,14 +57,14 @@
             </p:column>
 
             <p:column width="30px" resizable="false">
-              <p:commandButton id="caseActionsBtn" icon="si si-navigation-menu-horizontal-filled"
+              <p:commandButton id="caseActionsBtn" icon="ti ti-dots"
                 styleClass="ui-button-flat text-color action-button" />
               <p:menu id="caseActionsMenu" overlay="true" trigger="caseActionsBtn" my="right top" at="right bottom"
                 style="width: 200px">
                 <p:menuitem id="openCaseDetailsBtn" value="#{ivy.cm.co('/common/openDetails')}" url="#{case.case.detailLink}"
-                  icon="si si-information-circle" />
+                  icon="ti ti-info-circle" />
                 <p:menuitem value="#{ivy.cm.co('/common/rerunProcess')}" actionListener="#{case.rerunCase()}"
-                  id="rerunCaseProcessBtn" icon="si si-button-refresh-arrow" />
+                  id="rerunCaseProcessBtn" icon="ti ti-refresh" />
               </p:menu>
             </p:column>
           </p:dataTable>

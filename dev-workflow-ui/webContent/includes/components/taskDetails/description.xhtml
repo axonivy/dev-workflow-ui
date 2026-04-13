@@ -18,7 +18,7 @@
 
     <h:outputText value="#{ivy.cm.co('/common/priority')}" />
     <h:outputText>
-      <i class="si si-#{task.priorityIcon} mr-2" />
+      <i class="ti ti-#{task.priorityIcon} mr-2" />
       <h:outputText value="#{task.priority}" id="taskPriority" />
     </h:outputText>
 
@@ -70,7 +70,7 @@
       actionListener="#{tasksDetailsBean.setViewerLink()}" oncomplete="PF('process-viewer-dlg').show()"
       update="processViewer:processViewerDialog"
       disabled="#{!task.viewerAllowed}">
-      <i class="si si-hierarchy-6 si-rotate-270 mr-1" />
+      <i class="ti ti-sitemap -rotate-90 mr-1" />
       #{task.currentElement}
     </p:commandLink>
   </p:panelGrid>

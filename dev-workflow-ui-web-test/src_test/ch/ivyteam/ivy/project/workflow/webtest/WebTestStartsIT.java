@@ -211,9 +211,9 @@ class WebTestStartsIT {
   void startableIcons() {
     openView("starts.xhtml");
     $(By.id("startsForm:globalFilter")).setValue("makeAdminUser.ivp");
-    $(By.id("startsForm:projectStarts:0:processStartIcon")).shouldBe(visible).shouldHave(cssClass("si-controls-play"));
+    $(By.id("startsForm:projectStarts:0:processStartIcon")).shouldBe(visible).shouldHave(cssClass("ti-player-play"));
     $(By.id("startsForm:globalFilter")).setValue("HomePageTestData.ivp");
-    $(By.id("startsForm:projectStarts:0:processStartIcon")).shouldBe(visible).shouldHave(cssClass("si-house-1"));
+    $(By.id("startsForm:projectStarts:0:processStartIcon")).shouldBe(visible).shouldHave(cssClass("ti-home"));
   }
 
   @Test

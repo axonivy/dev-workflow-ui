@@ -23,7 +23,7 @@
             <div class="flex justify-content-between">
               <h4 class="m-0">#{ivy.cm.co('/login/signIn')}</h4>
               <div class="ui-input-icon-left">
-                <i class="pi pi-search" />
+                <i class="ti ti-search" />
                 <p:inputText id="globalFilter" placeholder="#{ivy.cm.co('/common/search')}"
                   value="#{switchUserBean.globalFilter}">
                   <p:ajax event="keyup" delay="300" update=":loginTable:users"/>
@@ -40,7 +40,7 @@
 
             <p:column headerText="#{ivy.cm.co('/common/username')}" filterBy="#{user.name}" sortBy="#{user.name}" sortOrder="ascending">
               <h:outputText value="#{user.name}">
-                <i class="si si-single-neutral-actions mr-1"></i>
+                <i class="ti ti-user-check mr-1"></i>
               </h:outputText>
             </p:column>
 

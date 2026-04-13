@@ -54,7 +54,7 @@ public class StartableModel {
   private static String getIcon(IStartCustomFields customFields) {
     var customIcon = customFields.value("cssIcon");
     if (StringUtils.isBlank(customIcon)) {
-      return "si si-controls-play";
+      return "ti ti-player-play";
     }
     return customIcon;
   }

@@ -27,12 +27,12 @@ public class UserComponentModel {
 
   private static String getCssIcon(ISecurityMember member) {
     if (isMemberUnknown(member)) {
-      return "si si-question-circle";
+      return "ti ti-help-circle";
     }
     if (member.isUser()) {
-      return "si si-single-neutral-circle";
+      return "ti ti-user-circle";
     }
-    return "si si-multiple-neutral-1";
+    return "ti ti-users";
   }
 
   public String getName() {

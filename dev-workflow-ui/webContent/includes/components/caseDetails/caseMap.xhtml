@@ -11,7 +11,7 @@
             <i class="case-map-icon #{stage.iconCss} #{stage.stateCss}" />
             <h:panelGroup class="stage-icon-container" rendered="#{stage.executed}">
               <span class="dot">
-                <i class="si #{stage.stateIconCss} case-map-state-icon"/>
+                <i class="ti #{stage.stateIconCss} case-map-state-icon"/>
               </span>
             </h:panelGroup>
           </div>
@@ -25,7 +25,7 @@
       </ui:repeat>
     </h:panelGroup>
     <c:if test="#{empty casesDetailsBean.getCaseMap().stages}">
-      <i class="si si-road-sign-warning mr-1"/>
+      <i class="ti ti-alert-triangle mr-1"/>
       <h:outputText value="#{ivy.cm.co('/common/noCaseMapsFound')}" />
     </c:if>
   </div>
