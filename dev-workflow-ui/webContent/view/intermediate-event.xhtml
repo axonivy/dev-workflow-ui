@@ -47,7 +47,7 @@
                 </p:column>
                 <p:column headerText="#{ivy.cm.co('/common/state')}" width="60" sortBy="#{instance.state}">
                   <h:panelGroup id="eventStateIcon" styleClass="flex justify-content-center">
-                    <i class="ti-lg #{intermediateEventDetailsBean.getEventStateIconCss(instance)}" />
+                    <i class="text-xl #{intermediateEventDetailsBean.getEventStateIconCss(instance)}" />
                   </h:panelGroup>
                   <p:tooltip id="eventStateTooltip" for="eventStateIcon" value="#{instance.state}" position="top" />
                 </p:column>

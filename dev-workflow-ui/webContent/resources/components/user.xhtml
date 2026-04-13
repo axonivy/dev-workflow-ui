@@ -10,7 +10,7 @@
   <ui:param name="userModel" value="#{userComponentBean.toComponentModel(cc.attrs.user)}" />
   <h:panelGroup styleClass="flex align-items-center">
     <h:panelGroup rendered="#{not empty userModel.name}">
-      <i class="mr-1 ti-lg #{userModel.cssIcon}" />
+      <i class="mr-1 text-xl #{userModel.cssIcon}" />
     </h:panelGroup>
 
     <h:panelGroup rendered="#{userModel.getShowUserDetailLink()}">

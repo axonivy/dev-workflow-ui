@@ -290,8 +290,3 @@ body .notification-scroll>.ui-datascroller-content::-webkit-scrollbar {
 .table-icon.light {
   opacity: 0.5;
 }
-
-/* Icon styling */
-.ti-lg {
-  font-size: 1.4em;
-}
