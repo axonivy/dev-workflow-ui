@@ -17,7 +17,7 @@
 .layout-dashboard .card {
   height: 100%;
 }
-.card .card-title-icon, .card .card-title > .si {
+.card .card-title-icon, .card .card-title > .ti {
   font-size: 1.4em;
 }
 body .ui-commandlink:hover,
