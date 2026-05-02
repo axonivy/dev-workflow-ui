@@ -2,22 +2,22 @@ Error:
   Page:
     Error: Error
     ErrorId: Id. del error
-    ErrorTimestamp: Marca de tiempo del erro
+    ErrorTimestamp: Marca de tiempo del error
     Attributes: Atributos
     ThrownBy: Generado por
-    ProcessCallStack: Pila de llamadas del proceso
+    ProcessCallStack: Pila de invocación del proceso
     TechnicalCause: Causa técnica
-    RequestUri:  Uri de la solicitud
+    RequestUri: Uri de la solicitud
     Servlet: Servlet
     Application: Aplicación
     ThreadLocalValues: Contexto de la solicitud
     Name: Nombre
     Value: Valor
-    StackTrace:  Rastreo de pila
+    StackTrace: Traza de pila
     StartLastProcess:
-      Label:  Iniciar último proceso
+      Label: Iniciar último proceso
       Description: Inicia el último proceso que se inició con una configuración de inicio o pulsando x en un elemento de inicio.
-    ContactAdmin: Póngase en contacto con el administrador del sistema.
+    ContactAdmin: Póngase en contacto con el administrador del sistema
     Details: Detalles
     BackToApplication: Volver a la aplicación
   UnavailablePage:
@@ -25,8 +25,8 @@ Error:
     State:
       STARTING: ${product} se está iniciando
       STOPPING: ${product} se está deteniendo
-      RUNNING: ${product} está en funcionamiento
-      STOPPED: ${product} se ha detenido
+      RUNNING: ${product} está en ejecución
+      STOPPED: ${product} está detenido
   StatusCode:
     "400": Solicitud incorrecta
     "401": No autorizado
@@ -35,12 +35,12 @@ Error:
     "409": Conflicto
     "500": Error del servidor
     "503": Servicio no disponible
-  Exception: 
+  Exception:
     ViewExpired: Vista caducada
     NotFound:
       CaseMap:
-        UUID: ¡No se ha encontrado el mapa de casos con UUID '${uuid}'
-        BusinessCase: No se ha encontrado el caso de negocio con id '${businessCaseId}'
+        UUID: ¡No se ha encontrado mayúscula con UUID '${uuid}'!
+        BusinessCase: No se ha encontrado el caso de negocio con id '${businessCaseId}'.
         BusinessCaseIdMustBeNumber: El parámetro businessCaseId debe ser un número
     PermissionDenied:
       CaseMap:
@@ -63,9 +63,9 @@ Error:
         NotResolved: No se resolvió valor de objeto de contenido para '${cmsUri}'.
       Dialog:
         IdNotFound: Tiempo de ejecución de diálogo '${dialogId}' no encontrado
-        NotAvailable: El tiempo de ejecución de diálogo ya no está disponible
+        NotAvailable: El tiempo de ejecución de diálogo ya no está disponible más
         NotFound: El diálogo de usuario solicitado no fue encontrado
-        RequestMustBeGuid: La ID del tiempo de ejecución de diálogo solicitada debe ser un GUID
+        RequestMustBeGuid: La id del tiempo de ejecución de diálogo solicitada debe ser un GUID
       Engine:
         NotRunning: ¡El motor de procesos debería estar en estado de ejecución ('running'), pero no lo está!
         NotStarted: El motor de procesos no está en funcionamiento. Por favor, inicie el motor de procesos primero
@@ -86,7 +86,7 @@ Error:
       PageContentNotFound: Objeto de contenido de página solicitado no encontrado.
       PageNoHttpResponse: La página de proceso automático no pudo escribirse en la respuesta HTTP.
       PageEngine:
-        InvalidRequest: Tipo de solicitud no soportado ${type} 
+        InvalidRequest: Tipo ${type} de solicitud no soportado
         WrongState: El estado de PageEngine debería ser 'RUNNING' pero era '${serviceState}'
       Pm:
         InMaintenance: El modelo de proceso '${pmName}' de la aplicación '${appName}' no está disponible actualmente debido a mantenimiento.
@@ -97,28 +97,29 @@ Error:
         NotReleased: No hay una versión del modelo de proceso liberada para el modelo de proceso '${pmName}' de la aplicación '${appName}'.
         NotFound: La versión del modelo de proceso solicitada no fue encontrada.
         PmNotFound: La versión del modelo de proceso solicitada del modelo de proceso '${pmName}' de la aplicación '${appName}' no fue encontrada.
-      Render:  
+      Render:
         NoTxtObject: No es un objeto de tipo texto '${cmsUri}'
         NoImageObject: No es una imagen '${cmsUri}'
-        NoMimeObject: No se puede renderizar la imagen al tipo MIME '${mimeType}'
+        NoMimeObject: No se puede representar la imagen al tipo mime '${mimeType}'
         NoResponse: No hay una respuesta de renderizador configurada
       RestPathMissing: Falta la ruta REST
-      SessionExpired: Su sesión ha expirado.
+      SessionExpired: Su sesión ha caducado.
       Start:
         NotFoundPmv: El inicio de proceso solicitado en la versión del modelo de proceso '${pmvId}' del modelo de proceso '${pmName}' de la aplicación web '${appName}' no fue encontrado.
         NotReleasedPmv: No está permitido iniciar un caso en la versión del modelo de proceso '${pmvId}' del modelo de proceso '${pmName}' de la aplicación web '${appName}' porque no está liberada.
       Task:
-        Forbidden : No tiene permiso para trabajar en la tarea con el identificador '${taskId}'.
+        Forbidden: No tiene permiso para trabajar en la tarea con el identificador '${taskId}'.
         NotFound: La tarea con el identificador '${taskId}' no existe.
         InvalidPath: Ruta de solicitud de tarea no válida
         IsDestroyed: Ya no puede trabajar en la tarea '${taskName}' con el identificador '${taskId}' porque la tarea fue destruida mientras tanto.
         IsDone: No puede trabajar en la tarea '${taskName}' con el identificador '${taskId}' porque el usuario '${userName}' ya la ha finalizado.
         InProcess: No puede trabajar en la tarea '${taskName}' con el identificador '${taskId}' porque el usuario '${userName}' está trabajando en ella actualmente.
-        UriOnWrongApp: La aplicación en la URI de solicitud no es igual a la aplicación de la tarea.
+        UriOnWrongApp: La aplicación en la uri de solicitud no es igual a la aplicación de la tarea.
         MustBePreAnalyzed: El parámetro de tarea debe ser analizado por filtros anteriores
       UrlWrongType: La URL solicitada tiene un tipo de solicitud no válido '${path}'.
       ViewFileMissing: Falta el archivo de vista
       WrongPathFormat: Formato de ruta incorrecto
+    Provision: Imposible proporcionar
 Notification:
   business:
     Description: Esta notificación se enviará, si se produce un cambio comercial relevante.
@@ -149,8 +150,8 @@ Notification:
       Footer:
         Sender: Este correo electrónico fue enviado desde la aplicación
         Settings: Gestionar las notificaciones
-      Greeting: Buenos días
-      GreetingShort: Hola
+      Greeting: Hola
+      GreetingShort: Buenas
       Task:
         Created: Fecha de creación
         Description: Descripción
@@ -164,10 +165,10 @@ Notification:
           NORMAL: Normal
         Responsible: Responsable
         Title: Detalles de la tarea
-      Title: Se le ha asignado una nueva tarea
+      Title: Se le ha asignado una tarea nueva
     Templates:
       Default:
         mail:
-          Subject: 'Nueva tarea "<%= ivy.html.escape(ivy.task.name) %>" asignado a: <%= ivy.html.escape(ivy.task.responsibles().displayName()) %>'
+          Subject: 'Tarea "<%= ivy.html.escape(ivy.task.name) %>" nueva asignada a: <%= ivy.html.escape(ivy.task.responsibles().displayName()) %>'
         web:
           Subject: Nueva tarea '<%= ivy.html.escape(ivy.task.name) %>' para <%= ivy.html.escape(ivy.task.responsibles().displayName()) %>
