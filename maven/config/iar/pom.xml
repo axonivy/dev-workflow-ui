@@ -18,8 +18,7 @@
         <groupId>com.axonivy.ivy.ci</groupId>
         <artifactId>project-build-plugin</artifactId>
         <extensions>true</extensions>
-        <configuration>
-          <engineListPageUrl>${engine.page.url}</engineListPageUrl>
+        <configuration>          
           <skipScriptValidation>false</skipScriptValidation>
         </configuration>
       </plugin>
