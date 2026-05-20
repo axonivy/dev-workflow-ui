@@ -51,6 +51,7 @@
           <artifactId>project-build-plugin</artifactId>
           <configuration>
             <engineDirectory>${engineHomeDirectory}</engineDirectory>
+            <engineListPageUrl>${engine.page.url}</engineListPageUrl>
             <testEngine>COPY_FROM_TEMPLATE</testEngine>
           </configuration>
         </plugin>
