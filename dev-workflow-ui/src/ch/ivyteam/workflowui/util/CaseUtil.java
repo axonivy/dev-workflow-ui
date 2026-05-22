@@ -52,11 +52,11 @@ public class CaseUtil {
     LastSessionStarts.current().add(startable);
     startable.execute();
   }
-  
+
   public static boolean canAccess(ICase caze) {
     if (caze == null) {
-	  return false;
-	}
+      return false;
+    }
     var session = ISession.current();
     if (session == null) {
       return false;
@@ -70,6 +70,6 @@ public class CaseUtil {
     } else {
       // TODO: Should this case even be handled? If yes with an Exception?
       return false;
-    }  
+    }
   }
 }

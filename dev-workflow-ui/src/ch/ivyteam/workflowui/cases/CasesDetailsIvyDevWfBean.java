@@ -169,7 +169,7 @@ public class CasesDetailsIvyDevWfBean {
   public String getProcessPreviewLink() {
     return processPreviewLink;
   }
-  
+
   public void redirectIfCantAccess() {
     if (!canAccess()) {
       RedirectUtil.redirect();
@@ -177,6 +177,6 @@ public class CasesDetailsIvyDevWfBean {
   }
 
   private boolean canAccess() {
-	return selectedCase != null && CaseUtil.canAccess(selectedCase);
+    return selectedCase != null && CaseUtil.canAccess(selectedCase);
   }
 }
