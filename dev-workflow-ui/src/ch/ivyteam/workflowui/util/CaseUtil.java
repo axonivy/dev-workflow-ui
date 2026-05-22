@@ -61,8 +61,7 @@ public class CaseUtil {
     if (session == null) {
       return false;
     }
-    var currentUser = session.getSessionUser();
-    if (currentUser == null) {
+    if (session.getSessionUser() == null) {
       return false;
     }
     if (caze instanceof Case) {
