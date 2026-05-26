@@ -19,7 +19,7 @@ case:
 cleanup:
   cleanups:
     businessData: すべてのビジネスデータと検索インデックス
-    dataCache: データキャッシュ
+    dataCache: すべてのデータキャッシュ
     sessionTokenStore: すべての ID プロバイダートークン
     userAndRole: すべてのユーザーとロール
     workflow: すべてのケース、タスク、依存オブジェクト
@@ -137,7 +137,7 @@ exception:
   attributes: 属性
   errorId: エラー ID
   processCallStack: プロセスコールスタック
-  requestUri: リクエスト URI
+  requestUri: リクエスト Uri
   servlet: サーブレット
   stacktrace: スタックトレース
   technicalCause: 技術的な原因
