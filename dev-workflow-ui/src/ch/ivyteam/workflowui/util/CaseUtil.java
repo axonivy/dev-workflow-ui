@@ -79,7 +79,7 @@ public class CaseUtil {
           Ivy.log().info("Involved member is session user");
         }
       });
-      
+
       return allMembers.stream().anyMatch(u -> u.isMember(session, true));
 
 //      var members = ((Case) caze).involved().members();
