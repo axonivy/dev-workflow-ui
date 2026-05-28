@@ -201,7 +201,7 @@
         "labelOffset" : { "x" : 5, "y" : 38 }
       },
       "connect" : [
-        { "id" : "f17", "to" : "f11", "via" : [ { "x" : 352, "y" : 352 } ] }
+        { "id" : "f17", "to" : "f70" }
       ]
     }, {
       "id" : "f18",
@@ -715,5 +715,24 @@
       "visual" : {
         "at" : { "x" : 1016, "y" : 160 }
       }
+    }, {
+      "id" : "f70",
+      "type" : "UserTask",
+      "name" : "TestDialog",
+      "config" : {
+        "dialog" : "ch.ivyteam.ivy.project.workflow.TestDialog1:start(ch.ivyteam.ivy.project.workflow.Data)",
+        "task" : {
+          "name" : "task created in UserTask during test:signal:complete test"
+        },
+        "case" : {
+          "name" : "case created in UserTask during test:signal:complete test"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 352 }
+      },
+      "connect" : [
+        { "id" : "f71", "to" : "f11", "via" : [ { "x" : 352, "y" : 352 } ], "color" : "default" }
+      ]
     } ]
 }
