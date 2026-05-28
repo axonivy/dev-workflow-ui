@@ -8,7 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.casemap.runtime.model.ICaseMap;
 import ch.ivyteam.ivy.casemap.runtime.repo.restricted.ICaseMapBusinessCase;
-import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.internal.caze.Case;
@@ -55,35 +54,19 @@ public class CaseUtil {
   }
 
   public static boolean canAccess(ICase caze) {
-//    Ivy.log().info("caze: " + caze);
     if (caze == null) {
       return false;
     }
     var session = ISession.current();
-//    Ivy.log().info("session: " + session);
     if (session == null) {
       return false;
     }
-//    Ivy.log().info("session user: " + session.getSessionUser());
     if (session.getSessionUser() == null) {
       return false;
     }
     if (caze instanceof Case) {
       return ((Case) caze).involved().members().stream().anyMatch(u -> u.isMember(session, true));
-
-      //      Ivy.log().info("caze is instanceof Case");
-//      var allMembers = ((Case) caze).involved().members();
-//      Ivy.log().info("allMembers:" + allMembers);
-//      allMembers.stream().forEach(u -> {
-//        Ivy.log().info("Involved member " + u);
-//        if (u.isMember(session, true)) {
-//          Ivy.log().info("Involved member is session user");
-//        }
-//      });
-//      return allMembers.stream().anyMatch(u -> u.isMember(session, true));
-
     } else {
-      Ivy.log().info("caze is NOT instanceof Case");
       // TODO: Should this case even be handled? If yes with an Exception?
       return false;
     }
