@@ -4,11 +4,12 @@ import static ch.ivyteam.ivy.process.viewer.api.ProcessViewerUrlBuilder.Mode.PRE
 import static ch.ivyteam.ivy.workflow.CaseState.CREATED;
 import static ch.ivyteam.ivy.workflow.CaseState.RUNNING;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
 
 import org.primefaces.model.menu.MenuModel;
 
@@ -29,9 +30,9 @@ import ch.ivyteam.workflowui.util.ResponseHelper;
 import ch.ivyteam.workflowui.util.TaskUtil;
 import ch.ivyteam.workflowui.util.ViewerUtil;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class CasesDetailsBean {
+public class CasesDetailsBean implements Serializable {
 
   private String selectedCaseId;
   private ICase selectedCase;

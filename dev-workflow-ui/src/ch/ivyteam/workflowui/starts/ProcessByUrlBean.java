@@ -1,6 +1,7 @@
 package ch.ivyteam.workflowui.starts;
 
-import javax.faces.bean.ManagedBean;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
 
 import ch.ivyteam.ivy.application.ReleaseState;
 import ch.ivyteam.ivy.application.app.IApplicationRepository;
@@ -8,7 +9,8 @@ import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
 import ch.ivyteam.ivy.workflow.start.IWebStartable;
 
-@ManagedBean
+@Named
+@RequestScoped
 public class ProcessByUrlBean {
 
   private String appName;

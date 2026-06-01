@@ -1,19 +1,20 @@
 package ch.ivyteam.workflowui.intermediateEvents;
 
+import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
+import jakarta.faces.application.FacesMessage;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
+import jakarta.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 
 import ch.ivyteam.workflowui.util.PermissionsUtil;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class IntermediateEventElementsBean {
+public class IntermediateEventElementsBean implements Serializable {
 
   private final List<IntermediateEventElementModel> intermediateEventElements;
 

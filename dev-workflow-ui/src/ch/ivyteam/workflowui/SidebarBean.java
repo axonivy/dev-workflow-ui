@@ -2,15 +2,15 @@ package ch.ivyteam.workflowui;
 
 import java.util.stream.Stream;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
+import jakarta.inject.Named;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.FacesContext;
 
 import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.security.context.EngineCockpitUrlPath;
 
-@ManagedBean
+@Named
 @RequestScoped
 public class SidebarBean {
 

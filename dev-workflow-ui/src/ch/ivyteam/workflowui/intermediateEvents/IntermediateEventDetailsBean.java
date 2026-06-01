@@ -1,11 +1,14 @@
 package ch.ivyteam.workflowui.intermediateEvents;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import jakarta.inject.Named;
 
-@ManagedBean
+import java.io.Serializable;
+
+import jakarta.faces.view.ViewScoped;
+
+@Named
 @ViewScoped
-public class IntermediateEventDetailsBean {
+public class IntermediateEventDetailsBean implements Serializable {
 
   private String processId;
   private IntermediateEventElementModel selectedIntermediateElement;

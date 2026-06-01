@@ -1,11 +1,12 @@
 package ch.ivyteam.workflowui.tasks;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
 
 import org.primefaces.model.menu.MenuModel;
 
@@ -23,9 +24,9 @@ import ch.ivyteam.workflowui.util.ResponseHelper;
 import ch.ivyteam.workflowui.util.TaskUtil;
 import ch.ivyteam.workflowui.util.UserUtil;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class TasksDetailsBean {
+public class TasksDetailsBean implements Serializable {
 
   private String selectedTaskId;
   private TaskModel selectedTask;
@@ -45,7 +46,7 @@ public class TasksDetailsBean {
     this.selectedTaskId = selectedTaskId;
     var task = TaskUtil.getTaskById(selectedTaskId);
     if (task == null) {
-      ResponseHelper.notFound("Task " + task + " does not exist");
+      ResponseHelper.notFound("Task " + selectedTaskId + " does not exist");
       return;
     }
     this.selectedTask = new TaskModel(task);

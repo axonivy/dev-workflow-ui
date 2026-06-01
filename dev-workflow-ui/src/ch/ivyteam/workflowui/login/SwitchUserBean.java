@@ -2,19 +2,20 @@ package ch.ivyteam.workflowui.login;
 
 import static java.util.stream.Collectors.toList;
 
+import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
 
 import ch.ivyteam.ivy.security.restricted.IUserInternal;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.workflowui.util.UserUtil;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class SwitchUserBean {
+public class SwitchUserBean implements Serializable {
 
   private List<User> users;
   private final User currentUser;

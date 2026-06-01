@@ -1,5 +1,6 @@
 package ch.ivyteam.workflowui.statistics;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -7,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
 
 import org.primefaces.model.charts.ChartData;
 import org.primefaces.model.charts.bar.BarChartDataSet;
@@ -25,9 +26,9 @@ import ch.ivyteam.ivy.workflow.caze.CaseBusinessState;
 import ch.ivyteam.ivy.workflow.stats.WorkflowStats;
 import ch.ivyteam.ivy.workflow.task.TaskBusinessState;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class StatisticsBean {
+public class StatisticsBean implements Serializable {
 
   private String timeDuration = TimeDuration.LAST_24H;
   private String chartResolution = StatisticsTimeResolver.getDefaultResolution(TimeDuration.LAST_24H);

@@ -4,10 +4,11 @@
   xmlns:pe="http://primefaces.org/ui/extensions" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
   xmlns:jc="http://xmlns.jcp.org/jsf/composite/components">
 
+<f:metadata>
+  <f:viewParam name="id" value="#{tasksDetailsBean.selectedTaskId}" />
+</f:metadata>
+
 <h:body>
-  <f:metadata>
-    <f:viewParam name="id" value="#{tasksDetailsBean.selectedTaskId}" />
-  </f:metadata>
 
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
@@ -16,7 +17,7 @@
       <div class="layout-dashboard">
         <div class="info-banner-wrapper">
           <p:staticMessage severity="#{tasksDetailsBean.getInfoBannerSeverity()}"
-            detail="#{ivy.cm.content(tasksDetailsBean.getInfoBannerMessageCmsPath()).replace('user', taskDetailBean.workerUserName).get()}"
+            detail="#{ivy.cm.content(tasksDetailsBean.getInfoBannerMessageCmsPath()).replace('user', tasksDetailsBean.workerUserName).get()}"
             rendered="#{tasksDetailsBean.showInfoBanner()}"></p:staticMessage>
         </div>
         <div class="grid">

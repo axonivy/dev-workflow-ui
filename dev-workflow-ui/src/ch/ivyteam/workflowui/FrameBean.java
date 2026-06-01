@@ -1,9 +1,10 @@
 package ch.ivyteam.workflowui;
 
+import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
 
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.model.menu.MenuModel;
@@ -19,8 +20,8 @@ import ch.ivyteam.workflowui.util.TaskUtil;
 import ch.ivyteam.workflowui.util.UrlUtil;
 
 @ViewScoped
-@ManagedBean
-public class FrameBean {
+@Named
+public class FrameBean implements Serializable {
 
   private String taskName;
   private final String taskUrl;

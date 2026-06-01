@@ -1,22 +1,23 @@
 package ch.ivyteam.workflowui;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
+import jakarta.faces.application.FacesMessage;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
+import jakarta.faces.context.FacesContext;
 
 import ch.ivyteam.ivy.engine.cleanup.EngineCleanup;
 import ch.ivyteam.ivy.environment.Ivy;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class CleanupBean {
+public class CleanupBean implements Serializable {
 
-  public List<String> cleanupIds = new ArrayList<>();
+  private List<String> cleanupIds = new ArrayList<>();
 
   public List<EngineCleanupDTO> getCleanups() {
     return EngineCleanup.all().stream()

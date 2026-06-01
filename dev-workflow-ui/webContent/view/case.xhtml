@@ -4,10 +4,11 @@
   xmlns:pe="http://primefaces.org/ui/extensions" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
   xmlns:jc="http://xmlns.jcp.org/jsf/composite/components" xmlns:jsf="http://xmlns.jcp.org/jsf">
 
+<f:metadata>
+  <f:viewParam name="id" value="#{casesDetailsBean.selectedCaseId}" />
+</f:metadata>
+
 <h:body>
-  <f:metadata>
-    <f:viewParam name="id" value="#{casesDetailsBean.selectedCaseId}" />
-  </f:metadata>
 
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">

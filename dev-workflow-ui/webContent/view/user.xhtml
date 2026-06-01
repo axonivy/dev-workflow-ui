@@ -9,10 +9,11 @@
   xmlns:jc="http://xmlns.jcp.org/jsf/composite/components"
   xmlns:jsf="http://xmlns.jcp.org/jsf">
 
+<f:metadata>
+  <f:viewParam name="userId" value="#{userDetailBean.userId}" />
+</f:metadata>
+
 <h:body>
-  <f:metadata>
-    <f:viewParam name="userId" value="#{userDetailBean.userId}" />
-  </f:metadata>
 
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">

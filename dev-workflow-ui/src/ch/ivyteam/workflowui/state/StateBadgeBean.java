@@ -1,6 +1,7 @@
 package ch.ivyteam.workflowui.state;
 
-import javax.faces.bean.ManagedBean;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
 
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
@@ -8,7 +9,8 @@ import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.workflowui.cases.CaseModel;
 import ch.ivyteam.workflowui.tasks.TaskModel;
 
-@ManagedBean
+@Named
+@RequestScoped
 public class StateBadgeBean {
 
   public StateBadgeModel toStateBadgeModel(Object data) {

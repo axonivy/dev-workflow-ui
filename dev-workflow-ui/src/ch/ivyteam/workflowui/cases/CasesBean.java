@@ -1,9 +1,10 @@
 package ch.ivyteam.workflowui.cases;
 
+import java.io.Serializable;
 import java.util.Map;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
 
 import org.primefaces.event.SelectEvent;
 
@@ -12,9 +13,9 @@ import ch.ivyteam.workflowui.util.CaseUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.url.Page;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class CasesBean {
+public class CasesBean implements Serializable {
 
   private final CasesDataModel casesDataModel;
 

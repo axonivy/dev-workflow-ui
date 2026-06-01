@@ -1,5 +1,6 @@
 package ch.ivyteam.workflowui.profile;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -7,10 +8,10 @@ import java.util.Locale;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
+import jakarta.faces.application.FacesMessage;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
+import jakarta.faces.context.FacesContext;
 
 import ch.ivyteam.ivy.language.LanguageManager;
 import ch.ivyteam.ivy.language.LanguageRepository;
@@ -19,9 +20,9 @@ import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.security.ISessionInternal;
 import ch.ivyteam.ivy.security.IUser;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class ProfileBean {
+public class ProfileBean implements Serializable {
 
   private String fullName;
   private String email;

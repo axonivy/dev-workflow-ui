@@ -53,6 +53,7 @@ class WebDocuScreenshots {
 
     Navigation.openTask("Created task of TestData");
     $("#actionMenuForm\\:taskActionsBtn").click();
+    $("#actionMenuForm\\:actionsMenu").shouldBe(visible);
     takeScreenshot("workflow-ui-taskDetails", new Dimension(SCREENSHOT_WIDTH, 800));
 
     openView("cases.xhtml");
