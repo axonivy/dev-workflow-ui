@@ -64,11 +64,12 @@ public class CaseUtil {
     if (session.getSessionUser() == null) {
       return false;
     }
+    if (PermissionsUtil.isAdmin()) {
+      return true;
+    }
     if (caze instanceof Case) {
       return ((Case) caze).involved().members().stream().anyMatch(u -> u.isMember(session, true));
-    } else {
-      // TODO: Should this case even be handled? If yes with an Exception?
-      return false;
     }
+    return false;
   }
 }
