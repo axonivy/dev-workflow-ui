@@ -7,9 +7,11 @@ import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.casemap.runtime.ICaseMapService;
 import ch.ivyteam.ivy.casemap.runtime.model.ICaseMap;
+import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
+import ch.ivyteam.ivy.workflow.restricted.caze.CaseInternal;
 import ch.ivyteam.workflowui.cases.CaseModel;
 import ch.ivyteam.workflowui.starts.StartableModel;
 
@@ -44,5 +46,25 @@ public class CaseUtil {
     var startable = new StartableModel(businessCase.getStartedFrom());
     LastSessionStarts.current().add(startable);
     startable.execute();
+  }
+
+  public static boolean canAccess(ICase caze) {
+    if (caze == null) {
+      return false;
+    }
+    var session = ISession.current();
+    if (session == null) {
+      return false;
+    }
+    if (session.getSessionUser() == null) {
+      return false;
+    }
+    if (PermissionsUtil.isAdmin()) {
+      return true;
+    }
+    if (caze instanceof CaseInternal) {
+      return ((CaseInternal) caze).involved().members().stream().anyMatch(u -> u.isMember(session));
+    }
+    return false;
   }
 }

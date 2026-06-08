@@ -24,6 +24,7 @@ import ch.ivyteam.workflowui.document.DocumentModel;
 import ch.ivyteam.workflowui.tasks.TaskModel;
 import ch.ivyteam.workflowui.tasks.WorkflowEventModel;
 import ch.ivyteam.workflowui.util.CaseUtil;
+import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.ResponseHelper;
 import ch.ivyteam.workflowui.util.TaskUtil;
 import ch.ivyteam.workflowui.util.ViewerUtil;
@@ -165,5 +166,15 @@ public class CasesDetailsBean {
 
   public String getProcessPreviewLink() {
     return processPreviewLink;
+  }
+
+  public void redirectIfCantAccess() {
+    if (!canAccess()) {
+      RedirectUtil.redirect();
+    }
+  }
+
+  private boolean canAccess() {
+    return selectedCase != null && CaseUtil.canAccess(selectedCase);
   }
 }
