@@ -14,6 +14,7 @@ import org.primefaces.model.menu.MenuModel;
 
 import ch.ivyteam.ivy.process.viewer.api.ProcessViewer;
 import ch.ivyteam.ivy.workflow.ICase;
+import ch.ivyteam.ivy.workflow.internal.caze.Case;
 import ch.ivyteam.ivy.workflow.query.CaseQuery;
 import ch.ivyteam.ivy.workflow.start.IWebStartable;
 import ch.ivyteam.workflowui.casemap.CaseMapModel;
@@ -165,5 +166,16 @@ public class CasesDetailsBean {
 
   public String getProcessPreviewLink() {
     return processPreviewLink;
+  }
+
+
+
+
+  public void redirectIfCantView() {
+
+  }
+
+  private boolean canView() {
+    ICaseInternal this.selectedCase.getBusinessCase()
   }
 }

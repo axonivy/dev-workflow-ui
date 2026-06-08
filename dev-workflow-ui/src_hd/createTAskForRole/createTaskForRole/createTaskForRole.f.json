@@ -1,0 +1,31 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/form.json",
+  "components" : [ {
+    "cid" : "layout1",
+    "type" : "Layout",
+    "config" : {
+      "components" : [ {
+        "cid" : "button2",
+        "type" : "Button",
+        "config" : {
+          "name" : "Cancel",
+          "action" : "#{ivyWorkflowView.cancel()}",
+          "variant" : "SECONDARY",
+          "style" : "FLAT",
+          "processOnlySelf" : true
+        }
+      }, {
+        "cid" : "button3",
+        "type" : "Button",
+        "config" : {
+          "name" : "Proceed",
+          "action" : "#{logic.close}",
+          "type" : "SUBMIT",
+          "icon" : "ti ti-check"
+        }
+      } ],
+      "type" : "FLEX",
+      "justifyContent" : "END"
+    }
+  } ]
+}
