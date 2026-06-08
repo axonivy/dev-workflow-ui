@@ -30,7 +30,6 @@
       <groupId>com.axonivy.ivy.api</groupId>
       <artifactId>ivy-workflow-index-api</artifactId>
     </dependency>
-
     <dependency>
       <groupId>com.axonivy.ivy.api.restricted</groupId>
       <artifactId>ivy-engine-cleanup-api</artifactId>
@@ -38,6 +37,10 @@
     <dependency>
       <groupId>com.axonivy.ivy.api.restricted</groupId>
       <artifactId>ivy-security-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.axonivy.ivy.api.restricted</groupId>
+      <artifactId>ivy-workflow-api</artifactId>
     </dependency>
   </dependencies>
 

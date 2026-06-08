@@ -14,7 +14,6 @@ import org.primefaces.model.menu.MenuModel;
 
 import ch.ivyteam.ivy.process.viewer.api.ProcessViewer;
 import ch.ivyteam.ivy.workflow.ICase;
-import ch.ivyteam.ivy.workflow.internal.caze.Case;
 import ch.ivyteam.ivy.workflow.query.CaseQuery;
 import ch.ivyteam.ivy.workflow.start.IWebStartable;
 import ch.ivyteam.workflowui.casemap.CaseMapModel;
@@ -25,6 +24,7 @@ import ch.ivyteam.workflowui.document.DocumentModel;
 import ch.ivyteam.workflowui.tasks.TaskModel;
 import ch.ivyteam.workflowui.tasks.WorkflowEventModel;
 import ch.ivyteam.workflowui.util.CaseUtil;
+import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.ResponseHelper;
 import ch.ivyteam.workflowui.util.TaskUtil;
 import ch.ivyteam.workflowui.util.ViewerUtil;
@@ -168,14 +168,13 @@ public class CasesDetailsBean {
     return processPreviewLink;
   }
 
-
-
-
-  public void redirectIfCantView() {
-
+  public void redirectIfCantAccess() {
+    if (!canAccess()) {
+      RedirectUtil.redirect();
+    }
   }
 
-  private boolean canView() {
-    ICaseInternal this.selectedCase.getBusinessCase()
+  private boolean canAccess() {
+    return selectedCase != null && CaseUtil.canAccess(selectedCase);
   }
 }
