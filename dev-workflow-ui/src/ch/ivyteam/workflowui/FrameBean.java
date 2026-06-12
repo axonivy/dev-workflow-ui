@@ -12,6 +12,7 @@ import ch.ivyteam.ivy.bpm.error.BpmError;
 import ch.ivyteam.ivy.dialog.execution.api.DialogInstance;
 import ch.ivyteam.ivy.request.EngineUriResolver;
 import ch.ivyteam.ivy.security.ISecurityContext;
+import ch.ivyteam.util.uri.UriChecker;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
 import ch.ivyteam.workflowui.util.TaskUtil;
@@ -45,13 +46,17 @@ public class FrameBean {
 
   private String checkTaskUrl() {
     var url = UrlUtil.getUrlParameter("taskUrl");
-    if (url == null || url.startsWith("/")) {
+    if (url == null) {
       return url;
-    } else {
-      String info = "taskUrl=" + url + "[url=" + UrlUtil.getHttpServletRequest().getRequestURI() + ", query=" + UrlUtil.getHttpServletRequest().getQueryString() + "]";
+    }
+    try {
+      UriChecker.checkUrl(url);
+    } catch (RuntimeException e) {
+      var info = "taskUrl=" + url + "[url=" + UrlUtil.getHttpServletRequest().getRequestURI() + ", query=" + UrlUtil.getHttpServletRequest().getQueryString() + "]";
       throw BpmError.create("frame:unsupported:url")
           .withMessage("Only relative urls are supported (security reasons): " + info).build();
     }
+    return url;
   }
 
   public String getTaskUrl() {

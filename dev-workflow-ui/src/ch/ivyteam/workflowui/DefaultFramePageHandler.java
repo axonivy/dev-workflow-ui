@@ -5,12 +5,14 @@ import java.io.IOException;
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.dialog.execution.api.DialogInstance;
 import ch.ivyteam.ivy.request.IHttpResponse;
+import ch.ivyteam.util.uri.UriChecker;
 import ch.ivyteam.workflowui.starts.CustomFieldsHelper;
 import ch.ivyteam.workflowui.tasks.TaskModel;
 
 public class DefaultFramePageHandler {
 
   public static void handleRedirect(String relativeUrl) throws IOException {
+    UriChecker.checkUrl(relativeUrl);
     var task = DialogInstance.of(relativeUrl).task();
     var url = relativeUrl;
     if (task == null || !shouldEscapeIFrame(new TaskModel(task))) {
