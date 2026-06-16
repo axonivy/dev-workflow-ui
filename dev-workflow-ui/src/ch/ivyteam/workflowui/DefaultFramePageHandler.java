@@ -5,14 +5,16 @@ import java.io.IOException;
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.dialog.execution.api.DialogInstance;
 import ch.ivyteam.ivy.request.IHttpResponse;
-import ch.ivyteam.util.uri.UriChecker;
 import ch.ivyteam.workflowui.starts.CustomFieldsHelper;
 import ch.ivyteam.workflowui.tasks.TaskModel;
+import ch.ivyteam.workflowui.util.RedirectUtil;
 
 public class DefaultFramePageHandler {
 
   public static void handleRedirect(String relativeUrl) throws IOException {
-    UriChecker.checkUrl(relativeUrl);
+    if(!RedirectUtil.isRelative(relativeUrl)) {
+      throw new RuntimeException("Redirecting to external websites is not allowed. Tried to redirect to: " + relativeUrl);
+    }
     var task = DialogInstance.of(relativeUrl).task();
     var url = relativeUrl;
     if (task == null || !shouldEscapeIFrame(new TaskModel(task))) {

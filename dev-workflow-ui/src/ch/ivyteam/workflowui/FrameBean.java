@@ -12,9 +12,9 @@ import ch.ivyteam.ivy.bpm.error.BpmError;
 import ch.ivyteam.ivy.dialog.execution.api.DialogInstance;
 import ch.ivyteam.ivy.request.EngineUriResolver;
 import ch.ivyteam.ivy.security.ISecurityContext;
-import ch.ivyteam.util.uri.UriChecker;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
+import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.TaskUtil;
 import ch.ivyteam.workflowui.util.UrlUtil;
 
@@ -49,12 +49,9 @@ public class FrameBean {
     if (url == null) {
       return url;
     }
-    try {
-      UriChecker.checkUrl(url);
-    } catch (RuntimeException e) {
+    if(!RedirectUtil.isRelative(url)) {
       var info = "taskUrl=" + url + "[url=" + UrlUtil.getHttpServletRequest().getRequestURI() + ", query=" + UrlUtil.getHttpServletRequest().getQueryString() + "]";
-      throw BpmError.create("frame:unsupported:url")
-          .withMessage("Only relative urls are supported (security reasons): " + info).build();
+      throw BpmError.create("frame:unsupported:url").withMessage("Only relative urls are supported (security reasons): " + info).build();
     }
     return url;
   }

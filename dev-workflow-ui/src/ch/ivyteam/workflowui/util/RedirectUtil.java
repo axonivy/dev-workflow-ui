@@ -33,10 +33,8 @@ public final class RedirectUtil {
   }
 
   public static void redirectRelative(String url) {
-    try {
-      UriChecker.checkUrl(url);
-    } catch (RuntimeException e) {
-      throw new RuntimeException("Redirecting to external websites is not allowed. Tried to redirect to: " + url, e);
+    if(!isRelative(url)) {
+      throw new RuntimeException("Redirecting to external websites is not allowed. Tried to redirect to: " + url);
     }
     redirectUnsafe(url);
   }
@@ -60,5 +58,14 @@ public final class RedirectUtil {
         .map(e -> URLEncoder.encode(e.getKey(), StandardCharsets.UTF_8)
             + "=" + URLEncoder.encode(e.getValue(), StandardCharsets.UTF_8))
         .collect(Collectors.joining("&"));
+  }
+
+  public static boolean isRelative(String url) {
+    try {
+      UriChecker.checkUrl(url);
+      return true;
+    } catch (RuntimeException e) {
+      return false;
+    }
   }
 }
