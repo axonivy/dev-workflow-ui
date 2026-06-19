@@ -45,12 +45,12 @@ public class StatisticsTimeResolver {
 
   public static String[] getValidResolutions(String timeDuration) {
     return switch (timeDuration) {
-      case TimeDuration.TODAY, TimeDuration.LAST_24H -> new String[]{Resolution.HOUR};
-      case TimeDuration.LAST_7D -> new String[]{Resolution.HOUR6, Resolution.DAY};
-      case TimeDuration.LAST_30D -> new String[]{Resolution.DAY, Resolution.WEEK};
-      case TimeDuration.LAST_90D -> new String[]{Resolution.DAY, Resolution.WEEK};
-      case TimeDuration.LAST_365D -> new String[]{Resolution.WEEK, Resolution.MONTH};
-      default -> new String[]{Resolution.MONTH};
+      case TimeDuration.TODAY, TimeDuration.LAST_24H -> new String[] {Resolution.HOUR};
+      case TimeDuration.LAST_7D -> new String[] {Resolution.HOUR6, Resolution.DAY};
+      case TimeDuration.LAST_30D -> new String[] {Resolution.DAY, Resolution.WEEK};
+      case TimeDuration.LAST_90D -> new String[] {Resolution.DAY, Resolution.WEEK};
+      case TimeDuration.LAST_365D -> new String[] {Resolution.WEEK, Resolution.MONTH};
+      default -> new String[] {Resolution.MONTH};
     };
   }
 

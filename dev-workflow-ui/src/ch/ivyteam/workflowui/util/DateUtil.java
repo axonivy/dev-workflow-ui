@@ -37,9 +37,9 @@ public class DateUtil {
       return "";
     }
     return date.toInstant()
-            .atZone(ZoneId.systemDefault())
-            .toLocalDateTime()
-            .format(format)
-            .toString();
+        .atZone(ZoneId.systemDefault())
+        .toLocalDateTime()
+        .format(format)
+        .toString();
   }
 }

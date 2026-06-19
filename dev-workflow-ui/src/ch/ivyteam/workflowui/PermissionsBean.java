@@ -1,9 +1,9 @@
 package ch.ivyteam.workflowui;
 
-import jakarta.inject.Named;
-import jakarta.faces.view.ViewScoped;
-
 import java.io.Serializable;
+
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
 
 import ch.ivyteam.ivy.security.IPermission;
 import ch.ivyteam.workflowui.util.PermissionsUtil;

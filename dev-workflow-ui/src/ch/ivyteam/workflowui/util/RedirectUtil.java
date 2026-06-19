@@ -33,7 +33,7 @@ public final class RedirectUtil {
   }
 
   public static void redirectRelative(String url) {
-    if(!UriChecker.isRelative(url)) {
+    if (!UriChecker.isRelative(url)) {
       throw new RuntimeException("Redirecting to external websites is not allowed. Tried to redirect to: " + url);
     }
     redirectUnsafe(url);

@@ -5,12 +5,12 @@ import static java.util.stream.Collectors.toList;
 import java.io.Serializable;
 import java.util.List;
 
-import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
 
-import ch.ivyteam.ivy.security.restricted.IUserInternal;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.security.IUser;
+import ch.ivyteam.ivy.security.restricted.IUserInternal;
 import ch.ivyteam.workflowui.util.UserUtil;
 
 @Named
