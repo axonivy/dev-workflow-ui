@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import javax.faces.context.FacesContext;
+import jakarta.faces.context.FacesContext;
 
 import ch.ivyteam.util.uri.UriChecker;
 import ch.ivyteam.workflowui.util.url.Page;

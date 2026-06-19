@@ -1,11 +1,12 @@
 package ch.ivyteam.workflowui.notes;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
 
 import org.primefaces.PrimeFaces;
 import org.primefaces.model.DialogFrameworkOptions;
@@ -15,9 +16,9 @@ import ch.ivyteam.workflowui.util.CaseUtil;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.TaskUtil;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class NotesBean {
+public class NotesBean implements Serializable {
 
   private String id;
   private WorkflowItem workflowItem;

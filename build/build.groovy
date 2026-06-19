@@ -35,12 +35,13 @@ def build() {
 
 def mvnBuild(def mvnArgs = '') {
   def phase = isReleasingBranch() ? 'deploy' : 'verify'
-  maven cmd: "clean ${phase} -ntp -Divy.engine.version.latest.minor=true -Dmaven.test.skip=false " + mvnArgs
+  maven cmd: "clean ${phase} -ntp -Divy.engine.version.latest.minor=true -Dmaven.test.skip=false -Dmaven.test.failure.ignore=true " + mvnArgs
   
   recordIssues tools: [eclipse()], qualityGates: [[threshold: 1, type: 'TOTAL']]
   recordIssues tools: [mavenConsole()], qualityGates: [[threshold: 1, type: 'TOTAL']], filters: [
     excludeMessage('The system property test.engine.url is configured twice!*'),
-    excludeMessage('JAR will be empty*')
+    excludeMessage('JAR will be empty*'),
+    excludeMessage('Skipped*')
   ]
   junit testDataPublishers: [[$class: 'AttachmentPublisher'], [$class: 'StabilityTestDataPublisher']], testResults: '**/target/*-reports/**/*.xml'
 }

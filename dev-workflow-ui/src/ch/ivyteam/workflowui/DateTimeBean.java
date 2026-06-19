@@ -1,15 +1,16 @@
 package ch.ivyteam.workflowui;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
 
 import ch.ivyteam.workflowui.util.DateUtil;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class DateTimeBean {
+public class DateTimeBean implements Serializable {
 
   public String getPrettyTime(Date date) {
     return DateUtil.getPrettyTime(date);

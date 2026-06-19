@@ -1,12 +1,13 @@
 package ch.ivyteam.workflowui.signals;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
+import jakarta.faces.application.FacesMessage;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
+import jakarta.faces.context.FacesContext;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -16,9 +17,9 @@ import ch.ivyteam.ivy.workflow.IWorkflowSession;
 import ch.ivyteam.ivy.workflow.signal.IBpmSignalService;
 import ch.ivyteam.ivy.workflow.signal.IStartSignalEventElement;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class SignalsBean {
+public class SignalsBean implements Serializable {
   private String code;
   private String payload;
   private final SignalsModel signalsModel;

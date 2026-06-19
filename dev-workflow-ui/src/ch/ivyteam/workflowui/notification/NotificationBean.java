@@ -1,13 +1,15 @@
 package ch.ivyteam.workflowui.notification;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
+
+import java.io.Serializable;
 
 import ch.ivyteam.ivy.notification.web.WebNotifications;
 
 @ViewScoped
-@ManagedBean
-public class NotificationBean {
+@Named
+public class NotificationBean implements Serializable {
 
   private final WebNotifications webNotifications;
   private final NotificationDataModel dataModel;

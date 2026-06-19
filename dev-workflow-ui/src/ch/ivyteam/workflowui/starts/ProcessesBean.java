@@ -1,15 +1,16 @@
 package ch.ivyteam.workflowui.starts;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.ws.rs.core.UriBuilder;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.ws.rs.core.UriBuilder;
 
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.PrimeFaces;
@@ -18,9 +19,9 @@ import org.primefaces.event.SelectEvent;
 import ch.ivyteam.workflowui.util.RedirectUtil;
 import ch.ivyteam.workflowui.util.ViewerUtil;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class ProcessesBean {
+public class ProcessesBean implements Serializable {
 
   private final StartsDataModel startsDataModel;
   private String viewerLink;

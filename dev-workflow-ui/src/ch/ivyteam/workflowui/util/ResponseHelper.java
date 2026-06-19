@@ -2,8 +2,8 @@ package ch.ivyteam.workflowui.util;
 
 import java.io.IOException;
 
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.faces.context.FacesContext;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class ResponseHelper {
 

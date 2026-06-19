@@ -1,9 +1,10 @@
 package ch.ivyteam.workflowui.user;
 
+import java.io.Serializable;
 import java.util.Map;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
 
 import org.primefaces.event.SelectEvent;
 
@@ -16,9 +17,9 @@ import ch.ivyteam.workflowui.util.ResponseHelper;
 import ch.ivyteam.workflowui.util.TaskUtil;
 import ch.ivyteam.workflowui.util.url.Page;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class UserDetailBean {
+public class UserDetailBean implements Serializable {
   private final ISecurityContext securityContext = ISecurityContext.current();
   private IUser user;
   private String userId;

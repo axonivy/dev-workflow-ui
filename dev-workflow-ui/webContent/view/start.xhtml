@@ -3,13 +3,14 @@
   xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
   xmlns:pe="http://primefaces.org/ui/extensions" xmlns:jc="http://xmlns.jcp.org/jsf/composite/components">
 
+<f:metadata>
+  <f:viewParam name="app" value="#{processByUrlBean.app}" />
+  <f:viewParam name="pmv" value="#{processByUrlBean.pmv}" />
+  <f:viewParam name="id" value="#{processByUrlBean.startableId}" />
+  <f:event type="preRenderView" listener="#{processByUrlBean.executeStart()}" />
+</f:metadata>
+
 <h:body>
-  <f:metadata>
-    <f:viewParam name="app" value="#{processByUrlBean.app}" />
-    <f:viewParam name="pmv" value="#{processByUrlBean.pmv}" />
-    <f:viewParam name="id" value="#{processByUrlBean.startableId}" />
-    <f:event type="preRenderView" listener="#{processByUrlBean.executeStart()}" />
-  </f:metadata>
 
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">

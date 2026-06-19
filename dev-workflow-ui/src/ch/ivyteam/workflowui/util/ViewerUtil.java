@@ -2,7 +2,7 @@ package ch.ivyteam.workflowui.util;
 
 import java.util.Optional;
 
-import javax.faces.context.FacesContext;
+import jakarta.faces.context.FacesContext;
 
 import ch.ivyteam.ivy.casemap.runtime.ICaseMapService;
 import ch.ivyteam.ivy.casemap.viewer.api.CaseMapViewer;

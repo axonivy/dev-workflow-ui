@@ -1,14 +1,16 @@
 package ch.ivyteam.workflowui;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
+
+import java.io.Serializable;
 
 import ch.ivyteam.ivy.security.IPermission;
 import ch.ivyteam.workflowui.util.PermissionsUtil;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class PermissionsBean {
+public class PermissionsBean implements Serializable {
 
   public boolean isDemoOrDevMode() {
     return PermissionsUtil.isDemoOrDevMode();

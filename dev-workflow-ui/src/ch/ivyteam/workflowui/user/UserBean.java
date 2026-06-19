@@ -1,10 +1,12 @@
 package ch.ivyteam.workflowui.user;
 
-import javax.faces.bean.ManagedBean;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
 
 import ch.ivyteam.ivy.security.ISession;
 
-@ManagedBean
+@Named
+@RequestScoped
 public class UserBean {
 
   public String getCurrentUserName() {

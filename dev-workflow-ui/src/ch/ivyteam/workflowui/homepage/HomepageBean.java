@@ -1,9 +1,10 @@
 package ch.ivyteam.workflowui.homepage;
 
+import java.io.Serializable;
 import java.util.Set;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
 
 import org.primefaces.event.SelectEvent;
 
@@ -16,9 +17,9 @@ import ch.ivyteam.workflowui.util.LastSessionStarts;
 import ch.ivyteam.workflowui.util.TaskUtil;
 import ch.ivyteam.workflowui.util.ViewerUtil;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class HomepageBean {
+public class HomepageBean implements Serializable {
 
   private final TasksDataModel tasksDataModel;
   private final StartedCasesDataModel startedCasesDataModel;

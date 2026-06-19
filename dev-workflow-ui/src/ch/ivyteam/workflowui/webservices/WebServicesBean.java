@@ -1,18 +1,19 @@
 package ch.ivyteam.workflowui.webservices;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
 
 import org.primefaces.event.SelectEvent;
 
 import ch.ivyteam.workflowui.util.ProcessModelsUtil;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class WebServicesBean {
+public class WebServicesBean implements Serializable {
 
   private List<WebServiceProcess> webServices;
   private String filter;

@@ -1,16 +1,18 @@
 package ch.ivyteam.workflowui.tasks;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
+
+import java.io.Serializable;
 
 import org.primefaces.event.SelectEvent;
 
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.workflowui.util.TaskUtil;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class TasksBean {
+public class TasksBean implements Serializable {
 
   private final TasksDataModel tasksDataModel;
 
