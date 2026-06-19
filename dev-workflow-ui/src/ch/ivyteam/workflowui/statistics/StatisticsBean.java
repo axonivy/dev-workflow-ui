@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
 
 import org.primefaces.model.charts.ChartData;
 import org.primefaces.model.charts.bar.BarChartDataSet;

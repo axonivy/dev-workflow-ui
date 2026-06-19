@@ -3,8 +3,8 @@ package ch.ivyteam.workflowui.user;
 import java.io.Serializable;
 import java.util.Map;
 
-import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
 
 import org.primefaces.event.SelectEvent;
 

@@ -2,9 +2,9 @@ package ch.ivyteam.workflowui;
 
 import java.util.stream.Stream;
 
-import jakarta.inject.Named;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.context.FacesContext;
+import jakarta.inject.Named;
 
 import org.apache.commons.lang3.StringUtils;
 

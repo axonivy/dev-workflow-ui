@@ -3,8 +3,8 @@ package ch.ivyteam.workflowui;
 import java.io.Serializable;
 import java.util.Date;
 
-import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
 
 import ch.ivyteam.workflowui.util.DateUtil;
 

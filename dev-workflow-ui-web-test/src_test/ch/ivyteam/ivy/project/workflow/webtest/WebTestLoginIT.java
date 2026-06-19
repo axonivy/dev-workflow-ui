@@ -35,9 +35,10 @@ import com.browserup.bup.util.HttpMessageInfo;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 
+import io.netty.handler.codec.http.HttpResponse;
+
 import ch.ivyteam.ivy.project.workflow.webtest.util.Navigation;
 import ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil;
-import io.netty.handler.codec.http.HttpResponse;
 
 @IvyWebTest
 class WebTestLoginIT {

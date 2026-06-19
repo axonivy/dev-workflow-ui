@@ -22,7 +22,7 @@ import com.codeborne.selenide.Selenide;
 
 import ch.ivyteam.ivy.project.workflow.webtest.util.Navigation;
 
-@IvyWebTest(headless=false)
+@IvyWebTest
 @Disabled
 // TODO: jakarta
 class WebTestCaseMapIT {

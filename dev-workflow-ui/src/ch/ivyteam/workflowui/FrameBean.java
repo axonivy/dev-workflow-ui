@@ -3,8 +3,8 @@ package ch.ivyteam.workflowui;
 import java.io.Serializable;
 import java.util.List;
 
-import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
 
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.model.menu.MenuModel;
@@ -50,7 +50,7 @@ public class FrameBean implements Serializable {
     if (url == null) {
       return url;
     }
-    if(!UriChecker.isRelative(url)) {
+    if (!UriChecker.isRelative(url)) {
       var info = "taskUrl=" + url + "[url=" + UrlUtil.getHttpServletRequest().getRequestURI() + ", query=" + UrlUtil.getHttpServletRequest().getQueryString() + "]";
       throw BpmError.create("frame:unsupported:url").withMessage("Only relative urls are supported (security reasons): " + info).build();
     }

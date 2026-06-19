@@ -12,7 +12,7 @@ import ch.ivyteam.workflowui.tasks.TaskModel;
 public class DefaultFramePageHandler {
 
   public static void handleRedirect(String relativeUrl) throws IOException {
-    if(!UriChecker.isRelative(relativeUrl)) {
+    if (!UriChecker.isRelative(relativeUrl)) {
       throw new RuntimeException("Redirecting to external websites is not allowed. Tried to redirect to: " + relativeUrl);
     }
     var task = DialogInstance.of(relativeUrl).task();
