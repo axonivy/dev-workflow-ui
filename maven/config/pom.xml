@@ -17,14 +17,6 @@
     <engineHomeDirectory>${basedir}/../maven/config/target/ivyEngine/</engineHomeDirectory>
   </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>jakarta.faces</groupId>
-      <artifactId>jakarta.faces-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
-  </dependencies>
-
   <build>
     <plugins>
       <plugin>
