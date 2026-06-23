@@ -12,6 +12,7 @@ import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -106,6 +107,63 @@ class WebTestTasksIT {
     $(By.id("taskState:tooltip")).$(".ui-tooltip-text").shouldHave(text("PARKED"));
     $(By.id("workingUser:userNameLink")).shouldBe(exactText($("#sessionUserName").getText()));
     $(By.id("workflowEvents:eventsTable:0:eventType")).shouldBe(exactText("EVENT_PARK_TASK"));
+  }
+
+  @Test
+  void taskDetailsMessage() {
+    var infoBanner = $(By.className("info-banner-wrapper"));
+    var infoMessage = infoBanner.$(By.className("ui-message-info-detail"));
+    var warningMessage = infoBanner.$(By.className("ui-message-warn-detail"));
+
+    Navigation.openTask("Created task of TestData");
+    infoMessage.shouldBe(hidden);
+    warningMessage.shouldBe(hidden);
+
+    $(By.id("actionMenuForm:taskActionsBtn")).click();
+    $(By.id("actionMenuForm:taskDestoryBtn")).shouldBe(visible).click();
+    Selenide.refresh();
+    infoMessage.shouldHave(text("You cannot work on the task because it was destroyed."));
+    warningMessage.shouldBe(hidden);
+
+    loginFromTable("testuser");
+    startTestProcess("18D3AB6E2DC7779B/generateUserTask.ivp");
+
+    Navigation.openTask("TaskDetailTest");
+    infoMessage.shouldBe(hidden);
+    warningMessage.shouldBe(hidden);
+
+    $(By.id("actionMenuForm:taskStartBtn")).shouldBe(visible).click();
+    Navigation.openTask("TaskDetailTest");
+    infoMessage.shouldBe(hidden);
+    warningMessage.shouldHave(text("You are currently working on the task in a different session."));
+
+    Navigation.openTask("TaskDetailTest");
+    $(By.id("actionMenuForm:taskActionsBtn")).click();
+    $(By.id("actionMenuForm:taskParkBtn")).shouldBe(visible).click();
+    Selenide.refresh();
+    infoMessage.shouldHave(text("You have parked the task."));
+    warningMessage.shouldBe(hidden);
+
+    loginDeveloper();
+    Navigation.openTask("TaskDetailTest");
+    infoMessage.shouldHave(text("You cannot work on the task because testuser has parked it."));
+    warningMessage.shouldBe(hidden);
+
+    loginFromTable("testuser");
+    Navigation.openTask("TaskDetailTest");
+    $(By.id("actionMenuForm:taskStartBtn")).shouldBe(visible).click();
+    $(By.id("iFrame")).shouldBe(visible);
+    Selenide.switchTo().frame("iFrame");
+    $(By.id("form:proceed")).shouldBe(visible).click();
+    Selenide.switchTo().defaultContent();
+    Navigation.openTask("TaskDetailTest");
+    infoMessage.shouldHave(text("You already have completed the task."));
+    warningMessage.shouldBe(hidden);
+
+    loginFromTable("Developer");
+    Navigation.openTask("TaskDetailTest");
+    infoMessage.shouldHave(text("Task has already been completed by testuser."));
+    warningMessage.shouldBe(hidden);
   }
 
   @Test
