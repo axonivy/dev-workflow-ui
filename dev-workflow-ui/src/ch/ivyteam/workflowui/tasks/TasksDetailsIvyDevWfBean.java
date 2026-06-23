@@ -162,7 +162,7 @@ public class TasksDetailsIvyDevWfBean {
     return switch (selectedTask.getState()) {
       case PARKED -> parkedInfoBannerMessage();
       case CREATED, RESUMED -> workingInfoBannerMessage();
-      case DONE, READY_FOR_JOIN, JOINING, JOIN_FAILED -> completedInforBannerMessage();
+      case DONE, READY_FOR_JOIN, JOINING, JOIN_FAILED -> completedInfoBannerMessage();
       case DESTROYED -> "You cannot work on the task because it was destroyed.";
       default -> "invalid state";
     };
