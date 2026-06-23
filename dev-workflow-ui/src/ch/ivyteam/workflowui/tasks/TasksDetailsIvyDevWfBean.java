@@ -160,24 +160,36 @@ public class TasksDetailsIvyDevWfBean {
 
   public String getInfoBannerMessage() {
     return switch (selectedTask.getState()) {
-      case CREATED, RESUMED, PARKED -> {
-        if (currentIsWorkerUser()) {
-          yield "You are currently working on the task in a different session. You may reset the task and start it again if you have closed your browser.";
-        } else {
-          yield "You cannot work on the task because user '%s' is currently working on it.".formatted(selectedTask.getWorkerUser().getName());
-        }
-      }
-      case DONE, READY_FOR_JOIN, JOINING, JOIN_FAILED -> {
-        if (currentIsWorkerUser()) {
-          yield "You already have completed the task";
-        } else {
-          yield "Task has already been completed by user '%s'"
-              .formatted(selectedTask.getWorkerUser().getName());
-        }
-      }
-      case DESTROYED -> "You cannot work on the task because it was destroyed";
+      case PARKED -> parkedInfoBannerMessage();
+      case CREATED, RESUMED -> workingInfoBannerMessage();
+      case DONE, READY_FOR_JOIN, JOINING, JOIN_FAILED -> completedInforBannerMessage();
+      case DESTROYED -> "You cannot work on the task because it was destroyed.";
       default -> "invalid state";
     };
+  }
+
+  private String parkedInfoBannerMessage() {
+    if (currentIsWorkerUser()) {
+      return "You have parked the task. It was exclusively reserved by you for working on it later. You may reset the task to release its reservation.";
+    }
+    return "You cannot work on the task because user '%s' has parked it. It was exclusively reserved by them for working on it later."
+        .formatted(selectedTask.getWorkerUser().getName());
+  }
+
+  private String workingInfoBannerMessage() {
+    if (currentIsWorkerUser()) {
+      return "You are currently working on the task in a different session. You may reset the task and start it again if you have closed your browser.";
+    }
+    return "You cannot work on the task because user '%s' is currently working on it."
+        .formatted(selectedTask.getWorkerUser().getName());
+  }
+
+  private String completedInforBannerMessage() {
+    if (currentIsWorkerUser()) {
+      return "You already have completed the task.";
+    }
+    return "Task has already been completed by user '%s'."
+        .formatted(selectedTask.getWorkerUser().getName());
   }
 
   private boolean isActivator() {
