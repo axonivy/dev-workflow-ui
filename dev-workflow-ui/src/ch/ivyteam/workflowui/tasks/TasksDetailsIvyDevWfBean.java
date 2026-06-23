@@ -184,7 +184,7 @@ public class TasksDetailsIvyDevWfBean {
         .formatted(selectedTask.getWorkerUser().getName());
   }
 
-  private String completedInforBannerMessage() {
+  private String completedInfoBannerMessage() {
     if (currentIsWorkerUser()) {
       return "You already have completed the task.";
     }
