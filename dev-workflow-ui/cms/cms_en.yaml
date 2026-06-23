@@ -263,12 +263,14 @@ switchUser:
 task:
   assignTask: Assign task
   canNotWork: You cannot work on the task because ${user} is currently working on it.
-  completedByCurrent: You already have completed the task
-  completedByOther: Task has already been completed by ${user}
+  completedByCurrent: You already have completed the task.
+  completedByOther: Task has already been completed by ${user}.
   delegateTask: Delegate task
   delegateTaskToUserOrRole: Delegate the task to a specified user or role
-  destroyed: You cannot work on the task because it was destroyed
+  destroyed: You cannot work on the task because it was destroyed.
   invalid: Invalid state
+  parkedByCurrent: You have parked the task. It was exclusively reserved by you for working on it later. You may reset the task to release its reservation.
+  parkedByOther: You cannot work on the task because ${user} has parked it. It was exclusively reserved by them for working on it later.
   role: Role
   user: User
   workingOn: You are currently working on the task in a different session. You may reset the task and start it again if you have closed your browser.

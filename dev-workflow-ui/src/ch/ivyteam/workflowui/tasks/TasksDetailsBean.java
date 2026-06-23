@@ -160,23 +160,33 @@ public class TasksDetailsBean implements Serializable {
 
   public String getInfoBannerMessageCmsPath() {
     return switch (selectedTask.getState()) {
-      case CREATED, RESUMED, PARKED -> {
-        if (currentIsWorkerUser()) {
-          yield "/task/workingOn";
-        } else {
-          yield "/task/canNotWork";
-        }
-      }
-      case DONE, READY_FOR_JOIN, JOINING, JOIN_FAILED -> {
-        if (currentIsWorkerUser()) {
-          yield "/task/completedByCurrent";
-        } else {
-          yield "/task/completedByOther";// "Task has already been completed by user '%s'".formatted(selectedTask.getWorkerUser().getName());
-        }
-      }
+      case PARKED -> parkedInfoBannerMessage();
+      case CREATED, RESUMED -> workingInfoBannerMessage();
+      case DONE, READY_FOR_JOIN, JOINING, JOIN_FAILED -> completedInfoBannerMessage();
       case DESTROYED -> "/task/destroyed";
       default -> "/task/invalid";
     };
+  }
+
+  private String parkedInfoBannerMessage() {
+    if (currentIsWorkerUser()) {
+      return "/task/parkedByCurrent";
+    }
+    return "/task/parkedByOther";
+  }
+
+  private String workingInfoBannerMessage() {
+    if (currentIsWorkerUser()) {
+      return "/task/workingOn";
+    }
+    return "/task/canNotWork";
+  }
+
+  private String completedInfoBannerMessage() {
+    if (currentIsWorkerUser()) {
+      return "/task/completedByCurrent";
+    }
+    return "/task/completedByOther";
   }
 
   public String getWorkerUserName() {

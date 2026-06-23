@@ -269,6 +269,8 @@ task:
   delegateTaskToUserOrRole: Delegiere den Task an einen Benutzer oder an eine Rolle
   destroyed: Dieser Task kann nicht bearbeitet werden, weil er gelöscht wurde.
   invalid: Ungültiger Status
+  parkedByCurrent: Du hast den Task geparkt. Er wurde exklusiv von dir reserviert, um später daran zu arbeiten. Du kannst den Task zurücksetzen, um die Reservierung freizugeben.
+  parkedByOther: Du kannst an diesem Task nicht arbeiten, weil ${user} den Task geparkt hat. Er wurde exklusiv von dieser Person reserviert, um später daran zu arbeiten.
   role: Rolle
   user: Benutzer
   workingOn: Dieser Task ist in einer anderen Browser Session geöffnet. Du kannst den Task zurücksetzen und neu starten, wenn der andere Browser geschlossen wurde.
