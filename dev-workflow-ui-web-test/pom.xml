@@ -56,9 +56,6 @@
       <releases>
         <enabled>false</enabled>
       </releases>
-      <snapshots>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
     </repository>
   </repositories>
 
