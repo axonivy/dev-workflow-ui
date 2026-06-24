@@ -114,9 +114,6 @@
       <url>https://repo.maven.apache.org/maven2</url>
     </repository>
     <repository>
-      <snapshots>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
       <id>maven.axonivy.com</id>
       <url>https://maven.axonivy.com</url>
     </repository>
@@ -127,9 +124,6 @@
     <pluginRepository>
       <id>nexus.ivyteam.io</id>
       <url>https://nexus.ivyteam.io/repository/maven/</url>
-      <snapshots>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
     </pluginRepository>
   </pluginRepositories>
 </project>
