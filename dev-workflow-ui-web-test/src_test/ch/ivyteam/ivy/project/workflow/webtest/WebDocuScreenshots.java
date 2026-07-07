@@ -64,9 +64,6 @@ class WebDocuScreenshots {
     openView("starts.xhtml");
     takeScreenshot("workflow-ui-starts", new Dimension(SCREENSHOT_WIDTH, 800));
 
-    openView("cleanup.xhtml");
-    takeScreenshot("workflow-ui-cleanup", new Dimension(SCREENSHOT_WIDTH, 800));
-
     openView("signals.xhtml");
     $(By.id("signalForm:signalCodeInput_input")).sendKeys("Screenshot data signal");
     $(By.id("signalForm:signalBtn")).shouldBe(enabled).click();
@@ -100,6 +97,10 @@ class WebDocuScreenshots {
     $(By.id("taskStatisticsChart_canvas")).shouldBe(visible);
     $(By.id("topCaseCreatorsChart_canvas")).shouldBe(visible);
     takeScreenshot("workflow-ui-statistics", new Dimension(SCREENSHOT_WIDTH, 800));
+
+    startTestProcess("1783B19164F69B78/designerEmbedded.ivp");
+    openView("cleanup.xhtml");
+    takeScreenshot("workflow-ui-cleanup", new Dimension(SCREENSHOT_WIDTH, 800));
   }
 
   private void takeScreenshot(String fileName, Dimension size) {

@@ -87,14 +87,20 @@ public class LoginIvyDevWfBean {
     UserUtil.redirectIfNotAdmin();
   }
 
-  public void redirectIfNotDevMode() {
+  public void redirectIfNotDemoOrDevMode() {
     if (!PermissionsUtil.isDemoOrDevMode()) {
       RedirectUtil.redirect();
     }
   }
 
-  public void redirectIfNotDevModeOrAdmin() {
+  public void redirectIfNotDemoDevModeOrAdmin() {
     if (!PermissionsUtil.isDemoDevModeOrAdmin()) {
+      RedirectUtil.redirect();
+    }
+  }
+
+  public void redirectIfNotDevModeAndAdmin() {
+    if (!PermissionsUtil.isDevModeAndAdmin()) {
       RedirectUtil.redirect();
     }
   }

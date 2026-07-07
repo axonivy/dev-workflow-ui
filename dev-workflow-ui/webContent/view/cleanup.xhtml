@@ -6,7 +6,7 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotAdmin}" />
+      <f:event type="preRenderView" listener="#{loginIvyDevWfBean.redirectIfNotDevModeAndAdmin}" />
 
       <div class="card">
         <h4 class="m-0">Cleanup</h4>
@@ -23,8 +23,7 @@
               value="#{cleanupIvyDevWfBean.identityProviderTokens}" itemLabel="All identity provider tokens" />
             <p:selectBooleanCheckbox id="dataCaches" value="#{cleanupIvyDevWfBean.dataCaches}" itemLabel="Data caches" />
             <p:commandButton id="cleanupBtn" value="Cleanup" icon="si si-recycling-trash-bin-2 "
-              actionListener="#{cleanupIvyDevWfBean.cleanup}" update="growl"
-              disabled="#{!permissionsBean.devModeAndAdmin}" />
+              actionListener="#{cleanupIvyDevWfBean.cleanup}" update="growl" />
           </p:panelGrid>
         </h:form>
       </div>
