@@ -6,7 +6,7 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <f:event type="preRenderView" listener="#{loginBean.redirectIfNotAdmin}" />
+      <f:event type="preRenderView" listener="#{loginBean.redirectIfNotDevModeAndAdmin}" />
 
       <div class="card">
         <h4 class="m-0">#{ivy.cm.co('/sidebar/cleanup')}</h4>
@@ -20,8 +20,7 @@
             </p:selectManyCheckbox>
 
             <p:commandButton id="cleanupBtn" value="#{ivy.cm.co('/sidebar/cleanup')}" icon="ti ti-recycle"
-              actionListener="#{cleanupBean.cleanup}" update="growl"
-              disabled="#{!permissionsBean.devModeAndAdmin}" />
+              actionListener="#{cleanupBean.cleanup}" update="growl" />
           </p:panelGrid>
         </h:form>
       </div>

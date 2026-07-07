@@ -4,8 +4,10 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginD
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.open;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openViewNoAssertion;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.assertCurrentUrlContains;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.enabled;
@@ -55,12 +57,12 @@ class WebTestCleanup {
 
   @Test
   @Order(1)
-  void noCleanupIfNotDevMode() {
-    openView("cleanup.xhtml");
-    $(By.id("cleanupForm:cleanupBtn")).shouldBe(disabled);
+  void redirectIfNotDevMode() {
+    openViewNoAssertion("cleanup.xhtml");
+    assertCurrentUrlContains("home.xhtml");
     startTestProcess("1783B19164F69B78/designerStandard.ivp");
-    openView("cleanup.xhtml");
-    $(By.id("cleanupForm:cleanupBtn")).shouldBe(disabled);
+    openViewNoAssertion("cleanup.xhtml");
+    assertCurrentUrlContains("home.xhtml");
   }
 
   @Test

@@ -17,7 +17,7 @@ public class PermissionsBean implements Serializable {
   }
 
   public boolean isDevModeAndAdmin() {
-    return PermissionsUtil.isDevMode() && isAdmin();
+    return PermissionsUtil.isDevModeAndAdmin();
   }
 
   public boolean isAdmin() {
