@@ -1,13 +1,11 @@
 package ch.ivyteam.workflowui.starts;
 
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.inject.Named;
-
-import ch.ivyteam.ivy.application.ReleaseState;
 import ch.ivyteam.ivy.application.app.IApplicationRepository;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
 import ch.ivyteam.ivy.workflow.start.IWebStartable;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
 
 @Named
 @RequestScoped
@@ -18,10 +16,7 @@ public class ProcessByUrlBean {
   private String startableId;
 
   public void executeStart() {
-    var app = IApplicationRepository.instance().findByName(appName).stream()
-        .filter(a -> a.getReleaseState() == ReleaseState.RELEASED)
-        .findAny()
-        .orElse(null);
+    var app = IApplicationRepository.instance().findReleasedByName(appName);
     if (app == null) {
       return;
     }
