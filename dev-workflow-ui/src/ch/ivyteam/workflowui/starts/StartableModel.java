@@ -43,7 +43,7 @@ public class StartableModel {
         startable.getDescription(),
         startable.getLink(),
         startable.getCategory(),
-        startable.pmv().getApplication().getName(),
+        startable.pmv().getApplication().name(),
         startable.pmv().project().name(),
         getIcon(startable.customFields()),
         evaluateEmbedInFrame(startable.customFields().value(CustomFieldsHelper.EMBED_IN_FRAME)),
