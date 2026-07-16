@@ -20,7 +20,7 @@ public class ProcessByUrlBean {
     if (app == null) {
       return;
     }
-    var project = app.findProcessModelVersion(projectName);
+    var project = app.projects().find(projectName);
     if (project == null) {
       return;
     }
