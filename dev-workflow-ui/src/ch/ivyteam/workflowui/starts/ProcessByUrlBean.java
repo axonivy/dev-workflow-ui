@@ -1,6 +1,6 @@
 package ch.ivyteam.workflowui.starts;
 
-import ch.ivyteam.ivy.application.app.IApplicationRepository;
+import ch.ivyteam.ivy.application.app.ApplicationRepository;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
 import ch.ivyteam.ivy.workflow.start.IWebStartable;
@@ -16,7 +16,7 @@ public class ProcessByUrlBean {
   private String startableId;
 
   public void executeStart() {
-    var app = IApplicationRepository.instance().findReleasedByName(appName);
+    var app = ApplicationRepository.instance().findReleasedByName(appName);
     if (app == null) {
       return;
     }
