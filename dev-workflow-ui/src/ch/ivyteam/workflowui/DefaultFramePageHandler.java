@@ -18,7 +18,7 @@ public class DefaultFramePageHandler {
     var task = DialogInstance.of(relativeUrl).task();
     var url = relativeUrl;
     if (task == null || !shouldEscapeIFrame(new TaskModel(task))) {
-      url = IApplication.current().getContextPath() + "/faces/view/dev-workflow-ui/frame.xhtml?taskUrl=" + relativeUrl;
+      url = IApplication.current().contextPath() + "/faces/view/dev-workflow-ui/frame.xhtml?taskUrl=" + relativeUrl;
     }
     IHttpResponse.current().sendRedirect(url);
   }
@@ -31,5 +31,4 @@ public class DefaultFramePageHandler {
     }
     return "false".equals(taskEmbedField.getValue());
   }
-
 }

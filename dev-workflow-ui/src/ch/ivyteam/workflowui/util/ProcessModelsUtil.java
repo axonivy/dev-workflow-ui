@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import ch.ivyteam.ivy.application.app.IApplicationRepository;
+import ch.ivyteam.ivy.application.app.ApplicationRepository;
 import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
@@ -17,7 +17,7 @@ public class ProcessModelsUtil {
 
   public static List<IWorkflowProcessModelVersion> getWorkflowPMVs() {
     var securityContext = ISecurityContext.current();
-    return IApplicationRepository.of(securityContext).all().stream()
+    return ApplicationRepository.of(securityContext).all().stream()
         .flatMap(app -> app.projects().all())
         .map(IWorkflowProcessModelVersion::of)
         .collect(Collectors.toList());
@@ -25,7 +25,7 @@ public class ProcessModelsUtil {
 
   public static Stream<IWorkflowProcessModelVersion> getReleasedWorkflowPMVs() {
     var securityContext = ISecurityContext.current();
-    return IApplicationRepository.of(securityContext).allReleased().stream()
+    return ApplicationRepository.of(securityContext).allReleased().stream()
         .flatMap(app -> app.projects().all())
         .map(IWorkflowProcessModelVersion::of);
   }
