@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.application.app.IApplicationRepository;
-import ch.ivyteam.ivy.application.app.state.ReleaseState;
 import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.IWorkflowProcessModelVersion;
@@ -27,8 +26,7 @@ public class ProcessModelsUtil {
 
   public static Stream<IWorkflowProcessModelVersion> getReleasedWorkflowPMVs() {
     var securityContext = ISecurityContext.current();
-    return IApplicationRepository.of(securityContext).all().stream()
-        .filter(app -> app.getReleaseState() == ReleaseState.RELEASED)
+    return IApplicationRepository.of(securityContext).allReleased().stream()
         .flatMap(IApplication::getProcessModelVersions)
         .map(IWorkflowProcessModelVersion::of);
   }
