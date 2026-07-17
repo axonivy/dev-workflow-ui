@@ -84,7 +84,7 @@ public class TaskModel {
     this.workflowEvents = WorkflowEventModel.toList(task.getWorkflowEvents());
     this.sidesteps = SidestepUtil.getSidesteps(task.getCase());
     this.customFields = CustomFieldModel.create(task);
-    this.pmv = task.getProcessModelVersion().getName();
+    this.pmv = task.getProcessModelVersion().pmv().name();
     this.currentElement = getCurrentElementId(task);
     this.viewerLink = buildViewerLink(task);
     this.viewerAllowed = isViewerAllowed(task);
