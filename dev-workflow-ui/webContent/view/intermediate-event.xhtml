@@ -11,6 +11,8 @@
 
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
+      <f:event type="preRenderView" listener="#{loginBean.redirectIfNotDemoDevModeOrAdmin}" />
+
       <ui:param name="intermediateElement" value="#{intermediateEventDetailsBean.selectedIntermediateElement}"></ui:param>
 
       <div class="layout-dashboard">

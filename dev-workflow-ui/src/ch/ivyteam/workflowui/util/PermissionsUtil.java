@@ -25,6 +25,10 @@ public class PermissionsUtil {
     return isDemoOrDevMode() && isAdmin();
   }
 
+  public static boolean isDevModeAndAdmin() {
+    return isDevMode() && isAdmin();
+  }
+
   public static boolean isAdmin() {
     return hasPermission(IPermission.TASK_READ_ALL) && hasPermission(IPermission.CASE_READ_ALL);
   }

@@ -10,7 +10,7 @@
 <h:body>
   <ui:composition template="../includes/template/template.xhtml">
     <ui:define name="content">
-      <f:event type="preRenderView" listener="#{loginBean.redirectIfNotDevMode}" />
+      <f:event type="preRenderView" listener="#{loginBean.redirectIfNotDemoOrDevMode}" />
 
       <h:panelGroup layout="block" styleClass="static-message" rendered="#{!loginBean.loggedIn}">
         <p:staticMessage severity="warn" summary="Warning" detail="#{ivy.cm.co('/switchUser/needLogin')}"
