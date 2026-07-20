@@ -1,9 +1,11 @@
 package ch.ivyteam.ivy.project.workflow.webtest;
 
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.assertCurrentUrlContains;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginFromTable;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.open;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
+import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openViewNoAssertion;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.viewUrl;
 import static com.codeborne.selenide.Condition.cssClass;
@@ -12,6 +14,8 @@ import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -52,12 +56,12 @@ class WebTestCleanup {
 
   @Test
   @Order(1)
-  void noCleanupIfNotDevMode() {
-    openView("cleanup.xhtml");
-    $(By.id("clanupForm:cleanupBtn")).shouldBe(disabled);
+  void redirectIfNotDevMode() {
+    openViewNoAssertion("cleanup.xhtml", Map.of());
+    assertCurrentUrlContains("home.xhtml");
     startTestProcess("1783B19164F69B78/designerStandard.ivp");
-    openView("cleanup.xhtml");
-    $(By.id("clanupForm:cleanupBtn")).shouldBe(disabled);
+    openViewNoAssertion("cleanup.xhtml", Map.of());
+    assertCurrentUrlContains("home.xhtml");
   }
 
   @Test

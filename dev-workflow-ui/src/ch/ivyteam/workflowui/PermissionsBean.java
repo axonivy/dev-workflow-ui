@@ -15,7 +15,7 @@ public class PermissionsBean {
   }
 
   public boolean isDevModeAndAdmin() {
-    return PermissionsUtil.isDevMode() && isAdmin();
+    return PermissionsUtil.isDevModeAndAdmin();
   }
 
   public boolean isAdmin() {
