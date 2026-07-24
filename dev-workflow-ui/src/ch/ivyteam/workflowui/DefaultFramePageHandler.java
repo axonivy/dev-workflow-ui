@@ -2,7 +2,7 @@ package ch.ivyteam.workflowui;
 
 import java.io.IOException;
 
-import ch.ivyteam.ivy.application.IApplication;
+import ch.ivyteam.ivy.application.app.Application;
 import ch.ivyteam.ivy.dialog.execution.api.DialogInstance;
 import ch.ivyteam.ivy.request.IHttpResponse;
 import ch.ivyteam.util.uri.UriChecker;
@@ -18,7 +18,7 @@ public class DefaultFramePageHandler {
     var task = DialogInstance.of(relativeUrl).task();
     var url = relativeUrl;
     if (task == null || !shouldEscapeIFrame(new TaskModel(task))) {
-      url = IApplication.current().contextPath() + "/faces/view/dev-workflow-ui/frame.xhtml?taskUrl=" + relativeUrl;
+      url = Application.current().contextPath() + "/faces/view/dev-workflow-ui/frame.xhtml?taskUrl=" + relativeUrl;
     }
     IHttpResponse.current().sendRedirect(url);
   }
