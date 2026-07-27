@@ -48,9 +48,9 @@ Error:
         ExecuteProcess: Pas de permission pour exécuter le processus '${processId}'
     Request:
       App:
-        InMaintenance: L'application '${appName}' est actuellement indisponible en raison de maintenance.
-        NameMissing: Nom de l'application manquant
-        NotFound: L'application demandée est introuvable
+        InMaintenance: The application '${appName}' in version '${appVersion}' is currently unavailable because of maintenance.
+        NameMissing: Application name missing
+        NotFound: The requested application was not found
       CaseMap:
         NoProcessId: Le paramètre de processus de l'étape secondaire '${processId}' doit être défini!
         RequestPathNoUUID: Aucun UUID de Case Map trouvé dans le lien de la requête
@@ -88,15 +88,10 @@ Error:
       PageEngine:
         InvalidRequest: Type de requête non supporté ${type}
         WrongState: L'état de PageEngine devrait être 'RUNNING' mais était '${serviceState}'
-      Pm:
-        InMaintenance: Le modèle de processus '${pmName}' de l'application '${appName}' est actuellement indisponible en raison de maintenance.
-        NotFound: Le modèle de processus demandé de l'application '${appName}' est introuvable.
-      Pmv:
-        InMaintenance: La version du modèle de processus '${pmvId}' du modèle de processus '${pmName}' de l'application '${appName}' est actuellement indisponible en raison de maintenance.
-        NameIsMissing: "Nom de la version du modèle de processus manquant"
-        NotReleased: Aucune version du modèle de processus n'a été publiée pour le modèle de processus '${pmName}' de l'application '${appName}'.
-        NotFound: La version demandée du modèle de processus est introuvable.
-        PmNotFound: La version demandée du modèle de processus '${pmName}' de l'application '${appName}' est introuvable.
+      Project:
+        NameIsMissing: Project name is missing.
+        NotFound: The project was not found.
+        ProjectNotFound: The project '${projectName}' of application '${appName}' was not found.
       Render:
         NoTxtObject: L’objet '${cmsUri}' n’est pas de type texte
         NoImageObject: "'${cmsUri}' n'est pas une image"
@@ -105,8 +100,8 @@ Error:
       RestPathMissing: Lien REST manquant
       SessionExpired: Votre session a expiré.
       Start:
-        NotFoundPmv: Le démarrage de processus demandé dans la version de modèle de processus '${pmvId}' du modèle de processus '${pmName}' de l'application web '${appName}' est introuvable.
-        NotReleasedPmv: Il n'est pas permis de démarrer un cas sur la version de modèle de processus '${pmvId}' du modèle de processus '${pmName}' de l'application web '${appName}' car elle n'est pas publiée.
+        NotFoundProcess: The process start in project '${projectName}' of application '${appName}' in version '${appVersion}' was not found.
+        NotReleasedApp: It is not allowed to start a case on the project '${projectName}' of application '${appName}' in version '${appVersion}' because it is not released.
       Task:
         Forbidden: Vous n'êtes pas autorisé à travailler sur la tâche avec l'identifiant '${taskId}'.
         NotFound: La tâche avec l'identifiant '${taskId}' n'existe pas.

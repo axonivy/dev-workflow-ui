@@ -48,9 +48,9 @@ Error:
         ExecuteProcess: Keine Berechtigung zur Ausführung des Prozesses '${processId}'
     Request:
       App:
-        InMaintenance: Die Anwendung '${appName}' ist wegen Wartungsarbeiten momentan nicht verfügbar.
-        NameMissing: Name der Anwendung fehlt
-        NotFound: Die angeforderte Anwendung wurde nicht gefunden
+        InMaintenance: Die Anwendung '${appName}' in der Version '${appVersion}' ist wegen Wartungsarbeiten momentan nicht verfügbar.
+        NameMissing: Name der Anwendung fehlt.
+        NotFound: Die angeforderte Anwendung wurde nicht gefunden.
       CaseMap:
         NoProcessId: Seitenprozess-Parameter '${processId}' muss definiert werden!
         RequestPathNoUUID: Keine Case Map UUID im Anforderungspfad gefunden
@@ -87,16 +87,11 @@ Error:
       PageNoHttpResponse: Die automatische Prozessseite konnte nicht in die HTTP-Antwort geschrieben werden.
       PageEngine:
         InvalidRequest: Nicht unterstützter Anforderungstyp ${type}
-        WrongState: PageEngine-Status sollte 'RUNNING' sein, war aber '${serviceState}'
-      Pm:
-        InMaintenance: Das Prozessmodell '${pmName}' der Anwendung '${appName}' ist wegen Wartungsarbeiten momentan nicht verfügbar.
-        NotFound: Das angeforderte Prozessmodell der Anwendung '${appName}' wurde nicht gefunden.
-      Pmv:
-        InMaintenance: Die Prozessmodellversion '${pmvId}' des Prozessmodells '${pmName}' der Anwendung '${appName}' ist wegen Wartungsarbeiten momentan nicht verfügbar.
-        NameIsMissing: "Name der Prozessmodellversion fehlt"
-        NotReleased: Es ist keine Prozessmodellversion für das Prozessmodell '${pmName}' der Anwendung '${appName}' freigegeben.
-        NotFound: Die angeforderte Prozessmodellversion wurde nicht gefunden.
-        PmNotFound: Die angeforderte Prozessmodellversion des Prozessmodells '${pmName}' der Anwendung '${appName}' wurde nicht gefunden.
+        WrongState: PageEngine-Status sollte 'RUNNING' sein, war aber '${serviceState}'      
+      Project:
+        NameIsMissing: Projekt Name fehlt.
+        NotFound: Das Projekt wurde nicht gefunden.
+        ProjectNotFound: Das Projekt '${projectName}' der Applikation '${appName}' wurde nicht gefunden.
       Render:
         NoTxtObject: Kein Text-Typ-Objekt '${cmsUri}'
         NoImageObject: Kein Bild '${cmsUri}'
@@ -105,8 +100,8 @@ Error:
       RestPathMissing: REST Pfad fehlt
       SessionExpired: Ihre Sitzung ist abgelaufen.
       Start:
-        NotFoundPmv: Der angeforderte Prozessstart in der Prozessmodellversion '${pmvId}' des Prozessmodells '${pmName}' der Webanwendung '${appName}' wurde nicht gefunden.
-        NotReleasedPmv: Es ist nicht erlaubt, einen Fall in der Prozessmodellversion '${pmvId}' des Prozessmodells '${pmName}' der Webanwendung '${appName}' zu starten, weil sie nicht freigegeben ist.
+        NotFoundProcess: Der Prozessstart im Projekt '${projectName}' der Anwendung '${appName}' in der Version '${appVersion}' wurde nicht gefunden.
+        NotReleasedApp: Es ist nicht erlaubt, einen Fall im Projekt '${projectName}' der Anwendung '${appName}' in der Version '${appVersion}' zu starten, da sie nicht freigegeben ist.
       Task:
         Forbidden: Sie sind nicht berechtigt, an der Aufgabe mit dem Bezeichner '${taskId}' zu arbeiten.
         NotFound: Die Aufgabe mit dem Bezeichner '${taskId}' existiert nicht.

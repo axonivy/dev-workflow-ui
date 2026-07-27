@@ -49,7 +49,7 @@ Error:
         ExecuteProcess: No permission to execute process '${processId}'
     Request:
       App:
-        InMaintenance: The application '${appName}' is currently unavailable because of maintenance.
+        InMaintenance: The application '${appName}' in version '${appVersion}' is currently unavailable because of maintenance.
         NameMissing: Application name missing
         NotFound: The requested application was not found
       CaseMap:
@@ -89,16 +89,11 @@ Error:
       PageEngine:
         InvalidRequest: Unsupported request type ${type} 
         WrongState: PageEngine state should be 'RUNNING' but was '${serviceState}'
-      Pm:
-        InMaintenance: The process model '${pmName}' of application '${appName}' is currently unavailable because of maintenance.
-        NotFound: The requested process model of application '${appName}' was not found.
-      Pmv:
-        InMaintenance: The process model version '${pmvId}' of process model '${pmName}' of application '${appName}' is currently unavailable because of maintenance.
-        NameIsMissing: "Process model version name missing"
-        NotReleased: There is no process model version released for process model '${pmName}' of application '${appName}'.
-        NotFound: The requested process model version was not found.
-        PmNotFound: The requested process model version of process model '${pmName}' of application '${appName}' was not found.
-      Render:  
+      Project:
+        NameIsMissing: Project name is missing.
+        NotFound: The project was not found.
+        ProjectNotFound: The project '${projectName}' of application '${appName}' was not found.
+      Render:
         NoTxtObject: Not a text type object '${cmsUri}'
         NoImageObject: Not an image '${cmsUri}'
         NoMimeObject: Cannot renderer image to mime type '${mimeType}'
@@ -106,8 +101,8 @@ Error:
       RestPathMissing: REST path missing
       SessionExpired: Your session has expired.
       Start:
-        NotFoundPmv: The requested process start in process model version '${pmvId}' of process model '${pmName}' of web application '${appName}' was not found.
-        NotReleasedPmv: It is not allowed to start a case on the process model version '${pmvId}' of process model '${pmName}' of web application '${appName}' because it is not released.
+        NotFoundProcess: The process start in project '${projectName}' of application '${appName}' in version '${appVersion}' was not found.
+        NotReleasedApp: It is not allowed to start a case on the project '${projectName}' of application '${appName}' in version '${appVersion}' because it is not released.
       Task:
         Forbidden : You are not allowed to work on the task with the identifier '${taskId}'.
         NotFound: The task with the identifier '${taskId}' does not exist.

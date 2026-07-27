@@ -48,9 +48,9 @@ Error:
         ExecuteProcess: プロセス'${processId}'を実行する権限がありません
     Request:
       App:
-        InMaintenance: メンテナンスのため、アプリケーション'${appName}'は現在利用できません。
-        NameMissing: アプリケーション名がありません
-        NotFound: リクエストされたアプリケーションは見つかりませんでした
+        InMaintenance: The application '${appName}' in version '${appVersion}' is currently unavailable because of maintenance.
+        NameMissing: Application name missing
+        NotFound: The requested application was not found
       CaseMap:
         NoProcessId: サイドステッププロセスパラメーター'${processId}'を定義する必要があります。
         RequestPathNoUUID: リクエストパスにケースマップのUUIDが見つかりません
@@ -88,15 +88,10 @@ Error:
       PageEngine:
         InvalidRequest: サポートされていないリクエストタイプ${type}
         WrongState: PageEngineの状態は'RUNNING'である必要がありますが、'${serviceState}'でした
-      Pm:
-        InMaintenance: アプリケーション'${appName}'のプロセスモデル'${pmName}'は、メンテナンスのため現在使用できません。
-        NotFound: アプリケーション'${appName}'のリクエストされたプロセスモデルは見つかりませんでした。
-      Pmv:
-        InMaintenance: アプリケーション'${appName}'のプロセスモデル'${pmName}'のプロセスモデルバージョン'${pmvId}'は、メンテナンスのため現在使用できません。
-        NameIsMissing: プロセスモデルバージョン名がありません
-        NotReleased: アプリケーション'${appName}'のプロセスモデル'${pmName}'にリリースされたプロセスモデルバージョンはありません。
-        NotFound: リクエストされたプロセスモデルバージョンは見つかりませんでした。
-        PmNotFound: アプリケーション'${appName}'のプロセスモデル'${pmName}'のリクエストされたプロセスモデルバージョンは見つかりませんでした。
+      Project:
+        NameIsMissing: Project name is missing.
+        NotFound: The project was not found.
+        ProjectNotFound: The project '${projectName}' of application '${appName}' was not found.
       Render:
         NoTxtObject: テキスト型オブジェクト'${cmsUri}'ではありません
         NoImageObject: 画像'${cmsUri}'ではありません
@@ -105,8 +100,8 @@ Error:
       RestPathMissing: RESTパスがありません
       SessionExpired: セッションは期限切れになりました。
       Start:
-        NotFoundPmv: Webアプリケーション'${appName}'のプロセスモデル'${pmName}'のプロセスモデルバージョン'${pmvId}'で始まるリクエストされたプロセスが見つかりませんでした。
-        NotReleasedPmv: リリースされていないため、Webアプリケーション'${appName}'のプロセスモデル'${pmName}'のプロセスモデルバージョン'${pmvId}'でケースを開始できません。
+        NotFoundProcess: The process start in project '${projectName}' of application '${appName}' in version '${appVersion}' was not found.
+        NotReleasedApp: It is not allowed to start a case on the project '${projectName}' of application '${appName}' in version '${appVersion}' because it is not released.
       Task:
         Forbidden: 識別子'${taskId}'付きのタスクでの作業は許可されていません。
         NotFound: 識別子'${taskId}'付きのタスクは存在しません。

@@ -58,11 +58,11 @@ public class ProcessByUrlBean {
     this.appName = app;
   }
 
-  public String getPmv() {
+  public String getProject() {
     return projectName;
   }
 
-  public void setPmv(String pmv) {
-    this.projectName = pmv;
+  public void setProject(String project) {
+    this.projectName = project;
   }
 }

@@ -74,7 +74,7 @@ common:
   openTasks: タスクを開く
   owner: 所有者
   park: 保留
-  pmv: PMV
+  project: Project
   prio: 優先度
   priority: 優先度
   process: プロセス
