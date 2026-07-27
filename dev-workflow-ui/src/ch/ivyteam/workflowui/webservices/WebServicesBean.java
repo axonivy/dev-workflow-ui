@@ -4,12 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import jakarta.faces.view.ViewScoped;
-import jakarta.inject.Named;
-
 import org.primefaces.event.SelectEvent;
 
-import ch.ivyteam.workflowui.util.ProcessModelsUtil;
+import ch.ivyteam.workflowui.util.ProjectUtil;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
 
 @Named
 @ViewScoped
@@ -24,7 +23,7 @@ public class WebServicesBean implements Serializable {
 
   @SuppressWarnings("deprecation")
   private List<WebServiceProcess> setServices() {
-    return ProcessModelsUtil.getReleasedWorkflowPMVs()
+    return ProjectUtil.getReleasedWorkflowPMVs()
         .flatMap(pmv -> pmv.getWebServiceProcesses().stream())
         .map(WebServiceProcess::new)
         .filter(ws -> filter == null || (ws.getName().toLowerCase().contains(filter) || ws.getProcessName().toLowerCase().contains(filter)))

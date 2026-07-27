@@ -13,7 +13,7 @@ import ch.ivyteam.ivy.workflow.start.IWebStartable;
 import ch.ivyteam.workflowui.starts.CaseMapStartableModel;
 import ch.ivyteam.workflowui.starts.StartableModel;
 
-public class ProcessModelsUtil {
+public class ProjectUtil {
 
   public static List<IWorkflowProcessModelVersion> getWorkflowPMVs() {
     var securityContext = ISecurityContext.current();
@@ -33,7 +33,7 @@ public class ProcessModelsUtil {
   public static List<StartableModel> getDeployedStartables() {
     return getReleasedWorkflowPMVs()
         .flatMap(pmv -> pmv.getStartables(ISession.current()).stream())
-        .map(ProcessModelsUtil::createCaseMapOrProcessStartable)
+        .map(ProjectUtil::createCaseMapOrProcessStartable)
         .sorted(Comparator.comparing((StartableModel s) -> s.getProjectName())
             .thenComparing(s -> s.getCategory().getName(),
                 Comparator.nullsLast(Comparator.comparing(String::isEmpty))

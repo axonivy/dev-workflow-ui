@@ -46,7 +46,7 @@ public class LastSessionStarts {
     if (starts == null) {
       return Set.of();
     }
-    var deployedStartables = ProcessModelsUtil.getDeployedStartables();
+    var deployedStartables = ProjectUtil.getDeployedStartables();
     if (deployedStartables.isEmpty()) {
       return starts;
     }
