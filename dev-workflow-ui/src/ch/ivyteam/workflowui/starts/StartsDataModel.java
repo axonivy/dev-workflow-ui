@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import ch.ivyteam.workflowui.util.ProcessModelsUtil;
+import ch.ivyteam.workflowui.util.ProjectUtil;
 
 public class StartsDataModel {
 
@@ -17,7 +17,7 @@ public class StartsDataModel {
   private final ProjectFilterModel projectFilterModel;
 
   public StartsDataModel() {
-    allStartables = ProcessModelsUtil.getDeployedStartables();
+    allStartables = ProjectUtil.getDeployedStartables();
     isOnlySingleApplication = allStartables.stream().map(StartableModel::getApplicationName).distinct().count() == 1;
     isOnlySingleProject = allStartables.stream().map(StartableModel::getProjectName).distinct().count() == 1;
     var allProjects = allStartables.stream().map(StartableModel::getProjectName).distinct().sorted().toList();
