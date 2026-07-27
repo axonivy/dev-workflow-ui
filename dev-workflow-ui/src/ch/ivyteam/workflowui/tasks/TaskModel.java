@@ -42,7 +42,7 @@ public class TaskModel {
   private Date endTimestamp;
   private Date delayTimestamp;
   private String description;
-  private String pmv;
+  private String project;
   private PID currentElement;
   private String viewerLink;
   private boolean viewerAllowed;
@@ -84,7 +84,7 @@ public class TaskModel {
     this.workflowEvents = WorkflowEventModel.toList(task.getWorkflowEvents());
     this.sidesteps = SidestepUtil.getSidesteps(task.getCase());
     this.customFields = CustomFieldModel.create(task);
-    this.pmv = task.getProcessModelVersion().project().name();
+    this.project = task.getProcessModelVersion().project().name();
     this.currentElement = getCurrentElementId(task);
     this.viewerLink = buildViewerLink(task);
     this.viewerAllowed = isViewerAllowed(task);
@@ -160,8 +160,8 @@ public class TaskModel {
     return description;
   }
 
-  public String getPmv() {
-    return pmv;
+  public String getProject() {
+    return project;
   }
 
   public PID getCurrentElement() {

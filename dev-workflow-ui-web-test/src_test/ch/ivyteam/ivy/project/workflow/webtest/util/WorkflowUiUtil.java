@@ -21,8 +21,8 @@ import com.axonivy.ivy.webtest.engine.EngineUrl;
 import com.codeborne.selenide.Selenide;
 
 public class WorkflowUiUtil {
-  public static String pmvName() {
-    return System.getProperty("test.engine.pmv", "dev-workflow-ui");
+  public static String projectName() {
+    return System.getProperty("test.engine.project", "dev-workflow-ui");
   }
 
   public static void startTestProcess(String pathToIvp) {
@@ -71,7 +71,7 @@ public class WorkflowUiUtil {
       System.out.println("Engine URL integrated:" + url);
       return url;
     }
-    var builder = EngineUrl.create().staticView(pmvName() + "/" + page);
+    var builder = EngineUrl.create().staticView(projectName() + "/" + page);
     for (var param : queryParams.entrySet()) {
       builder.queryParam(param.getKey(), param.getValue());
     }
