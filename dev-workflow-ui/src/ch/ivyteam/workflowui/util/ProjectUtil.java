@@ -17,7 +17,7 @@ public class ProjectUtil {
 
   public static List<IWorkflowProcessModelVersion> getWorkflowPMVs() {
     var securityContext = ISecurityContext.current();
-    return ApplicationRepository.of(securityContext).all().stream()
+    return ApplicationRepository.of(securityContext).all()
         .flatMap(app -> app.projects().all())
         .map(IWorkflowProcessModelVersion::of)
         .collect(Collectors.toList());
@@ -25,7 +25,7 @@ public class ProjectUtil {
 
   public static Stream<IWorkflowProcessModelVersion> getReleasedWorkflowPMVs() {
     var securityContext = ISecurityContext.current();
-    return ApplicationRepository.of(securityContext).allReleased().stream()
+    return ApplicationRepository.of(securityContext).allReleased()
         .flatMap(app -> app.projects().all())
         .map(IWorkflowProcessModelVersion::of);
   }
