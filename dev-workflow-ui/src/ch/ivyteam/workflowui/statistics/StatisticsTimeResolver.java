@@ -67,14 +67,12 @@ public class StatisticsTimeResolver {
 
   private static int calculateHourDataPoints(String timeDuration) {
     return switch (timeDuration) {
-      case TimeDuration.TODAY, TimeDuration.LAST_24H -> 24;
       default -> 24;
     };
   }
 
   private static int calculate6HourDataPoints(String timeDuration) {
     return switch (timeDuration) {
-      case TimeDuration.LAST_7D -> 28;
       default -> 28;
     };
   }
@@ -99,7 +97,6 @@ public class StatisticsTimeResolver {
 
   private static int calculateMonthDataPoints(String timeDuration) {
     return switch (timeDuration) {
-      case TimeDuration.LAST_365D, TimeDuration.ALL_TIME -> 12;
       default -> 12;
     };
   }

@@ -30,7 +30,7 @@ public class WebServiceProcess {
   }
 
   public void execute() {
-    RedirectUtil.redirectUnsafe(link.toString());
+    RedirectUtil.redirectUnsafe(link);
   }
 
   private static String toProcessName(IWebServiceProcess ws) {
