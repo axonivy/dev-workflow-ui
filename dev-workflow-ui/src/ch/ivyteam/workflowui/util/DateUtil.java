@@ -25,7 +25,7 @@ public class DateUtil {
     if (hoursPassed < 24) {
       return pretty.setLocale(ISession.current().getFormattingLocale()).format(date);
     }
-    return dateThen.format(defaultFormatter).toString();
+    return dateThen.format(defaultFormatter);
   }
 
   public static String getDefault(Date date) {
@@ -39,7 +39,6 @@ public class DateUtil {
     return date.toInstant()
         .atZone(ZoneId.systemDefault())
         .toLocalDateTime()
-        .format(format)
-        .toString();
+        .format(format);
   }
 }
