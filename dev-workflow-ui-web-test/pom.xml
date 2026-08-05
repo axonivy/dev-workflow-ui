@@ -122,8 +122,7 @@
     <profile>
       <id>integration</id>
       <properties>
-        <!-- TODO: jakarta (iar has some problems with cdi ViewScoped beans) -->
-        <skip.integration.test>true</skip.integration.test>
+        <skip.integration.test>false</skip.integration.test>
         <skip.engine>false</skip.engine>
       </properties>
       <build>
