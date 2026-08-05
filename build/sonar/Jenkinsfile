@@ -17,7 +17,7 @@ pipeline {
       }
       steps {
         script {          
-          docker.build('maven', '-f build/Dockerfile.maven .').inside("") {
+          docker.build('maven', '-f build/Dockerfile.maven .').inside {
             sonar projectName: 'dev-workflow-ui'
           }
         }
