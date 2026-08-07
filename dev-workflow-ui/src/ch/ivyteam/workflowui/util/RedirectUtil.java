@@ -1,10 +1,13 @@
 package ch.ivyteam.workflowui.util;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 import javax.faces.context.FacesContext;
 
 public class RedirectUtil {
+  private static final Pattern SCHEME_PATTERN = Pattern.compile("^[a-zA-Z][a-zA-Z0-9+.-]*:");
+
   private static RedirectHandler handler = new DefaultHandler();
 
   public static void redirect() {
@@ -13,6 +16,16 @@ public class RedirectUtil {
 
   public static void redirect(String url) {
     handler.redirect(url);
+  }
+
+  public static void redirectRelative(String url) {
+    var trimmed = url.trim();
+    if (trimmed.isEmpty() || trimmed.startsWith("//") || trimmed.contains("\\")
+        || SCHEME_PATTERN.matcher(trimmed).find()) {
+      throw new RuntimeException(
+          "Redirecting to external websites is not allowed. Tried to redirect to: " + url);
+    }
+    redirect(url);
   }
 
   public static interface RedirectHandler {
