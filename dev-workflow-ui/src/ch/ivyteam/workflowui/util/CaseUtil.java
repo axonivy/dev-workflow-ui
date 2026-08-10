@@ -62,8 +62,8 @@ public class CaseUtil {
     if (PermissionsUtil.isAdmin()) {
       return true;
     }
-    if (caze instanceof CaseInternal) {
-      return ((CaseInternal) caze).involved().members().stream().anyMatch(u -> u.isMember(session));
+    if (caze instanceof CaseInternal internalCase) {
+      return internalCase.involved().members().stream().anyMatch(u -> u.isMember(session));
     }
     return false;
   }
