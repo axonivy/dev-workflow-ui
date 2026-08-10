@@ -52,7 +52,7 @@ public class LastSessionStarts {
     }
     try {
       return starts.stream().filter(deployedStartables::contains).collect(Collectors.toSet());
-    } catch (ClassCastException ex) {
+    } catch (ClassCastException _) {
       return Set.of();
     }
   }

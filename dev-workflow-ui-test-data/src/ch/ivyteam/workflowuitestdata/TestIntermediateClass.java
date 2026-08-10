@@ -34,13 +34,10 @@ public class TestIntermediateClass extends AbstractProcessIntermediateEventBean 
       try {
         getEventBeanRuntime().fireProcessIntermediateEventEx(eventIdentifier, resultObject,
             additionalInformation);
-      } catch (PersistencyException ex) {
-
+      } catch (PersistencyException _) {
         // ===> Add here your exception handling code if the event cannot be processed
         // <===
-
       }
     }
   }
-
 }

@@ -99,7 +99,7 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
       try {
         long taskId = Long.parseLong(filter);
         baseQuery = baseQuery.or().taskId().isEqual(taskId);
-      } catch (NumberFormatException e) {}
+      } catch (NumberFormatException _) {}
 
       query.where().and(baseQuery
           .or().uuid().isEqual(filter)

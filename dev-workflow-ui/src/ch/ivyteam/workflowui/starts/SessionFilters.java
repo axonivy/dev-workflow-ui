@@ -35,7 +35,7 @@ public class SessionFilters {
   public Set<String> load() {
     try {
       return session.getAttribute(ATTRIBUTE_NAME);
-    } catch (ClassCastException ex) {
+    } catch (ClassCastException _) {
       clear();
       return null;
     }
@@ -49,7 +49,7 @@ public class SessionFilters {
     try {
       Set<String> stored = session.getAttribute(ATTRIBUTE_NAME);
       return stored != null && !stored.isEmpty();
-    } catch (ClassCastException ex) {
+    } catch (ClassCastException _) {
       clear();
       return false;
     }

@@ -93,7 +93,7 @@ public class CasesDataModel extends LazyDataModel<CaseModel> {
       try {
         long caseId = Long.parseLong(filter);
         baseQuery = baseQuery.or().caseId().isEqual(caseId);
-      } catch (NumberFormatException e) {}
+      } catch (NumberFormatException _) {}
 
       query.where().and(baseQuery
           .or().uuid().isEqual(filter)
