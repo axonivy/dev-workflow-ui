@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.faces.view.ViewScoped;
-import jakarta.inject.Named;
-
 import org.primefaces.model.charts.ChartData;
 import org.primefaces.model.charts.bar.BarChartDataSet;
 import org.primefaces.model.charts.bar.BarChartModel;
@@ -25,6 +22,8 @@ import ch.ivyteam.ivy.searchengine.client.agg.Buckets;
 import ch.ivyteam.ivy.workflow.caze.CaseBusinessState;
 import ch.ivyteam.ivy.workflow.stats.WorkflowStats;
 import ch.ivyteam.ivy.workflow.task.TaskBusinessState;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
 
 @Named
 @ViewScoped
@@ -207,7 +206,7 @@ public class StatisticsBean implements Serializable {
         var timeLabel = labelFormatter.format(bucketTime);
         timeCountMap.merge(timeLabel, bucket.count(), Long::sum);
       }
-    } catch (Exception e) {
+    } catch (Exception _) {
       System.err.println("Failed to parse date: " + bucket.key());
     }
   }
