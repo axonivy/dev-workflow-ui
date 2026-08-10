@@ -8,13 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.primefaces.model.charts.ChartData;
-import org.primefaces.model.charts.bar.BarChartDataSet;
-import org.primefaces.model.charts.bar.BarChartModel;
-import org.primefaces.model.charts.donut.DonutChartDataSet;
-import org.primefaces.model.charts.donut.DonutChartModel;
-import org.primefaces.model.charts.line.LineChartDataSet;
-import org.primefaces.model.charts.line.LineChartModel;
+import software.xdev.chartjs.model.charts.BarChart;
+import software.xdev.chartjs.model.charts.DoughnutChart;
+import software.xdev.chartjs.model.charts.LineChart;
+import software.xdev.chartjs.model.color.RGBAColor;
+import software.xdev.chartjs.model.data.BarData;
+import software.xdev.chartjs.model.data.DoughnutData;
+import software.xdev.chartjs.model.data.LineData;
+import software.xdev.chartjs.model.dataset.BarDataset;
+import software.xdev.chartjs.model.dataset.DoughnutDataset;
+import software.xdev.chartjs.model.dataset.LineDataset;
+import software.xdev.chartjs.model.options.BarOptions;
+import software.xdev.chartjs.model.options.DoughnutOptions;
+import software.xdev.chartjs.model.options.LineOptions;
 
 import ch.ivyteam.ivy.searchengine.client.agg.AggregationResult;
 import ch.ivyteam.ivy.searchengine.client.agg.Bucket;
@@ -61,15 +67,15 @@ public class StatisticsBean implements Serializable {
     return getValidResolutions().length > 1;
   }
 
-  public LineChartModel getTasksPerHourChart() {
+  public String getTasksPerHourChart() {
     return getTasksOverTimeChart();
   }
 
-  public LineChartModel getCasesPerDayChart() {
+  public String getCasesPerDayChart() {
     return getCasesOverTimeChart();
   }
 
-  public LineChartModel getTasksOverTimeChart() {
+  public String getTasksOverTimeChart() {
     var resolution = StatisticsTimeResolver.getResolutionForDurationAndType(timeDuration, chartResolution);
     var searchBucketType = switch (resolution.bucketType) {
       case Resolution.WEEK -> Resolution.DAY;
@@ -93,7 +99,7 @@ public class StatisticsBean implements Serializable {
     return createStartAndFinishLineChart(startCountMap, endCountMap);
   }
 
-  public LineChartModel getCasesOverTimeChart() {
+  public String getCasesOverTimeChart() {
     var resolution = StatisticsTimeResolver.getResolutionForDurationAndType(timeDuration, chartResolution);
     var searchBucketType = switch (resolution.bucketType) {
       case Resolution.WEEK -> Resolution.DAY;
@@ -127,54 +133,48 @@ public class StatisticsBean implements Serializable {
     return getCountFromAggregation(allCases);
   }
 
-  public DonutChartModel getTaskByStateGraph() {
-    Map<String, String> labelToColor = Map.of(TaskBusinessState.OPEN.toString(), "rgb(0, 148, 210)",
-        TaskBusinessState.IN_PROGRESS.toString(), "rgb(255, 206, 86)", TaskBusinessState.DONE.toString(),
-        "rgb(54, 199, 38)", TaskBusinessState.DELAYED.toString(), "rgb(200, 200, 200)",
-        TaskBusinessState.DESTROYED.toString(), "rgb(130, 130, 130)", TaskBusinessState.ERROR.toString(),
-        "rgb(255, 99, 132)");
+  public String getTaskByStateGraph() {
+    Map<String, RGBAColor> labelToColor = Map.of(TaskBusinessState.OPEN.toString(), new RGBAColor(0, 148, 210),
+        TaskBusinessState.IN_PROGRESS.toString(), new RGBAColor(255, 206, 86), TaskBusinessState.DONE.toString(),
+        new RGBAColor(54, 199, 38), TaskBusinessState.DELAYED.toString(), new RGBAColor(200, 200, 200),
+        TaskBusinessState.DESTROYED.toString(), new RGBAColor(130, 130, 130), TaskBusinessState.ERROR.toString(),
+        new RGBAColor(255, 99, 132));
     var aggrResult = WorkflowStats.current().task().aggregate("businessState", StatisticsTimeResolver.buildTimeQuery(timeDuration));
     return createDonutChartModel(aggrResult, labelToColor);
   }
 
-  public DonutChartModel getCaseByStateGraph() {
-    Map<String, String> labelToColor = Map.of(CaseBusinessState.OPEN.toString(), "rgb(0, 148, 210)",
-        CaseBusinessState.DONE.toString(), "rgb(54, 199, 38)", CaseBusinessState.DESTROYED.toString(),
-        "rgb(130, 130, 130)");
+  public String getCaseByStateGraph() {
+    Map<String, RGBAColor> labelToColor = Map.of(CaseBusinessState.OPEN.toString(), new RGBAColor(0, 148, 210),
+        CaseBusinessState.DONE.toString(), new RGBAColor(54, 199, 38), CaseBusinessState.DESTROYED.toString(),
+        new RGBAColor(130, 130, 130));
     var aggResult = WorkflowStats.current().caze().aggregate("businessState", StatisticsTimeResolver.buildTimeQuery(timeDuration));
     return createDonutChartModel(aggResult, labelToColor);
   }
 
-  public BarChartModel getTopCaseCreatorsModel() {
+  public String getTopCaseCreatorsModel() {
     var aggrResult = WorkflowStats.current().caze().aggregate("creator.name", StatisticsTimeResolver.buildTimeQuery(timeDuration));
     return createBarChartModel(aggrResult, "Cases created", "rgb(255, 159, 64)");
   }
 
-  public BarChartModel getTopTaskWorkersModel() {
+  public String getTopTaskWorkersModel() {
     var aggrResult = WorkflowStats.current().task().aggregate("worker.name", StatisticsTimeResolver.buildCombinedQuery("businessState:DONE", timeDuration));
     return createBarChartModel(aggrResult, "Tasks completed", "rgb(0, 148, 210)");
   }
 
-  private LineChartModel createStartAndFinishLineChart(Map<String, Long> startCountMap, Map<String, Long> endCountMap,
+  private String createStartAndFinishLineChart(Map<String, Long> startCountMap, Map<String, Long> endCountMap,
       String... colors) {
     var color = colors.length > 0 ? colors[0] : "rgb(54, 162, 235)";
-    var startDataSet = createLineChartDataSet(new ArrayList<>(startCountMap.values()), "Started", color);
+    var startDataSet = createLineChartDataSet(new ArrayList<Number>(startCountMap.values()), "Started", color);
     color = colors.length > 1 ? colors[1] : "rgb(255, 99, 132)";
-    var endDataSet = createLineChartDataSet(new ArrayList<>(endCountMap.values()), "Finished", color);
-    var data = new ChartData();
-    data.addChartDataSet(startDataSet);
-    data.addChartDataSet(endDataSet);
-    data.setLabels(new ArrayList<>(startCountMap.keySet()));
+    var endDataSet = createLineChartDataSet(new ArrayList<Number>(endCountMap.values()), "Finished", color);
+    var data = new LineData().addDataset(startDataSet).addDataset(endDataSet)
+        .setLabels(new ArrayList<>(startCountMap.keySet()));
     return createLineChart(data);
   }
 
-  private LineChartDataSet createLineChartDataSet(List<Object> values, String label, String backgroundColor) {
-    var dataSet = new LineChartDataSet();
-    dataSet.setData(values);
-    dataSet.setLabel(label);
-    dataSet.setBackgroundColor(backgroundColor);
-    dataSet.setBorderColor(backgroundColor.replace("rgb", "rgba").replace(")", ", 0.5)"));
-    return dataSet;
+  private LineDataset createLineChartDataSet(List<Number> values, String label, String color) {
+    return new LineDataset().setData(values).setLabel(label).setBackgroundColor(color)
+        .setBorderColor(color.replace("rgb", "rgba").replace(")", ", 0.5)"));
   }
 
   private void processBucket(Bucket bucket, Map<String, Long> timeCountMap, DateTimeFormatter labelFormatter) {
@@ -211,10 +211,8 @@ public class StatisticsBean implements Serializable {
     }
   }
 
-  private LineChartModel createLineChart(ChartData data) {
-    var model = new LineChartModel();
-    model.setData(data);
-    return model;
+  private String createLineChart(LineData data) {
+    return new LineChart(data, new LineOptions().setMaintainAspectRatio(Boolean.FALSE)).toJson();
   }
 
   private long getCountFromAggregation(AggregationResult aggrResult) {
@@ -227,14 +225,13 @@ public class StatisticsBean implements Serializable {
         .orElse(0l);
   }
 
-  private DonutChartModel createDonutChartModel(AggregationResult aggrResult, Map<String, String> labelToColor) {
-    var donutModel = new DonutChartModel();
+  private String createDonutChartModel(AggregationResult aggrResult, Map<String, RGBAColor> labelToColor) {
     if (aggrResult.aggs().isEmpty()) {
       return null;
     }
     List<Number> values = new ArrayList<>();
     List<String> labels = new ArrayList<>();
-    List<String> bgColors = new ArrayList<>();
+    List<RGBAColor> backgroundColors = new ArrayList<>();
     for (var agg : aggrResult.aggs()) {
       if (agg instanceof Buckets buckets) {
         for (Bucket bucket : buckets.buckets()) {
@@ -242,23 +239,17 @@ public class StatisticsBean implements Serializable {
           if (labelToColor.containsKey(key)) {
             values.add(bucket.count());
             labels.add(key);
-            bgColors.add(labelToColor.get(key));
+            backgroundColors.add(labelToColor.get(key));
           }
         }
       }
     }
-    DonutChartDataSet dataSet = new DonutChartDataSet();
-    dataSet.setData(values);
-    dataSet.setBackgroundColor(bgColors);
-    ChartData data = new ChartData();
-    data.addChartDataSet(dataSet);
-    data.setLabels(labels);
-    donutModel.setData(data);
-    return donutModel;
+    var dataSet = new DoughnutDataset().setData(values).addBackgroundColors(backgroundColors);
+    var data = new DoughnutData().addDataset(dataSet).setLabels(labels);
+    return new DoughnutChart(data, new DoughnutOptions().setMaintainAspectRatio(Boolean.FALSE)).toJson();
   }
 
-  private BarChartModel createBarChartModel(AggregationResult agg, String title, String color) {
-    var barModel = new BarChartModel();
+  private String createBarChartModel(AggregationResult agg, String title, String color) {
     if (agg.aggs().isEmpty()) {
       return null;
     }
@@ -272,17 +263,10 @@ public class StatisticsBean implements Serializable {
         }
       }
     }
-    var dataSet = new BarChartDataSet();
-    dataSet.setData(values);
-    dataSet.setLabel(title);
-    dataSet.setBorderColor(color);
-    dataSet.setBorderWidth(2);
-    dataSet.setBackgroundColor(color.replace("rgb", "rgba").replace(")", ", 0.5)"));
-    var data = new ChartData();
-    data.addChartDataSet(dataSet);
-    data.setLabels(labels);
-    barModel.setData(data);
-    return barModel;
+    var dataSet = new BarDataset().setData(values).setLabel(title).setBorderColor(color).setBorderWidth(2)
+      .setBackgroundColor(color.replace("rgb", "rgba").replace(")", ", 0.5)"));
+    var data = new BarData().addDataset(dataSet).setLabels(labels);
+    return new BarChart(data, new BarOptions().setMaintainAspectRatio(Boolean.FALSE)).toJson();
   }
 
   private static String cleanupUsername(String username) {

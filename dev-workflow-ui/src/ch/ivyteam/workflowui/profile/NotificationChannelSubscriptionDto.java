@@ -1,5 +1,7 @@
 package ch.ivyteam.workflowui.profile;
 
+import java.util.Objects;
+
 import ch.ivyteam.ivy.notification.channel.NotificationSubscription;
 
 public class NotificationChannelSubscriptionDto {
@@ -22,11 +24,11 @@ public class NotificationChannelSubscriptionDto {
     this.state = state;
   }
 
-  public String getStateAsString() {
-    return state.toString();
+  public Object getStateAsObject() {
+    return state.value;
   }
 
-  public void setStateAsString(String value) {
+  public void setStateAsObject(Object value) {
     this.state = State.of(value);
   }
 
@@ -51,26 +53,26 @@ public class NotificationChannelSubscriptionDto {
   }
 
   public enum State {
-    USE_DEFAULT("0"), SUBSCRIBED("1"), NOT_SUBSCRIBED("2");
+    USE_DEFAULT(null), SUBSCRIBED(true), NOT_SUBSCRIBED(false);
 
-    private final String value;
+    private final Boolean value;
 
-    State(String value) {
+    State(Boolean value) {
       this.value = value;
     }
 
     @Override
     public String toString() {
-      return value;
+      return String.valueOf(value);
     }
 
-    public static State of(String value) {
+    public static State of(Object bool) {
       for (State state : values()) {
-        if (state.value.equals(value)) {
+        if (Objects.equals(state.value, bool)) {
           return state;
         }
       }
-      throw new IllegalArgumentException("Unexpected value: " + value);
+      throw new IllegalArgumentException("Unexpected value: " + bool);
     }
 
     public static NotificationChannelSubscriptionDto.State fromDbState(NotificationSubscription.State state) {
@@ -84,9 +86,9 @@ public class NotificationChannelSubscriptionDto {
 
     public NotificationSubscription.State toDbState() {
       return switch (value) {
-        case "0" -> NotificationSubscription.State.USE_DEFAULT;
-        case "1" -> NotificationSubscription.State.SUBSCRIBED;
-        case "2" -> NotificationSubscription.State.NOT_SUBSCRIBED;
+        case null -> NotificationSubscription.State.USE_DEFAULT;
+        case Boolean b when b == true -> NotificationSubscription.State.SUBSCRIBED;
+        case Boolean b when b == false -> NotificationSubscription.State.NOT_SUBSCRIBED;
         default -> throw new IllegalArgumentException("Unexpected value: " + value);
       };
     }

@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.exactValue;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.value;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -128,7 +129,7 @@ class WebTestProfileIT {
 
   private void save() {
     $(By.id("profileForm:saveBtn")).click();
-    $(By.id("profileForm:growl_container")).has(text("Profile Saved"));
+    $(By.id("profileForm:growl_container")).shouldHave(visible, text("Profile Saved"));
     Selenide.refresh();
   }
 
