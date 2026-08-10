@@ -2,13 +2,12 @@ package ch.ivyteam.workflowui;
 
 import java.util.stream.Stream;
 
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.faces.context.FacesContext;
-import jakarta.inject.Named;
-
 import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.security.context.EngineCockpitUrlPath;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Named;
 
 @Named
 @RequestScoped
@@ -31,7 +30,7 @@ public class SidebarBean {
   }
 
   public boolean isActive(String... pages) {
-    return Stream.of(pages).anyMatch(page -> activePage.equals(page));
+    return Stream.of(pages).anyMatch(activePage::equals);
   }
 
   public String getCockpitPath() {

@@ -218,8 +218,13 @@ public class StatisticsBean implements Serializable {
   }
 
   private long getCountFromAggregation(AggregationResult aggrResult) {
-    return aggrResult.aggs().stream().filter(Buckets.class::isInstance).map(aggregation -> (Buckets) aggregation)
-        .flatMap(buckets -> buckets.buckets().stream()).map(Bucket::count).findFirst().orElse(0l);
+    return aggrResult.aggs().stream()
+        .filter(Buckets.class::isInstance)
+        .map(Buckets.class::cast)
+        .flatMap(buckets -> buckets.buckets().stream())
+        .map(Bucket::count)
+        .findFirst()
+        .orElse(0l);
   }
 
   private DonutChartModel createDonutChartModel(AggregationResult aggrResult, Map<String, String> labelToColor) {
