@@ -14,6 +14,8 @@ import ch.ivyteam.ivy.workflow.ITask;
 
 public class TestUtil {
 
+  private static Random random = new Random();
+
   public static void makeAdmin() {
     var name = "DeveloperTest";
     Sudo.run(() -> {
@@ -31,7 +33,6 @@ public class TestUtil {
   }
 
   public static void generateTaskAndCaseNotes(ITask task) {
-    var random = new Random();
     var caze = task.getCase();
     var user = notesUser();
     task.notes().add().author(user).content("this is a test note").execute();
