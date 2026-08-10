@@ -3,9 +3,6 @@ package ch.ivyteam.workflowui.homepage;
 import java.io.Serializable;
 import java.util.Set;
 
-import jakarta.faces.view.ViewScoped;
-import jakarta.inject.Named;
-
 import org.primefaces.event.SelectEvent;
 
 import ch.ivyteam.workflowui.cases.StartedCasesDataModel;
@@ -16,6 +13,8 @@ import ch.ivyteam.workflowui.tasks.TasksDataModel;
 import ch.ivyteam.workflowui.util.LastSessionStarts;
 import ch.ivyteam.workflowui.util.TaskUtil;
 import ch.ivyteam.workflowui.util.ViewerUtil;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
 
 @Named
 @ViewScoped
@@ -55,8 +54,8 @@ public class HomepageBean implements Serializable {
 
   public void executeLastStart(SelectEvent<?> event) {
     Object object = event.getObject();
-    if (object instanceof StartableModel) {
-      ((StartableModel) object).execute();
+    if (object instanceof StartableModel model) {
+      model.execute();
     }
   }
 

@@ -48,7 +48,7 @@ public class FrameBean implements Serializable {
   private String checkTaskUrl() {
     var url = UrlUtil.getUrlParameter("taskUrl");
     if (url == null) {
-      return url;
+      return null;
     }
     if (!UriChecker.isRelative(url)) {
       var info = "taskUrl=" + url + "[url=" + UrlUtil.getHttpServletRequest().getRequestURI() + ", query=" + UrlUtil.getHttpServletRequest().getQueryString() + "]";
