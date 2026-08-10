@@ -34,7 +34,7 @@ public class ProjectUtil {
     return getReleasedWorkflowPMVs()
         .flatMap(pmv -> pmv.getStartables(ISession.current()).stream())
         .map(ProjectUtil::createCaseMapOrProcessStartable)
-        .sorted(Comparator.comparing((StartableModel s) -> s.getProjectName())
+        .sorted(Comparator.comparing(StartableModel::getProjectName)
             .thenComparing(s -> s.getCategory().getName(),
                 Comparator.nullsLast(Comparator.comparing(String::isEmpty))
                     .thenComparing(String::compareTo))
