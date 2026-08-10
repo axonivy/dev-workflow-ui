@@ -34,7 +34,7 @@ def build() {
 }
 
 def mvnBuild(def mvnArgs = '') {
-  def phase = 'deploy' //isReleasingBranch() ? 'deploy' : 'verify'
+  def phase = isReleasingBranch() ? 'deploy' : 'verify'
   maven cmd: "clean ${phase} -ntp -Divy.engine.version.latest.minor=true -Dmaven.test.skip=false -Dmaven.test.failure.ignore=true " + mvnArgs
   
   recordIssues tools: [eclipse()], qualityGates: [[threshold: 1, type: 'TOTAL']]
