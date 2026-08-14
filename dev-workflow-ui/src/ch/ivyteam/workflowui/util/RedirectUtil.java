@@ -20,8 +20,7 @@ public class RedirectUtil {
 
   public static void redirectRelative(String url) {
     if (!isSafeLocalRedirect(url)) {
-      throw new RuntimeException(
-          "Redirecting to external websites is not allowed. Tried to redirect to: " + url);
+      throw new RuntimeException("Redirecting to external websites is not allowed. Tried to redirect to: " + url);
     }
     redirect(url);
   }

@@ -2,8 +2,8 @@ package ch.ivyteam.ivy.project.workflow.test;
 
 import static ch.ivyteam.workflowui.util.UserUtil.getRoles;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
@@ -41,13 +41,9 @@ public class TestLogin {
     RedirectUtil.setHandler(handler);
     for (var url : new String[] {"//www.google.com", "https://dev.axonivy.com", "\\evil.com",
         "/%2f%2fevil.com", "/%5cevil.com", "javascript:alert(1)"}) {
-      try {
-        LoginUtil.login("testJunitUser", "testJunitUser", url);
-        fail("Expected rejection for: " + url);
-      } catch (RuntimeException ex) {
-        assertThat(ex.getMessage())
-            .startsWith("Redirecting to external websites is not allowed. Tried to redirect to: " + url);
-      }
+      assertThatThrownBy(() -> LoginUtil.login("testJunitUser", "testJunitUser", url))
+          .isInstanceOf(RuntimeException.class)
+          .hasMessage("Redirecting to external websites is not allowed. Tried to redirect to: " + url);
       assertThat(handler.redirectUrl).isNull();
     }
   }
