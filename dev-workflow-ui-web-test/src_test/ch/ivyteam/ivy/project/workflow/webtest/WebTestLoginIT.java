@@ -6,6 +6,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.logout
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
 import static com.codeborne.selenide.Condition.cssClass;
+import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -13,6 +14,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.WebDriverConditions.urlContaining;
 import static org.assertj.core.api.Assertions.assertThat;
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -136,6 +138,21 @@ class WebTestLoginIT {
     $(".user-profile").shouldBe(visible).click();
     $(By.id("loginTableBtn")).shouldBe(visible).click();
     assertCurrentUrlContains("loginTable.xhtml?originalUrl=taskDetails.xhtml%3Ftask%3D" + taskId);
+  }
+
+  @Test
+  void dontRedirectToDifferentUrl() {
+    openView(LOGIN, Map.of("originalUrl", "//www.google.com"));
+    $(By.id("loginForm:userName")).shouldBe(interactable).clear();
+    $(By.id("loginForm:userName")).sendKeys("DeveloperTest");
+    $(By.id("loginForm:password")).clear();
+    $(By.id("loginForm:password")).sendKeys("DeveloperTest");
+    $(By.id("loginForm:login")).shouldBe(visible).click();
+    $(By.className("exception-content"))
+        .shouldBe(visible)
+        .shouldHave(text(
+            "Redirecting to external websites is not allowed. Tried to redirect to: //www.google.com"));
+    Selenide.webdriver().shouldNotHave(urlContaining("google.com"));
   }
 
   @Test
