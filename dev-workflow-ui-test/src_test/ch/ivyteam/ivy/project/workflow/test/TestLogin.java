@@ -40,7 +40,7 @@ public class TestLogin {
     TestHandler handler = new TestHandler();
     RedirectUtil.setHandler(handler);
     for (var url : new String[] {"//www.google.com", "https://dev.axonivy.com", "\\evil.com",
-        "javascript:alert(1)"}) {
+        "/%2f%2fevil.com", "/%5cevil.com", "javascript:alert(1)"}) {
       try {
         LoginUtil.login("testJunitUser", "testJunitUser", url);
         fail("Expected rejection for: " + url);

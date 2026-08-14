@@ -10,6 +10,7 @@ import org.primefaces.model.menu.MenuModel;
 
 import ch.ivyteam.ivy.bpm.error.BpmError;
 import ch.ivyteam.ivy.dialog.execution.api.DialogInstance;
+import ch.ivyteam.util.uri.UriChecker;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
 import ch.ivyteam.workflowui.util.TaskUtil;

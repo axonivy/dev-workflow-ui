@@ -1,13 +1,13 @@
 package ch.ivyteam.workflowui.util;
 
 import java.io.IOException;
-import java.util.regex.Pattern;
+import java.net.URI;
 
 import javax.faces.context.FacesContext;
 
-public class RedirectUtil {
-  private static final Pattern SCHEME_PATTERN = Pattern.compile("^[a-zA-Z][a-zA-Z0-9+.-]*:");
+import ch.ivyteam.util.uri.UriChecker;
 
+public class RedirectUtil {
   private static RedirectHandler handler = new DefaultHandler();
 
   public static void redirect() {
@@ -19,13 +19,27 @@ public class RedirectUtil {
   }
 
   public static void redirectRelative(String url) {
-    var trimmed = url.trim();
-    if (trimmed.isEmpty() || trimmed.startsWith("//") || trimmed.contains("\\")
-        || SCHEME_PATTERN.matcher(trimmed).find()) {
+    if (!isRelative(url)) {
       throw new RuntimeException(
           "Redirecting to external websites is not allowed. Tried to redirect to: " + url);
     }
     redirect(url);
+  }
+
+  private static boolean isRelative(String url) {
+    if (url == null || url.isBlank()) {
+      return false;
+    }
+    try {
+      var uri = URI.create(url);
+      if (uri.isAbsolute() || uri.getRawAuthority() != null) {
+        return false;
+      }
+      var validationUrl = url.startsWith("/") ? url : "/" + url;
+      return UriChecker.isRelative(validationUrl);
+    } catch (IllegalArgumentException ex) {
+      return false;
+    }
   }
 
   public static interface RedirectHandler {

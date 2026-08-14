@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.request.IHttpResponse;
+import ch.ivyteam.util.uri.UriChecker;
 
 public class DefaultFramePageHandler {
 
