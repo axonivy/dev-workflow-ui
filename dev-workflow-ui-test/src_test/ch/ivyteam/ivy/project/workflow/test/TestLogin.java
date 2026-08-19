@@ -23,7 +23,7 @@ public class TestLogin {
     TestHandler handler = new TestHandler();
     RedirectUtil.setHandler(handler);
     login();
-    assertThat(handler.redirectUrl).isEqualTo("home.xhtml");
+    assertThat(handler.redirectUrl).isEqualTo("/home.xhtml");
     assertThat(ISession.current().getSessionUser().getName()).isEqualTo("testJunitUser");
   }
 
@@ -54,7 +54,7 @@ public class TestLogin {
     TestHandler handler = new TestHandler();
     RedirectUtil.setHandler(handler);
     LoginUtil.login("testJunitUser", "testJunitUser", "tasks.xhtml");
-    assertThat(handler.redirectUrl).isEqualTo("tasks.xhtml");
+    assertThat(handler.redirectUrl).isEqualTo("/tasks.xhtml");
     assertThat(ISession.current().getSessionUser().getName()).isEqualTo("testJunitUser");
   }
 

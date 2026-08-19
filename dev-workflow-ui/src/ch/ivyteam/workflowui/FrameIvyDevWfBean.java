@@ -48,7 +48,7 @@ public class FrameIvyDevWfBean {
     if (url == null) {
       return url;
     }
-    if (!UriChecker.isSafeLocalRedirect(url)) {
+    if (!UriChecker.isSafeRootRelativeRedirect(url)) {
       var info = "taskUrl=" + url + "[url=" + UrlUtil.getHttpServletRequest().getRequestURI() + ", query=" + UrlUtil.getHttpServletRequest().getQueryString() + "]";
       throw BpmError.create("frame:unsupported:url")
           .withMessage("Only relative urls are supported (security reasons): " + info).build();
