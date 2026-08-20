@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URI;
 
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import ch.ivyteam.util.uri.UriChecker;
 
@@ -19,30 +20,42 @@ public class RedirectUtil {
   }
 
   public static void redirectRelative(String url) {
-    if (!isRelative(url)) {
-      throw new RuntimeException(
-          "Redirecting to external websites is not allowed. Tried to redirect to: " + url);
+    var redirectUrl = resolveRedirectUrl(url);
+    if (!UriChecker.isSafeRootRelativeRedirect(redirectUrl)) {
+      throw new RuntimeException("Redirecting to external websites is not allowed. Tried to redirect to: " + url);
     }
-    redirect(url);
+    redirect(redirectUrl);
   }
 
-  private static boolean isRelative(String url) {
-    if (url == null || url.isBlank()) {
-      return false;
-    }
-    try {
-      var uri = URI.create(url);
-      if (uri.isAbsolute() || uri.getRawAuthority() != null) {
-        return false;
+  private static String resolveRedirectUrl(String originalUrl) {
+    var redirectUrl = originalUrl;
+    if (redirectUrl != null && !redirectUrl.startsWith("/")) {
+      try {
+        if (URI.create(redirectUrl).isAbsolute()) {
+          return null;
+        }
+        redirectUrl = "/" + redirectUrl;
+      } catch (IllegalArgumentException ex) {
+        return null;
       }
-      var validationUrl = url.startsWith("/") ? url : "/" + url;
-      return UriChecker.isRelative(validationUrl);
-    } catch (IllegalArgumentException ex) {
-      return false;
     }
+    if (!UriChecker.isSafeRootRelativeRedirect(redirectUrl)) {
+      return null;
+    }
+    var context = FacesContext.getCurrentInstance();
+    if (context == null
+        || !(context.getExternalContext().getRequest() instanceof HttpServletRequest request)) {
+      return redirectUrl;
+    }
+    var requestUri = request.getRequestURI();
+    var lastSlash = requestUri == null ? -1 : requestUri.lastIndexOf('/');
+    if (lastSlash < 0) {
+      return null;
+    }
+    return requestUri.substring(0, lastSlash + 1) + redirectUrl.substring(1);
   }
 
-  public static interface RedirectHandler {
+  public interface RedirectHandler {
     void redirect(String url);
   }
 

@@ -43,7 +43,7 @@ public class FrameIvyDevWfBean {
 
   private String checkTaskUrl() {
     var url = UrlUtil.getUrlParameter("taskUrl");
-    if (url != null && UriChecker.isRelative(url)) {
+    if (url != null && UriChecker.isSafeRootRelativeRedirect(url)) {
       return url;
     }
     throw BpmError.create("frame:unsupported:url")

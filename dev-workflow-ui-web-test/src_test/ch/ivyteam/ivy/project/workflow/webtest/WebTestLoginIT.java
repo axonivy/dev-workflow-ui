@@ -14,7 +14,6 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.WebDriverConditions.urlContaining;
 import static org.assertj.core.api.Assertions.assertThat;
-import java.util.Map;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -142,7 +141,7 @@ class WebTestLoginIT {
 
   @Test
   void dontRedirectToDifferentUrl() {
-    openView(LOGIN, Map.of("originalUrl", "//www.google.com"));
+    openView(LOGIN + "?originalUrl=//www.google.com");
     $(By.id("loginForm:userName")).shouldBe(interactable).clear();
     $(By.id("loginForm:userName")).sendKeys("DeveloperTest");
     $(By.id("loginForm:password")).clear();
