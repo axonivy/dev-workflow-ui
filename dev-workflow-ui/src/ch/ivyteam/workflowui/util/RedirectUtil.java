@@ -52,7 +52,7 @@ public class RedirectUtil {
     if (lastSlash < 0) {
       return null;
     }
-    return requestUri.substring(0, lastSlash + 1) + redirectUrl.substring(1);
+    return requestUri.substring(0, lastSlash) + redirectUrl;
   }
 
   public interface RedirectHandler {
