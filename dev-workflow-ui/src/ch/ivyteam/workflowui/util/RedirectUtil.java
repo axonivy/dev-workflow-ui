@@ -1,8 +1,12 @@
 package ch.ivyteam.workflowui.util;
 
 import java.io.IOException;
+import java.net.URI;
 
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+
+import ch.ivyteam.util.uri.UriChecker;
 
 public class RedirectUtil {
   private static RedirectHandler handler = new DefaultHandler();
@@ -15,7 +19,43 @@ public class RedirectUtil {
     handler.redirect(url);
   }
 
-  public static interface RedirectHandler {
+  public static void redirectRelative(String url) {
+    var redirectUrl = resolveRedirectUrl(url);
+    if (!UriChecker.isSafeRootRelativeRedirect(redirectUrl)) {
+      throw new RuntimeException("Redirecting to external websites is not allowed. Tried to redirect to: " + url);
+    }
+    redirect(redirectUrl);
+  }
+
+  private static String resolveRedirectUrl(String originalUrl) {
+    var redirectUrl = originalUrl;
+    if (redirectUrl != null && !redirectUrl.startsWith("/")) {
+      try {
+        if (URI.create(redirectUrl).isAbsolute()) {
+          return null;
+        }
+        redirectUrl = "/" + redirectUrl;
+      } catch (IllegalArgumentException ex) {
+        return null;
+      }
+    }
+    if (!UriChecker.isSafeRootRelativeRedirect(redirectUrl)) {
+      return null;
+    }
+    var context = FacesContext.getCurrentInstance();
+    if (context == null
+        || !(context.getExternalContext().getRequest() instanceof HttpServletRequest request)) {
+      return redirectUrl;
+    }
+    var requestUri = request.getRequestURI();
+    var lastSlash = requestUri == null ? -1 : requestUri.lastIndexOf('/');
+    if (lastSlash < 0) {
+      return null;
+    }
+    return requestUri.substring(0, lastSlash) + redirectUrl;
+  }
+
+  public interface RedirectHandler {
     void redirect(String url);
   }
 

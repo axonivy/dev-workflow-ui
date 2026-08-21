@@ -10,6 +10,7 @@ import org.primefaces.model.menu.MenuModel;
 
 import ch.ivyteam.ivy.bpm.error.BpmError;
 import ch.ivyteam.ivy.dialog.execution.api.DialogInstance;
+import ch.ivyteam.util.uri.UriChecker;
 import ch.ivyteam.workflowui.casemap.SidestepModel;
 import ch.ivyteam.workflowui.casemap.SidestepUtil;
 import ch.ivyteam.workflowui.util.TaskUtil;
@@ -42,7 +43,7 @@ public class FrameIvyDevWfBean {
 
   private String checkTaskUrl() {
     var url = UrlUtil.getUrlParameter("taskUrl");
-    if (url != null && UriChecker.isRelative(url)) {
+    if (url != null && UriChecker.isSafeRootRelativeRedirect(url)) {
       return url;
     }
     throw BpmError.create("frame:unsupported:url")
