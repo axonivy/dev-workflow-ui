@@ -53,7 +53,7 @@ public class LoginUtil {
 
   private static boolean checkLoginAndRedirect(String username, String password, String originalUrl) {
     if (ISession.current().loginSessionUser(username, password)) {
-      RedirectUtil.redirect(StringUtils.isNotBlank(originalUrl) ? originalUrl : "home.xhtml");
+      RedirectUtil.redirectRelative(StringUtils.isNotBlank(originalUrl) ? originalUrl : "home.xhtml");
       return true;
     }
     return false;
