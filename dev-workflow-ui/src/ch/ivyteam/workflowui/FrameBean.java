@@ -50,7 +50,7 @@ public class FrameBean implements Serializable {
     if (url == null) {
       return null;
     }
-    if (!UriChecker.isRelative(url)) {
+    if (!UriChecker.isSafeRootRelativeRedirect(url)) {
       var info = "taskUrl=" + url + "[url=" + UrlUtil.getHttpServletRequest().getRequestURI() + ", query=" + UrlUtil.getHttpServletRequest().getQueryString() + "]";
       throw BpmError.create("frame:unsupported:url").withMessage("Only relative urls are supported (security reasons): " + info).build();
     }
