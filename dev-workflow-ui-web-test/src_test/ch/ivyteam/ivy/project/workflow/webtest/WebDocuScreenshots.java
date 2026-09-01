@@ -3,7 +3,9 @@ package ch.ivyteam.ivy.project.workflow.webtest;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginDeveloper;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.startTestProcess;
+import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.enabled;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
@@ -36,6 +38,7 @@ class WebDocuScreenshots {
   @Test
   void screenshotMainPages() {
     openView("home.xhtml");
+    resizeBrowser(new Dimension(SCREENSHOT_WIDTH, 1000));
     loginDeveloper();
     startTestProcess("1750C5211D94569D/TestData.ivp");
 
@@ -80,6 +83,10 @@ class WebDocuScreenshots {
     openView("cases.xhtml");
     $(By.id("casesForm:cases:0:caseName")).shouldBe(visible).click();
     takeScreenshot("workflow-ui-caseMap", new Dimension(SCREENSHOT_WIDTH, 800));
+    $(By.id("sidestepsBtn")).shouldBe(visible).click();
+    $(By.id("sidestepMenu")).find(By.cssSelector(".ui-menuitem-text")).shouldHave(text("TestData"));
+    $(By.id("sidestepsBtn")).shouldNotHave(cssClass("ui-state-loading"));
+    takeScreenshot("workflow-ui-caseMap-sidestepMenu", new Dimension(SCREENSHOT_WIDTH, 800));
 
     startTestProcess("1750C5211D94569D/testIntermediateEventProcess.ivp");
     openView("intermediate-events.xhtml");
