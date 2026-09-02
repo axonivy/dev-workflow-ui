@@ -4,10 +4,13 @@
   "namespace" : "ch.ivyteam.ivy.project.workflow.TestDialog1",
   "fields" : [ {
     "name" : "data",
-    "type" : "ch.ivyteam.ivy.project.workflow.Data"
+    "type" : "ch.ivyteam.ivy.project.workflow.Data",
+    "modifiers" : [ ]
   }, {
-    "name" : "testSelectOneMenu"
+    "name" : "testSelectOneMenu",
+    "modifiers" : [ ]
   }, {
-    "name" : "testInput"
+    "name" : "testInput",
+    "modifiers" : [ ]
   } ]
 }
