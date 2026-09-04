@@ -8,7 +8,7 @@ import ch.ivyteam.util.IAttributeStore;
 
 public class SessionFilters {
 
-  private final static String ATTRIBUTE_NAME = "sessionProjectFilters";
+  private static final String ATTRIBUTE_NAME = "sessionProjectFilters";
 
   private final IAttributeStore<Set<String>> session;
 
