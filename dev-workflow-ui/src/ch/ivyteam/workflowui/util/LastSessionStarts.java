@@ -11,7 +11,7 @@ import ch.ivyteam.workflowui.starts.StartableModel;
 
 public class LastSessionStarts {
 
-  private final static String ATTRIBUTE_NAME = "lastStarts";
+  private static final String ATTRIBUTE_NAME = "lastStarts";
 
   private final IAttributeStore<Set<StartableModel>> session;
 
