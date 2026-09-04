@@ -100,7 +100,7 @@ class WebTestLoginIT {
   void customLogin() {
     WorkflowUiUtil.login("DeveloperTest", "DeveloperTest");
     assertThat(STATUS.code).isEqualTo(302);
-    assertThat(STATUS.isAjax).isEqualTo(false);
+    assertThat(STATUS.isAjax).isFalse();
   }
 
   @Test
@@ -109,7 +109,7 @@ class WebTestLoginIT {
     $("#loginForm\\:loginMessage").shouldNotBe(visible);
     WorkflowUiUtil.tryLogin("sadgs", "sdgasgd");
     assertThat(STATUS.code).isEqualTo(401);
-    assertThat(STATUS.isAjax).isEqualTo(false);
+    assertThat(STATUS.isAjax).isFalse();
     $("#loginForm\\:loginMessage").shouldBe(visible);
   }
 

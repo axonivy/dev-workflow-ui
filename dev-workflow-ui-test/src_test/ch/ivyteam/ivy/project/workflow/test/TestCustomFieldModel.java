@@ -98,7 +98,7 @@ class TestCustomFieldModel {
   void description_noLocalization() {
     description = null;
     testee = new CustomFieldModel(customField);
-    assertThat(testee.getDescription()).isEqualTo("");
+    assertThat(testee.getDescription()).isEmpty();
   }
 
   @Test
