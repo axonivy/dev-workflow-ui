@@ -37,7 +37,7 @@ public class SessionFilters {
       return session.getAttribute(ATTRIBUTE_NAME);
     } catch (ClassCastException _) {
       clear();
-      return null;
+      return Set.of();
     }
   }
 
