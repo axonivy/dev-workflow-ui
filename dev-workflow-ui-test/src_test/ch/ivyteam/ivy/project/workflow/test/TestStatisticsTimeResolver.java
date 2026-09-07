@@ -11,10 +11,10 @@ import org.junit.jupiter.api.Test;
 import ch.ivyteam.workflowui.statistics.StatisticsTimeResolver;
 import ch.ivyteam.workflowui.statistics.StatisticsTimeResolver.TimeResolution;
 
-public class TestStatisticsTimeResolver {
+class TestStatisticsTimeResolver {
 
   @Test
-  public void testGetResolutionForDuration() {
+  void testGetResolutionForDuration() {
     TimeResolution todayResolution = StatisticsTimeResolver.getResolutionForDuration("today");
     assertThat(todayResolution.bucketType).isEqualTo("hour");
     assertThat(todayResolution.dataPoints).isEqualTo(24);
@@ -42,7 +42,7 @@ public class TestStatisticsTimeResolver {
   }
 
   @Test
-  public void testBuildTimeQuery() {
+  void testBuildTimeQuery() {
     assertThat(StatisticsTimeResolver.buildTimeQuery("all")).isNull();
     assertThat(StatisticsTimeResolver.buildTimeQuery("today")).isEqualTo("startTimestamp:>=now/d");
     assertThat(StatisticsTimeResolver.buildTimeQuery("24h")).isEqualTo("startTimestamp:>=now-24h");
@@ -52,7 +52,7 @@ public class TestStatisticsTimeResolver {
   }
 
   @Test
-  public void testBuildCombinedQuery() {
+  void testBuildCombinedQuery() {
     assertThat(StatisticsTimeResolver.buildCombinedQuery("businessState:DONE", "all"))
         .isEqualTo("businessState:DONE");
 
@@ -67,7 +67,7 @@ public class TestStatisticsTimeResolver {
   }
 
   @Test
-  public void testInitializeTimeMapToday() {
+  void testInitializeTimeMapToday() {
     TimeResolution resolution = StatisticsTimeResolver.getResolutionForDuration("today");
     var timeMap = StatisticsTimeResolver.initializeTimeMap("today", resolution);
 
@@ -82,7 +82,7 @@ public class TestStatisticsTimeResolver {
   }
 
   @Test
-  public void testInitializeTimeMapStandard() {
+  void testInitializeTimeMapStandard() {
     TimeResolution resolution = StatisticsTimeResolver.getResolutionForDuration("7d/d");
     var timeMap = StatisticsTimeResolver.initializeTimeMap("7d/d", resolution);
 
@@ -96,7 +96,7 @@ public class TestStatisticsTimeResolver {
   }
 
   @Test
-  public void testInitializeTimeMapWeeklySampling() {
+  void testInitializeTimeMapWeeklySampling() {
     TimeResolution resolution = StatisticsTimeResolver.getResolutionForDuration("90d/d");
     var timeMap = StatisticsTimeResolver.initializeTimeMap("90d/d", resolution);
 
@@ -107,7 +107,7 @@ public class TestStatisticsTimeResolver {
   }
 
   @Test
-  public void testInitializeTimeMapMonthly() {
+  void testInitializeTimeMapMonthly() {
     TimeResolution resolution = StatisticsTimeResolver.getResolutionForDuration("365d/d");
     var timeMap = StatisticsTimeResolver.initializeTimeMap("365d/d", resolution);
 
@@ -120,7 +120,7 @@ public class TestStatisticsTimeResolver {
   }
 
   @Test
-  public void testTimeResolutionLabelFormatting() {
+  void testTimeResolutionLabelFormatting() {
     TimeResolution hourResolution = new TimeResolution("hour", 24, "HH:mm");
     var testTime = ZonedDateTime.of(2023, 12, 15, 14, 30, 0, 0, ZoneId.systemDefault());
     assertThat(hourResolution.labelFormatter.format(testTime)).isEqualTo("14:30");
