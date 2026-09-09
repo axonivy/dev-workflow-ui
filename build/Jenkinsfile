@@ -17,7 +17,7 @@ pipeline {
     stage('check editorconfig') {
       steps {
         script {
-          docker.build('ec', '-f build/Dockerfile.editorconfig .').inside {
+          docker.build('editorconfig-checker', '-f build/Dockerfile.editorconfig .').inside {
             warnError('There are some editor errors') {
               sh 'editorconfig-checker -no-color'
             } 
