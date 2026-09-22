@@ -61,8 +61,8 @@
             "Random random = new Random();",
             "String number = random.nextInt(100000).toString();",
             "",
-            "task.getCase().documents().add(Path.of([\"Test\" + number, \"test.txt\"])).write().withContentFrom(\"this is test document\");",
-            "task.getCase().documents().add(Path.of([\"Test\" + number, \"documentTest.txt\"])).write().withContentFrom(\"document. you can read this correctly\");",
+            "task.getCase().documents().add(Path.of(\"Test\" + number + \"/test.txt\")).write().withContentFrom(\"this is test document\");",
+            "task.getCase().documents().add(Path.of(\"Test\" + number + \"/documentTest.txt\")).write().withContentFrom(\"document. you can read this correctly\");",
             "",
             "TestUtil.generateTaskAndCaseNotes(task);"
           ]
@@ -586,8 +586,8 @@
             "Random random = new Random();",
             "String number = random.nextInt(100000).toString();",
             "",
-            "task.getCase().documents().add(Path.of([\"Test\" + number, \"test.txt\"])).write().withContentFrom(\"this is test document\");",
-            "task.getCase().documents().add(Path.of([\"Test\" + number, \"documentTest.txt\"])).write().withContentFrom(\"document. you can read this correctly\");"
+            "task.getCase().documents().add(Path.of(\"Test\" + number + \"/test.txt\")).write().withContentFrom(\"this is test document\");",
+            "task.getCase().documents().add(Path.of(\"Test\" + number + \"/documentTest.txt\")).write().withContentFrom(\"document. you can read this correctly\");"
           ]
         },
         "case" : {
