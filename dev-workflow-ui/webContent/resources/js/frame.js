@@ -5,6 +5,7 @@ function iframeURLChange() {
   }
 
   var lastDispatched = null;
+  var sameOriginLoadSucceeded = false;
 
   const redirectMainWindow = (newHref, iframe) => {
     const originPage = new URLSearchParams(window.location.search).get("origin");
@@ -56,17 +57,54 @@ function iframeURLChange() {
     iframe.contentWindow.addEventListener("unload", unloadHandler);
   };
 
+  const externalLinkHandler = (event) => {
+    const link = event.target.closest?.("a[href]");
+    if (!link) {
+      return;
+    }
+
+    if (
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      (link.target && !["_self", "_top", "_parent"].includes(link.target.toLowerCase()))
+    ) {
+      return;
+    }
+
+    const linkUrl = new URL(link.href, iframe.contentDocument.baseURI);
+    if (
+      !["http:", "https:"].includes(linkUrl.protocol) ||
+      linkUrl.origin === window.location.origin
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    window.top.location.href = linkUrl.href;
+  };
+
+  const attachExternalLinkHandler = () => {
+    iframe.contentDocument.removeEventListener("click", externalLinkHandler, true);
+    iframe.contentDocument.addEventListener("click", externalLinkHandler, true);
+  };
+
   iframe.addEventListener("load", function () {
     try {
       // Try to access loaded iframe content
       iframe.contentWindow.content;
+      sameOriginLoadSucceeded = true;
       attachUnload();
+      attachExternalLinkHandler();
       // Just in case the change wasn't dispatched during the unload event...
       dispatchChange();
       iframe.style.visibility = "visible";
     } catch (e) {
       // Open iframe content in current window if it could not be loaded
-      window.location = iframe.src;
+      if (!sameOriginLoadSucceeded) {
+        window.location = iframe.src;
+      }
     }
   });
 
