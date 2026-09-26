@@ -180,6 +180,10 @@ class WebTestLoginIT {
     $(".user-profile").shouldBe(visible).click();
     $(By.id("loginTableBtn")).shouldBe(visible).click();
     assertCurrentUrlContains("switch-user.xhtml?origin=task%3Fid%3D" + taskId);
+
+    $(By.id("loginTable")).find(byText("testuser")).shouldBe(visible).click();
+    assertCurrentUrlContains("task.xhtml?id=" + taskId);
+    $(By.id("taskId")).shouldBe(exactText(taskId));
   }
 
   @Test

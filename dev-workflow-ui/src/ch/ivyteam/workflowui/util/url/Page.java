@@ -54,13 +54,6 @@ public enum Page {
     return view.substring(0, dotIndex);
   }
 
-  public static Page fromString(String value) {
-    if (value == null || value.isBlank()) {
-      return null;
-    }
-    return LOOKUP_BY_ORIGIN_NAME.get(value);
-  }
-
   public static Optional<Page> of(String value) {
     return Optional.ofNullable(LOOKUP_BY_ORIGIN_NAME.get(value));
   }

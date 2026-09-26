@@ -6,6 +6,8 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
 import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.security.restricted.IUserInternal;
@@ -60,12 +62,19 @@ public class LoginUtil {
 
   static void redirectAfterLogin(String origin, String originalUrl) {
     if (origin != null && !origin.isBlank()) {
-      RedirectUtil.redirect(Page.fromString(origin));
+      redirectToOrigin(origin);
     } else if (originalUrl != null && !originalUrl.isBlank()) {
       RedirectUtil.redirectRelative(originalUrl);
     } else {
       RedirectUtil.redirect();
     }
+  }
+
+  private static void redirectToOrigin(String origin) {
+    var query = StringUtils.substringAfter(origin, "?");
+    Page.of(StringUtils.substringBefore(origin, "?")).ifPresentOrElse(
+        page -> RedirectUtil.redirectUnsafe(query.isEmpty() ? page.getView() : page.getView() + "?" + query),
+        RedirectUtil::redirect);
   }
 
   public static void logout() {
