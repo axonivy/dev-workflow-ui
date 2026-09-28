@@ -4,6 +4,7 @@ const initDomSelector = () => {
   let selectionOverlay = null;
   let hoveredElement = null;
   let originalOutline = '';
+  const togglePickerButtonStyle = () => document.querySelector("#iFrameForm\\:previewElementPicker")?.classList.toggle('ui-button-outlined');
 
   const stopEvent = (event) => {
     event.preventDefault();
@@ -105,6 +106,7 @@ const initDomSelector = () => {
 
   const toggleSelectionMode = () => {
     isSelecting = !isSelecting;
+    togglePickerButtonStyle();
     if (isSelecting) {
       startSelectionMode();
     } else {
