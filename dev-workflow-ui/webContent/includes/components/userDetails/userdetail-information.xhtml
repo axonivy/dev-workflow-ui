@@ -22,7 +22,7 @@
     </p:panelGrid>
 
     <p:panelGrid columns="2" columnClasses="col-12 md:col-4 lg:col-4, col-12 md:col-8 lg:col-8" layout="flex"
-      styleClass="grey-label-panel ui-fluid" rendered="#{user.external and !user.ivySecuritySystem}">
+      styleClass="grey-label-panel ui-fluid" rendered="#{user.external and user.securityContext.managed()}">
       <label>#{ivy.cm.co('/common/externalName')}</label>
       <h:outputText id="externalName" value="#{user.externalName}" />
       <label>#{ivy.cm.co('/common/externalId')}</label>

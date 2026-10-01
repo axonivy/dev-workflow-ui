@@ -111,7 +111,7 @@
                   <jc:stateBadge id="caseState" data="#{case}"/>
                 </p:column>
 
-                <p:column headerText="#{ivy.cm.co('/common/name')}" filterBy="#{case.getName(case)}" sortBy="#{case.name}">
+                <p:column headerText="#{ivy.cm.co('/common/name')}" filterBy="#{casesBean.getName(case)}" sortBy="#{case.name}">
                   <h:outputText id="caseName" value="#{casesBean.getName(case)}" />
                 </p:column>
 
