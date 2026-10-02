@@ -69,10 +69,10 @@
                 <h:panelGroup>
                   <p:badge value="#{processesBean.startsDataModel.projectFilterModel.appliedProjects.size()}"
                     visible="#{processesBean.startsDataModel.projectFilterModel.projectFilterActive}">
-                    <p:commandButton id="filterBtn" value="#{ivy.cm.co('/starts/projects')}" binding="#{filterBtn}" icon="ti ti-filter"
+                    <p:commandButton id="filterBtn" widgetVar="filterBtn" value="#{ivy.cm.co('/starts/projects')}" icon="ti ti-filter"
                       styleClass="ui-button-secondary #{!processesBean.startsDataModel.projectFilterModel.projectFilterActive ? 'ui-button-outlined' : ''}"
                       rendered="#{!processesBean.startsDataModel.onlySingleProject}"
-                      actionListener="#{processesBean.initFilter}" oncomplete="PF('filterPanel').show('#{filterBtn.clientId}')" />
+                      actionListener="#{processesBean.initFilter}" oncomplete="PF('filterPanel').show(PF('filterBtn').jq)" />
                   </p:badge>
                 </h:panelGroup>
               </h:panelGroup>
@@ -148,7 +148,7 @@
           link="#{processesBean.viewerLink}" />
       </h:form>
 
-      <script>
+      <script type="text/javascript">
         function handleBrowserNavigation(event) {
           // reload the page when user navigates back/forward
           // needed for when table filter is being written to the URL and then the user navigates back
