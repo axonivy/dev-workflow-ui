@@ -45,14 +45,14 @@
         <hr/>
         <iframe id="iFrame" src="#{frameBean.taskUrl}" style="height: calc(100vh - 205px); width: 100%; border: 0; visibility: hidden;"></iframe>
       </div>
-      <script>
+      <script type="text/javascript">
         let preview;
       </script>
       <h:outputScript rendered="#{permissionsBean.demoOrDevMode}">
         preview = initPreview("#{frameBean.baseUrl}");
         const selector = initDomSelector();
       </h:outputScript>
-      <script>
+      <script type="text/javascript">
         iframeURLChange();
       </script>
     </ui:define>
