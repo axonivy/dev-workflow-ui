@@ -4,7 +4,7 @@
 
   <groupId>ch.ivyteam.ivy</groupId>
   <artifactId>system-cms</artifactId>
-  <version>14.0.1-SNAPSHOT</version>
+  <version>14.0.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   
   <distributionManagement>
