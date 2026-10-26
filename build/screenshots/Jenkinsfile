@@ -35,5 +35,5 @@ def getScreenshotRefBranch() {
   if (isReleasingBranch() && currentBuild.previousSuccessfulBuild != null) {
     return env.BRANCH_NAME.replace('/', '%252F')
   }
-  return 'master'
+  return 'release%252F12.0'
 }

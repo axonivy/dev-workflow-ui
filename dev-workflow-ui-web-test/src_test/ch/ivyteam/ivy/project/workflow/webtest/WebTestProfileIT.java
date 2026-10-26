@@ -4,9 +4,9 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginF
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.cssClass;
+import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.exactValue;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Selenide.$;
@@ -32,28 +32,10 @@ class WebTestProfileIT {
 
   @Test
   void profile() {
-    $(By.id("profileForm:userName")).shouldBe(exactText("testuser"));
-
+    $(By.id("profileForm:userName")).shouldHave(value("testuser"), disabled);
+    $(By.id("profileForm:email")).shouldHave(value("example@example.com"), disabled);
+    $(By.id("profileForm:fullName")).shouldHave(value("testuser"), disabled);
     $(By.id("profileForm:roles")).shouldBe(exactText("Everybody, testrole1, testrole2, testrole3"));
-
-    var email = $(By.id("profileForm:email"));
-    var fullName = $(By.id("profileForm:fullName"));
-
-    email.shouldBe(empty);
-    email.sendKeys("any@email.com");
-    fullName.shouldBe(exactValue("testuser"));
-    fullName.setValue("fullname for test");
-    save();
-
-    email.shouldBe(exactValue("any@email.com"));
-    fullName.shouldBe(exactValue("fullname for test"));
-
-    email.clear();
-    fullName.setValue("testuser");
-    save();
-
-    email.shouldBe(empty);
-    fullName.shouldBe(exactValue("testuser"));
   }
 
   @Test
@@ -91,7 +73,8 @@ class WebTestProfileIT {
   void notifications() {
     Table table = new Table(By.id("profileForm:notificationChannelsTable"));
     var webNewTaskIcon = $(By.className("subscription-icon"));
-    var webNewTaskCheckbox = $(By.id("profileForm:notificationChannelsTable:0:channels:0:subscriptionCheckbox")).lastChild().lastChild();
+    var webNewTaskCheckbox = $(By.id("profileForm:notificationChannelsTable:0:channels:0:subscriptionCheckbox"))
+        .lastChild().lastChild();
 
     table.valueAtShouldBe(0, 0, text("New task assigned"));
     table.valueAtShouldBe(1, 0, text("Business Information"));
