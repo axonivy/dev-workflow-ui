@@ -2,6 +2,7 @@
 <userConfig>
     <user>
         <username>testuser</username>
+        <emailAddress>example@example.com</emailAddress>
         <role>testrole1</role>
         <role>testrole2</role>
         <role>testrole3</role>

@@ -21,13 +21,13 @@
           <p:growl id="growl" showDetail="true" />
           <p:panelGrid columns="2" layout="flex" columnClasses="p-col-12 p-md-3, p-col-12 p-md-9">
             <h:outputLabel for="userName" styleClass="details-description-label">User Name</h:outputLabel>
-            <h:outputText id="userName" value="#{profileBean.userName}"></h:outputText>
+            <p:inputText id="userName" value="#{profileBean.userName}" disabled="true"/>
 
             <h:outputLabel for="fullName" styleClass="details-description-label">Full name</h:outputLabel>
-            <p:inputText id="fullName" value="#{profileBean.fullName}"></p:inputText>
+            <p:inputText id="fullName" value="#{profileBean.fullName}" disabled="true" />
 
             <h:outputLabel for="email" styleClass="details-description-label">Email</h:outputLabel>
-            <p:inputText id="email" value="#{profileBean.email}"></p:inputText>
+            <p:inputText id="email" value="#{profileBean.email}" disabled="true" />
 
             <h:outputLabel for="contentLanguage" styleClass="details-description-label">Language</h:outputLabel>
             <h:panelGroup>
