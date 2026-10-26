@@ -4,6 +4,7 @@ import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.loginF
 import static ch.ivyteam.ivy.project.workflow.webtest.util.WorkflowUiUtil.openView;
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.cssClass;
+import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.exactValue;
 import static com.codeborne.selenide.Condition.text;
@@ -34,28 +35,10 @@ class WebTestProfileIT {
 
   @Test
   void profile() {
-    $(By.id("profileForm:userName")).shouldHave(value("testuser"));
-
+    $(By.id("profileForm:userName")).shouldHave(value("testuser"), disabled);
+    $(By.id("profileForm:email")).shouldHave(value("example@example.com"), disabled);
+    $(By.id("profileForm:fullName")).shouldHave(exactValue("testuser"), disabled);
     $$("#roles span").shouldHave(CollectionCondition.containExactTextsCaseSensitive("Everybody", "testrole1", "testrole2", "testrole3"));
-
-    var email = $(By.id("profileForm:email"));
-    var fullName = $(By.id("profileForm:fullName"));
-
-    email.shouldBe(empty);
-    email.sendKeys("any@email.com");
-    fullName.shouldBe(exactValue("testuser"));
-    fullName.setValue("fullname for test");
-    save();
-
-    email.shouldBe(exactValue("any@email.com"));
-    fullName.shouldBe(exactValue("fullname for test"));
-
-    email.clear();
-    fullName.setValue("testuser");
-    save();
-
-    email.shouldBe(empty);
-    fullName.shouldBe(exactValue("testuser"));
   }
 
   @Test
