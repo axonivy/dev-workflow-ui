@@ -3,6 +3,7 @@
     <user>
         <username>testuser</username>
         <password>testuser</password>
+        <emailAddress>example@example.com</emailAddress>
         <role>testrole1</role>
         <role>testrole2</role>
         <role>testrole3</role>
