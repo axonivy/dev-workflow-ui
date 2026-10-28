@@ -13,13 +13,11 @@ import ch.ivyteam.workflowui.util.CaseUtil;
 
 public class CaseModel {
   private ICase caze;
-  private String owners;
 
   public CaseModel() {}
 
   CaseModel(ICase caze) {
     this.caze = caze;
-    this.owners = caze.owners().all().stream().map(CaseOwner::memberName).collect(Collectors.joining(", "));
   }
 
   public ICase getCase() {
@@ -39,7 +37,7 @@ public class CaseModel {
   }
 
   public String getOwners() {
-    return owners;
+    return caze.owners().all().stream().map(CaseOwner::memberName).collect(Collectors.joining(", "));
   }
 
   public String getCreatorUserName() {

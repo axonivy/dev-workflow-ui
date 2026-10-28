@@ -11,6 +11,7 @@ import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.workflowui.starts.CustomFieldsHelper;
+import ch.ivyteam.workflowui.tasks.TaskDetailModel;
 import ch.ivyteam.workflowui.tasks.TaskModel;
 import ch.ivyteam.workflowui.util.url.Page;
 
@@ -60,17 +61,21 @@ public class TaskUtil {
   }
 
   public static void executeTask(TaskModel task) {
+    executeTask(new TaskDetailModel(task.getId()));
+  }
+
+  public static void executeTask(TaskDetailModel task) {
     RedirectUtil.redirectUnsafe(createTaskUrl(task));
   }
 
-  public static String createTaskUrl(TaskModel task) {
+  public static String createTaskUrl(TaskDetailModel task) {
     if (shouldOpenInFrame(task)) {
       return UrlUtil.generateStartFrameUrl(task.getStartLink());
     }
     return task.getStartLink().get();
   }
 
-  private static boolean shouldOpenInFrame(TaskModel task) {
+  private static boolean shouldOpenInFrame(TaskDetailModel task) {
     var taskEmbedField = new CustomFieldsHelper(task).getEmbedInFrame();
     var caseEmbedField = task.getBusinessCase().customFields().stringField(CustomFieldsHelper.EMBED_IN_FRAME);
     if (taskEmbedField == null) {

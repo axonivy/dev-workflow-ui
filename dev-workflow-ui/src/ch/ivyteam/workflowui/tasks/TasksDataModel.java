@@ -54,10 +54,17 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
 
     applyFilter(taskQuery);
     applyOrdering(taskQuery, sort.toField(), sort.toOrder());
+    applyEagerlyFetch(taskQuery);
 
     List<TaskModel> tasks = TaskUtil.toTaskModelList(taskQuery.executor().resultsPaged().window(first, pageSize));
     setRowCount((int) taskQuery.executor().count());
     return tasks;
+  }
+
+  private void applyEagerlyFetch(TaskQuery taskQuery) {
+    taskQuery = taskQuery
+        .eagerlyFetch().tasks().nameAndDescription()
+        .eagerlyFetch().tasks().responsibles();
   }
 
   private TaskQuery createBaseQuery() {

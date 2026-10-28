@@ -53,6 +53,7 @@ public class CasesDataModel extends LazyDataModel<CaseModel> {
   public List<CaseModel> load(int first, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy) {
     var caseQuery = createCaseQuery();
     applyOrdering(caseQuery, sortBy);
+    applyEagerlyFetching(caseQuery);
     return caseQuery
         .executor()
         .resultsPaged()
@@ -60,6 +61,10 @@ public class CasesDataModel extends LazyDataModel<CaseModel> {
         .stream()
         .map(CaseModel::new)
         .toList();
+  }
+
+  private void applyEagerlyFetching(CaseQuery caseQuery) {
+    caseQuery.eagerlyFetch().nameAndDescription();
   }
 
   protected CaseQuery createCaseQuery() {
