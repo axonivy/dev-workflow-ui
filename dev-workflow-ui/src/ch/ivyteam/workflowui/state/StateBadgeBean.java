@@ -11,15 +11,12 @@ import ch.ivyteam.workflowui.tasks.TaskModel;
 public class StateBadgeBean {
 
   public StateBadgeModel toStateBadgeModel(Object data) {
-    if (data instanceof CaseModel caseModel) {
-      return new StateBadgeModel(caseModel.getCase());
-    } else if (data instanceof ICase caze) {
-      return new StateBadgeModel(caze);
-    } else if (data instanceof TaskModel taskModel) {
-      return new StateBadgeModel(taskModel);
-    } else if (data instanceof ITask task) {
-      return new StateBadgeModel(task);
-    }
-    throw new IllegalArgumentException("Unsupported data type");
+    return switch (data) {
+      case CaseModel caseModel -> new StateBadgeModel(caseModel.getCase());
+      case ICase caze -> new StateBadgeModel(caze);
+      case TaskModel taskModel -> new StateBadgeModel(taskModel);
+      case ITask task -> new StateBadgeModel(task);
+      default -> throw new IllegalArgumentException("Unsupported data type");
+    };
   }
 }

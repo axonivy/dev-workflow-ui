@@ -10,6 +10,7 @@ import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.workflowui.starts.CustomFieldsHelper;
+import ch.ivyteam.workflowui.tasks.TaskDetailModel;
 import ch.ivyteam.workflowui.tasks.TaskModel;
 
 public class TaskUtil {
@@ -57,18 +58,22 @@ public class TaskUtil {
     RedirectUtil.redirect(model.getDetailUrl());
   }
 
-  public static void executeTask(TaskModel model) {
-    RedirectUtil.redirect(createTaskUrl(model));
+  public static void executeTask(TaskModel task) {
+    executeTask(new TaskDetailModel(task.getId()));
   }
 
-  public static String createTaskUrl(TaskModel task) {
+  public static void executeTask(TaskDetailModel task) {
+    RedirectUtil.redirect(createTaskUrl(task));
+  }
+
+  public static String createTaskUrl(TaskDetailModel task) {
     if (shouldOpenInFrame(task)) {
       return UrlUtil.generateStartFrameUrl(task.getStartLink());
     }
     return task.getStartLink().get();
   }
 
-  private static boolean shouldOpenInFrame(TaskModel task) {
+  private static boolean shouldOpenInFrame(TaskDetailModel task) {
     var taskEmbedField = new CustomFieldsHelper(task).getEmbedInFrame();
     var caseEmbedField = task.getBusinessCase().customFields().stringField(CustomFieldsHelper.EMBED_IN_FRAME);
     if (taskEmbedField == null) {

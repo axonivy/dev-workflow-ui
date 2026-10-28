@@ -29,7 +29,7 @@ import ch.ivyteam.workflowui.util.UserUtil;
 public class TasksDetailsIvyDevWfBean {
 
   private String selectedTaskId;
-  private TaskModel selectedTask;
+  private TaskDetailModel selectedTask;
   private boolean showUsers = true;
   private String delegateMember;
   private String viewerLink;
@@ -49,7 +49,7 @@ public class TasksDetailsIvyDevWfBean {
       ResponseHelper.notFound("Task " + task + " does not exist");
       return;
     }
-    this.selectedTask = new TaskModel(task);
+    this.selectedTask = new TaskDetailModel(task);
   }
 
   public String getExecuteTaskLink() {
@@ -63,31 +63,31 @@ public class TasksDetailsIvyDevWfBean {
   public void reset() {
     var itask = loadTask();
     itask.reset();
-    selectedTask = new TaskModel(itask);
+    selectedTask = new TaskDetailModel(itask);
   }
 
   public void park() {
     var itask = loadTask();
     IWorkflowSession.current().parkTask(itask);
-    selectedTask = new TaskModel(itask);
+    selectedTask = new TaskDetailModel(itask);
   }
 
   public void destroy() {
     var itask = loadTask();
     itask.destroy();
-    selectedTask = new TaskModel(itask);
+    selectedTask = new TaskDetailModel(itask);
   }
 
   public void expireTask() {
     var itask = loadTask();
     itask.setExpiryTimestamp(new Date());
-    selectedTask = new TaskModel(itask);
+    selectedTask = new TaskDetailModel(itask);
   }
 
   public void clearDelay() {
     var itask = loadTask();
     itask.setDelayTimestamp(null);
-    selectedTask = new TaskModel(itask);
+    selectedTask = new TaskDetailModel(itask);
   }
 
   private ITask loadTask() {
@@ -123,7 +123,7 @@ public class TasksDetailsIvyDevWfBean {
     var member = Ivy.security().members().find(delegateMember);
     if (member != null) {
       itask.setActivator(member);
-      selectedTask = new TaskModel(itask);
+      selectedTask = new TaskDetailModel(itask);
     }
   }
 

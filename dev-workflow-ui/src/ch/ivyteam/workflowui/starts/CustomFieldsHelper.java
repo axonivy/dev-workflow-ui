@@ -1,15 +1,15 @@
 package ch.ivyteam.workflowui.starts;
 
 import ch.ivyteam.workflowui.customfield.CustomFieldModel;
-import ch.ivyteam.workflowui.tasks.TaskModel;
+import ch.ivyteam.workflowui.tasks.TaskDetailModel;
 
 public class CustomFieldsHelper {
 
   public static final String EMBED_IN_FRAME = "embedInFrame";
 
-  private final TaskModel task;
+  private final TaskDetailModel task;
 
-  public CustomFieldsHelper(TaskModel task) {
+  public CustomFieldsHelper(TaskDetailModel task) {
     this.task = task;
   }
 

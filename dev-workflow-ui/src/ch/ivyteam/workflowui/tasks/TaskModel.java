@@ -2,28 +2,15 @@ package ch.ivyteam.workflowui.tasks;
 
 import java.util.Date;
 import java.util.EnumSet;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.model.value.WebLink;
-import ch.ivyteam.ivy.process.model.value.PID;
-import ch.ivyteam.ivy.process.viewer.api.ProcessViewer;
 import ch.ivyteam.ivy.security.ISession;
-import ch.ivyteam.ivy.security.IUser;
-import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowPriority;
-import ch.ivyteam.ivy.workflow.businesscase.IBusinessCase;
-import ch.ivyteam.ivy.workflow.note.Note;
 import ch.ivyteam.ivy.workflow.task.IActivator;
 import ch.ivyteam.ivy.workflow.task.TaskBusinessState;
-import ch.ivyteam.workflowui.casemap.SidestepModel;
-import ch.ivyteam.workflowui.casemap.SidestepUtil;
-import ch.ivyteam.workflowui.customfield.CustomFieldModel;
-import ch.ivyteam.workflowui.starts.CustomFieldsHelper;
 import ch.ivyteam.workflowui.util.TaskUtil;
 
 public class TaskModel {
@@ -35,9 +22,6 @@ public class TaskModel {
   private String priorityIcon;
   private TaskBusinessState businessState;
   private TaskState state;
-  private IBusinessCase businessCase;
-  private ICase technicalCase;
-  private IUser workerUser;
   private String category;
   private IActivator activator;
   private String activatorName;
@@ -45,18 +29,7 @@ public class TaskModel {
   private Date expiryTimestamp;
   private Date endTimestamp;
   private Date delayTimestamp;
-  private String description;
-  private String pmv;
-  private PID currentElement;
-  private String viewerLink;
-  private boolean viewerAllowed;
-  private ISession workerSession;
-
   private WebLink startLink;
-  private List<WorkflowEventModel> workflowEvents;
-  private List<SidestepModel> sidesteps;
-  private List<CustomFieldModel> customFields;
-  private List<Note> notes;
 
   public TaskModel() {}
 
@@ -72,9 +45,6 @@ public class TaskModel {
     this.priorityIcon = TaskUtil.getPriorityIcon(task);
     this.state = task.getState();
     this.businessState = task.getBusinessState();
-    this.businessCase = task.getCase().getBusinessCase();
-    this.technicalCase = task.getCase();
-    this.workerUser = task.getWorkerUser();
     this.category = task.getCategory().getName();
     this.activator = task.activator();
     this.activatorName = task.getActivatorName();
@@ -82,17 +52,7 @@ public class TaskModel {
     this.expiryTimestamp = task.getExpiryTimestamp();
     this.endTimestamp = task.getEndTimestamp();
     this.delayTimestamp = task.getDelayTimestamp();
-    this.description = task.getDescription();
     this.startLink = task.getStartLink();
-    this.workflowEvents = WorkflowEventModel.toList(task.getWorkflowEvents());
-    this.sidesteps = SidestepUtil.getSidesteps(task.getCase());
-    this.customFields = CustomFieldModel.create(task);
-    this.pmv = task.getProcessModelVersion().getVersionName();
-    this.currentElement = getCurrentElementId(task);
-    this.viewerLink = buildViewerLink(task);
-    this.viewerAllowed = isViewerAllowed(task);
-    this.workerSession = task.getWorkerSession();
-    this.notes = task.notes().all();
   }
 
   public long getId() {
@@ -119,18 +79,6 @@ public class TaskModel {
     return businessState;
   }
 
-  public IBusinessCase getBusinessCase() {
-    return businessCase;
-  }
-
-  public ICase getCase() {
-    return technicalCase;
-  }
-
-  public IUser getWorkerUser() {
-    return workerUser;
-  }
-
   public IActivator getActivator() {
     return activator;
   }
@@ -151,32 +99,8 @@ public class TaskModel {
     return endTimestamp;
   }
 
-  public String getDescription() {
-    return StringUtils.isEmpty(description) ? "No description" : description;
-  }
-
-  public String getPmv() {
-    return pmv;
-  }
-
-  public PID getCurrentElement() {
-    return currentElement;
-  }
-
-  public String getViewerLink() {
-    return viewerLink;
-  }
-
-  public boolean isViewerAllowed() {
-    return viewerAllowed;
-  }
-
   public WebLink getStartLink() {
     return startLink;
-  }
-
-  public List<SidestepModel> getSidesteps() {
-    return sidesteps;
   }
 
   public String getPriorityIcon() {
@@ -205,22 +129,6 @@ public class TaskModel {
     return TaskState.END_STATES.contains(state);
   }
 
-  public boolean renderSidestepBtn() {
-    return (!isDone() && !sidesteps.isEmpty());
-  }
-
-  public List<WorkflowEventModel> getWorkflowEvents() {
-    return workflowEvents;
-  }
-
-  public List<CustomFieldModel> getCustomFields() {
-    return customFields;
-  }
-
-  public CustomFieldModel getCustomField(String customFieldName) {
-    return new CustomFieldsHelper(this).find(customFieldName);
-  }
-
   public String getCategory() {
     return category;
   }
@@ -229,31 +137,11 @@ public class TaskModel {
     return delayTimestamp;
   }
 
-  private static PID getCurrentElementId(ITask task) {
-    return task.getStart().getProcessElementId();
-  }
-
-  private static String buildViewerLink(ITask task) {
-    return ProcessViewer.of(task).url().toWebLink().get();
-  }
-
-  private static boolean isViewerAllowed(ITask task) {
-    return ProcessViewer.of(task).isViewAllowed();
-  }
-
   public String getDetailUrl() {
     return toDetailUrl(uuid);
   }
 
   public static String toDetailUrl(String uuid) {
     return "task.xhtml?id=" + uuid;
-  }
-
-  public ISession getWorkerSession() {
-    return this.workerSession;
-  }
-
-  public List<Note> getNotes() {
-    return notes;
   }
 }
