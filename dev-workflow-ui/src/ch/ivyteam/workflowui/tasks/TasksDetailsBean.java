@@ -29,7 +29,7 @@ import ch.ivyteam.workflowui.util.UserUtil;
 public class TasksDetailsBean implements Serializable {
 
   private String selectedTaskId;
-  private TaskModel selectedTask;
+  private TaskDetailModel selectedTask;
   private boolean showUsers = true;
   private String delegateMember;
   private String viewerLink;
@@ -38,7 +38,7 @@ public class TasksDetailsBean implements Serializable {
     return selectedTaskId;
   }
 
-  public TaskModel getSelectedTask() {
+  public TaskDetailModel getSelectedTask() {
     return selectedTask;
   }
 
@@ -49,7 +49,7 @@ public class TasksDetailsBean implements Serializable {
       ResponseHelper.notFound("Task " + selectedTaskId + " does not exist");
       return;
     }
-    this.selectedTask = new TaskModel(task);
+    this.selectedTask = new TaskDetailModel(task);
   }
 
   public String getExecuteTaskLink() {
@@ -63,31 +63,31 @@ public class TasksDetailsBean implements Serializable {
   public void reset() {
     var itask = loadTask();
     itask.reset();
-    selectedTask = new TaskModel(itask);
+    selectedTask = new TaskDetailModel(itask);
   }
 
   public void park() {
     var itask = loadTask();
     IWorkflowSession.current().parkTask(itask);
-    selectedTask = new TaskModel(itask);
+    selectedTask = new TaskDetailModel(itask);
   }
 
   public void destroy() {
     var itask = loadTask();
     itask.destroy();
-    selectedTask = new TaskModel(itask);
+    selectedTask = new TaskDetailModel(itask);
   }
 
   public void expireTask() {
     var itask = loadTask();
     itask.setExpiryTimestamp(new Date());
-    selectedTask = new TaskModel(itask);
+    selectedTask = new TaskDetailModel(itask);
   }
 
   public void clearDelay() {
     var itask = loadTask();
     itask.setDelayTimestamp(null);
-    selectedTask = new TaskModel(itask);
+    selectedTask = new TaskDetailModel(itask);
   }
 
   private ITask loadTask() {
@@ -123,7 +123,7 @@ public class TasksDetailsBean implements Serializable {
     var member = Ivy.security().members().find(delegateMember);
     if (member != null) {
       itask.responsibles().set(member);
-      selectedTask = new TaskModel(itask);
+      selectedTask = new TaskDetailModel(itask);
     }
   }
 

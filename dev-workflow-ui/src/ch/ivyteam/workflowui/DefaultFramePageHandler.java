@@ -7,7 +7,7 @@ import ch.ivyteam.ivy.dialog.execution.api.DialogInstance;
 import ch.ivyteam.ivy.request.IHttpResponse;
 import ch.ivyteam.util.uri.UriChecker;
 import ch.ivyteam.workflowui.starts.CustomFieldsHelper;
-import ch.ivyteam.workflowui.tasks.TaskModel;
+import ch.ivyteam.workflowui.tasks.TaskDetailModel;
 
 public class DefaultFramePageHandler {
 
@@ -17,13 +17,13 @@ public class DefaultFramePageHandler {
     }
     var task = DialogInstance.of(relativeUrl).task();
     var url = relativeUrl;
-    if (task == null || !shouldEscapeIFrame(new TaskModel(task))) {
+    if (task == null || !shouldEscapeIFrame(new TaskDetailModel(task))) {
       url = Application.current().contextPath() + "/faces/view/dev-workflow-ui/frame.xhtml?taskUrl=" + relativeUrl;
     }
     IHttpResponse.current().sendRedirect(url);
   }
 
-  private static boolean shouldEscapeIFrame(TaskModel task) {
+  private static boolean shouldEscapeIFrame(TaskDetailModel task) {
     var taskEmbedField = new CustomFieldsHelper(task).getEmbedInFrame();
     var caseEmbedField = task.getBusinessCase().customFields().stringField(CustomFieldsHelper.EMBED_IN_FRAME);
     if (taskEmbedField == null) {
