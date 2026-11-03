@@ -29,6 +29,7 @@ public class TaskModel {
   private Date endTimestamp;
   private Date delayTimestamp;
   private WebLink startLink;
+  private ITask task;
 
   public TaskModel() {}
 
@@ -53,6 +54,7 @@ public class TaskModel {
     this.endTimestamp = task.getEndTimestamp();
     this.delayTimestamp = task.getDelayTimestamp();
     this.startLink = task.getStartLink();
+    this.task = task;
   }
 
   public long getId() {
@@ -120,7 +122,7 @@ public class TaskModel {
     if (sessionUser == null) {
       return false;
     }
-    return IWorkflowContext.current().findTask(uuid)
+    return task
         .canUserResumeTask(sessionUser.getUserToken()).wasSuccessful();
   }
 
