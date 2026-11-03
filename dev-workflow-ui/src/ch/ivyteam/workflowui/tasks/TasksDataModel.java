@@ -62,7 +62,8 @@ public class TasksDataModel extends LazyDataModel<TaskModel> {
   }
 
   private void applyEagerlyFetch(TaskQuery taskQuery) {
-    taskQuery.eagerlyFetch().tasks().nameAndDescription();
+    taskQuery.eagerlyFetch().tasks().nameAndDescription()
+        .eagerlyFetch().cases().data();
   }
 
 private TaskQuery createBaseQuery() {
