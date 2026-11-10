@@ -114,6 +114,7 @@ Error:
       UrlWrongType: L'URL demandée a un type de requête invalide '${path}'.
       ViewFileMissing: Fichier de vue manquant
       WrongPathFormat: Format de lien incorrect
+    Provision: Incapable d ' une disposition
 Notification:
   business:
     Description: Cette notification sera envoyée si un changement pertinent pour l'entreprise se produit dans un processus.
