@@ -99,6 +99,7 @@ common:
   workerUser: ワーカー
   workflowEvents: ワークフローイベント
   author: 作成者
+  projcet: プロジェクト
 end:
   taskEnd: タスク終了
   taskFinished: タスクを正常に完了しました。
@@ -244,15 +245,17 @@ switchUser:
 task:
   assignTask: タスクを割り当てる
   canNotWork: ${user} が現在作業中であるため、このタスクを処理することはできません。
-  completedByCurrent: すでにタスクを完了しました
-  completedByOther: タスクはすでに ${user} によって完了されました
+  completedByCurrent: すでにタスクを完了しました.
+  completedByOther: ${user} で既にタスクが完了しました.
   delegateTask: タスクを委任する
   delegateTaskToUserOrRole: タスクを指定したユーザーまたはロールに委任する
-  destroyed: 破棄されたため、このタスクを処理することはできません
+  destroyed: 破壊されたため、タスクで作業することはできません.
   invalid: 無効な状態
   role: ロール
   user: ユーザー
   workingOn: 現在、異なるセッションでタスクを処理しています。 ブラウザを閉じた場合、タスクをリセットして再び起動することができます。
+  parkedByCurrent: タスクを駐車しました。 あとは、お仕事のお手伝いをさせていただきます。 タスクをリセットして予約を解除することができます.
+  parkedByOther: ${user}がそれを駐車しているので、タスクで動作することはできません。 あとで作業をするために、専用の予約をしました.
 tasks:
   noTasksFound: タスクが見つかりません
 template:
