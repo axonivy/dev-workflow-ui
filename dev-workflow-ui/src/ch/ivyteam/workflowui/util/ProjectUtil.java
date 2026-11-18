@@ -2,9 +2,11 @@ package ch.ivyteam.workflowui.util;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import ch.ivyteam.ivy.application.app.Application;
 import ch.ivyteam.ivy.application.app.ApplicationRepository;
 import ch.ivyteam.ivy.security.ISecurityContext;
 import ch.ivyteam.ivy.security.ISession;
@@ -15,24 +17,23 @@ import ch.ivyteam.workflowui.starts.StartableModel;
 
 public class ProjectUtil {
 
-  public static List<IWorkflowProcessModelVersion> getWorkflowPMVs() {
-    var securityContext = ISecurityContext.current();
-    return ApplicationRepository.of(securityContext).all()
-        .flatMap(app -> app.projects().all())
-        .map(IWorkflowProcessModelVersion::of)
-        .collect(Collectors.toList());
+  public static Stream<IWorkflowProcessModelVersion> getActiveWorkflowPMVs() {
+    return workflowPMVs(app -> app.state().active());
   }
 
-  public static Stream<IWorkflowProcessModelVersion> getReleasedWorkflowPMVs() {
-    var securityContext = ISecurityContext.current();
-    return ApplicationRepository.of(securityContext).allReleased()
+  public static Stream<IWorkflowProcessModelVersion> getRunningWorkflowPMVs() {
+    return workflowPMVs(app -> app.state().running());
+  }
+
+  private static Stream<IWorkflowProcessModelVersion> workflowPMVs(Predicate<Application> filter) {
+    return ApplicationRepository.of(ISecurityContext.current()).all()
+        .filter(filter)
         .flatMap(app -> app.projects().all())
         .map(IWorkflowProcessModelVersion::of);
   }
 
   public static List<StartableModel> getDeployedStartables() {
-    return getReleasedWorkflowPMVs()
-        .filter(pmv -> pmv.app().state().active())
+    return getRunningWorkflowPMVs()
         .flatMap(pmv -> pmv.getStartables(ISession.current()).stream())
         .map(ProjectUtil::createCaseMapOrProcessStartable)
         .sorted(Comparator.comparing(StartableModel::getProjectName)
