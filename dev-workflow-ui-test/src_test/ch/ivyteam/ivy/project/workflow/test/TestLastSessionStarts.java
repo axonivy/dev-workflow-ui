@@ -31,6 +31,15 @@ class TestLastSessionStarts {
     assertThat(starts.storedStarts()).as("shouldn't add duplicates").hasSize(1);
   }
 
+  @Test
+  void hidesStartsThatAreNoLongerAvailable() {
+    var session = new MapAttributeStore();
+    var startable = new StartableModel("old", null, WebLink.of("unavailable-start"), null, null, null, null, true, null, false);
+    session.setAttribute("lastStarts", Set.of(startable));
+
+    assertThat(new LastSessionStarts(session).getAll()).isEmpty();
+  }
+
   private static class MapAttributeStore implements IAttributeStore<Set<StartableModel>> {
 
     private final Map<String, Set<StartableModel>> starts = new HashMap<>();

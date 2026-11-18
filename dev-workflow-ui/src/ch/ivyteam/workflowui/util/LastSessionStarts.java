@@ -47,9 +47,6 @@ public class LastSessionStarts {
       return Set.of();
     }
     var deployedStartables = ProjectUtil.getDeployedStartables();
-    if (deployedStartables.isEmpty()) {
-      return starts;
-    }
     try {
       return starts.stream().filter(deployedStartables::contains).collect(Collectors.toSet());
     } catch (ClassCastException _) {
