@@ -33,7 +33,7 @@ public class ProjectUtil {
   }
 
   public static List<StartableModel> getDeployedStartables() {
-    return startedWorkflowPmvs()
+    return startedAndReleasedWorkflowPmvs()
         .flatMap(pmv -> pmv.getStartables(ISession.current()).stream())
         .map(ProjectUtil::createCaseMapOrProcessStartable)
         .sorted(Comparator.comparing(StartableModel::getProjectName)
