@@ -18,7 +18,7 @@ public class IntermediateEventElementModel {
 
   @SuppressWarnings("deprecation")
   public static List<IntermediateEventElementModel> create() {
-    return ProjectUtil.getActiveWorkflowPMVs()
+    return ProjectUtil.startedAndReleasedWorkflowPmvs()
         .flatMap(pmv -> pmv.getIntermediateEventElements().stream())
         .map(IntermediateEventElementModel::new)
         .collect(Collectors.toList());

@@ -17,12 +17,12 @@ import ch.ivyteam.workflowui.starts.StartableModel;
 
 public class ProjectUtil {
 
-  public static Stream<IWorkflowProcessModelVersion> getActiveWorkflowPMVs() {
-    return workflowPMVs(app -> app.state().active());
+  public static Stream<IWorkflowProcessModelVersion> startedAndReleasedWorkflowPmvs() {
+    return workflowPMVs(app -> app.state().started() && app.state().released());
   }
 
-  public static Stream<IWorkflowProcessModelVersion> getRunningWorkflowPMVs() {
-    return workflowPMVs(app -> app.state().running());
+  public static Stream<IWorkflowProcessModelVersion> startedWorkflowPmvs() {
+    return workflowPMVs(app -> app.state().started());
   }
 
   private static Stream<IWorkflowProcessModelVersion> workflowPMVs(Predicate<Application> filter) {
@@ -33,7 +33,7 @@ public class ProjectUtil {
   }
 
   public static List<StartableModel> getDeployedStartables() {
-    return getRunningWorkflowPMVs()
+    return startedWorkflowPmvs()
         .flatMap(pmv -> pmv.getStartables(ISession.current()).stream())
         .map(ProjectUtil::createCaseMapOrProcessStartable)
         .sorted(Comparator.comparing(StartableModel::getProjectName)

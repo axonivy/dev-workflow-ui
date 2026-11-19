@@ -23,7 +23,7 @@ public class WebServicesBean implements Serializable {
 
   @SuppressWarnings("deprecation")
   private List<WebServiceProcess> setServices() {
-    return ProjectUtil.getRunningWorkflowPMVs()
+    return ProjectUtil.startedWorkflowPmvs()
         .flatMap(pmv -> pmv.getWebServiceProcesses().stream())
         .map(WebServiceProcess::new)
         .filter(ws -> filter == null || (ws.getName().toLowerCase().contains(filter) || ws.getProcessName().toLowerCase().contains(filter)))
