@@ -99,6 +99,7 @@ common:
   value: Wert
   workerUser: Bearbeiter
   workflowEvents: Workflow Ereignisse
+  projcet: Projekt
 end:
   taskEnd: Task Ende
   taskFinished: Du hast den Task erfolgreich beendet.
@@ -263,11 +264,11 @@ switchUser:
 task:
   assignTask: Task zuweisen
   canNotWork: Du kannst an diesem Task nicht arbeiten, weil ${user} den Task bereits geöffnet hat.
-  completedByCurrent: Dieser Task ist bereits abgeschlossen.
-  completedByOther: Der Task wurde bereits von ${user} abgeschlossen.
+  completedByCurrent: Sie haben die Aufgabe bereits erledigt.
+  completedByOther: Die Aufgabe wurde bereits durch ${user} abgeschlossen.
   delegateTask: Task delegieren
   delegateTaskToUserOrRole: Delegiere den Task an einen Benutzer oder an eine Rolle
-  destroyed: Dieser Task kann nicht bearbeitet werden, weil er gelöscht wurde.
+  destroyed: Sie können nicht an der Aufgabe arbeiten, weil sie zerstört wurde.
   invalid: Ungültiger Status
   parkedByCurrent: Du hast den Task geparkt. Er wurde exklusiv von dir reserviert, um später daran zu arbeiten. Du kannst den Task zurücksetzen, um die Reservierung freizugeben.
   parkedByOther: Du kannst an diesem Task nicht arbeiten, weil ${user} den Task geparkt hat. Er wurde exklusiv von dieser Person reserviert, um später daran zu arbeiten.
